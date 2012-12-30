@@ -107,11 +107,13 @@
     xkey: 'label',
     ykeys: ['complexity'],
     labels: ['Complexity']
+  }).on('click', function(i, row){
+    console.log(i, row);
+    document.location = cyclomatic[i].link;
   });
 
-//
-//  buildBarChart('#chart1', [cyclomatic])
 </script>
+
 <script type="text/javascript" src="assets/syntaxHighlighter/scripts/shCore.js"></script>
 <script type="text/javascript" src="assets/syntaxHighlighter/scripts/shBrushJScript.js"></script>
 <script type="text/javascript">SyntaxHighlighter.all();</script>
