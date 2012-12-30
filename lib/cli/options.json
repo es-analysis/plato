@@ -1,0 +1,23 @@
+{
+  "h": {
+    "long": "help",
+    "desc": "Display this help text.",
+    "type": "Boolean"
+  },
+  "v": {
+    "long": "version",
+    "desc": "Print the version.",
+    "type": "Boolean"
+  },
+  "d": {
+    "long": "dir",
+    "desc": "The output directory",
+    "type": "String",
+    "required": true
+  },
+  "r": {
+    "long": "recurse",
+    "desc": "Recursively search directories",
+    "type": "Boolean"
+  }
+}

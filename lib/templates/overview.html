@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Complexity Overview</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <link href="assets/css/bootstrap-3.0.0-wip.css" rel="stylesheet">
+  <link href="assets/css/plato.css" rel="stylesheet">
+  <link href="assets/css/plato-overview.css" rel="stylesheet">
+  <link href="assets/syntaxHighlighter/styles/shCoreDefault.css" rel="stylesheet">
+  <link href="assets/css/opentip.css" rel="stylesheet">
+  <link href="assets/css/morris.css" rel="stylesheet">
+
+  <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <script type="text/javascript" src="assets/scripts/vendor/jquery-1.8.3.js"></script>
+
+  <script type="text/javascript" src="assets/scripts/vendor/lodash.min.js"></script>
+  <script type="text/javascript" src="assets/scripts/vendor/d3.js"></script>
+  <script type="text/javascript" src="assets/scripts/vendor/raphael-min.js"></script>
+  <script type="text/javascript" src="assets/scripts/vendor/morris.min.js"></script>
+  <script type="text/javascript" src="assets/scripts/vendor/opentip-jquery.js"></script>
+  <script type="text/javascript" src="assets/scripts/vendor/bootstrap.js"></script>
+  <script type="text/javascript" src="assets/scripts/barchart.js"></script>
+
+  <script type="text/javascript" src="report.js"></script>
+  <style>
+    .bar {
+    }
+    .bar:hover {
+      fill: #04815F;
+    }
+    .chart {
+      margin: 0 auto;
+      height:400px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <a class="brand" href="./index.html">Home</a>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>Complexity Overview</h1>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <h2 class="span12">Cyclomatic Complexity</h2>
+    <div class="span12"><div id='chart1' class='chart'></div></div>
+
+  </div>
+  <div class="row">
+    <table class="table table-striped span12">
+      <thead>
+      <tr>
+        <th>File</th>
+        <th>LSLOC</th>
+        <th>Complexity</th>
+        <th>Maintainability</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% report.forEach(function(item,i) { %>
+      <tr>
+        <td><%= item.module %></td>
+        <td><%= item.aggregate.complexity.sloc.logical %></td>
+        <td><%= item.aggregate.complexity.cyclomatic %></td>
+        <td><%= item.maintainability %></td>
+      </tr>
+      <% }); %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script>
+
+
+//  var cyclomatic = _.map(__report,function(report,i){ return {
+//    y : report.aggregate.complexity.cyclomatic,
+//    x : i,
+//    label : report.module,
+//    link : 'files/' + report.module_safe
+//  }});
+//
+//  buildBarChart('#chart1', [cyclomatic])
+</script>
+<script type="text/javascript" src="assets/syntaxHighlighter/scripts/shCore.js"></script>
+<script type="text/javascript" src="assets/syntaxHighlighter/scripts/shBrushJScript.js"></script>
+<script type="text/javascript">SyntaxHighlighter.all();</script>
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+{
+  "name": "plato",
+  "description": "Visualize JavaScript complexity",
+  "version": "0.1.0",
+  "homepage": "https://github.com/jsoverson/plato",
+  "author": {
+    "name": "Jarrod Overson",
+    "email": "jsoverson@gmail.com",
+    "url": "http://jarrodoverson.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jsoverson/plato.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jsoverson/plato/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/jsoverson/plato/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "lib/plato",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.0a"
+  },
+  "keywords": [],
+  "dependencies": {
+    "complexity-report": "~0.4.3",
+    "nopt": "~2.0.0",
+    "string-format": "~0.2.1",
+    "posix-getopt": "~1.0.0",
+    "lodash": "~1.0.0-rc.3",
+    "mkdirp": "~0.3.4",
+    "fs-extra": "~0.3.2"
+  }
+}

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Complexity Overview</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <link href="../../assets/css/bootstrap-3.0.0-wip.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+  <link href="../../assets/syntaxHighlighter/styles/shCoreDefault.css" rel="stylesheet">
+  <link href="../../assets/css/opentip.css" rel="stylesheet">
+
+  <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <script type="text/javascript" src="../../assets/scripts/vendor/jquery-1.8.3.js"></script>
+
+  <script type="text/javascript" src="../../assets/scripts/vendor/lodash.min.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/d3.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/opentip-jquery.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/bootstrap.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/barchart.js"></script>
+
+  <script type="text/javascript" src="report.js"></script>
+  <style>
+    .bar {
+      transition-duration: 150ms;
+    }
+    .bar:hover {
+      fill: #04815F;
+    }
+    .chart {
+      margin: 0 auto;
+      height:400px;
+    }
+  </style>
+</head>
+
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <a class="brand" href="../../index.html">Home</a>
+  </div>
+</div>
+
+
+<div class="jumbotron">
+  <div class="container">
+    <h1><%= report.module %></h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="span4">
+      <h2 class="header">Complexity</h2>
+      <p class="stat"><%= report.aggregate.complexity.cyclomatic %></p>
+    </div>
+    <div class="span4">
+      <h2 class="header">Maintainability</h2>
+      <p class="stat"><%= report.maintainability.toFixed(2) %></p>
+    </div>
+    <div class="span4">
+      <h2 class="header">Estimated # Bugs</h2>
+      <p class="stat"><%= report.aggregate.complexity.halstead.bugs.toFixed(2) %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span4">
+      <h2 class="header">Difficulty</h2>
+      <p class="stat"><%= report.aggregate.complexity.halstead.difficulty.toFixed(2) %></p>
+    </div>
+    <div class="span4">
+      <h2 class="header">Volume</h2>
+      <p class="stat"><%= report.aggregate.complexity.halstead.volume.toFixed(2) %></p>
+    </div>
+    <div class="span4">
+      <h2 class="header">SLOC/LSLOC</h2>
+      <p class="stat"><%= report.aggregate.complexity.sloc.physical %> / <%= report.aggregate.complexity.sloc.logical %></p>
+    </div>
+  </div>
+</div>
+
+<!--
+
+$('#example').popover(options)
+
+animation	boolean	true	apply a css fade transition to the tooltip
+html	boolean	false	Insert html into the popover. If false, jquery's text method will be used to insert content into the dom. Use text if you're worried about XSS attacks.
+placement	string|function	'right'	how to position the popover - top | bottom | left | right
+selector	string	false	if a selector is provided, tooltip objects will be delegated to the specified targets
+trigger	string	'click'	how popover is triggered - click | hover | focus | manual
+title	string | function	''	default title value if `title` attribute isn't present
+content	string | function	''	default content value if `data-content` attribute isn't present
+delay	number | object	0
+delay showing and hiding the popover (ms) - does not apply to manual trigger type
+
+If a number is supplied, delay is applied to both hide/show
+-->
+
+<div class="container">
+  <div class="row">
+    <pre id="file-source" class="span12 brush: js; ruler: true;"><%= source %></pre>
+  </div>
+</div>
+
+
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script>
+
+//  var cyclomatic = _.map(__report,function(report,i){ return {
+//    y : report.aggregate.complexity.cyclomatic,
+//    x : i,
+//    label : report.module,
+//    link : 'files/' + report.module
+//  }});
+//
+//  buildBarChart('#chart1', [cyclomatic])
+
+</script>
+<script type="text/javascript" src="../../assets/syntaxHighlighter/scripts/shCore.js"></script>
+<script type="text/javascript" src="../../assets/syntaxHighlighter/scripts/shBrushJScript.js"></script>
+<script type="text/javascript">SyntaxHighlighter.all();</script>
+<script>
+  setTimeout(function(){
+    var fileSource = $('#file-source');
+    var container = fileSource.find('.code');
+    __report.functions.forEach(function(fn,i){
+      console.log(container.find('.line.number' + fn.line));
+      container.find('.line.number' + fn.line).css('background-color', 'black');
+    });
+  },100)
+</script>
+
+</body>
+</html>
+
+
+  21 700
+  38 200
+  16 500
+ 142 710
+     385
