@@ -95,14 +95,20 @@
 </footer>
 
 <script>
+  var cyclomatic = _.map(__report,function(report,i){ return {
+    complexity : report.aggregate.complexity.cyclomatic,
+    label : report.module,
+    link : 'files/' + report.module_safe
+  }});
 
+  Morris.Bar({
+    element: '#chart1',
+    data: cyclomatic,
+    xkey: 'label',
+    ykeys: ['complexity'],
+    labels: ['Complexity']
+  });
 
-//  var cyclomatic = _.map(__report,function(report,i){ return {
-//    y : report.aggregate.complexity.cyclomatic,
-//    x : i,
-//    label : report.module,
-//    link : 'files/' + report.module_safe
-//  }});
 //
 //  buildBarChart('#chart1', [cyclomatic])
 </script>
