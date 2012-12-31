@@ -1,0 +1,16 @@
+.chart {
+  margin: 0 auto;
+  height:400px;
+}
+
+.plato-file-link {
+  font-size:25px;
+  color: #334B6D;
+  display:block;
+  padding:12px 12px 12px 0;
+  text-decoration: underline;
+}
+
+.plato-file-link:hover {
+  color: #3B71B1;
+}

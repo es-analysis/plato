@@ -7,53 +7,38 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <link href="assets/css/bootstrap-3.0.0-wip.css" rel="stylesheet">
-  <link href="assets/css/plato.css" rel="stylesheet">
-  <link href="assets/css/plato-overview.css" rel="stylesheet">
-  <link href="assets/syntaxHighlighter/styles/shCoreDefault.css" rel="stylesheet">
-  <link href="assets/css/opentip.css" rel="stylesheet">
-  <link href="assets/css/morris.css" rel="stylesheet">
 
-  <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
   <!--[if lt IE 9]>
   <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
 
-  <script type="text/javascript" src="assets/scripts/vendor/jquery-1.8.3.js"></script>
+  <script type="text/javascript" src="assets/scripts/vendor/jquery-1.8.3.min.js"></script>
 
   <script type="text/javascript" src="assets/scripts/vendor/lodash.min.js"></script>
-  <script type="text/javascript" src="assets/scripts/vendor/d3.js"></script>
   <script type="text/javascript" src="assets/scripts/vendor/raphael-min.js"></script>
   <script type="text/javascript" src="assets/scripts/vendor/morris.min.js"></script>
-  <script type="text/javascript" src="assets/scripts/vendor/opentip-jquery.js"></script>
-  <script type="text/javascript" src="assets/scripts/vendor/bootstrap.js"></script>
-  <script type="text/javascript" src="assets/scripts/barchart.js"></script>
 
   <script type="text/javascript" src="report.js"></script>
-  <style>
-    .bar {
-    }
-    .bar:hover {
-      fill: #04815F;
-    }
-    .chart {
-      margin: 0 auto;
-      height:400px;
-    }
-  </style>
+
+  <link href="assets/css/bootstrap-3.0.0-wip.css" rel="stylesheet">
+  <link href="assets/css/font-awesome.css" rel="stylesheet">
+  <link href="assets/css/font-awesome-ie7.css" rel="stylesheet">
+  <link href="assets/css/morris.css" rel="stylesheet">
+  <link href="assets/css/plato.css" rel="stylesheet">
+  <link href="assets/css/plato-overview.css" rel="stylesheet">
 </head>
 
 <body>
 
-<div class="navbar navbar-inverse navbar-fixed-top">
+<div class="navbar navbar-fixed-top">
   <div class="container">
-    <a class="brand" href="./index.html">Home</a>
+    <a class="brand" href="index.html">Home</a>
   </div>
 </div>
 
 <div class="jumbotron">
   <div class="container">
-    <h1>Complexity Overview</h1>
+    <h1>JavaScript Source Analysis</h1>
   </div>
 </div>
 
@@ -65,21 +50,11 @@
   </div>
   <div class="row">
     <table class="table table-striped span12">
-      <thead>
-      <tr>
-        <th>File</th>
-        <th>LSLOC</th>
-        <th>Complexity</th>
-        <th>Maintainability</th>
-      </tr>
-      </thead>
       <tbody>
       <% report.forEach(function(item,i) { %>
-      <tr>
-        <td><%= item.module %></td>
-        <td><%= item.aggregate.complexity.sloc.logical %></td>
-        <td><%= item.aggregate.complexity.cyclomatic %></td>
-        <td><%= item.maintainability %></td>
+      <tr id="plato-file-<%= i %>">
+        <td><a class="plato-file-link" href="./files/<%= item.module_safe %>/"><%= item.module %></a></td>
+        <td class="plato-file-chart"></td>
       </tr>
       <% }); %>
       </tbody>
@@ -95,11 +70,24 @@
 </footer>
 
 <script>
-  var cyclomatic = _.map(__report,function(report,i){ return {
-    complexity : report.aggregate.complexity.cyclomatic,
-    label : report.module,
-    link : 'files/' + report.module_safe
-  }});
+  var maxComplexity = 0,
+    maxSloc = 0,
+    maxBugs = 0;
+
+  var cyclomatic = [];
+
+  __report.forEach(function(report,i){
+    // grab some data while we're here
+    if (report.aggregate.complexity.cyclomatic > maxComplexity) maxComplexity = report.aggregate.complexity.cyclomatic;
+    if (report.aggregate.complexity.sloc.physical > maxSloc) maxSloc = report.aggregate.complexity.sloc.physical;
+    if (report.aggregate.complexity.halstead.bugs > maxBugs) maxBugs = report.aggregate.complexity.halstead.bugs;
+
+    cyclomatic.push({
+      complexity : report.aggregate.complexity.cyclomatic,
+      label : report.module,
+      link : 'files/' + report.module_safe
+    })
+  });
 
   Morris.Bar({
     element: 'chart1',
@@ -112,11 +100,34 @@
     document.location = cyclomatic[i].link;
   });
 
-</script>
+  var graphWidth = 500,
+      graphHeight = 10,
+      lineHeight = 1.35;
 
-<script type="text/javascript" src="assets/syntaxHighlighter/scripts/shCore.js"></script>
-<script type="text/javascript" src="assets/syntaxHighlighter/scripts/shBrushJScript.js"></script>
-<script type="text/javascript">SyntaxHighlighter.all();</script>
+  var horizontalGraph = function(paper, num, orig, width, label, color){
+    var offset = 70;
+    var y = parseInt(graphHeight * num * lineHeight,10);
+    paper.rect(offset, y, width, graphHeight).attr({fill: color, stroke:'none'});
+    paper.text(offset - 5, y + 5, label).attr({'font-size':12,'text-anchor':'end' });
+    paper.text(width + offset + 10, y + 6, orig).attr({'font-size':10,'text-anchor':'start' });
+  }
+
+  __report.forEach(function(file,i){
+    var $chart = $('#plato-file-' + i + ' .plato-file-chart');
+    var paper = Raphael($chart[0], 650, 40);
+
+    var value = file.aggregate.complexity.cyclomatic;
+    horizontalGraph(paper,0,value, value * 2 > graphWidth ? graphWidth : value * 2,'complexity',value > graphWidth ? '#440000' : '#cc0000');
+
+    value = file.aggregate.complexity.sloc.physical;
+    horizontalGraph(paper,1,value, value > graphWidth ? graphWidth : value, 'sloc', value > graphWidth ? '#444400' : '#aaaa00');
+
+    value = file.aggregate.complexity.halstead.bugs.toFixed(2);
+    horizontalGraph(paper,2,value, value * 5, 'est bugs', 'blue');
+  });
+
+
+</script>
 
 </body>
 </html>

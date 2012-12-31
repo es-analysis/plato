@@ -8,15 +8,6 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <link href="../../assets/css/bootstrap-3.0.0-wip.css" rel="stylesheet">
-  <link href="../../assets/css/plato.css" rel="stylesheet">
-  <link href="../../assets/css/plato-file.css" rel="stylesheet">
-  <link href="../../assets/codemirror-3.0/lib/codemirror.css" rel="stylesheet">
-
-  <!--<link href="../../assets/syntaxHighlighter/styles/shCoreDefault.css" rel="stylesheet">-->
-  <link href="../../assets/css/opentip.css" rel="stylesheet">
-
-  <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
   <!--[if lt IE 9]>
   <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
@@ -24,39 +15,33 @@
   <script type="text/javascript" src="../../assets/scripts/vendor/jquery-1.8.3.js"></script>
 
   <script type="text/javascript" src="../../assets/scripts/vendor/lodash.min.js"></script>
-  <script type="text/javascript" src="../../assets/scripts/vendor/d3.js"></script>
-  <script type="text/javascript" src="../../assets/scripts/vendor/opentip-jquery.js"></script>
-  <script type="text/javascript" src="../../assets/scripts/vendor/bootstrap.js"></script>
-  <script type="text/javascript" src="../../assets/scripts/barchart.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/raphael-min.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/morris.min.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/bootstrap-tooltip.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/bootstrap-popover.js"></script>
+  <script type="text/javascript" src="../../assets/codemirror-3.0/lib/codemirror.js"></script>
+  <script type="text/javascript" src="../../assets/codemirror-3.0/lib/util/searchcursor.js"></script>
+  <script type="text/javascript" src="../../assets/codemirror-3.0/mode/javascript/javascript.js"></script>
 
   <script type="text/javascript" src="report.js"></script>
-  <style>
-    .CodeMirror {
-      height: auto;
-    }
-    .CodeMirror-scroll {
-      overflow-x: hidden;
-      overflow-y: hidden;
-    }
-    .CodeMirror-gutter.plato {
-      width: 15px;
-    }
-    .highlight {
-      background-color:rgb(55, 235, 206);
-    }
-    .complexity-notice {
-      background-color: rgb(235, 227, 78);
-    }
-  </style>
+
+  <link href="../../assets/css/morris.css" rel="stylesheet">
+  <link href="../../assets/css/bootstrap-3.0.0-wip.css" rel="stylesheet">
+  <link href="../../assets/css/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/font-awesome-ie7.css" rel="stylesheet">
+  <link href="../../assets/codemirror-3.0/lib/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
 </head>
 
 <body>
-<div class="navbar navbar-inverse navbar-fixed-top">
+
+<div class="navbar navbar-fixed-top">
   <div class="container">
     <a class="brand" href="../../index.html">Home</a>
   </div>
 </div>
-
 
 <div class="jumbotron">
   <div class="container">
@@ -95,6 +80,22 @@
   </div>
 </div>
 
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="span6">
+      <h3 class="chart-header">By Complexity</h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="span6">
+      <h3 class="chart-header">By SLOC</h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
 <div class="container">
   <div class="row">
     <textarea id="file-source" class="span12"><%= source %></textarea>
@@ -109,24 +110,60 @@
 
 <script type="text/html" id="complexity-notice-template">
 <div class="complexity-notice">
-  {{ name === '<anonymous>' ? '&lt;anonymous&gt;' : 'function ' + name + ''}} :
-  Complexity : {{ complexity.cyclomatic }}
-  Length : {{ complexity.halstead.length }}
-  Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }}
+  Complexity : {{ complexity.cyclomatic }} <br>
+  Length : {{ complexity.halstead.length }} <br>
+  Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
   Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
 </div>
 </script>
-<script type="text/javascript" src="../../assets/codemirror-3.0/lib/codemirror.js"></script>
-<script type="text/javascript" src="../../assets/codemirror-3.0/lib/util/searchcursor.js"></script>
-<script type="text/javascript" src="../../assets/codemirror-3.0/mode/javascript/javascript.js"></script>
 <script>
+  window.onhashchange = function(){
+    $('plato-mark').removeClass('focus');
+    var markId = window.location.hash.substr(1);
+    if (markId) $('.' + markId).addClass('focus');
+  }
+
   var srcEl = document.getElementById('file-source');
   var options = {
     lineNumbers : true,
-    gutters     : ['plato'],
-    readOnly    : true
+    gutters     : ['plato-gutter'],
+    readOnly    : 'nocursor'
   };
   var cm = CodeMirror.fromTextArea(srcEl, options);
+
+  var byComplexity = _.map(__report.functions,function(fn,i){
+    return {
+      label : fn.name + ':' + fn.line,
+      value : fn.complexity.cyclomatic
+    }
+  })
+
+  var bySloc = _.map(__report.functions,function(fn,i){
+    return {
+      label : fn.name + ':' + fn.line,
+      value : fn.complexity.sloc.physical
+    }
+  })
+
+  var scrollToLine = function(i, data) {
+    var origScroll = [window.pageXOffset,window.pageYOffset];
+    window.location.hash = '#plato-mark-fn-' + i;
+    window.scrollTo(origScroll[0],origScroll[1]);
+    var parts = data.label.split(':');
+    var coords = cm.charCoords({line : parts[1], ch : 0});
+    $('body,html').animate({scrollTop : coords.top -50},250)
+  };
+
+  Morris.Donut({
+    element: 'fn-by-complexity',
+    data: byComplexity
+  }).on('click',scrollToLine);
+  Morris.Donut({
+    element: 'fn-by-sloc',
+    data: bySloc
+  }).on('click',scrollToLine);
+
+
   __report.functions.forEach(function (fn,i) {
     var name = fn.name === '<anonymous>' ? 'function\\s*\\([^)]*\\)' : fn.name;
     var line = fn.line - 1;
@@ -137,7 +174,7 @@
       interpolate : /\{\{(.+?)\}\}/g
     };
     var notice = _.template($('#complexity-notice-template').text());
-    cm.addLineWidget(line, $(notice(fn))[0], {});
+//    cm.addLineWidget(line, $(notice(fn))[0], {});
 
     while (match = cursor.findNext()) {
       if (cursor.to().line !== line) break;
@@ -145,38 +182,39 @@
         { line : line, ch : cursor.from().ch },
         { line : line, ch : cursor.to().ch },
         {
-          className     : 'highlight plato-marker-fn-' + i,
+          className   : 'plato-mark plato-mark-fn-' + i,
+          startStyle  : 'plato-mark-start',
+          endStyle    : 'plato-mark-end'
         }
       )
     }
-    $('.plato-marker-fn-' + i).popover({
-      trigger : 'hover',
-      content : 'foo',
-      title : 'foo',
+    var gutterIcon = $('<a class="plato-gutter-complexity" name="' + ('plato-mark-fn-'+i) + '"><i class="icon-cog"></i></a>');
+    cm.setGutterMarker(line, 'plato-gutter', gutterIcon[0])
+    var stillIn = false;
+    var markStart = $('.plato-mark-start.plato-mark-fn-' + i);
+    var markSpans = $('.plato-mark-fn-' + i);
+
+    markSpans.add(gutterIcon)
+      .mouseenter(function(){
+        stillIn = true;
+        markStart.popover('show');
+      }).mouseleave(function(){
+        stillIn = false;
+        setTimeout(function(){
+          if (!stillIn) markStart.popover('hide');
+        },200);
+      });
+
+    markStart.popover({
+      trigger : 'manual',
+      content : notice(fn),
+      html : true,
+      title : fn.name === '<anonymous>' ? '&lt;anonymous&gt;' : 'function ' + fn.name + '',
       placement : 'top'
     })
 
   })
 
 </script>
-
-<!--<script type="text/javascript" src="../../assets/syntaxHighlighter/scripts/shCore.js"></script>-->
-<!--<script type="text/javascript" src="../../assets/syntaxHighlighter/scripts/shBrushJScript.js"></script>-->
-<!--<script type="text/javascript">SyntaxHighlighter.highlight();</script>-->
-<!--<script>-->
-    <!--var fileSource = $('#file-source');-->
-    <!--var container = fileSource.find('.code');-->
-    <!--__report.functions.forEach(function(fn,i){-->
-      <!--console.log(container.find('.line.number' + fn.line));-->
-      <!--container.find('.line.number' + fn.line)-->
-        <!--.css('background-color', 'black !important')-->
-        <!--.popover({-->
-          <!--trigger : 'click',-->
-          <!--content : 'foo',-->
-          <!--placement : 'top'-->
-        <!--});-->
-    <!--});-->
-<!--</script>-->
-
 </body>
 </html>
