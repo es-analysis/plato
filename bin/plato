@@ -16,4 +16,6 @@ if (cli.args.h) {
   process.exit();
 }
 
-cli.exec();
+cli.exec(function(){
+  console.log('Done!')
+});

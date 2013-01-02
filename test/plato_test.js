@@ -1,6 +1,6 @@
 'use strict';
 
-var plato = require('../lib/plato.js');
+var util = require('../lib/util');
 
 /*
   ======== A Handy Little Nodeunit Reference ========
@@ -29,8 +29,14 @@ exports['awesome'] = {
   },
   'no args': function(test) {
     test.expect(1);
-    // tests here
-    test.equal(plato.awesome(), 'awesome', 'should be awesome.');
+
+    var files = [
+      '/lib/foo/bar/a.js',
+      '/lib/foo/bar/baz/b.js',
+      '/lib/foo/bar/qux/c.js',
+    ];
+
+    test.equal(util.findCommonBase(files), '/lib/foo/bar/', 'should find common prefix');
     test.done();
   },
 };

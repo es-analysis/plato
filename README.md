@@ -1,26 +1,33 @@
 # plato
 
-Visualize JavaScript complexity
+Visualize your JavaScript
 
-## Getting Started
-Install the module with: `npm install plato`
+## Installation
+Install the module with: `npm install -g plato`
 
-```javascript
-var plato = require('plato');
-plato.awesome(); // "awesome"
+## Usage
+
+```
+Usage : plato [options] file1.js file2.js ... fileN.js
+  -h, --help
+      Display this help text.
+  -v, --version
+      Print the version.
+  -d, --dir : String *required*
+      The output directory
+  -r, --recurse
+      Recursively search directories
 ```
 
-## Documentation
-_(Coming soon)_
+## Example
 
-## Examples
-_(Coming soon)_
-
-## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [grunt](http://gruntjs.com/).
+```shell
+plato -r -d report src/*.js
+```
 
 ## Release History
-_(Nothing yet)_
+
+ - 0.1.0 initial release
 
 ## License
 Copyright (c) 2012 Jarrod Overson  

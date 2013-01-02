@@ -15,7 +15,7 @@ module.exports = function(grunt) {
         src: 'Gruntfile.js'
       },
       lib: {
-        src: ['lib/**/*.js']
+        src: ['lib/**/*.js', '!lib/assets/**/*.js']
       },
       test: {
         src: ['test/**/*.js']
@@ -36,6 +36,9 @@ module.exports = function(grunt) {
       },
     },
   });
+
+  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-nodeunit');
 
   // Default task.
   grunt.registerTask('default', ['jshint', 'nodeunit']);

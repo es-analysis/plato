@@ -1,6 +1,6 @@
 {
   "name": "plato",
-  "description": "Visualize JavaScript complexity",
+  "description": "JavaScript source analysis and visualizer",
   "version": "0.1.0",
   "homepage": "https://github.com/jsoverson/plato",
   "author": {
@@ -29,16 +29,15 @@
     "test": "grunt test"
   },
   "devDependencies": {
-    "grunt": "~0.4.0a"
+    "grunt": "~0.4.0a",
+    "grunt-contrib-jshint": "~0.1.0",
+    "grunt-contrib-nodeunit": "~0.1.1"
   },
   "keywords": [],
   "dependencies": {
     "complexity-report": "~0.4.3",
-    "nopt": "~2.0.0",
-    "string-format": "~0.2.1",
     "posix-getopt": "~1.0.0",
     "lodash": "~1.0.0-rc.3",
-    "mkdirp": "~0.3.4",
     "fs-extra": "~0.3.2"
   }
 }
