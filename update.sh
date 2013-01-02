@@ -15,7 +15,7 @@ then
 fi
 
 git clone --depth 1 git://github.com/emberjs/ember.js.git $TMPDIR/ember
-plato -r -d examples/ember/ $TMPDIR/ember/packages/*
+plato -r -d examples/ember/ $TMPDIR/ember/packages/ember-runtime/lib/*
 
 git clone --depth 1 git://github.com/jquery/jquery.git $TMPDIR/jquery
 plato -r -d examples/jquery/ $TMPDIR/jquery/src/*

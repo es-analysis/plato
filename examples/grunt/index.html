@@ -13,6 +13,7 @@
   <![endif]-->
 
   <script type="text/javascript" src="assets/scripts/vendor/jquery-1.8.3.min.js"></script>
+  <script type="text/javascript" src="assets/scripts/vendor/jquery.fittext.js"></script>
 
   <script type="text/javascript" src="assets/scripts/vendor/lodash.min.js"></script>
   <script type="text/javascript" src="assets/scripts/vendor/raphael-min.js"></script>
@@ -157,6 +158,10 @@
 </footer>
 
 <script>
+
+  $(function(){
+    $('.plato-file-link').fitText(1.2, { minFontSize: '20px', maxFontSize: '28px' });
+  });
 
   var colors = {
     default : [

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - JavaScript Introspection</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <script type="text/javascript" src="assets/scripts/vendor/jquery-1.8.3.min.js"></script>
+  <script type="text/javascript" src="assets/scripts/vendor/jquery.fittext.js"></script>
+
+  <script type="text/javascript" src="assets/scripts/vendor/lodash.min.js"></script>
+  <script type="text/javascript" src="assets/scripts/vendor/raphael-min.js"></script>
+  <script type="text/javascript" src="assets/scripts/vendor/morris.min.js"></script>
+
+  <script type="text/javascript" src="report.js"></script>
+
+  <link href="assets/css/vendor/bootstrap-3.0.0-wip.css" rel="stylesheet">
+  <link href="assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
+  <link href="assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="assets/css/plato.css" rel="stylesheet">
+  <link href="assets/css/plato-overview.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <ul class="nav">
+      <li class="active">
+        <a href="index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>JavaScript Source Analysis</h1>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <h1 class="span12">At a glance</h1>
+  </div>
+  <div class="row">
+    <h2 class="span12">Cyclomatic Complexity</h2>
+    <div class="span12"><div id='chart1' class='chart'></div></div>
+  </div>
+  <div class="row">
+    <h2 class="span12">Lines of code</h2>
+    <div class="span12"><div id='chart2' class='chart'></div></div>
+  </div>
+  <div class="row">
+    <h2 class="span12">Estimated number of bugs</h2>
+    <div class="span12"><div id='chart3' class='chart'></div></div>
+  </div>
+
+  <div class="row">
+    <h1 class="span12">Files</h1>
+  </div>
+  <div class="row">
+    <ul class="file-list list-unstyled">
+      
+      <li class="span12" id="plato-file-0">
+        <span class="span3 plato-file"><a class="plato-file-link" href="./files/controllers_array_controller_js/">controllers/array_controller.js</a></span>
+        <span class="span9 plato-file-chart"></span>
+      </li>
+      
+      <li class="span12" id="plato-file-1">
+        <span class="span3 plato-file"><a class="plato-file-link" href="./files/controllers_controller_js/">controllers/controller.js</a></span>
+        <span class="span9 plato-file-chart"></span>
+      </li>
+      
+      <li class="span12" id="plato-file-2">
+        <span class="span3 plato-file"><a class="plato-file-link" href="./files/controllers_object_controller_js/">controllers/object_controller.js</a></span>
+        <span class="span9 plato-file-chart"></span>
+      </li>
+      
+      <li class="span12" id="plato-file-3">
+        <span class="span3 plato-file"><a class="plato-file-link" href="./files/controllers_js/">controllers.js</a></span>
+        <span class="span9 plato-file-chart"></span>
+      </li>
+      
+      <li class="span12" id="plato-file-4">
+        <span class="span3 plato-file"><a class="plato-file-link" href="./files/core_js/">core.js</a></span>
+        <span class="span9 plato-file-chart"></span>
+      </li>
+      
+      <li class="span12" id="plato-file-5">
+        <span class="span3 plato-file"><a class="plato-file-link" href="./files/ext_function_js/">ext/function.js</a></span>
+        <span class="span9 plato-file-chart"></span>
+      </li>
+      
+      <li class="span12" id="plato-file-6">
+        <span class="span3 plato-file"><a class="plato-file-link" href="./files/ext_string_js/">ext/string.js</a></span>
+        <span class="span9 plato-file-chart"></span>
+      </li>
+      
+      <li class="span12" id="plato-file-7">
+        <span class="span3 plato-file"><a class="plato-file-link" href="./files/ext_js/">ext.js</a></span>
+        <span class="span9 plato-file-chart"></span>
+      </li>
+      
+      <li class="span12" id="plato-file-8">
+        <span class="span3 plato-file"><a class="plato-file-link" href="./files/main_js/">main.js</a></span>
+        <span class="span9 plato-file-chart"></span>
+      </li>
+      
+      <li class="span12" id="plato-file-9">
+        <span class="span3 plato-file"><a class="plato-file-link" href="./files/mixins_array_js/">mixins/array.js</a></span>
+        <span class="span9 plato-file-chart"></span>
+      </li>
+      
+      <li class="span12" id="plato-file-10">
+        <span class="span3 plato-file"><a class="plato-file-link" href="./files/mixins_comparable_js/">mixins/comparable.js</a></span>
+        <span class="span9 plato-file-chart"></span>
+      </li>
+      
+      <li class="span12" id="plato-file-11">
+        <span class="span3 plato-file"><a class="plato-file-link" href="./files/mixins_copyable_js/">mixins/copyable.js</a></span>
+        <span class="span9 plato-file-chart"></span>
+      </li>
+      
+      <li class="span12" id="plato-file-12">
+        <span class="span3 plato-file"><a class="plato-file-link" href="./files/mixins_deferred_js/">mixins/deferred.js</a></span>
+        <span class="span9 plato-file-chart"></span>
+      </li>
+      
+      <li class="span12" id="plato-file-13">
+        <span class="span3 plato-file"><a class="plato-file-link" href="./files/mixins_enumerable_js/">mixins/enumerable.js</a></span>
+        <span class="span9 plato-file-chart"></span>
+      </li>
+      
+      <li class="span12" id="plato-file-14">
+        <span class="span3 plato-file"><a class="plato-file-link" href="./files/mixins_evented_js/">mixins/evented.js</a></span>
+        <span class="span9 plato-file-chart"></span>
+      </li>
+      
+      <li class="span12" id="plato-file-15">
+        <span class="span3 plato-file"><a class="plato-file-link" href="./files/mixins_freezable_js/">mixins/freezable.js</a></span>
+        <span class="span9 plato-file-chart"></span>
+      </li>
+      
+      <li class="span12" id="plato-file-16">
+        <span class="span3 plato-file"><a class="plato-file-link" href="./files/mixins_mutable_array_js/">mixins/mutable_array.js</a></span>
+        <span class="span9 plato-file-chart"></span>
+      </li>
+      
+      <li class="span12" id="plato-file-17">
+        <span class="span3 plato-file"><a class="plato-file-link" href="./files/mixins_mutable_enumerable_js/">mixins/mutable_enumerable.js</a></span>
+        <span class="span9 plato-file-chart"></span>
+      </li>
+      
+      <li class="span12" id="plato-file-18">
+        <span class="span3 plato-file"><a class="plato-file-link" href="./files/mixins_observable_js/">mixins/observable.js</a></span>
+        <span class="span9 plato-file-chart"></span>
+      </li>
+      
+      <li class="span12" id="plato-file-19">
+        <span class="span3 plato-file"><a class="plato-file-link" href="./files/mixins_sortable_js/">mixins/sortable.js</a></span>
+        <span class="span9 plato-file-chart"></span>
+      </li>
+      
+      <li class="span12" id="plato-file-20">
+        <span class="span3 plato-file"><a class="plato-file-link" href="./files/mixins_target_action_support_js/">mixins/target_action_support.js</a></span>
+        <span class="span9 plato-file-chart"></span>
+      </li>
+      
+      <li class="span12" id="plato-file-21">
+        <span class="span3 plato-file"><a class="plato-file-link" href="./files/mixins_js/">mixins.js</a></span>
+        <span class="span9 plato-file-chart"></span>
+      </li>
+      
+      <li class="span12" id="plato-file-22">
+        <span class="span3 plato-file"><a class="plato-file-link" href="./files/system_application_js/">system/application.js</a></span>
+        <span class="span9 plato-file-chart"></span>
+      </li>
+      
+      <li class="span12" id="plato-file-23">
+        <span class="span3 plato-file"><a class="plato-file-link" href="./files/system_array_proxy_js/">system/array_proxy.js</a></span>
+        <span class="span9 plato-file-chart"></span>
+      </li>
+      
+      <li class="span12" id="plato-file-24">
+        <span class="span3 plato-file"><a class="plato-file-link" href="./files/system_core_object_js/">system/core_object.js</a></span>
+        <span class="span9 plato-file-chart"></span>
+      </li>
+      
+      <li class="span12" id="plato-file-25">
+        <span class="span3 plato-file"><a class="plato-file-link" href="./files/system_deferred_js/">system/deferred.js</a></span>
+        <span class="span9 plato-file-chart"></span>
+      </li>
+      
+      <li class="span12" id="plato-file-26">
+        <span class="span3 plato-file"><a class="plato-file-link" href="./files/system_each_proxy_js/">system/each_proxy.js</a></span>
+        <span class="span9 plato-file-chart"></span>
+      </li>
+      
+      <li class="span12" id="plato-file-27">
+        <span class="span3 plato-file"><a class="plato-file-link" href="./files/system_lazy_load_js/">system/lazy_load.js</a></span>
+        <span class="span9 plato-file-chart"></span>
+      </li>
+      
+      <li class="span12" id="plato-file-28">
+        <span class="span3 plato-file"><a class="plato-file-link" href="./files/system_namespace_js/">system/namespace.js</a></span>
+        <span class="span9 plato-file-chart"></span>
+      </li>
+      
+      <li class="span12" id="plato-file-29">
+        <span class="span3 plato-file"><a class="plato-file-link" href="./files/system_native_array_js/">system/native_array.js</a></span>
+        <span class="span9 plato-file-chart"></span>
+      </li>
+      
+      <li class="span12" id="plato-file-30">
+        <span class="span3 plato-file"><a class="plato-file-link" href="./files/system_object_js/">system/object.js</a></span>
+        <span class="span9 plato-file-chart"></span>
+      </li>
+      
+      <li class="span12" id="plato-file-31">
+        <span class="span3 plato-file"><a class="plato-file-link" href="./files/system_object_proxy_js/">system/object_proxy.js</a></span>
+        <span class="span9 plato-file-chart"></span>
+      </li>
+      
+      <li class="span12" id="plato-file-32">
+        <span class="span3 plato-file"><a class="plato-file-link" href="./files/system_promise_chain_js/">system/promise_chain.js</a></span>
+        <span class="span9 plato-file-chart"></span>
+      </li>
+      
+      <li class="span12" id="plato-file-33">
+        <span class="span3 plato-file"><a class="plato-file-link" href="./files/system_set_js/">system/set.js</a></span>
+        <span class="span9 plato-file-chart"></span>
+      </li>
+      
+      <li class="span12" id="plato-file-34">
+        <span class="span3 plato-file"><a class="plato-file-link" href="./files/system_string_js/">system/string.js</a></span>
+        <span class="span9 plato-file-chart"></span>
+      </li>
+      
+      <li class="span12" id="plato-file-35">
+        <span class="span3 plato-file"><a class="plato-file-link" href="./files/system_js/">system.js</a></span>
+        <span class="span9 plato-file-chart"></span>
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script>
+
+  $(function(){
+    $('.plato-file-link').fitText(1.2, { minFontSize: '20px', maxFontSize: '28px' });
+  });
+
+  var colors = {
+    default : [
+      '#50ABD2',
+      '#ED913D',
+      '#E8182E'
+    ]
+  };
+
+  var graphHeight = 10,
+      lineHeight = 1.35;
+
+  var horizontalGraph = function(paper, num, orig, width, label, color){
+    var offset = 70;
+    var y = parseInt(graphHeight * num * lineHeight,10);
+    paper.rect(offset, y, width, graphHeight).attr({fill: color, stroke:'none'});
+    paper.text(offset - 5, y + 5, label).attr({'font-size':12,'text-anchor':'end' });
+    paper.text(width + offset + 8, y + 6, orig).attr({'font-size':10,'text-anchor':'start' });
+  }
+
+  function getColor(value, colors, thresholds) {
+    thresholds = thresholds || [];
+    for (var i = thresholds.length - 1; i > -1; i--) {
+      if (value > thresholds[i]) return colors[i+1];
+    }
+    return colors[0];
+  }
+
+  function drawFileCharts(reports) {
+    reports.forEach(function(file,i){
+      var $container = $('#plato-file-' + i + ' .plato-file-chart').empty();
+      var width = $container.width();
+      var paper = Raphael($container[0], width, 40);
+
+      // leave room at the end for the value labels.
+      width = width - 120;
+
+      var value = file.aggregate.complexity.cyclomatic;
+      horizontalGraph(paper,0,value, Math.min(value * 2, width),'complexity', getColor(value, colors.default, [5,10]));
+
+      value = file.aggregate.complexity.sloc.physical;
+      horizontalGraph(paper,1,value, Math.min(value, width), 'sloc', getColor(value,colors.default,[400,600]));
+
+      value = file.aggregate.complexity.halstead.bugs.toFixed(2);
+      horizontalGraph(paper,2,value, value * 5, 'est bugs', getColor(value,colors.default,[1,5]));
+    });
+  }
+
+  function drawOverviewCharts(reports) {
+    $('#chart1, #chart2, #chart3').empty();
+
+    var cyclomatic = {
+      element: 'chart1',
+      data: [],
+      xkey: 'label',
+      ykeys: ['value'],
+      ymax:20,
+      labels: ['Complexity'],
+      barColors : ['#194756']
+    };
+    var sloc = {
+      element: 'chart2',
+      data: [],
+      xkey: 'label',
+      ykeys: ['value'],
+      ymax : 400,
+      labels: ['Lines'],
+      barColors : ['#FAAF78']
+    }
+
+    var bugs = {
+      element: 'chart3',
+      data: [],
+      xkey: 'label',
+      ykeys: ['value'],
+      labels: ['Bugs'],
+      ymax: 20,
+      barColors : ['#D54C2C']
+    };
+
+    __report.forEach(function(report,i){
+      report.link = 'files/' + report.module_safe;
+
+      cyclomatic.ymax = Math.max(cyclomatic.ymax, report.aggregate.complexity.cyclomatic);
+      sloc.ymax = Math.max(sloc.ymax, report.aggregate.complexity.sloc.physical);
+      bugs.ymax = Math.max(bugs.ymax, report.aggregate.complexity.halstead.bugs);
+
+      cyclomatic.data.push({
+        value : report.aggregate.complexity.cyclomatic,
+        label : report.module
+      })
+      sloc.data.push({
+        value : report.aggregate.complexity.sloc.physical,
+        label : report.module
+      })
+      bugs.data.push({
+        value : report.aggregate.complexity.halstead.bugs.toFixed(2),
+        label : report.module
+      })
+    });
+
+    function onGraphClick(i, row){
+      document.location = __report[i].link;
+    }
+
+    var charts = [
+      Morris.Bar(cyclomatic),
+      Morris.Bar(bugs),
+      Morris.Bar(sloc)
+    ];
+
+    charts.forEach(function(chart){
+      chart.on('click', onGraphClick);
+    });
+    return charts;
+  }
+
+  drawOverviewCharts(__report);
+  drawFileCharts(__report);
+
+  $(window).on('resize', _.debounce(function(){
+    drawFileCharts(__report);
+    drawOverviewCharts(__report);
+  },200))
+
+
+
+
+</script>
+
+</body>
+</html>

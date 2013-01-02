@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>mixins/sortable.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <script type="text/javascript" src="../../assets/scripts/vendor/jquery-1.8.3.min.js"></script>
+
+  <script type="text/javascript" src="../../assets/scripts/vendor/lodash.min.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/raphael-min.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/morris.min.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/bootstrap-tooltip.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/bootstrap-popover.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/codemirror/codemirror.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/codemirror/util/searchcursor.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/codemirror/javascript.js"></script>
+
+  <script type="text/javascript" src="report.js"></script>
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap-3.0.0-wip.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <ul class="nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>mixins/sortable.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="span4">
+      <h2 class="header">Complexity</h2>
+      <p class="stat">14</p>
+    </div>
+    <div class="span4">
+      <h2 class="header">Maintainability</h2>
+      <p class="stat">126.12</p>
+    </div>
+    <div class="span4">
+      <h2 class="header">Estimated # Bugs</h2>
+      <p class="stat">1.58</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span4">
+      <h2 class="header">Difficulty</h2>
+      <p class="stat">55.13</p>
+    </div>
+    <div class="span4">
+      <h2 class="header">Volume</h2>
+      <p class="stat">4745.99</p>
+    </div>
+    <div class="span4">
+      <h2 class="header">SLOC/LSLOC</h2>
+      <p class="stat">206 / 109</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="span6">
+      <h3 class="chart-header">By Complexity</h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="span6">
+      <h3 class="chart-header">By SLOC</h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="span12">/**
+@module ember
+@submodule ember-runtime
+*/
+
+var get = Ember.get, set = Ember.set, forEach = Ember.EnumerableUtils.forEach;
+
+/**
+  `Ember.SortableMixin` provides a standard interface for array proxies
+  to specify a sort order and maintain this sorting when objects are added,
+  removed, or updated without changing the implicit order of their underlying
+  content array:
+
+  ```javascript
+  songs = [
+    {trackNumber: 4, title: 'Ob-La-Di, Ob-La-Da'},
+    {trackNumber: 2, title: 'Back in the U.S.S.R.'},
+    {trackNumber: 3, title: 'Glass Onion'},
+  ];
+
+  songsController = Ember.ArrayController.create({
+    content: songs,
+    sortProperties: ['trackNumber']
+  });
+
+  songsController.get('firstObject');  // {trackNumber: 2, title: 'Back in the U.S.S.R.'}
+
+  songsController.addObject({trackNumber: 1, title: 'Dear Prudence'});
+  songsController.get('firstObject');  // {trackNumber: 1, title: 'Dear Prudence'}
+  ```
+
+  @class SortableMixin
+  @namespace Ember
+  @extends Ember.Mixin
+  @uses Ember.MutableEnumerable
+*/
+Ember.SortableMixin = Ember.Mixin.create(Ember.MutableEnumerable, {
+  sortProperties: null,
+  sortAscending: true,
+
+  orderBy: function(item1, item2) {
+    var result = 0,
+        sortProperties = get(this, 'sortProperties'),
+        sortAscending = get(this, 'sortAscending');
+
+    Ember.assert("you need to define `sortProperties`", !!sortProperties);
+
+    forEach(sortProperties, function(propertyName) {
+      if (result === 0) {
+        result = Ember.compare(get(item1, propertyName), get(item2, propertyName));
+        if ((result !== 0) && !sortAscending) {
+          result = (-1) * result;
+        }
+      }
+    });
+
+    return result;
+  },
+
+  destroy: function() {
+    var content = get(this, 'content'),
+        sortProperties = get(this, 'sortProperties');
+
+    if (content && sortProperties) {
+      forEach(content, function(item) {
+        forEach(sortProperties, function(sortProperty) {
+          Ember.removeObserver(item, sortProperty, this, 'contentItemSortPropertyDidChange');
+        }, this);
+      }, this);
+    }
+
+    return this._super();
+  },
+
+  isSorted: Ember.computed('sortProperties', function() {
+    return !!get(this, 'sortProperties');
+  }),
+
+  arrangedContent: Ember.computed('content', 'sortProperties.@each', function(key, value) {
+    var content = get(this, 'content'),
+        isSorted = get(this, 'isSorted'),
+        sortProperties = get(this, 'sortProperties'),
+        self = this;
+
+    if (content && isSorted) {
+      content = content.slice();
+      content.sort(function(item1, item2) {
+        return self.orderBy(item1, item2);
+      });
+      forEach(content, function(item) {
+        forEach(sortProperties, function(sortProperty) {
+          Ember.addObserver(item, sortProperty, this, 'contentItemSortPropertyDidChange');
+        }, this);
+      }, this);
+      return Ember.A(content);
+    }
+
+    return content;
+  }),
+
+  _contentWillChange: Ember.beforeObserver(function() {
+    var content = get(this, 'content'),
+        sortProperties = get(this, 'sortProperties');
+
+    if (content && sortProperties) {
+      forEach(content, function(item) {
+        forEach(sortProperties, function(sortProperty) {
+          Ember.removeObserver(item, sortProperty, this, 'contentItemSortPropertyDidChange');
+        }, this);
+      }, this);
+    }
+
+    this._super();
+  }, 'content'),
+
+  sortAscendingWillChange: Ember.beforeObserver(function() {
+    this._lastSortAscending = get(this, 'sortAscending');
+  }, 'sortAscending'),
+
+  sortAscendingDidChange: Ember.observer(function() {
+    if (get(this, 'sortAscending') !== this._lastSortAscending) {
+      var arrangedContent = get(this, 'arrangedContent');
+      arrangedContent.reverseObjects();
+    }
+  }, 'sortAscending'),
+
+  contentArrayWillChange: function(array, idx, removedCount, addedCount) {
+    var isSorted = get(this, 'isSorted');
+
+    if (isSorted) {
+      var arrangedContent = get(this, 'arrangedContent');
+      var removedObjects = array.slice(idx, idx+removedCount);
+      var sortProperties = get(this, 'sortProperties');
+
+      forEach(removedObjects, function(item) {
+        arrangedContent.removeObject(item);
+
+        forEach(sortProperties, function(sortProperty) {
+          Ember.removeObserver(item, sortProperty, this, 'contentItemSortPropertyDidChange');
+        }, this);
+      });
+    }
+
+    return this._super(array, idx, removedCount, addedCount);
+  },
+
+  contentArrayDidChange: function(array, idx, removedCount, addedCount) {
+    var isSorted = get(this, 'isSorted'),
+        sortProperties = get(this, 'sortProperties');
+
+    if (isSorted) {
+      var addedObjects = array.slice(idx, idx+addedCount);
+      var arrangedContent = get(this, 'arrangedContent');
+
+      forEach(addedObjects, function(item) {
+        this.insertItemSorted(item);
+
+        forEach(sortProperties, function(sortProperty) {
+          Ember.addObserver(item, sortProperty, this, 'contentItemSortPropertyDidChange');
+        }, this);
+      }, this);
+    }
+
+    return this._super(array, idx, removedCount, addedCount);
+  },
+
+  insertItemSorted: function(item) {
+    var arrangedContent = get(this, 'arrangedContent');
+    var length = get(arrangedContent, 'length');
+
+    var idx = this._binarySearch(item, 0, length);
+    arrangedContent.insertAt(idx, item);
+  },
+
+  contentItemSortPropertyDidChange: function(item) {
+    var arrangedContent = get(this, 'arrangedContent'),
+        oldIndex = arrangedContent.indexOf(item),
+        leftItem = arrangedContent.objectAt(oldIndex - 1),
+        rightItem = arrangedContent.objectAt(oldIndex + 1),
+        leftResult = leftItem && this.orderBy(item, leftItem),
+        rightResult = rightItem && this.orderBy(item, rightItem);
+
+    if (leftResult < 0 || rightResult > 0) {
+      arrangedContent.removeObject(item);
+      this.insertItemSorted(item);
+    }
+  },
+
+  _binarySearch: function(item, low, high) {
+    var mid, midItem, res, arrangedContent;
+
+    if (low === high) {
+      return low;
+    }
+
+    arrangedContent = get(this, 'arrangedContent');
+
+    mid = low + Math.floor((high - low) / 2);
+    midItem = arrangedContent.objectAt(mid);
+
+    res = this.orderBy(midItem, item);
+
+    if (res < 0) {
+      return this._binarySearch(item, mid+1, high);
+    } else if (res > 0) {
+      return this._binarySearch(item, low, mid);
+    }
+
+    return mid;
+  }
+});
+</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-notice-template">
+<div class="complexity-notice">
+  Complexity : {{ complexity.cyclomatic }} <br>
+  Length : {{ complexity.halstead.length }} <br>
+  Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+  Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+</div>
+</script>
+<script>
+  function focusFragment() {
+    $('.plato-mark').removeClass('focus');
+    var markId = window.location.hash.substr(1);
+    if (markId) $('.' + markId).addClass('focus');
+  }
+
+  $(focusFragment)
+  window.onhashchange = function(){
+    focusFragment();
+  }
+
+  var srcEl = document.getElementById('file-source');
+  var options = {
+    lineNumbers : true,
+    gutters     : ['plato-gutter'],
+    readOnly    : 'nocursor'
+  };
+  var cm = CodeMirror.fromTextArea(srcEl, options);
+
+  var byComplexity = _.map(__report.functions,function(fn,i){
+    return {
+      label : fn.name,
+      value : fn.complexity.cyclomatic
+    }
+  })
+
+  var bySloc = _.map(__report.functions,function(fn,i){
+    return {
+      label : fn.name,
+      value : fn.complexity.sloc.physical,
+      formatter: function (x) { return x + " lines"}
+    }
+  })
+
+  var scrollToLine = function(i, data) {
+    var origScroll = [window.pageXOffset,window.pageYOffset];
+    window.location.hash = '#plato-mark-fn-' + i;
+    window.scrollTo(origScroll[0],origScroll[1]);
+    var line = __report.functions[i].line;
+    var coords = cm.charCoords({line : line, ch : 0});
+    $('body,html').animate({scrollTop : coords.top -50},250)
+  };
+
+  Morris.Donut({
+    element: 'fn-by-complexity',
+    data: byComplexity
+  }).on('click',scrollToLine);
+  Morris.Donut({
+    element: 'fn-by-sloc',
+    data: bySloc
+  }).on('click',scrollToLine);
+
+
+  __report.functions.forEach(function (fn,i) {
+    var name = fn.name === '<anonymous>' ? 'function\\s*\\([^)]*\\)' : fn.name;
+    var line = fn.line - 1;
+    var re = new RegExp('(' + name + ')', 'g');
+    var cursor = cm.getSearchCursor(re, {line : line, ch : 0});
+    var match;
+    _.templateSettings = {
+      interpolate : /\{\{(.+?)\}\}/g
+    };
+    var notice = _.template($('#complexity-notice-template').text());
+//    cm.addLineWidget(line, $(notice(fn))[0], {});
+
+    while (match = cursor.findNext()) {
+      if (cursor.to().line !== line) break;
+      cm.markText(
+        { line : line, ch : cursor.from().ch },
+        { line : line, ch : cursor.to().ch },
+        {
+          className   : 'plato-mark plato-mark-fn-' + i,
+          startStyle  : 'plato-mark-start',
+          endStyle    : 'plato-mark-end'
+        }
+      )
+    }
+    var gutterIcon = $('<a class="plato-gutter-complexity" name="' + ('plato-mark-fn-'+i) + '"><i class="icon-cog"></i></a>');
+    cm.setGutterMarker(line, 'plato-gutter', gutterIcon[0])
+    var stillIn = false;
+    var markStart = $('.plato-mark-start.plato-mark-fn-' + i);
+    var markSpans = $('.plato-mark-fn-' + i);
+
+    markSpans.add(gutterIcon)
+      .on('mouseenter touchstart',function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        markSpans.addClass('active');
+        stillIn = true;
+        markStart.popover('show');
+      })
+      .on('mouseleave touchend',function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        markSpans.removeClass('active');
+        stillIn = false;
+        setTimeout(function(){
+          if (!stillIn) markStart.popover('hide');
+        },200);
+      });
+
+    markStart.popover({
+      trigger : 'manual',
+      content : notice(fn),
+      html : true,
+      title : fn.name === '<anonymous>' ? '&lt;anonymous&gt;' : 'function ' + fn.name + '',
+      placement : 'top'
+    })
+
+  })
+
+</script>
+</body>
+</html>

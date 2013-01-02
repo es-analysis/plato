@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>system/each_proxy.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <script type="text/javascript" src="../../assets/scripts/vendor/jquery-1.8.3.min.js"></script>
+
+  <script type="text/javascript" src="../../assets/scripts/vendor/lodash.min.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/raphael-min.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/morris.min.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/bootstrap-tooltip.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/bootstrap-popover.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/codemirror/codemirror.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/codemirror/util/searchcursor.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/codemirror/javascript.js"></script>
+
+  <script type="text/javascript" src="report.js"></script>
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap-3.0.0-wip.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <ul class="nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>system/each_proxy.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="span4">
+      <h2 class="header">Complexity</h2>
+      <p class="stat">20</p>
+    </div>
+    <div class="span4">
+      <h2 class="header">Maintainability</h2>
+      <p class="stat">117.20</p>
+    </div>
+    <div class="span4">
+      <h2 class="header">Estimated # Bugs</h2>
+      <p class="stat">1.52</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span4">
+      <h2 class="header">Difficulty</h2>
+      <p class="stat">58.93</p>
+    </div>
+    <div class="span4">
+      <h2 class="header">Volume</h2>
+      <p class="stat">4548.22</p>
+    </div>
+    <div class="span4">
+      <h2 class="header">SLOC/LSLOC</h2>
+      <p class="stat">203 / 117</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="span6">
+      <h3 class="chart-header">By Complexity</h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="span6">
+      <h3 class="chart-header">By SLOC</h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="span12">require('ember-runtime/system/object');
+require('ember-runtime/mixins/array');
+
+/**
+@module ember
+@submodule ember-runtime
+*/
+
+
+var set = Ember.set, get = Ember.get, guidFor = Ember.guidFor;
+var forEach = Ember.EnumerableUtils.forEach;
+
+var EachArray = Ember.Object.extend(Ember.Array, {
+
+  init: function(content, keyName, owner) {
+    this._super();
+    this._keyName = keyName;
+    this._owner   = owner;
+    this._content = content;
+  },
+
+  objectAt: function(idx) {
+    var item = this._content.objectAt(idx);
+    return item && get(item, this._keyName);
+  },
+
+  length: Ember.computed(function() {
+    var content = this._content;
+    return content ? get(content, 'length') : 0;
+  })
+
+});
+
+var IS_OBSERVER = /^.+:(before|change)$/;
+
+function addObserverForContentKey(content, keyName, proxy, idx, loc) {
+  var objects = proxy._objects, guid;
+  if (!objects) objects = proxy._objects = {};
+
+  while(--loc>=idx) {
+    var item = content.objectAt(loc);
+    if (item) {
+      Ember.addBeforeObserver(item, keyName, proxy, 'contentKeyWillChange');
+      Ember.addObserver(item, keyName, proxy, 'contentKeyDidChange');
+
+      // keep track of the indicies each item was found at so we can map
+      // it back when the obj changes.
+      guid = guidFor(item);
+      if (!objects[guid]) objects[guid] = [];
+      objects[guid].push(loc);
+    }
+  }
+}
+
+function removeObserverForContentKey(content, keyName, proxy, idx, loc) {
+  var objects = proxy._objects;
+  if (!objects) objects = proxy._objects = {};
+  var indicies, guid;
+
+  while(--loc>=idx) {
+    var item = content.objectAt(loc);
+    if (item) {
+      Ember.removeBeforeObserver(item, keyName, proxy, 'contentKeyWillChange');
+      Ember.removeObserver(item, keyName, proxy, 'contentKeyDidChange');
+
+      guid = guidFor(item);
+      indicies = objects[guid];
+      indicies[indicies.indexOf(loc)] = null;
+    }
+  }
+}
+
+/**
+  This is the object instance returned when you get the `@each` property on an
+  array. It uses the unknownProperty handler to automatically create
+  EachArray instances for property names.
+
+  @private
+  @class EachProxy
+  @namespace Ember
+  @extends Ember.Object
+*/
+Ember.EachProxy = Ember.Object.extend({
+
+  init: function(content) {
+    this._super();
+    this._content = content;
+    content.addArrayObserver(this);
+
+    // in case someone is already observing some keys make sure they are
+    // added
+    forEach(Ember.watchedEvents(this), function(eventName) {
+      this.didAddListener(eventName);
+    }, this);
+  },
+
+  /**
+    You can directly access mapped properties by simply requesting them.
+    The `unknownProperty` handler will generate an EachArray of each item.
+
+    @method unknownProperty
+    @param keyName {String}
+    @param value {anything}
+  */
+  unknownProperty: function(keyName, value) {
+    var ret;
+    ret = new EachArray(this._content, keyName, this);
+    Ember.defineProperty(this, keyName, null, ret);
+    this.beginObservingContentKey(keyName);
+    return ret;
+  },
+
+  // ..........................................................
+  // ARRAY CHANGES
+  // Invokes whenever the content array itself changes.
+
+  arrayWillChange: function(content, idx, removedCnt, addedCnt) {
+    var keys = this._keys, key, array, lim;
+
+    lim = removedCnt>0 ? idx+removedCnt : -1;
+    Ember.beginPropertyChanges(this);
+
+    for(key in keys) {
+      if (!keys.hasOwnProperty(key)) { continue; }
+
+      if (lim>0) removeObserverForContentKey(content, key, this, idx, lim);
+
+      Ember.propertyWillChange(this, key);
+    }
+
+    Ember.propertyWillChange(this._content, '@each');
+    Ember.endPropertyChanges(this);
+  },
+
+  arrayDidChange: function(content, idx, removedCnt, addedCnt) {
+    var keys = this._keys, key, array, lim;
+
+    lim = addedCnt>0 ? idx+addedCnt : -1;
+    Ember.beginPropertyChanges(this);
+
+    for(key in keys) {
+      if (!keys.hasOwnProperty(key)) { continue; }
+
+      if (lim>0) addObserverForContentKey(content, key, this, idx, lim);
+
+      Ember.propertyDidChange(this, key);
+    }
+
+    Ember.propertyDidChange(this._content, '@each');
+    Ember.endPropertyChanges(this);
+  },
+
+  // ..........................................................
+  // LISTEN FOR NEW OBSERVERS AND OTHER EVENT LISTENERS
+  // Start monitoring keys based on who is listening...
+
+  didAddListener: function(eventName) {
+    if (IS_OBSERVER.test(eventName)) {
+      this.beginObservingContentKey(eventName.slice(0, -7));
+    }
+  },
+
+  didRemoveListener: function(eventName) {
+    if (IS_OBSERVER.test(eventName)) {
+      this.stopObservingContentKey(eventName.slice(0, -7));
+    }
+  },
+
+  // ..........................................................
+  // CONTENT KEY OBSERVING
+  // Actual watch keys on the source content.
+
+  beginObservingContentKey: function(keyName) {
+    var keys = this._keys;
+    if (!keys) keys = this._keys = {};
+    if (!keys[keyName]) {
+      keys[keyName] = 1;
+      var content = this._content,
+          len = get(content, 'length');
+      addObserverForContentKey(content, keyName, this, 0, len);
+    } else {
+      keys[keyName]++;
+    }
+  },
+
+  stopObservingContentKey: function(keyName) {
+    var keys = this._keys;
+    if (keys && (keys[keyName]>0) && (--keys[keyName]<=0)) {
+      var content = this._content,
+          len     = get(content, 'length');
+      removeObserverForContentKey(content, keyName, this, 0, len);
+    }
+  },
+
+  contentKeyWillChange: function(obj, keyName) {
+    Ember.propertyWillChange(this, keyName);
+  },
+
+  contentKeyDidChange: function(obj, keyName) {
+    Ember.propertyDidChange(this, keyName);
+  }
+
+});
+
+
+</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-notice-template">
+<div class="complexity-notice">
+  Complexity : {{ complexity.cyclomatic }} <br>
+  Length : {{ complexity.halstead.length }} <br>
+  Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+  Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+</div>
+</script>
+<script>
+  function focusFragment() {
+    $('.plato-mark').removeClass('focus');
+    var markId = window.location.hash.substr(1);
+    if (markId) $('.' + markId).addClass('focus');
+  }
+
+  $(focusFragment)
+  window.onhashchange = function(){
+    focusFragment();
+  }
+
+  var srcEl = document.getElementById('file-source');
+  var options = {
+    lineNumbers : true,
+    gutters     : ['plato-gutter'],
+    readOnly    : 'nocursor'
+  };
+  var cm = CodeMirror.fromTextArea(srcEl, options);
+
+  var byComplexity = _.map(__report.functions,function(fn,i){
+    return {
+      label : fn.name,
+      value : fn.complexity.cyclomatic
+    }
+  })
+
+  var bySloc = _.map(__report.functions,function(fn,i){
+    return {
+      label : fn.name,
+      value : fn.complexity.sloc.physical,
+      formatter: function (x) { return x + " lines"}
+    }
+  })
+
+  var scrollToLine = function(i, data) {
+    var origScroll = [window.pageXOffset,window.pageYOffset];
+    window.location.hash = '#plato-mark-fn-' + i;
+    window.scrollTo(origScroll[0],origScroll[1]);
+    var line = __report.functions[i].line;
+    var coords = cm.charCoords({line : line, ch : 0});
+    $('body,html').animate({scrollTop : coords.top -50},250)
+  };
+
+  Morris.Donut({
+    element: 'fn-by-complexity',
+    data: byComplexity
+  }).on('click',scrollToLine);
+  Morris.Donut({
+    element: 'fn-by-sloc',
+    data: bySloc
+  }).on('click',scrollToLine);
+
+
+  __report.functions.forEach(function (fn,i) {
+    var name = fn.name === '<anonymous>' ? 'function\\s*\\([^)]*\\)' : fn.name;
+    var line = fn.line - 1;
+    var re = new RegExp('(' + name + ')', 'g');
+    var cursor = cm.getSearchCursor(re, {line : line, ch : 0});
+    var match;
+    _.templateSettings = {
+      interpolate : /\{\{(.+?)\}\}/g
+    };
+    var notice = _.template($('#complexity-notice-template').text());
+//    cm.addLineWidget(line, $(notice(fn))[0], {});
+
+    while (match = cursor.findNext()) {
+      if (cursor.to().line !== line) break;
+      cm.markText(
+        { line : line, ch : cursor.from().ch },
+        { line : line, ch : cursor.to().ch },
+        {
+          className   : 'plato-mark plato-mark-fn-' + i,
+          startStyle  : 'plato-mark-start',
+          endStyle    : 'plato-mark-end'
+        }
+      )
+    }
+    var gutterIcon = $('<a class="plato-gutter-complexity" name="' + ('plato-mark-fn-'+i) + '"><i class="icon-cog"></i></a>');
+    cm.setGutterMarker(line, 'plato-gutter', gutterIcon[0])
+    var stillIn = false;
+    var markStart = $('.plato-mark-start.plato-mark-fn-' + i);
+    var markSpans = $('.plato-mark-fn-' + i);
+
+    markSpans.add(gutterIcon)
+      .on('mouseenter touchstart',function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        markSpans.addClass('active');
+        stillIn = true;
+        markStart.popover('show');
+      })
+      .on('mouseleave touchend',function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        markSpans.removeClass('active');
+        stillIn = false;
+        setTimeout(function(){
+          if (!stillIn) markStart.popover('hide');
+        },200);
+      });
+
+    markStart.popover({
+      trigger : 'manual',
+      content : notice(fn),
+      html : true,
+      title : fn.name === '<anonymous>' ? '&lt;anonymous&gt;' : 'function ' + fn.name + '',
+      placement : 'top'
+    })
+
+  })
+
+</script>
+</body>
+</html>
