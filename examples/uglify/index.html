@@ -144,7 +144,7 @@
     var y = parseInt(graphHeight * num * lineHeight,10);
     paper.rect(offset, y, width, graphHeight).attr({fill: color, stroke:'none'});
     paper.text(offset - 5, y + 5, label).attr({'font-size':12,'text-anchor':'end' });
-    paper.text(width + offset + 10, y + 6, orig).attr({'font-size':10,'text-anchor':'start' });
+    paper.text(width + offset + 8, y + 6, orig).attr({'font-size':10,'text-anchor':'start' });
   }
 
   function getColor(value, colors, thresholds) {
@@ -161,11 +161,14 @@
       var width = $container.width();
       var paper = Raphael($container[0], width, 40);
 
+      // leave room at the end for the value labels.
+      width = width - 120;
+
       var value = file.aggregate.complexity.cyclomatic;
-      horizontalGraph(paper,0,value, value * 2 > width ? width : value * 2,'complexity', getColor(value, colors.default, [5,10]));
+      horizontalGraph(paper,0,value, Math.min(value * 2, width),'complexity', getColor(value, colors.default, [5,10]));
 
       value = file.aggregate.complexity.sloc.physical;
-      horizontalGraph(paper,1,value, value > width ? width : value, 'sloc', getColor(value,colors.default,[400,600]));
+      horizontalGraph(paper,1,value, Math.min(value, width), 'sloc', getColor(value,colors.default,[400,600]));
 
       value = file.aggregate.complexity.halstead.bugs.toFixed(2);
       horizontalGraph(paper,2,value, value * 5, 'est bugs', getColor(value,colors.default,[1,5]));
