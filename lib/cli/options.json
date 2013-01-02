@@ -22,7 +22,7 @@
   },
   "l": {
     "long": "jshint",
-    "desc": "Turn on jshint linting, optionally specify a jshintrc file",
+    "desc": "Specify a jshintrc file for JSHint linting",
     "type": "String"
   }
 }
