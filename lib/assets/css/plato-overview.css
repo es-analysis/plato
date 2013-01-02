@@ -1,6 +1,24 @@
 .chart {
   margin: 0 auto;
-  height:400px;
+  height:300px;
+}
+
+.chart rect {
+  cursor:pointer;
+}
+
+.file-list li {
+  border-bottom:1px solid #ccc;
+  padding-bottom:10px;
+  padding-top:10px;
+}
+
+.file-list li:nth-child(odd) {
+  background-color: hsl(0, 0%, 98%);
+}
+
+.plato-file {
+  text-align: center;
 }
 
 .plato-file-link {
@@ -14,3 +32,4 @@
 .plato-file-link:hover {
   color: #3B71B1;
 }
+

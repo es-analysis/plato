@@ -1,4 +1,7 @@
 
+body {
+}
+
 .navbar {
   margin-bottom:0;
   padding: 0 20px;
@@ -29,3 +32,13 @@ a:visited {
   box-shadow: 5px 5px 15px -6px black;
 }
 
+li {
+  line-height: 10px;
+}
+
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) {
+  .jumbotron h1 {
+    font-size: 40px;
+  }
+}

@@ -37,6 +37,9 @@
 .plato-mark.focus {
   background-color: rgb(235, 250, 166);
 }
+.plato-mark.active {
+  background-color: rgb(158, 180, 255);
+}
 
 .plato-mark-start {
   border-left-width:1px;
