@@ -15,6 +15,7 @@
   "bugs": {
     "url": "https://github.com/jsoverson/plato/issues"
   },
+  "bin" : "bin/plato",
   "licenses": [
     {
       "type": "MIT",
@@ -33,7 +34,15 @@
     "grunt-contrib-jshint": "~0.1.0",
     "grunt-contrib-nodeunit": "~0.1.1"
   },
-  "keywords": [],
+  "keywords": [
+    "halstead",
+    "visualize",
+    "cyclomatic",
+    "complexity",
+    "report",
+    "analysis",
+    "analyze"
+  ],
   "dependencies": {
     "complexity-report": "~0.4.3",
     "posix-getopt": "~1.0.0",
