@@ -19,5 +19,10 @@
     "long": "recurse",
     "desc": "Recursively search directories",
     "type": "Boolean"
+  },
+  "l": {
+    "long": "jshint",
+    "desc": "Turn on jshint linting, optionally specify a jshintrc file",
+    "type": "String"
   }
 }
