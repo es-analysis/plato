@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>callbacks.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <script type="text/javascript" src="../../assets/scripts/vendor/jquery-1.8.3.min.js"></script>
+
+  <script type="text/javascript" src="../../assets/scripts/vendor/lodash.min.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/raphael-min.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/morris.min.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/bootstrap-tooltip.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/bootstrap-popover.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/codemirror/codemirror.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/codemirror/util/searchcursor.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/codemirror/javascript.js"></script>
+
+  <script type="text/javascript" src="report.js"></script>
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap-3.0.0-wip.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <ul class="nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>callbacks.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="span4">
+      <h2 class="header">Complexity</h2>
+      <p class="stat">29</p>
+    </div>
+    <div class="span4">
+      <h2 class="header">Maintainability</h2>
+      <p class="stat">118.99</p>
+    </div>
+    <div class="span4">
+      <h2 class="header">Estimated # Bugs</h2>
+      <p class="stat">0.98</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span4">
+      <h2 class="header">Difficulty</h2>
+      <p class="stat">55.83</p>
+    </div>
+    <div class="span4">
+      <h2 class="header">Volume</h2>
+      <p class="stat">2943.23</p>
+    </div>
+    <div class="span4">
+      <h2 class="header">SLOC/LSLOC</h2>
+      <p class="stat">194 / 102</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="span6">
+      <h3 class="chart-header">By Complexity</h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="span6">
+      <h3 class="chart-header">By SLOC</h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="span12">// String to Object options format cache
+var optionsCache = {};
+
+// Convert String-formatted options into Object-formatted ones and store in cache
+function createOptions( options ) {
+	var object = optionsCache[ options ] = {};
+	jQuery.each( options.match( core_rnotwhite ) || [], function( _, flag ) {
+		object[ flag ] = true;
+	});
+	return object;
+}
+
+/*
+ * Create a callback list using the following parameters:
+ *
+ *	options: an optional list of space-separated options that will change how
+ *			the callback list behaves or a more traditional option object
+ *
+ * By default a callback list will act like an event callback list and can be
+ * "fired" multiple times.
+ *
+ * Possible options:
+ *
+ *	once:			will ensure the callback list can only be fired once (like a Deferred)
+ *
+ *	memory:			will keep track of previous values and will call any callback added
+ *					after the list has been fired right away with the latest "memorized"
+ *					values (like a Deferred)
+ *
+ *	unique:			will ensure a callback can only be added once (no duplicate in the list)
+ *
+ *	stopOnFalse:	interrupt callings when a callback returns false
+ *
+ */
+jQuery.Callbacks = function( options ) {
+
+	// Convert options from String-formatted to Object-formatted if needed
+	// (we check in cache first)
+	options = typeof options === "string" ?
+		( optionsCache[ options ] || createOptions( options ) ) :
+		jQuery.extend( {}, options );
+
+	var // Last fire value (for non-forgettable lists)
+		memory,
+		// Flag to know if list was already fired
+		fired,
+		// Flag to know if list is currently firing
+		firing,
+		// First callback to fire (used internally by add and fireWith)
+		firingStart,
+		// End of the loop when firing
+		firingLength,
+		// Index of currently firing callback (modified by remove if needed)
+		firingIndex,
+		// Actual callback list
+		list = [],
+		// Stack of fire calls for repeatable lists
+		stack = !options.once && [],
+		// Fire callbacks
+		fire = function( data ) {
+			memory = options.memory && data;
+			fired = true;
+			firingIndex = firingStart || 0;
+			firingStart = 0;
+			firingLength = list.length;
+			firing = true;
+			for ( ; list && firingIndex < firingLength; firingIndex++ ) {
+				if ( list[ firingIndex ].apply( data[ 0 ], data[ 1 ] ) === false && options.stopOnFalse ) {
+					memory = false; // To prevent further calls using add
+					break;
+				}
+			}
+			firing = false;
+			if ( list ) {
+				if ( stack ) {
+					if ( stack.length ) {
+						fire( stack.shift() );
+					}
+				} else if ( memory ) {
+					list = [];
+				} else {
+					self.disable();
+				}
+			}
+		},
+		// Actual Callbacks object
+		self = {
+			// Add a callback or a collection of callbacks to the list
+			add: function() {
+				if ( list ) {
+					// First, we save the current length
+					var start = list.length;
+					(function add( args ) {
+						jQuery.each( args, function( _, arg ) {
+							var type = jQuery.type( arg );
+							if ( type === "function" ) {
+								if ( !options.unique || !self.has( arg ) ) {
+									list.push( arg );
+								}
+							} else if ( arg && arg.length && type !== "string" ) {
+								// Inspect recursively
+								add( arg );
+							}
+						});
+					})( arguments );
+					// Do we need to add the callbacks to the
+					// current firing batch?
+					if ( firing ) {
+						firingLength = list.length;
+					// With memory, if we're not firing then
+					// we should call right away
+					} else if ( memory ) {
+						firingStart = start;
+						fire( memory );
+					}
+				}
+				return this;
+			},
+			// Remove a callback from the list
+			remove: function() {
+				if ( list ) {
+					jQuery.each( arguments, function( _, arg ) {
+						var index;
+						while( ( index = jQuery.inArray( arg, list, index ) ) > -1 ) {
+							list.splice( index, 1 );
+							// Handle firing indexes
+							if ( firing ) {
+								if ( index <= firingLength ) {
+									firingLength--;
+								}
+								if ( index <= firingIndex ) {
+									firingIndex--;
+								}
+							}
+						}
+					});
+				}
+				return this;
+			},
+			// Control if a given callback is in the list
+			has: function( fn ) {
+				return jQuery.inArray( fn, list ) > -1;
+			},
+			// Remove all callbacks from the list
+			empty: function() {
+				list = [];
+				return this;
+			},
+			// Have the list do nothing anymore
+			disable: function() {
+				list = stack = memory = undefined;
+				return this;
+			},
+			// Is it disabled?
+			disabled: function() {
+				return !list;
+			},
+			// Lock the list in its current state
+			lock: function() {
+				stack = undefined;
+				if ( !memory ) {
+					self.disable();
+				}
+				return this;
+			},
+			// Is it locked?
+			locked: function() {
+				return !stack;
+			},
+			// Call all callbacks with the given context and arguments
+			fireWith: function( context, args ) {
+				args = args || [];
+				args = [ context, args.slice ? args.slice() : args ];
+				if ( list && ( !fired || stack ) ) {
+					if ( firing ) {
+						stack.push( args );
+					} else {
+						fire( args );
+					}
+				}
+				return this;
+			},
+			// Call all the callbacks with the given arguments
+			fire: function() {
+				self.fireWith( this, arguments );
+				return this;
+			},
+			// To know if the callbacks have already been called at least once
+			fired: function() {
+				return !!fired;
+			}
+		};
+
+	return self;
+};
+</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-notice-template">
+<div class="complexity-notice">
+  Complexity : {{ complexity.cyclomatic }} <br>
+  Length : {{ complexity.halstead.length }} <br>
+  Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+  Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+</div>
+</script>
+<script>
+  function focusFragment() {
+    $('.plato-mark').removeClass('focus');
+    var markId = window.location.hash.substr(1);
+    if (markId) $('.' + markId).addClass('focus');
+  }
+
+  $(focusFragment)
+  window.onhashchange = function(){
+    focusFragment();
+  }
+
+  var srcEl = document.getElementById('file-source');
+  var options = {
+    lineNumbers : true,
+    gutters     : ['plato-gutter'],
+    readOnly    : 'nocursor'
+  };
+  var cm = CodeMirror.fromTextArea(srcEl, options);
+
+  var byComplexity = _.map(__report.functions,function(fn,i){
+    return {
+      label : fn.name,
+      value : fn.complexity.cyclomatic
+    }
+  })
+
+  var bySloc = _.map(__report.functions,function(fn,i){
+    return {
+      label : fn.name,
+      value : fn.complexity.sloc.physical,
+      formatter: function (x) { return x + " lines"}
+    }
+  })
+
+  var scrollToLine = function(i, data) {
+    var origScroll = [window.pageXOffset,window.pageYOffset];
+    window.location.hash = '#plato-mark-fn-' + i;
+    window.scrollTo(origScroll[0],origScroll[1]);
+    var line = __report.functions[i].line;
+    var coords = cm.charCoords({line : line, ch : 0});
+    $('body,html').animate({scrollTop : coords.top -50},250)
+  };
+
+  Morris.Donut({
+    element: 'fn-by-complexity',
+    data: byComplexity
+  }).on('click',scrollToLine);
+  Morris.Donut({
+    element: 'fn-by-sloc',
+    data: bySloc
+  }).on('click',scrollToLine);
+
+
+  __report.functions.forEach(function (fn,i) {
+    var name = fn.name === '<anonymous>' ? 'function\\s*\\([^)]*\\)' : fn.name;
+    var line = fn.line - 1;
+    var re = new RegExp('(' + name + ')', 'g');
+    var cursor = cm.getSearchCursor(re, {line : line, ch : 0});
+    var match;
+    _.templateSettings = {
+      interpolate : /\{\{(.+?)\}\}/g
+    };
+    var notice = _.template($('#complexity-notice-template').text());
+//    cm.addLineWidget(line, $(notice(fn))[0], {});
+
+    while (match = cursor.findNext()) {
+      if (cursor.to().line !== line) break;
+      cm.markText(
+        { line : line, ch : cursor.from().ch },
+        { line : line, ch : cursor.to().ch },
+        {
+          className   : 'plato-mark plato-mark-fn-' + i,
+          startStyle  : 'plato-mark-start',
+          endStyle    : 'plato-mark-end'
+        }
+      )
+    }
+    var gutterIcon = $('<a class="plato-gutter-complexity" name="' + ('plato-mark-fn-'+i) + '"><i class="icon-cog"></i></a>');
+    cm.setGutterMarker(line, 'plato-gutter', gutterIcon[0])
+    var stillIn = false;
+    var markStart = $('.plato-mark-start.plato-mark-fn-' + i);
+    var markSpans = $('.plato-mark-fn-' + i);
+
+    markSpans.add(gutterIcon)
+      .on('mouseenter touchstart',function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        markSpans.addClass('active');
+        stillIn = true;
+        markStart.popover('show');
+      })
+      .on('mouseleave touchend',function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        markSpans.removeClass('active');
+        stillIn = false;
+        setTimeout(function(){
+          if (!stillIn) markStart.popover('hide');
+        },200);
+      });
+
+    markStart.popover({
+      trigger : 'manual',
+      content : notice(fn),
+      html : true,
+      title : fn.name === '<anonymous>' ? '&lt;anonymous&gt;' : 'function ' + fn.name + '',
+      placement : 'top'
+    })
+
+  })
+
+</script>
+</body>
+</html>

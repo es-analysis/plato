@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>support.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <script type="text/javascript" src="../../assets/scripts/vendor/jquery-1.8.3.min.js"></script>
+
+  <script type="text/javascript" src="../../assets/scripts/vendor/lodash.min.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/raphael-min.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/morris.min.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/bootstrap-tooltip.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/bootstrap-popover.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/codemirror/codemirror.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/codemirror/util/searchcursor.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/codemirror/javascript.js"></script>
+
+  <script type="text/javascript" src="report.js"></script>
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap-3.0.0-wip.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <ul class="nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>support.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="span4">
+      <h2 class="header">Complexity</h2>
+      <p class="stat">12</p>
+    </div>
+    <div class="span4">
+      <h2 class="header">Maintainability</h2>
+      <p class="stat">76.44</p>
+    </div>
+    <div class="span4">
+      <h2 class="header">Estimated # Bugs</h2>
+      <p class="stat">1.78</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span4">
+      <h2 class="header">Difficulty</h2>
+      <p class="stat">30.68</p>
+    </div>
+    <div class="span4">
+      <h2 class="header">Volume</h2>
+      <p class="stat">5334.18</p>
+    </div>
+    <div class="span4">
+      <h2 class="header">SLOC/LSLOC</h2>
+      <p class="stat">216 / 113</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="span6">
+      <h3 class="chart-header">By Complexity</h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="span6">
+      <h3 class="chart-header">By SLOC</h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="span12">jQuery.support = (function() {
+
+	var support, all, a, select, opt, input, fragment, eventName, isSupported, i,
+		div = document.createElement("div");
+
+	// Setup
+	div.setAttribute( "className", "t" );
+	div.innerHTML = "  <link/><table></table><a>a</a><input type='checkbox'/>";
+
+	// Support tests won't run in some limited or non-browser environments
+	all = div.getElementsByTagName("*");
+	a = div.getElementsByTagName("a")[ 0 ];
+	if ( !all || !a || !all.length ) {
+		return {};
+	}
+
+	// First batch of tests
+	select = document.createElement("select");
+	opt = select.appendChild( document.createElement("option") );
+	input = div.getElementsByTagName("input")[ 0 ];
+
+	a.style.cssText = "float:left;opacity:.5";
+	support = {
+		// Test setAttribute on camelCase class. If it works, we need attrFixes when doing get/setAttribute (ie6/7)
+		getSetAttribute: div.className !== "t",
+
+		// IE strips leading whitespace when .innerHTML is used
+		leadingWhitespace: div.firstChild.nodeType === 3,
+
+		// Make sure that tbody elements aren't automatically inserted
+		// IE will insert them into empty tables
+		tbody: !div.getElementsByTagName("tbody").length,
+
+		// Make sure that link elements get serialized correctly by innerHTML
+		// This requires a wrapper element in IE
+		htmlSerialize: !!div.getElementsByTagName("link").length,
+
+		// Make sure that element opacity exists
+		// (IE uses filter instead)
+		// Use a regex to work around a WebKit issue. See #5145
+		opacity: /^0.5/.test( a.style.opacity ),
+
+		// Verify style float existence
+		// (IE uses styleFloat instead of cssFloat)
+		cssFloat: !!a.style.cssFloat,
+
+		// Check the default checkbox/radio value ("" on WebKit; "on" elsewhere)
+		checkOn: !!input.value,
+
+		// Must access the parent to make an option select properly
+		// Support: IE9, IE10
+		optSelected: opt.selected,
+
+		// Makes sure cloning an html5 element does not cause problems
+		// Where outerHTML is undefined, this still works
+		html5Clone: document.createElement("nav").cloneNode( true ).outerHTML !== "<:nav></:nav>",
+
+		// jQuery.support.boxModel DEPRECATED in 1.8 since we don't support Quirks Mode
+		boxModel: document.compatMode === "CSS1Compat",
+
+		// Will be defined later
+		deleteExpando: true,
+		noCloneEvent: true,
+		inlineBlockNeedsLayout: false,
+		shrinkWrapBlocks: false,
+		reliableMarginRight: true,
+		boxSizingReliable: true,
+		pixelPosition: false
+	};
+
+	// Make sure checked status is properly cloned
+	input.checked = true;
+	support.noCloneChecked = input.cloneNode( true ).checked;
+
+	// Make sure that the options inside disabled selects aren't marked as disabled
+	// (WebKit marks them as disabled)
+	select.disabled = true;
+	support.optDisabled = !opt.disabled;
+
+	// Support: IE<9
+	try {
+		delete div.test;
+	} catch( e ) {
+		support.deleteExpando = false;
+	}
+
+	// Check if an input maintains its value after becoming a radio
+	input = document.createElement("input");
+	input.value = "t";
+	input.setAttribute( "type", "radio" );
+	support.radioValue = input.value === "t";
+
+	// #11217 - WebKit loses check when the name is after the checked attribute
+	input.setAttribute( "checked", "t" );
+	input.setAttribute( "name", "t" );
+
+	fragment = document.createDocumentFragment();
+	fragment.appendChild( input );
+
+	// Check if a disconnected checkbox will retain its checked
+	// value of true after appended to the DOM (IE6/7)
+	support.appendChecked = input.checked;
+
+	// WebKit doesn't clone checked state correctly in fragments
+	support.checkClone = fragment.cloneNode( true ).cloneNode( true ).lastChild.checked;
+
+	// Support: IE<9
+	// Opera does not clone events (and typeof div.attachEvent === undefined).
+	// IE9-10 clones events bound via attachEvent, but they don't trigger with .click()
+	if ( div.attachEvent ) {
+		div.attachEvent( "onclick", function() {
+			support.noCloneEvent = false;
+		});
+
+		div.cloneNode( true ).click();
+	}
+
+	// Support: IE<9 (lack submit/change bubble), Firefox 17+ (lack focusin event)
+	// Beware of CSP restrictions (https://developer.mozilla.org/en/Security/CSP), test/csp.php
+	for ( i in { submit: true, change: true, focusin: true }) {
+		div.setAttribute( eventName = "on" + i, "t" );
+
+		support[ i + "Bubbles" ] = eventName in window || div.attributes[ eventName ].expando === false;
+	}
+
+	// Run tests that need a body at doc ready
+	jQuery(function() {
+		var container, marginDiv, tds,
+			divReset = "padding:0;margin:0;border:0;display:block;box-sizing:content-box;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;",
+			body = document.getElementsByTagName("body")[0];
+
+		if ( !body ) {
+			// Return for frameset docs that don't have a body
+			return;
+		}
+
+		container = document.createElement("div");
+		container.style.cssText = "border:0;width:0;height:0;position:absolute;top:0;left:-9999px;margin-top:1px";
+
+		body.appendChild( container ).appendChild( div );
+
+		// Support: IE8
+		// Check if table cells still have offsetWidth/Height when they are set
+		// to display:none and there are still other visible table cells in a
+		// table row; if so, offsetWidth/Height are not reliable for use when
+		// determining if an element has been hidden directly using
+		// display:none (it is still safe to use offsets if a parent element is
+		// hidden; don safety goggles and see bug #4512 for more information).
+		div.innerHTML = "<table><tr><td></td><td>t</td></tr></table>";
+		tds = div.getElementsByTagName("td");
+		tds[ 0 ].style.cssText = "padding:0;margin:0;border:0;display:none";
+		isSupported = ( tds[ 0 ].offsetHeight === 0 );
+
+		tds[ 0 ].style.display = "";
+		tds[ 1 ].style.display = "none";
+
+		// Support: IE8
+		// Check if empty table cells still have offsetWidth/Height
+		support.reliableHiddenOffsets = isSupported && ( tds[ 0 ].offsetHeight === 0 );
+
+		// Check box-sizing and margin behavior
+		div.innerHTML = "";
+		div.style.cssText = "box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;padding:1px;border:1px;display:block;width:4px;margin-top:1%;position:absolute;top:1%;";
+		support.boxSizing = ( div.offsetWidth === 4 );
+		support.doesNotIncludeMarginInBodyOffset = ( body.offsetTop !== 1 );
+
+		// Use window.getComputedStyle because jsdom on node.js will break without it.
+		if ( window.getComputedStyle ) {
+			support.pixelPosition = ( window.getComputedStyle( div, null ) || {} ).top !== "1%";
+			support.boxSizingReliable = ( window.getComputedStyle( div, null ) || { width: "4px" } ).width === "4px";
+
+			// Check if div with explicit width and no margin-right incorrectly
+			// gets computed margin-right based on width of container. (#3333)
+			// Fails in WebKit before Feb 2011 nightlies
+			// WebKit Bug 13343 - getComputedStyle returns wrong value for margin-right
+			marginDiv = div.appendChild( document.createElement("div") );
+			marginDiv.style.cssText = div.style.cssText = divReset;
+			marginDiv.style.marginRight = marginDiv.style.width = "0";
+			div.style.width = "1px";
+
+			support.reliableMarginRight =
+				!parseFloat( ( window.getComputedStyle( marginDiv, null ) || {} ).marginRight );
+		}
+
+		if ( typeof div.style.zoom !== "undefined" ) {
+			// Support: IE<8
+			// Check if natively block-level elements act like inline-block
+			// elements when setting their display to 'inline' and giving
+			// them layout
+			div.innerHTML = "";
+			div.style.cssText = divReset + "width:1px;padding:1px;display:inline;zoom:1";
+			support.inlineBlockNeedsLayout = ( div.offsetWidth === 3 );
+
+			// Support: IE6
+			// Check if elements with layout shrink-wrap their children
+			div.style.display = "block";
+			div.innerHTML = "<div></div>";
+			div.firstChild.style.width = "5px";
+			support.shrinkWrapBlocks = ( div.offsetWidth !== 3 );
+
+			// Prevent IE 6 from affecting layout for positioned elements #11048
+			// Prevent IE from shrinking the body in IE 7 mode #12869
+			body.style.zoom = 1;
+		}
+
+		body.removeChild( container );
+
+		// Null elements to avoid leaks in IE
+		container = div = tds = marginDiv = null;
+	});
+
+	// Null elements to avoid leaks in IE
+	all = select = fragment = opt = a = input = null;
+
+	return support;
+})();
+
+</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-notice-template">
+<div class="complexity-notice">
+  Complexity : {{ complexity.cyclomatic }} <br>
+  Length : {{ complexity.halstead.length }} <br>
+  Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+  Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+</div>
+</script>
+<script>
+  function focusFragment() {
+    $('.plato-mark').removeClass('focus');
+    var markId = window.location.hash.substr(1);
+    if (markId) $('.' + markId).addClass('focus');
+  }
+
+  $(focusFragment)
+  window.onhashchange = function(){
+    focusFragment();
+  }
+
+  var srcEl = document.getElementById('file-source');
+  var options = {
+    lineNumbers : true,
+    gutters     : ['plato-gutter'],
+    readOnly    : 'nocursor'
+  };
+  var cm = CodeMirror.fromTextArea(srcEl, options);
+
+  var byComplexity = _.map(__report.functions,function(fn,i){
+    return {
+      label : fn.name,
+      value : fn.complexity.cyclomatic
+    }
+  })
+
+  var bySloc = _.map(__report.functions,function(fn,i){
+    return {
+      label : fn.name,
+      value : fn.complexity.sloc.physical,
+      formatter: function (x) { return x + " lines"}
+    }
+  })
+
+  var scrollToLine = function(i, data) {
+    var origScroll = [window.pageXOffset,window.pageYOffset];
+    window.location.hash = '#plato-mark-fn-' + i;
+    window.scrollTo(origScroll[0],origScroll[1]);
+    var line = __report.functions[i].line;
+    var coords = cm.charCoords({line : line, ch : 0});
+    $('body,html').animate({scrollTop : coords.top -50},250)
+  };
+
+  Morris.Donut({
+    element: 'fn-by-complexity',
+    data: byComplexity
+  }).on('click',scrollToLine);
+  Morris.Donut({
+    element: 'fn-by-sloc',
+    data: bySloc
+  }).on('click',scrollToLine);
+
+
+  __report.functions.forEach(function (fn,i) {
+    var name = fn.name === '<anonymous>' ? 'function\\s*\\([^)]*\\)' : fn.name;
+    var line = fn.line - 1;
+    var re = new RegExp('(' + name + ')', 'g');
+    var cursor = cm.getSearchCursor(re, {line : line, ch : 0});
+    var match;
+    _.templateSettings = {
+      interpolate : /\{\{(.+?)\}\}/g
+    };
+    var notice = _.template($('#complexity-notice-template').text());
+//    cm.addLineWidget(line, $(notice(fn))[0], {});
+
+    while (match = cursor.findNext()) {
+      if (cursor.to().line !== line) break;
+      cm.markText(
+        { line : line, ch : cursor.from().ch },
+        { line : line, ch : cursor.to().ch },
+        {
+          className   : 'plato-mark plato-mark-fn-' + i,
+          startStyle  : 'plato-mark-start',
+          endStyle    : 'plato-mark-end'
+        }
+      )
+    }
+    var gutterIcon = $('<a class="plato-gutter-complexity" name="' + ('plato-mark-fn-'+i) + '"><i class="icon-cog"></i></a>');
+    cm.setGutterMarker(line, 'plato-gutter', gutterIcon[0])
+    var stillIn = false;
+    var markStart = $('.plato-mark-start.plato-mark-fn-' + i);
+    var markSpans = $('.plato-mark-fn-' + i);
+
+    markSpans.add(gutterIcon)
+      .on('mouseenter touchstart',function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        markSpans.addClass('active');
+        stillIn = true;
+        markStart.popover('show');
+      })
+      .on('mouseleave touchend',function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        markSpans.removeClass('active');
+        stillIn = false;
+        setTimeout(function(){
+          if (!stillIn) markStart.popover('hide');
+        },200);
+      });
+
+    markStart.popover({
+      trigger : 'manual',
+      content : notice(fn),
+      html : true,
+      title : fn.name === '<anonymous>' ? '&lt;anonymous&gt;' : 'function ' + fn.name + '',
+      placement : 'top'
+    })
+
+  })
+
+</script>
+</body>
+</html>

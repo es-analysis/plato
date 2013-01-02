@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>serialize.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <script type="text/javascript" src="../../assets/scripts/vendor/jquery-1.8.3.min.js"></script>
+
+  <script type="text/javascript" src="../../assets/scripts/vendor/lodash.min.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/raphael-min.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/morris.min.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/bootstrap-tooltip.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/bootstrap-popover.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/codemirror/codemirror.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/codemirror/util/searchcursor.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/codemirror/javascript.js"></script>
+
+  <script type="text/javascript" src="report.js"></script>
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap-3.0.0-wip.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <ul class="nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>serialize.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="span4">
+      <h2 class="header">Complexity</h2>
+      <p class="stat">15</p>
+    </div>
+    <div class="span4">
+      <h2 class="header">Maintainability</h2>
+      <p class="stat">125.34</p>
+    </div>
+    <div class="span4">
+      <h2 class="header">Estimated # Bugs</h2>
+      <p class="stat">0.85</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span4">
+      <h2 class="header">Difficulty</h2>
+      <p class="stat">32.73</p>
+    </div>
+    <div class="span4">
+      <h2 class="header">Volume</h2>
+      <p class="stat">2538.37</p>
+    </div>
+    <div class="span4">
+      <h2 class="header">SLOC/LSLOC</h2>
+      <p class="stat">99 / 50</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="span6">
+      <h3 class="chart-header">By Complexity</h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="span6">
+      <h3 class="chart-header">By SLOC</h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="span12">var r20 = /%20/g,
+	rbracket = /\[\]$/,
+	rCRLF = /\r?\n/g,
+	rsubmitterTypes = /^(?:submit|button|image|reset)$/i,
+	rsubmittable = /^(?:input|select|textarea|keygen)/i;
+
+jQuery.fn.extend({
+	serialize: function() {
+		return jQuery.param( this.serializeArray() );
+	},
+	serializeArray: function() {
+		return this.map(function(){
+			// Can add propHook for "elements" to filter or add form elements
+			var elements = jQuery.prop( this, "elements" );
+			return elements ? jQuery.makeArray( elements ) : this;
+		})
+		.filter(function(){
+			var type = this.type;
+			// Use .is(":disabled") so that fieldset[disabled] works
+			return this.name && !jQuery( this ).is( ":disabled" ) &&
+				rsubmittable.test( this.nodeName ) && !rsubmitterTypes.test( type ) &&
+				( this.checked || !manipulation_rcheckableType.test( type ) );
+		})
+		.map(function( i, elem ){
+			var val = jQuery( this ).val();
+
+			return val == null ?
+				null :
+				jQuery.isArray( val ) ?
+					jQuery.map( val, function( val ){
+						return { name: elem.name, value: val.replace( rCRLF, "\r\n" ) };
+					}) :
+					{ name: elem.name, value: val.replace( rCRLF, "\r\n" ) };
+		}).get();
+	}
+});
+
+//Serialize an array of form elements or a set of
+//key/values into a query string
+jQuery.param = function( a, traditional ) {
+	var prefix,
+		s = [],
+		add = function( key, value ) {
+			// If value is a function, invoke it and return its value
+			value = jQuery.isFunction( value ) ? value() : ( value == null ? "" : value );
+			s[ s.length ] = encodeURIComponent( key ) + "=" + encodeURIComponent( value );
+		};
+
+	// Set traditional to true for jQuery <= 1.3.2 behavior.
+	if ( traditional === undefined ) {
+		traditional = jQuery.ajaxSettings && jQuery.ajaxSettings.traditional;
+	}
+
+	// If an array was passed in, assume that it is an array of form elements.
+	if ( jQuery.isArray( a ) || ( a.jquery && !jQuery.isPlainObject( a ) ) ) {
+		// Serialize the form elements
+		jQuery.each( a, function() {
+			add( this.name, this.value );
+		});
+
+	} else {
+		// If traditional, encode the "old" way (the way 1.3.2 or older
+		// did it), otherwise encode params recursively.
+		for ( prefix in a ) {
+			buildParams( prefix, a[ prefix ], traditional, add );
+		}
+	}
+
+	// Return the resulting serialization
+	return s.join( "&" ).replace( r20, "+" );
+};
+
+function buildParams( prefix, obj, traditional, add ) {
+	var name;
+
+	if ( jQuery.isArray( obj ) ) {
+		// Serialize array item.
+		jQuery.each( obj, function( i, v ) {
+			if ( traditional || rbracket.test( prefix ) ) {
+				// Treat each array item as a scalar.
+				add( prefix, v );
+
+			} else {
+				// Item is non-scalar (array or object), encode its numeric index.
+				buildParams( prefix + "[" + ( typeof v === "object" ? i : "" ) + "]", v, traditional, add );
+			}
+		});
+
+	} else if ( !traditional && jQuery.type( obj ) === "object" ) {
+		// Serialize object item.
+		for ( name in obj ) {
+			buildParams( prefix + "[" + name + "]", obj[ name ], traditional, add );
+		}
+
+	} else {
+		// Serialize scalar item.
+		add( prefix, obj );
+	}
+}
+</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-notice-template">
+<div class="complexity-notice">
+  Complexity : {{ complexity.cyclomatic }} <br>
+  Length : {{ complexity.halstead.length }} <br>
+  Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+  Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+</div>
+</script>
+<script>
+  function focusFragment() {
+    $('.plato-mark').removeClass('focus');
+    var markId = window.location.hash.substr(1);
+    if (markId) $('.' + markId).addClass('focus');
+  }
+
+  $(focusFragment)
+  window.onhashchange = function(){
+    focusFragment();
+  }
+
+  var srcEl = document.getElementById('file-source');
+  var options = {
+    lineNumbers : true,
+    gutters     : ['plato-gutter'],
+    readOnly    : 'nocursor'
+  };
+  var cm = CodeMirror.fromTextArea(srcEl, options);
+
+  var byComplexity = _.map(__report.functions,function(fn,i){
+    return {
+      label : fn.name,
+      value : fn.complexity.cyclomatic
+    }
+  })
+
+  var bySloc = _.map(__report.functions,function(fn,i){
+    return {
+      label : fn.name,
+      value : fn.complexity.sloc.physical,
+      formatter: function (x) { return x + " lines"}
+    }
+  })
+
+  var scrollToLine = function(i, data) {
+    var origScroll = [window.pageXOffset,window.pageYOffset];
+    window.location.hash = '#plato-mark-fn-' + i;
+    window.scrollTo(origScroll[0],origScroll[1]);
+    var line = __report.functions[i].line;
+    var coords = cm.charCoords({line : line, ch : 0});
+    $('body,html').animate({scrollTop : coords.top -50},250)
+  };
+
+  Morris.Donut({
+    element: 'fn-by-complexity',
+    data: byComplexity
+  }).on('click',scrollToLine);
+  Morris.Donut({
+    element: 'fn-by-sloc',
+    data: bySloc
+  }).on('click',scrollToLine);
+
+
+  __report.functions.forEach(function (fn,i) {
+    var name = fn.name === '<anonymous>' ? 'function\\s*\\([^)]*\\)' : fn.name;
+    var line = fn.line - 1;
+    var re = new RegExp('(' + name + ')', 'g');
+    var cursor = cm.getSearchCursor(re, {line : line, ch : 0});
+    var match;
+    _.templateSettings = {
+      interpolate : /\{\{(.+?)\}\}/g
+    };
+    var notice = _.template($('#complexity-notice-template').text());
+//    cm.addLineWidget(line, $(notice(fn))[0], {});
+
+    while (match = cursor.findNext()) {
+      if (cursor.to().line !== line) break;
+      cm.markText(
+        { line : line, ch : cursor.from().ch },
+        { line : line, ch : cursor.to().ch },
+        {
+          className   : 'plato-mark plato-mark-fn-' + i,
+          startStyle  : 'plato-mark-start',
+          endStyle    : 'plato-mark-end'
+        }
+      )
+    }
+    var gutterIcon = $('<a class="plato-gutter-complexity" name="' + ('plato-mark-fn-'+i) + '"><i class="icon-cog"></i></a>');
+    cm.setGutterMarker(line, 'plato-gutter', gutterIcon[0])
+    var stillIn = false;
+    var markStart = $('.plato-mark-start.plato-mark-fn-' + i);
+    var markSpans = $('.plato-mark-fn-' + i);
+
+    markSpans.add(gutterIcon)
+      .on('mouseenter touchstart',function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        markSpans.addClass('active');
+        stillIn = true;
+        markStart.popover('show');
+      })
+      .on('mouseleave touchend',function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        markSpans.removeClass('active');
+        stillIn = false;
+        setTimeout(function(){
+          if (!stillIn) markStart.popover('hide');
+        },200);
+      });
+
+    markStart.popover({
+      trigger : 'manual',
+      content : notice(fn),
+      html : true,
+      title : fn.name === '<anonymous>' ? '&lt;anonymous&gt;' : 'function ' + fn.name + '',
+      placement : 'top'
+    })
+
+  })
+
+</script>
+</body>
+</html>

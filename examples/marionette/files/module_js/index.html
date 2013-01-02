@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>module.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <script type="text/javascript" src="../../assets/scripts/vendor/jquery-1.8.3.min.js"></script>
+
+  <script type="text/javascript" src="../../assets/scripts/vendor/lodash.min.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/raphael-min.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/morris.min.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/bootstrap-tooltip.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/bootstrap-popover.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/codemirror/codemirror.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/codemirror/util/searchcursor.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/codemirror/javascript.js"></script>
+
+  <script type="text/javascript" src="report.js"></script>
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap-3.0.0-wip.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <ul class="nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>module.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="span4">
+      <h2 class="header">Complexity</h2>
+      <p class="stat">16</p>
+    </div>
+    <div class="span4">
+      <h2 class="header">Maintainability</h2>
+      <p class="stat">120.06</p>
+    </div>
+    <div class="span4">
+      <h2 class="header">Estimated # Bugs</h2>
+      <p class="stat">1.29</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span4">
+      <h2 class="header">Difficulty</h2>
+      <p class="stat">36.11</p>
+    </div>
+    <div class="span4">
+      <h2 class="header">Volume</h2>
+      <p class="stat">3869.14</p>
+    </div>
+    <div class="span4">
+      <h2 class="header">SLOC/LSLOC</h2>
+      <p class="stat">243 / 98</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="span6">
+      <h3 class="chart-header">By Complexity</h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="span6">
+      <h3 class="chart-header">By SLOC</h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="span12">// Module
+// ------
+
+// A simple module system, used to create privacy and encapsulation in
+// Marionette applications
+Marionette.Module = function(moduleName, app){
+  this.moduleName = moduleName;
+
+  // store sub-modules
+  this.submodules = {};
+
+  this._setupInitializersAndFinalizers();
+
+  // store the configuration for this module
+  this.config = {};
+  this.config.app = app;
+
+  // extend this module with an event binder
+  Marionette.addEventBinder(this);
+  this.triggerMethod = Marionette.triggerMethod;
+};
+
+// Extend the Module prototype with events / bindTo, so that the module
+// can be used as an event aggregator or pub/sub.
+_.extend(Marionette.Module.prototype, Backbone.Events, {
+
+  // Initializer for a specific module. Initializers are run when the
+  // module's `start` method is called.
+  addInitializer: function(callback){
+    this._initializerCallbacks.add(callback);
+  },
+
+  // Finalizers are run when a module is stopped. They are used to teardown
+  // and finalize any variables, references, events and other code that the
+  // module had set up.
+  addFinalizer: function(callback){
+    this._finalizerCallbacks.add(callback);
+  },
+
+  // Start the module, and run all of it's initializers
+  start: function(options){
+    // Prevent re-starting a module that is already started
+    if (this._isInitialized){ return; }
+
+    // start the sub-modules (depth-first hierarchy)
+    _.each(this.submodules, function(mod){
+      // check to see if we should start the sub-module with this parent
+      var startWithParent = true;
+      if (mod.config && mod.config.options){
+        startWithParent = mod.config.options.startWithParent;
+      }
+
+      // start the sub-module
+      if (startWithParent){
+        mod.start(options);
+      }
+    });
+
+    // run the callbacks to "start" the current module
+    this.triggerMethod("before:start", options);
+
+    this._initializerCallbacks.run(options, this);
+    this._isInitialized = true;
+
+    this.triggerMethod("start", options);
+  },
+
+  // Stop this module by running its finalizers and then stop all of
+  // the sub-modules for this module
+  stop: function(){
+    // if we are not initialized, don't bother finalizing
+    if (!this._isInitialized){ return; }
+    this._isInitialized = false;
+
+    Marionette.triggerMethod.call(this, "before:stop");
+
+    // stop the sub-modules; depth-first, to make sure the
+    // sub-modules are stopped / finalized before parents
+    _.each(this.submodules, function(mod){ mod.stop(); });
+
+    // run the finalizers
+    this._finalizerCallbacks.run();
+
+    // reset the initializers and finalizers
+    this._initializerCallbacks.reset();
+    this._finalizerCallbacks.reset();
+
+    Marionette.triggerMethod.call(this, "stop");
+  },
+
+  // Configure the module with a definition function and any custom args
+  // that are to be passed in to the definition function
+  addDefinition: function(moduleDefinition, customArgs){
+    this._runModuleDefinition(moduleDefinition, customArgs);
+  },
+
+  // Internal method: run the module definition function with the correct
+  // arguments
+  _runModuleDefinition: function(definition, customArgs){
+    if (!definition){ return; }
+
+    // build the correct list of arguments for the module definition
+    var args = _.flatten([
+      this,
+      this.config.app,
+      Backbone,
+      Marionette,
+      $, _,
+      customArgs
+    ]);
+
+    definition.apply(this, args);
+  },
+
+  // Internal method: set up new copies of initializers and finalizers.
+  // Calling this method will wipe out all existing initializers and
+  // finalizers.
+  _setupInitializersAndFinalizers: function(){
+    this._initializerCallbacks = new Marionette.Callbacks();
+    this._finalizerCallbacks = new Marionette.Callbacks();
+  }
+});
+
+// Function level methods to create modules
+_.extend(Marionette.Module, {
+
+  // Create a module, hanging off the app parameter as the parent object.
+  create: function(app, moduleNames, moduleDefinition){
+    var that = this;
+    var parentModule = app;
+    moduleNames = moduleNames.split(".");
+
+    // get the custom args passed in after the module definition and
+    // get rid of the module name and definition function
+    var customArgs = slice.apply(arguments);
+    customArgs.splice(0, 3);
+
+    // Loop through all the parts of the module definition
+    var length = moduleNames.length;
+    _.each(moduleNames, function(moduleName, i){
+      var isLastModuleInChain = (i === length-1);
+      var isFirstModuleInChain = (i === 0);
+      var module = that._getModuleDefinition(parentModule, moduleName, app);
+
+      // if this is the last module in the chain, then set up
+      // all of the module options from the configuration
+      if (isLastModuleInChain){
+        module.config.options = that._getModuleOptions(module, parentModule, moduleDefinition);
+
+        // Only add a module definition and initializer when this is the last
+        // module in a "parent.child.grandchild" hierarchy of module names and
+        // when the module call has a definition function supplied
+        if (module.config.options.hasDefinition){
+          module.addDefinition(module.config.options.definition, customArgs);
+        }
+      }
+
+      // if it's a top level module, and this is the only
+      // module in the chain, then this one gets configured
+      // to start with the parent app.
+      if (isFirstModuleInChain && isLastModuleInChain ){
+        that._configureStartWithApp(app, module);
+      }
+
+      // Reset the parent module so that the next child
+      // in the list will be added to the correct parent
+      parentModule = module;
+    });
+
+    // Return the last module in the definition chain
+    return parentModule;
+  },
+
+  // Only add the initializer if it is set to start with parent (the app),
+  // and if it has not yet been added
+  _configureStartWithApp: function(app, module){
+    // skip this if we have already configured the module to start w/ the app
+    if (module.config.startWithAppIsConfigured){
+      return;
+    }
+
+    // start the module when the app starts
+    app.addInitializer(function(options){
+      // but only if the module is configured to start w/ parent
+      if (module.config.options.startWithParent){
+        module.start(options);
+      }
+    });
+
+    // prevent this module from being configured for
+    // auto start again. the first time the module
+    // is defined, determines it's auto-start
+    module.config.startWithAppIsConfigured = true;
+  },
+
+  _getModuleDefinition: function(parentModule, moduleName, app){
+    // Get an existing module of this name if we have one
+    var module = parentModule[moduleName];
+
+    if (!module){
+      // Create a new module if we don't have one
+      module = new Marionette.Module(moduleName, app);
+      parentModule[moduleName] = module;
+      // store the module on the parent
+      parentModule.submodules[moduleName] = module;
+    }
+
+    return module;
+  },
+
+  _getModuleOptions: function(module, parentModule, moduleDefinition){
+    // default to starting the module with it's parent to whatever the
+    var startWithParent = true;
+    if (module.config.options && !module.config.options.startWithParent){
+      startWithParent = false;
+    }
+
+    // set up initial options for the module
+    var options = {
+      startWithParent: startWithParent,
+      hasDefinition: !!moduleDefinition
+    };
+
+    // short circuit if we don't have a module definition
+    if (!options.hasDefinition){ return options; }
+
+    if (_.isFunction(moduleDefinition)){
+      // if the definition is a function, assign it directly
+      // and use the defaults
+      options.definition = moduleDefinition;
+
+    } else {
+
+      // the definition is an object.
+
+      // grab the "define" attribute
+      options.hasDefinition = !!moduleDefinition.define;
+      options.definition = moduleDefinition.define;
+
+      // grab the "startWithParent" attribute if one exists
+      if (moduleDefinition.hasOwnProperty("startWithParent")){
+        options.startWithParent = moduleDefinition.startWithParent;
+      }
+    }
+
+    return options;
+  }
+});
+</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-notice-template">
+<div class="complexity-notice">
+  Complexity : {{ complexity.cyclomatic }} <br>
+  Length : {{ complexity.halstead.length }} <br>
+  Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+  Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+</div>
+</script>
+<script>
+  function focusFragment() {
+    $('.plato-mark').removeClass('focus');
+    var markId = window.location.hash.substr(1);
+    if (markId) $('.' + markId).addClass('focus');
+  }
+
+  $(focusFragment)
+  window.onhashchange = function(){
+    focusFragment();
+  }
+
+  var srcEl = document.getElementById('file-source');
+  var options = {
+    lineNumbers : true,
+    gutters     : ['plato-gutter'],
+    readOnly    : 'nocursor'
+  };
+  var cm = CodeMirror.fromTextArea(srcEl, options);
+
+  var byComplexity = _.map(__report.functions,function(fn,i){
+    return {
+      label : fn.name,
+      value : fn.complexity.cyclomatic
+    }
+  })
+
+  var bySloc = _.map(__report.functions,function(fn,i){
+    return {
+      label : fn.name,
+      value : fn.complexity.sloc.physical,
+      formatter: function (x) { return x + " lines"}
+    }
+  })
+
+  var scrollToLine = function(i, data) {
+    var origScroll = [window.pageXOffset,window.pageYOffset];
+    window.location.hash = '#plato-mark-fn-' + i;
+    window.scrollTo(origScroll[0],origScroll[1]);
+    var line = __report.functions[i].line;
+    var coords = cm.charCoords({line : line, ch : 0});
+    $('body,html').animate({scrollTop : coords.top -50},250)
+  };
+
+  Morris.Donut({
+    element: 'fn-by-complexity',
+    data: byComplexity
+  }).on('click',scrollToLine);
+  Morris.Donut({
+    element: 'fn-by-sloc',
+    data: bySloc
+  }).on('click',scrollToLine);
+
+
+  __report.functions.forEach(function (fn,i) {
+    var name = fn.name === '<anonymous>' ? 'function\\s*\\([^)]*\\)' : fn.name;
+    var line = fn.line - 1;
+    var re = new RegExp('(' + name + ')', 'g');
+    var cursor = cm.getSearchCursor(re, {line : line, ch : 0});
+    var match;
+    _.templateSettings = {
+      interpolate : /\{\{(.+?)\}\}/g
+    };
+    var notice = _.template($('#complexity-notice-template').text());
+//    cm.addLineWidget(line, $(notice(fn))[0], {});
+
+    while (match = cursor.findNext()) {
+      if (cursor.to().line !== line) break;
+      cm.markText(
+        { line : line, ch : cursor.from().ch },
+        { line : line, ch : cursor.to().ch },
+        {
+          className   : 'plato-mark plato-mark-fn-' + i,
+          startStyle  : 'plato-mark-start',
+          endStyle    : 'plato-mark-end'
+        }
+      )
+    }
+    var gutterIcon = $('<a class="plato-gutter-complexity" name="' + ('plato-mark-fn-'+i) + '"><i class="icon-cog"></i></a>');
+    cm.setGutterMarker(line, 'plato-gutter', gutterIcon[0])
+    var stillIn = false;
+    var markStart = $('.plato-mark-start.plato-mark-fn-' + i);
+    var markSpans = $('.plato-mark-fn-' + i);
+
+    markSpans.add(gutterIcon)
+      .on('mouseenter touchstart',function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        markSpans.addClass('active');
+        stillIn = true;
+        markStart.popover('show');
+      })
+      .on('mouseleave touchend',function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        markSpans.removeClass('active');
+        stillIn = false;
+        setTimeout(function(){
+          if (!stillIn) markStart.popover('hide');
+        },200);
+      });
+
+    markStart.popover({
+      trigger : 'manual',
+      content : notice(fn),
+      html : true,
+      title : fn.name === '<anonymous>' ? '&lt;anonymous&gt;' : 'function ' + fn.name + '',
+      placement : 'top'
+    })
+
+  })
+
+</script>
+</body>
+</html>

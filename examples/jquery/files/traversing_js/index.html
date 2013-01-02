@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>traversing.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <script type="text/javascript" src="../../assets/scripts/vendor/jquery-1.8.3.min.js"></script>
+
+  <script type="text/javascript" src="../../assets/scripts/vendor/lodash.min.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/raphael-min.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/morris.min.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/bootstrap-tooltip.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/bootstrap-popover.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/codemirror/codemirror.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/codemirror/util/searchcursor.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/codemirror/javascript.js"></script>
+
+  <script type="text/javascript" src="report.js"></script>
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap-3.0.0-wip.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <ul class="nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>traversing.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="span4">
+      <h2 class="header">Complexity</h2>
+      <p class="stat">46</p>
+    </div>
+    <div class="span4">
+      <h2 class="header">Maintainability</h2>
+      <p class="stat">127.27</p>
+    </div>
+    <div class="span4">
+      <h2 class="header">Estimated # Bugs</h2>
+      <p class="stat">2.54</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span4">
+      <h2 class="header">Difficulty</h2>
+      <p class="stat">71.12</p>
+    </div>
+    <div class="span4">
+      <h2 class="header">Volume</h2>
+      <p class="stat">7610.15</p>
+    </div>
+    <div class="span4">
+      <h2 class="header">SLOC/LSLOC</h2>
+      <p class="stat">278 / 142</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="span6">
+      <h3 class="chart-header">By Complexity</h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="span6">
+      <h3 class="chart-header">By SLOC</h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="span12">var runtil = /Until$/,
+	rparentsprev = /^(?:parents|prev(?:Until|All))/,
+	isSimple = /^.[^:#\[\.,]*$/,
+	rneedsContext = jQuery.expr.match.needsContext,
+	// methods guaranteed to produce a unique set when starting from a unique set
+	guaranteedUnique = {
+		children: true,
+		contents: true,
+		next: true,
+		prev: true
+	};
+
+jQuery.fn.extend({
+	find: function( selector ) {
+		var self, matched, i,
+			l = this.length;
+
+		if ( typeof selector !== "string" ) {
+			self = this;
+			return this.pushStack( jQuery( selector ).filter(function() {
+				for ( i = 0; i < l; i++ ) {
+					if ( jQuery.contains( self[ i ], this ) ) {
+						return true;
+					}
+				}
+			}) );
+		}
+
+		matched = [];
+		for ( i = 0; i < l; i++ ) {
+			jQuery.find( selector, this[ i ], matched );
+		}
+
+		// Needed because $( selector, context ) becomes $( context ).find( selector )
+		matched = this.pushStack( jQuery.unique( matched ) );
+		matched.selector = ( this.selector ? this.selector + " " : "" ) + selector;
+		return matched;
+	},
+
+	has: function( target ) {
+		var targets = jQuery( target, this ),
+			l = targets.length;
+
+		return this.filter(function() {
+			var i = 0;
+			for ( ; i < l; i++ ) {
+				if ( jQuery.contains( this, targets[i] ) ) {
+					return true;
+				}
+			}
+		});
+	},
+
+	not: function( selector ) {
+		return this.pushStack( winnow(this, selector, false) );
+	},
+
+	filter: function( selector ) {
+		return this.pushStack( winnow(this, selector, true) );
+	},
+
+	is: function( selector ) {
+		return !!selector && (
+			typeof selector === "string" ?
+				// If this is a positional/relative selector, check membership in the returned set
+				// so $("p:first").is("p:last") won't return true for a doc with two "p".
+				rneedsContext.test( selector ) ?
+					jQuery( selector, this.context ).index( this[ 0 ] ) >= 0 :
+					jQuery.filter( selector, this ).length > 0 :
+				this.filter( selector ).length > 0 );
+	},
+
+	closest: function( selectors, context ) {
+		var cur,
+			i = 0,
+			l = this.length,
+			matched = [],
+			pos = ( rneedsContext.test( selectors ) || typeof selectors !== "string" ) ?
+				jQuery( selectors, context || this.context ) :
+				0;
+
+		for ( ; i < l; i++ ) {
+			cur = this[ i ];
+
+			while ( cur && cur.ownerDocument && cur !== context ) {
+				if ( pos ? pos.index( cur ) > -1 : jQuery.find.matchesSelector( cur, selectors ) ) {
+					matched.push( cur );
+					break;
+				}
+				cur = cur.parentElement;
+			}
+		}
+
+		return this.pushStack( matched.length > 1 ? jQuery.unique( matched ) : matched );
+	},
+
+	// Determine the position of an element within
+	// the matched set of elements
+	index: function( elem ) {
+
+		// No argument, return index in parent
+		if ( !elem ) {
+			return ( this[ 0 ] && this[ 0 ].parentNode ) ? this.first().prevAll().length : -1;
+		}
+
+		// index in selector
+		if ( typeof elem === "string" ) {
+			return core_indexOf.call( jQuery( elem ), this[ 0 ] );
+		}
+
+		// Locate the position of the desired element
+		return core_indexOf.call( this,
+
+			// If it receives a jQuery object, the first element is used
+			elem.jquery ? elem[ 0 ] : elem
+		);
+	},
+
+	add: function( selector, context ) {
+		var set = typeof selector === "string" ?
+				jQuery( selector, context ) :
+				jQuery.makeArray( selector && selector.nodeType ? [ selector ] : selector ),
+			all = jQuery.merge( this.get(), set );
+
+		return this.pushStack( jQuery.unique(all) );
+	},
+
+	addBack: function( selector ) {
+		return this.add( selector == null ?
+			this.prevObject : this.prevObject.filter(selector)
+		);
+	}
+});
+
+jQuery.fn.andSelf = jQuery.fn.addBack;
+
+jQuery.each({
+	parent: function( elem ) {
+		return elem.parentElement;
+	},
+	parents: function( elem ) {
+		return jQuery.dir( elem, "parentElement" );
+	},
+	parentsUntil: function( elem, i, until ) {
+		return jQuery.dir( elem, "parentElement", until );
+	},
+	next: function( elem ) {
+		return elem.nextElementSibling;
+	},
+	prev: function( elem ) {
+		return elem.previousElementSibling;
+	},
+	nextAll: function( elem ) {
+		return jQuery.dir( elem, "nextElementSibling" );
+	},
+	prevAll: function( elem ) {
+		return jQuery.dir( elem, "previousElementSibling" );
+	},
+	nextUntil: function( elem, i, until ) {
+		return jQuery.dir( elem, "nextElementSibling", until );
+	},
+	prevUntil: function( elem, i, until ) {
+		return jQuery.dir( elem, "previousElementSibling", until );
+	},
+	siblings: function( elem ) {
+		return jQuery.sibling( ( elem.parentNode || {} ).firstChild, elem );
+	},
+	children: function( elem ) {
+		var children = elem.children;
+
+		// documentFragment or document does not have children property
+		return children ? jQuery.merge( [], children ) : jQuery.sibling( elem.firstChild );
+	},
+	contents: function( elem ) {
+		return jQuery.nodeName( elem, "iframe" ) ?
+			elem.contentDocument || elem.contentWindow.document :
+			jQuery.merge( [], elem.childNodes );
+	}
+}, function( name, fn ) {
+	jQuery.fn[ name ] = function( until, selector ) {
+		var matched = jQuery.map( this, fn, until );
+
+		if ( !runtil.test( name ) ) {
+			selector = until;
+		}
+
+		if ( selector && typeof selector === "string" ) {
+			matched = jQuery.filter( selector, matched );
+		}
+
+		if ( this.length > 1 ) {
+			if ( !guaranteedUnique[ name ] ) {
+				jQuery.unique( matched );
+			}
+
+			if ( rparentsprev.test( name ) ) {
+				matched.reverse();
+			}
+		}
+
+		return this.pushStack( matched );
+	};
+});
+
+jQuery.extend({
+	filter: function( expr, elems, not ) {
+		if ( not ) {
+			expr = ":not(" + expr + ")";
+		}
+
+		return elems.length === 1 ?
+			jQuery.find.matchesSelector( elems[ 0 ], expr ) ? [ elems[ 0 ] ] : [] :
+			jQuery.find.matches( expr, elems );
+	},
+
+	dir: function( elem, dir, until ) {
+		var cur = elem[ dir ],
+			matched = [];
+
+		while ( cur && ( !until || !jQuery( cur ).is( until ) ) ) {
+			matched.push( cur );
+			cur = cur[ dir ];
+		}
+
+		return matched;
+	},
+
+	sibling: function( n, elem ) {
+		var matched = [];
+
+		for ( ; n; n = n.nextSibling ) {
+			if ( n.nodeType === 1 && n !== elem ) {
+				matched.push( n );
+			}
+		}
+
+		return matched;
+	}
+});
+
+// Implement the identical functionality for filter and not
+function winnow( elements, qualifier, keep ) {
+
+	// Can't pass null or undefined to indexOf in Firefox 4
+	// Set to 0 to skip string check
+	qualifier = qualifier || 0;
+
+	var filtered;
+
+	if ( jQuery.isFunction( qualifier ) ) {
+		return jQuery.grep(elements, function( elem, i ) {
+			var retVal = !!qualifier.call( elem, i, elem );
+			return retVal === keep;
+		});
+	}
+
+	if ( qualifier.nodeType ) {
+		return jQuery.grep(elements, function( elem ) {
+			return ( elem === qualifier ) === keep;
+		});
+	}
+
+	if ( typeof qualifier === "string" ) {
+		filtered = jQuery.grep(elements, function( elem ) {
+			return elem.nodeType === 1;
+		});
+
+		if ( isSimple.test( qualifier ) ) {
+			return jQuery.filter( qualifier, filtered, !keep );
+		}
+
+		qualifier = jQuery.filter( qualifier, filtered );
+	}
+
+	return jQuery.grep(elements, function( elem ) {
+		return ( core_indexOf.call( qualifier, elem ) >= 0 ) === keep;
+	});
+}
+</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-notice-template">
+<div class="complexity-notice">
+  Complexity : {{ complexity.cyclomatic }} <br>
+  Length : {{ complexity.halstead.length }} <br>
+  Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+  Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+</div>
+</script>
+<script>
+  function focusFragment() {
+    $('.plato-mark').removeClass('focus');
+    var markId = window.location.hash.substr(1);
+    if (markId) $('.' + markId).addClass('focus');
+  }
+
+  $(focusFragment)
+  window.onhashchange = function(){
+    focusFragment();
+  }
+
+  var srcEl = document.getElementById('file-source');
+  var options = {
+    lineNumbers : true,
+    gutters     : ['plato-gutter'],
+    readOnly    : 'nocursor'
+  };
+  var cm = CodeMirror.fromTextArea(srcEl, options);
+
+  var byComplexity = _.map(__report.functions,function(fn,i){
+    return {
+      label : fn.name,
+      value : fn.complexity.cyclomatic
+    }
+  })
+
+  var bySloc = _.map(__report.functions,function(fn,i){
+    return {
+      label : fn.name,
+      value : fn.complexity.sloc.physical,
+      formatter: function (x) { return x + " lines"}
+    }
+  })
+
+  var scrollToLine = function(i, data) {
+    var origScroll = [window.pageXOffset,window.pageYOffset];
+    window.location.hash = '#plato-mark-fn-' + i;
+    window.scrollTo(origScroll[0],origScroll[1]);
+    var line = __report.functions[i].line;
+    var coords = cm.charCoords({line : line, ch : 0});
+    $('body,html').animate({scrollTop : coords.top -50},250)
+  };
+
+  Morris.Donut({
+    element: 'fn-by-complexity',
+    data: byComplexity
+  }).on('click',scrollToLine);
+  Morris.Donut({
+    element: 'fn-by-sloc',
+    data: bySloc
+  }).on('click',scrollToLine);
+
+
+  __report.functions.forEach(function (fn,i) {
+    var name = fn.name === '<anonymous>' ? 'function\\s*\\([^)]*\\)' : fn.name;
+    var line = fn.line - 1;
+    var re = new RegExp('(' + name + ')', 'g');
+    var cursor = cm.getSearchCursor(re, {line : line, ch : 0});
+    var match;
+    _.templateSettings = {
+      interpolate : /\{\{(.+?)\}\}/g
+    };
+    var notice = _.template($('#complexity-notice-template').text());
+//    cm.addLineWidget(line, $(notice(fn))[0], {});
+
+    while (match = cursor.findNext()) {
+      if (cursor.to().line !== line) break;
+      cm.markText(
+        { line : line, ch : cursor.from().ch },
+        { line : line, ch : cursor.to().ch },
+        {
+          className   : 'plato-mark plato-mark-fn-' + i,
+          startStyle  : 'plato-mark-start',
+          endStyle    : 'plato-mark-end'
+        }
+      )
+    }
+    var gutterIcon = $('<a class="plato-gutter-complexity" name="' + ('plato-mark-fn-'+i) + '"><i class="icon-cog"></i></a>');
+    cm.setGutterMarker(line, 'plato-gutter', gutterIcon[0])
+    var stillIn = false;
+    var markStart = $('.plato-mark-start.plato-mark-fn-' + i);
+    var markSpans = $('.plato-mark-fn-' + i);
+
+    markSpans.add(gutterIcon)
+      .on('mouseenter touchstart',function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        markSpans.addClass('active');
+        stillIn = true;
+        markStart.popover('show');
+      })
+      .on('mouseleave touchend',function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        markSpans.removeClass('active');
+        stillIn = false;
+        setTimeout(function(){
+          if (!stillIn) markStart.popover('hide');
+        },200);
+      });
+
+    markStart.popover({
+      trigger : 'manual',
+      content : notice(fn),
+      html : true,
+      title : fn.name === '<anonymous>' ? '&lt;anonymous&gt;' : 'function ' + fn.name + '',
+      placement : 'top'
+    })
+
+  })
+
+</script>
+</body>
+</html>

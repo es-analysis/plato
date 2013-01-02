@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>grunt/log.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <script type="text/javascript" src="../../assets/scripts/vendor/jquery-1.8.3.min.js"></script>
+
+  <script type="text/javascript" src="../../assets/scripts/vendor/lodash.min.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/raphael-min.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/morris.min.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/bootstrap-tooltip.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/bootstrap-popover.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/codemirror/codemirror.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/codemirror/util/searchcursor.js"></script>
+  <script type="text/javascript" src="../../assets/scripts/vendor/codemirror/javascript.js"></script>
+
+  <script type="text/javascript" src="report.js"></script>
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap-3.0.0-wip.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <ul class="nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>grunt/log.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="span4">
+      <h2 class="header">Complexity</h2>
+      <p class="stat">31</p>
+    </div>
+    <div class="span4">
+      <h2 class="header">Maintainability</h2>
+      <p class="stat">124.46</p>
+    </div>
+    <div class="span4">
+      <h2 class="header">Estimated # Bugs</h2>
+      <p class="stat">2.70</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span4">
+      <h2 class="header">Difficulty</h2>
+      <p class="stat">53.33</p>
+    </div>
+    <div class="span4">
+      <h2 class="header">Volume</h2>
+      <p class="stat">8113.68</p>
+    </div>
+    <div class="span4">
+      <h2 class="header">SLOC/LSLOC</h2>
+      <p class="stat">300 / 156</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="span6">
+      <h3 class="chart-header">By Complexity</h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="span6">
+      <h3 class="chart-header">By SLOC</h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="span12">/*
+ * grunt
+ * http://gruntjs.com/
+ *
+ * Copyright (c) 2012 "Cowboy" Ben Alman
+ * Licensed under the MIT license.
+ * https://github.com/gruntjs/grunt/blob/master/LICENSE-MIT
+ */
+
+'use strict';
+
+var grunt = require('../grunt');
+
+// Nodejs libs.
+var util = require('util');
+
+// The module to be exported.
+var log = module.exports = {};
+
+// External lib. Requiring this here modifies the String prototype!
+var colors = require('colors');
+
+// Disable colors if --no-colors was passed.
+log.initColors = function() {
+  var util = grunt.util;
+  if (grunt.option('no-color')) {
+    // String color getters should just return the string.
+    colors.mode = 'none';
+    // Strip colors from strings passed to console.log.
+    util.hooker.hook(console, 'log', function() {
+      var args = util.toArray(arguments);
+      return util.hooker.filter(this, args.map(function(arg) {
+        return util.kindOf(arg) === 'string' ? colors.stripColors(arg) : arg;
+      }));
+    });
+  }
+};
+
+// Temporarily suppress output.
+var suppressOutput;
+
+// Allow external muting of output.
+log.muted = false;
+
+// True once anything has actually been logged.
+var hasLogged;
+
+// Parse certain markup in strings to be logged.
+function markup(str) {
+  str = str || '';
+  // Make _foo_ underline.
+  str = str.replace(/(\s|^)_(\S|\S[\s\S]+?\S)_(?=[\s,.!?]|$)/g, '$1' + '$2'.underline);
+  // Make *foo* bold.
+  str = str.replace(/(\s|^)\*(\S|\S[\s\S]+?\S)\*(?=[\s,.!?]|$)/g, '$1' + '$2'.bold);
+  return str;
+}
+
+// Write output.
+log.write = function(msg) {
+  // Actually write output.
+  if (!log.muted && !suppressOutput) {
+    hasLogged = true;
+    // Users should probably use the colors-provided methods, but if they
+    // don't, this should strip extraneous color codes.
+    if (grunt.option('no-color')) { msg = colors.stripColors(msg); }
+    // Actually write to stdout.
+    process.stdout.write(markup(msg));
+  }
+  // Chainable!
+  return this;
+};
+
+// Write a line of output.
+log.writeln = function(msg) {
+  // Actually write output.
+  this.write((msg || '') + '\n');
+  // Chainable!
+  return this;
+};
+
+// Stuff.
+
+log.warn = function(msg) {
+  if (msg) {
+    return this.writeln('>> '.red + grunt.util._.trim(msg).replace(/\n/g, '\n>> '.red));
+  } else {
+    return this.writeln('ERROR'.red);
+  }
+};
+log.error = function(msg) {
+  if (msg) {
+    grunt.fail.errorcount++;
+    return this.writeln('>> '.red + grunt.util._.trim(msg).replace(/\n/g, '\n>> '.red));
+  } else {
+    return this.writeln('ERROR'.red);
+  }
+};
+log.ok = function(msg) {
+  if (msg) {
+    return this.writeln('>> '.green + grunt.util._.trim(msg).replace(/\n/g, '\n>> '.green));
+  } else {
+    return this.writeln('OK'.green);
+  }
+};
+log.errorlns = function(msg) { return this.error(log.wraptext(77, msg)); };
+log.oklns = function(msg) { return this.ok(log.wraptext(77, msg)); };
+log.success = function(msg) { return this.writeln(msg.green); };
+log.fail = function(msg) { return this.writeln(msg.red); };
+log.header = function(msg) {
+  // Skip line before header, but not if header is the very first line output.
+  if (hasLogged) { this.writeln(); }
+  return this.writeln(msg.underline);
+};
+log.subhead = function(msg) {
+  // Skip line before subhead, but not if subhead is the very first line output.
+  if (hasLogged) { this.writeln(); }
+  return this.writeln(msg.bold);
+};
+// For debugging.
+log.debug = function() {
+  if (grunt.option('debug')) {
+    this.writeln(('[D] ' + util.format.apply(this, arguments)).magenta);
+  }
+  return this;
+};
+
+// Write a line of a table.
+log.writetableln = function(widths, texts) {
+  return this.writeln(this.table(widths, texts));
+};
+
+// Wrap a long line of text to 80 columns.
+log.writelns = function(msg) {
+  return this.writeln(this.wraptext(80, msg));
+};
+
+// Display flags in verbose mode.
+log.writeflags = function(obj, prefix) {
+  var wordlist;
+  if (Array.isArray(obj)) {
+    wordlist = log.wordlist(obj);
+  } else if (typeof obj === 'object' && obj) {
+    wordlist = log.wordlist(Object.keys(obj).map(function(key) {
+      var val = obj[key];
+      return key + (val === true ? '' : '=' + JSON.stringify(val));
+    }));
+  }
+  return this.writeln((prefix || 'Flags') + ': ' + (wordlist || '(none)'.cyan));
+};
+
+// Create explicit "verbose" and "notverbose" functions, one for each already-
+// defined log function, that do the same thing but ONLY if -v or --verbose is
+// specified (or not specified).
+log.verbose = {};
+log.notverbose = {};
+
+// Iterate over all exported functions.
+Object.keys(log).filter(function(key) {
+  return typeof log[key] === 'function';
+}).forEach(function(key) {
+  // Like any other log function, but suppresses output if the "verbose" option
+  // IS NOT set.
+  log.verbose[key] = function() {
+    suppressOutput = !grunt.option('verbose');
+    log[key].apply(this, arguments);
+    suppressOutput = false;
+    return this;
+  };
+  // Like any other log function, but suppresses output if the "verbose" option
+  // IS set.
+  log.notverbose[key] = function() {
+    suppressOutput = grunt.option('verbose');
+    log[key].apply(this, arguments);
+    suppressOutput = false;
+    return this;
+  };
+});
+
+// A way to switch between verbose and notverbose modes. For example, this will
+// write 'foo' if verbose logging is enabled, otherwise write 'bar':
+// verbose.write('foo').or.write('bar');
+log.verbose.or = log.notverbose;
+log.notverbose.or = log.verbose;
+
+// Static methods.
+
+// Pretty-format a word list.
+log.wordlist = function(arr, options) {
+  options = grunt.util._.defaults(options || {}, {
+    separator: ', ',
+    color: 'cyan'
+  });
+  return arr.map(function(item) {
+    return options.color ? String(item)[options.color] : item;
+  }).join(options.separator);
+};
+
+// Return a string, uncolored (suitable for testing .length, etc).
+log.uncolor = function(str) {
+  return str.replace(/\x1B\[\d+m/g, '');
+};
+
+// Word-wrap text to a given width, permitting ANSI color codes.
+log.wraptext = function(width, text) {
+  // notes to self:
+  // grab 1st character or ansi code from string
+  // if ansi code, add to array and save for later, strip from front of string
+  // if character, add to array and increment counter, strip from front of string
+  // if width + 1 is reached and current character isn't space:
+  //  slice off everything after last space in array and prepend it to string
+  //  etc
+
+  // This result array will be joined on \n.
+  var result = [];
+  var matches, color, tmp;
+  var captured = [];
+  var charlen = 0;
+
+  while (matches = text.match(/(?:(\x1B\[\d+m)|\n|(.))([\s\S]*)/)) {
+    // Updated text to be everything not matched.
+    text = matches[3];
+
+    // Matched a color code?
+    if (matches[1]) {
+      // Save last captured color code for later use.
+      color = matches[1];
+      // Capture color code.
+      captured.push(matches[1]);
+      continue;
+
+    // Matched a non-newline character?
+    } else if (matches[2]) {
+      // If this is the first character and a previous color code was set, push
+      // that onto the captured array first.
+      if (charlen === 0 && color) { captured.push(color); }
+      // Push the matched character.
+      captured.push(matches[2]);
+      // Increment the current charlen.
+      charlen++;
+      // If not yet at the width limit or a space was matched, continue.
+      if (charlen <= width || matches[2] === ' ') { continue; }
+      // The current charlen exceeds the width and a space wasn't matched.
+      // "Roll everything back" until the last space character.
+      tmp = captured.lastIndexOf(' ');
+      text = captured.slice(tmp === -1 ? tmp : tmp + 1).join('') + text;
+      captured = captured.slice(0, tmp);
+    }
+
+    // The limit has been reached. Push captured string onto result array.
+    result.push(captured.join(''));
+
+    // Reset captured array and charlen.
+    captured = [];
+    charlen = 0;
+  }
+
+  result.push(captured.join(''));
+  return result.join('\n');
+};
+
+// todo: write unit tests
+//
+// function logs(text) {
+//   [4, 6, 10, 15, 20, 25, 30, 40].forEach(function(n) {
+//     log(n, text);
+//   });
+// }
+//
+// function log(n, text) {
+//   console.log(Array(n + 1).join('-'));
+//   console.log(wrap(n, text));
+// }
+//
+// var text = 'this is '.red + 'a simple'.yellow.inverse + ' test of'.green + ' ' + 'some wrapped'.blue + ' text over '.inverse.magenta + 'many lines'.red;
+// logs(text);
+//
+// var text = 'foolish '.red.inverse + 'monkeys'.yellow + ' eating'.green + ' ' + 'delicious'.inverse.blue + ' bananas '.magenta + 'forever'.red;
+// logs(text);
+//
+// var text = 'foolish monkeys eating delicious bananas forever'.rainbow;
+// logs(text);
+
+// Format output into columns, wrapping words as-necessary.
+log.table = function(widths, texts) {
+  var rows = [];
+  widths.forEach(function(width, i) {
+    var lines = log.wraptext(width, texts[i]).split('\n');
+    lines.forEach(function(line, j) {
+      var row = rows[j];
+      if (!row) { row = rows[j] = []; }
+      row[i] = line;
+    });
+  });
+
+  var lines = [];
+  rows.forEach(function(row) {
+    var txt = '';
+    var column;
+    for (var i = 0; i < row.length; i++) {
+      column = row[i] || '';
+      txt += column;
+      var diff = widths[i] - log.uncolor(column).length;
+      if (diff > 0) { txt += grunt.util.repeat(diff, ' '); }
+    }
+    lines.push(txt);
+  });
+
+  return lines.join('\n');
+};
+</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-notice-template">
+<div class="complexity-notice">
+  Complexity : {{ complexity.cyclomatic }} <br>
+  Length : {{ complexity.halstead.length }} <br>
+  Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+  Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+</div>
+</script>
+<script>
+  function focusFragment() {
+    $('.plato-mark').removeClass('focus');
+    var markId = window.location.hash.substr(1);
+    if (markId) $('.' + markId).addClass('focus');
+  }
+
+  $(focusFragment)
+  window.onhashchange = function(){
+    focusFragment();
+  }
+
+  var srcEl = document.getElementById('file-source');
+  var options = {
+    lineNumbers : true,
+    gutters     : ['plato-gutter'],
+    readOnly    : 'nocursor'
+  };
+  var cm = CodeMirror.fromTextArea(srcEl, options);
+
+  var byComplexity = _.map(__report.functions,function(fn,i){
+    return {
+      label : fn.name,
+      value : fn.complexity.cyclomatic
+    }
+  })
+
+  var bySloc = _.map(__report.functions,function(fn,i){
+    return {
+      label : fn.name,
+      value : fn.complexity.sloc.physical,
+      formatter: function (x) { return x + " lines"}
+    }
+  })
+
+  var scrollToLine = function(i, data) {
+    var origScroll = [window.pageXOffset,window.pageYOffset];
+    window.location.hash = '#plato-mark-fn-' + i;
+    window.scrollTo(origScroll[0],origScroll[1]);
+    var line = __report.functions[i].line;
+    var coords = cm.charCoords({line : line, ch : 0});
+    $('body,html').animate({scrollTop : coords.top -50},250)
+  };
+
+  Morris.Donut({
+    element: 'fn-by-complexity',
+    data: byComplexity
+  }).on('click',scrollToLine);
+  Morris.Donut({
+    element: 'fn-by-sloc',
+    data: bySloc
+  }).on('click',scrollToLine);
+
+
+  __report.functions.forEach(function (fn,i) {
+    var name = fn.name === '<anonymous>' ? 'function\\s*\\([^)]*\\)' : fn.name;
+    var line = fn.line - 1;
+    var re = new RegExp('(' + name + ')', 'g');
+    var cursor = cm.getSearchCursor(re, {line : line, ch : 0});
+    var match;
+    _.templateSettings = {
+      interpolate : /\{\{(.+?)\}\}/g
+    };
+    var notice = _.template($('#complexity-notice-template').text());
+//    cm.addLineWidget(line, $(notice(fn))[0], {});
+
+    while (match = cursor.findNext()) {
+      if (cursor.to().line !== line) break;
+      cm.markText(
+        { line : line, ch : cursor.from().ch },
+        { line : line, ch : cursor.to().ch },
+        {
+          className   : 'plato-mark plato-mark-fn-' + i,
+          startStyle  : 'plato-mark-start',
+          endStyle    : 'plato-mark-end'
+        }
+      )
+    }
+    var gutterIcon = $('<a class="plato-gutter-complexity" name="' + ('plato-mark-fn-'+i) + '"><i class="icon-cog"></i></a>');
+    cm.setGutterMarker(line, 'plato-gutter', gutterIcon[0])
+    var stillIn = false;
+    var markStart = $('.plato-mark-start.plato-mark-fn-' + i);
+    var markSpans = $('.plato-mark-fn-' + i);
+
+    markSpans.add(gutterIcon)
+      .on('mouseenter touchstart',function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        markSpans.addClass('active');
+        stillIn = true;
+        markStart.popover('show');
+      })
+      .on('mouseleave touchend',function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        markSpans.removeClass('active');
+        stillIn = false;
+        setTimeout(function(){
+          if (!stillIn) markStart.popover('hide');
+        },200);
+      });
+
+    markStart.popover({
+      trigger : 'manual',
+      content : notice(fn),
+      html : true,
+      title : fn.name === '<anonymous>' ? '&lt;anonymous&gt;' : 'function ' + fn.name + '',
+      placement : 'top'
+    })
+
+  })
+
+</script>
+</body>
+</html>
