@@ -1,6 +1,13 @@
 # plato
 
-Visualize your JavaScript
+Visualize JavaScript source complexity with plato.
+
+## Example report on popular projects
+
+ - [jquery](http://jsoverson.github.com/plato/examples/jquery/)
+ - [grunt](http://jsoverson.github.com/plato/examples/grunt/)
+ - [uglifyjs](http://jsoverson.github.com/plato/examples/uglify/)
+ - [marionettejs](http://jsoverson.github.com/plato/examples/marionette/)
 
 ## Installation
 Install the module with: `npm install -g plato`
