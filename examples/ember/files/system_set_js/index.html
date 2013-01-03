@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>system/set.js</title>
+  <title></title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
@@ -11,19 +11,6 @@
   <!--[if lt IE 9]>
   <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
-
-  <script type="text/javascript" src="../../assets/scripts/vendor/jquery-1.8.3.min.js"></script>
-
-  <script type="text/javascript" src="../../assets/scripts/vendor/lodash.min.js"></script>
-  <script type="text/javascript" src="../../assets/scripts/vendor/raphael-min.js"></script>
-  <script type="text/javascript" src="../../assets/scripts/vendor/morris.min.js"></script>
-  <script type="text/javascript" src="../../assets/scripts/vendor/bootstrap-tooltip.js"></script>
-  <script type="text/javascript" src="../../assets/scripts/vendor/bootstrap-popover.js"></script>
-  <script type="text/javascript" src="../../assets/scripts/vendor/codemirror/codemirror.js"></script>
-  <script type="text/javascript" src="../../assets/scripts/vendor/codemirror/util/searchcursor.js"></script>
-  <script type="text/javascript" src="../../assets/scripts/vendor/codemirror/javascript.js"></script>
-
-  <script type="text/javascript" src="report.js"></script>
 
   <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
   <link href="../../assets/css/vendor/bootstrap-3.0.0-wip.css" rel="stylesheet">
@@ -80,7 +67,7 @@
     </div>
     <div class="span4">
       <h2 class="header">SLOC/LSLOC</h2>
-      <p class="stat">455 / 135</p>
+      <p class="stat">457 / 135</p>
     </div>
   </div>
 </div>
@@ -418,8 +405,10 @@ Ember.Set = Ember.CoreObject.extend(Ember.MutableEnumerable, Ember.Copyable, Emb
 
     This is an alias of `Ember.MutableEnumerable.addObjects()`
 
+    ```javascript
     var colors = new Ember.Set();
     colors.addEach(["red", "green", "blue"]);  // ["red", "green", "blue"]
+    ```
 
     @method addEach
     @param {Ember.Enumerable} objects the objects to add.
@@ -568,126 +557,20 @@ Ember.Set = Ember.CoreObject.extend(Ember.MutableEnumerable, Ember.Copyable, Emb
   </div>
 </footer>
 
-<script type="text/html" id="complexity-notice-template">
-<div class="complexity-notice">
-  Complexity : {{ complexity.cyclomatic }} <br>
-  Length : {{ complexity.halstead.length }} <br>
-  Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
-  Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
-</div>
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
 </script>
-<script>
-  function focusFragment() {
-    $('.plato-mark').removeClass('focus');
-    var markId = window.location.hash.substr(1);
-    if (markId) $('.' + markId).addClass('focus');
-  }
 
-  $(focusFragment)
-  window.onhashchange = function(){
-    focusFragment();
-  }
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
 
-  var srcEl = document.getElementById('file-source');
-  var options = {
-    lineNumbers : true,
-    gutters     : ['plato-gutter'],
-    readOnly    : 'nocursor'
-  };
-  var cm = CodeMirror.fromTextArea(srcEl, options);
-
-  var byComplexity = _.map(__report.functions,function(fn,i){
-    return {
-      label : fn.name,
-      value : fn.complexity.cyclomatic
-    }
-  })
-
-  var bySloc = _.map(__report.functions,function(fn,i){
-    return {
-      label : fn.name,
-      value : fn.complexity.sloc.physical,
-      formatter: function (x) { return x + " lines"}
-    }
-  })
-
-  var scrollToLine = function(i, data) {
-    var origScroll = [window.pageXOffset,window.pageYOffset];
-    window.location.hash = '#plato-mark-fn-' + i;
-    window.scrollTo(origScroll[0],origScroll[1]);
-    var line = __report.functions[i].line;
-    var coords = cm.charCoords({line : line, ch : 0});
-    $('body,html').animate({scrollTop : coords.top -50},250)
-  };
-
-  Morris.Donut({
-    element: 'fn-by-complexity',
-    data: byComplexity
-  }).on('click',scrollToLine);
-  Morris.Donut({
-    element: 'fn-by-sloc',
-    data: bySloc
-  }).on('click',scrollToLine);
-
-
-  __report.functions.forEach(function (fn,i) {
-    var name = fn.name === '<anonymous>' ? 'function\\s*\\([^)]*\\)' : fn.name;
-    var line = fn.line - 1;
-    var re = new RegExp('(' + name + ')', 'g');
-    var cursor = cm.getSearchCursor(re, {line : line, ch : 0});
-    var match;
-    _.templateSettings = {
-      interpolate : /\{\{(.+?)\}\}/g
-    };
-    var notice = _.template($('#complexity-notice-template').text());
-//    cm.addLineWidget(line, $(notice(fn))[0], {});
-
-    while (match = cursor.findNext()) {
-      if (cursor.to().line !== line) break;
-      cm.markText(
-        { line : line, ch : cursor.from().ch },
-        { line : line, ch : cursor.to().ch },
-        {
-          className   : 'plato-mark plato-mark-fn-' + i,
-          startStyle  : 'plato-mark-start',
-          endStyle    : 'plato-mark-end'
-        }
-      )
-    }
-    var gutterIcon = $('<a class="plato-gutter-complexity" name="' + ('plato-mark-fn-'+i) + '"><i class="icon-cog"></i></a>');
-    cm.setGutterMarker(line, 'plato-gutter', gutterIcon[0])
-    var stillIn = false;
-    var markStart = $('.plato-mark-start.plato-mark-fn-' + i);
-    var markSpans = $('.plato-mark-fn-' + i);
-
-    markSpans.add(gutterIcon)
-      .on('mouseenter touchstart',function(e){
-        e.preventDefault();
-        e.stopPropagation();
-        markSpans.addClass('active');
-        stillIn = true;
-        markStart.popover('show');
-      })
-      .on('mouseleave touchend',function(e){
-        e.preventDefault();
-        e.stopPropagation();
-        markSpans.removeClass('active');
-        stillIn = false;
-        setTimeout(function(){
-          if (!stillIn) markStart.popover('hide');
-        },200);
-      });
-
-    markStart.popover({
-      trigger : 'manual',
-      content : notice(fn),
-      html : true,
-      title : fn.name === '<anonymous>' ? '&lt;anonymous&gt;' : 'function ' + fn.name + '',
-      placement : 'top'
-    })
-
-  })
-
-</script>
 </body>
 </html>
