@@ -24,6 +24,8 @@ Usage : plato [options] file1.js file2.js ... fileN.js
       The output directory
   -r, --recurse
       Recursively search directories
+  -l, --jshint : String
+      Specify a jshintrc file for JSHint linting
 ```
 
 ## Example
