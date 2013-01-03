@@ -63,6 +63,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('optimize', ['uglify']);
   // Default task.
-  grunt.registerTask('default', ['jshint', 'nodeunit']);
+  grunt.registerTask('test', ['jshint', 'nodeunit']);
+  grunt.registerTask('default', ['test']);
 
 };
