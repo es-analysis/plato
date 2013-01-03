@@ -36,6 +36,7 @@ plato -r -d report src/*.js
 
 ## Release History
 
+ - 0.2.0 added jshint reporting
  - 0.1.0 initial release
 
 ## License
