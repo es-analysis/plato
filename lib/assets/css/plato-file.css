@@ -80,7 +80,7 @@
 .CodeMirror-linewidget {
   background-color: hsl(240, 20%, 96%);
   font-size:12px;
-  box-shadow:inset 10px 10px 10px -10px hsl(240, 20%, 17%);
+  box-shadow:inset 10px 10px 10px -12px hsl(240, 20%, 17%);
   margin-top:10px;
   padding-top:5px;
   padding-left:5px;
@@ -88,7 +88,7 @@
 }
 
 .CodeMirror-linewidget ~ .CodeMirror-linewidget{
-  box-shadow:inset 10px 0px 10px -10px hsl(240, 20%, 17%);
+  box-shadow:inset 10px 0px 10px -12px hsl(240, 20%, 17%);
   margin-top:0px;
   padding-top:0px;
 }
