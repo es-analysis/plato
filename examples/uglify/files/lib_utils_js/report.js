@@ -1476,10 +1476,10 @@ __report = {
     "messages": [
       {
         "severity": "error",
-        "line": 49,
-        "column": 9,
-        "message": "Expected '{' and instead saw 'ret'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "line": 44,
+        "column": 1,
+        "message": "Use the function form of \"use strict\".",
+        "source": "Use the function form of \"use strict\"."
       },
       {
         "severity": "error",
@@ -1504,27 +1504,6 @@ __report = {
       },
       {
         "severity": "error",
-        "line": 63,
-        "column": 9,
-        "message": "Expected '{' and instead saw 'if'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 63,
-        "column": 22,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 64,
-        "column": 13,
-        "message": "Expected '{' and instead saw 'return'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
         "line": 66,
         "column": 2,
         "message": "Unnecessary semicolon.",
@@ -1532,45 +1511,10 @@ __report = {
       },
       {
         "severity": "error",
-        "line": 71,
-        "column": 13,
-        "message": "Expected '{' and instead saw 'return'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
         "line": 73,
         "column": 2,
         "message": "Unnecessary semicolon.",
         "source": "Unnecessary semicolon."
-      },
-      {
-        "severity": "error",
-        "line": 76,
-        "column": 17,
-        "message": "Expected '{' and instead saw 'return'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 77,
-        "column": 11,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 77,
-        "column": 17,
-        "message": "Expected '{' and instead saw 'return'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 80,
-        "column": 16,
-        "message": "Expected '{' and instead saw 'd'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
       },
       {
         "severity": "error",
@@ -1588,34 +1532,6 @@ __report = {
       },
       {
         "severity": "error",
-        "line": 91,
-        "column": 9,
-        "message": "Expected '{' and instead saw 'args'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 93,
-        "column": 16,
-        "message": "Expected '{' and instead saw 'for'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 93,
-        "column": 35,
-        "message": "Expected '{' and instead saw 'if'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 94,
-        "column": 9,
-        "message": "Expected '{' and instead saw 'throw'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
         "line": 95,
         "column": 16,
         "message": "'i' is already defined.",
@@ -1623,24 +1539,10 @@ __report = {
       },
       {
         "severity": "error",
-        "line": 95,
-        "column": 25,
-        "message": "Expected '{' and instead saw 'if'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
         "line": 99,
         "column": 2,
         "message": "Unnecessary semicolon.",
         "source": "Unnecessary semicolon."
-      },
-      {
-        "severity": "error",
-        "line": 102,
-        "column": 24,
-        "message": "Expected '{' and instead saw 'if'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
       },
       {
         "severity": "error",
@@ -1658,13 +1560,6 @@ __report = {
       },
       {
         "severity": "error",
-        "line": 116,
-        "column": 26,
-        "message": "Expected '{' and instead saw 'val'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
         "line": 133,
         "column": 10,
         "message": "Unnecessary semicolon.",
@@ -1672,59 +1567,10 @@ __report = {
       },
       {
         "severity": "error",
-        "line": 136,
-        "column": 47,
-        "message": "Expected '{' and instead saw 'if'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 136,
-        "column": 59,
-        "message": "Expected '{' and instead saw 'break'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 140,
-        "column": 48,
-        "message": "Expected '{' and instead saw 'if'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 140,
-        "column": 60,
-        "message": "Expected '{' and instead saw 'break'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
         "line": 144,
         "column": 18,
         "message": "Bad for in variable 'i'.",
         "source": "Bad for in variable '{a}'."
-      },
-      {
-        "severity": "error",
-        "line": 144,
-        "column": 26,
-        "message": "Expected '{' and instead saw 'if'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 144,
-        "column": 51,
-        "message": "Expected '{' and instead saw 'if'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 144,
-        "column": 63,
-        "message": "Expected '{' and instead saw 'break'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
       },
       {
         "severity": "error",
@@ -1798,13 +1644,6 @@ __report = {
       },
       {
         "severity": "error",
-        "line": 160,
-        "column": 9,
-        "message": "Expected '{' and instead saw 'array'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
         "line": 161,
         "column": 2,
         "message": "Unnecessary semicolon.",
@@ -1819,57 +1658,101 @@ __report = {
       },
       {
         "severity": "error",
-        "line": 171,
-        "column": 30,
-        "message": "Expected '{' and instead saw 'array'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "line": 173,
+        "column": 2,
+        "message": "Unnecessary semicolon.",
+        "source": "Unnecessary semicolon."
       },
       {
         "severity": "error",
-        "line": 171,
-        "column": 30,
-        "message": "Too many errors. (59% scanned).",
-        "source": "Too many errors."
+        "line": 181,
+        "column": 17,
+        "message": "Bad line breaking before '?'.",
+        "source": "Bad line breaking before '{a}'."
       },
       {
-        "severity": "warning",
-        "line": [
-          115,
-          150
-        ],
-        "column": 0,
-        "message": "Implied global 'Last'",
-        "source": "jshint.implied-globals"
+        "severity": "error",
+        "line": 182,
+        "column": 34,
+        "message": "Expected an assignment or function call and instead saw an expression.",
+        "source": "Expected an assignment or function call and instead saw an expression."
       },
       {
-        "severity": "warning",
-        "line": [
-          117,
-          148
-        ],
-        "column": 0,
-        "message": "Implied global 'AtTop'",
-        "source": "jshint.implied-globals"
+        "severity": "error",
+        "line": 187,
+        "column": 6,
+        "message": "Unnecessary semicolon.",
+        "source": "Unnecessary semicolon."
       },
       {
-        "severity": "warning",
-        "line": [
-          119,
-          126,
-          149
-        ],
-        "column": 0,
-        "message": "Implied global 'Splice'",
-        "source": "jshint.implied-globals"
+        "severity": "error",
+        "line": 195,
+        "column": 6,
+        "message": "Unnecessary semicolon.",
+        "source": "Unnecessary semicolon."
       },
       {
-        "severity": "warning",
-        "line": [
-          125
-        ],
-        "column": 0,
-        "message": "Implied global 'skip'",
-        "source": "jshint.implied-globals"
+        "severity": "error",
+        "line": 197,
+        "column": 2,
+        "message": "Unnecessary semicolon.",
+        "source": "Unnecessary semicolon."
+      },
+      {
+        "severity": "error",
+        "line": 203,
+        "column": 2,
+        "message": "Unnecessary semicolon.",
+        "source": "Unnecessary semicolon."
+      },
+      {
+        "severity": "error",
+        "line": 209,
+        "column": 2,
+        "message": "Unnecessary semicolon.",
+        "source": "Unnecessary semicolon."
+      },
+      {
+        "severity": "error",
+        "line": 235,
+        "column": 20,
+        "message": "'i' is already defined.",
+        "source": "'{a}' is already defined."
+      },
+      {
+        "severity": "error",
+        "line": 245,
+        "column": 24,
+        "message": "The Function constructor is eval.",
+        "source": "The Function constructor is eval."
+      },
+      {
+        "severity": "error",
+        "line": 246,
+        "column": 2,
+        "message": "Unnecessary semicolon.",
+        "source": "Unnecessary semicolon."
+      },
+      {
+        "severity": "error",
+        "line": 251,
+        "column": 2,
+        "message": "Unnecessary semicolon.",
+        "source": "Unnecessary semicolon."
+      },
+      {
+        "severity": "error",
+        "line": 266,
+        "column": 56,
+        "message": "Missing semicolon.",
+        "source": "Missing semicolon."
+      },
+      {
+        "severity": "error",
+        "line": 274,
+        "column": 60,
+        "message": "Missing semicolon.",
+        "source": "Missing semicolon."
       }
     ]
   }

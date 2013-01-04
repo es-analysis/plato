@@ -1,5 +1,8 @@
+/*global $:false, _:false, Morris:false, CodeMirror:false, __report:false */
+/*jshint browser:true*/
 
 $(function(){
+  "use strict";
 
   _.templateSettings = {
     interpolate : /\{\{(.+?)\}\}/g
@@ -30,11 +33,11 @@ $(function(){
     byComplexity.push({
       label : fn.name,
       value : fn.complexity.cyclomatic
-    })
+    });
     bySloc.push({
       label : fn.name,
       value : fn.complexity.sloc.physical,
-      formatter: function (x) { return x + " lines"}
+      formatter: function (x) { return x + " lines"; }
     });
 
     var name = fn.name === '<anonymous>' ? 'function\\s*\\([^)]*\\)' : fn.name;
@@ -48,17 +51,17 @@ $(function(){
       type : 'popover',
       title : fn.name === '<anonymous>' ? '&lt;anonymous&gt;' : 'function ' + fn.name + '',
       content : _.template($('#complexity-popover-template').text())(fn)
-    }
+    };
     cm.markPopoverText({line : line, ch:0}, name, className, gutter, popover);
-  })
+  });
 
-  var scrollToLine = function(i, data) {
+  var scrollToLine = function(i) {
     var origScroll = [window.pageXOffset,window.pageYOffset];
     window.location.hash = '#plato-mark-fn-' + i;
     window.scrollTo(origScroll[0],origScroll[1]);
     var line = __report.complexity.functions[i].line;
     var coords = cm.charCoords({line : line, ch : 0});
-    $('body,html').animate({scrollTop : coords.top -50},250)
+    $('body,html').animate({scrollTop : coords.top -50},250);
   };
 
   // yield to the browser
@@ -66,7 +69,7 @@ $(function(){
     drawCharts([
       { element: 'fn-by-complexity', data: byComplexity },
       { element: 'fn-by-sloc', data: bySloc }
-    ])
+    ]);
   },0);
   setTimeout(function(){
     addLintMessages(__report);
@@ -76,25 +79,28 @@ $(function(){
   function drawCharts(charts) {
     charts.forEach(function(chart){
       Morris.Donut(chart).on('click',scrollToLine);
-    })
-  }
-
-  function addLintMessages(report) {
-    var gutterIcon = $('<a><i class="plato-gutter-icon icon-eye-open"></i></a>');
-    report.jshint.messages.forEach(function (message,i) {
-      var text = 'Column: ' + message.column + ' "' + message.message + '"';
-      var content = $('<div class="plato-jshint-message text-'+message.severity+'"></div>').text(text);
-      if (_.isArray(message.line)) {
-        message.line.forEach(function(line){
-          cm.setGutterMarker(line - 1, 'plato-gutter-jshint', gutterIcon.clone()[0])
-          cm.addLineWidget(line - 1, content.clone()[0]);
-        })
-      } else {
-        cm.setGutterMarker(message.line - 1, 'plato-gutter-jshint', gutterIcon.clone()[0])
-        cm.addLineWidget(message.line - 1, content[0]);
-      }
     });
   }
 
-})
+  function addLintMessages(report) {
+    var lines = {};
+    report.jshint.messages.forEach(function (message) {
+      var text = 'Column: ' + message.column + ' "' + message.message + '"';
+      if (_.isArray(message.line)) {
+        message.line.forEach(function(line){
+          if (!lines[line]) lines[line] = '';
+          lines[line] += '<div class="plato-jshint-message text-'+message.severity+'">' + text + '</div>';
+        });
+      } else {
+        if (!lines[message.line]) lines[message.line] = '';
+        lines[message.line] += '<div class="plato-jshint-message text-'+message.severity+'">' + text + '</div>';
+      }
+    });
+    var gutterIcon = $('<a><i class="plato-gutter-icon icon-eye-open"></i></a>');
+    Object.keys(lines).forEach(function(line){
+      cm.setGutterMarker(line - 1, 'plato-gutter-jshint', gutterIcon.clone()[0]);
+      cm.addLineWidget(line - 1, $('<div>' + lines[line] + '</div>')[0]);
+    });
+  }
+});
 

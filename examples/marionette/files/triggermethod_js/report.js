@@ -79,46 +79,6 @@ __report = {
     "module": "triggermethod.js"
   },
   "jshint": {
-    "messages": [
-      {
-        "severity": "error",
-        "line": 9,
-        "column": 3,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 8,
-        "column": 1,
-        "message": "'Marionette' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 22,
-        "column": 7,
-        "message": "'_' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "warning",
-        "line": [
-          8
-        ],
-        "column": 0,
-        "message": "Implied global 'Marionette'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          22
-        ],
-        "column": 0,
-        "message": "Implied global '_'",
-        "source": "jshint.implied-globals"
-      }
-    ]
+    "messages": []
   }
 }

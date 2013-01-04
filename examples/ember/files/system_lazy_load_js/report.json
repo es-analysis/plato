@@ -150,49 +150,17 @@
     "messages": [
       {
         "severity": "error",
-        "line": 16,
-        "column": 3,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
+        "line": 21,
+        "column": 14,
+        "message": "Expected a conditional expression and instead saw an assignment.",
+        "source": "Expected a conditional expression and instead saw an assignment."
       },
       {
         "severity": "error",
-        "line": 33,
-        "column": 3,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 15,
-        "column": 1,
-        "message": "'Ember' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 18,
-        "column": 40,
-        "message": "'Ember' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 32,
-        "column": 1,
-        "message": "'Ember' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "warning",
-        "line": [
-          15,
-          18,
-          32
-        ],
-        "column": 0,
-        "message": "Implied global 'Ember'",
-        "source": "jshint.implied-globals"
+        "line": 37,
+        "column": 13,
+        "message": "Expected a conditional expression and instead saw an assignment.",
+        "source": "Expected a conditional expression and instead saw an assignment."
       }
     ]
   }

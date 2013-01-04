@@ -10,32 +10,32 @@ __report = {
       "line": 1,
       "complexity": {
         "sloc": {
-          "physical": 641,
-          "logical": 352
+          "physical": 637,
+          "logical": 349
         },
-        "cyclomatic": 117,
+        "cyclomatic": 118,
         "halstead": {
           "operators": {
             "distinct": 32,
-            "total": 996,
+            "total": 1001,
             "identifiers": [
               "__stripped__"
             ]
           },
           "operands": {
-            "distinct": 223,
-            "total": 1276,
+            "distinct": 222,
+            "total": 1274,
             "identifiers": [
               "__stripped__"
             ]
           },
-          "length": 2272,
-          "vocabulary": 255,
-          "difficulty": 91.55156950672645,
-          "volume": 18163.171008543326,
-          "effort": 1662866.813051213,
-          "bugs": 6.0543903361811084,
-          "time": 92381.48961395628
+          "length": 2275,
+          "vocabulary": 254,
+          "difficulty": 91.81981981981981,
+          "volume": 18174.25766240668,
+          "effort": 1668757.0639211608,
+          "bugs": 6.058085887468893,
+          "time": 92708.72577339782
         }
       }
     },
@@ -1044,19 +1044,19 @@ __report = {
               ]
             },
             "operands": {
-              "distinct": 69,
+              "distinct": 68,
               "total": 180,
               "identifiers": [
                 "__stripped__"
               ]
             },
             "length": 309,
-            "vocabulary": 92,
-            "difficulty": 30,
-            "volume": 2015.7806444216171,
-            "effort": 60473.41933264851,
-            "bugs": 0.6719268814738724,
-            "time": 3359.6344073693617
+            "vocabulary": 91,
+            "difficulty": 30.441176470588236,
+            "volume": 2010.9085438213972,
+            "effort": 61214.421848680766,
+            "bugs": 0.6703028479404657,
+            "time": 3400.801213815598
           }
         }
       },
@@ -1235,38 +1235,38 @@ __report = {
         "line": 516,
         "complexity": {
           "sloc": {
-            "physical": 30,
-            "logical": 17
+            "physical": 36,
+            "logical": 23
           },
-          "cyclomatic": 6,
+          "cyclomatic": 7,
           "halstead": {
             "operators": {
-              "distinct": 11,
-              "total": 32,
+              "distinct": 13,
+              "total": 43,
               "identifiers": [
                 "__stripped__"
               ]
             },
             "operands": {
-              "distinct": 19,
-              "total": 47,
+              "distinct": 20,
+              "total": 61,
               "identifiers": [
                 "__stripped__"
               ]
             },
-            "length": 79,
-            "vocabulary": 30,
-            "difficulty": 13.605263157894738,
-            "volume": 387.64435705307295,
-            "effort": 5274.003489379967,
-            "bugs": 0.12921478568435765,
-            "time": 293.0001938544426
+            "length": 104,
+            "vocabulary": 33,
+            "difficulty": 19.825,
+            "volume": 524.6169884132792,
+            "effort": 10400.531795293258,
+            "bugs": 0.17487232947109305,
+            "time": 577.8073219607365
           }
         }
       },
       {
         "name": "findOrAppend",
-        "line": 548,
+        "line": 554,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -1300,7 +1300,7 @@ __report = {
       },
       {
         "name": "disableScript",
-        "line": 553,
+        "line": 559,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -1334,7 +1334,7 @@ __report = {
       },
       {
         "name": "restoreScript",
-        "line": 558,
+        "line": 564,
         "complexity": {
           "sloc": {
             "physical": 12,
@@ -1368,10 +1368,10 @@ __report = {
       },
       {
         "name": "setGlobalEval",
-        "line": 572,
+        "line": 578,
         "complexity": {
           "sloc": {
-            "physical": 10,
+            "physical": 8,
             "logical": 4
           },
           "cyclomatic": 3,
@@ -1384,59 +1384,59 @@ __report = {
               ]
             },
             "operands": {
-              "distinct": 10,
+              "distinct": 9,
               "total": 21,
               "identifiers": [
                 "__stripped__"
               ]
             },
             "length": 36,
-            "vocabulary": 19,
-            "difficulty": 9.450000000000001,
-            "volume": 152.92539048396907,
-            "effort": 1445.1449400735078,
-            "bugs": 0.050975130161323025,
-            "time": 80.28583000408376
+            "vocabulary": 18,
+            "difficulty": 10.5,
+            "volume": 150.11730005192322,
+            "effort": 1576.2316505451938,
+            "bugs": 0.05003910001730774,
+            "time": 87.56842503028855
           }
         }
       },
       {
         "name": "cloneCopyEvent",
-        "line": 583,
+        "line": 587,
         "complexity": {
           "sloc": {
-            "physical": 35,
-            "logical": 25
+            "physical": 27,
+            "logical": 16
           },
           "cyclomatic": 6,
           "halstead": {
             "operators": {
-              "distinct": 13,
-              "total": 50,
+              "distinct": 15,
+              "total": 44,
               "identifiers": [
                 "__stripped__"
               ]
             },
             "operands": {
-              "distinct": 25,
-              "total": 73,
+              "distinct": 21,
+              "total": 57,
               "identifiers": [
                 "__stripped__"
               ]
             },
-            "length": 123,
-            "vocabulary": 38,
-            "difficulty": 18.98,
-            "volume": 645.495084153561,
-            "effort": 12251.496697234588,
-            "bugs": 0.215165028051187,
-            "time": 680.6387054019216
+            "length": 101,
+            "vocabulary": 36,
+            "difficulty": 20.357142857142858,
+            "volume": 522.1624251456735,
+            "effort": 10629.73508332264,
+            "bugs": 0.17405414171522451,
+            "time": 590.5408379623689
           }
         }
       },
       {
         "name": "getAll",
-        "line": 619,
+        "line": 615,
         "complexity": {
           "sloc": {
             "physical": 9,
@@ -1470,7 +1470,7 @@ __report = {
       },
       {
         "name": "fixInput",
-        "line": 630,
+        "line": 626,
         "complexity": {
           "sloc": {
             "physical": 12,
@@ -1503,495 +1503,24 @@ __report = {
         }
       }
     ],
-    "maintainability": 110.28415505707389,
+    "maintainability": 110.37115877530856,
     "module": "manipulation.js"
   },
   "jshint": {
     "messages": [
       {
         "severity": "error",
-        "line": 29,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 37,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 66,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 86,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 94,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 102,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 110,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 118,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 126,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 135,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 160,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
         "line": 181,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
+        "column": 39,
+        "message": "Use '===' to compare with 'null'.",
+        "source": "Use '{a}' to compare with '{b}'."
       },
       {
         "severity": "error",
-        "line": 190,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 229,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 255,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 261,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 362,
-        "column": 5,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 382,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 424,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 517,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 549,
-        "column": 5,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 554,
-        "column": 5,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 559,
-        "column": 5,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 573,
-        "column": 5,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 584,
-        "column": 5,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 620,
-        "column": 5,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 631,
-        "column": 5,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 27,
-        "column": 1,
-        "message": "'jQuery' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 29,
-        "column": 16,
-        "message": "'jQuery' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 31,
-        "column": 17,
-        "message": "'jQuery' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 32,
-        "column": 76,
-        "message": "'document' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 37,
-        "column": 14,
-        "message": "'jQuery' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 39,
-        "column": 17,
-        "message": "'jQuery' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 45,
-        "column": 24,
-        "message": "'jQuery' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 66,
-        "column": 14,
-        "message": "'jQuery' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 68,
-        "column": 17,
-        "message": "'jQuery' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 73,
-        "column": 24,
-        "message": "'jQuery' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 86,
-        "column": 26,
-        "message": "'jQuery' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 89,
-        "column": 13,
-        "message": "'jQuery' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 95,
-        "column": 19,
-        "message": "'jQuery' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 96,
-        "column": 17,
-        "message": "'jQuery' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 142,
-        "column": 31,
-        "message": "'jQuery' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 144,
-        "column": 21,
-        "message": "'jQuery' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 148,
-        "column": 38,
-        "message": "'jQuery' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 170,
-        "column": 17,
-        "message": "'jQuery' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 185,
-        "column": 20,
-        "message": "'jQuery' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 190,
-        "column": 16,
-        "message": "'jQuery' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 211,
-        "column": 29,
-        "message": "'jQuery' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 229,
-        "column": 26,
-        "message": "'jQuery' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 234,
-        "column": 21,
-        "message": "'jQuery' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 234,
-        "column": 21,
-        "message": "Too many errors. (36% scanned).",
-        "source": "Too many errors."
-      },
-      {
-        "severity": "warning",
-        "line": [
-          27,
-          29,
-          31,
-          37,
-          39,
-          45,
-          66,
-          68,
-          73,
-          86,
-          89,
-          95,
-          96,
-          142,
-          144,
-          148,
-          170,
-          185,
-          190,
-          211,
-          229,
-          234,
-          243,
-          269,
-          272,
-          285,
-          293,
-          294,
-          303,
-          312,
-          324,
-          330,
-          334,
-          343,
-          355,
-          362,
-          365,
-          371,
-          380,
-          384,
-          388,
-          441,
-          485,
-          490,
-          520,
-          525,
-          531,
-          535,
-          593,
-          604,
-          613,
-          624,
-          625
-        ],
-        "column": 0,
-        "message": "Implied global 'jQuery'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          32,
-          428,
-          432
-        ],
-        "column": 0,
-        "message": "Implied global 'document'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          261
-        ],
-        "column": 0,
-        "message": "Implied global 'core_concat'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          307,
-          373,
-          442,
-          466
-        ],
-        "column": 0,
-        "message": "Implied global 'core_push'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          330,
-          526,
-          577,
-          578,
-          591,
-          592,
-          596
-        ],
-        "column": 0,
-        "message": "Implied global 'data_priv'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          543
-        ],
-        "column": 0,
-        "message": "Implied global 'data_discard'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          611,
-          612,
-          615
-        ],
-        "column": 0,
-        "message": "Implied global 'data_user'",
-        "source": "jshint.implied-globals"
+        "line": 182,
+        "column": 47,
+        "message": "Use '===' to compare with 'null'.",
+        "source": "Use '{a}' to compare with '{b}'."
       }
     ]
   }

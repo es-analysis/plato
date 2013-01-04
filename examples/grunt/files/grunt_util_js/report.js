@@ -623,6 +623,126 @@ __report = {
     "module": "grunt/util.js"
   },
   "jshint": {
-    "messages": []
+    "messages": [
+      {
+        "severity": "error",
+        "line": 10,
+        "column": 1,
+        "message": "Use the function form of \"use strict\".",
+        "source": "Use the function form of \"use strict\"."
+      },
+      {
+        "severity": "error",
+        "line": 78,
+        "column": 13,
+        "message": "Use '===' to compare with 'null'.",
+        "source": "Use '{a}' to compare with '{b}'."
+      },
+      {
+        "severity": "error",
+        "line": 13,
+        "column": 13,
+        "message": "'require' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 14,
+        "column": 16,
+        "message": "'require' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 15,
+        "column": 12,
+        "message": "'require' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 18,
+        "column": 12,
+        "message": "'module' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 21,
+        "column": 13,
+        "message": "'require' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 22,
+        "column": 18,
+        "message": "'require' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 25,
+        "column": 13,
+        "message": "'require' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 28,
+        "column": 15,
+        "message": "'require' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 29,
+        "column": 14,
+        "message": "'require' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 30,
+        "column": 18,
+        "message": "'require' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 31,
+        "column": 13,
+        "message": "'require' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 34,
+        "column": 9,
+        "message": "'require' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 63,
+        "column": 17,
+        "message": "'process' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 145,
+        "column": 11,
+        "message": "'process' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 146,
+        "column": 13,
+        "message": "'process' is not defined.",
+        "source": "'{a}' is not defined."
+      }
+    ]
   }
 }

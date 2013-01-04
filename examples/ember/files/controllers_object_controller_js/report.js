@@ -44,37 +44,6 @@ __report = {
     "module": "controllers/object_controller.js"
   },
   "jshint": {
-    "messages": [
-      {
-        "severity": "error",
-        "line": 23,
-        "column": 1,
-        "message": "'Ember' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 23,
-        "column": 26,
-        "message": "'Ember' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 23,
-        "column": 51,
-        "message": "'Ember' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "warning",
-        "line": [
-          23
-        ],
-        "column": 0,
-        "message": "Implied global 'Ember'",
-        "source": "jshint.implied-globals"
-      }
-    ]
+    "messages": []
   }
 }

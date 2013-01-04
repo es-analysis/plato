@@ -44,37 +44,6 @@
     "module": "system/object.js"
   },
   "jshint": {
-    "messages": [
-      {
-        "severity": "error",
-        "line": 20,
-        "column": 1,
-        "message": "'Ember' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 20,
-        "column": 16,
-        "message": "'Ember' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 20,
-        "column": 40,
-        "message": "'Ember' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "warning",
-        "line": [
-          20
-        ],
-        "column": 0,
-        "message": "Implied global 'Ember'",
-        "source": "jshint.implied-globals"
-      }
-    ]
+    "messages": []
   }
 }

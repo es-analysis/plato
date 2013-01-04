@@ -317,6 +317,77 @@ __report = {
     "module": "grunt.js"
   },
   "jshint": {
-    "messages": []
+    "messages": [
+      {
+        "severity": "error",
+        "line": 10,
+        "column": 1,
+        "message": "Use the function form of \"use strict\".",
+        "source": "Use the function form of \"use strict\"."
+      },
+      {
+        "severity": "error",
+        "line": 39,
+        "column": 7,
+        "message": "Expected an identifier and instead saw 'package' (a reserved word).",
+        "source": "Expected an identifier and instead saw '{a}' (a reserved word)."
+      },
+      {
+        "severity": "error",
+        "line": 40,
+        "column": 23,
+        "message": "Expected an identifier and instead saw 'package' (a reserved word).",
+        "source": "Expected an identifier and instead saw '{a}' (a reserved word)."
+      },
+      {
+        "severity": "error",
+        "line": 13,
+        "column": 12,
+        "message": "'require' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 16,
+        "column": 1,
+        "message": "'require' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 19,
+        "column": 13,
+        "message": "'module' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 23,
+        "column": 24,
+        "message": "'require' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 39,
+        "column": 41,
+        "message": "'__dirname' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 58,
+        "column": 1,
+        "message": "'process' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 76,
+        "column": 55,
+        "message": "'__dirname' is not defined.",
+        "source": "'{a}' is not defined."
+      }
+    ]
   }
 }

@@ -589,6 +589,224 @@ __report = {
     "module": "grunt/help.js"
   },
   "jshint": {
-    "messages": []
+    "messages": [
+      {
+        "severity": "error",
+        "line": 10,
+        "column": 1,
+        "message": "Use the function form of \"use strict\".",
+        "source": "Use the function form of \"use strict\"."
+      },
+      {
+        "severity": "error",
+        "line": 43,
+        "column": 11,
+        "message": "Extra comma.",
+        "source": "Extra comma."
+      },
+      {
+        "severity": "error",
+        "line": 12,
+        "column": 13,
+        "message": "'require' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 15,
+        "column": 12,
+        "message": "'require' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 19,
+        "column": 1,
+        "message": "'exports' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 22,
+        "column": 1,
+        "message": "'exports' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 24,
+        "column": 3,
+        "message": "'exports' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 28,
+        "column": 1,
+        "message": "'exports' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 30,
+        "column": 28,
+        "message": "'exports' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 35,
+        "column": 1,
+        "message": "'exports' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 47,
+        "column": 1,
+        "message": "'exports' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 48,
+        "column": 3,
+        "message": "'exports' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 48,
+        "column": 42,
+        "message": "'exports' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 53,
+        "column": 1,
+        "message": "'exports' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 58,
+        "column": 1,
+        "message": "'exports' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 60,
+        "column": 41,
+        "message": "'process' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 64,
+        "column": 1,
+        "message": "'exports' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 66,
+        "column": 3,
+        "message": "'exports' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 69,
+        "column": 5,
+        "message": "'exports' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 74,
+        "column": 1,
+        "message": "'exports' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 76,
+        "column": 3,
+        "message": "'exports' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 76,
+        "column": 17,
+        "message": "'exports' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 85,
+        "column": 1,
+        "message": "'exports' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 90,
+        "column": 3,
+        "message": "'exports' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 92,
+        "column": 5,
+        "message": "'exports' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 94,
+        "column": 5,
+        "message": "'exports' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 98,
+        "column": 1,
+        "message": "'exports' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 100,
+        "column": 7,
+        "message": "'exports' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 103,
+        "column": 5,
+        "message": "'exports' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 103,
+        "column": 19,
+        "message": "'exports' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 124,
+        "column": 1,
+        "message": "'exports' is not defined.",
+        "source": "'{a}' is not defined."
+      }
+    ]
   }
 }

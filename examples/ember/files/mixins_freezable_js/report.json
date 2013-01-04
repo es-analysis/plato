@@ -79,67 +79,6 @@
     "module": "mixins/freezable.js"
   },
   "jshint": {
-    "messages": [
-      {
-        "severity": "error",
-        "line": 86,
-        "column": 5,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 86,
-        "column": 32,
-        "message": "Expected '{' and instead saw 'return'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 7,
-        "column": 11,
-        "message": "'Ember' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 7,
-        "column": 28,
-        "message": "'Ember' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 66,
-        "column": 1,
-        "message": "'Ember' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 66,
-        "column": 19,
-        "message": "'Ember' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 93,
-        "column": 1,
-        "message": "'Ember' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "warning",
-        "line": [
-          7,
-          66,
-          93
-        ],
-        "column": 0,
-        "message": "Implied global 'Ember'",
-        "source": "jshint.implied-globals"
-      }
-    ]
+    "messages": []
   }
 }

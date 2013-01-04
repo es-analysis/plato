@@ -5522,10 +5522,10 @@ __report = {
     "messages": [
       {
         "severity": "error",
-        "line": 75,
-        "column": 37,
-        "message": "Expected '{' and instead saw 'code'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "line": 44,
+        "column": 1,
+        "message": "Use the function form of \"use strict\".",
+        "source": "Use the function form of \"use strict\"."
       },
       {
         "severity": "error",
@@ -5536,27 +5536,6 @@ __report = {
       },
       {
         "severity": "error",
-        "line": 97,
-        "column": 33,
-        "message": "Expected '{' and instead saw 'str'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 98,
-        "column": 22,
-        "message": "Expected '{' and instead saw 'return'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 99,
-        "column": 14,
-        "message": "Expected '{' and instead saw 'return'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
         "line": 100,
         "column": 6,
         "message": "Unnecessary semicolon.",
@@ -5564,24 +5543,10 @@ __report = {
       },
       {
         "severity": "error",
-        "line": 105,
-        "column": 13,
-        "message": "Expected '{' and instead saw 'ret'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
         "line": 107,
         "column": 6,
         "message": "Unnecessary semicolon.",
         "source": "Unnecessary semicolon."
-      },
-      {
-        "severity": "error",
-        "line": 112,
-        "column": 13,
-        "message": "Expected '{' and instead saw 'name'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
       },
       {
         "severity": "error",
@@ -5606,24 +5571,10 @@ __report = {
       },
       {
         "severity": "error",
-        "line": 132,
-        "column": 13,
-        "message": "Expected '{' and instead saw 'print'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
         "line": 133,
         "column": 6,
         "message": "Unnecessary semicolon.",
         "source": "Unnecessary semicolon."
-      },
-      {
-        "severity": "error",
-        "line": 153,
-        "column": 21,
-        "message": "Expected '{' and instead saw 'might_need_space'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
       },
       {
         "severity": "error",
@@ -5634,13 +5585,6 @@ __report = {
       },
       {
         "severity": "error",
-        "line": 173,
-        "column": 51,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
         "line": 174,
         "column": 17,
         "message": "Bad line breaking before '||'.",
@@ -5648,17 +5592,10 @@ __report = {
       },
       {
         "severity": "error",
-        "line": 174,
-        "column": 49,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
         "line": 184,
         "column": 15,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "message": "Use '===' to compare with '0'.",
+        "source": "Use '{a}' to compare with '{b}'."
       },
       {
         "severity": "error",
@@ -5666,13 +5603,6 @@ __report = {
         "column": 6,
         "message": "Unnecessary semicolon.",
         "source": "Unnecessary semicolon."
-      },
-      {
-        "severity": "error",
-        "line": 207,
-        "column": 27,
-        "message": "Expected '{' and instead saw 'col'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
       },
       {
         "severity": "error",
@@ -5725,31 +5655,10 @@ __report = {
       },
       {
         "severity": "error",
-        "line": 270,
-        "column": 34,
-        "message": "Expected '{' and instead saw 'space'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
         "line": 271,
         "column": 6,
         "message": "Unnecessary semicolon.",
         "source": "Unnecessary semicolon."
-      },
-      {
-        "severity": "error",
-        "line": 275,
-        "column": 24,
-        "message": "Expected '{' and instead saw 'options'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 279,
-        "column": 38,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
       },
       {
         "severity": "error",
@@ -5872,95 +5781,101 @@ __report = {
       },
       {
         "severity": "error",
-        "line": 344,
+        "line": 364,
+        "column": 17,
+        "message": "Missing 'new' prefix when invoking a constructor.",
+        "source": "Missing 'new' prefix when invoking a constructor."
+      },
+      {
+        "severity": "error",
+        "line": 410,
         "column": 6,
-        "message": "Too many errors. (28% scanned).",
+        "message": "Unnecessary semicolon.",
+        "source": "Unnecessary semicolon."
+      },
+      {
+        "severity": "error",
+        "line": 436,
+        "column": 13,
+        "message": "Bad line breaking before '||'.",
+        "source": "Bad line breaking before '{a}'."
+      },
+      {
+        "severity": "error",
+        "line": 437,
+        "column": 13,
+        "message": "Bad line breaking before '||'.",
+        "source": "Bad line breaking before '{a}'."
+      },
+      {
+        "severity": "error",
+        "line": 438,
+        "column": 13,
+        "message": "Bad line breaking before '||'.",
+        "source": "Bad line breaking before '{a}'."
+      },
+      {
+        "severity": "error",
+        "line": 439,
+        "column": 13,
+        "message": "Bad line breaking before '||'.",
+        "source": "Bad line breaking before '{a}'."
+      },
+      {
+        "severity": "error",
+        "line": 440,
+        "column": 13,
+        "message": "Bad line breaking before '||'.",
+        "source": "Bad line breaking before '{a}'."
+      },
+      {
+        "severity": "error",
+        "line": 441,
+        "column": 13,
+        "message": "Bad line breaking before '||'.",
+        "source": "Bad line breaking before '{a}'."
+      },
+      {
+        "severity": "error",
+        "line": 442,
+        "column": 13,
+        "message": "Bad line breaking before '||'.",
+        "source": "Bad line breaking before '{a}'."
+      },
+      {
+        "severity": "error",
+        "line": 463,
+        "column": 17,
+        "message": "Bad line breaking before '||'.",
+        "source": "Bad line breaking before '{a}'."
+      },
+      {
+        "severity": "error",
+        "line": 464,
+        "column": 21,
+        "message": "Bad line breaking before '&&'.",
+        "source": "Bad line breaking before '{a}'."
+      },
+      {
+        "severity": "error",
+        "line": 465,
+        "column": 21,
+        "message": "Bad line breaking before '&&'.",
+        "source": "Bad line breaking before '{a}'."
+      },
+      {
+        "severity": "error",
+        "line": 502,
+        "column": 13,
+        "message": "Bad line breaking before '&&'.",
+        "source": "Bad line breaking before '{a}'."
+      },
+      {
+        "severity": "error",
+        "line": 502,
+        "column": 13,
+        "message": "Too many errors. (41% scanned).",
         "source": "Too many errors."
-      },
-      {
-        "severity": "warning",
-        "line": [
-          48
-        ],
-        "column": 0,
-        "message": "Implied global 'defaults'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          117
-        ],
-        "column": 0,
-        "message": "Implied global 'repeat_string'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          132
-        ],
-        "column": 0,
-        "message": "Implied global 'print'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          135
-        ],
-        "column": 0,
-        "message": "Implied global 'makePredicate'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          159,
-          160
-        ],
-        "column": 0,
-        "message": "Implied global 'stack'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          172,
-          173
-        ],
-        "column": 0,
-        "message": "Implied global 'is_identifier_char'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          204,
-          217,
-          291
-        ],
-        "column": 0,
-        "message": "Implied global 'noop'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          207
-        ],
-        "column": 0,
-        "message": "Implied global 'next_indent'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          282
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Node'",
-        "source": "jshint.implied-globals"
       }
     ]
   }

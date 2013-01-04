@@ -1031,6 +1031,21 @@
     "module": "util/task.js"
   },
   "jshint": {
-    "messages": []
+    "messages": [
+      {
+        "severity": "error",
+        "line": 57,
+        "column": 12,
+        "message": "Use '===' to compare with 'null'.",
+        "source": "Use '{a}' to compare with '{b}'."
+      },
+      {
+        "severity": "error",
+        "line": 225,
+        "column": 9,
+        "message": "'setTimeout' is not defined.",
+        "source": "'{a}' is not defined."
+      }
+    ]
   }
 }

@@ -44,38 +44,6 @@
     "module": "mixins/comparable.js"
   },
   "jshint": {
-    "messages": [
-      {
-        "severity": "error",
-        "line": 20,
-        "column": 1,
-        "message": "'Ember' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 20,
-        "column": 20,
-        "message": "'Ember' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 46,
-        "column": 12,
-        "message": "'Ember' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "warning",
-        "line": [
-          20,
-          46
-        ],
-        "column": 0,
-        "message": "Implied global 'Ember'",
-        "source": "jshint.implied-globals"
-      }
-    ]
+    "messages": []
   }
 }

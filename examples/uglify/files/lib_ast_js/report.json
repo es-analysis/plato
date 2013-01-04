@@ -3142,31 +3142,10 @@
     "messages": [
       {
         "severity": "error",
-        "line": 47,
-        "column": 31,
-        "message": "Expected '{' and instead saw 'base'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 48,
-        "column": 17,
-        "message": "Expected '{' and instead saw 'props'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 49,
-        "column": 10,
-        "message": "Expected '{' and instead saw 'props'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 52,
-        "column": 9,
-        "message": "Expected '{' and instead saw 'props'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "line": 44,
+        "column": 1,
+        "message": "Use the function form of \"use strict\".",
+        "source": "Use the function form of \"use strict\"."
       },
       {
         "severity": "error",
@@ -3184,38 +3163,10 @@
       },
       {
         "severity": "error",
-        "line": 59,
-        "column": 9,
-        "message": "Expected '{' and instead saw 'code'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
         "line": 61,
         "column": 28,
         "message": "The Function constructor is eval.",
         "source": "The Function constructor is eval."
-      },
-      {
-        "severity": "error",
-        "line": 66,
-        "column": 15,
-        "message": "Expected '{' and instead saw 'base'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 74,
-        "column": 18,
-        "message": "Expected '{' and instead saw 'for'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 74,
-        "column": 37,
-        "message": "Expected '{' and instead saw 'if'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
       },
       {
         "severity": "error",
@@ -3226,17 +3177,24 @@
       },
       {
         "severity": "error",
-        "line": 110,
-        "column": 9,
-        "message": "Expected '{' and instead saw 'AST_Node'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "line": 116,
+        "column": 51,
+        "message": "Extra comma.",
+        "source": "Extra comma."
       },
       {
         "severity": "error",
-        "line": 147,
-        "column": 10,
-        "message": "Expected '{' and instead saw 'node'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "line": 120,
+        "column": 54,
+        "message": "Extra comma.",
+        "source": "Extra comma."
+      },
+      {
+        "severity": "error",
+        "line": 128,
+        "column": 6,
+        "message": "Extra comma.",
+        "source": "Extra comma."
       },
       {
         "severity": "error",
@@ -3247,31 +3205,45 @@
       },
       {
         "severity": "error",
-        "line": 230,
-        "column": 28,
-        "message": "Expected '{' and instead saw 'this'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "line": 165,
+        "column": 40,
+        "message": "Extra comma.",
+        "source": "Extra comma."
       },
       {
         "severity": "error",
-        "line": 231,
-        "column": 33,
-        "message": "Expected '{' and instead saw 'this'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "line": 214,
+        "column": 39,
+        "message": "Extra comma.",
+        "source": "Extra comma."
       },
       {
         "severity": "error",
-        "line": 232,
-        "column": 28,
-        "message": "Expected '{' and instead saw 'this'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "line": 218,
+        "column": 42,
+        "message": "Extra comma.",
+        "source": "Extra comma."
       },
       {
         "severity": "error",
-        "line": 295,
-        "column": 61,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "line": 279,
+        "column": 99,
+        "message": "Extra comma.",
+        "source": "Extra comma."
+      },
+      {
+        "severity": "error",
+        "line": 280,
+        "column": 6,
+        "message": "Extra comma.",
+        "source": "Extra comma."
+      },
+      {
+        "severity": "error",
+        "line": 286,
+        "column": 82,
+        "message": "Extra comma.",
+        "source": "Extra comma."
       },
       {
         "severity": "error",
@@ -3282,87 +3254,157 @@
       },
       {
         "severity": "error",
-        "line": 296,
-        "column": 25,
-        "message": "Expected '{' and instead saw 'to_export'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "line": 315,
+        "column": 82,
+        "message": "Extra comma.",
+        "source": "Extra comma."
       },
       {
         "severity": "error",
-        "line": 305,
+        "line": 318,
+        "column": 62,
+        "message": "Extra comma.",
+        "source": "Extra comma."
+      },
+      {
+        "severity": "error",
+        "line": 319,
+        "column": 31,
+        "message": "Extra comma.",
+        "source": "Extra comma."
+      },
+      {
+        "severity": "error",
+        "line": 389,
+        "column": 60,
+        "message": "Extra comma.",
+        "source": "Extra comma."
+      },
+      {
+        "severity": "error",
+        "line": 439,
+        "column": 55,
+        "message": "Extra comma.",
+        "source": "Extra comma."
+      },
+      {
+        "severity": "error",
+        "line": 443,
+        "column": 48,
+        "message": "Extra comma.",
+        "source": "Extra comma."
+      },
+      {
+        "severity": "error",
+        "line": 572,
+        "column": 26,
+        "message": "Use '===' to compare with '0'.",
+        "source": "Use '{a}' to compare with '{b}'."
+      },
+      {
+        "severity": "error",
+        "line": 698,
+        "column": 61,
+        "message": "Extra comma.",
+        "source": "Extra comma."
+      },
+      {
+        "severity": "error",
+        "line": 745,
+        "column": 51,
+        "message": "Extra comma.",
+        "source": "Extra comma."
+      },
+      {
+        "severity": "error",
+        "line": 749,
+        "column": 48,
+        "message": "Extra comma.",
+        "source": "Extra comma."
+      },
+      {
+        "severity": "error",
+        "line": 753,
+        "column": 48,
+        "message": "Extra comma.",
+        "source": "Extra comma."
+      },
+      {
+        "severity": "error",
+        "line": 762,
         "column": 49,
-        "message": "Expected '{' and instead saw 'switch'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "message": "Extra comma.",
+        "source": "Extra comma."
       },
       {
         "severity": "error",
-        "line": 339,
-        "column": 28,
-        "message": "Expected '{' and instead saw 'this'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "line": 777,
+        "column": 49,
+        "message": "Extra comma.",
+        "source": "Extra comma."
       },
       {
         "severity": "error",
-        "line": 418,
-        "column": 35,
-        "message": "Expected '{' and instead saw 'this'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "line": 785,
+        "column": 56,
+        "message": "Extra comma.",
+        "source": "Extra comma."
       },
       {
         "severity": "error",
-        "line": 470,
-        "column": 30,
-        "message": "Expected '{' and instead saw 'this'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "line": 789,
+        "column": 49,
+        "message": "Extra comma.",
+        "source": "Extra comma."
       },
       {
         "severity": "error",
-        "line": 471,
-        "column": 32,
-        "message": "Expected '{' and instead saw 'this'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "line": 793,
+        "column": 58,
+        "message": "Extra comma.",
+        "source": "Extra comma."
       },
       {
         "severity": "error",
-        "line": 532,
-        "column": 29,
-        "message": "Expected '{' and instead saw 'this'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "line": 797,
+        "column": 59,
+        "message": "Extra comma.",
+        "source": "Extra comma."
       },
       {
         "severity": "error",
-        "line": 572,
-        "column": 26,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "line": 808,
+        "column": 76,
+        "message": "Extra comma.",
+        "source": "Extra comma."
       },
       {
         "severity": "error",
-        "line": 572,
-        "column": 32,
-        "message": "Expected '{' and instead saw 'return'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "line": 812,
+        "column": 50,
+        "message": "Extra comma.",
+        "source": "Extra comma."
       },
       {
         "severity": "error",
-        "line": 573,
-        "column": 26,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "line": 816,
+        "column": 40,
+        "message": "Extra comma.",
+        "source": "Extra comma."
       },
       {
         "severity": "error",
-        "line": 573,
-        "column": 32,
-        "message": "Expected '{' and instead saw 'return'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "line": 848,
+        "column": 43,
+        "message": "Extra comma.",
+        "source": "Extra comma."
       },
       {
         "severity": "error",
-        "line": 613,
-        "column": 27,
-        "message": "Expected '{' and instead saw 'this'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "line": 872,
+        "column": 46,
+        "message": "Extra comma.",
+        "source": "Extra comma."
       },
       {
         "severity": "error",
@@ -3370,48 +3412,6 @@
         "column": 2,
         "message": "Unnecessary semicolon.",
         "source": "Unnecessary semicolon."
-      },
-      {
-        "severity": "error",
-        "line": 919,
-        "column": 36,
-        "message": "Expected '{' and instead saw 'return'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 931,
-        "column": 62,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 935,
-        "column": 58,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 935,
-        "column": 80,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 936,
-        "column": 17,
-        "message": "Expected '{' and instead saw 'return'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 945,
-        "column": 71,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
       },
       {
         "severity": "error",
@@ -3450,13 +3450,6 @@
       },
       {
         "severity": "error",
-        "line": 955,
-        "column": 49,
-        "message": "Expected '{' and instead saw 'return'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
         "line": 110,
         "column": 32,
         "message": "'string_template' is not defined.",
@@ -3492,65 +3485,17 @@
       },
       {
         "severity": "error",
-        "line": 307,
+        "line": 322,
         "column": 28,
-        "message": "Too many errors. (31% scanned).",
+        "message": "'MAP' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 322,
+        "column": 28,
+        "message": "Too many errors. (33% scanned).",
         "source": "Too many errors."
-      },
-      {
-        "severity": "warning",
-        "line": [
-          110
-        ],
-        "column": 0,
-        "message": "Implied global 'string_template'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          295
-        ],
-        "column": 0,
-        "message": "Implied global 'find_if'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          301
-        ],
-        "column": 0,
-        "message": "Implied global 'parse'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          302
-        ],
-        "column": 0,
-        "message": "Implied global 'TreeTransformer'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          307,
-          322
-        ],
-        "column": 0,
-        "message": "Implied global 'MAP'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          896
-        ],
-        "column": 0,
-        "message": "Implied global 'noop'",
-        "source": "jshint.implied-globals"
       }
     ]
   }

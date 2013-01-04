@@ -1133,6 +1133,63 @@ __report = {
     "module": "grunt/log.js"
   },
   "jshint": {
-    "messages": []
+    "messages": [
+      {
+        "severity": "error",
+        "line": 10,
+        "column": 1,
+        "message": "Use the function form of \"use strict\".",
+        "source": "Use the function form of \"use strict\"."
+      },
+      {
+        "severity": "error",
+        "line": 219,
+        "column": 18,
+        "message": "Expected a conditional expression and instead saw an assignment.",
+        "source": "Expected a conditional expression and instead saw an assignment."
+      },
+      {
+        "severity": "error",
+        "line": 12,
+        "column": 13,
+        "message": "'require' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 15,
+        "column": 12,
+        "message": "'require' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 18,
+        "column": 11,
+        "message": "'module' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 21,
+        "column": 14,
+        "message": "'require' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 30,
+        "column": 22,
+        "message": "'console' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 67,
+        "column": 5,
+        "message": "'process' is not defined.",
+        "source": "'{a}' is not defined."
+      }
+    ]
   }
 }

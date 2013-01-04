@@ -1,14 +1,16 @@
+/*global $:false, _:false, Morris:false, __report:false, Raphael:false */
+/*jshint browser:true*/
+
 $(function(){
+  "use strict";
 
-  $('.plato-file-link').fitText(1.2, { minFontSize: '20px', maxFontSize: '28px' });
+//  $('.plato-file-link').fitText(1.2, { minFontSize: '20px', maxFontSize: '28px' });
 
-  var colors = {
-    default : [
-      '#50ABD2',
-      '#ED913D',
-      '#E8182E'
-    ]
-  };
+  var colors = [
+    '#50ABD2',
+    '#ED913D',
+    '#E8182E'
+  ];
 
   var graphHeight = 10,
     lineHeight = 1.35;
@@ -19,7 +21,7 @@ $(function(){
     paper.rect(offset, y, width, graphHeight).attr({fill: color, stroke:'none'});
     paper.text(offset - 5, y + 5, label).attr({'font-size':12,'text-anchor':'end' });
     paper.text(width + offset + 8, y + 6, orig).attr({'font-size':10,'text-anchor':'start' });
-  }
+  };
 
   function getColor(value, colors, thresholds) {
     thresholds = thresholds || [];
@@ -30,22 +32,30 @@ $(function(){
   }
 
   function drawFileCharts(reports) {
-    reports.forEach(function(report,i){
-      var $container = $('#plato-file-' + i + ' .plato-file-chart').empty();
-      var width = $container.width();
-      var paper = Raphael($container[0], width, 40);
+    reports.forEach(function(report, i){
+      var $container = $('#plato-file-' + i + ' .plato-file-chart');
+      var width = $container.width(),
+          height = $container.height();
 
-      // leave room at the end for the value labels.
-      width = width - 120;
+      var chart = $container.data('chart');
+      if (!chart) $container.data('chart', chart = Raphael($container[0],width,height));
+      chart.clear();
+      chart.setSize(width, height);
 
-      var value = report.complexity.aggregate.complexity.cyclomatic;
-      horizontalGraph(paper,0,value, Math.min(value * 2, width),'complexity', getColor(value, colors.default, [5,10]));
+      // yield for UI
+      setTimeout(function(){
+        //leave room at the end for the value labels.
+        width = width - 120;
 
-      value = report.complexity.aggregate.complexity.sloc.physical;
-      horizontalGraph(paper,1,value, Math.min(value, width), 'sloc', getColor(value,colors.default,[400,600]));
+        var value = report.complexity.aggregate.complexity.cyclomatic;
+        horizontalGraph(chart,0,value, Math.min(value * 2, width),'complexity', getColor(value, colors, [5,10]));
 
-      value = report.complexity.aggregate.complexity.halstead.bugs.toFixed(2);
-      horizontalGraph(paper,2,value, value * 5, 'est bugs', getColor(value,colors.default,[1,5]));
+        value = report.complexity.aggregate.complexity.sloc.physical;
+        horizontalGraph(chart,1,value, Math.min(value, width), 'sloc', getColor(value,colors,[400,600]));
+
+        value = report.complexity.aggregate.complexity.halstead.bugs.toFixed(2);
+        horizontalGraph(chart,2,value, value * 5, 'est bugs', getColor(value,colors,[1,5]));
+      },0)
     });
   }
 
@@ -69,7 +79,7 @@ $(function(){
       ymax : 400,
       labels: ['Lines'],
       barColors : ['#FAAF78']
-    }
+    };
 
     var bugs = {
       element: 'chart3',
@@ -81,7 +91,7 @@ $(function(){
       barColors : ['#D54C2C']
     };
 
-    __report.forEach(function(report,i){
+    reports.forEach(function(report){
 
       cyclomatic.ymax = Math.max(cyclomatic.ymax, report.complexity.aggregate.complexity.cyclomatic);
       sloc.ymax = Math.max(sloc.ymax, report.complexity.aggregate.complexity.sloc.physical);
@@ -91,18 +101,18 @@ $(function(){
       cyclomatic.data.push({
         value : report.complexity.aggregate.complexity.cyclomatic,
         label : report.complexity.module
-      })
+      });
       sloc.data.push({
         value : report.complexity.aggregate.complexity.sloc.physical,
         label : report.complexity.module
-      })
+      });
       bugs.data.push({
         value : report.complexity.aggregate.complexity.halstead.bugs.toFixed(2),
         label : report.complexity.module
-      })
+      });
     });
 
-    function onGraphClick(i, row){
+    function onGraphClick(i){
       document.location = __report[i].info.link;
     }
 
@@ -124,7 +134,7 @@ $(function(){
   $(window).on('resize', _.debounce(function(){
     drawFileCharts(__report);
     drawOverviewCharts(__report);
-  },200))
+  },200));
 });
 
 

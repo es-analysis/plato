@@ -113,6 +113,49 @@ __report = {
     "module": "util/exit.js"
   },
   "jshint": {
-    "messages": []
+    "messages": [
+      {
+        "severity": "error",
+        "line": 10,
+        "column": 1,
+        "message": "Use the function form of \"use strict\".",
+        "source": "Use the function form of \"use strict\"."
+      },
+      {
+        "severity": "error",
+        "line": 18,
+        "column": 1,
+        "message": "'exports' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 19,
+        "column": 7,
+        "message": "'process' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 19,
+        "column": 43,
+        "message": "'process' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 20,
+        "column": 5,
+        "message": "'process' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 24,
+        "column": 5,
+        "message": "'process' is not defined.",
+        "source": "'{a}' is not defined."
+      }
+    ]
   }
 }

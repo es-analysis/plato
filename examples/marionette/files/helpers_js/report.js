@@ -79,68 +79,6 @@ __report = {
     "module": "helpers.js"
   },
   "jshint": {
-    "messages": [
-      {
-        "severity": "error",
-        "line": 19,
-        "column": 3,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 11,
-        "column": 1,
-        "message": "'Marionette' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 11,
-        "column": 21,
-        "message": "'Backbone' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 18,
-        "column": 1,
-        "message": "'Marionette' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 5,
-        "column": 10,
-        "message": "'slice' is defined but never used.",
-        "source": "'{a}' is defined but never used."
-      },
-      {
-        "severity": "warning",
-        "line": [
-          11,
-          18
-        ],
-        "column": 0,
-        "message": "Implied global 'Marionette'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          11
-        ],
-        "column": 0,
-        "message": "Implied global 'Backbone'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": 5,
-        "column": 0,
-        "message": "Unused variable: 'slice'",
-        "source": "jshint.implied-unuseds"
-      }
-    ]
+    "messages": []
   }
 }

@@ -147,30 +147,6 @@ __report = {
     "module": "createObject.js"
   },
   "jshint": {
-    "messages": [
-      {
-        "severity": "error",
-        "line": 7,
-        "column": 3,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 6,
-        "column": 1,
-        "message": "'Marionette' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "warning",
-        "line": [
-          6
-        ],
-        "column": 0,
-        "message": "Implied global 'Marionette'",
-        "source": "jshint.implied-globals"
-      }
-    ]
+    "messages": []
   }
 }

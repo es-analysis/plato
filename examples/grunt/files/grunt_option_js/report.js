@@ -215,6 +215,21 @@ __report = {
     "module": "grunt/option.js"
   },
   "jshint": {
-    "messages": []
+    "messages": [
+      {
+        "severity": "error",
+        "line": 10,
+        "column": 1,
+        "message": "Use the function form of \"use strict\".",
+        "source": "Use the function form of \"use strict\"."
+      },
+      {
+        "severity": "error",
+        "line": 16,
+        "column": 14,
+        "message": "'module' is not defined.",
+        "source": "'{a}' is not defined."
+      }
+    ]
   }
 }

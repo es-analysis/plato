@@ -1099,6 +1099,63 @@
     "module": "grunt/task.js"
   },
   "jshint": {
-    "messages": []
+    "messages": [
+      {
+        "severity": "error",
+        "line": 10,
+        "column": 1,
+        "message": "Use the function form of \"use strict\".",
+        "source": "Use the function form of \"use strict\"."
+      },
+      {
+        "severity": "error",
+        "line": 162,
+        "column": 10,
+        "message": "Use '===' to compare with 'null'.",
+        "source": "Use '{a}' to compare with '{b}'."
+      },
+      {
+        "severity": "error",
+        "line": 198,
+        "column": 19,
+        "message": "Extra comma.",
+        "source": "Extra comma."
+      },
+      {
+        "severity": "error",
+        "line": 12,
+        "column": 13,
+        "message": "'require' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 15,
+        "column": 12,
+        "message": "'require' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 21,
+        "column": 12,
+        "message": "'module' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 282,
+        "column": 10,
+        "message": "'require' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 393,
+        "column": 5,
+        "message": "'process' is not defined.",
+        "source": "'{a}' is not defined."
+      }
+    ]
   }
 }

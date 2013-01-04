@@ -3312,6 +3312,13 @@
     "messages": [
       {
         "severity": "error",
+        "line": 45,
+        "column": 1,
+        "message": "Use the function form of \"use strict\".",
+        "source": "Use the function form of \"use strict\"."
+      },
+      {
+        "severity": "error",
         "line": 50,
         "column": 5,
         "message": "Bad line breaking before '+'.",
@@ -3389,20 +3396,6 @@
       },
       {
         "severity": "error",
-        "line": 156,
-        "column": 17,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 156,
-        "column": 31,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
         "line": 157,
         "column": 2,
         "message": "Unnecessary semicolon.",
@@ -3424,24 +3417,10 @@
       },
       {
         "severity": "error",
-        "line": 163,
-        "column": 17,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
         "line": 164,
         "column": 9,
         "message": "Bad line breaking before '||'.",
         "source": "Bad line breaking before '{a}'."
-      },
-      {
-        "severity": "error",
-        "line": 164,
-        "column": 17,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
       },
       {
         "severity": "error",
@@ -3488,16 +3467,9 @@
       {
         "severity": "error",
         "line": 203,
-        "column": 23,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 203,
-        "column": 62,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "column": 39,
+        "message": "Use '===' to compare with 'null'.",
+        "source": "Use '{a}' to compare with '{b}'."
       },
       {
         "severity": "error",
@@ -3515,38 +3487,10 @@
       },
       {
         "severity": "error",
-        "line": 229,
-        "column": 13,
-        "message": "Expected '{' and instead saw 'throw'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 230,
-        "column": 16,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
         "line": 238,
         "column": 6,
         "message": "Unnecessary semicolon.",
         "source": "Unnecessary semicolon."
-      },
-      {
-        "severity": "error",
-        "line": 242,
-        "column": 31,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 242,
-        "column": 38,
-        "message": "Expected '{' and instead saw 'throw'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
       },
       {
         "severity": "error",
@@ -3564,27 +3508,6 @@
       },
       {
         "severity": "error",
-        "line": 253,
-        "column": 34,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 254,
-        "column": 34,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 255,
-        "column": 34,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
         "line": 276,
         "column": 6,
         "message": "Unnecessary semicolon.",
@@ -3592,24 +3515,10 @@
       },
       {
         "severity": "error",
-        "line": 280,
-        "column": 13,
-        "message": "Expected '{' and instead saw 'next'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
         "line": 281,
         "column": 6,
         "message": "Unnecessary semicolon.",
         "source": "Unnecessary semicolon."
-      },
-      {
-        "severity": "error",
-        "line": 286,
-        "column": 13,
-        "message": "Expected '{' and instead saw 'ret'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
       },
       {
         "severity": "error",
@@ -3627,17 +3536,10 @@
       },
       {
         "severity": "error",
-        "line": 295,
-        "column": 77,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
         "line": 304,
         "column": 38,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "message": "Use '===' to compare with '0'.",
+        "source": "Use '{a}' to compare with '{b}'."
       },
       {
         "severity": "error",
@@ -3663,67 +3565,107 @@
       {
         "severity": "error",
         "line": 307,
-        "column": 38,
-        "message": "Too many errors. (21% scanned).",
+        "column": 40,
+        "message": "Expected an identifier and instead saw ')'.",
+        "source": "Expected an identifier and instead saw '{a}'."
+      },
+      {
+        "severity": "error",
+        "line": 307,
+        "column": 40,
+        "message": "Expected an assignment or function call and instead saw an expression.",
+        "source": "Expected an assignment or function call and instead saw an expression."
+      },
+      {
+        "severity": "error",
+        "line": 307,
+        "column": 41,
+        "message": "Missing semicolon.",
+        "source": "Missing semicolon."
+      },
+      {
+        "severity": "error",
+        "line": 307,
+        "column": 41,
+        "message": "Expected '}' to match '{' from line 296 and instead saw ':'.",
+        "source": "Expected '{a}' to match '{b}' from line {c} and instead saw '{d}'."
+      },
+      {
+        "severity": "error",
+        "line": 308,
+        "column": 17,
+        "message": "Expected ')' and instead saw 'return'.",
+        "source": "Expected '{a}' and instead saw '{b}'."
+      },
+      {
+        "severity": "error",
+        "line": 311,
+        "column": 10,
+        "message": "Expected an identifier and instead saw ')'.",
+        "source": "Expected an identifier and instead saw '{a}'."
+      },
+      {
+        "severity": "error",
+        "line": 311,
+        "column": 10,
+        "message": "Expected an assignment or function call and instead saw an expression.",
+        "source": "Expected an assignment or function call and instead saw an expression."
+      },
+      {
+        "severity": "error",
+        "line": 319,
+        "column": 5,
+        "message": "Expected '(end)' and instead saw '}'.",
+        "source": "Expected '{a}' and instead saw '{b}'."
+      },
+      {
+        "severity": "error",
+        "line": 53,
+        "column": 12,
+        "message": "'makePredicate' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 54,
+        "column": 18,
+        "message": "'makePredicate' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 55,
+        "column": 30,
+        "message": "'makePredicate' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 56,
+        "column": 17,
+        "message": "'makePredicate' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 58,
+        "column": 22,
+        "message": "'makePredicate' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 58,
+        "column": 36,
+        "message": "'characters' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 58,
+        "column": 36,
+        "message": "Too many errors. (4% scanned).",
         "source": "Too many errors."
-      },
-      {
-        "severity": "warning",
-        "line": [
-          53,
-          54,
-          55,
-          56,
-          58,
-          64,
-          111,
-          113,
-          115,
-          117
-        ],
-        "column": 0,
-        "message": "Implied global 'makePredicate'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          58,
-          111,
-          113,
-          115,
-          117
-        ],
-        "column": 0,
-        "message": "Implied global 'characters'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          193
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Node'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          253
-        ],
-        "column": 0,
-        "message": "Implied global 'UNARY_POSTFIX'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          275
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Token'",
-        "source": "jshint.implied-globals"
       }
     ]
   }

@@ -184,6 +184,20 @@ __report = {
     "messages": [
       {
         "severity": "error",
+        "line": 44,
+        "column": 1,
+        "message": "Use the function form of \"use strict\".",
+        "source": "Use the function form of \"use strict\"."
+      },
+      {
+        "severity": "error",
+        "line": 51,
+        "column": 20,
+        "message": "Extra comma.",
+        "source": "Extra comma."
+      },
+      {
+        "severity": "error",
         "line": 75,
         "column": 6,
         "message": "Unnecessary semicolon.",
@@ -230,39 +244,6 @@ __report = {
         "column": 40,
         "message": "'MOZ_SourceMap' is not defined.",
         "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 47,
-        "column": 19,
-        "message": "'SourceMap' is defined but never used.",
-        "source": "'{a}' is defined but never used."
-      },
-      {
-        "severity": "warning",
-        "line": [
-          48
-        ],
-        "column": 0,
-        "message": "Implied global 'defaults'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          53,
-          57
-        ],
-        "column": 0,
-        "message": "Implied global 'MOZ_SourceMap'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": 47,
-        "column": 0,
-        "message": "Unused variable: 'SourceMap'",
-        "source": "jshint.implied-unuseds"
       }
     ]
   }

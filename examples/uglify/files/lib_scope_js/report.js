@@ -1646,6 +1646,13 @@ __report = {
     "messages": [
       {
         "severity": "error",
+        "line": 44,
+        "column": 1,
+        "message": "Use the function form of \"use strict\".",
+        "source": "Use the function form of \"use strict\"."
+      },
+      {
+        "severity": "error",
         "line": 56,
         "column": 2,
         "message": "Unnecessary semicolon.",
@@ -1668,30 +1675,16 @@ __report = {
       {
         "severity": "error",
         "line": 62,
+        "column": 38,
+        "message": "Expected an identifier and instead saw 'eval' (a reserved word).",
+        "source": "Expected an identifier and instead saw '{a}' (a reserved word)."
+      },
+      {
+        "severity": "error",
+        "line": 62,
         "column": 42,
         "message": "eval is evil.",
         "source": "eval is evil."
-      },
-      {
-        "severity": "error",
-        "line": 66,
-        "column": 13,
-        "message": "Expected '{' and instead saw 'this'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 101,
-        "column": 17,
-        "message": "Expected '{' and instead saw 's'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 107,
-        "column": 17,
-        "message": "Expected '{' and instead saw 'throw'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
       },
       {
         "severity": "error",
@@ -1702,52 +1695,10 @@ __report = {
       },
       {
         "severity": "error",
-        "line": 154,
-        "column": 23,
-        "message": "Expected '{' and instead saw 'throw'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
         "line": 167,
         "column": 12,
         "message": "'tw' is already defined.",
         "source": "'{a}' is already defined."
-      },
-      {
-        "severity": "error",
-        "line": 192,
-        "column": 26,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 194,
-        "column": 25,
-        "message": "Expected '{' and instead saw 's'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 196,
-        "column": 26,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 236,
-        "column": 30,
-        "message": "Expected '{' and instead saw 'break'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 251,
-        "column": 37,
-        "message": "Expected '{' and instead saw 'name'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
       },
       {
         "severity": "error",
@@ -1765,38 +1716,10 @@ __report = {
       },
       {
         "severity": "error",
-        "line": 282,
-        "column": 32,
-        "message": "Expected '{' and instead saw 'continue'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 289,
-        "column": 19,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 289,
-        "column": 28,
-        "message": "Expected '{' and instead saw 'continue'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 296,
-        "column": 36,
-        "message": "Expected '{' and instead saw 'sym'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
         "line": 315,
         "column": 48,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "message": "Use '===' to compare with '0'.",
+        "source": "Use '{a}' to compare with '{b}'."
       },
       {
         "severity": "error",
@@ -1807,10 +1730,10 @@ __report = {
       },
       {
         "severity": "error",
-        "line": 370,
-        "column": 31,
-        "message": "Expected '{' and instead saw 'a'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "line": 342,
+        "column": 9,
+        "message": "Expected an identifier and instead saw 'eval' (a reserved word).",
+        "source": "Expected an identifier and instead saw '{a}' (a reserved word)."
       },
       {
         "severity": "error",
@@ -1828,651 +1751,255 @@ __report = {
       },
       {
         "severity": "error",
-        "line": 391,
-        "column": 13,
-        "message": "Expected '{' and instead saw 'base54'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "line": 462,
+        "column": 75,
+        "message": "Missing semicolon.",
+        "source": "Missing semicolon."
       },
       {
         "severity": "error",
-        "line": 393,
-        "column": 13,
-        "message": "Expected '{' and instead saw 'base54'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "line": 463,
+        "column": 54,
+        "message": "Missing semicolon.",
+        "source": "Missing semicolon."
       },
       {
         "severity": "error",
-        "line": 395,
-        "column": 13,
-        "message": "Expected '{' and instead saw 'base54'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "line": 480,
+        "column": 42,
+        "message": "Missing semicolon.",
+        "source": "Missing semicolon."
       },
       {
         "severity": "error",
-        "line": 397,
-        "column": 13,
-        "message": "Expected '{' and instead saw 'base54'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "line": 481,
+        "column": 47,
+        "message": "Missing semicolon.",
+        "source": "Missing semicolon."
       },
       {
         "severity": "error",
-        "line": 399,
-        "column": 13,
-        "message": "Expected '{' and instead saw 'base54'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "line": 482,
+        "column": 20,
+        "message": "'base54' is already defined.",
+        "source": "'{a}' is already defined."
       },
       {
         "severity": "error",
-        "line": 401,
-        "column": 13,
-        "message": "Expected '{' and instead saw 'base54'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "line": 490,
+        "column": 6,
+        "message": "Unnecessary semicolon.",
+        "source": "Unnecessary semicolon."
       },
       {
         "severity": "error",
-        "line": 403,
-        "column": 13,
-        "message": "Expected '{' and instead saw 'base54'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "line": 501,
+        "column": 9,
+        "message": "Expected an identifier and instead saw 'eval' (a reserved word).",
+        "source": "Expected an identifier and instead saw '{a}' (a reserved word)."
       },
       {
         "severity": "error",
-        "line": 405,
+        "line": 505,
         "column": 13,
-        "message": "Expected '{' and instead saw 'base54'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "message": "Bad line breaking before '&&'.",
+        "source": "Bad line breaking before '{a}'."
       },
       {
         "severity": "error",
-        "line": 407,
+        "line": 506,
         "column": 13,
-        "message": "Expected '{' and instead saw 'base54'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "message": "Bad line breaking before '&&'.",
+        "source": "Bad line breaking before '{a}'."
       },
       {
         "severity": "error",
-        "line": 410,
-        "column": 35,
-        "message": "Expected '{' and instead saw 'base54'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "line": 526,
+        "column": 17,
+        "message": "Bad line breaking before '&&'.",
+        "source": "Bad line breaking before '{a}'."
       },
       {
         "severity": "error",
-        "line": 413,
-        "column": 13,
-        "message": "Expected '{' and instead saw 'base54'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "line": 527,
+        "column": 21,
+        "message": "Bad line breaking before '||'.",
+        "source": "Bad line breaking before '{a}'."
       },
       {
         "severity": "error",
-        "line": 415,
-        "column": 13,
-        "message": "Expected '{' and instead saw 'base54'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "line": 537,
+        "column": 21,
+        "message": "Expected an identifier and instead saw 'eval' (a reserved word).",
+        "source": "Expected an identifier and instead saw '{a}' (a reserved word)."
       },
       {
         "severity": "error",
-        "line": 417,
+        "line": 538,
         "column": 13,
-        "message": "Expected '{' and instead saw 'base54'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "message": "eval is evil.",
+        "source": "eval is evil."
       },
       {
         "severity": "error",
-        "line": 419,
+        "line": 538,
         "column": 13,
-        "message": "Expected '{' and instead saw 'base54'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "message": "Bad line breaking before '&&'.",
+        "source": "Bad line breaking before '{a}'."
       },
       {
         "severity": "error",
-        "line": 421,
+        "line": 539,
         "column": 13,
-        "message": "Expected '{' and instead saw 'base54'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "message": "Bad line breaking before '&&'.",
+        "source": "Bad line breaking before '{a}'."
       },
       {
         "severity": "error",
-        "line": 423,
+        "line": 540,
         "column": 13,
-        "message": "Expected '{' and instead saw 'base54'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "message": "Bad line breaking before '&&'.",
+        "source": "Bad line breaking before '{a}'."
       },
       {
         "severity": "error",
-        "line": 425,
+        "line": 544,
         "column": 13,
-        "message": "Expected '{' and instead saw 'base54'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "message": "Bad line breaking before '&&'.",
+        "source": "Bad line breaking before '{a}'."
       },
       {
         "severity": "error",
-        "line": 427,
+        "line": 545,
         "column": 13,
-        "message": "Expected '{' and instead saw 'base54'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "message": "Bad line breaking before '&&'.",
+        "source": "Bad line breaking before '{a}'."
       },
       {
         "severity": "error",
-        "line": 429,
+        "line": 555,
         "column": 13,
-        "message": "Expected '{' and instead saw 'base54'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "message": "Bad line breaking before '&&'.",
+        "source": "Bad line breaking before '{a}'."
       },
       {
         "severity": "error",
-        "line": 431,
+        "line": 556,
         "column": 13,
-        "message": "Expected '{' and instead saw 'base54'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "message": "Bad line breaking before '&&'.",
+        "source": "Bad line breaking before '{a}'."
       },
       {
         "severity": "error",
-        "line": 433,
+        "line": 565,
         "column": 13,
-        "message": "Expected '{' and instead saw 'base54'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "message": "Bad line breaking before '&&'.",
+        "source": "Bad line breaking before '{a}'."
       },
       {
         "severity": "error",
-        "line": 435,
+        "line": 566,
         "column": 13,
-        "message": "Expected '{' and instead saw 'base54'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "message": "Bad line breaking before '&&'.",
+        "source": "Bad line breaking before '{a}'."
       },
       {
         "severity": "error",
-        "line": 437,
-        "column": 13,
-        "message": "Expected '{' and instead saw 'base54'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "line": 70,
+        "column": 1,
+        "message": "'AST_Toplevel' is not defined.",
+        "source": "'{a}' is not defined."
       },
       {
         "severity": "error",
-        "line": 439,
-        "column": 13,
-        "message": "Expected '{' and instead saw 'base54'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "line": 81,
+        "column": 22,
+        "message": "'Dictionary' is not defined.",
+        "source": "'{a}' is not defined."
       },
       {
         "severity": "error",
-        "line": 439,
+        "line": 83,
+        "column": 18,
+        "message": "'TreeWalker' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 84,
+        "column": 29,
+        "message": "'AST_Scope' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 94,
+        "column": 29,
+        "message": "'AST_Directive' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 96,
         "column": 13,
-        "message": "Too many errors. (75% scanned).",
+        "message": "'push_uniq' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 99,
+        "column": 29,
+        "message": "'AST_With' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 104,
+        "column": 29,
+        "message": "'AST_LabeledStatement' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 107,
+        "column": 33,
+        "message": "'string_template' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 113,
+        "column": 29,
+        "message": "'AST_Symbol' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 116,
+        "column": 29,
+        "message": "'AST_Label' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 120,
+        "column": 29,
+        "message": "'AST_SymbolLambda' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 129,
+        "column": 34,
+        "message": "'AST_SymbolDefun' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 129,
+        "column": 34,
+        "message": "Too many errors. (22% scanned).",
         "source": "Too many errors."
-      },
-      {
-        "severity": "warning",
-        "line": [
-          70,
-          339,
-          347,
-          387
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Toplevel'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          81,
-          166,
-          211,
-          212
-        ],
-        "column": 0,
-        "message": "Implied global 'Dictionary'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          83,
-          167,
-          355,
-          389
-        ],
-        "column": 0,
-        "message": "Implied global 'TreeWalker'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          84,
-          209,
-          221,
-          226,
-          250,
-          256,
-          261,
-          265,
-          278,
-          295,
-          363
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Scope'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          94,
-          402
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Directive'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          96,
-          235
-        ],
-        "column": 0,
-        "message": "Implied global 'push_uniq'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          99,
-          428
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_With'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          104,
-          356
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_LabeledStatement'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          107,
-          154
-        ],
-        "column": 0,
-        "message": "Implied global 'string_template'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          113,
-          251,
-          296,
-          300,
-          314,
-          319,
-          331,
-          335
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Symbol'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          116,
-          242,
-          310,
-          327,
-          376
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Label'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          120
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_SymbolLambda'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          129
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_SymbolDefun'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          137
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_SymbolVar'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          138,
-          140
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_SymbolConst'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          143
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_SymbolCatch'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          152,
-          175,
-          246,
-          323
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_LabelRef'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          168,
-          225,
-          416
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Lambda'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          179,
-          230
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_SymbolRef'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          192
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Call'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          281,
-          378,
-          391,
-          393,
-          395,
-          397,
-          399,
-          401,
-          403,
-          405,
-          407,
-          409,
-          410,
-          413,
-          415,
-          417,
-          419,
-          421,
-          423,
-          425,
-          427,
-          429,
-          431,
-          433,
-          435,
-          437
-        ],
-        "column": 0,
-        "message": "Implied global 'base54'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          282,
-          378
-        ],
-        "column": 0,
-        "message": "Implied global 'is_identifier'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          305
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_SymbolAccessor'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          340
-        ],
-        "column": 0,
-        "message": "Implied global 'defaults'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          390
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Constant'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          392
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Return'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          394
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Throw'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          396
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Continue'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          398
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Break'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          400
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Debugger'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          404
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_While'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          406
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Do'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          408
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_If'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          412
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Var'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          414
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Const'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          418
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_For'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          420
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_ForIn'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          422
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Switch'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          424
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Case'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          426
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Default'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          430
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_ObjectSetter'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          432
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_ObjectGetter'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          434
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_ObjectKeyVal'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          436
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_New'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          438
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_This'",
-        "source": "jshint.implied-globals"
       }
     ]
   }

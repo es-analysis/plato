@@ -79,38 +79,6 @@ __report = {
     "module": "renderer.js"
   },
   "jshint": {
-    "messages": [
-      {
-        "severity": "error",
-        "line": 13,
-        "column": 5,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 6,
-        "column": 1,
-        "message": "'Marionette' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 13,
-        "column": 68,
-        "message": "'Marionette' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "warning",
-        "line": [
-          6,
-          13
-        ],
-        "column": 0,
-        "message": "Implied global 'Marionette'",
-        "source": "jshint.implied-globals"
-      }
-    ]
+    "messages": []
   }
 }

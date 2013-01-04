@@ -419,6 +419,42 @@ __report = {
     "module": "grunt/config.js"
   },
   "jshint": {
-    "messages": []
+    "messages": [
+      {
+        "severity": "error",
+        "line": 10,
+        "column": 1,
+        "message": "Use the function form of \"use strict\".",
+        "source": "Use the function form of \"use strict\"."
+      },
+      {
+        "severity": "error",
+        "line": 66,
+        "column": 18,
+        "message": "Use '!==' to compare with 'null'.",
+        "source": "Use '{a}' to compare with '{b}'."
+      },
+      {
+        "severity": "error",
+        "line": 95,
+        "column": 29,
+        "message": "Use '===' to compare with 'null'.",
+        "source": "Use '{a}' to compare with '{b}'."
+      },
+      {
+        "severity": "error",
+        "line": 12,
+        "column": 13,
+        "message": "'require' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 15,
+        "column": 14,
+        "message": "'module' is not defined.",
+        "source": "'{a}' is not defined."
+      }
+    ]
   }
 }

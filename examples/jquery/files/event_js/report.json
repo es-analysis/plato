@@ -23,19 +23,19 @@
             ]
           },
           "operands": {
-            "distinct": 235,
+            "distinct": 233,
             "total": 1710,
             "identifiers": [
               "__stripped__"
             ]
           },
           "length": 3083,
-          "vocabulary": 270,
-          "difficulty": 127.34042553191489,
-          "volume": 24900.822485707715,
-          "effort": 3170881.331424695,
-          "bugs": 8.300274161902571,
-          "time": 176160.0739680386
+          "vocabulary": 268,
+          "difficulty": 128.4334763948498,
+          "volume": 24867.752974181312,
+          "effort": 3193851.964602472,
+          "bugs": 8.289250991393772,
+          "time": 177436.22025569287
         }
       }
     },
@@ -58,19 +58,19 @@
               ]
             },
             "operands": {
-              "distinct": 58,
+              "distinct": 57,
               "total": 201,
               "identifiers": [
                 "__stripped__"
               ]
             },
             "length": 363,
-            "vocabulary": 77,
-            "difficulty": 32.92241379310345,
-            "volume": 2274.843514272249,
-            "effort": 74893.33949142863,
-            "bugs": 0.758281171424083,
-            "time": 4160.7410828571465
+            "vocabulary": 76,
+            "difficulty": 33.5,
+            "volume": 2267.997687380022,
+            "effort": 75977.92252723074,
+            "bugs": 0.7559992291266739,
+            "time": 4220.995695957263
           }
         }
       },
@@ -126,19 +126,19 @@
               ]
             },
             "operands": {
-              "distinct": 59,
+              "distinct": 58,
               "total": 176,
               "identifiers": [
                 "__stripped__"
               ]
             },
             "length": 320,
-            "vocabulary": 82,
-            "difficulty": 34.30508474576271,
-            "volume": 2034.4166414777872,
-            "effort": 69790.83529408545,
-            "bugs": 0.6781388804925957,
-            "time": 3877.2686274491916
+            "vocabulary": 81,
+            "difficulty": 34.89655172413793,
+            "volume": 2028.75200092308,
+            "effort": 70796.44913566059,
+            "bugs": 0.67625066697436,
+            "time": 3933.136063092255
           }
         }
       },
@@ -1469,497 +1469,66 @@
         }
       }
     ],
-    "maintainability": 102.82847968326334,
+    "maintainability": 102.81263503592217,
     "module": "event.js"
   },
   "jshint": {
     "messages": [
       {
         "severity": "error",
-        "line": 13,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 124,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 196,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 321,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 343,
-        "column": 43,
-        "message": "Expected '!==' and instead saw '!='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "line": 241,
+        "column": 21,
+        "message": "Use '!==' to compare with 'null'.",
+        "source": "Use '{a}' to compare with '{b}'."
       },
       {
         "severity": "error",
         "line": 421,
-        "column": 13,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
+        "column": 30,
+        "message": "Use '===' to compare with 'null'.",
+        "source": "Use '{a}' to compare with '{b}'."
       },
       {
         "severity": "error",
-        "line": 432,
-        "column": 13,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
+        "line": 422,
+        "column": 49,
+        "message": "Use '!==' to compare with 'null'.",
+        "source": "Use '{a}' to compare with '{b}'."
       },
       {
         "severity": "error",
-        "line": 456,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
+        "line": 436,
+        "column": 30,
+        "message": "Use '===' to compare with 'null'.",
+        "source": "Use '{a}' to compare with '{b}'."
       },
       {
         "severity": "error",
-        "line": 484,
-        "column": 17,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
+        "line": 436,
+        "column": 58,
+        "message": "Use '!==' to compare with 'null'.",
+        "source": "Use '{a}' to compare with '{b}'."
       },
       {
         "severity": "error",
-        "line": 493,
-        "column": 17,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
+        "line": 695,
+        "column": 19,
+        "message": "Use '===' to compare with 'null'.",
+        "source": "Use '{a}' to compare with '{b}'."
       },
       {
         "severity": "error",
-        "line": 502,
-        "column": 17,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
+        "line": 695,
+        "column": 33,
+        "message": "Use '===' to compare with 'null'.",
+        "source": "Use '{a}' to compare with '{b}'."
       },
       {
         "severity": "error",
-        "line": 514,
-        "column": 17,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 525,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 549,
-        "column": 5,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 556,
-        "column": 5,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 588,
-        "column": 5,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 591,
-        "column": 5,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 598,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 606,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 614,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 628,
-        "column": 5,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 656,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 679,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 732,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 735,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 767,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 770,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 774,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 778,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 782,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 787,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 793,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 802,
-        "column": 5,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 10,
-        "column": 1,
-        "message": "'jQuery' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 19,
-        "column": 95,
-        "message": "'data_priv' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 32,
-        "column": 28,
-        "message": "'jQuery' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 45,
-        "column": 64,
-        "message": "'jQuery' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 46,
-        "column": 21,
-        "message": "'jQuery' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 54,
-        "column": 40,
-        "message": "'core_rnotwhite' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 62,
-        "column": 23,
-        "message": "'jQuery' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 68,
-        "column": 23,
-        "message": "'jQuery' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 71,
-        "column": 25,
-        "message": "'jQuery' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 78,
-        "column": 43,
-        "message": "'jQuery' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 112,
-        "column": 13,
-        "message": "'jQuery' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 127,
+        "line": 699,
         "column": 24,
-        "message": "'data_priv' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 127,
-        "column": 53,
-        "message": "'data_priv' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 134,
-        "column": 40,
-        "message": "'core_rnotwhite' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 143,
-        "column": 21,
-        "message": "'jQuery' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 148,
-        "column": 23,
-        "message": "'jQuery' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 177,
-        "column": 21,
-        "message": "'jQuery' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 177,
-        "column": 21,
-        "message": "Too many errors. (21% scanned).",
-        "source": "Too many errors."
-      },
-      {
-        "severity": "warning",
-        "line": [
-          10,
-          32,
-          45,
-          46,
-          62,
-          68,
-          71,
-          78,
-          112,
-          143,
-          148,
-          177,
-          185,
-          190,
-          208,
-          222,
-          224,
-          226,
-          241,
-          245,
-          253,
-          274,
-          280,
-          290,
-          294,
-          304,
-          306,
-          321,
-          324,
-          327,
-          355,
-          356,
-          389,
-          456,
-          463,
-          466,
-          484,
-          525,
-          526,
-          534,
-          536,
-          546,
-          548,
-          554,
-          556,
-          557,
-          577,
-          581,
-          584,
-          596,
-          624,
-          628,
-          640,
-          652,
-          653,
-          658,
-          661,
-          676,
-          721,
-          725,
-          728,
-          739,
-          762,
-          783,
-          788,
-          797,
-          802,
-          809,
-          813
-        ],
-        "column": 0,
-        "message": "Implied global 'jQuery'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          19,
-          127
-        ],
-        "column": 0,
-        "message": "Implied global 'data_priv'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          54,
-          134
-        ],
-        "column": 0,
-        "message": "Implied global 'core_rnotwhite'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          200,
-          263,
-          437,
-          493,
-          502,
-          664,
-          669
-        ],
-        "column": 0,
-        "message": "Implied global 'document'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          264
-        ],
-        "column": 0,
-        "message": "Implied global 'window'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          326
-        ],
-        "column": 0,
-        "message": "Implied global 'core_slice'",
-        "source": "jshint.implied-globals"
+        "message": "Use '===' to compare with 'null'.",
+        "source": "Use '{a}' to compare with '{b}'."
       }
     ]
   }

@@ -79,62 +79,6 @@ __report = {
     "module": "eventaggregator.js"
   },
   "jshint": {
-    "messages": [
-      {
-        "severity": "error",
-        "line": 11,
-        "column": 5,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 8,
-        "column": 1,
-        "message": "'Marionette' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 8,
-        "column": 30,
-        "message": "'Backbone' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 11,
-        "column": 5,
-        "message": "'Marionette' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 14,
-        "column": 5,
-        "message": "'Backbone' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "warning",
-        "line": [
-          8,
-          11
-        ],
-        "column": 0,
-        "message": "Implied global 'Marionette'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          8,
-          14
-        ],
-        "column": 0,
-        "message": "Implied global 'Backbone'",
-        "source": "jshint.implied-globals"
-      }
-    ]
+    "messages": []
   }
 }

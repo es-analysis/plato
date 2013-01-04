@@ -1680,13 +1680,6 @@ __report = {
     "messages": [
       {
         "severity": "error",
-        "line": 38,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
         "line": 42,
         "column": 20,
         "message": "Unescaped '-'.",
@@ -1708,358 +1701,73 @@ __report = {
       },
       {
         "severity": "error",
-        "line": 61,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 66,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 76,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 184,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 188,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
         "line": 194,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
+        "column": 20,
+        "message": "Use '===' to compare with 'null'.",
+        "source": "Use '{a}' to compare with '{b}'."
       },
       {
         "severity": "error",
-        "line": 208,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 222,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 227,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 233,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 237,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 241,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 245,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 251,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 257,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 271,
-        "column": 5,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 336,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 356,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 367,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 392,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
+        "line": 298,
+        "column": 41,
+        "message": "Use '!==' to compare with 'null'.",
+        "source": "Use '{a}' to compare with '{b}'."
       },
       {
         "severity": "error",
         "line": 398,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 398,
-        "column": 35,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 402,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
+        "column": 20,
+        "message": "Use '!==' to compare with 'null'.",
+        "source": "Use '{a}' to compare with '{b}'."
       },
       {
         "severity": "error",
         "line": 406,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 419,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 441,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 449,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 456,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 485,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 508,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 517,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 521,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 526,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
+        "column": 18,
+        "message": "Use '===' to compare with 'null'.",
+        "source": "Use '{a}' to compare with '{b}'."
       },
       {
         "severity": "error",
         "line": 575,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
+        "column": 21,
+        "message": "Use '===' to compare with 'null'.",
+        "source": "Use '{a}' to compare with '{b}'."
       },
       {
         "severity": "error",
-        "line": 580,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
+        "line": 582,
+        "column": 18,
+        "message": "Use '!==' to compare with 'null'.",
+        "source": "Use '{a}' to compare with '{b}'."
       },
       {
         "severity": "error",
         "line": 597,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
+        "column": 20,
+        "message": "Use '===' to compare with 'null'.",
+        "source": "Use '{a}' to compare with '{b}'."
       },
       {
         "severity": "error",
-        "line": 601,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
+        "line": 652,
+        "column": 28,
+        "message": "Use '!==' to compare with 'null'.",
+        "source": "Use '{a}' to compare with '{b}'."
       },
       {
         "severity": "error",
-        "line": 621,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
+        "line": 662,
+        "column": 28,
+        "message": "Use '!==' to compare with 'null'.",
+        "source": "Use '{a}' to compare with '{b}'."
       },
       {
         "severity": "error",
-        "line": 641,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 678,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 707,
-        "column": 9,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 761,
-        "column": 5,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 786,
-        "column": 5,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 790,
-        "column": 5,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 9,
-        "column": 16,
-        "message": "'window' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 10,
-        "column": 16,
-        "message": "'window' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 10,
-        "column": 16,
-        "message": "Too many errors. (1% scanned).",
-        "source": "Too many errors."
-      },
-      {
-        "severity": "warning",
-        "line": [
-          9,
-          10,
-          13,
-          16,
-          336,
-          337,
-          340,
-          341,
-          778
-        ],
-        "column": 0,
-        "message": "Implied global 'window'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          492
-        ],
-        "column": 0,
-        "message": "Implied global 'DOMParser'",
-        "source": "jshint.implied-globals"
+        "line": 709,
+        "column": 24,
+        "message": "Use '===' to compare with 'null'.",
+        "source": "Use '{a}' to compare with '{b}'."
       }
     ]
   }

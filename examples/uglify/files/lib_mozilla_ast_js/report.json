@@ -626,10 +626,10 @@
     "messages": [
       {
         "severity": "error",
-        "line": 72,
-        "column": 41,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "line": 44,
+        "column": 1,
+        "message": "Use the function form of \"use strict\".",
+        "source": "Use the function form of \"use strict\"."
       },
       {
         "severity": "error",
@@ -647,80 +647,10 @@
       },
       {
         "severity": "error",
-        "line": 116,
-        "column": 31,
-        "message": "Expected '{' and instead saw 'return'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
         "line": 125,
         "column": 55,
         "message": "Bad constructor.",
         "source": "Bad constructor."
-      },
-      {
-        "severity": "error",
-        "line": 135,
-        "column": 32,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 136,
-        "column": 34,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 137,
-        "column": 34,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 137,
-        "column": 82,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 138,
-        "column": 34,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 139,
-        "column": 34,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 140,
-        "column": 34,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 141,
-        "column": 34,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 141,
-        "column": 64,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
       },
       {
         "severity": "error",
@@ -766,55 +696,6 @@
       },
       {
         "severity": "error",
-        "line": 222,
-        "column": 22,
-        "message": "Expected '{' and instead saw 'propmap'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 224,
-        "column": 21,
-        "message": "Expected '{' and instead saw 'throw'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 227,
-        "column": 21,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 229,
-        "column": 28,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 231,
-        "column": 28,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 233,
-        "column": 28,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 235,
-        "column": 20,
-        "message": "Expected '{' and instead saw 'throw'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
         "line": 242,
         "column": 33,
         "message": "The Function constructor is eval.",
@@ -826,6 +707,13 @@
         "column": 6,
         "message": "Unnecessary semicolon.",
         "source": "Unnecessary semicolon."
+      },
+      {
+        "severity": "error",
+        "line": 252,
+        "column": 24,
+        "message": "Use '!==' to compare with 'null'.",
+        "source": "Use '{a}' to compare with '{b}'."
       },
       {
         "severity": "error",
@@ -976,616 +864,122 @@
       },
       {
         "severity": "error",
-        "line": 136,
-        "column": 58,
-        "message": "Too many errors. (51% scanned).",
+        "line": 137,
+        "column": 95,
+        "message": "'AST_SymbolConst' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 137,
+        "column": 113,
+        "message": "'AST_SymbolVar' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 138,
+        "column": 74,
+        "message": "'AST_SymbolLambda' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 138,
+        "column": 93,
+        "message": "'AST_SymbolFunarg' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 139,
+        "column": 75,
+        "message": "'AST_SymbolDefun' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 139,
+        "column": 93,
+        "message": "'AST_SymbolFunarg' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 140,
+        "column": 53,
+        "message": "'AST_SymbolCatch' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 141,
+        "column": 89,
+        "message": "'AST_LabelRef' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 142,
+        "column": 27,
+        "message": "'AST_SymbolRef' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 151,
+        "column": 32,
+        "message": "'AST_UnaryPrefix' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 151,
+        "column": 50,
+        "message": "'AST_UnaryPostfix' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 161,
+        "column": 17,
+        "message": "'AST_Node' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 162,
+        "column": 20,
+        "message": "'AST_Toplevel' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 163,
+        "column": 21,
+        "message": "'AST_Function' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 164,
+        "column": 27,
+        "message": "'AST_EmptyStatement' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 165,
+        "column": 27,
+        "message": "'AST_BlockStatement' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 165,
+        "column": 27,
+        "message": "Too many errors. (62% scanned).",
         "source": "Too many errors."
-      },
-      {
-        "severity": "warning",
-        "line": [
-          50
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Try'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          143,
-          152
-        ],
-        "column": 0,
-        "message": "Implied global 'my_start_token'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          144,
-          153
-        ],
-        "column": 0,
-        "message": "Implied global 'my_end_token'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          155,
-          243
-        ],
-        "column": 0,
-        "message": "Implied global 'from_moz'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          55
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Finally'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          59
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Catch'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          67
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Object'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          81
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_ObjectKeyVal'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          84
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_ObjectSetter'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          87
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_ObjectGetter'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          93
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Seq'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          96
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Sub'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          96
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Dot'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          104
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Case'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          104
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Default'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          116
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Null'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          120
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_String'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          123
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Number'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          125
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_True'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          125
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_False'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          128
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_RegExp'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          135,
-          184
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_This'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          136
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Label'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          137
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_SymbolConst'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          137
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_SymbolVar'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          138
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_SymbolLambda'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          138,
-          139
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_SymbolFunarg'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          139
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_SymbolDefun'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          140
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_SymbolCatch'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          141
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_LabelRef'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          142
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_SymbolRef'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          151
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_UnaryPrefix'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          151
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_UnaryPostfix'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          161,
-          162,
-          163,
-          164,
-          165,
-          166,
-          167,
-          168,
-          169,
-          170,
-          171,
-          172,
-          173,
-          174,
-          175,
-          176,
-          177,
-          178,
-          179,
-          180,
-          181,
-          182,
-          184,
-          185,
-          186,
-          187,
-          188,
-          189,
-          190,
-          191,
-          192
-        ],
-        "column": 0,
-        "message": "Implied global 'map'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          161,
-          257
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Node'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          162
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Toplevel'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          163,
-          186
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Function'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          164
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_EmptyStatement'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          165
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_BlockStatement'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          166
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_SimpleStatement'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          167
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_If'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          168
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_LabeledStatement'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          169
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Break'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          170
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Continue'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          171
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_With'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          172
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Switch'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          173
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Return'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          174
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Throw'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          175
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_While'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          176
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Do'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          177
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_For'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          178
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_ForIn'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          179
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Debugger'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          180
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Defun'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          181
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Var'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          182
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_VarDef'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          185
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Array'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          187,
-          189
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Binary'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          188
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Assign'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          190
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Conditional'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          191
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_New'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          192
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Call'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          197,
-          207
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Token'",
-        "source": "jshint.implied-globals"
       }
     ]
   }

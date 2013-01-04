@@ -215,6 +215,63 @@ __report = {
     "module": "grunt/fail.js"
   },
   "jshint": {
-    "messages": []
+    "messages": [
+      {
+        "severity": "error",
+        "line": 10,
+        "column": 1,
+        "message": "Use the function form of \"use strict\".",
+        "source": "Use the function form of \"use strict\"."
+      },
+      {
+        "severity": "error",
+        "line": 24,
+        "column": 13,
+        "message": "Extra comma.",
+        "source": "Extra comma."
+      },
+      {
+        "severity": "error",
+        "line": 12,
+        "column": 13,
+        "message": "'require' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 15,
+        "column": 12,
+        "message": "'module' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 46,
+        "column": 7,
+        "message": "'console' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 48,
+        "column": 7,
+        "message": "'console' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 57,
+        "column": 3,
+        "message": "'process' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 73,
+        "column": 5,
+        "message": "'process' is not defined.",
+        "source": "'{a}' is not defined."
+      }
+    ]
   }
 }

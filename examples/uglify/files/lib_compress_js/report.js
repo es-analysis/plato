@@ -5284,10 +5284,10 @@ __report = {
     "messages": [
       {
         "severity": "error",
-        "line": 48,
-        "column": 9,
-        "message": "Expected '{' and instead saw 'return'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "line": 44,
+        "column": 1,
+        "message": "Use the function form of \"use strict\".",
+        "source": "Use the function form of \"use strict\"."
       },
       {
         "severity": "error",
@@ -5312,66 +5312,10 @@ __report = {
       },
       {
         "severity": "error",
-        "line": 80,
-        "column": 13,
-        "message": "Expected '{' and instead saw 'AST_Node'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 83,
-        "column": 29,
-        "message": "Expected '{' and instead saw 'return'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 111,
-        "column": 34,
-        "message": "Expected '{' and instead saw 'return'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 114,
-        "column": 31,
-        "message": "Expected '{' and instead saw 'return'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
         "line": 117,
         "column": 6,
         "message": "Unnecessary semicolon.",
         "source": "Unnecessary semicolon."
-      },
-      {
-        "severity": "error",
-        "line": 125,
-        "column": 39,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 129,
-        "column": 21,
-        "message": "Expected '{' and instead saw 'props'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 131,
-        "column": 31,
-        "message": "Expected '{' and instead saw 'props'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 132,
-        "column": 29,
-        "message": "Expected '{' and instead saw 'props'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
       },
       {
         "severity": "error",
@@ -5389,45 +5333,10 @@ __report = {
       },
       {
         "severity": "error",
-        "line": 148,
-        "column": 38,
-        "message": "Expected '{' and instead saw 'return'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
         "line": 173,
         "column": 6,
         "message": "Unnecessary semicolon.",
         "source": "Unnecessary semicolon."
-      },
-      {
-        "severity": "error",
-        "line": 176,
-        "column": 29,
-        "message": "Expected '{' and instead saw 'return'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 177,
-        "column": 50,
-        "message": "Expected '{' and instead saw 'return'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 178,
-        "column": 50,
-        "message": "Expected '{' and instead saw 'return'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 179,
-        "column": 45,
-        "message": "Expected '{' and instead saw 'return'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
       },
       {
         "severity": "error",
@@ -5438,31 +5347,10 @@ __report = {
       },
       {
         "severity": "error",
-        "line": 184,
-        "column": 29,
-        "message": "Expected '{' and instead saw 'return'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 185,
-        "column": 50,
-        "message": "Expected '{' and instead saw 'return'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 186,
-        "column": 50,
-        "message": "Expected '{' and instead saw 'return'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
         "line": 186,
         "column": 75,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "message": "Use '===' to compare with '0'.",
+        "source": "Use '{a}' to compare with '{b}'."
       },
       {
         "severity": "error",
@@ -5470,13 +5358,6 @@ __report = {
         "column": 6,
         "message": "Unnecessary semicolon.",
         "source": "Unnecessary semicolon."
-      },
-      {
-        "severity": "error",
-        "line": 191,
-        "column": 38,
-        "message": "Expected '{' and instead saw 'return'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
       },
       {
         "severity": "error",
@@ -5496,15 +5377,15 @@ __report = {
         "severity": "error",
         "line": 247,
         "column": 94,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "message": "Use '===' to compare with '0'.",
+        "source": "Use '{a}' to compare with '{b}'."
       },
       {
         "severity": "error",
         "line": 258,
         "column": 55,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "message": "Use '===' to compare with '0'.",
+        "source": "Use '{a}' to compare with '{b}'."
       },
       {
         "severity": "error",
@@ -5524,15 +5405,8 @@ __report = {
         "severity": "error",
         "line": 279,
         "column": 41,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
-      },
-      {
-        "severity": "error",
-        "line": 302,
-        "column": 40,
-        "message": "Expected '===' and instead saw '=='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "message": "Use '===' to compare with '0'.",
+        "source": "Use '{a}' to compare with '{b}'."
       },
       {
         "severity": "error",
@@ -5620,397 +5494,150 @@ __report = {
       },
       {
         "severity": "error",
-        "line": 389,
-        "column": 39,
-        "message": "Expected '{' and instead saw 'has_quit'.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "line": 395,
+        "column": 10,
+        "message": "Unnecessary semicolon.",
+        "source": "Unnecessary semicolon."
       },
       {
         "severity": "error",
-        "line": 393,
-        "column": 41,
-        "message": "Expected '!==' and instead saw '!='.",
-        "source": "Expected '{a}' and instead saw '{b}'."
+        "line": 406,
+        "column": 14,
+        "message": "Unnecessary semicolon.",
+        "source": "Unnecessary semicolon."
       },
       {
         "severity": "error",
-        "line": 393,
-        "column": 41,
-        "message": "Too many errors. (19% scanned).",
+        "line": 415,
+        "column": 10,
+        "message": "Unnecessary semicolon.",
+        "source": "Unnecessary semicolon."
+      },
+      {
+        "severity": "error",
+        "line": 427,
+        "column": 14,
+        "message": "Unnecessary semicolon.",
+        "source": "Unnecessary semicolon."
+      },
+      {
+        "severity": "error",
+        "line": 469,
+        "column": 10,
+        "message": "Unnecessary semicolon.",
+        "source": "Unnecessary semicolon."
+      },
+      {
+        "severity": "error",
+        "line": 479,
+        "column": 26,
+        "message": "Bad line breaking before '&&'.",
+        "source": "Bad line breaking before '{a}'."
+      },
+      {
+        "severity": "error",
+        "line": 480,
+        "column": 26,
+        "message": "Bad line breaking before '&&'.",
+        "source": "Bad line breaking before '{a}'."
+      },
+      {
+        "severity": "error",
+        "line": 497,
+        "column": 10,
+        "message": "Unnecessary semicolon.",
+        "source": "Unnecessary semicolon."
+      },
+      {
+        "severity": "error",
+        "line": 499,
+        "column": 6,
+        "message": "Unnecessary semicolon.",
+        "source": "Unnecessary semicolon."
+      },
+      {
+        "severity": "error",
+        "line": 518,
+        "column": 6,
+        "message": "Unnecessary semicolon.",
+        "source": "Unnecessary semicolon."
+      },
+      {
+        "severity": "error",
+        "line": 526,
+        "column": 47,
+        "message": "Missing semicolon.",
+        "source": "Missing semicolon."
+      },
+      {
+        "severity": "error",
+        "line": 544,
+        "column": 46,
+        "message": "Missing semicolon.",
+        "source": "Missing semicolon."
+      },
+      {
+        "severity": "error",
+        "line": 545,
+        "column": 47,
+        "message": "Missing semicolon.",
+        "source": "Missing semicolon."
+      },
+      {
+        "severity": "error",
+        "line": 552,
+        "column": 47,
+        "message": "Missing semicolon.",
+        "source": "Missing semicolon."
+      },
+      {
+        "severity": "error",
+        "line": 553,
+        "column": 48,
+        "message": "Missing semicolon.",
+        "source": "Missing semicolon."
+      },
+      {
+        "severity": "error",
+        "line": 572,
+        "column": 17,
+        "message": "Bad line breaking before '&&'.",
+        "source": "Bad line breaking before '{a}'."
+      },
+      {
+        "severity": "error",
+        "line": 573,
+        "column": 17,
+        "message": "Bad line breaking before '&&'.",
+        "source": "Bad line breaking before '{a}'."
+      },
+      {
+        "severity": "error",
+        "line": 574,
+        "column": 17,
+        "message": "Bad line breaking before '&&'.",
+        "source": "Bad line breaking before '{a}'."
+      },
+      {
+        "severity": "error",
+        "line": 583,
+        "column": 13,
+        "message": "Bad line breaking before '?'.",
+        "source": "Bad line breaking before '{a}'."
+      },
+      {
+        "severity": "error",
+        "line": 584,
+        "column": 6,
+        "message": "Unnecessary semicolon.",
+        "source": "Unnecessary semicolon."
+      },
+      {
+        "severity": "error",
+        "line": 584,
+        "column": 6,
+        "message": "Too many errors. (29% scanned).",
         "source": "Too many errors."
-      },
-      {
-        "severity": "warning",
-        "line": [
-          49,
-          75
-        ],
-        "column": 0,
-        "message": "Implied global 'TreeTransformer'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          50
-        ],
-        "column": 0,
-        "message": "Implied global 'defaults'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          76
-        ],
-        "column": 0,
-        "message": "Implied global 'merge'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          80,
-          119,
-          123,
-          148
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Node'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          84,
-          90
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Scope'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          151
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_String'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          155
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_NaN'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          155
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Number'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          159
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_True'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          159
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_False'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          161,
-          283,
-          306
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Undefined'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          164
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Null'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          167
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_RegExp'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          169
-        ],
-        "column": 0,
-        "message": "Implied global 'string_template'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          177,
-          186,
-          193,
-          221,
-          294,
-          318,
-          326,
-          329,
-          340,
-          346,
-          349,
-          377
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_BlockStatement'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          178,
-          185,
-          224
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_EmptyStatement'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          179
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Statement'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          191
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Switch'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          192
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_For'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          192
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_ForIn'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          192
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_DWLoop'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          202
-        ],
-        "column": 0,
-        "message": "Implied global 'eliminate_spurious_blocks'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          204
-        ],
-        "column": 0,
-        "message": "Implied global 'eliminate_dead_code'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          207
-        ],
-        "column": 0,
-        "message": "Implied global 'handle_if_return'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          210
-        ],
-        "column": 0,
-        "message": "Implied global 'sequencesize'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          213
-        ],
-        "column": 0,
-        "message": "Implied global 'join_consecutive_vars'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          226
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Directive'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          242
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Lambda'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          247,
-          254,
-          259,
-          270,
-          279,
-          282,
-          305,
-          316,
-          338
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Return'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          253
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_If'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          262,
-          302,
-          303
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_SimpleStatement'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          314,
-          336,
-          389
-        ],
-        "column": 0,
-        "message": "Implied global 'aborts'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          315,
-          337,
-          374
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_LoopControl'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          317,
-          339,
-          378
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Continue'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          318,
-          340,
-          376
-        ],
-        "column": 0,
-        "message": "Implied global 'AST_Break'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          320,
-          342,
-          381
-        ],
-        "column": 0,
-        "message": "Implied global 'remove'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          372
-        ],
-        "column": 0,
-        "message": "Implied global 'extract_declarations_from_unreachable_code'",
-        "source": "jshint.implied-globals"
       }
     ]
   }

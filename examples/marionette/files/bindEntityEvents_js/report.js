@@ -249,62 +249,6 @@ __report = {
     "module": "bindEntityEvents.js"
   },
   "jshint": {
-    "messages": [
-      {
-        "severity": "error",
-        "line": 20,
-        "column": 3,
-        "message": "Missing \"use strict\" statement.",
-        "source": "Missing \"use strict\" statement."
-      },
-      {
-        "severity": "error",
-        "line": 16,
-        "column": 1,
-        "message": "'Marionette' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 23,
-        "column": 5,
-        "message": "'_' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 43,
-        "column": 5,
-        "message": "'_' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 47,
-        "column": 11,
-        "message": "'_' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "warning",
-        "line": [
-          16
-        ],
-        "column": 0,
-        "message": "Implied global 'Marionette'",
-        "source": "jshint.implied-globals"
-      },
-      {
-        "severity": "warning",
-        "line": [
-          23,
-          43,
-          47
-        ],
-        "column": 0,
-        "message": "Implied global '_'",
-        "source": "jshint.implied-globals"
-      }
-    ]
+    "messages": []
   }
 }

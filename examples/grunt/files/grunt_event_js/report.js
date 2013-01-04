@@ -44,6 +44,28 @@ __report = {
     "module": "grunt/event.js"
   },
   "jshint": {
-    "messages": []
+    "messages": [
+      {
+        "severity": "error",
+        "line": 10,
+        "column": 1,
+        "message": "Use the function form of \"use strict\".",
+        "source": "Use the function form of \"use strict\"."
+      },
+      {
+        "severity": "error",
+        "line": 13,
+        "column": 21,
+        "message": "'require' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 16,
+        "column": 1,
+        "message": "'module' is not defined.",
+        "source": "'{a}' is not defined."
+      }
+    ]
   }
 }
