@@ -27,8 +27,8 @@ exports['awesome'] = {
     // setup here
     done();
   },
-  'no args': function(test) {
-    test.expect(1);
+  'common prefix': function(test) {
+    test.expect(2);
 
     var files = [
       '/lib/foo/bar/a.js',
@@ -37,6 +37,12 @@ exports['awesome'] = {
     ];
 
     test.equal(util.findCommonBase(files), '/lib/foo/bar/', 'should find common prefix');
+
+    files = [
+      'single/file/foo.js'
+    ];
+    test.equal(util.findCommonBase(files), '', 'should nto find common prefix for one file');
+
     test.done();
   },
 };
