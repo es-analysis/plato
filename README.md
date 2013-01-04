@@ -38,8 +38,11 @@ plato -r -d report src/*.js
 
 ## Release History
 
- - 0.2.0 added jshint reporting
- - 0.1.0 initial release
+  - 0.3.0 Formatting changes, refactoring.
+    - Breaking : jshint reporting api
+  - 0.2.0 added jshint reporting.
+    - Breaking : options api, cli api
+  - 0.1.0 initial release
 
 ## License
 Copyright (c) 2012 Jarrod Overson  
