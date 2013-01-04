@@ -38,6 +38,7 @@ plato -r -d report src/*.js
 
 ## Release History
 
+  - 0.3.1 Added graphs
   - 0.3.0 Formatting changes, refactoring.
     - Breaking : jshint reporting api
   - 0.2.0 added jshint reporting.
