@@ -28,6 +28,8 @@ Usage : plato [options] file1.js file2.js ... fileN.js
       Recursively search directories
   -l, --jshint : String
       Specify a jshintrc file for JSHint linting
+  -t, --title : String
+      Title of the report
 ```
 
 ## Example
@@ -38,6 +40,8 @@ plato -r -d report src/*.js
 
 ## Release History
 
+  - 0.4.0 Added summary stats, Casper tests, nodunit tests
+    - Breaking : plato api
   - 0.3.1 Added graphs
   - 0.3.0 Formatting changes, refactoring.
     - Breaking : jshint reporting api
