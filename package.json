@@ -49,6 +49,7 @@
     "posix-getopt": "~1.0.0",
     "lodash": "~1.0.0-rc.3",
     "fs-extra": "~0.3.2",
-    "jshint": "~0.9.1"
+    "jshint": "~0.9.1",
+    "grunt-casper": "~0.1.0"
   }
 }

@@ -18,8 +18,11 @@ module.exports = function(grunt) {
         src: ['lib/**/*.js', '!lib/assets/**/*.js']
       },
       test: {
-        src: ['test/**/*.js']
+        src: ['test/**/*.js','!test/fixtures/**/*.js']
       },
+      assets: {
+        src: ['lib/assets/scripts/*.js']
+      }
     },
     uglify: {
       'assets' : {
@@ -55,15 +58,46 @@ module.exports = function(grunt) {
         tasks: ['jshint:test', 'nodeunit']
       },
     },
+    casperjs : {
+      test : {
+        src: 'test/casper-overview.js',
+        options : {
+          test : true,
+          direct : true
+        }
+      }
+    }
   });
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-nodeunit');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-casper');
+
+  grunt.registerTask('runbin',function(){
+    var done = this.async();
+
+    grunt.util.spawn({
+        cmd : './bin/plato',
+        args : [
+          '-dtmp',
+          '-ttest report',
+          'test/fixtures/a.js','test/fixtures/b.js','test/fixtures/empty.js'
+        ]
+      },
+      function(err, result, code){
+        console.log(result.stdout);
+        if (err || code !== 0) {
+          grunt.fail('Running plato binary failed');
+        }
+        done();
+      }
+    );
+  });
 
   grunt.registerTask('optimize', ['uglify']);
   // Default task.
-  grunt.registerTask('test', ['jshint', 'nodeunit']);
+  grunt.registerTask('test', ['jshint', 'nodeunit', 'runbin', 'casperjs']);
   grunt.registerTask('default', ['test']);
 
 };
