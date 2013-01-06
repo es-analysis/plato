@@ -3,7 +3,7 @@ __report = {
     "file": "/tmp/plato/jquery/src/sizzle-jquery.js",
     "fileShort": "sizzle-jquery.js",
     "fileSafe": "sizzle_jquery_js",
-    "link": "files/sizzle_jquery_js"
+    "link": "files/sizzle_jquery_js/index.html"
   },
   "complexity": {
     "aggregate": {

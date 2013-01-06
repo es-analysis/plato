@@ -3,7 +3,7 @@
     "file": "/tmp/plato/ember/packages/ember-runtime/lib/mixins/observable.js",
     "fileShort": "mixins/observable.js",
     "fileSafe": "mixins_observable_js",
-    "link": "files/mixins_observable_js"
+    "link": "files/mixins_observable_js/index.html"
   },
   "complexity": {
     "aggregate": {

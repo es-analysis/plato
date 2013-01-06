@@ -3,7 +3,7 @@ __report = {
     "file": "/tmp/plato/ember/packages/ember-runtime/lib/system/promise_chain.js",
     "fileShort": "system/promise_chain.js",
     "fileSafe": "system_promise_chain_js",
-    "link": "files/system_promise_chain_js"
+    "link": "files/system_promise_chain_js/index.html"
   },
   "complexity": {
     "aggregate": {

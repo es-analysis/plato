@@ -3,7 +3,7 @@ __report = {
     "file": "/tmp/plato/marionette/src/marionette.callbacks.js",
     "fileShort": "callbacks.js",
     "fileSafe": "callbacks_js",
-    "link": "files/callbacks_js"
+    "link": "files/callbacks_js/index.html"
   },
   "complexity": {
     "aggregate": {

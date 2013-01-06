@@ -3,7 +3,7 @@
     "file": "/tmp/plato/marionette/src/marionette.layout.js",
     "fileShort": "layout.js",
     "fileSafe": "layout_js",
-    "link": "files/layout_js"
+    "link": "files/layout_js/index.html"
   },
   "complexity": {
     "aggregate": {

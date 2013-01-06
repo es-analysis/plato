@@ -3,7 +3,7 @@ __report = {
     "file": "/tmp/plato/jquery/src/manipulation.js",
     "fileShort": "manipulation.js",
     "fileSafe": "manipulation_js",
-    "link": "files/manipulation_js"
+    "link": "files/manipulation_js/index.html"
   },
   "complexity": {
     "aggregate": {

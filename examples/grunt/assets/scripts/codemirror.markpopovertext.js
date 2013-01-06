@@ -1,6 +1,8 @@
-
+/*global CodeMirror:false, $:false*/
 
 (function(){
+  "use strict";
+
   function makeid(num){
     num = num || 5;
     var text = "";
@@ -27,11 +29,11 @@
           startStyle  : 'plato-mark-start',
           endStyle    : 'plato-mark-end'
         }
-      )
+      );
     }
 
     if (gutter) {
-      this.setGutterMarker(lineObj.line, gutter.gutterId, gutter.el)
+      this.setGutterMarker(lineObj.line, gutter.gutterId, gutter.el);
     }
 
     if (message) {
@@ -63,11 +65,11 @@
           html : true,
           title : message.title,
           placement : 'top'
-        })
+        });
       } else if (message.type === 'block') {
-        this.addLineWidget(lineObj.line, $(message.content)[0])
+        this.addLineWidget(lineObj.line, $(message.content)[0]);
       }
     }
   };
 
-})()
+})();

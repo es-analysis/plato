@@ -3,7 +3,7 @@
     "file": "/tmp/plato/uglify/lib/transform.js",
     "fileShort": "lib/transform.js",
     "fileSafe": "lib_transform_js",
-    "link": "files/lib_transform_js"
+    "link": "files/lib_transform_js/index.html"
   },
   "complexity": {
     "aggregate": {

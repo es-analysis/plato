@@ -42,3 +42,21 @@ li {
     font-size: 40px;
   }
 }
+
+.aggregate-stats {
+
+}
+
+.aggregate-stats .header {
+  text-align: center;
+  color: #5a5a5a;
+  font-weight:lighter;
+}
+
+.aggregate-stats .stat {
+  text-align: center;
+  color: #5a5a5a;
+  font-size:55px;
+  line-height:70px;
+}
+

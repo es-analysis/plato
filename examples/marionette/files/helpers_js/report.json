@@ -3,7 +3,7 @@
     "file": "/tmp/plato/marionette/src/marionette.helpers.js",
     "fileShort": "helpers.js",
     "fileSafe": "helpers_js",
-    "link": "files/helpers_js"
+    "link": "files/helpers_js/index.html"
   },
   "complexity": {
     "aggregate": {

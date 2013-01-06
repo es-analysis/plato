@@ -3,7 +3,7 @@ __report = {
     "file": "/tmp/plato/ember/packages/ember-runtime/lib/system/lazy_load.js",
     "fileShort": "system/lazy_load.js",
     "fileSafe": "system_lazy_load_js",
-    "link": "files/system_lazy_load_js"
+    "link": "files/system_lazy_load_js/index.html"
   },
   "complexity": {
     "aggregate": {

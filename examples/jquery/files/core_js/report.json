@@ -3,7 +3,7 @@
     "file": "/tmp/plato/jquery/src/core.js",
     "fileShort": "core.js",
     "fileSafe": "core_js",
-    "link": "files/core_js"
+    "link": "files/core_js/index.html"
   },
   "complexity": {
     "aggregate": {

@@ -3,7 +3,7 @@ __report = {
     "file": "/tmp/plato/jquery/src/deferred.js",
     "fileShort": "deferred.js",
     "fileSafe": "deferred_js",
-    "link": "files/deferred_js"
+    "link": "files/deferred_js/index.html"
   },
   "complexity": {
     "aggregate": {

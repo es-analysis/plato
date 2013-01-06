@@ -3,7 +3,7 @@ __report = {
     "file": "/tmp/plato/jquery/src/dimensions.js",
     "fileShort": "dimensions.js",
     "fileSafe": "dimensions_js",
-    "link": "files/dimensions_js"
+    "link": "files/dimensions_js/index.html"
   },
   "complexity": {
     "aggregate": {

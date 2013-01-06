@@ -3,11 +3,11 @@ __report = {
     "file": "/tmp/plato/jquery/src/deprecated.js",
     "fileShort": "deprecated.js",
     "fileSafe": "deprecated_js",
-    "link": "files/deprecated_js"
+    "link": "files/deprecated_js/index.html"
   },
   "complexity": {
     "aggregate": {
-      "line": 5,
+      "line": 4,
       "complexity": {
         "sloc": {
           "physical": 1,

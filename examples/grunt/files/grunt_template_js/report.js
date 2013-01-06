@@ -3,7 +3,7 @@ __report = {
     "file": "/tmp/plato/grunt/lib/grunt/template.js",
     "fileShort": "grunt/template.js",
     "fileSafe": "grunt_template_js",
-    "link": "files/grunt_template_js"
+    "link": "files/grunt_template_js/index.html"
   },
   "complexity": {
     "aggregate": {

@@ -4,7 +4,10 @@
 $(function(){
   "use strict";
 
-//  $('.plato-file-link').fitText(1.2, { minFontSize: '20px', maxFontSize: '28px' });
+  // Workaround for jshint complaint I don't want to turn off.
+  var raphael = Raphael;
+
+  //  $('.plato-file-link').fitText(1.2, { minFontSize: '20px', maxFontSize: '28px' });
 
   var colors = [
     '#50ABD2',
@@ -38,7 +41,7 @@ $(function(){
           height = $container.height();
 
       var chart = $container.data('chart');
-      if (!chart) $container.data('chart', chart = Raphael($container[0],width,height));
+      if (!chart) $container.data('chart', chart = raphael($container[0],width,height));
       chart.clear();
       chart.setSize(width, height);
 
@@ -55,22 +58,13 @@ $(function(){
 
         value = report.complexity.aggregate.complexity.halstead.bugs.toFixed(2);
         horizontalGraph(chart,2,value, value * 5, 'est bugs', getColor(value,colors,[1,5]));
-      },0)
+      },0);
     });
   }
 
   function drawOverviewCharts(reports) {
-    $('#chart1, #chart2, #chart3').empty();
+    $('.chart').empty();
 
-    var cyclomatic = {
-      element: 'chart_complexity',
-      data: [],
-      xkey: 'label',
-      ykeys: ['value'],
-      ymax:20,
-      labels: ['Complexity'],
-      barColors : ['#194756']
-    };
     var sloc = {
       element: 'chart_sloc',
       data: [],
@@ -101,15 +95,10 @@ $(function(){
 
     reports.forEach(function(report){
 
-      cyclomatic.ymax = Math.max(cyclomatic.ymax, report.complexity.aggregate.complexity.cyclomatic);
       sloc.ymax = Math.max(sloc.ymax, report.complexity.aggregate.complexity.sloc.physical);
       bugs.ymax = Math.max(bugs.ymax, report.complexity.aggregate.complexity.halstead.bugs.toFixed(2));
 
 
-      cyclomatic.data.push({
-        value : report.complexity.aggregate.complexity.cyclomatic,
-        label : report.complexity.module
-      });
       sloc.data.push({
         value : report.complexity.aggregate.complexity.sloc.physical,
         label : report.complexity.module
@@ -125,11 +114,10 @@ $(function(){
     });
 
     function onGraphClick(i){
-      document.location = __report[i].info.link;
+      document.location = __report.reports[i].info.link;
     }
 
     var charts = [
-      Morris.Bar(cyclomatic),
       Morris.Bar(bugs),
       Morris.Bar(sloc),
       Morris.Bar(maintainability)
@@ -141,12 +129,12 @@ $(function(){
     return charts;
   }
 
-  drawOverviewCharts(__report);
-  drawFileCharts(__report);
+  drawOverviewCharts(__report.reports);
+  drawFileCharts(__report.reports);
 
   $(window).on('resize', _.debounce(function(){
-    drawFileCharts(__report);
-    drawOverviewCharts(__report);
+    drawFileCharts(__report.reports);
+    drawOverviewCharts(__report.reports);
   },200));
 });
 

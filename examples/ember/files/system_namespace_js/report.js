@@ -3,7 +3,7 @@ __report = {
     "file": "/tmp/plato/ember/packages/ember-runtime/lib/system/namespace.js",
     "fileShort": "system/namespace.js",
     "fileSafe": "system_namespace_js",
-    "link": "files/system_namespace_js"
+    "link": "files/system_namespace_js/index.html"
   },
   "complexity": {
     "aggregate": {

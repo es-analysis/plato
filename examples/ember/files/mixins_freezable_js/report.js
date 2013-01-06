@@ -3,7 +3,7 @@ __report = {
     "file": "/tmp/plato/ember/packages/ember-runtime/lib/mixins/freezable.js",
     "fileShort": "mixins/freezable.js",
     "fileSafe": "mixins_freezable_js",
-    "link": "files/mixins_freezable_js"
+    "link": "files/mixins_freezable_js/index.html"
   },
   "complexity": {
     "aggregate": {

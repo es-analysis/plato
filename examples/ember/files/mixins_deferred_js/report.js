@@ -3,7 +3,7 @@ __report = {
     "file": "/tmp/plato/ember/packages/ember-runtime/lib/mixins/deferred.js",
     "fileShort": "mixins/deferred.js",
     "fileSafe": "mixins_deferred_js",
-    "link": "files/mixins_deferred_js"
+    "link": "files/mixins_deferred_js/index.html"
   },
   "complexity": {
     "aggregate": {

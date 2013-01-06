@@ -3,7 +3,7 @@ __report = {
     "file": "/tmp/plato/marionette/src/marionette.eventbinder.js",
     "fileShort": "eventbinder.js",
     "fileSafe": "eventbinder_js",
-    "link": "files/eventbinder_js"
+    "link": "files/eventbinder_js/index.html"
   },
   "complexity": {
     "aggregate": {

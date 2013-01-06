@@ -3,7 +3,7 @@ __report = {
     "file": "/tmp/plato/jquery/src/offset.js",
     "fileShort": "offset.js",
     "fileSafe": "offset_js",
-    "link": "files/offset_js"
+    "link": "files/offset_js/index.html"
   },
   "complexity": {
     "aggregate": {

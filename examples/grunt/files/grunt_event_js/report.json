@@ -3,7 +3,7 @@
     "file": "/tmp/plato/grunt/lib/grunt/event.js",
     "fileShort": "grunt/event.js",
     "fileSafe": "grunt_event_js",
-    "link": "files/grunt_event_js"
+    "link": "files/grunt_event_js/index.html"
   },
   "complexity": {
     "aggregate": {

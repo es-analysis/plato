@@ -3,7 +3,7 @@ __report = {
     "file": "/tmp/plato/jquery/src/ajax.js",
     "fileShort": "ajax.js",
     "fileSafe": "ajax_js",
-    "link": "files/ajax_js"
+    "link": "files/ajax_js/index.html"
   },
   "complexity": {
     "aggregate": {

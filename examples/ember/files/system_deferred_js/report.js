@@ -3,7 +3,7 @@ __report = {
     "file": "/tmp/plato/ember/packages/ember-runtime/lib/system/deferred.js",
     "fileShort": "system/deferred.js",
     "fileSafe": "system_deferred_js",
-    "link": "files/system_deferred_js"
+    "link": "files/system_deferred_js/index.html"
   },
   "complexity": {
     "aggregate": {

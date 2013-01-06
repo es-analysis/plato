@@ -3,7 +3,7 @@ __report = {
     "file": "/tmp/plato/ember/packages/ember-runtime/lib/ext/function.js",
     "fileShort": "ext/function.js",
     "fileSafe": "ext_function_js",
-    "link": "files/ext_function_js"
+    "link": "files/ext_function_js/index.html"
   },
   "complexity": {
     "aggregate": {

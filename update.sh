@@ -2,7 +2,17 @@
 
 TMPDIR=/tmp/plato
 
-if [ -d $TMPDIR ]
+CMD=plato
+
+unset REFETCH
+
+if [ $1 ]
+then
+REFETCH=true
+fi
+
+
+if [ $REFETCH ] && [ -d $TMPDIR ]
 then
   echo "Removing $TMPDIR"
   rm -rf $TMPDIR
@@ -14,17 +24,19 @@ then
   rm -rf examples
 fi
 
+if [ $REFETCH ]
+then
 git clone --depth 1 git://github.com/emberjs/ember.js.git $TMPDIR/ember
-plato -r -d examples/ember/ $TMPDIR/ember/packages/ember-runtime/lib/*
-
 git clone --depth 1 git://github.com/jquery/jquery.git $TMPDIR/jquery
-plato -r -d examples/jquery/ $TMPDIR/jquery/src/*
-
 git clone --depth 1 git://github.com/gruntjs/grunt.git $TMPDIR/grunt
-plato -r -d examples/grunt/ $TMPDIR/grunt/lib/*
-
 git clone --depth 1 https://github.com/marionettejs/backbone.marionette.git $TMPDIR/marionette
-plato -d examples/marionette/ $TMPDIR/marionette/src/*.js
-
 git clone --depth 1 git://github.com/mishoo/UglifyJS2.git $TMPDIR/uglify
-plato -r -d examples/uglify/ $TMPDIR/uglify/lib/*.js $TMPDIR/uglify/bin/*
+git clone --depth 1 git://github.com/ariya/esprima.git $TMPDIR/esprima
+fi
+
+$CMD -r -d examples/ember/ $TMPDIR/ember/packages/ember-runtime/lib/*
+$CMD -r -d examples/jquery/ $TMPDIR/jquery/src/*
+$CMD -r -d examples/grunt/ $TMPDIR/grunt/lib/*
+$CMD -d examples/marionette/ $TMPDIR/marionette/src/*.js
+$CMD -r -d examples/uglify/ $TMPDIR/uglify/lib/*.js $TMPDIR/uglify/bin/*
+$CMD -d examples/esprima $TMPDIR/esprima/esprima.js

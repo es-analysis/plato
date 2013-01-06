@@ -3,7 +3,7 @@ __report = {
     "file": "/tmp/plato/marionette/src/marionette.bindEntityEvents.js",
     "fileShort": "bindEntityEvents.js",
     "fileSafe": "bindEntityEvents_js",
-    "link": "files/bindEntityEvents_js"
+    "link": "files/bindEntityEvents_js/index.html"
   },
   "complexity": {
     "aggregate": {

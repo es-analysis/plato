@@ -45,29 +45,29 @@
   <div class="row">
     <div class="span4">
       <h2 class="header">Complexity</h2>
-      <p class="stat">106</p>
+      <p class="stat">107</p>
     </div>
     <div class="span4">
       <h2 class="header">Maintainability</h2>
-      <p class="stat">111.61</p>
+      <p class="stat">111.49</p>
     </div>
     <div class="span4">
       <h2 class="header">Estimated # Bugs</h2>
-      <p class="stat">4.52</p>
+      <p class="stat">4.54</p>
     </div>
   </div>
   <div class="row">
     <div class="span4">
       <h2 class="header">Difficulty</h2>
-      <p class="stat">90.85</p>
+      <p class="stat">91.13</p>
     </div>
     <div class="span4">
       <h2 class="header">Volume</h2>
-      <p class="stat">13567.25</p>
+      <p class="stat">13620.61</p>
     </div>
     <div class="span4">
       <h2 class="header">SLOC/LSLOC</h2>
-      <p class="stat">494 / 278</p>
+      <p class="stat">498 / 279</p>
     </div>
   </div>
 </div>
@@ -419,7 +419,11 @@ jQuery.extend({
 
 		} else {
 
-			ret = elem.getAttribute( name );
+			// In IE9+, Flash objects don't have .getAttribute (#12945)
+			// Support: IE9+
+			if ( typeof elem.getAttribute !== "undefined" ) {
+				ret =  elem.getAttribute( name );
+			}
 
 			// Non-existent attributes return null, we normalize to undefined
 			return ret == null ?
@@ -583,8 +587,7 @@ if ( !jQuery.support.optSelected ) {
 			return null;
 		}
 	});
-}
-</textarea>
+}</textarea>
   </div>
 </div>
 

@@ -3,7 +3,7 @@ __report = {
     "file": "/tmp/plato/uglify/lib/ast.js",
     "fileShort": "lib/ast.js",
     "fileSafe": "lib_ast_js",
-    "link": "files/lib_ast_js"
+    "link": "files/lib_ast_js/index.html"
   },
   "complexity": {
     "aggregate": {

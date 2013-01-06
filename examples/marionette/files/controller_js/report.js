@@ -3,7 +3,7 @@ __report = {
     "file": "/tmp/plato/marionette/src/marionette.controller.js",
     "fileShort": "controller.js",
     "fileSafe": "controller_js",
-    "link": "files/controller_js"
+    "link": "files/controller_js/index.html"
   },
   "complexity": {
     "aggregate": {

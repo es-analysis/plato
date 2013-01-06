@@ -3,7 +3,7 @@
     "file": "/tmp/plato/grunt/lib/grunt/cli.js",
     "fileShort": "grunt/cli.js",
     "fileSafe": "grunt_cli_js",
-    "link": "files/grunt_cli_js"
+    "link": "files/grunt_cli_js/index.html"
   },
   "complexity": {
     "aggregate": {

@@ -3,7 +3,7 @@ __report = {
     "file": "/tmp/plato/jquery/src/effects.js",
     "fileShort": "effects.js",
     "fileSafe": "effects_js",
-    "link": "files/effects_js"
+    "link": "files/effects_js/index.html"
   },
   "complexity": {
     "aggregate": {

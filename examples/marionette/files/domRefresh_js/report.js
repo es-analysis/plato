@@ -3,7 +3,7 @@ __report = {
     "file": "/tmp/plato/marionette/src/marionette.domRefresh.js",
     "fileShort": "domRefresh.js",
     "fileSafe": "domRefresh_js",
-    "link": "files/domRefresh_js"
+    "link": "files/domRefresh_js/index.html"
   },
   "complexity": {
     "aggregate": {

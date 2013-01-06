@@ -3,7 +3,7 @@ __report = {
     "file": "/tmp/plato/ember/packages/ember-runtime/lib/system/each_proxy.js",
     "fileShort": "system/each_proxy.js",
     "fileSafe": "system_each_proxy_js",
-    "link": "files/system_each_proxy_js"
+    "link": "files/system_each_proxy_js/index.html"
   },
   "complexity": {
     "aggregate": {

@@ -3,7 +3,7 @@ __report = {
     "file": "/tmp/plato/uglify/lib/parse.js",
     "fileShort": "lib/parse.js",
     "fileSafe": "lib_parse_js",
-    "link": "files/lib_parse_js"
+    "link": "files/lib_parse_js/index.html"
   },
   "complexity": {
     "aggregate": {

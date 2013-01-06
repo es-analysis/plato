@@ -3,7 +3,7 @@ __report = {
     "file": "/tmp/plato/ember/packages/ember-runtime/lib/system/native_array.js",
     "fileShort": "system/native_array.js",
     "fileSafe": "system_native_array_js",
-    "link": "files/system_native_array_js"
+    "link": "files/system_native_array_js/index.html"
   },
   "complexity": {
     "aggregate": {

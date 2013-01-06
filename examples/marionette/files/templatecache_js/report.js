@@ -3,7 +3,7 @@ __report = {
     "file": "/tmp/plato/marionette/src/marionette.templatecache.js",
     "fileShort": "templatecache.js",
     "fileSafe": "templatecache_js",
-    "link": "files/templatecache_js"
+    "link": "files/templatecache_js/index.html"
   },
   "complexity": {
     "aggregate": {

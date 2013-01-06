@@ -3,7 +3,7 @@ __report = {
     "file": "/tmp/plato/marionette/src/marionette.triggermethod.js",
     "fileShort": "triggermethod.js",
     "fileSafe": "triggermethod_js",
-    "link": "files/triggermethod_js"
+    "link": "files/triggermethod_js/index.html"
   },
   "complexity": {
     "aggregate": {

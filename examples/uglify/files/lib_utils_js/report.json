@@ -3,7 +3,7 @@
     "file": "/tmp/plato/uglify/lib/utils.js",
     "fileShort": "lib/utils.js",
     "fileSafe": "lib_utils_js",
-    "link": "files/lib_utils_js"
+    "link": "files/lib_utils_js/index.html"
   },
   "complexity": {
     "aggregate": {

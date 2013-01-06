@@ -3,7 +3,7 @@
     "file": "/tmp/plato/grunt/lib/util/exit.js",
     "fileShort": "util/exit.js",
     "fileSafe": "util_exit_js",
-    "link": "files/util_exit_js"
+    "link": "files/util_exit_js/index.html"
   },
   "complexity": {
     "aggregate": {

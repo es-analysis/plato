@@ -3,7 +3,7 @@
     "file": "/tmp/plato/ember/packages/ember-runtime/lib/mixins/array.js",
     "fileShort": "mixins/array.js",
     "fileSafe": "mixins_array_js",
-    "link": "files/mixins_array_js"
+    "link": "files/mixins_array_js/index.html"
   },
   "complexity": {
     "aggregate": {

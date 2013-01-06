@@ -3,7 +3,7 @@ __report = {
     "file": "/tmp/plato/jquery/src/event.js",
     "fileShort": "event.js",
     "fileSafe": "event_js",
-    "link": "files/event_js"
+    "link": "files/event_js/index.html"
   },
   "complexity": {
     "aggregate": {

@@ -3,7 +3,7 @@
     "file": "/tmp/plato/ember/packages/ember-runtime/lib/mixins/sortable.js",
     "fileShort": "mixins/sortable.js",
     "fileSafe": "mixins_sortable_js",
-    "link": "files/mixins_sortable_js"
+    "link": "files/mixins_sortable_js/index.html"
   },
   "complexity": {
     "aggregate": {

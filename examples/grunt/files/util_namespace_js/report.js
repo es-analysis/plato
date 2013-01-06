@@ -3,7 +3,7 @@ __report = {
     "file": "/tmp/plato/grunt/lib/util/namespace.js",
     "fileShort": "util/namespace.js",
     "fileSafe": "util_namespace_js",
-    "link": "files/util_namespace_js"
+    "link": "files/util_namespace_js/index.html"
   },
   "complexity": {
     "aggregate": {

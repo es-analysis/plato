@@ -3,7 +3,7 @@ __report = {
     "file": "/tmp/plato/jquery/src/serialize.js",
     "fileShort": "serialize.js",
     "fileSafe": "serialize_js",
-    "link": "files/serialize_js"
+    "link": "files/serialize_js/index.html"
   },
   "complexity": {
     "aggregate": {

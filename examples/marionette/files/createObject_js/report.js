@@ -3,7 +3,7 @@ __report = {
     "file": "/tmp/plato/marionette/src/marionette.createObject.js",
     "fileShort": "createObject.js",
     "fileSafe": "createObject_js",
-    "link": "files/createObject_js"
+    "link": "files/createObject_js/index.html"
   },
   "complexity": {
     "aggregate": {

@@ -3,7 +3,7 @@ __report = {
     "file": "/tmp/plato/jquery/src/traversing.js",
     "fileShort": "traversing.js",
     "fileSafe": "traversing_js",
-    "link": "files/traversing_js"
+    "link": "files/traversing_js/index.html"
   },
   "complexity": {
     "aggregate": {

@@ -3,7 +3,7 @@
     "file": "/tmp/plato/ember/packages/ember-runtime/lib/system/array_proxy.js",
     "fileShort": "system/array_proxy.js",
     "fileSafe": "system_array_proxy_js",
-    "link": "files/system_array_proxy_js"
+    "link": "files/system_array_proxy_js/index.html"
   },
   "complexity": {
     "aggregate": {

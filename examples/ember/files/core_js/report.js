@@ -3,39 +3,39 @@ __report = {
     "file": "/tmp/plato/ember/packages/ember-runtime/lib/core.js",
     "fileShort": "core.js",
     "fileSafe": "core_js",
-    "link": "files/core_js"
+    "link": "files/core_js/index.html"
   },
   "complexity": {
     "aggregate": {
       "line": 3,
       "complexity": {
         "sloc": {
-          "physical": 414,
-          "logical": 170
+          "physical": 421,
+          "logical": 172
         },
-        "cyclomatic": 63,
+        "cyclomatic": 65,
         "halstead": {
           "operators": {
             "distinct": 35,
-            "total": 469,
+            "total": 476,
             "identifiers": [
               "__stripped__"
             ]
           },
           "operands": {
-            "distinct": 122,
-            "total": 530,
+            "distinct": 123,
+            "total": 536,
             "identifiers": [
               "__stripped__"
             ]
           },
-          "length": 999,
-          "vocabulary": 157,
-          "difficulty": 76.02459016393443,
-          "volume": 7287.326128142736,
-          "effort": 554015.9822829827,
-          "bugs": 2.429108709380912,
-          "time": 30778.665682387928
+          "length": 1012,
+          "vocabulary": 158,
+          "difficulty": 76.260162601626,
+          "volume": 7391.426117155228,
+          "effort": 563671.3575521628,
+          "bugs": 2.4638087057184093,
+          "time": 31315.0754195646
         }
       }
     },
@@ -280,41 +280,41 @@ __report = {
       },
       {
         "name": "Ember.inspect",
-        "line": 320,
+        "line": 323,
         "complexity": {
           "sloc": {
-            "physical": 12,
-            "logical": 12
+            "physical": 16,
+            "logical": 14
           },
-          "cyclomatic": 4,
+          "cyclomatic": 6,
           "halstead": {
             "operators": {
-              "distinct": 11,
-              "total": 27,
+              "distinct": 14,
+              "total": 34,
               "identifiers": [
                 "__stripped__"
               ]
             },
             "operands": {
-              "distinct": 17,
-              "total": 30,
+              "distinct": 20,
+              "total": 36,
               "identifiers": [
                 "__stripped__"
               ]
             },
-            "length": 57,
-            "vocabulary": 28,
-            "difficulty": 9.705882352941176,
-            "volume": 274.01923055728344,
-            "effort": 2659.598414232457,
-            "bugs": 0.09133974351909448,
-            "time": 147.75546745735872
+            "length": 70,
+            "vocabulary": 34,
+            "difficulty": 12.6,
+            "volume": 356.1223988875238,
+            "effort": 4487.1422259828,
+            "bugs": 0.11870746629584127,
+            "time": 249.28567922126663
           }
         }
       },
       {
         "name": "Ember.isEqual",
-        "line": 351,
+        "line": 358,
         "complexity": {
           "sloc": {
             "physical": 4,
@@ -348,7 +348,7 @@ __report = {
       },
       {
         "name": "Ember.keys",
-        "line": 384,
+        "line": 391,
         "complexity": {
           "sloc": {
             "physical": 7,
@@ -382,7 +382,7 @@ __report = {
       },
       {
         "name": "Ember.Error",
-        "line": 407,
+        "line": 414,
         "complexity": {
           "sloc": {
             "physical": 8,
@@ -415,7 +415,7 @@ __report = {
         }
       }
     ],
-    "maintainability": 96.22475223297577,
+    "maintainability": 95.95538200435604,
     "module": "core.js"
   },
   "jshint": {

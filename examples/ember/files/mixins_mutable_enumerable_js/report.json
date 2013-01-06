@@ -3,7 +3,7 @@
     "file": "/tmp/plato/ember/packages/ember-runtime/lib/mixins/mutable_enumerable.js",
     "fileShort": "mixins/mutable_enumerable.js",
     "fileSafe": "mixins_mutable_enumerable_js",
-    "link": "files/mixins_mutable_enumerable_js"
+    "link": "files/mixins_mutable_enumerable_js/index.html"
   },
   "complexity": {
     "aggregate": {

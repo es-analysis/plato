@@ -3,7 +3,7 @@ __report = {
     "file": "/tmp/plato/ember/packages/ember-runtime/lib/mixins/copyable.js",
     "fileShort": "mixins/copyable.js",
     "fileSafe": "mixins_copyable_js",
-    "link": "files/mixins_copyable_js"
+    "link": "files/mixins_copyable_js/index.html"
   },
   "complexity": {
     "aggregate": {

@@ -3,7 +3,7 @@
     "file": "/tmp/plato/uglify/lib/mozilla-ast.js",
     "fileShort": "lib/mozilla-ast.js",
     "fileSafe": "lib_mozilla_ast_js",
-    "link": "files/lib_mozilla_ast_js"
+    "link": "files/lib_mozilla_ast_js/index.html"
   },
   "complexity": {
     "aggregate": {

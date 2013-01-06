@@ -3,7 +3,7 @@ __report = {
     "file": "/tmp/plato/marionette/src/marionette.approuter.js",
     "fileShort": "approuter.js",
     "fileSafe": "approuter_js",
-    "link": "files/approuter_js"
+    "link": "files/approuter_js/index.html"
   },
   "complexity": {
     "aggregate": {

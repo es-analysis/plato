@@ -3,7 +3,7 @@ __report = {
     "file": "/tmp/plato/jquery/src/queue.js",
     "fileShort": "queue.js",
     "fileSafe": "queue_js",
-    "link": "files/queue_js"
+    "link": "files/queue_js/index.html"
   },
   "complexity": {
     "aggregate": {

@@ -3,7 +3,7 @@
     "file": "/tmp/plato/ember/packages/ember-runtime/lib/system/core_object.js",
     "fileShort": "system/core_object.js",
     "fileSafe": "system_core_object_js",
-    "link": "files/system_core_object_js"
+    "link": "files/system_core_object_js/index.html"
   },
   "complexity": {
     "aggregate": {

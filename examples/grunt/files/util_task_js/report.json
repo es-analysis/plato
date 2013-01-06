@@ -3,7 +3,7 @@
     "file": "/tmp/plato/grunt/lib/util/task.js",
     "fileShort": "util/task.js",
     "fileSafe": "util_task_js",
-    "link": "files/util_task_js"
+    "link": "files/util_task_js/index.html"
   },
   "complexity": {
     "aggregate": {

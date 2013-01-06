@@ -3,39 +3,39 @@
     "file": "/tmp/plato/uglify/lib/scope.js",
     "fileShort": "lib/scope.js",
     "fileSafe": "lib_scope_js",
-    "link": "files/lib_scope_js"
+    "link": "files/lib_scope_js/index.html"
   },
   "complexity": {
     "aggregate": {
       "line": 44,
       "complexity": {
         "sloc": {
-          "physical": 534,
-          "logical": 407
+          "physical": 537,
+          "logical": 410
         },
         "cyclomatic": 95,
         "halstead": {
           "operators": {
             "distinct": 37,
-            "total": 1061,
+            "total": 1066,
             "identifiers": [
               "__stripped__"
             ]
           },
           "operands": {
-            "distinct": 248,
-            "total": 1208,
+            "distinct": 249,
+            "total": 1214,
             "identifiers": [
               "__stripped__"
             ]
           },
-          "length": 2269,
-          "vocabulary": 285,
-          "difficulty": 90.11290322580645,
-          "volume": 18503.282289439227,
-          "effort": 1667384.4863080154,
-          "bugs": 6.167760763146409,
-          "time": 92632.47146155642
+          "length": 2280,
+          "vocabulary": 286,
+          "difficulty": 90.19678714859438,
+          "volume": 18604.506647854727,
+          "effort": 1678066.726121162,
+          "bugs": 6.201502215951575,
+          "time": 93225.92922895345
         }
       }
     },
@@ -147,7 +147,7 @@
         "line": 70,
         "complexity": {
           "sloc": {
-            "physical": 138,
+            "physical": 141,
             "logical": 10
           },
           "cyclomatic": 1,
@@ -181,38 +181,38 @@
         "line": 83,
         "complexity": {
           "sloc": {
-            "physical": 79,
-            "logical": 52
+            "physical": 82,
+            "logical": 55
           },
           "cyclomatic": 16,
           "halstead": {
             "operators": {
               "distinct": 17,
-              "total": 120,
+              "total": 125,
               "identifiers": [
                 "__stripped__"
               ]
             },
             "operands": {
-              "distinct": 49,
-              "total": 139,
+              "distinct": 51,
+              "total": 145,
               "identifiers": [
                 "__stripped__"
               ]
             },
-            "length": 259,
-            "vocabulary": 66,
-            "difficulty": 24.112244897959183,
-            "volume": 1565.4980769138394,
-            "effort": 37747.67301783064,
-            "bugs": 0.5218326923046132,
-            "time": 2097.0929454350353
+            "length": 270,
+            "vocabulary": 68,
+            "difficulty": 24.166666666666668,
+            "volume": 1643.6149671375917,
+            "effort": 39720.69503915847,
+            "bugs": 0.5478716557125306,
+            "time": 2206.7052799532485
           }
         }
       },
       {
         "name": "<anonymous>",
-        "line": 167,
+        "line": 170,
         "complexity": {
           "sloc": {
             "physical": 39,
@@ -246,7 +246,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 209,
+        "line": 212,
         "complexity": {
           "sloc": {
             "physical": 11,
@@ -280,7 +280,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 221,
+        "line": 224,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -314,7 +314,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 225,
+        "line": 228,
         "complexity": {
           "sloc": {
             "physical": 4,
@@ -348,7 +348,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 230,
+        "line": 233,
         "complexity": {
           "sloc": {
             "physical": 11,
@@ -382,7 +382,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 242,
+        "line": 245,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -416,7 +416,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 246,
+        "line": 249,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -450,7 +450,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 250,
+        "line": 253,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -484,7 +484,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 256,
+        "line": 259,
         "complexity": {
           "sloc": {
             "physical": 4,
@@ -518,7 +518,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 261,
+        "line": 264,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -552,7 +552,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 265,
+        "line": 268,
         "complexity": {
           "sloc": {
             "physical": 12,
@@ -586,7 +586,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 278,
+        "line": 281,
         "complexity": {
           "sloc": {
             "physical": 16,
@@ -620,7 +620,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 295,
+        "line": 298,
         "complexity": {
           "sloc": {
             "physical": 4,
@@ -654,7 +654,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 300,
+        "line": 303,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -688,7 +688,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 305,
+        "line": 308,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -722,7 +722,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 310,
+        "line": 313,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -756,7 +756,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 314,
+        "line": 317,
         "complexity": {
           "sloc": {
             "physical": 4,
@@ -790,7 +790,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 319,
+        "line": 322,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -824,7 +824,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 323,
+        "line": 326,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -858,7 +858,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 327,
+        "line": 330,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -892,7 +892,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 331,
+        "line": 334,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -926,7 +926,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 335,
+        "line": 338,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -960,7 +960,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 339,
+        "line": 342,
         "complexity": {
           "sloc": {
             "physical": 7,
@@ -994,7 +994,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 347,
+        "line": 350,
         "complexity": {
           "sloc": {
             "physical": 39,
@@ -1028,7 +1028,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 355,
+        "line": 358,
         "complexity": {
           "sloc": {
             "physical": 28,
@@ -1062,7 +1062,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 365,
+        "line": 368,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -1096,7 +1096,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 370,
+        "line": 373,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -1130,7 +1130,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 384,
+        "line": 387,
         "complexity": {
           "sloc": {
             "physical": 1,
@@ -1164,7 +1164,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 387,
+        "line": 390,
         "complexity": {
           "sloc": {
             "physical": 69,
@@ -1198,7 +1198,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 389,
+        "line": 392,
         "complexity": {
           "sloc": {
             "physical": 64,
@@ -1232,7 +1232,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 457,
+        "line": 460,
         "complexity": {
           "sloc": {
             "physical": 36,
@@ -1266,7 +1266,7 @@
       },
       {
         "name": "reset",
-        "line": 460,
+        "line": 463,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -1300,7 +1300,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 462,
+        "line": 465,
         "complexity": {
           "sloc": {
             "physical": 1,
@@ -1334,7 +1334,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 463,
+        "line": 466,
         "complexity": {
           "sloc": {
             "physical": 1,
@@ -1368,7 +1368,7 @@
       },
       {
         "name": "base54.consider",
-        "line": 465,
+        "line": 468,
         "complexity": {
           "sloc": {
             "physical": 6,
@@ -1402,7 +1402,7 @@
       },
       {
         "name": "base54.sort",
-        "line": 471,
+        "line": 474,
         "complexity": {
           "sloc": {
             "physical": 7,
@@ -1436,7 +1436,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 472,
+        "line": 475,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -1470,7 +1470,7 @@
       },
       {
         "name": "base54.get",
-        "line": 480,
+        "line": 483,
         "complexity": {
           "sloc": {
             "physical": 1,
@@ -1504,7 +1504,7 @@
       },
       {
         "name": "base54.freq",
-        "line": 481,
+        "line": 484,
         "complexity": {
           "sloc": {
             "physical": 1,
@@ -1538,7 +1538,7 @@
       },
       {
         "name": "base54",
-        "line": 482,
+        "line": 485,
         "complexity": {
           "sloc": {
             "physical": 9,
@@ -1572,7 +1572,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 494,
+        "line": 497,
         "complexity": {
           "sloc": {
             "physical": 84,
@@ -1606,7 +1606,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 503,
+        "line": 506,
         "complexity": {
           "sloc": {
             "physical": 73,
@@ -1639,7 +1639,7 @@
         }
       }
     ],
-    "maintainability": 109.36486917628494,
+    "maintainability": 109.19313136810501,
     "module": "lib/scope.js"
   },
   "jshint": {
@@ -1688,217 +1688,217 @@
       },
       {
         "severity": "error",
-        "line": 138,
+        "line": 141,
         "column": 18,
         "message": "Bad line breaking before '||'.",
         "source": "Bad line breaking before '{a}'."
       },
       {
         "severity": "error",
-        "line": 167,
+        "line": 170,
         "column": 12,
         "message": "'tw' is already defined.",
         "source": "'{a}' is already defined."
       },
       {
         "severity": "error",
-        "line": 253,
+        "line": 256,
         "column": 9,
         "message": "Bad line breaking before '||'.",
         "source": "Bad line breaking before '{a}'."
       },
       {
         "severity": "error",
-        "line": 258,
+        "line": 261,
         "column": 9,
         "message": "Bad line breaking before '||'.",
         "source": "Bad line breaking before '{a}'."
       },
       {
         "severity": "error",
-        "line": 315,
+        "line": 318,
         "column": 48,
         "message": "Use '===' to compare with '0'.",
         "source": "Use '{a}' to compare with '{b}'."
       },
       {
         "severity": "error",
-        "line": 316,
+        "line": 319,
         "column": 9,
         "message": "Bad line breaking before '&&'.",
         "source": "Bad line breaking before '{a}'."
       },
       {
         "severity": "error",
-        "line": 342,
+        "line": 345,
         "column": 9,
         "message": "Expected an identifier and instead saw 'eval' (a reserved word).",
         "source": "Expected an identifier and instead saw '{a}' (a reserved word)."
       },
       {
         "severity": "error",
-        "line": 378,
+        "line": 381,
         "column": 16,
         "message": "Expected '{' and instead saw 'name'.",
         "source": "Expected '{a}' and instead saw '{b}'."
       },
       {
         "severity": "error",
-        "line": 384,
+        "line": 387,
         "column": 57,
         "message": "Missing semicolon.",
         "source": "Missing semicolon."
       },
       {
         "severity": "error",
-        "line": 462,
+        "line": 465,
         "column": 75,
         "message": "Missing semicolon.",
         "source": "Missing semicolon."
       },
       {
         "severity": "error",
-        "line": 463,
+        "line": 466,
         "column": 54,
         "message": "Missing semicolon.",
         "source": "Missing semicolon."
       },
       {
         "severity": "error",
-        "line": 480,
+        "line": 483,
         "column": 42,
         "message": "Missing semicolon.",
         "source": "Missing semicolon."
       },
       {
         "severity": "error",
-        "line": 481,
+        "line": 484,
         "column": 47,
         "message": "Missing semicolon.",
         "source": "Missing semicolon."
       },
       {
         "severity": "error",
-        "line": 482,
+        "line": 485,
         "column": 20,
         "message": "'base54' is already defined.",
         "source": "'{a}' is already defined."
       },
       {
         "severity": "error",
-        "line": 490,
+        "line": 493,
         "column": 6,
         "message": "Unnecessary semicolon.",
         "source": "Unnecessary semicolon."
       },
       {
         "severity": "error",
-        "line": 501,
+        "line": 504,
         "column": 9,
         "message": "Expected an identifier and instead saw 'eval' (a reserved word).",
         "source": "Expected an identifier and instead saw '{a}' (a reserved word)."
       },
       {
         "severity": "error",
-        "line": 505,
+        "line": 508,
         "column": 13,
         "message": "Bad line breaking before '&&'.",
         "source": "Bad line breaking before '{a}'."
       },
       {
         "severity": "error",
-        "line": 506,
+        "line": 509,
         "column": 13,
         "message": "Bad line breaking before '&&'.",
         "source": "Bad line breaking before '{a}'."
       },
       {
         "severity": "error",
-        "line": 526,
+        "line": 529,
         "column": 17,
         "message": "Bad line breaking before '&&'.",
         "source": "Bad line breaking before '{a}'."
       },
       {
         "severity": "error",
-        "line": 527,
+        "line": 530,
         "column": 21,
         "message": "Bad line breaking before '||'.",
         "source": "Bad line breaking before '{a}'."
       },
       {
         "severity": "error",
-        "line": 537,
+        "line": 540,
         "column": 21,
         "message": "Expected an identifier and instead saw 'eval' (a reserved word).",
         "source": "Expected an identifier and instead saw '{a}' (a reserved word)."
       },
       {
         "severity": "error",
-        "line": 538,
+        "line": 541,
         "column": 13,
         "message": "eval is evil.",
         "source": "eval is evil."
       },
       {
         "severity": "error",
-        "line": 538,
+        "line": 541,
         "column": 13,
         "message": "Bad line breaking before '&&'.",
         "source": "Bad line breaking before '{a}'."
       },
       {
         "severity": "error",
-        "line": 539,
+        "line": 542,
         "column": 13,
         "message": "Bad line breaking before '&&'.",
         "source": "Bad line breaking before '{a}'."
       },
       {
         "severity": "error",
-        "line": 540,
+        "line": 543,
         "column": 13,
         "message": "Bad line breaking before '&&'.",
         "source": "Bad line breaking before '{a}'."
       },
       {
         "severity": "error",
-        "line": 544,
+        "line": 547,
         "column": 13,
         "message": "Bad line breaking before '&&'.",
         "source": "Bad line breaking before '{a}'."
       },
       {
         "severity": "error",
-        "line": 545,
+        "line": 548,
         "column": 13,
         "message": "Bad line breaking before '&&'.",
         "source": "Bad line breaking before '{a}'."
       },
       {
         "severity": "error",
-        "line": 555,
+        "line": 558,
         "column": 13,
         "message": "Bad line breaking before '&&'.",
         "source": "Bad line breaking before '{a}'."
       },
       {
         "severity": "error",
-        "line": 556,
+        "line": 559,
         "column": 13,
         "message": "Bad line breaking before '&&'.",
         "source": "Bad line breaking before '{a}'."
       },
       {
         "severity": "error",
-        "line": 565,
+        "line": 568,
         "column": 13,
         "message": "Bad line breaking before '&&'.",
         "source": "Bad line breaking before '{a}'."
       },
       {
         "severity": "error",
-        "line": 566,
+        "line": 569,
         "column": 13,
         "message": "Bad line breaking before '&&'.",
         "source": "Bad line breaking before '{a}'."
@@ -1933,72 +1933,72 @@
       },
       {
         "severity": "error",
-        "line": 94,
+        "line": 90,
+        "column": 26,
+        "message": "'Dictionary' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 97,
         "column": 29,
         "message": "'AST_Directive' is not defined.",
         "source": "'{a}' is not defined."
       },
       {
         "severity": "error",
-        "line": 96,
+        "line": 99,
         "column": 13,
         "message": "'push_uniq' is not defined.",
         "source": "'{a}' is not defined."
       },
       {
         "severity": "error",
-        "line": 99,
+        "line": 102,
         "column": 29,
         "message": "'AST_With' is not defined.",
         "source": "'{a}' is not defined."
       },
       {
         "severity": "error",
-        "line": 104,
+        "line": 107,
         "column": 29,
         "message": "'AST_LabeledStatement' is not defined.",
         "source": "'{a}' is not defined."
       },
       {
         "severity": "error",
-        "line": 107,
+        "line": 110,
         "column": 33,
         "message": "'string_template' is not defined.",
         "source": "'{a}' is not defined."
       },
       {
         "severity": "error",
-        "line": 113,
+        "line": 116,
         "column": 29,
         "message": "'AST_Symbol' is not defined.",
         "source": "'{a}' is not defined."
       },
       {
         "severity": "error",
-        "line": 116,
+        "line": 119,
         "column": 29,
         "message": "'AST_Label' is not defined.",
         "source": "'{a}' is not defined."
       },
       {
         "severity": "error",
-        "line": 120,
+        "line": 123,
         "column": 29,
         "message": "'AST_SymbolLambda' is not defined.",
         "source": "'{a}' is not defined."
       },
       {
         "severity": "error",
-        "line": 129,
-        "column": 34,
-        "message": "'AST_SymbolDefun' is not defined.",
-        "source": "'{a}' is not defined."
-      },
-      {
-        "severity": "error",
-        "line": 129,
-        "column": 34,
-        "message": "Too many errors. (22% scanned).",
+        "line": 123,
+        "column": 29,
+        "message": "Too many errors. (21% scanned).",
         "source": "Too many errors."
       }
     ]

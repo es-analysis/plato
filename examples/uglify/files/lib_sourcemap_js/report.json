@@ -3,7 +3,7 @@
     "file": "/tmp/plato/uglify/lib/sourcemap.js",
     "fileShort": "lib/sourcemap.js",
     "fileSafe": "lib_sourcemap_js",
-    "link": "files/lib_sourcemap_js"
+    "link": "files/lib_sourcemap_js/index.html"
   },
   "complexity": {
     "aggregate": {

@@ -3,7 +3,7 @@ __report = {
     "file": "/tmp/plato/marionette/src/marionette.eventaggregator.js",
     "fileShort": "eventaggregator.js",
     "fileSafe": "eventaggregator_js",
-    "link": "files/eventaggregator_js"
+    "link": "files/eventaggregator_js/index.html"
   },
   "complexity": {
     "aggregate": {

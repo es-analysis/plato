@@ -3,7 +3,7 @@ __report = {
     "file": "/tmp/plato/ember/packages/ember-runtime/lib/mixins/target_action_support.js",
     "fileShort": "mixins/target_action_support.js",
     "fileSafe": "mixins_target_action_support_js",
-    "link": "files/mixins_target_action_support_js"
+    "link": "files/mixins_target_action_support_js/index.html"
   },
   "complexity": {
     "aggregate": {

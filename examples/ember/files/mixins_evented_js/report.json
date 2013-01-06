@@ -3,7 +3,7 @@
     "file": "/tmp/plato/ember/packages/ember-runtime/lib/mixins/evented.js",
     "fileShort": "mixins/evented.js",
     "fileSafe": "mixins_evented_js",
-    "link": "files/mixins_evented_js"
+    "link": "files/mixins_evented_js/index.html"
   },
   "complexity": {
     "aggregate": {

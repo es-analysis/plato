@@ -3,7 +3,7 @@ __report = {
     "file": "/tmp/plato/uglify/lib/output.js",
     "fileShort": "lib/output.js",
     "fileSafe": "lib_output_js",
-    "link": "files/lib_output_js"
+    "link": "files/lib_output_js/index.html"
   },
   "complexity": {
     "aggregate": {
@@ -5874,7 +5874,7 @@ __report = {
         "severity": "error",
         "line": 502,
         "column": 13,
-        "message": "Too many errors. (41% scanned).",
+        "message": "Too many errors. (42% scanned).",
         "source": "Too many errors."
       }
     ]

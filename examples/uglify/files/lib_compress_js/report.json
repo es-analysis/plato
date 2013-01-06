@@ -3,7 +3,7 @@
     "file": "/tmp/plato/uglify/lib/compress.js",
     "fileShort": "lib/compress.js",
     "fileSafe": "lib_compress_js",
-    "link": "files/lib_compress_js"
+    "link": "files/lib_compress_js/index.html"
   },
   "complexity": {
     "aggregate": {

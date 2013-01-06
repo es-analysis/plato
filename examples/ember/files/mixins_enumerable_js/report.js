@@ -3,7 +3,7 @@ __report = {
     "file": "/tmp/plato/ember/packages/ember-runtime/lib/mixins/enumerable.js",
     "fileShort": "mixins/enumerable.js",
     "fileSafe": "mixins_enumerable_js",
-    "link": "files/mixins_enumerable_js"
+    "link": "files/mixins_enumerable_js/index.html"
   },
   "complexity": {
     "aggregate": {
