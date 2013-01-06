@@ -24,5 +24,10 @@
     "long": "jshint",
     "desc": "Specify a jshintrc file for JSHint linting",
     "type": "String"
+  },
+  "t": {
+    "long": "title",
+    "desc": "Title of the report",
+    "type": "String"
   }
 }
