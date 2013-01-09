@@ -45,21 +45,21 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability</h2>
-      <p class="stat">94.99</p>
+      <p class="stat">95.37</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated # Bugs</h2>
-      <p class="stat">35.47</p>
+      <p class="stat">35.72</p>
     </div>
   </div>
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty</h2>
-      <p class="stat">189.50</p>
+      <p class="stat">189.73</p>
     </div>
     <div class="span6">
       <h2 class="header">SLOC/LSLOC</h2>
-      <p class="stat">3780 / 2533</p>
+      <p class="stat">3798 / 2541</p>
     </div>
   </div>
 </div>
@@ -839,24 +839,18 @@ parseStatement: true, parseSourceElement: true */
                 }
             }
 
-            while (index < length) {
-                if (!isDecimalDigit(source.charCodeAt(index))) {
-                    ch = source[index];
-                    break;
-                }
+            while (isDecimalDigit(source.charCodeAt(index))) {
                 number += source[index++];
             }
+            ch = source[index];
         }
 
         if (ch === '.') {
             number += source[index++];
-            while (index < length) {
-                if (!isDecimalDigit(source.charCodeAt(index))) {
-                    ch = source[index];
-                    break;
-                }
+            while (isDecimalDigit(source.charCodeAt(index))) {
                 number += source[index++];
             }
+            ch = source[index];
         }
 
         if (ch === 'e' || ch === 'E') {
@@ -866,30 +860,17 @@ parseStatement: true, parseSourceElement: true */
             if (ch === '+' || ch === '-') {
                 number += source[index++];
             }
-
-            ch = source[index];
-            if (ch && isDecimalDigit(ch.charCodeAt(0))) {
-                number += source[index++];
-                while (index < length) {
-                    if (!isDecimalDigit(source.charCodeAt(index))) {
-                        ch = source[index];
-                        break;
-                    }
+            if (isDecimalDigit(source.charCodeAt(index))) {
+                while (isDecimalDigit(source.charCodeAt(index))) {
                     number += source[index++];
                 }
             } else {
-                ch = 'character ' + ch;
-                if (index >= length) {
-                    ch = '<end>';
-                }
                 throwError({}, Messages.UnexpectedToken, 'ILLEGAL');
             }
         }
 
-        if (index < length) {
-            if (isIdentifierStart(source.charCodeAt(index))) {
-                throwError({}, Messages.UnexpectedToken, 'ILLEGAL');
-            }
+        if (isIdentifierStart(source.charCodeAt(index))) {
+            throwError({}, Messages.UnexpectedToken, 'ILLEGAL');
         }
 
         return {
@@ -1184,6 +1165,10 @@ parseStatement: true, parseSourceElement: true */
     SyntaxTreeDelegate = {
 
         name: 'SyntaxTree',
+
+        postProcess: function (node) {
+            return node;
+        },
 
         createArrayExpression: function (elements) {
             return {
@@ -3486,6 +3471,7 @@ parseStatement: true, parseSourceElement: true */
                         column: this.loc.end.column
                     }
                 };
+                node = delegate.postProcess(node);
             }
         };
 
@@ -3504,6 +3490,7 @@ parseStatement: true, parseSourceElement: true */
                         column: this.loc.end.column
                     }
                 };
+                node = delegate.postProcess(node);
             }
         };
 
@@ -3637,11 +3624,13 @@ parseStatement: true, parseSourceElement: true */
                             start: start,
                             end: end
                         };
+                        node = delegate.postProcess(node);
                     } else if (typeof node.loc === 'undefined') {
                         node.loc = {
                             start: node.left.loc.start,
                             end: node.right.loc.end
                         };
+                        node = delegate.postProcess(node);
                     }
                 }
             }
@@ -3797,6 +3786,26 @@ parseStatement: true, parseSourceElement: true */
         }
     }
 
+    // This is used to modify the delegate.
+
+    function extend(object, properties) {
+        var entry, result = {};
+
+        for (entry in object) {
+            if (object.hasOwnProperty(entry)) {
+                result[entry] = object[entry];
+            }
+        }
+
+        for (entry in properties) {
+            if (properties.hasOwnProperty(entry)) {
+                result[entry] = properties[entry];
+            }
+        }
+
+        return result;
+    }
+
     function parse(code, options) {
         var program, toString;
 
@@ -3824,6 +3833,15 @@ parseStatement: true, parseSourceElement: true */
         if (typeof options !== 'undefined') {
             extra.range = (typeof options.range === 'boolean') && options.range;
             extra.loc = (typeof options.loc === 'boolean') && options.loc;
+
+            if (extra.loc && options.source !== null && options.source !== undefined) {
+                delegate = extend(delegate, {
+                    'postProcess': function (node) {
+                        node.loc.source = toString(options.source);
+                        return node;
+                    }
+                });
+            }
 
             if (typeof options.tokens === 'boolean' && options.tokens) {
                 extra.tokens = [];

@@ -10,37 +10,37 @@
       "line": 9,
       "complexity": {
         "sloc": {
-          "physical": 6,
-          "logical": 6
+          "physical": 7,
+          "logical": 7
         },
         "cyclomatic": 1,
         "halstead": {
           "operators": {
             "distinct": 1,
-            "total": 6,
+            "total": 7,
             "identifiers": [
               "__stripped__"
             ]
           },
           "operands": {
-            "distinct": 7,
-            "total": 12,
+            "distinct": 8,
+            "total": 14,
             "identifiers": [
               "__stripped__"
             ]
           },
-          "length": 18,
-          "vocabulary": 8,
-          "difficulty": 0.8571428571428571,
-          "volume": 54,
-          "effort": 46.285714285714285,
-          "bugs": 0.018,
-          "time": 2.571428571428571
+          "length": 21,
+          "vocabulary": 9,
+          "difficulty": 0.875,
+          "volume": 66.56842503028857,
+          "effort": 58.2473719015025,
+          "bugs": 0.022189475010096188,
+          "time": 3.2359651056390275
         }
       }
     },
     "functions": [],
-    "maintainability": 128.8583664842649,
+    "maintainability": 125.57498509471228,
     "module": "main.js"
   },
   "jshint": {

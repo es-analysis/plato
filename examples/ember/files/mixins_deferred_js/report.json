@@ -17,7 +17,7 @@
         "halstead": {
           "operators": {
             "distinct": 9,
-            "total": 46,
+            "total": 47,
             "identifiers": [
               "__stripped__"
             ]
@@ -29,13 +29,13 @@
               "__stripped__"
             ]
           },
-          "length": 108,
+          "length": 109,
           "vocabulary": 40,
           "difficulty": 9,
-          "volume": 574.7682342478352,
-          "effort": 5172.914108230516,
-          "bugs": 0.19158941141594504,
-          "time": 287.3841171239176
+          "volume": 580.0901623427226,
+          "effort": 5220.811461084503,
+          "bugs": 0.1933633874475742,
+          "time": 290.0450811713613
         }
       }
     },
@@ -85,8 +85,8 @@
           "cyclomatic": 1,
           "halstead": {
             "operators": {
-              "distinct": 4,
-              "total": 6,
+              "distinct": 5,
+              "total": 7,
               "identifiers": [
                 "__stripped__"
               ]
@@ -98,13 +98,13 @@
                 "__stripped__"
               ]
             },
-            "length": 17,
-            "vocabulary": 13,
-            "difficulty": 2.4444444444444446,
-            "volume": 62.907475208398566,
-            "effort": 153.7738282871965,
-            "bugs": 0.02096915840279952,
-            "time": 8.542990460399805
+            "length": 18,
+            "vocabulary": 14,
+            "difficulty": 3.055555555555556,
+            "volume": 68.53238859703687,
+            "effort": 209.40452071316824,
+            "bugs": 0.022844129532345624,
+            "time": 11.633584484064903
           }
         }
       },
@@ -211,7 +211,7 @@
         }
       }
     ],
-    "maintainability": 154.33103992172394,
+    "maintainability": 153.70269623317418,
     "module": "mixins/deferred.js"
   },
   "jshint": {

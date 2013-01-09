@@ -10,32 +10,32 @@ __report = {
       "line": 1,
       "complexity": {
         "sloc": {
-          "physical": 146,
-          "logical": 82
+          "physical": 147,
+          "logical": 83
         },
         "cyclomatic": 26,
         "halstead": {
           "operators": {
             "distinct": 25,
-            "total": 214,
+            "total": 216,
             "identifiers": [
               "__stripped__"
             ]
           },
           "operands": {
-            "distinct": 60,
-            "total": 272,
+            "distinct": 61,
+            "total": 275,
             "identifiers": [
               "__stripped__"
             ]
           },
-          "length": 486,
-          "vocabulary": 85,
-          "difficulty": 56.666666666666664,
-          "volume": 3114.9639949629236,
-          "effort": 176514.62638123232,
-          "bugs": 1.0383213316543078,
-          "time": 9806.368132290685
+          "length": 491,
+          "vocabulary": 86,
+          "difficulty": 56.35245901639344,
+          "volume": 3155.29599455873,
+          "effort": 177808.6882179612,
+          "bugs": 1.0517653315195767,
+          "time": 9878.2604565534
         }
       }
     },
@@ -79,32 +79,32 @@ __report = {
         "line": 21,
         "complexity": {
           "sloc": {
-            "physical": 34,
-            "logical": 16
+            "physical": 35,
+            "logical": 17
           },
           "cyclomatic": 6,
           "halstead": {
             "operators": {
               "distinct": 12,
-              "total": 37,
+              "total": 39,
               "identifiers": [
                 "__stripped__"
               ]
             },
             "operands": {
-              "distinct": 19,
-              "total": 47,
+              "distinct": 20,
+              "total": 50,
               "identifiers": [
                 "__stripped__"
               ]
             },
-            "length": 84,
-            "vocabulary": 31,
-            "difficulty": 14.842105263157896,
-            "volume": 416.1524900724976,
-            "effort": 6176.579063181281,
-            "bugs": 0.13871749669083253,
-            "time": 343.14328128784894
+            "length": 89,
+            "vocabulary": 32,
+            "difficulty": 15,
+            "volume": 445,
+            "effort": 6675,
+            "bugs": 0.14833333333333334,
+            "time": 370.8333333333333
           }
         }
       },
@@ -144,7 +144,7 @@ __report = {
       },
       {
         "name": "_queueHooks",
-        "line": 57,
+        "line": 58,
         "complexity": {
           "sloc": {
             "physical": 9,
@@ -178,7 +178,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 60,
+        "line": 61,
         "complexity": {
           "sloc": {
             "physical": 4,
@@ -212,7 +212,7 @@ __report = {
       },
       {
         "name": "queue",
-        "line": 69,
+        "line": 70,
         "complexity": {
           "sloc": {
             "physical": 26,
@@ -246,7 +246,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 84,
+        "line": 85,
         "complexity": {
           "sloc": {
             "physical": 10,
@@ -280,7 +280,7 @@ __report = {
       },
       {
         "name": "dequeue",
-        "line": 95,
+        "line": 96,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -314,7 +314,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 96,
+        "line": 97,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -348,7 +348,7 @@ __report = {
       },
       {
         "name": "delay",
-        "line": 102,
+        "line": 103,
         "complexity": {
           "sloc": {
             "physical": 11,
@@ -382,7 +382,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 106,
+        "line": 107,
         "complexity": {
           "sloc": {
             "physical": 6,
@@ -416,7 +416,7 @@ __report = {
       },
       {
         "name": "hooks.stop",
-        "line": 108,
+        "line": 109,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -450,7 +450,7 @@ __report = {
       },
       {
         "name": "clearQueue",
-        "line": 113,
+        "line": 114,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -484,7 +484,7 @@ __report = {
       },
       {
         "name": "promise",
-        "line": 118,
+        "line": 119,
         "complexity": {
           "sloc": {
             "physical": 28,
@@ -518,7 +518,7 @@ __report = {
       },
       {
         "name": "resolve",
-        "line": 124,
+        "line": 125,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -551,7 +551,7 @@ __report = {
         }
       }
     ],
-    "maintainability": 120.3577148328855,
+    "maintainability": 120.05919770863095,
     "module": "queue.js"
   },
   "jshint": {

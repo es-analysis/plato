@@ -45,21 +45,21 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability</h2>
-      <p class="stat">112.02</p>
+      <p class="stat">110.37</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated # Bugs</h2>
-      <p class="stat">4.67</p>
+      <p class="stat">5.40</p>
     </div>
   </div>
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty</h2>
-      <p class="stat">61.18</p>
+      <p class="stat">69.82</p>
     </div>
     <div class="span6">
       <h2 class="header">SLOC/LSLOC</h2>
-      <p class="stat">408 / 236</p>
+      <p class="stat">434 / 259</p>
     </div>
   </div>
 </div>
@@ -183,7 +183,7 @@ task.normalizeMultiTaskFiles = function(data, target) {
       files.push(obj);
     } else if (grunt.util.kindOf(data.files) === 'object') {
       for (prop in data.files) {
-        files.push({src: data.files[prop], dest: prop});
+        files.push({src: data.files[prop], dest: grunt.config.process(prop)});
       }
     } else if (Array.isArray(data.files)) {
       data.files.forEach(function(obj) {
@@ -192,50 +192,99 @@ task.normalizeMultiTaskFiles = function(data, target) {
           files.push(obj);
         } else {
           for (prop in obj) {
-            files.push({src: obj[prop], dest: prop});
+            files.push({src: obj[prop], dest: grunt.config.process(prop)});
           }
         }
       });
     }
   } else {
-    files.push({src: Array.isArray(data) ? data : [data], dest: target});
+    files.push({src: data, dest: grunt.config.process(target)});
   }
 
-  // If no files were specified, a single empty files object should be
-  // returned so that the task function will still actually run.
+  // If no src/dest or files were specified, return an empty files array.
   if (files.length === 0) {
-    return [{}];
+    grunt.verbose.writeln('File: ' + '[no files]'.red);
+    return [];
   }
 
-  // Process each normalized file object as a template.
-  files.forEach(function(obj) {
-    if ('src' in obj) {
-      // Expose the un-expanded (but normalized) src list as .srcRaw.
-      obj.srcRaw = obj.src;
-      // Process obj.srcRaw as a template (recursively, if necessary).
-      obj.srcRaw = grunt.util.recurse(obj.srcRaw, function(src) {
-        if (typeof src !== 'string') { return src; }
-        return grunt.template.process(src);
+  // Process all normalized file objects.
+  files = grunt.util._(files).chain().forEach(function(obj) {
+    if (!('src' in obj) || !obj.src) { return; }
+    // Normalize .src properties to flattened array.
+    if (Array.isArray(obj.src)) {
+      obj.src = grunt.util._.flatten(obj.src);
+    } else {
+      obj.src = [obj.src];
+    }
+  }).map(function(obj) {
+    // Build options object, removing unwanted properties.
+    var expandOptions = grunt.util._.extend({}, obj);
+    delete expandOptions.src;
+    delete expandOptions.dest;
+
+    // Expand file mappings.
+    if (obj.expand) {
+      return grunt.file.expandMapping(obj.src, obj.dest, expandOptions).map(function(mapObj) {
+        // Copy obj properties to result.
+        var result = grunt.util._.extend({}, obj);
+        // Make a clone of the orig obj available.
+        result.orig = grunt.util._.extend({}, obj);
+        // Set .src and .dest, processing both as templates.
+        result.src = [grunt.config.process(mapObj.src)];
+        result.dest = grunt.config.process(mapObj.dest);
+        // Remove unwanted properties.
+        ['expand', 'cwd', 'flatten', 'rename', 'ext'].forEach(function(prop) {
+          delete result[prop];
+        });
+        return result;
       });
-      // If obj.srcRaw is an array, flatten it. Otherwise, make it into an array.
-      obj.srcRaw = Array.isArray(obj.srcRaw) ? grunt.util._.flatten(obj.srcRaw) : [obj.srcRaw];
+    }
+
+    // Copy obj properties to result, adding an .orig property.
+    var result = grunt.util._.extend({}, obj);
+    // Make a clone of the orig obj available.
+    result.orig = grunt.util._.extend({}, obj);
+
+    if ('src' in result) {
       // Expose an expand-on-demand getter method as .src.
-      Object.defineProperty(obj, 'src', {
+      Object.defineProperty(result, 'src', {
         enumerable: true,
         get: function fn() {
+          var src;
           if (!('result' in fn)) {
-            fn.result = grunt.file.expand(obj.srcRaw);
+            src = obj.src;
+            // If src is an array, flatten it. Otherwise, make it into an array.
+            src = Array.isArray(src) ? grunt.util._.flatten(src) : [src];
+            // Expand src files, memoizing result.
+            fn.result = grunt.file.expand(expandOptions, src);
           }
           return fn.result;
         }
       });
     }
 
-    if ('dest' in obj) {
-      // Process dest as a template.
-      obj.dest = grunt.template.process(obj.dest);
+    if ('dest' in result) {
+      result.dest = obj.dest;
     }
-  });
+
+    return result;
+  }).flatten().value();
+
+  // Log this.file src and dest properties when --verbose is specified.
+  if (grunt.option('verbose')) {
+    files.forEach(function(obj) {
+      var output = [];
+      if ('src' in obj) {
+        output.push(obj.src.length > 0 ? grunt.log.wordlist(obj.src) : '[no src]'.red);
+      }
+      if ('dest' in obj) {
+        output.push('-> ' + (obj.dest ? String(obj.dest).cyan : '[no dest]'.red));
+      }
+      if (output.length > 0) {
+        grunt.verbose.writeln('Files: ' + output.join(' '));
+      }
+    });
+  }
 
   return files;
 };
@@ -253,65 +302,42 @@ task.registerMultiTask = function(name, info, fn) {
     // Guaranteed to always be the actual task name.
     var name = thisTask.name;
     // Arguments (sans target) as an array.
-    var args = grunt.util.toArray(arguments).slice(1);
+    this.args = grunt.util.toArray(arguments).slice(1);
     // If a target wasn't specified, run this task once for each target.
     if (!target || target === '*') {
-      return task.runAllTargets(name, args);
+      return task.runAllTargets(name, this.args);
     } else if (!isValidMultiTaskTarget(target)) {
       throw new Error('Invalid target "' + target + '" specified.');
     }
     // Fail if any required config properties have been omitted.
     this.requiresConfig([name, target]);
-    // Target data.
-    var data = grunt.config([name, target]);
-    // Initialize the errorcount for this task.
-    errorcount = grunt.fail.errorcount;
-    // Normalize files object.
-    var files = task.normalizeMultiTaskFiles(data, target);
-    // For each file object, call original task function, passing in the
-    // target and any other args.
-    grunt.util.async.forEachSeries(files, function(fileObj, next) {
-      var context = {};
-      // Copy some properties over from the main task `this` object.
-      [
-        'nameArgs',
-        'name',
-        'args',
-        'flags',
-        'requiresConfig',
-        'requires',
-      ].forEach(function(key) {
-        context[key] = this[key];
-      }, this);
-      // Return the number of errors logged during this task.
-      Object.defineProperty(context, 'errorCount', {
-        get: function() {
-          return grunt.fail.errorcount - errorcount;
-        }
-      });
-      // Return an options object with the specified defaults overriden by task-
-      // and/or target-specific overrides, via the "options" property.
-      context.options = function() {
-        var targetObj = grunt.config([name, target]);
-        var args = [{}].concat(grunt.util.toArray(arguments)).concat([
-          grunt.config([name, 'options']),
-          grunt.util.kindOf(targetObj) === 'object' ? targetObj.options : {}
-        ]);
-        return grunt.util._.extend.apply(null, args);
-      };
-      // Expose data on `context` (as well as task.current).
-      context.data = data;
-      // Expose the current target.
-      context.target = target;
-      // Expose file object.
-      context.file = fileObj;
-
-      // Actually run the task function (handling this.async, etc)
-      task.runTaskFn(context, function() {
-        return fn.apply(this, this.args);
-      }, next);
-
-    }.bind(this), this.async());
+    // Return an options object with the specified defaults overriden by task-
+    // and/or target-specific overrides, via the "options" property.
+    this.options = function() {
+      var targetObj = grunt.config([name, target]);
+      var args = [{}].concat(grunt.util.toArray(arguments)).concat([
+        grunt.config([name, 'options']),
+        grunt.util.kindOf(targetObj) === 'object' ? targetObj.options : {}
+      ]);
+      return grunt.util._.extend.apply(null, args);
+    };
+    // Expose data on `this` (as well as task.current).
+    this.data = grunt.config([name, target]);
+    // Expose normalized files object.
+    this.files = task.normalizeMultiTaskFiles(this.data, target);
+    // Expose normalized, flattened, uniqued array of src files.
+    Object.defineProperty(this, 'filesSrc', {
+      get: function() {
+        return grunt.util._(this.files).chain().pluck('src').flatten().uniq().value();
+      }.bind(this)
+    });
+    // Expose the current target.
+    this.target = target;
+    // Recreate flags object so that the target isn't set as a flag.
+    this.flags = {};
+    this.args.forEach(function(arg) { this.flags[arg] = true; }, this);
+    // Call original task function, passing in the target and any other args.
+    return fn.apply(this, this.args);
   });
 
   thisTask = task._tasks[name];

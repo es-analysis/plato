@@ -1,12 +1,12 @@
 {
   "summary": {
     "total": {
-      "sloc": 3780,
-      "maintainability": 94.98661786283367
+      "sloc": 3798,
+      "maintainability": 95.36906377531872
     },
     "average": {
-      "sloc": 3780,
-      "maintainability": "94.99"
+      "sloc": 3798,
+      "maintainability": "95.37"
     }
   },
   "reports": [
@@ -22,37 +22,37 @@
           "line": 40,
           "complexity": {
             "sloc": {
-              "physical": 3780,
-              "logical": 2533
+              "physical": 3798,
+              "logical": 2541
             },
-            "cyclomatic": 597,
+            "cyclomatic": 595,
             "halstead": {
               "operators": {
                 "distinct": 44,
-                "total": 4996,
+                "total": 5022,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
               "operands": {
-                "distinct": 712,
-                "total": 6133,
+                "distinct": 716,
+                "total": 6175,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
-              "length": 11129,
-              "vocabulary": 756,
-              "difficulty": 189.50280898876406,
-              "volume": 106418.19593915633,
-              "effort": 20166547.057986807,
-              "bugs": 35.47273197971877,
-              "time": 1120363.7254437115
+              "length": 11197,
+              "vocabulary": 760,
+              "difficulty": 189.73463687150837,
+              "volume": 107153.67324648163,
+              "effort": 20330763.282869454,
+              "bugs": 35.71789108216054,
+              "time": 1129486.849048303
             }
           }
         },
         "module": "/tmp/plato/esprima/esprima.js",
-        "maintainability": 94.98661786283367
+        "maintainability": 95.36906377531872
       }
     }
   ]

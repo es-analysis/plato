@@ -45,21 +45,21 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability</h2>
-      <p class="stat">115.43</p>
+      <p class="stat">113.47</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated # Bugs</h2>
-      <p class="stat">4.84</p>
+      <p class="stat">4.44</p>
     </div>
   </div>
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty</h2>
-      <p class="stat">65.27</p>
+      <p class="stat">66.09</p>
     </div>
     <div class="span6">
       <h2 class="header">SLOC/LSLOC</h2>
-      <p class="stat">439 / 261</p>
+      <p class="stat">414 / 253</p>
     </div>
   </div>
 </div>
@@ -191,60 +191,28 @@ file.expand = function() {
   // Return empty set if there are no patterns or filepaths.
   if (patterns.length === 0) { return []; }
   // Return all matching filepaths.
-  return processPatterns(patterns, function(pattern) {
+  var matches = processPatterns(patterns, function(pattern) {
     // Find all matching files for this pattern.
     return file.glob.sync(pattern, options);
   });
-};
-
-// Further filter file.expand.
-var expandByType = function(type) {
-  var args = grunt.util.toArray(arguments).slice(1);
-  // If the first argument is an options object, grab it.
-  var options = grunt.util.kindOf(args[0]) === 'object' ? args[0] : {};
-  // Match, then filter filepaths.
-  return file.expand.apply(file, args).filter(function(filepath) {
-    try {
-      // If the file is of the right type and exists, this should work.
-      return fs.statSync(path.join(options.cwd, filepath))[type]();
-    } catch(e) {
-      // Otherwise, it's probably not the right type.
-      return false;
-    }
-  });
-};
-
-// A few type-specific file expansion methods.
-file.expandDirs = expandByType.bind(file, 'isDirectory');
-file.expandFiles = expandByType.bind(file, 'isFile');
-
-// Return an array of all file paths that match the given wildcard patterns,
-// plus a uniqed list of any URLs that were passed, at the end.
-file.expandFileURLs = function() {
-  // Use the first argument if it's an Array, otherwise convert the arguments
-  // object to an array and use that.
-  var patterns = Array.isArray(arguments[0]) ? arguments[0] : grunt.util.toArray(arguments);
-  var urls = [];
-  // Filter all URLs out of patterns list and store them in a separate array.
-  patterns = grunt.util._.flatten(patterns).filter(function(pattern) {
-    if (/^(?:file|https?):\/\//i.test(pattern)) {
-      // Push onto urls array.
-      urls.push(pattern);
-      // Remove from patterns array.
-      return false;
-    }
-    // Otherwise, keep pattern.
-    return true;
-  });
-  // Return uniqed array of expanded filepaths with urls at end.
-  return grunt.util._.uniq(file.expandFiles(patterns).map(function(filepath) {
-    var abspath = path.resolve(filepath);
-    // Convert C:\foo\bar style paths to /C:/foo/bar.
-    if (abspath.indexOf('/') !== 0) {
-      abspath = unixifyPath('/' + abspath);
-    }
-    return 'file://' + abspath;
-  }).concat(urls));
+  // Filter result set?
+  if (options.filter) {
+    matches = matches.filter(function(filepath) {
+      filepath = path.join(options.cwd, filepath);
+      try {
+        if (typeof options.filter === 'function') {
+          return options.filter(filepath);
+        } else {
+          // If the file is of the right type and exists, this should work.
+          return fs.statSync(filepath)[options.filter]();
+        }
+      } catch(e) {
+        // Otherwise, it's probably not the right type.
+        return false;
+      }
+    });
+  }
+  return matches;
 };
 
 var pathSeparatorRe = /[\/\\]/g;
@@ -259,8 +227,15 @@ file.expandMapping = function(patterns, destBase, options) {
   var files = [];
   // Find all files matching pattern, using passed-in options.
   file.expand(options, patterns).forEach(function(src) {
-    // Flatten if specified.
-    var destPath = options.flatten ? path.basename(src) : src;
+    var destPath = src;
+    // Flatten?
+    if (options.flatten) {
+      destPath = path.basename(destPath);
+    }
+    // Change the extension?
+    if (options.ext) {
+      destPath = destPath.replace(/(\..*)?$/, options.ext);
+    }
     // Generate destination filename.
     var dest = options.rename(destBase, destPath, options);
     // Prepend cwd to src path if necessary.

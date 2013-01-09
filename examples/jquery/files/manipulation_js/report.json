@@ -10,32 +10,32 @@
       "line": 1,
       "complexity": {
         "sloc": {
-          "physical": 637,
-          "logical": 349
+          "physical": 628,
+          "logical": 343
         },
-        "cyclomatic": 118,
+        "cyclomatic": 112,
         "halstead": {
           "operators": {
-            "distinct": 32,
-            "total": 1001,
+            "distinct": 33,
+            "total": 975,
             "identifiers": [
               "__stripped__"
             ]
           },
           "operands": {
-            "distinct": 222,
-            "total": 1274,
+            "distinct": 220,
+            "total": 1239,
             "identifiers": [
               "__stripped__"
             ]
           },
-          "length": 2275,
-          "vocabulary": 254,
-          "difficulty": 91.81981981981981,
-          "volume": 18174.25766240668,
-          "effort": 1668757.0639211608,
-          "bugs": 6.058085887468893,
-          "time": 92708.72577339782
+          "length": 2214,
+          "vocabulary": 253,
+          "difficulty": 92.925,
+          "volume": 17674.347774373204,
+          "effort": 1642388.76693363,
+          "bugs": 5.891449258124402,
+          "time": 91243.82038520166
         }
       }
     },
@@ -113,8 +113,8 @@
         "line": 36,
         "complexity": {
           "sloc": {
-            "physical": 28,
-            "logical": 8
+            "physical": 31,
+            "logical": 9
           },
           "cyclomatic": 4,
           "halstead": {
@@ -127,24 +127,24 @@
             },
             "operands": {
               "distinct": 16,
-              "total": 32,
+              "total": 33,
               "identifiers": [
                 "__stripped__"
               ]
             },
-            "length": 62,
+            "length": 63,
             "vocabulary": 23,
-            "difficulty": 7,
-            "volume": 280.4608412755348,
-            "effort": 1963.2258889287436,
-            "bugs": 0.09348694709184494,
-            "time": 109.06810494048575
+            "difficulty": 7.21875,
+            "volume": 284.98440323159184,
+            "effort": 2057.231160828054,
+            "bugs": 0.09499480107719728,
+            "time": 114.29062004600299
           }
         }
       },
       {
         "name": "<anonymous>",
-        "line": 38,
+        "line": 40,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -178,7 +178,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 51,
+        "line": 54,
         "complexity": {
           "sloc": {
             "physical": 9,
@@ -187,32 +187,32 @@
           "cyclomatic": 2,
           "halstead": {
             "operators": {
-              "distinct": 7,
-              "total": 11,
+              "distinct": 5,
+              "total": 7,
               "identifiers": [
                 "__stripped__"
               ]
             },
             "operands": {
-              "distinct": 5,
-              "total": 12,
+              "distinct": 3,
+              "total": 8,
               "identifiers": [
                 "__stripped__"
               ]
             },
-            "length": 23,
-            "vocabulary": 12,
-            "difficulty": 8.4,
-            "volume": 82.4541375165866,
-            "effort": 692.6147551393275,
-            "bugs": 0.027484712505528867,
-            "time": 38.47859750774042
+            "length": 15,
+            "vocabulary": 8,
+            "difficulty": 6.666666666666666,
+            "volume": 45,
+            "effort": 300,
+            "bugs": 0.015,
+            "time": 16.666666666666668
           }
         }
       },
       {
         "name": "wrapInner",
-        "line": 65,
+        "line": 68,
         "complexity": {
           "sloc": {
             "physical": 19,
@@ -246,7 +246,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 67,
+        "line": 70,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -280,7 +280,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 72,
+        "line": 75,
         "complexity": {
           "sloc": {
             "physical": 11,
@@ -314,7 +314,7 @@
       },
       {
         "name": "wrap",
-        "line": 85,
+        "line": 88,
         "complexity": {
           "sloc": {
             "physical": 7,
@@ -348,7 +348,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 88,
+        "line": 91,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -382,7 +382,7 @@
       },
       {
         "name": "unwrap",
-        "line": 93,
+        "line": 96,
         "complexity": {
           "sloc": {
             "physical": 7,
@@ -416,7 +416,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 94,
+        "line": 97,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -450,7 +450,7 @@
       },
       {
         "name": "append",
-        "line": 101,
+        "line": 104,
         "complexity": {
           "sloc": {
             "physical": 7,
@@ -484,7 +484,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 102,
+        "line": 105,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -518,7 +518,7 @@
       },
       {
         "name": "prepend",
-        "line": 109,
+        "line": 112,
         "complexity": {
           "sloc": {
             "physical": 7,
@@ -552,7 +552,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 110,
+        "line": 113,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -586,7 +586,7 @@
       },
       {
         "name": "before",
-        "line": 117,
+        "line": 120,
         "complexity": {
           "sloc": {
             "physical": 7,
@@ -620,7 +620,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 118,
+        "line": 121,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -654,7 +654,7 @@
       },
       {
         "name": "after",
-        "line": 125,
+        "line": 128,
         "complexity": {
           "sloc": {
             "physical": 7,
@@ -688,7 +688,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 126,
+        "line": 129,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -722,7 +722,7 @@
       },
       {
         "name": "remove",
-        "line": 134,
+        "line": 137,
         "complexity": {
           "sloc": {
             "physical": 24,
@@ -756,7 +756,7 @@
       },
       {
         "name": "empty",
-        "line": 159,
+        "line": 162,
         "complexity": {
           "sloc": {
             "physical": 20,
@@ -790,7 +790,7 @@
       },
       {
         "name": "clone",
-        "line": 180,
+        "line": 183,
         "complexity": {
           "sloc": {
             "physical": 8,
@@ -824,7 +824,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 184,
+        "line": 187,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -858,7 +858,7 @@
       },
       {
         "name": "html",
-        "line": 189,
+        "line": 192,
         "complexity": {
           "sloc": {
             "physical": 38,
@@ -892,7 +892,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 190,
+        "line": 193,
         "complexity": {
           "sloc": {
             "physical": 36,
@@ -926,7 +926,7 @@
       },
       {
         "name": "replaceWith",
-        "line": 228,
+        "line": 231,
         "complexity": {
           "sloc": {
             "physical": 25,
@@ -960,7 +960,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 237,
+        "line": 240,
         "complexity": {
           "sloc": {
             "physical": 15,
@@ -994,7 +994,7 @@
       },
       {
         "name": "detach",
-        "line": 254,
+        "line": 257,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -1028,41 +1028,41 @@
       },
       {
         "name": "domManip",
-        "line": 258,
+        "line": 261,
         "complexity": {
           "sloc": {
-            "physical": 95,
-            "logical": 50
+            "physical": 93,
+            "logical": 48
           },
           "cyclomatic": 18,
           "halstead": {
             "operators": {
               "distinct": 23,
-              "total": 129,
+              "total": 126,
               "identifiers": [
                 "__stripped__"
               ]
             },
             "operands": {
-              "distinct": 68,
-              "total": 180,
+              "distinct": 66,
+              "total": 175,
               "identifiers": [
                 "__stripped__"
               ]
             },
-            "length": 309,
-            "vocabulary": 91,
-            "difficulty": 30.441176470588236,
-            "volume": 2010.9085438213972,
-            "effort": 61214.421848680766,
-            "bugs": 0.6703028479404657,
-            "time": 3400.801213815598
+            "length": 301,
+            "vocabulary": 89,
+            "difficulty": 30.492424242424242,
+            "volume": 1949.1957627208858,
+            "effort": 59435.70412842095,
+            "bugs": 0.649731920906962,
+            "time": 3301.9835626900526
           }
         }
       },
       {
         "name": "<anonymous>",
-        "line": 273,
+        "line": 276,
         "complexity": {
           "sloc": {
             "physical": 7,
@@ -1096,7 +1096,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 361,
+        "line": 362,
         "complexity": {
           "sloc": {
             "physical": 18,
@@ -1130,7 +1130,7 @@
       },
       {
         "name": "<anonymous>.name",
-        "line": 362,
+        "line": 363,
         "complexity": {
           "sloc": {
             "physical": 16,
@@ -1164,7 +1164,7 @@
       },
       {
         "name": "clone",
-        "line": 381,
+        "line": 382,
         "complexity": {
           "sloc": {
             "physical": 41,
@@ -1197,42 +1197,42 @@
         }
       },
       {
-        "name": "clean",
-        "line": 423,
+        "name": "buildFragment",
+        "line": 424,
         "complexity": {
           "sloc": {
-            "physical": 92,
-            "logical": 49
+            "physical": 82,
+            "logical": 44
           },
-          "cyclomatic": 24,
+          "cyclomatic": 18,
           "halstead": {
             "operators": {
-              "distinct": 21,
-              "total": 130,
+              "distinct": 22,
+              "total": 111,
               "identifiers": [
                 "__stripped__"
               ]
             },
             "operands": {
-              "distinct": 56,
-              "total": 167,
+              "distinct": 51,
+              "total": 140,
               "identifiers": [
                 "__stripped__"
               ]
             },
-            "length": 297,
-            "vocabulary": 77,
-            "difficulty": 31.3125,
-            "volume": 1861.2356025863858,
-            "effort": 58279.93980598621,
-            "bugs": 0.6204118675287953,
-            "time": 3237.7744336659002
+            "length": 251,
+            "vocabulary": 73,
+            "difficulty": 30.19607843137255,
+            "volume": 1553.6459642788843,
+            "effort": 46914.01539195063,
+            "bugs": 0.5178819880929615,
+            "time": 2606.3341884417014
           }
         }
       },
       {
         "name": "cleanData",
-        "line": 516,
+        "line": 507,
         "complexity": {
           "sloc": {
             "physical": 36,
@@ -1266,7 +1266,7 @@
       },
       {
         "name": "findOrAppend",
-        "line": 554,
+        "line": 545,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -1300,7 +1300,7 @@
       },
       {
         "name": "disableScript",
-        "line": 559,
+        "line": 550,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -1334,7 +1334,7 @@
       },
       {
         "name": "restoreScript",
-        "line": 564,
+        "line": 555,
         "complexity": {
           "sloc": {
             "physical": 12,
@@ -1368,7 +1368,7 @@
       },
       {
         "name": "setGlobalEval",
-        "line": 578,
+        "line": 569,
         "complexity": {
           "sloc": {
             "physical": 8,
@@ -1402,7 +1402,7 @@
       },
       {
         "name": "cloneCopyEvent",
-        "line": 587,
+        "line": 578,
         "complexity": {
           "sloc": {
             "physical": 27,
@@ -1436,7 +1436,7 @@
       },
       {
         "name": "getAll",
-        "line": 615,
+        "line": 606,
         "complexity": {
           "sloc": {
             "physical": 9,
@@ -1470,7 +1470,7 @@
       },
       {
         "name": "fixInput",
-        "line": 626,
+        "line": 617,
         "complexity": {
           "sloc": {
             "physical": 12,
@@ -1503,21 +1503,21 @@
         }
       }
     ],
-    "maintainability": 110.37115877530856,
+    "maintainability": 110.94147025280587,
     "module": "manipulation.js"
   },
   "jshint": {
     "messages": [
       {
         "severity": "error",
-        "line": 181,
+        "line": 184,
         "column": 39,
         "message": "Use '===' to compare with 'null'.",
         "source": "Use '{a}' to compare with '{b}'."
       },
       {
         "severity": "error",
-        "line": 182,
+        "line": 185,
         "column": 47,
         "message": "Use '===' to compare with 'null'.",
         "source": "Use '{a}' to compare with '{b}'."

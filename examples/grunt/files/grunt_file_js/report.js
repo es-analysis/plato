@@ -10,32 +10,32 @@ __report = {
       "line": 10,
       "complexity": {
         "sloc": {
-          "physical": 439,
-          "logical": 261
+          "physical": 414,
+          "logical": 253
         },
-        "cyclomatic": 50,
+        "cyclomatic": 49,
         "halstead": {
           "operators": {
-            "distinct": 28,
-            "total": 859,
+            "distinct": 29,
+            "total": 793,
             "identifiers": [
               "__stripped__"
             ]
           },
           "operands": {
-            "distinct": 210,
-            "total": 979,
+            "distinct": 199,
+            "total": 907,
             "identifiers": [
               "__stripped__"
             ]
           },
-          "length": 1838,
-          "vocabulary": 238,
-          "difficulty": 65.26666666666667,
-          "volume": 14510.675048960002,
-          "effort": 947063.3915287894,
-          "bugs": 4.836891682986667,
-          "time": 52614.632862710525
+          "length": 1700,
+          "vocabulary": 228,
+          "difficulty": 66.08793969849246,
+          "volume": 13315.913024080062,
+          "effort": 880021.2569657735,
+          "bugs": 4.4386376746933545,
+          "time": 48890.069831431865
         }
       }
     },
@@ -283,32 +283,32 @@ __report = {
         "line": 99,
         "complexity": {
           "sloc": {
-            "physical": 16,
-            "logical": 6
+            "physical": 34,
+            "logical": 9
           },
-          "cyclomatic": 4,
+          "cyclomatic": 5,
           "halstead": {
             "operators": {
               "distinct": 11,
-              "total": 31,
+              "total": 39,
               "identifiers": [
                 "__stripped__"
               ]
             },
             "operands": {
-              "distinct": 16,
-              "total": 30,
+              "distinct": 18,
+              "total": 38,
               "identifiers": [
                 "__stripped__"
               ]
             },
-            "length": 61,
-            "vocabulary": 27,
-            "difficulty": 10.3125,
-            "volume": 290.0481376319716,
-            "effort": 2991.121419329707,
-            "bugs": 0.09668271254399054,
-            "time": 166.1734121849837
+            "length": 77,
+            "vocabulary": 29,
+            "difficulty": 11.61111111111111,
+            "volume": 374.0645366248231,
+            "effort": 4343.304897477113,
+            "bugs": 0.12468817887494103,
+            "time": 241.29471652650625
           }
         }
       },
@@ -347,181 +347,45 @@ __report = {
         }
       },
       {
-        "name": "expandByType",
-        "line": 117,
+        "name": "<anonymous>",
+        "line": 116,
         "complexity": {
           "sloc": {
-            "physical": 15,
-            "logical": 3
+            "physical": 14,
+            "logical": 8
           },
           "cyclomatic": 2,
           "halstead": {
             "operators": {
               "distinct": 9,
-              "total": 24,
+              "total": 20,
               "identifiers": [
                 "__stripped__"
               ]
             },
             "operands": {
-              "distinct": 17,
-              "total": 25,
+              "distinct": 11,
+              "total": 20,
               "identifiers": [
                 "__stripped__"
               ]
             },
-            "length": 49,
-            "vocabulary": 26,
-            "difficulty": 6.61764705882353,
-            "volume": 230.32154618891354,
-            "effort": 1524.1867027207516,
-            "bugs": 0.07677384872963784,
-            "time": 84.67703904004175
-          }
-        }
-      },
-      {
-        "name": "<anonymous>",
-        "line": 122,
-        "complexity": {
-          "sloc": {
-            "physical": 9,
-            "logical": 4
-          },
-          "cyclomatic": 1,
-          "halstead": {
-            "operators": {
-              "distinct": 4,
-              "total": 10,
-              "identifiers": [
-                "__stripped__"
-              ]
-            },
-            "operands": {
-              "distinct": 10,
-              "total": 11,
-              "identifiers": [
-                "__stripped__"
-              ]
-            },
-            "length": 21,
-            "vocabulary": 14,
-            "difficulty": 2.2,
-            "volume": 79.95445336320968,
-            "effort": 175.8997973990613,
-            "bugs": 0.026651484454403226,
-            "time": 9.772210966614516
-          }
-        }
-      },
-      {
-        "name": "file.expandFileURLs",
-        "line": 139,
-        "complexity": {
-          "sloc": {
-            "physical": 26,
-            "logical": 4
-          },
-          "cyclomatic": 2,
-          "halstead": {
-            "operators": {
-              "distinct": 8,
-              "total": 33,
-              "identifiers": [
-                "__stripped__"
-              ]
-            },
-            "operands": {
-              "distinct": 18,
-              "total": 32,
-              "identifiers": [
-                "__stripped__"
-              ]
-            },
-            "length": 65,
-            "vocabulary": 26,
-            "difficulty": 7.111111111111111,
-            "volume": 305.528581679171,
-            "effort": 2172.6476919407714,
-            "bugs": 0.10184286055972366,
-            "time": 120.70264955226509
-          }
-        }
-      },
-      {
-        "name": "<anonymous>",
-        "line": 145,
-        "complexity": {
-          "sloc": {
-            "physical": 10,
-            "logical": 4
-          },
-          "cyclomatic": 2,
-          "halstead": {
-            "operators": {
-              "distinct": 4,
-              "total": 7,
-              "identifiers": [
-                "__stripped__"
-              ]
-            },
-            "operands": {
-              "distinct": 7,
-              "total": 9,
-              "identifiers": [
-                "__stripped__"
-              ]
-            },
-            "length": 16,
-            "vocabulary": 11,
-            "difficulty": 2.5714285714285716,
-            "volume": 55.350905898196764,
-            "effort": 142.3309008810774,
-            "bugs": 0.018450301966065587,
-            "time": 7.907272271170967
-          }
-        }
-      },
-      {
-        "name": "<anonymous>",
-        "line": 156,
-        "complexity": {
-          "sloc": {
-            "physical": 8,
-            "logical": 4
-          },
-          "cyclomatic": 2,
-          "halstead": {
-            "operators": {
-              "distinct": 8,
-              "total": 13,
-              "identifiers": [
-                "__stripped__"
-              ]
-            },
-            "operands": {
-              "distinct": 9,
-              "total": 15,
-              "identifiers": [
-                "__stripped__"
-              ]
-            },
-            "length": 28,
-            "vocabulary": 17,
-            "difficulty": 6.666666666666667,
-            "volume": 114.44895955500952,
-            "effort": 762.9930637000635,
-            "bugs": 0.03814965318500317,
-            "time": 42.38850353889242
+            "length": 40,
+            "vocabulary": 20,
+            "difficulty": 8.181818181818182,
+            "volume": 172.8771237954945,
+            "effort": 1414.4491946904095,
+            "bugs": 0.0576257079318315,
+            "time": 78.58051081613387
           }
         }
       },
       {
         "name": "file.expandMapping",
-        "line": 169,
+        "line": 137,
         "complexity": {
           "sloc": {
-            "physical": 26,
+            "physical": 33,
             "logical": 5
           },
           "cyclomatic": 1,
@@ -552,7 +416,7 @@ __report = {
       },
       {
         "name": "rename",
-        "line": 171,
+        "line": 139,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -586,41 +450,41 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 177,
+        "line": 145,
         "complexity": {
           "sloc": {
-            "physical": 16,
-            "logical": 9
+            "physical": 23,
+            "logical": 13
           },
-          "cyclomatic": 3,
+          "cyclomatic": 4,
           "halstead": {
             "operators": {
-              "distinct": 8,
-              "total": 27,
+              "distinct": 7,
+              "total": 34,
               "identifiers": [
                 "__stripped__"
               ]
             },
             "operands": {
-              "distinct": 17,
-              "total": 39,
+              "distinct": 19,
+              "total": 48,
               "identifiers": [
                 "__stripped__"
               ]
             },
-            "length": 66,
-            "vocabulary": 25,
-            "difficulty": 9.176470588235293,
-            "volume": 306.49450852513183,
-            "effort": 2812.5378429365037,
-            "bugs": 0.10216483617504395,
-            "time": 156.25210238536133
+            "length": 82,
+            "vocabulary": 26,
+            "difficulty": 8.842105263157894,
+            "volume": 385.4360568875696,
+            "effort": 3408.066187216404,
+            "bugs": 0.12847868562918985,
+            "time": 189.33701040091134
           }
         }
       },
       {
         "name": "file.mkdir",
-        "line": 197,
+        "line": 172,
         "complexity": {
           "sloc": {
             "physical": 19,
@@ -654,7 +518,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 203,
+        "line": 178,
         "complexity": {
           "sloc": {
             "physical": 12,
@@ -688,7 +552,7 @@ __report = {
       },
       {
         "name": "recurse",
-        "line": 218,
+        "line": 193,
         "complexity": {
           "sloc": {
             "physical": 11,
@@ -722,7 +586,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 220,
+        "line": 195,
         "complexity": {
           "sloc": {
             "physical": 8,
@@ -756,7 +620,7 @@ __report = {
       },
       {
         "name": "file.read",
-        "line": 234,
+        "line": 209,
         "complexity": {
           "sloc": {
             "physical": 22,
@@ -790,7 +654,7 @@ __report = {
       },
       {
         "name": "file.readJSON",
-        "line": 258,
+        "line": 233,
         "complexity": {
           "sloc": {
             "physical": 13,
@@ -824,7 +688,7 @@ __report = {
       },
       {
         "name": "file.readYAML",
-        "line": 273,
+        "line": 248,
         "complexity": {
           "sloc": {
             "physical": 13,
@@ -858,7 +722,7 @@ __report = {
       },
       {
         "name": "file.write",
-        "line": 288,
+        "line": 263,
         "complexity": {
           "sloc": {
             "physical": 23,
@@ -892,7 +756,7 @@ __report = {
       },
       {
         "name": "file.copy",
-        "line": 313,
+        "line": 288,
         "complexity": {
           "sloc": {
             "physical": 28,
@@ -926,7 +790,7 @@ __report = {
       },
       {
         "name": "file.delete",
-        "line": 343,
+        "line": 318,
         "complexity": {
           "sloc": {
             "physical": 35,
@@ -960,7 +824,7 @@ __report = {
       },
       {
         "name": "file.exists",
-        "line": 380,
+        "line": 355,
         "complexity": {
           "sloc": {
             "physical": 4,
@@ -994,7 +858,7 @@ __report = {
       },
       {
         "name": "file.isLink",
-        "line": 386,
+        "line": 361,
         "complexity": {
           "sloc": {
             "physical": 4,
@@ -1028,7 +892,7 @@ __report = {
       },
       {
         "name": "file.isDir",
-        "line": 392,
+        "line": 367,
         "complexity": {
           "sloc": {
             "physical": 4,
@@ -1062,7 +926,7 @@ __report = {
       },
       {
         "name": "file.isFile",
-        "line": 398,
+        "line": 373,
         "complexity": {
           "sloc": {
             "physical": 4,
@@ -1096,7 +960,7 @@ __report = {
       },
       {
         "name": "file.isPathAbsolute",
-        "line": 404,
+        "line": 379,
         "complexity": {
           "sloc": {
             "physical": 4,
@@ -1130,7 +994,7 @@ __report = {
       },
       {
         "name": "file.arePathsEquivalent",
-        "line": 410,
+        "line": 385,
         "complexity": {
           "sloc": {
             "physical": 7,
@@ -1164,7 +1028,7 @@ __report = {
       },
       {
         "name": "file.doesPathContain",
-        "line": 420,
+        "line": 395,
         "complexity": {
           "sloc": {
             "physical": 9,
@@ -1198,7 +1062,7 @@ __report = {
       },
       {
         "name": "file.isPathCwd",
-        "line": 431,
+        "line": 406,
         "complexity": {
           "sloc": {
             "physical": 8,
@@ -1232,7 +1096,7 @@ __report = {
       },
       {
         "name": "file.isPathInCwd",
-        "line": 441,
+        "line": 416,
         "complexity": {
           "sloc": {
             "physical": 8,
@@ -1265,7 +1129,7 @@ __report = {
         }
       }
     ],
-    "maintainability": 115.4271896808854,
+    "maintainability": 113.467130148596,
     "module": "grunt/file.js"
   },
   "jshint": {
@@ -1293,21 +1157,21 @@ __report = {
       },
       {
         "severity": "error",
-        "line": 190,
+        "line": 165,
         "column": 17,
         "message": "Extra comma.",
         "source": "Extra comma."
       },
       {
         "severity": "error",
-        "line": 200,
+        "line": 175,
         "column": 12,
         "message": "Use '===' to compare with 'null'.",
         "source": "Use '{a}' to compare with '{b}'."
       },
       {
         "severity": "error",
-        "line": 343,
+        "line": 318,
         "column": 6,
         "message": "Expected an identifier and instead saw 'delete' (a reserved word).",
         "source": "Expected an identifier and instead saw '{a}' (a reserved word)."
@@ -1398,28 +1262,28 @@ __report = {
       },
       {
         "severity": "error",
-        "line": 201,
+        "line": 176,
         "column": 36,
         "message": "'process' is not defined.",
         "source": "'{a}' is not defined."
       },
       {
         "severity": "error",
-        "line": 297,
+        "line": 272,
         "column": 10,
         "message": "'Buffer' is not defined.",
         "source": "'{a}' is not defined."
       },
       {
         "severity": "error",
-        "line": 434,
+        "line": 409,
         "column": 36,
         "message": "'process' is not defined.",
         "source": "'{a}' is not defined."
       },
       {
         "severity": "error",
-        "line": 444,
+        "line": 419,
         "column": 33,
         "message": "'process' is not defined.",
         "source": "'{a}' is not defined."

@@ -10,7 +10,7 @@ __report = {
       "line": 1,
       "complexity": {
         "sloc": {
-          "physical": 468,
+          "physical": 476,
           "logical": 215
         },
         "cyclomatic": 34,
@@ -314,7 +314,7 @@ __report = {
       },
       {
         "name": "destroy",
-        "line": 248,
+        "line": 256,
         "complexity": {
           "sloc": {
             "physical": 10,
@@ -348,7 +348,7 @@ __report = {
       },
       {
         "name": "_scheduledDestroy",
-        "line": 267,
+        "line": 275,
         "complexity": {
           "sloc": {
             "physical": 6,
@@ -382,7 +382,7 @@ __report = {
       },
       {
         "name": "bind",
-        "line": 274,
+        "line": 282,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -416,7 +416,7 @@ __report = {
       },
       {
         "name": "toString",
-        "line": 310,
+        "line": 318,
         "complexity": {
           "sloc": {
             "physical": 7,
@@ -450,7 +450,7 @@ __report = {
       },
       {
         "name": "makeToString",
-        "line": 319,
+        "line": 327,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -484,7 +484,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 320,
+        "line": 328,
         "complexity": {
           "sloc": {
             "physical": 1,
@@ -518,7 +518,7 @@ __report = {
       },
       {
         "name": "extend",
-        "line": 339,
+        "line": 347,
         "complexity": {
           "sloc": {
             "physical": 21,
@@ -552,7 +552,7 @@ __report = {
       },
       {
         "name": "createWithMixins",
-        "line": 361,
+        "line": 369,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -586,7 +586,7 @@ __report = {
       },
       {
         "name": "create",
-        "line": 367,
+        "line": 375,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -620,7 +620,7 @@ __report = {
       },
       {
         "name": "reopen",
-        "line": 373,
+        "line": 381,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -654,7 +654,7 @@ __report = {
       },
       {
         "name": "reopenClass",
-        "line": 379,
+        "line": 387,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -688,7 +688,7 @@ __report = {
       },
       {
         "name": "detect",
-        "line": 385,
+        "line": 393,
         "complexity": {
           "sloc": {
             "physical": 8,
@@ -722,7 +722,7 @@ __report = {
       },
       {
         "name": "detectInstance",
-        "line": 394,
+        "line": 402,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -756,7 +756,7 @@ __report = {
       },
       {
         "name": "metaForProperty",
-        "line": 425,
+        "line": 433,
         "complexity": {
           "sloc": {
             "physical": 6,
@@ -790,7 +790,7 @@ __report = {
       },
       {
         "name": "eachComputedProperty",
-        "line": 440,
+        "line": 448,
         "complexity": {
           "sloc": {
             "physical": 14,

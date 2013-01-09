@@ -45,21 +45,21 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability</h2>
-      <p class="stat">102.81</p>
+      <p class="stat">102.71</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated # Bugs</h2>
-      <p class="stat">8.29</p>
+      <p class="stat">8.33</p>
     </div>
   </div>
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty</h2>
-      <p class="stat">128.43</p>
+      <p class="stat">129.11</p>
     </div>
     <div class="span6">
       <h2 class="header">SLOC/LSLOC</h2>
-      <p class="stat">815 / 453</p>
+      <p class="stat">821 / 455</p>
     </div>
   </div>
 </div>
@@ -552,6 +552,12 @@ jQuery.event = {
 		for ( i = copy.length; i; ) {
 			prop = copy[ --i ];
 			event[ prop ] = originalEvent[ prop ];
+		}
+
+		// Target should not be a text node (#504, #13143)
+		// Support: Chrome 23+, Safari?
+		if ( event.target.nodeType === 3 ) {
+			event.target = event.target.parentNode;
 		}
 
 		return fixHook.filter? fixHook.filter( event, originalEvent ) : event;

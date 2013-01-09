@@ -1,12 +1,12 @@
 __report = {
   "summary": {
     "total": {
-      "sloc": 5871,
-      "maintainability": 4608.075771854517
+      "sloc": 5991,
+      "maintainability": 4619.570275294288
     },
     "average": {
-      "sloc": 163,
-      "maintainability": "128.00"
+      "sloc": 166,
+      "maintainability": "128.32"
     }
   },
   "reports": [
@@ -22,37 +22,37 @@ __report = {
           "line": 1,
           "complexity": {
             "sloc": {
-              "physical": 58,
-              "logical": 6
+              "physical": 212,
+              "logical": 55
             },
-            "cyclomatic": 1,
+            "cyclomatic": 7,
             "halstead": {
               "operators": {
-                "distinct": 4,
-                "total": 15,
+                "distinct": 16,
+                "total": 126,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
               "operands": {
-                "distinct": 12,
-                "total": 21,
+                "distinct": 57,
+                "total": 175,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
-              "length": 36,
-              "vocabulary": 16,
-              "difficulty": 3.5,
-              "volume": 144,
-              "effort": 504,
-              "bugs": 0.048,
-              "time": 28
+              "length": 301,
+              "vocabulary": 73,
+              "difficulty": 24.56140350877193,
+              "volume": 1863.1371922228852,
+              "effort": 45761.264370386656,
+              "bugs": 0.6210457307409617,
+              "time": 2542.292465021481
             }
           }
         },
         "module": "controllers/array_controller.js",
-        "maintainability": 120.69228576170141
+        "maintainability": 125.26196736208472
       }
     },
     {
@@ -67,32 +67,32 @@ __report = {
           "line": 1,
           "complexity": {
             "sloc": {
-              "physical": 77,
-              "logical": 18
+              "physical": 79,
+              "logical": 19
             },
             "cyclomatic": 3,
             "halstead": {
               "operators": {
                 "distinct": 13,
-                "total": 56,
+                "total": 57,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
               "operands": {
-                "distinct": 32,
-                "total": 69,
+                "distinct": 33,
+                "total": 71,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
-              "length": 125,
-              "vocabulary": 45,
-              "difficulty": 14.015625,
-              "volume": 686.4816370412093,
-              "effort": 9621.4691941557,
-              "bugs": 0.22882721234706976,
-              "time": 534.5260663419833
+              "length": 128,
+              "vocabulary": 46,
+              "difficulty": 13.984848484848484,
+              "volume": 707.0159303752977,
+              "effort": 9887.510662672723,
+              "bugs": 0.23567197679176588,
+              "time": 549.3061479262624
             }
           }
         },
@@ -382,37 +382,37 @@ __report = {
           "line": 9,
           "complexity": {
             "sloc": {
-              "physical": 6,
-              "logical": 6
+              "physical": 7,
+              "logical": 7
             },
             "cyclomatic": 1,
             "halstead": {
               "operators": {
                 "distinct": 1,
-                "total": 6,
+                "total": 7,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
               "operands": {
-                "distinct": 7,
-                "total": 12,
+                "distinct": 8,
+                "total": 14,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
-              "length": 18,
-              "vocabulary": 8,
-              "difficulty": 0.8571428571428571,
-              "volume": 54,
-              "effort": 46.285714285714285,
-              "bugs": 0.018,
-              "time": 2.571428571428571
+              "length": 21,
+              "vocabulary": 9,
+              "difficulty": 0.875,
+              "volume": 66.56842503028857,
+              "effort": 58.2473719015025,
+              "bugs": 0.022189475010096188,
+              "time": 3.2359651056390275
             }
           }
         },
         "module": "main.js",
-        "maintainability": 128.8583664842649
+        "maintainability": 125.57498509471228
       }
     },
     {
@@ -569,7 +569,7 @@ __report = {
             "halstead": {
               "operators": {
                 "distinct": 9,
-                "total": 46,
+                "total": 47,
                 "identifiers": [
                   "__stripped__"
                 ]
@@ -581,18 +581,18 @@ __report = {
                   "__stripped__"
                 ]
               },
-              "length": 108,
+              "length": 109,
               "vocabulary": 40,
               "difficulty": 9,
-              "volume": 574.7682342478352,
-              "effort": 5172.914108230516,
-              "bugs": 0.19158941141594504,
-              "time": 287.3841171239176
+              "volume": 580.0901623427226,
+              "effort": 5220.811461084503,
+              "bugs": 0.1933633874475742,
+              "time": 290.0450811713613
             }
           }
         },
         "module": "mixins/deferred.js",
-        "maintainability": 154.33103992172394
+        "maintainability": 153.70269623317418
       }
     },
     {
@@ -891,23 +891,23 @@ __report = {
               },
               "operands": {
                 "distinct": 85,
-                "total": 426,
+                "total": 427,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
-              "length": 704,
+              "length": 705,
               "vocabulary": 107,
-              "difficulty": 55.12941176470588,
-              "volume": 4745.992758426407,
-              "effort": 261643.78901160165,
-              "bugs": 1.5819975861421356,
-              "time": 14535.766056200091
+              "difficulty": 55.258823529411764,
+              "volume": 4752.734225412808,
+              "effort": 262630.50184428185,
+              "bugs": 1.5842447418042693,
+              "time": 14590.583435793436
             }
           }
         },
         "module": "mixins/sortable.js",
-        "maintainability": 126.1221116643722
+        "maintainability": 126.10710288207261
       }
     },
     {
@@ -1092,6 +1092,51 @@ __report = {
     },
     {
       "info": {
+        "file": "/tmp/plato/ember/packages/ember-runtime/lib/system/container.js",
+        "fileShort": "system/container.js",
+        "fileSafe": "system_container_js",
+        "link": "files/system_container_js/index.html"
+      },
+      "complexity": {
+        "aggregate": {
+          "line": 1,
+          "complexity": {
+            "sloc": {
+              "physical": 2,
+              "logical": 2
+            },
+            "cyclomatic": 1,
+            "halstead": {
+              "operators": {
+                "distinct": 3,
+                "total": 7,
+                "identifiers": [
+                  "__stripped__"
+                ]
+              },
+              "operands": {
+                "distinct": 5,
+                "total": 9,
+                "identifiers": [
+                  "__stripped__"
+                ]
+              },
+              "length": 16,
+              "vocabulary": 8,
+              "difficulty": 2.7,
+              "volume": 48,
+              "effort": 129.60000000000002,
+              "bugs": 0.016,
+              "time": 7.200000000000001
+            }
+          }
+        },
+        "module": "system/container.js",
+        "maintainability": 143.13458715392872
+      }
+    },
+    {
+      "info": {
         "file": "/tmp/plato/ember/packages/ember-runtime/lib/system/core_object.js",
         "fileShort": "system/core_object.js",
         "fileSafe": "system_core_object_js",
@@ -1102,7 +1147,7 @@ __report = {
           "line": 1,
           "complexity": {
             "sloc": {
-              "physical": 468,
+              "physical": 476,
               "logical": 215
             },
             "cyclomatic": 34,
@@ -1452,51 +1497,6 @@ __report = {
     },
     {
       "info": {
-        "file": "/tmp/plato/ember/packages/ember-runtime/lib/system/promise_chain.js",
-        "fileShort": "system/promise_chain.js",
-        "fileSafe": "system_promise_chain_js",
-        "link": "files/system_promise_chain_js/index.html"
-      },
-      "complexity": {
-        "aggregate": {
-          "line": 1,
-          "complexity": {
-            "sloc": {
-              "physical": 54,
-              "logical": 33
-            },
-            "cyclomatic": 4,
-            "halstead": {
-              "operators": {
-                "distinct": 11,
-                "total": 77,
-                "identifiers": [
-                  "__stripped__"
-                ]
-              },
-              "operands": {
-                "distinct": 39,
-                "total": 96,
-                "identifiers": [
-                  "__stripped__"
-                ]
-              },
-              "length": 173,
-              "vocabulary": 50,
-              "difficulty": 13.53846153846154,
-              "volume": 976.3871208310273,
-              "effort": 13218.779482020063,
-              "bugs": 0.32546237361034247,
-              "time": 734.3766378900035
-            }
-          }
-        },
-        "module": "system/promise_chain.js",
-        "maintainability": 126.83423939660875
-      }
-    },
-    {
-      "info": {
         "file": "/tmp/plato/ember/packages/ember-runtime/lib/system/set.js",
         "fileShort": "system/set.js",
         "fileSafe": "system_set_js",
@@ -1552,37 +1552,37 @@ __report = {
           "line": 6,
           "complexity": {
             "sloc": {
-              "physical": 230,
-              "logical": 40
+              "physical": 237,
+              "logical": 46
             },
-            "cyclomatic": 7,
+            "cyclomatic": 8,
             "halstead": {
               "operators": {
-                "distinct": 16,
-                "total": 125,
+                "distinct": 19,
+                "total": 143,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
               "operands": {
-                "distinct": 54,
-                "total": 148,
+                "distinct": 62,
+                "total": 168,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
-              "length": 273,
-              "vocabulary": 70,
-              "difficulty": 21.925925925925927,
-              "volume": 1673.294263625976,
-              "effort": 36688.52607653992,
-              "bugs": 0.557764754541992,
-              "time": 2038.2514486966622
+              "length": 311,
+              "vocabulary": 81,
+              "difficulty": 25.741935483870964,
+              "volume": 1971.6933508971185,
+              "effort": 50755.20303277098,
+              "bugs": 0.6572311169657061,
+              "time": 2819.73350182061
             }
           }
         },
         "module": "system/string.js",
-        "maintainability": 139.29795861787053
+        "maintainability": 133.84916656034085
       }
     },
     {

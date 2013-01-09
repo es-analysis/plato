@@ -45,7 +45,7 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability</h2>
-      <p class="stat">126.12</p>
+      <p class="stat">126.11</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated # Bugs</h2>
@@ -55,7 +55,7 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty</h2>
-      <p class="stat">55.13</p>
+      <p class="stat">55.26</p>
     </div>
     <div class="span6">
       <h2 class="header">SLOC/LSLOC</h2>
@@ -222,7 +222,7 @@ Ember.SortableMixin = Ember.Mixin.create(Ember.MutableEnumerable, {
         forEach(sortProperties, function(sortProperty) {
           Ember.removeObserver(item, sortProperty, this, 'contentItemSortPropertyDidChange');
         }, this);
-      });
+      }, this);
     }
 
     return this._super(array, idx, removedCount, addedCount);

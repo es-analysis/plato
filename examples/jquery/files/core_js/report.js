@@ -10,32 +10,32 @@ __report = {
       "line": 1,
       "complexity": {
         "sloc": {
-          "physical": 807,
-          "logical": 388
+          "physical": 808,
+          "logical": 387
         },
         "cyclomatic": 110,
         "halstead": {
           "operators": {
             "distinct": 38,
-            "total": 978,
+            "total": 976,
             "identifiers": [
               "__stripped__"
             ]
           },
           "operands": {
-            "distinct": 219,
-            "total": 1190,
+            "distinct": 218,
+            "total": 1187,
             "identifiers": [
               "__stripped__"
             ]
           },
-          "length": 2168,
-          "vocabulary": 257,
-          "difficulty": 103.2420091324201,
-          "volume": 17356.19402265233,
-          "effort": 1791888.3417907269,
-          "bugs": 5.785398007550777,
-          "time": 99549.35232170705
+          "length": 2163,
+          "vocabulary": 256,
+          "difficulty": 103.45412844036697,
+          "volume": 17304,
+          "effort": 1790170.2385321101,
+          "bugs": 5.768,
+          "time": 99453.90214067278
         }
       }
     },
@@ -997,38 +997,38 @@ __report = {
         "line": 455,
         "complexity": {
           "sloc": {
-            "physical": 25,
-            "logical": 15
+            "physical": 26,
+            "logical": 14
           },
           "cyclomatic": 7,
           "halstead": {
             "operators": {
               "distinct": 13,
-              "total": 42,
+              "total": 40,
               "identifiers": [
                 "__stripped__"
               ]
             },
             "operands": {
-              "distinct": 21,
-              "total": 48,
+              "distinct": 20,
+              "total": 45,
               "identifiers": [
                 "__stripped__"
               ]
             },
-            "length": 90,
-            "vocabulary": 34,
-            "difficulty": 14.857142857142856,
-            "volume": 457.8716557125306,
-            "effort": 6802.664599157597,
-            "bugs": 0.1526238852375102,
-            "time": 377.92581106431095
+            "length": 85,
+            "vocabulary": 33,
+            "difficulty": 14.625,
+            "volume": 428.7735001454685,
+            "effort": 6270.812439627477,
+            "bugs": 0.1429245000484895,
+            "time": 348.3784688681932
           }
         }
       },
       {
         "name": "parseXML",
-        "line": 484,
+        "line": 485,
         "complexity": {
           "sloc": {
             "physical": 19,
@@ -1062,7 +1062,7 @@ __report = {
       },
       {
         "name": "noop",
-        "line": 504,
+        "line": 505,
         "complexity": {
           "sloc": {
             "physical": 1,
@@ -1096,7 +1096,7 @@ __report = {
       },
       {
         "name": "globalEval",
-        "line": 507,
+        "line": 508,
         "complexity": {
           "sloc": {
             "physical": 6,
@@ -1130,7 +1130,7 @@ __report = {
       },
       {
         "name": "camelCase",
-        "line": 516,
+        "line": 517,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -1164,7 +1164,7 @@ __report = {
       },
       {
         "name": "nodeName",
-        "line": 520,
+        "line": 521,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -1198,7 +1198,7 @@ __report = {
       },
       {
         "name": "each",
-        "line": 525,
+        "line": 526,
         "complexity": {
           "sloc": {
             "physical": 48,
@@ -1232,7 +1232,7 @@ __report = {
       },
       {
         "name": "trim",
-        "line": 574,
+        "line": 575,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -1266,7 +1266,7 @@ __report = {
       },
       {
         "name": "makeArray",
-        "line": 579,
+        "line": 580,
         "complexity": {
           "sloc": {
             "physical": 16,
@@ -1300,7 +1300,7 @@ __report = {
       },
       {
         "name": "inArray",
-        "line": 596,
+        "line": 597,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -1334,7 +1334,7 @@ __report = {
       },
       {
         "name": "merge",
-        "line": 600,
+        "line": 601,
         "complexity": {
           "sloc": {
             "physical": 19,
@@ -1368,7 +1368,7 @@ __report = {
       },
       {
         "name": "grep",
-        "line": 620,
+        "line": 621,
         "complexity": {
           "sloc": {
             "physical": 18,
@@ -1402,7 +1402,7 @@ __report = {
       },
       {
         "name": "map",
-        "line": 640,
+        "line": 641,
         "complexity": {
           "sloc": {
             "physical": 31,
@@ -1436,7 +1436,7 @@ __report = {
       },
       {
         "name": "proxy",
-        "line": 677,
+        "line": 678,
         "complexity": {
           "sloc": {
             "physical": 26,
@@ -1470,7 +1470,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 694,
+        "line": 695,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -1504,7 +1504,7 @@ __report = {
       },
       {
         "name": "access",
-        "line": 706,
+        "line": 707,
         "complexity": {
           "sloc": {
             "physical": 50,
@@ -1538,7 +1538,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 735,
+        "line": 736,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -1572,7 +1572,7 @@ __report = {
       },
       {
         "name": "<anonymous>.promise",
-        "line": 760,
+        "line": 761,
         "complexity": {
           "sloc": {
             "physical": 23,
@@ -1606,7 +1606,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 785,
+        "line": 786,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -1640,7 +1640,7 @@ __report = {
       },
       {
         "name": "isArraylike",
-        "line": 789,
+        "line": 790,
         "complexity": {
           "sloc": {
             "physical": 16,
@@ -1673,7 +1673,7 @@ __report = {
         }
       }
     ],
-    "maintainability": 112.46029400580197,
+    "maintainability": 112.5232221534267,
     "module": "core.js"
   },
   "jshint": {
@@ -1729,42 +1729,42 @@ __report = {
       },
       {
         "severity": "error",
-        "line": 575,
+        "line": 576,
         "column": 21,
         "message": "Use '===' to compare with 'null'.",
         "source": "Use '{a}' to compare with '{b}'."
       },
       {
         "severity": "error",
-        "line": 582,
+        "line": 583,
         "column": 18,
         "message": "Use '!==' to compare with 'null'.",
         "source": "Use '{a}' to compare with '{b}'."
       },
       {
         "severity": "error",
-        "line": 597,
+        "line": 598,
         "column": 20,
         "message": "Use '===' to compare with 'null'.",
         "source": "Use '{a}' to compare with '{b}'."
       },
       {
         "severity": "error",
-        "line": 652,
+        "line": 653,
         "column": 28,
         "message": "Use '!==' to compare with 'null'.",
         "source": "Use '{a}' to compare with '{b}'."
       },
       {
         "severity": "error",
-        "line": 662,
+        "line": 663,
         "column": 28,
         "message": "Use '!==' to compare with 'null'.",
         "source": "Use '{a}' to compare with '{b}'."
       },
       {
         "severity": "error",
-        "line": 709,
+        "line": 710,
         "column": 24,
         "message": "Use '===' to compare with 'null'.",
         "source": "Use '{a}' to compare with '{b}'."

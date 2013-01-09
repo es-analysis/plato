@@ -24,18 +24,18 @@
           },
           "operands": {
             "distinct": 85,
-            "total": 426,
+            "total": 427,
             "identifiers": [
               "__stripped__"
             ]
           },
-          "length": 704,
+          "length": 705,
           "vocabulary": 107,
-          "difficulty": 55.12941176470588,
-          "volume": 4745.992758426407,
-          "effort": 261643.78901160165,
-          "bugs": 1.5819975861421356,
-          "time": 14535.766056200091
+          "difficulty": 55.258823529411764,
+          "volume": 4752.734225412808,
+          "effort": 262630.50184428185,
+          "bugs": 1.5842447418042693,
+          "time": 14590.583435793436
         }
       }
     },
@@ -569,18 +569,18 @@
             },
             "operands": {
               "distinct": 17,
-              "total": 32,
+              "total": 33,
               "identifiers": [
                 "__stripped__"
               ]
             },
-            "length": 52,
+            "length": 53,
             "vocabulary": 25,
-            "difficulty": 7.529411764705882,
-            "volume": 241.48052186828568,
-            "effort": 1818.2062823023862,
-            "bugs": 0.08049350728942856,
-            "time": 101.01146012791034
+            "difficulty": 7.764705882352941,
+            "volume": 246.1243780580604,
+            "effort": 1911.0834060978807,
+            "bugs": 0.0820414593526868,
+            "time": 106.17130033877115
           }
         }
       },
@@ -857,7 +857,7 @@
         }
       }
     ],
-    "maintainability": 126.1221116643722,
+    "maintainability": 126.10710288207261,
     "module": "mixins/sortable.js"
   },
   "jshint": {

@@ -45,21 +45,21 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability</h2>
-      <p class="stat">80.59</p>
+      <p class="stat">79.50</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated # Bugs</h2>
-      <p class="stat">0.95</p>
+      <p class="stat">1.03</p>
     </div>
   </div>
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty</h2>
-      <p class="stat">20.08</p>
+      <p class="stat">20.68</p>
     </div>
     <div class="span6">
       <h2 class="header">SLOC/LSLOC</h2>
-      <p class="stat">116 / 67</p>
+      <p class="stat">120 / 70</p>
     </div>
   </div>
 </div>
@@ -147,6 +147,10 @@
 	// Beware of CSP restrictions (https://developer.mozilla.org/en/Security/CSP), test/csp.php
 	div.setAttribute( "onfocusin", "t" );
 	support.focusinBubbles = "onfocusin" in window || div.attributes.onfocusin.expando === false;
+
+	div.style.backgroundClip = "content-box";
+	div.cloneNode( true ).style.backgroundClip = "";
+	support.clearCloneStyle = div.style.backgroundClip === "content-box";
 
 	// Run tests that need a body at doc ready
 	jQuery(function() {

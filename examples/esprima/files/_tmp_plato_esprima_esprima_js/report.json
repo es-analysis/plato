@@ -10,32 +10,32 @@
       "line": 40,
       "complexity": {
         "sloc": {
-          "physical": 3780,
-          "logical": 2533
+          "physical": 3798,
+          "logical": 2541
         },
-        "cyclomatic": 597,
+        "cyclomatic": 595,
         "halstead": {
           "operators": {
             "distinct": 44,
-            "total": 4996,
+            "total": 5022,
             "identifiers": [
               "__stripped__"
             ]
           },
           "operands": {
-            "distinct": 712,
-            "total": 6133,
+            "distinct": 716,
+            "total": 6175,
             "identifiers": [
               "__stripped__"
             ]
           },
-          "length": 11129,
-          "vocabulary": 756,
-          "difficulty": 189.50280898876406,
-          "volume": 106418.19593915633,
-          "effort": 20166547.057986807,
-          "bugs": 35.47273197971877,
-          "time": 1120363.7254437115
+          "length": 11197,
+          "vocabulary": 760,
+          "difficulty": 189.73463687150837,
+          "volume": 107153.67324648163,
+          "effort": 20330763.282869454,
+          "bugs": 35.71789108216054,
+          "time": 1129486.849048303
         }
       }
     },
@@ -45,32 +45,32 @@
         "line": 52,
         "complexity": {
           "sloc": {
-            "physical": 3768,
-            "logical": 269
+            "physical": 3786,
+            "logical": 271
           },
           "cyclomatic": 1,
           "halstead": {
             "operators": {
               "distinct": 8,
-              "total": 320,
+              "total": 323,
               "identifiers": [
                 "__stripped__"
               ]
             },
             "operands": {
-              "distinct": 345,
-              "total": 434,
+              "distinct": 347,
+              "total": 437,
               "identifiers": [
                 "__stripped__"
               ]
             },
-            "length": 754,
-            "vocabulary": 353,
-            "difficulty": 5.0318840579710145,
-            "volume": 6381.497377446471,
-            "effort": 32110.954919556734,
-            "bugs": 2.127165792482157,
-            "time": 1783.9419399753742
+            "length": 760,
+            "vocabulary": 355,
+            "difficulty": 5.037463976945245,
+            "volume": 6438.473162937954,
+            "effort": 32433.57662482866,
+            "bugs": 2.146157720979318,
+            "time": 1801.8653680460366
           }
         }
       },
@@ -759,38 +759,38 @@
         "line": 728,
         "complexity": {
           "sloc": {
-            "physical": 91,
-            "logical": 57
+            "physical": 72,
+            "logical": 44
           },
-          "cyclomatic": 23,
+          "cyclomatic": 18,
           "halstead": {
             "operators": {
-              "distinct": 23,
-              "total": 137,
+              "distinct": 18,
+              "total": 110,
               "identifiers": [
                 "__stripped__"
               ]
             },
             "operands": {
-              "distinct": 39,
-              "total": 156,
+              "distinct": 36,
+              "total": 131,
               "identifiers": [
                 "__stripped__"
               ]
             },
-            "length": 293,
-            "vocabulary": 62,
-            "difficulty": 46,
-            "volume": 1744.5795189433545,
-            "effort": 80250.6578713943,
-            "bugs": 0.5815265063144515,
-            "time": 4458.369881744128
+            "length": 241,
+            "vocabulary": 54,
+            "difficulty": 32.75,
+            "volume": 1386.927888021396,
+            "effort": 45421.88833270072,
+            "bugs": 0.462309296007132,
+            "time": 2523.4382407055955
           }
         }
       },
       {
         "name": "scanStringLiteral",
-        "line": 822,
+        "line": 803,
         "complexity": {
           "sloc": {
             "physical": 103,
@@ -824,7 +824,7 @@
       },
       {
         "name": "scanRegExp",
-        "line": 926,
+        "line": 907,
         "complexity": {
           "sloc": {
             "physical": 91,
@@ -858,7 +858,7 @@
       },
       {
         "name": "isIdentifierName",
-        "line": 1018,
+        "line": 999,
         "complexity": {
           "sloc": {
             "physical": 6,
@@ -892,7 +892,7 @@
       },
       {
         "name": "advance",
-        "line": 1025,
+        "line": 1006,
         "complexity": {
           "sloc": {
             "physical": 45,
@@ -926,7 +926,7 @@
       },
       {
         "name": "lex",
-        "line": 1071,
+        "line": 1052,
         "complexity": {
           "sloc": {
             "physical": 16,
@@ -960,7 +960,7 @@
       },
       {
         "name": "peek",
-        "line": 1088,
+        "line": 1069,
         "complexity": {
           "sloc": {
             "physical": 11,
@@ -993,8 +993,42 @@
         }
       },
       {
+        "name": "postProcess",
+        "line": 1085,
+        "complexity": {
+          "sloc": {
+            "physical": 3,
+            "logical": 1
+          },
+          "cyclomatic": 1,
+          "halstead": {
+            "operators": {
+              "distinct": 1,
+              "total": 1,
+              "identifiers": [
+                "__stripped__"
+              ]
+            },
+            "operands": {
+              "distinct": 1,
+              "total": 2,
+              "identifiers": [
+                "__stripped__"
+              ]
+            },
+            "length": 3,
+            "vocabulary": 2,
+            "difficulty": 1,
+            "volume": 3,
+            "effort": 3,
+            "bugs": 0.001,
+            "time": 0.16666666666666666
+          }
+        }
+      },
+      {
         "name": "createArrayExpression",
-        "line": 1104,
+        "line": 1089,
         "complexity": {
           "sloc": {
             "physical": 6,
@@ -1028,7 +1062,7 @@
       },
       {
         "name": "createAssignmentExpression",
-        "line": 1111,
+        "line": 1096,
         "complexity": {
           "sloc": {
             "physical": 8,
@@ -1062,7 +1096,7 @@
       },
       {
         "name": "createBinaryExpression",
-        "line": 1120,
+        "line": 1105,
         "complexity": {
           "sloc": {
             "physical": 10,
@@ -1096,7 +1130,7 @@
       },
       {
         "name": "createBlockStatement",
-        "line": 1131,
+        "line": 1116,
         "complexity": {
           "sloc": {
             "physical": 6,
@@ -1130,7 +1164,7 @@
       },
       {
         "name": "createBreakStatement",
-        "line": 1138,
+        "line": 1123,
         "complexity": {
           "sloc": {
             "physical": 6,
@@ -1164,7 +1198,7 @@
       },
       {
         "name": "createCallExpression",
-        "line": 1145,
+        "line": 1130,
         "complexity": {
           "sloc": {
             "physical": 7,
@@ -1198,7 +1232,7 @@
       },
       {
         "name": "createCatchClause",
-        "line": 1153,
+        "line": 1138,
         "complexity": {
           "sloc": {
             "physical": 7,
@@ -1232,7 +1266,7 @@
       },
       {
         "name": "createConditionalExpression",
-        "line": 1161,
+        "line": 1146,
         "complexity": {
           "sloc": {
             "physical": 8,
@@ -1266,7 +1300,7 @@
       },
       {
         "name": "createContinueStatement",
-        "line": 1170,
+        "line": 1155,
         "complexity": {
           "sloc": {
             "physical": 6,
@@ -1300,7 +1334,7 @@
       },
       {
         "name": "createDebuggerStatement",
-        "line": 1177,
+        "line": 1162,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -1334,7 +1368,7 @@
       },
       {
         "name": "createDoWhileStatement",
-        "line": 1183,
+        "line": 1168,
         "complexity": {
           "sloc": {
             "physical": 7,
@@ -1368,7 +1402,7 @@
       },
       {
         "name": "createEmptyStatement",
-        "line": 1191,
+        "line": 1176,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -1402,7 +1436,7 @@
       },
       {
         "name": "createExpressionStatement",
-        "line": 1197,
+        "line": 1182,
         "complexity": {
           "sloc": {
             "physical": 6,
@@ -1436,7 +1470,7 @@
       },
       {
         "name": "createForStatement",
-        "line": 1204,
+        "line": 1189,
         "complexity": {
           "sloc": {
             "physical": 9,
@@ -1470,7 +1504,7 @@
       },
       {
         "name": "createForInStatement",
-        "line": 1214,
+        "line": 1199,
         "complexity": {
           "sloc": {
             "physical": 9,
@@ -1504,7 +1538,7 @@
       },
       {
         "name": "createFunctionDeclaration",
-        "line": 1224,
+        "line": 1209,
         "complexity": {
           "sloc": {
             "physical": 12,
@@ -1538,7 +1572,7 @@
       },
       {
         "name": "createFunctionExpression",
-        "line": 1237,
+        "line": 1222,
         "complexity": {
           "sloc": {
             "physical": 12,
@@ -1572,7 +1606,7 @@
       },
       {
         "name": "createIdentifier",
-        "line": 1250,
+        "line": 1235,
         "complexity": {
           "sloc": {
             "physical": 6,
@@ -1606,7 +1640,7 @@
       },
       {
         "name": "createIfStatement",
-        "line": 1257,
+        "line": 1242,
         "complexity": {
           "sloc": {
             "physical": 8,
@@ -1640,7 +1674,7 @@
       },
       {
         "name": "createLabeledStatement",
-        "line": 1266,
+        "line": 1251,
         "complexity": {
           "sloc": {
             "physical": 7,
@@ -1674,7 +1708,7 @@
       },
       {
         "name": "createLiteral",
-        "line": 1274,
+        "line": 1259,
         "complexity": {
           "sloc": {
             "physical": 7,
@@ -1708,7 +1742,7 @@
       },
       {
         "name": "createMemberExpression",
-        "line": 1282,
+        "line": 1267,
         "complexity": {
           "sloc": {
             "physical": 8,
@@ -1742,7 +1776,7 @@
       },
       {
         "name": "createNewExpression",
-        "line": 1291,
+        "line": 1276,
         "complexity": {
           "sloc": {
             "physical": 7,
@@ -1776,7 +1810,7 @@
       },
       {
         "name": "createObjectExpression",
-        "line": 1299,
+        "line": 1284,
         "complexity": {
           "sloc": {
             "physical": 6,
@@ -1810,7 +1844,7 @@
       },
       {
         "name": "createPostfixExpression",
-        "line": 1306,
+        "line": 1291,
         "complexity": {
           "sloc": {
             "physical": 8,
@@ -1844,7 +1878,7 @@
       },
       {
         "name": "createProgram",
-        "line": 1315,
+        "line": 1300,
         "complexity": {
           "sloc": {
             "physical": 6,
@@ -1878,7 +1912,7 @@
       },
       {
         "name": "createProperty",
-        "line": 1322,
+        "line": 1307,
         "complexity": {
           "sloc": {
             "physical": 8,
@@ -1912,7 +1946,7 @@
       },
       {
         "name": "createReturnStatement",
-        "line": 1331,
+        "line": 1316,
         "complexity": {
           "sloc": {
             "physical": 6,
@@ -1946,7 +1980,7 @@
       },
       {
         "name": "createSequenceExpression",
-        "line": 1338,
+        "line": 1323,
         "complexity": {
           "sloc": {
             "physical": 6,
@@ -1980,7 +2014,7 @@
       },
       {
         "name": "createSwitchCase",
-        "line": 1345,
+        "line": 1330,
         "complexity": {
           "sloc": {
             "physical": 7,
@@ -2014,7 +2048,7 @@
       },
       {
         "name": "createSwitchStatement",
-        "line": 1353,
+        "line": 1338,
         "complexity": {
           "sloc": {
             "physical": 7,
@@ -2048,7 +2082,7 @@
       },
       {
         "name": "createThisExpression",
-        "line": 1361,
+        "line": 1346,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -2082,7 +2116,7 @@
       },
       {
         "name": "createThrowStatement",
-        "line": 1367,
+        "line": 1352,
         "complexity": {
           "sloc": {
             "physical": 6,
@@ -2116,7 +2150,7 @@
       },
       {
         "name": "createTryStatement",
-        "line": 1374,
+        "line": 1359,
         "complexity": {
           "sloc": {
             "physical": 9,
@@ -2150,7 +2184,7 @@
       },
       {
         "name": "createUnaryExpression",
-        "line": 1384,
+        "line": 1369,
         "complexity": {
           "sloc": {
             "physical": 15,
@@ -2184,7 +2218,7 @@
       },
       {
         "name": "createVariableDeclaration",
-        "line": 1400,
+        "line": 1385,
         "complexity": {
           "sloc": {
             "physical": 7,
@@ -2218,7 +2252,7 @@
       },
       {
         "name": "createVariableDeclarator",
-        "line": 1408,
+        "line": 1393,
         "complexity": {
           "sloc": {
             "physical": 7,
@@ -2252,7 +2286,7 @@
       },
       {
         "name": "createWhileStatement",
-        "line": 1416,
+        "line": 1401,
         "complexity": {
           "sloc": {
             "physical": 7,
@@ -2286,7 +2320,7 @@
       },
       {
         "name": "createWithStatement",
-        "line": 1424,
+        "line": 1409,
         "complexity": {
           "sloc": {
             "physical": 7,
@@ -2320,7 +2354,7 @@
       },
       {
         "name": "peekLineTerminator",
-        "line": 1435,
+        "line": 1420,
         "complexity": {
           "sloc": {
             "physical": 14,
@@ -2354,7 +2388,7 @@
       },
       {
         "name": "throwError",
-        "line": 1452,
+        "line": 1437,
         "complexity": {
           "sloc": {
             "physical": 26,
@@ -2388,7 +2422,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 1457,
+        "line": 1442,
         "complexity": {
           "sloc": {
             "physical": 4,
@@ -2422,7 +2456,7 @@
       },
       {
         "name": "throwErrorTolerant",
-        "line": 1479,
+        "line": 1464,
         "complexity": {
           "sloc": {
             "physical": 11,
@@ -2456,7 +2490,7 @@
       },
       {
         "name": "throwUnexpected",
-        "line": 1494,
+        "line": 1479,
         "complexity": {
           "sloc": {
             "physical": 30,
@@ -2490,7 +2524,7 @@
       },
       {
         "name": "expect",
-        "line": 1528,
+        "line": 1513,
         "complexity": {
           "sloc": {
             "physical": 6,
@@ -2524,7 +2558,7 @@
       },
       {
         "name": "expectKeyword",
-        "line": 1538,
+        "line": 1523,
         "complexity": {
           "sloc": {
             "physical": 6,
@@ -2558,7 +2592,7 @@
       },
       {
         "name": "match",
-        "line": 1547,
+        "line": 1532,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -2592,7 +2626,7 @@
       },
       {
         "name": "matchKeyword",
-        "line": 1553,
+        "line": 1538,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -2626,7 +2660,7 @@
       },
       {
         "name": "matchAssign",
-        "line": 1559,
+        "line": 1544,
         "complexity": {
           "sloc": {
             "physical": 20,
@@ -2660,7 +2694,7 @@
       },
       {
         "name": "consumeSemicolon",
-        "line": 1580,
+        "line": 1565,
         "complexity": {
           "sloc": {
             "physical": 24,
@@ -2694,7 +2728,7 @@
       },
       {
         "name": "isLeftHandSide",
-        "line": 1607,
+        "line": 1592,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -2728,7 +2762,7 @@
       },
       {
         "name": "parseArrayInitialiser",
-        "line": 1613,
+        "line": 1598,
         "complexity": {
           "sloc": {
             "physical": 22,
@@ -2762,7 +2796,7 @@
       },
       {
         "name": "parsePropertyFunction",
-        "line": 1638,
+        "line": 1623,
         "complexity": {
           "sloc": {
             "physical": 11,
@@ -2796,7 +2830,7 @@
       },
       {
         "name": "parseObjectPropertyKey",
-        "line": 1650,
+        "line": 1635,
         "complexity": {
           "sloc": {
             "physical": 15,
@@ -2830,7 +2864,7 @@
       },
       {
         "name": "parseObjectProperty",
-        "line": 1666,
+        "line": 1651,
         "complexity": {
           "sloc": {
             "physical": 43,
@@ -2864,7 +2898,7 @@
       },
       {
         "name": "parseObjectInitialiser",
-        "line": 1710,
+        "line": 1695,
         "complexity": {
           "sloc": {
             "physical": 46,
@@ -2898,7 +2932,7 @@
       },
       {
         "name": "parseGroupExpression",
-        "line": 1759,
+        "line": 1744,
         "complexity": {
           "sloc": {
             "physical": 11,
@@ -2932,7 +2966,7 @@
       },
       {
         "name": "parsePrimaryExpression",
-        "line": 1774,
+        "line": 1759,
         "complexity": {
           "sloc": {
             "physical": 57,
@@ -2966,7 +3000,7 @@
       },
       {
         "name": "parseArguments",
-        "line": 1834,
+        "line": 1819,
         "complexity": {
           "sloc": {
             "physical": 19,
@@ -3000,7 +3034,7 @@
       },
       {
         "name": "parseNonComputedProperty",
-        "line": 1854,
+        "line": 1839,
         "complexity": {
           "sloc": {
             "physical": 9,
@@ -3034,7 +3068,7 @@
       },
       {
         "name": "parseNonComputedMember",
-        "line": 1864,
+        "line": 1849,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -3068,7 +3102,7 @@
       },
       {
         "name": "parseComputedMember",
-        "line": 1870,
+        "line": 1855,
         "complexity": {
           "sloc": {
             "physical": 11,
@@ -3102,7 +3136,7 @@
       },
       {
         "name": "parseNewExpression",
-        "line": 1882,
+        "line": 1867,
         "complexity": {
           "sloc": {
             "physical": 9,
@@ -3136,7 +3170,7 @@
       },
       {
         "name": "parseLeftHandSideExpressionAllowCall",
-        "line": 1892,
+        "line": 1877,
         "complexity": {
           "sloc": {
             "physical": 20,
@@ -3170,7 +3204,7 @@
       },
       {
         "name": "parseLeftHandSideExpression",
-        "line": 1914,
+        "line": 1899,
         "complexity": {
           "sloc": {
             "physical": 17,
@@ -3204,7 +3238,7 @@
       },
       {
         "name": "parsePostfixExpression",
-        "line": 1934,
+        "line": 1919,
         "complexity": {
           "sloc": {
             "physical": 23,
@@ -3238,7 +3272,7 @@
       },
       {
         "name": "parseUnaryExpression",
-        "line": 1960,
+        "line": 1945,
         "complexity": {
           "sloc": {
             "physical": 40,
@@ -3272,7 +3306,7 @@
       },
       {
         "name": "binaryPrecedence",
-        "line": 2001,
+        "line": 1986,
         "complexity": {
           "sloc": {
             "physical": 70,
@@ -3306,7 +3340,7 @@
       },
       {
         "name": "parseBinaryExpression",
-        "line": 2080,
+        "line": 2065,
         "complexity": {
           "sloc": {
             "physical": 46,
@@ -3340,7 +3374,7 @@
       },
       {
         "name": "parseConditionalExpression",
-        "line": 2130,
+        "line": 2115,
         "complexity": {
           "sloc": {
             "physical": 19,
@@ -3374,7 +3408,7 @@
       },
       {
         "name": "parseAssignmentExpression",
-        "line": 2152,
+        "line": 2137,
         "complexity": {
           "sloc": {
             "physical": 24,
@@ -3408,7 +3442,7 @@
       },
       {
         "name": "parseExpression",
-        "line": 2179,
+        "line": 2164,
         "complexity": {
           "sloc": {
             "physical": 17,
@@ -3442,7 +3476,7 @@
       },
       {
         "name": "parseStatementList",
-        "line": 2199,
+        "line": 2184,
         "complexity": {
           "sloc": {
             "physical": 17,
@@ -3476,7 +3510,7 @@
       },
       {
         "name": "parseBlock",
-        "line": 2217,
+        "line": 2202,
         "complexity": {
           "sloc": {
             "physical": 11,
@@ -3510,7 +3544,7 @@
       },
       {
         "name": "parseVariableIdentifier",
-        "line": 2231,
+        "line": 2216,
         "complexity": {
           "sloc": {
             "physical": 9,
@@ -3544,7 +3578,7 @@
       },
       {
         "name": "parseVariableDeclaration",
-        "line": 2241,
+        "line": 2226,
         "complexity": {
           "sloc": {
             "physical": 19,
@@ -3578,7 +3612,7 @@
       },
       {
         "name": "parseVariableDeclarationList",
-        "line": 2261,
+        "line": 2246,
         "complexity": {
           "sloc": {
             "physical": 13,
@@ -3612,7 +3646,7 @@
       },
       {
         "name": "parseVariableStatement",
-        "line": 2275,
+        "line": 2260,
         "complexity": {
           "sloc": {
             "physical": 11,
@@ -3646,7 +3680,7 @@
       },
       {
         "name": "parseConstLetDeclaration",
-        "line": 2291,
+        "line": 2276,
         "complexity": {
           "sloc": {
             "physical": 11,
@@ -3680,7 +3714,7 @@
       },
       {
         "name": "parseEmptyStatement",
-        "line": 2305,
+        "line": 2290,
         "complexity": {
           "sloc": {
             "physical": 4,
@@ -3714,7 +3748,7 @@
       },
       {
         "name": "parseExpressionStatement",
-        "line": 2312,
+        "line": 2297,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -3748,7 +3782,7 @@
       },
       {
         "name": "parseIfStatement",
-        "line": 2320,
+        "line": 2305,
         "complexity": {
           "sloc": {
             "physical": 22,
@@ -3782,7 +3816,7 @@
       },
       {
         "name": "parseDoWhileStatement",
-        "line": 2345,
+        "line": 2330,
         "complexity": {
           "sloc": {
             "physical": 26,
@@ -3816,7 +3850,7 @@
       },
       {
         "name": "parseWhileStatement",
-        "line": 2372,
+        "line": 2357,
         "complexity": {
           "sloc": {
             "physical": 20,
@@ -3850,7 +3884,7 @@
       },
       {
         "name": "parseForVariableDeclaration",
-        "line": 2393,
+        "line": 2378,
         "complexity": {
           "sloc": {
             "physical": 6,
@@ -3884,7 +3918,7 @@
       },
       {
         "name": "parseForStatement",
-        "line": 2400,
+        "line": 2385,
         "complexity": {
           "sloc": {
             "physical": 71,
@@ -3918,7 +3952,7 @@
       },
       {
         "name": "parseContinueStatement",
-        "line": 2474,
+        "line": 2459,
         "complexity": {
           "sloc": {
             "physical": 41,
@@ -3952,7 +3986,7 @@
       },
       {
         "name": "parseBreakStatement",
-        "line": 2518,
+        "line": 2503,
         "complexity": {
           "sloc": {
             "physical": 41,
@@ -3986,7 +4020,7 @@
       },
       {
         "name": "parseReturnStatement",
-        "line": 2562,
+        "line": 2547,
         "complexity": {
           "sloc": {
             "physical": 32,
@@ -4020,7 +4054,7 @@
       },
       {
         "name": "parseWithStatement",
-        "line": 2597,
+        "line": 2582,
         "complexity": {
           "sloc": {
             "physical": 19,
@@ -4054,7 +4088,7 @@
       },
       {
         "name": "parseSwitchCase",
-        "line": 2619,
+        "line": 2604,
         "complexity": {
           "sloc": {
             "physical": 24,
@@ -4088,7 +4122,7 @@
       },
       {
         "name": "parseSwitchStatement",
-        "line": 2644,
+        "line": 2629,
         "complexity": {
           "sloc": {
             "physical": 44,
@@ -4122,7 +4156,7 @@
       },
       {
         "name": "parseThrowStatement",
-        "line": 2691,
+        "line": 2676,
         "complexity": {
           "sloc": {
             "physical": 15,
@@ -4156,7 +4190,7 @@
       },
       {
         "name": "parseCatchClause",
-        "line": 2709,
+        "line": 2694,
         "complexity": {
           "sloc": {
             "physical": 20,
@@ -4190,7 +4224,7 @@
       },
       {
         "name": "parseTryStatement",
-        "line": 2730,
+        "line": 2715,
         "complexity": {
           "sloc": {
             "physical": 22,
@@ -4224,7 +4258,7 @@
       },
       {
         "name": "parseDebuggerStatement",
-        "line": 2755,
+        "line": 2740,
         "complexity": {
           "sloc": {
             "physical": 7,
@@ -4258,7 +4292,7 @@
       },
       {
         "name": "parseStatement",
-        "line": 2765,
+        "line": 2750,
         "complexity": {
           "sloc": {
             "physical": 79,
@@ -4292,7 +4326,7 @@
       },
       {
         "name": "parseFunctionSourceElements",
-        "line": 2847,
+        "line": 2832,
         "complexity": {
           "sloc": {
             "physical": 61,
@@ -4326,7 +4360,7 @@
       },
       {
         "name": "parseParams",
-        "line": 2909,
+        "line": 2894,
         "complexity": {
           "sloc": {
             "physical": 49,
@@ -4360,7 +4394,7 @@
       },
       {
         "name": "parseFunctionDeclaration",
-        "line": 2959,
+        "line": 2944,
         "complexity": {
           "sloc": {
             "physical": 40,
@@ -4394,7 +4428,7 @@
       },
       {
         "name": "parseFunctionExpression",
-        "line": 3000,
+        "line": 2985,
         "complexity": {
           "sloc": {
             "physical": 43,
@@ -4428,7 +4462,7 @@
       },
       {
         "name": "parseSourceElement",
-        "line": 3046,
+        "line": 3031,
         "complexity": {
           "sloc": {
             "physical": 17,
@@ -4462,7 +4496,7 @@
       },
       {
         "name": "parseSourceElements",
-        "line": 3064,
+        "line": 3049,
         "complexity": {
           "sloc": {
             "physical": 37,
@@ -4496,7 +4530,7 @@
       },
       {
         "name": "parseProgram",
-        "line": 3102,
+        "line": 3087,
         "complexity": {
           "sloc": {
             "physical": 7,
@@ -4530,7 +4564,7 @@
       },
       {
         "name": "addComment",
-        "line": 3113,
+        "line": 3098,
         "complexity": {
           "sloc": {
             "physical": 20,
@@ -4564,7 +4598,7 @@
       },
       {
         "name": "scanComment",
-        "line": 3134,
+        "line": 3119,
         "complexity": {
           "sloc": {
             "physical": 121,
@@ -4598,7 +4632,7 @@
       },
       {
         "name": "filterCommentLocation",
-        "line": 3256,
+        "line": 3241,
         "complexity": {
           "sloc": {
             "physical": 20,
@@ -4632,7 +4666,7 @@
       },
       {
         "name": "collectToken",
-        "line": 3277,
+        "line": 3262,
         "complexity": {
           "sloc": {
             "physical": 31,
@@ -4666,7 +4700,7 @@
       },
       {
         "name": "collectRegex",
-        "line": 3309,
+        "line": 3294,
         "complexity": {
           "sloc": {
             "physical": 38,
@@ -4700,7 +4734,7 @@
       },
       {
         "name": "filterTokenLocation",
-        "line": 3348,
+        "line": 3333,
         "complexity": {
           "sloc": {
             "physical": 20,
@@ -4734,10 +4768,10 @@
       },
       {
         "name": "createLocationMarker",
-        "line": 3369,
+        "line": 3354,
         "complexity": {
           "sloc": {
-            "physical": 59,
+            "physical": 61,
             "logical": 13
           },
           "cyclomatic": 1,
@@ -4768,7 +4802,7 @@
       },
       {
         "name": "marker.end",
-        "line": 3384,
+        "line": 3369,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -4802,75 +4836,75 @@
       },
       {
         "name": "marker.applyGroup",
-        "line": 3390,
+        "line": 3375,
         "complexity": {
           "sloc": {
-            "physical": 17,
-            "logical": 10
+            "physical": 18,
+            "logical": 11
           },
           "cyclomatic": 3,
           "halstead": {
             "operators": {
-              "distinct": 6,
-              "total": 34,
+              "distinct": 7,
+              "total": 37,
+              "identifiers": [
+                "__stripped__"
+              ]
+            },
+            "operands": {
+              "distinct": 16,
+              "total": 45,
+              "identifiers": [
+                "__stripped__"
+              ]
+            },
+            "length": 82,
+            "vocabulary": 23,
+            "difficulty": 9.84375,
+            "volume": 370.9320803966751,
+            "effort": 3651.36266640477,
+            "bugs": 0.12364402679889169,
+            "time": 202.85348146693167
+          }
+        }
+      },
+      {
+        "name": "marker.apply",
+        "line": 3394,
+        "complexity": {
+          "sloc": {
+            "physical": 18,
+            "logical": 11
+          },
+          "cyclomatic": 3,
+          "halstead": {
+            "operators": {
+              "distinct": 7,
+              "total": 37,
               "identifiers": [
                 "__stripped__"
               ]
             },
             "operands": {
               "distinct": 14,
-              "total": 41,
+              "total": 45,
               "identifiers": [
                 "__stripped__"
               ]
             },
-            "length": 75,
-            "vocabulary": 20,
-            "difficulty": 8.785714285714285,
-            "volume": 324.1446071165522,
-            "effort": 2847.8419053811367,
-            "bugs": 0.10804820237218407,
-            "time": 158.21343918784092
-          }
-        }
-      },
-      {
-        "name": "marker.apply",
-        "line": 3408,
-        "complexity": {
-          "sloc": {
-            "physical": 17,
-            "logical": 10
-          },
-          "cyclomatic": 3,
-          "halstead": {
-            "operators": {
-              "distinct": 6,
-              "total": 34,
-              "identifiers": [
-                "__stripped__"
-              ]
-            },
-            "operands": {
-              "distinct": 12,
-              "total": 41,
-              "identifiers": [
-                "__stripped__"
-              ]
-            },
-            "length": 75,
-            "vocabulary": 18,
-            "difficulty": 10.25,
-            "volume": 312.7443751081734,
-            "effort": 3205.6298448587777,
-            "bugs": 0.1042481250360578,
-            "time": 178.09054693659877
+            "length": 82,
+            "vocabulary": 21,
+            "difficulty": 11.25,
+            "volume": 360.1700286678584,
+            "effort": 4051.912822513407,
+            "bugs": 0.12005667622261947,
+            "time": 225.1062679174115
           }
         }
       },
       {
         "name": "trackGroupExpression",
-        "line": 3429,
+        "line": 3416,
         "complexity": {
           "sloc": {
             "physical": 16,
@@ -4904,7 +4938,7 @@
       },
       {
         "name": "trackLeftHandSideExpression",
-        "line": 3446,
+        "line": 3433,
         "complexity": {
           "sloc": {
             "physical": 24,
@@ -4938,7 +4972,7 @@
       },
       {
         "name": "trackLeftHandSideExpressionAllowCall",
-        "line": 3471,
+        "line": 3458,
         "complexity": {
           "sloc": {
             "physical": 29,
@@ -4972,7 +5006,7 @@
       },
       {
         "name": "filterGroup",
-        "line": 3501,
+        "line": 3488,
         "complexity": {
           "sloc": {
             "physical": 16,
@@ -5006,10 +5040,10 @@
       },
       {
         "name": "wrapTrackingFunction",
-        "line": 3518,
+        "line": 3505,
         "complexity": {
           "sloc": {
-            "physical": 72,
+            "physical": 74,
             "logical": 1
           },
           "cyclomatic": 1,
@@ -5040,10 +5074,10 @@
       },
       {
         "name": "<anonymous>",
-        "line": 3520,
+        "line": 3507,
         "complexity": {
           "sloc": {
-            "physical": 69,
+            "physical": 71,
             "logical": 3
           },
           "cyclomatic": 1,
@@ -5074,7 +5108,7 @@
       },
       {
         "name": "isBinary",
-        "line": 3522,
+        "line": 3509,
         "complexity": {
           "sloc": {
             "physical": 4,
@@ -5108,41 +5142,41 @@
       },
       {
         "name": "visit",
-        "line": 3527,
+        "line": 3514,
         "complexity": {
           "sloc": {
-            "physical": 37,
-            "logical": 28
+            "physical": 39,
+            "logical": 30
           },
           "cyclomatic": 15,
           "halstead": {
             "operators": {
               "distinct": 13,
-              "total": 105,
+              "total": 111,
               "identifiers": [
                 "__stripped__"
               ]
             },
             "operands": {
-              "distinct": 15,
-              "total": 123,
+              "distinct": 17,
+              "total": 131,
               "identifiers": [
                 "__stripped__"
               ]
             },
-            "length": 228,
-            "vocabulary": 28,
-            "difficulty": 53.3,
-            "volume": 1096.0769222291337,
-            "effort": 58420.89995481283,
-            "bugs": 0.3653589740763779,
-            "time": 3245.605553045157
+            "length": 242,
+            "vocabulary": 30,
+            "difficulty": 50.088235294117645,
+            "volume": 1187.4675241372615,
+            "effort": 59478.15275311048,
+            "bugs": 0.39582250804575386,
+            "time": 3304.341819617249
           }
         }
       },
       {
         "name": "<anonymous>",
-        "line": 3565,
+        "line": 3554,
         "complexity": {
           "sloc": {
             "physical": 23,
@@ -5176,7 +5210,7 @@
       },
       {
         "name": "patch",
-        "line": 3591,
+        "line": 3580,
         "complexity": {
           "sloc": {
             "physical": 82,
@@ -5210,7 +5244,7 @@
       },
       {
         "name": "unpatch",
-        "line": 3674,
+        "line": 3663,
         "complexity": {
           "sloc": {
             "physical": 41,
@@ -5243,42 +5277,110 @@
         }
       },
       {
-        "name": "parse",
-        "line": 3716,
+        "name": "extend",
+        "line": 3707,
         "complexity": {
           "sloc": {
-            "physical": 76,
-            "logical": 48
+            "physical": 17,
+            "logical": 9
           },
-          "cyclomatic": 15,
+          "cyclomatic": 3,
           "halstead": {
             "operators": {
-              "distinct": 20,
-              "total": 123,
+              "distinct": 8,
+              "total": 18,
               "identifiers": [
                 "__stripped__"
               ]
             },
             "operands": {
-              "distinct": 44,
-              "total": 134,
+              "distinct": 6,
+              "total": 24,
               "identifiers": [
                 "__stripped__"
               ]
             },
-            "length": 257,
-            "vocabulary": 64,
-            "difficulty": 30.454545454545453,
-            "volume": 1542,
-            "effort": 46960.90909090909,
-            "bugs": 0.514,
-            "time": 2608.939393939394
+            "length": 42,
+            "vocabulary": 14,
+            "difficulty": 16,
+            "volume": 159.90890672641936,
+            "effort": 2558.5425076227098,
+            "bugs": 0.05330296890880645,
+            "time": 142.14125042348388
+          }
+        }
+      },
+      {
+        "name": "parse",
+        "line": 3725,
+        "complexity": {
+          "sloc": {
+            "physical": 85,
+            "logical": 51
+          },
+          "cyclomatic": 16,
+          "halstead": {
+            "operators": {
+              "distinct": 21,
+              "total": 136,
+              "identifiers": [
+                "__stripped__"
+              ]
+            },
+            "operands": {
+              "distinct": 47,
+              "total": 148,
+              "identifiers": [
+                "__stripped__"
+              ]
+            },
+            "length": 284,
+            "vocabulary": 68,
+            "difficulty": 33.06382978723404,
+            "volume": 1728.8394469150965,
+            "effort": 57162.05320225659,
+            "bugs": 0.5762798156383655,
+            "time": 3175.6696223475883
           }
         }
       },
       {
         "name": "<anonymous>",
-        "line": 3799,
+        "line": 3755,
+        "complexity": {
+          "sloc": {
+            "physical": 4,
+            "logical": 2
+          },
+          "cyclomatic": 1,
+          "halstead": {
+            "operators": {
+              "distinct": 4,
+              "total": 6,
+              "identifiers": [
+                "__stripped__"
+              ]
+            },
+            "operands": {
+              "distinct": 5,
+              "total": 8,
+              "identifiers": [
+                "__stripped__"
+              ]
+            },
+            "length": 14,
+            "vocabulary": 9,
+            "difficulty": 3.2,
+            "volume": 44.37895002019238,
+            "effort": 142.01264006461562,
+            "bugs": 0.014792983340064125,
+            "time": 7.889591114700868
+          }
+        }
+      },
+      {
+        "name": "<anonymous>",
+        "line": 3817,
         "complexity": {
           "sloc": {
             "physical": 19,
@@ -5345,7 +5447,7 @@
         }
       }
     ],
-    "maintainability": 94.98661786283367,
+    "maintainability": 95.36906377531872,
     "module": "/tmp/plato/esprima/esprima.js"
   },
   "jshint": {

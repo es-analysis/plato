@@ -10,32 +10,32 @@
       "line": 1,
       "complexity": {
         "sloc": {
-          "physical": 815,
-          "logical": 453
+          "physical": 821,
+          "logical": 455
         },
-        "cyclomatic": 175,
+        "cyclomatic": 176,
         "halstead": {
           "operators": {
             "distinct": 35,
-            "total": 1373,
+            "total": 1381,
             "identifiers": [
               "__stripped__"
             ]
           },
           "operands": {
             "distinct": 233,
-            "total": 1710,
+            "total": 1719,
             "identifiers": [
               "__stripped__"
             ]
           },
-          "length": 3083,
+          "length": 3100,
           "vocabulary": 268,
-          "difficulty": 128.4334763948498,
-          "volume": 24867.752974181312,
-          "effort": 3193851.964602472,
-          "bugs": 8.289250991393772,
-          "time": 177436.22025569287
+          "difficulty": 129.10944206008583,
+          "volume": 25004.876490419094,
+          "effort": 3228365.6524593662,
+          "bugs": 8.334958830139698,
+          "time": 179353.6473588537
         }
       }
     },
@@ -283,38 +283,38 @@
         "line": 455,
         "complexity": {
           "sloc": {
-            "physical": 20,
-            "logical": 12
+            "physical": 26,
+            "logical": 14
           },
-          "cyclomatic": 6,
+          "cyclomatic": 7,
           "halstead": {
             "operators": {
-              "distinct": 11,
-              "total": 38,
+              "distinct": 12,
+              "total": 46,
               "identifiers": [
                 "__stripped__"
               ]
             },
             "operands": {
-              "distinct": 17,
-              "total": 48,
+              "distinct": 21,
+              "total": 57,
               "identifiers": [
                 "__stripped__"
               ]
             },
-            "length": 86,
-            "vocabulary": 28,
-            "difficulty": 15.529411764705884,
-            "volume": 413.43252329695395,
-            "effort": 6420.363891199756,
-            "bugs": 0.13781084109898464,
-            "time": 356.6868828444309
+            "length": 103,
+            "vocabulary": 33,
+            "difficulty": 16.285714285714285,
+            "volume": 519.5725942939207,
+            "effort": 8461.610821358137,
+            "bugs": 0.17319086476464024,
+            "time": 470.0894900754521
           }
         }
       },
       {
         "name": "trigger",
-        "line": 483,
+        "line": 489,
         "complexity": {
           "sloc": {
             "physical": 6,
@@ -348,7 +348,7 @@
       },
       {
         "name": "trigger",
-        "line": 492,
+        "line": 498,
         "complexity": {
           "sloc": {
             "physical": 6,
@@ -382,7 +382,7 @@
       },
       {
         "name": "trigger",
-        "line": 501,
+        "line": 507,
         "complexity": {
           "sloc": {
             "physical": 6,
@@ -416,7 +416,7 @@
       },
       {
         "name": "postDispatch",
-        "line": 511,
+        "line": 517,
         "complexity": {
           "sloc": {
             "physical": 7,
@@ -450,7 +450,7 @@
       },
       {
         "name": "simulate",
-        "line": 521,
+        "line": 527,
         "complexity": {
           "sloc": {
             "physical": 21,
@@ -484,7 +484,7 @@
       },
       {
         "name": "jQuery.removeEvent",
-        "line": 548,
+        "line": 554,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -518,7 +518,7 @@
       },
       {
         "name": "jQuery.Event",
-        "line": 554,
+        "line": 560,
         "complexity": {
           "sloc": {
             "physical": 32,
@@ -552,7 +552,7 @@
       },
       {
         "name": "returnFalse",
-        "line": 587,
+        "line": 593,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -586,7 +586,7 @@
       },
       {
         "name": "returnTrue",
-        "line": 590,
+        "line": 596,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -620,7 +620,7 @@
       },
       {
         "name": "preventDefault",
-        "line": 597,
+        "line": 603,
         "complexity": {
           "sloc": {
             "physical": 8,
@@ -654,7 +654,7 @@
       },
       {
         "name": "stopPropagation",
-        "line": 605,
+        "line": 611,
         "complexity": {
           "sloc": {
             "physical": 8,
@@ -688,7 +688,7 @@
       },
       {
         "name": "stopImmediatePropagation",
-        "line": 613,
+        "line": 619,
         "complexity": {
           "sloc": {
             "physical": 4,
@@ -722,7 +722,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 627,
+        "line": 633,
         "complexity": {
           "sloc": {
             "physical": 22,
@@ -756,7 +756,7 @@
       },
       {
         "name": "handle",
-        "line": 632,
+        "line": 638,
         "complexity": {
           "sloc": {
             "physical": 15,
@@ -790,7 +790,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 653,
+        "line": 659,
         "complexity": {
           "sloc": {
             "physical": 21,
@@ -824,7 +824,7 @@
       },
       {
         "name": "handler",
-        "line": 657,
+        "line": 663,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -858,7 +858,7 @@
       },
       {
         "name": "setup",
-        "line": 662,
+        "line": 668,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -892,7 +892,7 @@
       },
       {
         "name": "teardown",
-        "line": 667,
+        "line": 673,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -926,7 +926,7 @@
       },
       {
         "name": "on",
-        "line": 678,
+        "line": 684,
         "complexity": {
           "sloc": {
             "physical": 53,
@@ -960,7 +960,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 719,
+        "line": 725,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -994,7 +994,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 727,
+        "line": 733,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -1028,7 +1028,7 @@
       },
       {
         "name": "one",
-        "line": 731,
+        "line": 737,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -1062,7 +1062,7 @@
       },
       {
         "name": "off",
-        "line": 734,
+        "line": 740,
         "complexity": {
           "sloc": {
             "physical": 31,
@@ -1096,7 +1096,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 761,
+        "line": 767,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -1130,7 +1130,7 @@
       },
       {
         "name": "bind",
-        "line": 766,
+        "line": 772,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -1164,7 +1164,7 @@
       },
       {
         "name": "unbind",
-        "line": 769,
+        "line": 775,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -1198,7 +1198,7 @@
       },
       {
         "name": "delegate",
-        "line": 773,
+        "line": 779,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -1232,7 +1232,7 @@
       },
       {
         "name": "undelegate",
-        "line": 776,
+        "line": 782,
         "complexity": {
           "sloc": {
             "physical": 4,
@@ -1266,7 +1266,7 @@
       },
       {
         "name": "trigger",
-        "line": 781,
+        "line": 787,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -1300,7 +1300,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 782,
+        "line": 788,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -1334,7 +1334,7 @@
       },
       {
         "name": "triggerHandler",
-        "line": 786,
+        "line": 792,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -1368,7 +1368,7 @@
       },
       {
         "name": "hover",
-        "line": 792,
+        "line": 798,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -1402,7 +1402,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 799,
+        "line": 805,
         "complexity": {
           "sloc": {
             "physical": 17,
@@ -1436,7 +1436,7 @@
       },
       {
         "name": "<anonymous>.name",
-        "line": 802,
+        "line": 808,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -1469,7 +1469,7 @@
         }
       }
     ],
-    "maintainability": 102.81263503592217,
+    "maintainability": 102.71308758630522,
     "module": "event.js"
   },
   "jshint": {
@@ -1511,21 +1511,21 @@
       },
       {
         "severity": "error",
-        "line": 695,
+        "line": 701,
         "column": 19,
         "message": "Use '===' to compare with 'null'.",
         "source": "Use '{a}' to compare with '{b}'."
       },
       {
         "severity": "error",
-        "line": 695,
+        "line": 701,
         "column": 33,
         "message": "Use '===' to compare with 'null'.",
         "source": "Use '{a}' to compare with '{b}'."
       },
       {
         "severity": "error",
-        "line": 699,
+        "line": 705,
         "column": 24,
         "message": "Use '===' to compare with 'null'.",
         "source": "Use '{a}' to compare with '{b}'."

@@ -45,21 +45,21 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability</h2>
-      <p class="stat">124.59</p>
+      <p class="stat">125.91</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated # Bugs</h2>
-      <p class="stat">0.92</p>
+      <p class="stat">0.95</p>
     </div>
   </div>
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty</h2>
-      <p class="stat">31.50</p>
+      <p class="stat">32.07</p>
     </div>
     <div class="span6">
       <h2 class="header">SLOC/LSLOC</h2>
-      <p class="stat">103 / 53</p>
+      <p class="stat">109 / 55</p>
     </div>
   </div>
 </div>
@@ -136,7 +136,13 @@ var propStringTmplRe = /^<%=\s*([a-z0-9_$]+(?:\.[a-z0-9_$]+)*)\s*%>$/i;
 
 // Get config data, recursively processing templates.
 config.get = function(prop) {
-  return grunt.util.recurse(config.getRaw(prop), function(value) {
+  return config.process(config.getRaw(prop));
+};
+
+// Expand a config value recursively. Used for post-processing raw values
+// already retrieved from the config.
+config.process = function(raw) {
+  return grunt.util.recurse(raw, function(value) {
     // If the value is not a string, return it.
     if (typeof value !== 'string') { return value; }
     // If possible, access the specified property via config.get, in case it

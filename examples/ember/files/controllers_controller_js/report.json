@@ -10,39 +10,39 @@
       "line": 1,
       "complexity": {
         "sloc": {
-          "physical": 77,
-          "logical": 18
+          "physical": 79,
+          "logical": 19
         },
         "cyclomatic": 3,
         "halstead": {
           "operators": {
             "distinct": 13,
-            "total": 56,
+            "total": 57,
             "identifiers": [
               "__stripped__"
             ]
           },
           "operands": {
-            "distinct": 32,
-            "total": 69,
+            "distinct": 33,
+            "total": 71,
             "identifiers": [
               "__stripped__"
             ]
           },
-          "length": 125,
-          "vocabulary": 45,
-          "difficulty": 14.015625,
-          "volume": 686.4816370412093,
-          "effort": 9621.4691941557,
-          "bugs": 0.22882721234706976,
-          "time": 534.5260663419833
+          "length": 128,
+          "vocabulary": 46,
+          "difficulty": 13.984848484848484,
+          "volume": 707.0159303752977,
+          "effort": 9887.510662672723,
+          "bugs": 0.23567197679176588,
+          "time": 549.3061479262624
         }
       }
     },
     "functions": [
       {
         "name": "send",
-        "line": 58,
+        "line": 60,
         "complexity": {
           "sloc": {
             "physical": 11,
@@ -82,7 +82,7 @@
     "messages": [
       {
         "severity": "error",
-        "line": 64,
+        "line": 66,
         "column": 22,
         "message": "Expected a conditional expression and instead saw an assignment.",
         "source": "Expected a conditional expression and instead saw an assignment."
