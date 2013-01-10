@@ -16,7 +16,7 @@
         "cyclomatic": 343,
         "halstead": {
           "operators": {
-            "distinct": 53,
+            "distinct": 54,
             "total": 3618,
             "identifiers": [
               "__stripped__"
@@ -30,12 +30,12 @@
             ]
           },
           "length": 7826,
-          "vocabulary": 455,
-          "difficulty": 277.39303482587064,
-          "volume": 69101.41012478349,
-          "effort": 19168249.865260836,
-          "bugs": 23.03380337492783,
-          "time": 1064902.7702922686
+          "vocabulary": 456,
+          "difficulty": 282.6268656716418,
+          "volume": 69126.19725085328,
+          "effort": 19536920.464808322,
+          "bugs": 23.042065750284426,
+          "time": 1085384.4702671291
         }
       }
     },
@@ -3995,7 +3995,7 @@
           "cyclomatic": 13,
           "halstead": {
             "operators": {
-              "distinct": 19,
+              "distinct": 20,
               "total": 170,
               "identifiers": [
                 "__stripped__"
@@ -4009,12 +4009,12 @@
               ]
             },
             "length": 357,
-            "vocabulary": 76,
-            "difficulty": 31.166666666666668,
-            "volume": 2230.5101222993603,
-            "effort": 69517.56547833007,
-            "bugs": 0.7435033740997867,
-            "time": 3862.0869710183374
+            "vocabulary": 77,
+            "difficulty": 32.80701754385965,
+            "volume": 2237.24279502808,
+            "effort": 73397.26362635981,
+            "bugs": 0.7457475983426933,
+            "time": 4077.6257570199896
           }
         }
       },
@@ -5277,7 +5277,7 @@
         }
       }
     ],
-    "maintainability": 106.26857184755409,
+    "maintainability": 106.25583539663188,
     "module": "lib/compress.js"
   },
   "jshint": {

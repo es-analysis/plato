@@ -16,7 +16,7 @@
         "cyclomatic": 110,
         "halstead": {
           "operators": {
-            "distinct": 38,
+            "distinct": 39,
             "total": 976,
             "identifiers": [
               "__stripped__"
@@ -30,12 +30,12 @@
             ]
           },
           "length": 2163,
-          "vocabulary": 256,
-          "difficulty": 103.45412844036697,
-          "volume": 17304,
-          "effort": 1790170.2385321101,
-          "bugs": 5.768,
-          "time": 99453.90214067278
+          "vocabulary": 257,
+          "difficulty": 106.17660550458716,
+          "volume": 17316.16589990636,
+          "effort": 1838571.7156063418,
+          "bugs": 5.772055299968786,
+          "time": 102142.87308924121
         }
       }
     },

@@ -16,7 +16,7 @@ __report = {
         "cyclomatic": 250,
         "halstead": {
           "operators": {
-            "distinct": 42,
+            "distinct": 43,
             "total": 2322,
             "identifiers": [
               "__stripped__"
@@ -30,12 +30,12 @@ __report = {
             ]
           },
           "length": 5076,
-          "vocabulary": 583,
-          "difficulty": 106.90203327171903,
-          "volume": 46634.99912356572,
-          "effort": 4985376.22793401,
-          "bugs": 15.54499970785524,
-          "time": 276965.3459963339
+          "vocabulary": 584,
+          "difficulty": 109.44731977818854,
+          "volume": 46647.54946087497,
+          "effort": 5105449.26271325,
+          "bugs": 15.549183153624991,
+          "time": 283636.0701507361
         }
       }
     },
@@ -2805,7 +2805,7 @@ __report = {
           "cyclomatic": 7,
           "halstead": {
             "operators": {
-              "distinct": 16,
+              "distinct": 17,
               "total": 74,
               "identifiers": [
                 "__stripped__"
@@ -2819,12 +2819,12 @@ __report = {
               ]
             },
             "length": 158,
-            "vocabulary": 53,
-            "difficulty": 18.16216216216216,
-            "volume": 905.0114318209855,
-            "effort": 16436.964383343304,
-            "bugs": 0.30167047727366186,
-            "time": 913.1646879635168
+            "vocabulary": 54,
+            "difficulty": 19.2972972972973,
+            "volume": 909.2722253418282,
+            "effort": 17546.49645659636,
+            "bugs": 0.3030907417806094,
+            "time": 974.8053586997978
           }
         }
       },
@@ -3305,7 +3305,7 @@ __report = {
         }
       }
     ],
-    "maintainability": 105.51218893375082,
+    "maintainability": 105.49791703616566,
     "module": "lib/parse.js"
   },
   "jshint": {

@@ -2,7 +2,7 @@ __report = {
   "summary": {
     "total": {
       "sloc": 6571,
-      "maintainability": 1042.0588121843748
+      "maintainability": 1042.0318038358673
     },
     "average": {
       "sloc": 730,
@@ -73,7 +73,7 @@ __report = {
             "cyclomatic": 343,
             "halstead": {
               "operators": {
-                "distinct": 53,
+                "distinct": 54,
                 "total": 3618,
                 "identifiers": [
                   "__stripped__"
@@ -87,17 +87,17 @@ __report = {
                 ]
               },
               "length": 7826,
-              "vocabulary": 455,
-              "difficulty": 277.39303482587064,
-              "volume": 69101.41012478349,
-              "effort": 19168249.865260836,
-              "bugs": 23.03380337492783,
-              "time": 1064902.7702922686
+              "vocabulary": 456,
+              "difficulty": 282.6268656716418,
+              "volume": 69126.19725085328,
+              "effort": 19536920.464808322,
+              "bugs": 23.042065750284426,
+              "time": 1085384.4702671291
             }
           }
         },
         "module": "lib/compress.js",
-        "maintainability": 106.26857184755409
+        "maintainability": 106.25583539663188
       }
     },
     {
@@ -208,7 +208,7 @@ __report = {
             "cyclomatic": 250,
             "halstead": {
               "operators": {
-                "distinct": 42,
+                "distinct": 43,
                 "total": 2322,
                 "identifiers": [
                   "__stripped__"
@@ -222,17 +222,17 @@ __report = {
                 ]
               },
               "length": 5076,
-              "vocabulary": 583,
-              "difficulty": 106.90203327171903,
-              "volume": 46634.99912356572,
-              "effort": 4985376.22793401,
-              "bugs": 15.54499970785524,
-              "time": 276965.3459963339
+              "vocabulary": 584,
+              "difficulty": 109.44731977818854,
+              "volume": 46647.54946087497,
+              "effort": 5105449.26271325,
+              "bugs": 15.549183153624991,
+              "time": 283636.0701507361
             }
           }
         },
         "module": "lib/parse.js",
-        "maintainability": 105.51218893375082
+        "maintainability": 105.49791703616566
       }
     },
     {
