@@ -30,10 +30,10 @@
     "test": "grunt test"
   },
   "devDependencies": {
-    "grunt": "~0.4.0a",
-    "grunt-contrib-jshint": "~0.1.0",
-    "grunt-contrib-nodeunit": "~0.1.1",
-    "grunt-contrib-uglify": "~0.1.0",
+    "grunt": "~0.4.0rc5",
+    "grunt-contrib-jshint": "~0.1.1rc5",
+    "grunt-contrib-nodeunit": "~0.1.2rc5",
+    "grunt-contrib-uglify": "~0.1.1rc5",
     "grunt-casper": "~0.1.0"
   },
   "keywords": [
@@ -46,7 +46,7 @@
     "analyze"
   ],
   "dependencies": {
-    "complexity-report": "~0.4.3",
+    "complexity-report": "~0.6.2",
     "posix-getopt": "~1.0.0",
     "lodash": "~1.0.0-rc.3",
     "fs-extra": "~0.3.2",
