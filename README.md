@@ -40,6 +40,7 @@ plato -r -d report src/*.js
 
 ## Release History
 
+  - 0.4.2 Fixed overview links to files
   - 0.4.1 Fixed jshint option passing
   - 0.4.0 Added summary stats, Casper tests, nodunit tests
     - Breaking : plato api
