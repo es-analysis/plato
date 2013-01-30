@@ -2,7 +2,8 @@
   "h": {
     "long": "help",
     "desc": "Display this help text.",
-    "type": "Boolean"
+    "type": "Boolean",
+    "modal": true
   },
   "q": {
     "long": "quiet",
@@ -12,7 +13,8 @@
   "v": {
     "long": "version",
     "desc": "Print the version.",
-    "type": "Boolean"
+    "type": "Boolean",
+    "modal": true
   },
   "x": {
     "long": "exclude",
