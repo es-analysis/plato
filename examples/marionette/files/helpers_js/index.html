@@ -45,17 +45,17 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability</h2>
-      <p class="stat">109.98</p>
+      <p class="stat">108.41</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated # Bugs</h2>
-      <p class="stat">0.09</p>
+      <p class="stat">0.10</p>
     </div>
   </div>
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty</h2>
-      <p class="stat">11.54</p>
+      <p class="stat">14.57</p>
     </div>
     <div class="span6">
       <h2 class="header">SLOC/LSLOC</h2>
@@ -103,7 +103,7 @@ Marionette.getOption = function(target, optionName){
   if (!target || !optionName){ return; }
   var value;
 
-  if (target.options && target.options[optionName]){
+  if (target.options && (optionName in target.options) && (target.options[optionName] !== undefined)){
     value = target.options[optionName];
   } else {
     value = target[optionName];

@@ -13,29 +13,29 @@
           "physical": 278,
           "logical": 142
         },
-        "cyclomatic": 46,
+        "cyclomatic": 47,
         "halstead": {
           "operators": {
             "distinct": 27,
-            "total": 479,
+            "total": 481,
             "identifiers": [
               "__stripped__"
             ]
           },
           "operands": {
             "distinct": 112,
-            "total": 590,
+            "total": 593,
             "identifiers": [
               "__stripped__"
             ]
           },
-          "length": 1069,
+          "length": 1074,
           "vocabulary": 139,
-          "difficulty": 71.11607142857143,
-          "volume": 7610.1480067414295,
-          "effort": 541203.829229424,
-          "bugs": 2.536716002247143,
-          "time": 30066.879401634666
+          "difficulty": 71.47767857142857,
+          "volume": 7645.742712105047,
+          "effort": 546499.940015687,
+          "bugs": 2.5485809040350156,
+          "time": 30361.10777864928
         }
       }
     },
@@ -48,29 +48,29 @@
             "physical": 25,
             "logical": 13
           },
-          "cyclomatic": 4,
+          "cyclomatic": 5,
           "halstead": {
             "operators": {
-              "distinct": 15,
-              "total": 36,
+              "distinct": 16,
+              "total": 38,
               "identifiers": [
                 "__stripped__"
               ]
             },
             "operands": {
-              "distinct": 17,
-              "total": 46,
+              "distinct": 18,
+              "total": 49,
               "identifiers": [
                 "__stripped__"
               ]
             },
-            "length": 82,
-            "vocabulary": 32,
-            "difficulty": 20.294117647058826,
-            "volume": 410,
-            "effort": 8320.588235294119,
-            "bugs": 0.13666666666666666,
-            "time": 462.25490196078437
+            "length": 87,
+            "vocabulary": 34,
+            "difficulty": 21.77777777777778,
+            "volume": 442.6092671887796,
+            "effort": 9639.046263222312,
+            "bugs": 0.14753642239625986,
+            "time": 535.5025701790173
           }
         }
       },
@@ -1163,7 +1163,7 @@
         }
       }
     ],
-    "maintainability": 127.27016863205348,
+    "maintainability": 127.17537209412366,
     "module": "traversing.js"
   },
   "jshint": {

@@ -10,32 +10,32 @@ __report = {
       "line": 1,
       "complexity": {
         "sloc": {
-          "physical": 336,
-          "logical": 153
+          "physical": 341,
+          "logical": 155
         },
-        "cyclomatic": 57,
+        "cyclomatic": 58,
         "halstead": {
           "operators": {
             "distinct": 31,
-            "total": 419,
+            "total": 428,
             "identifiers": [
               "__stripped__"
             ]
           },
           "operands": {
-            "distinct": 96,
-            "total": 498,
+            "distinct": 97,
+            "total": 507,
             "identifiers": [
               "__stripped__"
             ]
           },
-          "length": 917,
-          "vocabulary": 127,
-          "difficulty": 80.40625,
-          "volume": 6408.623857770077,
-          "effort": 515293.41206382524,
-          "bugs": 2.1362079525900257,
-          "time": 28627.411781323623
+          "length": 935,
+          "vocabulary": 128,
+          "difficulty": 81.01546391752578,
+          "volume": 6545,
+          "effort": 530246.2113402062,
+          "bugs": 2.1816666666666666,
+          "time": 29458.12285223368
         }
       }
     },
@@ -283,38 +283,38 @@ __report = {
         "line": 225,
         "complexity": {
           "sloc": {
-            "physical": 6,
-            "logical": 2
+            "physical": 11,
+            "logical": 4
           },
-          "cyclomatic": 2,
+          "cyclomatic": 3,
           "halstead": {
             "operators": {
-              "distinct": 10,
-              "total": 17,
+              "distinct": 11,
+              "total": 26,
               "identifiers": [
                 "__stripped__"
               ]
             },
             "operands": {
-              "distinct": 8,
-              "total": 16,
+              "distinct": 12,
+              "total": 25,
               "identifiers": [
                 "__stripped__"
               ]
             },
-            "length": 33,
-            "vocabulary": 18,
-            "difficulty": 10,
-            "volume": 137.6075250475963,
-            "effort": 1376.075250475963,
-            "bugs": 0.04586917501586544,
-            "time": 76.44862502644239
+            "length": 51,
+            "vocabulary": 23,
+            "difficulty": 11.458333333333334,
+            "volume": 230.70165975890765,
+            "effort": 2643.456518070817,
+            "bugs": 0.07690055325296921,
+            "time": 146.8586954483787
           }
         }
       },
       {
         "name": "data",
-        "line": 234,
+        "line": 239,
         "complexity": {
           "sloc": {
             "physical": 48,
@@ -348,7 +348,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 265,
+        "line": 270,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -382,7 +382,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 270,
+        "line": 275,
         "complexity": {
           "sloc": {
             "physical": 11,
@@ -416,7 +416,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 277,
+        "line": 282,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -450,7 +450,7 @@ __report = {
       },
       {
         "name": "removeData",
-        "line": 283,
+        "line": 288,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -484,7 +484,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 284,
+        "line": 289,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -518,7 +518,7 @@ __report = {
       },
       {
         "name": "dataAttr",
-        "line": 290,
+        "line": 295,
         "complexity": {
           "sloc": {
             "physical": 30,
@@ -552,7 +552,7 @@ __report = {
       },
       {
         "name": "isEmptyDataObject",
-        "line": 322,
+        "line": 327,
         "complexity": {
           "sloc": {
             "physical": 15,
@@ -585,7 +585,7 @@ __report = {
         }
       }
     ],
-    "maintainability": 106.72644482961513,
+    "maintainability": 106.43440695005444,
     "module": "data.js"
   },
   "jshint": {

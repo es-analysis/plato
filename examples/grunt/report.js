@@ -1,12 +1,12 @@
 __report = {
   "summary": {
     "total": {
-      "sloc": 2388,
-      "maintainability": 1840.5794619428498
+      "sloc": 2393,
+      "maintainability": 1841.6759303377587
     },
     "average": {
       "sloc": 159,
-      "maintainability": "122.71"
+      "maintainability": "122.78"
     }
   },
   "reports": [
@@ -16,6 +16,9 @@ __report = {
         "fileShort": "grunt/cli.js",
         "fileSafe": "grunt_cli_js",
         "link": "files/grunt_cli_js/index.html"
+      },
+      "jshint": {
+        "messages": 7
       },
       "complexity": {
         "aggregate": {
@@ -62,6 +65,9 @@ __report = {
         "fileSafe": "grunt_config_js",
         "link": "files/grunt_config_js/index.html"
       },
+      "jshint": {
+        "messages": 5
+      },
       "complexity": {
         "aggregate": {
           "line": 10,
@@ -106,6 +112,9 @@ __report = {
         "fileShort": "grunt/event.js",
         "fileSafe": "grunt_event_js",
         "link": "files/grunt_event_js/index.html"
+      },
+      "jshint": {
+        "messages": 3
       },
       "complexity": {
         "aggregate": {
@@ -152,6 +161,9 @@ __report = {
         "fileSafe": "grunt_fail_js",
         "link": "files/grunt_fail_js/index.html"
       },
+      "jshint": {
+        "messages": 8
+      },
       "complexity": {
         "aggregate": {
           "line": 10,
@@ -196,6 +208,9 @@ __report = {
         "fileShort": "grunt/file.js",
         "fileSafe": "grunt_file_js",
         "link": "files/grunt_file_js/index.html"
+      },
+      "jshint": {
+        "messages": 22
       },
       "complexity": {
         "aggregate": {
@@ -242,42 +257,45 @@ __report = {
         "fileSafe": "grunt_help_js",
         "link": "files/grunt_help_js/index.html"
       },
+      "jshint": {
+        "messages": 32
+      },
       "complexity": {
         "aggregate": {
           "line": 10,
           "complexity": {
             "sloc": {
-              "physical": 117,
-              "logical": 52
+              "physical": 120,
+              "logical": 53
             },
             "cyclomatic": 5,
             "halstead": {
               "operators": {
                 "distinct": 16,
-                "total": 203,
+                "total": 206,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
               "operands": {
-                "distinct": 94,
-                "total": 246,
+                "distinct": 96,
+                "total": 250,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
-              "length": 449,
-              "vocabulary": 110,
-              "difficulty": 20.93617021276596,
-              "volume": 3044.8305113725723,
-              "effort": 63747.08985511939,
-              "bugs": 1.0149435037908574,
-              "time": 3541.504991951077
+              "length": 456,
+              "vocabulary": 112,
+              "difficulty": 20.833333333333332,
+              "volume": 3104.1538444582675,
+              "effort": 64669.87175954723,
+              "bugs": 1.0347179481527558,
+              "time": 3592.7706533081796
             }
           }
         },
         "module": "grunt/help.js",
-        "maintainability": 137.69057209688546
+        "maintainability": 138.93144334164919
       }
     },
     {
@@ -286,6 +304,9 @@ __report = {
         "fileShort": "grunt/log.js",
         "fileSafe": "grunt_log_js",
         "link": "files/grunt_log_js/index.html"
+      },
+      "jshint": {
+        "messages": 8
       },
       "complexity": {
         "aggregate": {
@@ -332,6 +353,9 @@ __report = {
         "fileSafe": "grunt_option_js",
         "link": "files/grunt_option_js/index.html"
       },
+      "jshint": {
+        "messages": 2
+      },
       "complexity": {
         "aggregate": {
           "line": 10,
@@ -377,42 +401,45 @@ __report = {
         "fileSafe": "grunt_task_js",
         "link": "files/grunt_task_js/index.html"
       },
+      "jshint": {
+        "messages": 7
+      },
       "complexity": {
         "aggregate": {
           "line": 10,
           "complexity": {
             "sloc": {
-              "physical": 434,
-              "logical": 259
+              "physical": 436,
+              "logical": 261
             },
             "cyclomatic": 59,
             "halstead": {
               "operators": {
                 "distinct": 31,
-                "total": 945,
+                "total": 948,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
               "operands": {
-                "distinct": 236,
-                "total": 1063,
+                "distinct": 237,
+                "total": 1068,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
-              "length": 2008,
-              "vocabulary": 267,
-              "difficulty": 69.8156779661017,
-              "volume": 16185.87743082861,
-              "effort": 1130028.006309524,
-              "bugs": 5.39529247694287,
-              "time": 62779.33368386244
+              "length": 2016,
+              "vocabulary": 268,
+              "difficulty": 69.84810126582279,
+              "volume": 16261.235807962868,
+              "effort": 1135816.4454220142,
+              "bugs": 5.420411935987623,
+              "time": 63100.913634556346
             }
           }
         },
         "module": "grunt/task.js",
-        "maintainability": 110.37245588570543
+        "maintainability": 110.22805303585068
       }
     },
     {
@@ -421,6 +448,9 @@ __report = {
         "fileShort": "grunt/template.js",
         "fileSafe": "grunt_template_js",
         "link": "files/grunt_template_js/index.html"
+      },
+      "jshint": {
+        "messages": 4
       },
       "complexity": {
         "aggregate": {
@@ -467,6 +497,9 @@ __report = {
         "fileSafe": "grunt_util_js",
         "link": "files/grunt_util_js/index.html"
       },
+      "jshint": {
+        "messages": 17
+      },
       "complexity": {
         "aggregate": {
           "line": 10,
@@ -511,6 +544,9 @@ __report = {
         "fileShort": "grunt.js",
         "fileSafe": "grunt_js",
         "link": "files/grunt_js/index.html"
+      },
+      "jshint": {
+        "messages": 10
       },
       "complexity": {
         "aggregate": {
@@ -557,6 +593,9 @@ __report = {
         "fileSafe": "util_exit_js",
         "link": "files/util_exit_js/index.html"
       },
+      "jshint": {
+        "messages": 6
+      },
       "complexity": {
         "aggregate": {
           "line": 10,
@@ -602,6 +641,9 @@ __report = {
         "fileSafe": "util_namespace_js",
         "link": "files/util_namespace_js/index.html"
       },
+      "jshint": {
+        "messages": 0
+      },
       "complexity": {
         "aggregate": {
           "line": 10,
@@ -646,6 +688,9 @@ __report = {
         "fileShort": "util/task.js",
         "fileSafe": "util_task_js",
         "link": "files/util_task_js/index.html"
+      },
+      "jshint": {
+        "messages": 2
       },
       "complexity": {
         "aggregate": {

@@ -10,7 +10,7 @@ __report = {
       "line": 1,
       "complexity": {
         "sloc": {
-          "physical": 212,
+          "physical": 215,
           "logical": 55
         },
         "cyclomatic": 7,
@@ -147,7 +147,7 @@ __report = {
         "line": 160,
         "complexity": {
           "sloc": {
-            "physical": 12,
+            "physical": 15,
             "logical": 5
           },
           "cyclomatic": 1,
@@ -178,7 +178,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 166,
+        "line": 164,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -212,7 +212,7 @@ __report = {
       },
       {
         "name": "init",
-        "line": 173,
+        "line": 176,
         "complexity": {
           "sloc": {
             "physical": 4,
@@ -246,7 +246,7 @@ __report = {
       },
       {
         "name": "controllerAt",
-        "line": 178,
+        "line": 181,
         "complexity": {
           "sloc": {
             "physical": 20,
@@ -280,7 +280,7 @@ __report = {
       },
       {
         "name": "_resetSubContainers",
-        "line": 201,
+        "line": 204,
         "complexity": {
           "sloc": {
             "physical": 11,
@@ -314,7 +314,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 205,
+        "line": 208,
         "complexity": {
           "sloc": {
             "physical": 3,

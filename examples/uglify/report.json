@@ -1,12 +1,12 @@
 {
   "summary": {
     "total": {
-      "sloc": 6571,
-      "maintainability": 1042.0318038358673
+      "sloc": 6580,
+      "maintainability": 1042.1885102160613
     },
     "average": {
-      "sloc": 730,
-      "maintainability": "115.78"
+      "sloc": 731,
+      "maintainability": "115.80"
     }
   },
   "reports": [
@@ -17,42 +17,45 @@
         "fileSafe": "lib_ast_js",
         "link": "files/lib_ast_js/index.html"
       },
+      "jshint": {
+        "messages": 51
+      },
       "complexity": {
         "aggregate": {
           "line": 44,
           "complexity": {
             "sloc": {
-              "physical": 916,
-              "logical": 585
+              "physical": 921,
+              "logical": 589
             },
             "cyclomatic": 62,
             "halstead": {
               "operators": {
                 "distinct": 33,
-                "total": 1436,
+                "total": 1444,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
               "operands": {
-                "distinct": 508,
-                "total": 1890,
+                "distinct": 511,
+                "total": 1900,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
-              "length": 3326,
-              "vocabulary": 541,
-              "difficulty": 61.387795275590555,
-              "volume": 30198.36639100799,
-              "effort": 1853811.1336684728,
-              "bugs": 10.066122130335996,
-              "time": 102989.50742602626
+              "length": 3344,
+              "vocabulary": 544,
+              "difficulty": 61.35029354207436,
+              "volume": 30388.475741141134,
+              "effort": 1864341.9070152142,
+              "bugs": 10.12949191371371,
+              "time": 103574.55038973413
             }
           }
         },
         "module": "lib/ast.js",
-        "maintainability": 131.08730244901844
+        "maintainability": 131.3027362969568
       }
     },
     {
@@ -62,42 +65,45 @@
         "fileSafe": "lib_compress_js",
         "link": "files/lib_compress_js/index.html"
       },
+      "jshint": {
+        "messages": 51
+      },
       "complexity": {
         "aggregate": {
           "line": 44,
           "complexity": {
             "sloc": {
-              "physical": 1923,
-              "logical": 1289
+              "physical": 1927,
+              "logical": 1292
             },
-            "cyclomatic": 343,
+            "cyclomatic": 344,
             "halstead": {
               "operators": {
                 "distinct": 54,
-                "total": 3618,
+                "total": 3629,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
               "operands": {
                 "distinct": 402,
-                "total": 4208,
+                "total": 4221,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
-              "length": 7826,
+              "length": 7850,
               "vocabulary": 456,
-              "difficulty": 282.6268656716418,
-              "volume": 69126.19725085328,
-              "effort": 19536920.464808322,
-              "bugs": 23.042065750284426,
-              "time": 1085384.4702671291
+              "difficulty": 283.5,
+              "volume": 69338.18661119323,
+              "effort": 19657375.904273283,
+              "bugs": 23.112728870397746,
+              "time": 1092076.4391262934
             }
           }
         },
         "module": "lib/compress.js",
-        "maintainability": 106.25583539663188
+        "maintainability": 106.19605417487199
       }
     },
     {
@@ -106,6 +112,9 @@
         "fileShort": "lib/mozilla-ast.js",
         "fileSafe": "lib_mozilla_ast_js",
         "link": "files/lib_mozilla_ast_js/index.html"
+      },
+      "jshint": {
+        "messages": 51
       },
       "complexity": {
         "aggregate": {
@@ -152,6 +161,9 @@
         "fileSafe": "lib_output_js",
         "link": "files/lib_output_js/index.html"
       },
+      "jshint": {
+        "messages": 51
+      },
       "complexity": {
         "aggregate": {
           "line": 44,
@@ -160,34 +172,34 @@
               "physical": 1152,
               "logical": 827
             },
-            "cyclomatic": 155,
+            "cyclomatic": 154,
             "halstead": {
               "operators": {
                 "distinct": 40,
-                "total": 1906,
+                "total": 1904,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
               "operands": {
-                "distinct": 395,
-                "total": 2452,
+                "distinct": 396,
+                "total": 2453,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
-              "length": 4358,
-              "vocabulary": 435,
-              "difficulty": 124.15189873417722,
-              "volume": 38197.310392427884,
-              "effort": 4742268.611758642,
-              "bugs": 12.73243679747596,
-              "time": 263459.3673199245
+              "length": 4357,
+              "vocabulary": 436,
+              "difficulty": 123.88888888888889,
+              "volume": 38202.97910305307,
+              "effort": 4732924.633322686,
+              "bugs": 12.734326367684357,
+              "time": 262940.2574068159
             }
           }
         },
         "module": "lib/output.js",
-        "maintainability": 120.67244534686361
+        "maintainability": 120.67349910087907
       }
     },
     {
@@ -196,6 +208,9 @@
         "fileShort": "lib/parse.js",
         "fileSafe": "lib_parse_js",
         "link": "files/lib_parse_js/index.html"
+      },
+      "jshint": {
+        "messages": 51
       },
       "complexity": {
         "aggregate": {
@@ -242,6 +257,9 @@
         "fileSafe": "lib_scope_js",
         "link": "files/lib_scope_js/index.html"
       },
+      "jshint": {
+        "messages": 51
+      },
       "complexity": {
         "aggregate": {
           "line": 44,
@@ -286,6 +304,9 @@
         "fileShort": "lib/sourcemap.js",
         "fileSafe": "lib_sourcemap_js",
         "link": "files/lib_sourcemap_js/index.html"
+      },
+      "jshint": {
+        "messages": 9
       },
       "complexity": {
         "aggregate": {
@@ -332,6 +353,9 @@
         "fileSafe": "lib_transform_js",
         "link": "files/lib_transform_js/index.html"
       },
+      "jshint": {
+        "messages": 36
+      },
       "complexity": {
         "aggregate": {
           "line": 44,
@@ -376,6 +400,9 @@
         "fileShort": "lib/utils.js",
         "fileSafe": "lib_utils_js",
         "link": "files/lib_utils_js/index.html"
+      },
+      "jshint": {
+        "messages": 40
       },
       "complexity": {
         "aggregate": {

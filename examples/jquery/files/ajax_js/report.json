@@ -10,32 +10,32 @@
       "line": 1,
       "complexity": {
         "sloc": {
-          "physical": 846,
-          "logical": 405
+          "physical": 851,
+          "logical": 409
         },
-        "cyclomatic": 132,
+        "cyclomatic": 133,
         "halstead": {
           "operators": {
             "distinct": 38,
-            "total": 996,
+            "total": 1001,
             "identifiers": [
               "__stripped__"
             ]
           },
           "operands": {
-            "distinct": 279,
-            "total": 1282,
+            "distinct": 281,
+            "total": 1288,
             "identifiers": [
               "__stripped__"
             ]
           },
-          "length": 2278,
-          "vocabulary": 317,
-          "difficulty": 87.30465949820788,
-          "volume": 18926.396310657572,
-          "effort": 1652362.5854300973,
-          "bugs": 6.308798770219191,
-          "time": 91797.92141278318
+          "length": 2289,
+          "vocabulary": 319,
+          "difficulty": 87.08896797153025,
+          "volume": 19038.557472907785,
+          "effort": 1658048.321982204,
+          "bugs": 6.346185824302595,
+          "time": 92113.795665678
         }
       }
     },
@@ -521,7 +521,7 @@
         "line": 308,
         "complexity": {
           "sloc": {
-            "physical": 378,
+            "physical": 383,
             "logical": 93
           },
           "cyclomatic": 43,
@@ -793,38 +793,38 @@
         "line": 580,
         "complexity": {
           "sloc": {
-            "physical": 103,
-            "logical": 54
+            "physical": 108,
+            "logical": 58
           },
-          "cyclomatic": 22,
+          "cyclomatic": 23,
           "halstead": {
             "operators": {
               "distinct": 18,
-              "total": 101,
+              "total": 106,
               "identifiers": [
                 "__stripped__"
               ]
             },
             "operands": {
-              "distinct": 57,
-              "total": 151,
+              "distinct": 59,
+              "total": 157,
               "identifiers": [
                 "__stripped__"
               ]
             },
-            "length": 252,
-            "vocabulary": 75,
-            "difficulty": 23.842105263157894,
-            "volume": 1569.662310004962,
-            "effort": 37424.05402274988,
-            "bugs": 0.523220770001654,
-            "time": 2079.114112374993
+            "length": 263,
+            "vocabulary": 77,
+            "difficulty": 23.949152542372882,
+            "volume": 1648.1648602027592,
+            "effort": 39472.15165197456,
+            "bugs": 0.5493882867342531,
+            "time": 2192.8973139985865
           }
         }
       },
       {
         "name": "getScript",
-        "line": 687,
+        "line": 692,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -858,7 +858,7 @@
       },
       {
         "name": "getJSON",
-        "line": 691,
+        "line": 696,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -892,7 +892,7 @@
       },
       {
         "name": "ajaxHandleResponses",
-        "line": 701,
+        "line": 706,
         "complexity": {
           "sloc": {
             "physical": 60,
@@ -926,7 +926,7 @@
       },
       {
         "name": "ajaxConvert",
-        "line": 763,
+        "line": 768,
         "complexity": {
           "sloc": {
             "physical": 84,
@@ -959,7 +959,7 @@
         }
       }
     ],
-    "maintainability": 96.98230037712048,
+    "maintainability": 96.77126690136376,
     "module": "ajax.js"
   },
   "jshint": {
@@ -987,7 +987,7 @@
       },
       {
         "severity": "error",
-        "line": 828,
+        "line": 833,
         "column": 35,
         "message": "['throws'] is better written in dot notation.",
         "source": "['{a}'] is better written in dot notation."

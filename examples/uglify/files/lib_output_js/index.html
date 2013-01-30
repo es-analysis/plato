@@ -55,7 +55,7 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty</h2>
-      <p class="stat">124.15</p>
+      <p class="stat">123.89</p>
     </div>
     <div class="span6">
       <h2 class="header">SLOC/LSLOC</h2>
@@ -1068,8 +1068,7 @@ function OutputStream(options) {
             if (len > 0) output.space();
             a.forEach(function(exp, i){
                 if (i) output.comma();
-                if (!(exp instanceof AST_Undefined))
-                    exp.print(output);
+                exp.print(output);
             });
             if (len > 0) output.space();
         });
@@ -1120,6 +1119,7 @@ function OutputStream(options) {
     DEFPRINT(AST_Undefined, function(self, output){
         output.print("void 0");
     });
+    DEFPRINT(AST_Hole, noop);
     DEFPRINT(AST_Infinity, function(self, output){
         output.print("1/0");
     });

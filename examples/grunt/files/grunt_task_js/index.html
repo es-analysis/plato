@@ -45,21 +45,21 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability</h2>
-      <p class="stat">110.37</p>
+      <p class="stat">110.23</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated # Bugs</h2>
-      <p class="stat">5.40</p>
+      <p class="stat">5.42</p>
     </div>
   </div>
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty</h2>
-      <p class="stat">69.82</p>
+      <p class="stat">69.85</p>
     </div>
     <div class="span6">
       <h2 class="header">SLOC/LSLOC</h2>
-      <p class="stat">434 / 259</p>
+      <p class="stat">436 / 261</p>
     </div>
   </div>
 </div>
@@ -133,6 +133,7 @@ task.registerTask = function(name) {
     errorcount = grunt.fail.errorcount;
     // Return the number of errors logged during this task.
     Object.defineProperty(this, 'errorCount', {
+      enumerable: true,
       get: function() {
         return grunt.fail.errorcount - errorcount;
       }
@@ -327,6 +328,7 @@ task.registerMultiTask = function(name, info, fn) {
     this.files = task.normalizeMultiTaskFiles(this.data, target);
     // Expose normalized, flattened, uniqued array of src files.
     Object.defineProperty(this, 'filesSrc', {
+      enumerable: true,
       get: function() {
         return grunt.util._(this.files).chain().pluck('src').flatten().uniq().value();
       }.bind(this)
@@ -363,7 +365,7 @@ task.renameTask = function(oldname, newname) {
 // If a property wasn't passed, run all task targets in turn.
 task.runAllTargets = function(taskname, args) {
   // Get an array of sub-property keys under the given config object.
-  var targets = Object.keys(grunt.config(taskname) || {});
+  var targets = Object.keys(grunt.config.getRaw(taskname) || {});
   // Fail if there are no actual properties to iterate over.
   if (targets.length === 0) {
     grunt.log.error('No "' + taskname + '" targets found.');

@@ -10,32 +10,32 @@ __report = {
       "line": 7,
       "complexity": {
         "sloc": {
-          "physical": 78,
-          "logical": 36
+          "physical": 77,
+          "logical": 35
         },
         "cyclomatic": 1,
         "halstead": {
           "operators": {
             "distinct": 10,
-            "total": 120,
+            "total": 119,
             "identifiers": [
               "__stripped__"
             ]
           },
           "operands": {
-            "distinct": 55,
-            "total": 153,
+            "distinct": 54,
+            "total": 151,
             "identifiers": [
               "__stripped__"
             ]
           },
-          "length": 273,
-          "vocabulary": 65,
-          "difficulty": 13.909090909090908,
-          "volume": 1644.106412956768,
-          "effort": 22868.025562035044,
-          "bugs": 0.5480354709855894,
-          "time": 1270.4458645575023
+          "length": 270,
+          "vocabulary": 64,
+          "difficulty": 13.981481481481481,
+          "volume": 1620,
+          "effort": 22650,
+          "bugs": 0.54,
+          "time": 1258.3333333333333
         }
       }
     },
@@ -45,38 +45,38 @@ __report = {
         "line": 7,
         "complexity": {
           "sloc": {
-            "physical": 12,
-            "logical": 8
+            "physical": 11,
+            "logical": 7
           },
           "cyclomatic": 1,
           "halstead": {
             "operators": {
               "distinct": 5,
-              "total": 28,
+              "total": 27,
               "identifiers": [
                 "__stripped__"
               ]
             },
             "operands": {
-              "distinct": 19,
-              "total": 33,
+              "distinct": 18,
+              "total": 31,
               "identifiers": [
                 "__stripped__"
               ]
             },
-            "length": 61,
-            "vocabulary": 24,
-            "difficulty": 4.342105263157895,
-            "volume": 279.6827125439906,
-            "effort": 1214.411778151538,
-            "bugs": 0.09322757084799686,
-            "time": 67.46732100841878
+            "length": 58,
+            "vocabulary": 23,
+            "difficulty": 4.305555555555555,
+            "volume": 262.36659345130676,
+            "effort": 1129.6339440264596,
+            "bugs": 0.08745553115043558,
+            "time": 62.75744133480331
           }
         }
       },
       {
         "name": "execute",
-        "line": 22,
+        "line": 21,
         "complexity": {
           "sloc": {
             "physical": 4,
@@ -110,7 +110,7 @@ __report = {
       },
       {
         "name": "request",
-        "line": 28,
+        "line": 27,
         "complexity": {
           "sloc": {
             "physical": 4,
@@ -144,7 +144,7 @@ __report = {
       },
       {
         "name": "addInitializer",
-        "line": 36,
+        "line": 35,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -178,7 +178,7 @@ __report = {
       },
       {
         "name": "start",
-        "line": 43,
+        "line": 42,
         "complexity": {
           "sloc": {
             "physical": 7,
@@ -212,7 +212,7 @@ __report = {
       },
       {
         "name": "addRegions",
-        "line": 55,
+        "line": 54,
         "complexity": {
           "sloc": {
             "physical": 7,
@@ -246,7 +246,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 57,
+        "line": 56,
         "complexity": {
           "sloc": {
             "physical": 4,
@@ -280,7 +280,7 @@ __report = {
       },
       {
         "name": "removeRegion",
-        "line": 66,
+        "line": 65,
         "complexity": {
           "sloc": {
             "physical": 4,
@@ -314,7 +314,7 @@ __report = {
       },
       {
         "name": "module",
-        "line": 72,
+        "line": 71,
         "complexity": {
           "sloc": {
             "physical": 9,
@@ -347,7 +347,7 @@ __report = {
         }
       }
     ],
-    "maintainability": 134.1011515662076,
+    "maintainability": 134.83916628288588,
     "module": "application.js"
   },
   "jshint": {

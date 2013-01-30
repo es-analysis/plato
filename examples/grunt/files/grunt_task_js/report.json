@@ -10,32 +10,32 @@
       "line": 10,
       "complexity": {
         "sloc": {
-          "physical": 434,
-          "logical": 259
+          "physical": 436,
+          "logical": 261
         },
         "cyclomatic": 59,
         "halstead": {
           "operators": {
             "distinct": 31,
-            "total": 945,
+            "total": 948,
             "identifiers": [
               "__stripped__"
             ]
           },
           "operands": {
-            "distinct": 236,
-            "total": 1063,
+            "distinct": 237,
+            "total": 1068,
             "identifiers": [
               "__stripped__"
             ]
           },
-          "length": 2008,
-          "vocabulary": 267,
-          "difficulty": 69.8156779661017,
-          "volume": 16185.87743082861,
-          "effort": 1130028.006309524,
-          "bugs": 5.39529247694287,
-          "time": 62779.33368386244
+          "length": 2016,
+          "vocabulary": 268,
+          "difficulty": 69.84810126582279,
+          "volume": 16261.235807962868,
+          "effort": 1135816.4454220142,
+          "bugs": 5.420411935987623,
+          "time": 63100.913634556346
         }
       }
     },
@@ -45,7 +45,7 @@
         "line": 36,
         "complexity": {
           "sloc": {
-            "physical": 45,
+            "physical": 46,
             "logical": 7
           },
           "cyclomatic": 1,
@@ -79,38 +79,38 @@
         "line": 47,
         "complexity": {
           "sloc": {
-            "physical": 32,
-            "logical": 10
+            "physical": 33,
+            "logical": 11
           },
           "cyclomatic": 5,
           "halstead": {
             "operators": {
               "distinct": 15,
-              "total": 54,
+              "total": 55,
               "identifiers": [
                 "__stripped__"
               ]
             },
             "operands": {
-              "distinct": 39,
-              "total": 64,
+              "distinct": 41,
+              "total": 66,
               "identifiers": [
                 "__stripped__"
               ]
             },
-            "length": 118,
-            "vocabulary": 54,
-            "difficulty": 12.307692307692307,
-            "volume": 679.0767252552894,
-            "effort": 8357.867387757407,
-            "bugs": 0.2263589084184298,
-            "time": 464.32596598652265
+            "length": 121,
+            "vocabulary": 56,
+            "difficulty": 12.073170731707318,
+            "volume": 702.6899455689702,
+            "effort": 8483.695684308299,
+            "bugs": 0.2342299818563234,
+            "time": 471.3164269060166
           }
         }
       },
       {
         "name": "get",
-        "line": 52,
+        "line": 53,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -144,7 +144,7 @@
       },
       {
         "name": "<anonymous>.options",
-        "line": 62,
+        "line": 63,
         "complexity": {
           "sloc": {
             "physical": 6,
@@ -178,7 +178,7 @@
       },
       {
         "name": "isValidMultiTaskTarget",
-        "line": 83,
+        "line": 84,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -212,7 +212,7 @@
       },
       {
         "name": "task.normalizeMultiTaskFiles",
-        "line": 88,
+        "line": 89,
         "complexity": {
           "sloc": {
             "physical": 119,
@@ -246,7 +246,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 105,
+        "line": 106,
         "complexity": {
           "sloc": {
             "physical": 10,
@@ -280,7 +280,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 135,
+        "line": 136,
         "complexity": {
           "sloc": {
             "physical": 53,
@@ -314,7 +314,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 143,
+        "line": 144,
         "complexity": {
           "sloc": {
             "physical": 14,
@@ -348,7 +348,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 152,
+        "line": 153,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -382,7 +382,7 @@
       },
       {
         "name": "fn",
-        "line": 168,
+        "line": 169,
         "complexity": {
           "sloc": {
             "physical": 11,
@@ -416,7 +416,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 127,
+        "line": 128,
         "complexity": {
           "sloc": {
             "physical": 9,
@@ -450,7 +450,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 191,
+        "line": 192,
         "complexity": {
           "sloc": {
             "physical": 12,
@@ -484,10 +484,10 @@
       },
       {
         "name": "task.registerMultiTask",
-        "line": 209,
+        "line": 210,
         "complexity": {
           "sloc": {
-            "physical": 53,
+            "physical": 54,
             "logical": 7
           },
           "cyclomatic": 2,
@@ -518,41 +518,41 @@
       },
       {
         "name": "<anonymous>",
-        "line": 217,
+        "line": 218,
         "complexity": {
           "sloc": {
-            "physical": 41,
-            "logical": 18
+            "physical": 42,
+            "logical": 19
           },
           "cyclomatic": 4,
           "halstead": {
             "operators": {
               "distinct": 17,
-              "total": 62,
+              "total": 63,
               "identifiers": [
                 "__stripped__"
               ]
             },
             "operands": {
-              "distinct": 34,
-              "total": 73,
+              "distinct": 36,
+              "total": 75,
               "identifiers": [
                 "__stripped__"
               ]
             },
-            "length": 135,
-            "vocabulary": 51,
-            "difficulty": 18.25,
-            "volume": 765.777421166152,
-            "effort": 13975.437936282273,
-            "bugs": 0.25525914038871733,
-            "time": 776.4132186823485
+            "length": 138,
+            "vocabulary": 53,
+            "difficulty": 17.708333333333336,
+            "volume": 790.4530227297215,
+            "effort": 13997.60561083882,
+            "bugs": 0.2634843409099072,
+            "time": 777.6447561577122
           }
         }
       },
       {
         "name": "<anonymous>.options",
-        "line": 232,
+        "line": 233,
         "complexity": {
           "sloc": {
             "physical": 8,
@@ -586,7 +586,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 246,
+        "line": 248,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -620,7 +620,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 254,
+        "line": 256,
         "complexity": {
           "sloc": {
             "physical": 1,
@@ -654,7 +654,7 @@
       },
       {
         "name": "task.registerInitTask",
-        "line": 265,
+        "line": 267,
         "complexity": {
           "sloc": {
             "physical": 4,
@@ -688,7 +688,7 @@
       },
       {
         "name": "task.renameTask",
-        "line": 271,
+        "line": 273,
         "complexity": {
           "sloc": {
             "physical": 7,
@@ -722,7 +722,7 @@
       },
       {
         "name": "task.runAllTargets",
-        "line": 280,
+        "line": 282,
         "complexity": {
           "sloc": {
             "physical": 14,
@@ -732,31 +732,31 @@
           "halstead": {
             "operators": {
               "distinct": 11,
-              "total": 22,
+              "total": 23,
               "identifiers": [
                 "__stripped__"
               ]
             },
             "operands": {
-              "distinct": 18,
-              "total": 24,
+              "distinct": 19,
+              "total": 25,
               "identifiers": [
                 "__stripped__"
               ]
             },
-            "length": 46,
-            "vocabulary": 29,
-            "difficulty": 7.333333333333333,
-            "volume": 223.46712577586834,
-            "effort": 1638.7589223563677,
-            "bugs": 0.07448904192528945,
-            "time": 91.04216235313154
+            "length": 48,
+            "vocabulary": 30,
+            "difficulty": 7.236842105263158,
+            "volume": 235.53074858920888,
+            "effort": 1704.4988384745382,
+            "bugs": 0.0785102495297363,
+            "time": 94.69437991525211
           }
         }
       },
       {
         "name": "<anonymous>",
-        "line": 289,
+        "line": 291,
         "complexity": {
           "sloc": {
             "physical": 4,
@@ -790,7 +790,7 @@
       },
       {
         "name": "loadTask",
-        "line": 297,
+        "line": 299,
         "complexity": {
           "sloc": {
             "physical": 34,
@@ -824,7 +824,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 314,
+        "line": 316,
         "complexity": {
           "sloc": {
             "physical": 7,
@@ -858,7 +858,7 @@
       },
       {
         "name": "loadTasksMessage",
-        "line": 333,
+        "line": 335,
         "complexity": {
           "sloc": {
             "physical": 6,
@@ -892,7 +892,7 @@
       },
       {
         "name": "loadTasks",
-        "line": 341,
+        "line": 343,
         "complexity": {
           "sloc": {
             "physical": 11,
@@ -926,7 +926,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 345,
+        "line": 347,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -960,7 +960,7 @@
       },
       {
         "name": "task.loadTasks",
-        "line": 354,
+        "line": 356,
         "complexity": {
           "sloc": {
             "physical": 8,
@@ -994,7 +994,7 @@
       },
       {
         "name": "task.loadNpmTasks",
-        "line": 365,
+        "line": 367,
         "complexity": {
           "sloc": {
             "physical": 33,
@@ -1028,7 +1028,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 374,
+        "line": 376,
         "complexity": {
           "sloc": {
             "physical": 12,
@@ -1062,7 +1062,7 @@
       },
       {
         "name": "task.init",
-        "line": 400,
+        "line": 402,
         "complexity": {
           "sloc": {
             "physical": 44,
@@ -1096,7 +1096,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 404,
+        "line": 406,
         "complexity": {
           "sloc": {
             "physical": 4,
@@ -1129,7 +1129,7 @@
         }
       }
     ],
-    "maintainability": 110.37245588570543,
+    "maintainability": 110.22805303585068,
     "module": "grunt/task.js"
   },
   "jshint": {
@@ -1143,7 +1143,7 @@
       },
       {
         "severity": "error",
-        "line": 211,
+        "line": 212,
         "column": 10,
         "message": "Use '===' to compare with 'null'.",
         "source": "Use '{a}' to compare with '{b}'."
@@ -1171,14 +1171,14 @@
       },
       {
         "severity": "error",
-        "line": 308,
+        "line": 310,
         "column": 10,
         "message": "'require' is not defined.",
         "source": "'{a}' is not defined."
       },
       {
         "severity": "error",
-        "line": 419,
+        "line": 421,
         "column": 5,
         "message": "'process' is not defined.",
         "source": "'{a}' is not defined."

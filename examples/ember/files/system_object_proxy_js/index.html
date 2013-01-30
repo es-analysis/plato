@@ -49,17 +49,17 @@
     </div>
     <div class="span6">
       <h2 class="header">Estimated # Bugs</h2>
-      <p class="stat">0.43</p>
+      <p class="stat">0.45</p>
     </div>
   </div>
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty</h2>
-      <p class="stat">23.61</p>
+      <p class="stat">22.67</p>
     </div>
     <div class="span6">
       <h2 class="header">SLOC/LSLOC</h2>
-      <p class="stat">135 / 40</p>
+      <p class="stat">137 / 41</p>
     </div>
   </div>
 </div>
@@ -191,6 +191,8 @@ Ember.ObjectProxy = Ember.Object.extend(
   _contentDidChange: Ember.observer(function() {
     Ember.assert("Can't set ObjectProxy's content to itself", this.get('content') !== this);
   }, 'content'),
+
+  isTruthy: Ember.computed.bool('content'),
 
   willWatchProperty: function (key) {
     var contentKey = 'content.' + key;

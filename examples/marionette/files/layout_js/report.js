@@ -17,25 +17,25 @@ __report = {
         "halstead": {
           "operators": {
             "distinct": 15,
-            "total": 146,
+            "total": 144,
             "identifiers": [
               "__stripped__"
             ]
           },
           "operands": {
-            "distinct": 43,
-            "total": 164,
+            "distinct": 42,
+            "total": 162,
             "identifiers": [
               "__stripped__"
             ]
           },
-          "length": 310,
-          "vocabulary": 58,
-          "difficulty": 28.6046511627907,
-          "volume": 1815.9741084895472,
-          "effort": 51945.30589400333,
-          "bugs": 0.6053247028298491,
-          "time": 2885.8503274446293
+          "length": 306,
+          "vocabulary": 57,
+          "difficulty": 28.92857142857143,
+          "volume": 1784.864344334411,
+          "effort": 51633.575675388325,
+          "bugs": 0.5949547814448036,
+          "time": 2868.531981966018
         }
       }
     },
@@ -52,25 +52,25 @@ __report = {
           "halstead": {
             "operators": {
               "distinct": 4,
-              "total": 14,
+              "total": 13,
               "identifiers": [
                 "__stripped__"
               ]
             },
             "operands": {
-              "distinct": 13,
-              "total": 17,
+              "distinct": 12,
+              "total": 16,
               "identifiers": [
                 "__stripped__"
               ]
             },
-            "length": 31,
-            "vocabulary": 17,
-            "difficulty": 2.6153846153846154,
-            "volume": 126.71134807876054,
-            "effort": 331.39891035983527,
-            "bugs": 0.04223711602625351,
-            "time": 18.411050575546405
+            "length": 29,
+            "vocabulary": 16,
+            "difficulty": 2.6666666666666665,
+            "volume": 116,
+            "effort": 309.3333333333333,
+            "bugs": 0.03866666666666667,
+            "time": 17.185185185185183
           }
         }
       },
@@ -120,25 +120,25 @@ __report = {
           "halstead": {
             "operators": {
               "distinct": 6,
-              "total": 19,
+              "total": 18,
               "identifiers": [
                 "__stripped__"
               ]
             },
             "operands": {
-              "distinct": 14,
-              "total": 20,
+              "distinct": 13,
+              "total": 19,
               "identifiers": [
                 "__stripped__"
               ]
             },
-            "length": 39,
-            "vocabulary": 20,
-            "difficulty": 4.285714285714286,
-            "volume": 168.55519570060713,
-            "effort": 722.3794101454591,
-            "bugs": 0.05618506523353571,
-            "time": 40.13218945252551
+            "length": 37,
+            "vocabulary": 19,
+            "difficulty": 4.384615384615384,
+            "volume": 157.17331799741265,
+            "effort": 689.1445481425015,
+            "bugs": 0.05239110599913755,
+            "time": 38.285808230138976
           }
         }
       },
@@ -449,7 +449,7 @@ __report = {
         }
       }
     ],
-    "maintainability": 130.63566647695453,
+    "maintainability": 130.67206774590653,
     "module": "layout.js"
   },
   "jshint": {

@@ -10,39 +10,39 @@ __report = {
       "line": 6,
       "complexity": {
         "sloc": {
-          "physical": 206,
-          "logical": 109
+          "physical": 217,
+          "logical": 108
         },
         "cyclomatic": 14,
         "halstead": {
           "operators": {
             "distinct": 22,
-            "total": 278,
+            "total": 274,
             "identifiers": [
               "__stripped__"
             ]
           },
           "operands": {
-            "distinct": 85,
-            "total": 427,
+            "distinct": 86,
+            "total": 424,
             "identifiers": [
               "__stripped__"
             ]
           },
-          "length": 705,
-          "vocabulary": 107,
-          "difficulty": 55.258823529411764,
-          "volume": 4752.734225412808,
-          "effort": 262630.50184428185,
-          "bugs": 1.5842447418042693,
-          "time": 14590.583435793436
+          "length": 698,
+          "vocabulary": 108,
+          "difficulty": 54.23255813953488,
+          "volume": 4714.911476510101,
+          "effort": 255701.71077259432,
+          "bugs": 1.5716371588367004,
+          "time": 14205.650598477463
         }
       }
     },
     "functions": [
       {
         "name": "orderBy",
-        "line": 41,
+        "line": 54,
         "complexity": {
           "sloc": {
             "physical": 18,
@@ -76,7 +76,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 48,
+        "line": 61,
         "complexity": {
           "sloc": {
             "physical": 8,
@@ -110,7 +110,7 @@ __report = {
       },
       {
         "name": "destroy",
-        "line": 60,
+        "line": 73,
         "complexity": {
           "sloc": {
             "physical": 14,
@@ -144,7 +144,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 65,
+        "line": 78,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -178,7 +178,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 66,
+        "line": 79,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -212,41 +212,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 75,
-        "complexity": {
-          "sloc": {
-            "physical": 3,
-            "logical": 1
-          },
-          "cyclomatic": 1,
-          "halstead": {
-            "operators": {
-              "distinct": 3,
-              "total": 4,
-              "identifiers": [
-                "__stripped__"
-              ]
-            },
-            "operands": {
-              "distinct": 3,
-              "total": 3,
-              "identifiers": [
-                "__stripped__"
-              ]
-            },
-            "length": 7,
-            "vocabulary": 6,
-            "difficulty": 1.5,
-            "volume": 18.094737505048094,
-            "effort": 27.14210625757214,
-            "bugs": 0.006031579168349364,
-            "time": 1.5078947920873411
-          }
-        }
-      },
-      {
-        "name": "<anonymous>",
-        "line": 79,
+        "line": 90,
         "complexity": {
           "sloc": {
             "physical": 21,
@@ -280,7 +246,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 87,
+        "line": 98,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -314,7 +280,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 90,
+        "line": 101,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -348,7 +314,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 91,
+        "line": 102,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -382,7 +348,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 101,
+        "line": 112,
         "complexity": {
           "sloc": {
             "physical": 14,
@@ -416,7 +382,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 106,
+        "line": 117,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -450,7 +416,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 107,
+        "line": 118,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -484,7 +450,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 116,
+        "line": 127,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -518,7 +484,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 120,
+        "line": 131,
         "complexity": {
           "sloc": {
             "physical": 6,
@@ -552,7 +518,7 @@ __report = {
       },
       {
         "name": "contentArrayWillChange",
-        "line": 127,
+        "line": 138,
         "complexity": {
           "sloc": {
             "physical": 19,
@@ -586,7 +552,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 135,
+        "line": 146,
         "complexity": {
           "sloc": {
             "physical": 7,
@@ -620,7 +586,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 138,
+        "line": 149,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -654,7 +620,7 @@ __report = {
       },
       {
         "name": "contentArrayDidChange",
-        "line": 147,
+        "line": 158,
         "complexity": {
           "sloc": {
             "physical": 19,
@@ -688,7 +654,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 155,
+        "line": 166,
         "complexity": {
           "sloc": {
             "physical": 7,
@@ -722,7 +688,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 158,
+        "line": 169,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -756,7 +722,7 @@ __report = {
       },
       {
         "name": "insertItemSorted",
-        "line": 167,
+        "line": 178,
         "complexity": {
           "sloc": {
             "physical": 7,
@@ -790,7 +756,7 @@ __report = {
       },
       {
         "name": "contentItemSortPropertyDidChange",
-        "line": 175,
+        "line": 186,
         "complexity": {
           "sloc": {
             "physical": 13,
@@ -824,7 +790,7 @@ __report = {
       },
       {
         "name": "_binarySearch",
-        "line": 189,
+        "line": 200,
         "complexity": {
           "sloc": {
             "physical": 22,
@@ -857,7 +823,7 @@ __report = {
         }
       }
     ],
-    "maintainability": 126.10710288207261,
+    "maintainability": 125.45198295590409,
     "module": "mixins/sortable.js"
   },
   "jshint": {

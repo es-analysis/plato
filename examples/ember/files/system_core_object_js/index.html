@@ -45,21 +45,21 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability</h2>
-      <p class="stat">112.26</p>
+      <p class="stat">113.00</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated # Bugs</h2>
-      <p class="stat">2.78</p>
+      <p class="stat">2.83</p>
     </div>
   </div>
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty</h2>
-      <p class="stat">66.91</p>
+      <p class="stat">67.64</p>
     </div>
     <div class="span6">
       <h2 class="header">SLOC/LSLOC</h2>
-      <p class="stat">476 / 215</p>
+      <p class="stat">480 / 219</p>
     </div>
   </div>
 </div>
@@ -235,9 +235,9 @@ function makeCtor() {
 }
 
 var CoreObject = makeCtor();
+CoreObject.toString = function() { return "Ember.CoreObject"; };
 
 CoreObject.PrototypeMixin = Mixin.create({
-
   reopen: function() {
     applyMixin(this, arguments, true);
     return this;
@@ -408,6 +408,8 @@ CoreObject.PrototypeMixin = Mixin.create({
   }
 });
 
+CoreObject.PrototypeMixin.ownerConstructor = CoreObject;
+
 function makeToString(ret) {
   return function() { return ret; };
 }
@@ -545,6 +547,8 @@ var ClassMixin = Mixin.create({
   }
 
 });
+
+ClassMixin.ownerConstructor = CoreObject;
 
 if (Ember.config.overrideClassMixin) {
   Ember.config.overrideClassMixin(ClassMixin);

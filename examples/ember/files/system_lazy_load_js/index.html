@@ -49,13 +49,13 @@
     </div>
     <div class="span6">
       <h2 class="header">Estimated # Bugs</h2>
-      <p class="stat">0.12</p>
+      <p class="stat">0.13</p>
     </div>
   </div>
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty</h2>
-      <p class="stat">13.54</p>
+      <p class="stat">12.53</p>
     </div>
     <div class="span6">
       <h2 class="header">SLOC/LSLOC</h2>
@@ -87,7 +87,7 @@
 @submodule ember-runtime
 */
 
-var loadHooks = {};
+var loadHooks = Ember.ENV.EMBER_LOAD_HOOKS || {};
 var loaded = {};
 
 /**

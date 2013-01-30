@@ -45,21 +45,21 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability</h2>
-      <p class="stat">131.09</p>
+      <p class="stat">131.30</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated # Bugs</h2>
-      <p class="stat">10.07</p>
+      <p class="stat">10.13</p>
     </div>
   </div>
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty</h2>
-      <p class="stat">61.39</p>
+      <p class="stat">61.35</p>
     </div>
     <div class="span6">
       <h2 class="header">SLOC/LSLOC</h2>
-      <p class="stat">916 / 585</p>
+      <p class="stat">921 / 589</p>
     </div>
   </div>
 </div>
@@ -944,6 +944,11 @@ var AST_NaN = DEFNODE("NaN", null, {
 
 var AST_Undefined = DEFNODE("Undefined", null, {
     $documentation: "The `undefined` value",
+    value: (function(){}())
+}, AST_Atom);
+
+var AST_Hole = DEFNODE("Hole", null, {
+    $documentation: "A hole in an array",
     value: (function(){}())
 }, AST_Atom);
 

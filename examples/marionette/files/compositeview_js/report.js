@@ -75,7 +75,7 @@ __report = {
         }
       },
       {
-        "name": "initialEvents",
+        "name": "_initialEvents",
         "line": 18,
         "complexity": {
           "sloc": {

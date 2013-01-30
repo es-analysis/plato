@@ -45,21 +45,21 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability</h2>
-      <p class="stat">118.99</p>
+      <p class="stat">118.92</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated # Bugs</h2>
-      <p class="stat">0.98</p>
+      <p class="stat">1.00</p>
     </div>
   </div>
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty</h2>
-      <p class="stat">55.83</p>
+      <p class="stat">56.75</p>
     </div>
     <div class="span6">
       <h2 class="header">SLOC/LSLOC</h2>
-      <p class="stat">194 / 102</p>
+      <p class="stat">195 / 102</p>
     </div>
   </div>
 </div>
@@ -221,9 +221,10 @@ jQuery.Callbacks = function( options ) {
 				}
 				return this;
 			},
-			// Control if a given callback is in the list
+			// Check if a given callback is in the list.
+			// If no argument is given, return whether or not list has callbacks attached.
 			has: function( fn ) {
-				return jQuery.inArray( fn, list ) > -1;
+				return fn ? jQuery.inArray( fn, list ) > -1 : !!( list && list.length );
 			},
 			// Remove all callbacks from the list
 			empty: function() {

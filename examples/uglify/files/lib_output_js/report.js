@@ -13,29 +13,29 @@ __report = {
           "physical": 1152,
           "logical": 827
         },
-        "cyclomatic": 155,
+        "cyclomatic": 154,
         "halstead": {
           "operators": {
             "distinct": 40,
-            "total": 1906,
+            "total": 1904,
             "identifiers": [
               "__stripped__"
             ]
           },
           "operands": {
-            "distinct": 395,
-            "total": 2452,
+            "distinct": 396,
+            "total": 2453,
             "identifiers": [
               "__stripped__"
             ]
           },
-          "length": 4358,
-          "vocabulary": 435,
-          "difficulty": 124.15189873417722,
-          "volume": 38197.310392427884,
-          "effort": 4742268.611758642,
-          "bugs": 12.73243679747596,
-          "time": 263459.3673199245
+          "length": 4357,
+          "vocabulary": 436,
+          "difficulty": 123.88888888888889,
+          "volume": 38202.97910305307,
+          "effort": 4732924.633322686,
+          "bugs": 12.734326367684357,
+          "time": 262940.2574068159
         }
       }
     },
@@ -1508,31 +1508,31 @@ __report = {
         "complexity": {
           "sloc": {
             "physical": 858,
-            "logical": 106
+            "logical": 107
           },
           "cyclomatic": 1,
           "halstead": {
             "operators": {
               "distinct": 3,
-              "total": 187,
+              "total": 188,
               "identifiers": [
                 "__stripped__"
               ]
             },
             "operands": {
-              "distinct": 86,
-              "total": 298,
+              "distinct": 87,
+              "total": 301,
               "identifiers": [
                 "__stripped__"
               ]
             },
-            "length": 485,
-            "vocabulary": 89,
-            "difficulty": 5.197674418604651,
-            "volume": 3140.7307140187027,
-            "effort": 16324.495687980929,
-            "bugs": 1.0469102380062343,
-            "time": 906.9164271100516
+            "length": 489,
+            "vocabulary": 90,
+            "difficulty": 5.189655172413793,
+            "volume": 3174.516164105211,
+            "effort": 16474.6442309598,
+            "bugs": 1.058172054701737,
+            "time": 915.2580128310999
           }
         }
       },
@@ -4499,7 +4499,7 @@ __report = {
         "line": 981,
         "complexity": {
           "sloc": {
-            "physical": 12,
+            "physical": 11,
             "logical": 1
           },
           "cyclomatic": 1,
@@ -4533,7 +4533,7 @@ __report = {
         "line": 982,
         "complexity": {
           "sloc": {
-            "physical": 10,
+            "physical": 9,
             "logical": 7
           },
           "cyclomatic": 3,
@@ -4567,38 +4567,38 @@ __report = {
         "line": 985,
         "complexity": {
           "sloc": {
-            "physical": 5,
-            "logical": 4
+            "physical": 4,
+            "logical": 3
           },
-          "cyclomatic": 3,
+          "cyclomatic": 2,
           "halstead": {
             "operators": {
+              "distinct": 3,
+              "total": 5,
+              "identifiers": [
+                "__stripped__"
+              ]
+            },
+            "operands": {
               "distinct": 5,
               "total": 8,
               "identifiers": [
                 "__stripped__"
               ]
             },
-            "operands": {
-              "distinct": 6,
-              "total": 10,
-              "identifiers": [
-                "__stripped__"
-              ]
-            },
-            "length": 18,
-            "vocabulary": 11,
-            "difficulty": 4.166666666666667,
-            "volume": 62.26976913547136,
-            "effort": 259.4573713977973,
-            "bugs": 0.020756589711823786,
-            "time": 14.41429841098874
+            "length": 13,
+            "vocabulary": 8,
+            "difficulty": 2.4000000000000004,
+            "volume": 39,
+            "effort": 93.60000000000001,
+            "bugs": 0.013,
+            "time": 5.2
           }
         }
       },
       {
         "name": "<anonymous>",
-        "line": 993,
+        "line": 992,
         "complexity": {
           "sloc": {
             "physical": 14,
@@ -4632,7 +4632,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 994,
+        "line": 993,
         "complexity": {
           "sloc": {
             "physical": 11,
@@ -4666,7 +4666,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 995,
+        "line": 994,
         "complexity": {
           "sloc": {
             "physical": 8,
@@ -4700,7 +4700,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 1007,
+        "line": 1006,
         "complexity": {
           "sloc": {
             "physical": 17,
@@ -4734,7 +4734,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 1024,
+        "line": 1023,
         "complexity": {
           "sloc": {
             "physical": 4,
@@ -4768,7 +4768,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 1028,
+        "line": 1027,
         "complexity": {
           "sloc": {
             "physical": 4,
@@ -4802,7 +4802,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 1032,
+        "line": 1031,
         "complexity": {
           "sloc": {
             "physical": 4,
@@ -4836,7 +4836,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 1036,
+        "line": 1035,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -5515,7 +5515,7 @@ __report = {
         }
       }
     ],
-    "maintainability": 120.67244534686361,
+    "maintainability": 120.67349910087907,
     "module": "lib/output.js"
   },
   "jshint": {

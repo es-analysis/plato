@@ -45,21 +45,21 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability</h2>
-      <p class="stat">106.73</p>
+      <p class="stat">106.43</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated # Bugs</h2>
-      <p class="stat">2.14</p>
+      <p class="stat">2.18</p>
     </div>
   </div>
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty</h2>
-      <p class="stat">80.41</p>
+      <p class="stat">81.02</p>
     </div>
     <div class="span6">
       <h2 class="header">SLOC/LSLOC</h2>
-      <p class="stat">336 / 153</p>
+      <p class="stat">341 / 155</p>
     </div>
   </div>
 </div>
@@ -307,6 +307,11 @@ jQuery.extend({
 
 	// A method for determining if a DOM node can handle the data expando
 	acceptData: function( elem ) {
+		// Do not set data on non-element because it will not be cleared (#8335).
+		if ( elem.nodeType && elem.nodeType !== 1 && elem.nodeType !== 9 ) {
+			return false;
+		}
+
 		var noData = elem.nodeName && jQuery.noData[ elem.nodeName.toLowerCase() ];
 
 		// nodes accept data unless otherwise specified; rejection can be conditional
@@ -332,7 +337,7 @@ jQuery.fn.extend({
 						name = attrs[i].name;
 
 						if ( !name.indexOf( "data-" ) ) {
-							name = jQuery.camelCase( name.substring(5) );
+							name = jQuery.camelCase( name.slice(5) );
 
 							dataAttr( elem, name, data[ name ] );
 						}

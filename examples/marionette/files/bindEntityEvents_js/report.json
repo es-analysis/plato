@@ -7,76 +7,76 @@
   },
   "complexity": {
     "aggregate": {
-      "line": 16,
+      "line": 17,
       "complexity": {
         "sloc": {
-          "physical": 40,
-          "logical": 19
+          "physical": 74,
+          "logical": 33
         },
-        "cyclomatic": 5,
+        "cyclomatic": 6,
         "halstead": {
           "operators": {
             "distinct": 13,
-            "total": 42,
+            "total": 69,
             "identifiers": [
               "__stripped__"
             ]
           },
           "operands": {
-            "distinct": 22,
-            "total": 67,
+            "distinct": 32,
+            "total": 135,
             "identifiers": [
               "__stripped__"
             ]
           },
-          "length": 109,
-          "vocabulary": 35,
-          "difficulty": 19.795454545454547,
-          "volume": 559.0918488470013,
-          "effort": 11067.477280584959,
-          "bugs": 0.1863639496156671,
-          "time": 614.8598489213866
+          "length": 204,
+          "vocabulary": 45,
+          "difficulty": 27.421875,
+          "volume": 1120.3380316512537,
+          "effort": 30721.769461686723,
+          "bugs": 0.3734460105504179,
+          "time": 1706.7649700937068
         }
       }
     },
     "functions": [
       {
         "name": "<anonymous>",
-        "line": 16,
+        "line": 17,
         "complexity": {
           "sloc": {
-            "physical": 40,
-            "logical": 3
+            "physical": 74,
+            "logical": 8
           },
           "cyclomatic": 1,
           "halstead": {
             "operators": {
-              "distinct": 2,
-              "total": 4,
+              "distinct": 3,
+              "total": 11,
               "identifiers": [
                 "__stripped__"
               ]
             },
             "operands": {
-              "distinct": 3,
-              "total": 3,
+              "distinct": 10,
+              "total": 13,
               "identifiers": [
                 "__stripped__"
               ]
             },
-            "length": 7,
-            "vocabulary": 5,
-            "difficulty": 1,
-            "volume": 16.253496664211536,
-            "effort": 16.253496664211536,
-            "bugs": 0.005417832221403845,
-            "time": 0.9029720369006409
+            "length": 24,
+            "vocabulary": 13,
+            "difficulty": 1.9500000000000002,
+            "volume": 88.81055323538621,
+            "effort": 173.18057880900312,
+            "bugs": 0.029603517745128736,
+            "time": 9.62114326716684
           }
         }
       },
       {
         "name": "bindFromStrings",
-        "line": 20,
+        "line": 22,
         "complexity": {
           "sloc": {
             "physical": 13,
@@ -110,7 +110,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 23,
+        "line": 25,
         "complexity": {
           "sloc": {
             "physical": 9,
@@ -144,7 +144,7 @@
       },
       {
         "name": "bindToFunction",
-        "line": 35,
+        "line": 37,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -177,42 +177,144 @@
         }
       },
       {
-        "name": "<anonymous>",
-        "line": 40,
+        "name": "unbindFromStrings",
+        "line": 43,
         "complexity": {
           "sloc": {
-            "physical": 15,
-            "logical": 3
+            "physical": 8,
+            "logical": 2
           },
-          "cyclomatic": 3,
+          "cyclomatic": 1,
           "halstead": {
             "operators": {
-              "distinct": 7,
-              "total": 8,
+              "distinct": 5,
+              "total": 7,
+              "identifiers": [
+                "__stripped__"
+              ]
+            },
+            "operands": {
+              "distinct": 10,
+              "total": 12,
+              "identifiers": [
+                "__stripped__"
+              ]
+            },
+            "length": 19,
+            "vocabulary": 15,
+            "difficulty": 3,
+            "volume": 74.23092131656186,
+            "effort": 222.69276394968557,
+            "bugs": 0.024743640438853954,
+            "time": 12.371820219426976
+          }
+        }
+      },
+      {
+        "name": "<anonymous>",
+        "line": 46,
+        "complexity": {
+          "sloc": {
+            "physical": 4,
+            "logical": 2
+          },
+          "cyclomatic": 1,
+          "halstead": {
+            "operators": {
+              "distinct": 4,
+              "total": 5,
               "identifiers": [
                 "__stripped__"
               ]
             },
             "operands": {
               "distinct": 6,
-              "total": 9,
+              "total": 10,
               "identifiers": [
                 "__stripped__"
               ]
             },
-            "length": 17,
-            "vocabulary": 13,
-            "difficulty": 5.25,
-            "volume": 62.907475208398566,
-            "effort": 330.26424484409245,
-            "bugs": 0.02096915840279952,
-            "time": 18.34801360244958
+            "length": 15,
+            "vocabulary": 10,
+            "difficulty": 3.3333333333333335,
+            "volume": 49.82892142331044,
+            "effort": 166.09640474436813,
+            "bugs": 0.016609640474436815,
+            "time": 9.227578041353786
+          }
+        }
+      },
+      {
+        "name": "unbindToFunction",
+        "line": 53,
+        "complexity": {
+          "sloc": {
+            "physical": 3,
+            "logical": 1
+          },
+          "cyclomatic": 1,
+          "halstead": {
+            "operators": {
+              "distinct": 2,
+              "total": 2,
+              "identifiers": [
+                "__stripped__"
+              ]
+            },
+            "operands": {
+              "distinct": 5,
+              "total": 10,
+              "identifiers": [
+                "__stripped__"
+              ]
+            },
+            "length": 12,
+            "vocabulary": 7,
+            "difficulty": 2,
+            "volume": 33.68825906469125,
+            "effort": 67.3765181293825,
+            "bugs": 0.011229419688230418,
+            "time": 3.743139896076806
+          }
+        }
+      },
+      {
+        "name": "iterateEvents",
+        "line": 59,
+        "complexity": {
+          "sloc": {
+            "physical": 21,
+            "logical": 5
+          },
+          "cyclomatic": 4,
+          "halstead": {
+            "operators": {
+              "distinct": 8,
+              "total": 14,
+              "identifiers": [
+                "__stripped__"
+              ]
+            },
+            "operands": {
+              "distinct": 10,
+              "total": 18,
+              "identifiers": [
+                "__stripped__"
+              ]
+            },
+            "length": 32,
+            "vocabulary": 18,
+            "difficulty": 7.2,
+            "volume": 133.437600046154,
+            "effort": 960.7507203323088,
+            "bugs": 0.04447920001538466,
+            "time": 53.3750400184616
           }
         }
       },
       {
         "name": "<anonymous>",
-        "line": 43,
+        "line": 68,
         "complexity": {
           "sloc": {
             "physical": 11,
@@ -243,12 +345,116 @@
             "time": 15.684210940655062
           }
         }
+      },
+      {
+        "name": "Marionette.bindEntityEvents",
+        "line": 82,
+        "complexity": {
+          "sloc": {
+            "physical": 3,
+            "logical": 1
+          },
+          "cyclomatic": 1,
+          "halstead": {
+            "operators": {
+              "distinct": 1,
+              "total": 1,
+              "identifiers": [
+                "__stripped__"
+              ]
+            },
+            "operands": {
+              "distinct": 6,
+              "total": 9,
+              "identifiers": [
+                "__stripped__"
+              ]
+            },
+            "length": 10,
+            "vocabulary": 7,
+            "difficulty": 0.75,
+            "volume": 28.07354922057604,
+            "effort": 21.05516191543203,
+            "bugs": 0.009357849740192013,
+            "time": 1.1697312175240018
+          }
+        }
+      },
+      {
+        "name": "Marionette.unbindEntityEvents",
+        "line": 86,
+        "complexity": {
+          "sloc": {
+            "physical": 3,
+            "logical": 1
+          },
+          "cyclomatic": 1,
+          "halstead": {
+            "operators": {
+              "distinct": 1,
+              "total": 1,
+              "identifiers": [
+                "__stripped__"
+              ]
+            },
+            "operands": {
+              "distinct": 6,
+              "total": 9,
+              "identifiers": [
+                "__stripped__"
+              ]
+            },
+            "length": 10,
+            "vocabulary": 7,
+            "difficulty": 0.75,
+            "volume": 28.07354922057604,
+            "effort": 21.05516191543203,
+            "bugs": 0.009357849740192013,
+            "time": 1.1697312175240018
+          }
+        }
       }
     ],
-    "maintainability": 134.63564955384194,
+    "maintainability": 134.92800579163907,
     "module": "bindEntityEvents.js"
   },
   "jshint": {
-    "messages": []
+    "messages": [
+      {
+        "severity": "error",
+        "line": 25,
+        "column": 5,
+        "message": "'_' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 46,
+        "column": 5,
+        "message": "'_' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 63,
+        "column": 9,
+        "message": "'_' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 68,
+        "column": 5,
+        "message": "'_' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 72,
+        "column": 11,
+        "message": "'_' is not defined.",
+        "source": "'{a}' is not defined."
+      }
+    ]
   }
 }

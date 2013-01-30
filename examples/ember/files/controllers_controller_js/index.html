@@ -49,17 +49,17 @@
     </div>
     <div class="span6">
       <h2 class="header">Estimated # Bugs</h2>
-      <p class="stat">0.24</p>
+      <p class="stat">0.27</p>
     </div>
   </div>
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty</h2>
-      <p class="stat">13.98</p>
+      <p class="stat">13.00</p>
     </div>
     <div class="span6">
       <h2 class="header">SLOC/LSLOC</h2>
-      <p class="stat">79 / 19</p>
+      <p class="stat">84 / 21</p>
     </div>
   </div>
 </div>
@@ -123,6 +123,9 @@ var get = Ember.get;
   @extends Ember.Mixin
 */
 Ember.ControllerMixin = Ember.Mixin.create({
+  /* ducktype as a controller */
+  isController: true,
+
   /**
     The object to which events from the view should be sent.
 
@@ -140,6 +143,8 @@ Ember.ControllerMixin = Ember.Mixin.create({
   container: null,
 
   store: null,
+
+  model: Ember.computed.alias('content'),
 
   send: function(actionName) {
     var args = [].slice.call(arguments, 1), target;

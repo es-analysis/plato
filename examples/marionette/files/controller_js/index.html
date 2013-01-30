@@ -45,21 +45,21 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability</h2>
-      <p class="stat">127.17</p>
+      <p class="stat">130.04</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated # Bugs</h2>
-      <p class="stat">0.13</p>
+      <p class="stat">0.12</p>
     </div>
   </div>
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty</h2>
-      <p class="stat">10.00</p>
+      <p class="stat">9.88</p>
     </div>
     <div class="span6">
       <h2 class="header">SLOC/LSLOC</h2>
-      <p class="stat">24 / 12</p>
+      <p class="stat">22 / 11</p>
     </div>
   </div>
 </div>
@@ -92,8 +92,6 @@ Marionette.Controller = function(options){
   this.triggerMethod = Marionette.triggerMethod;
   this.options = options || {};
 
-  Marionette.addEventBinder(this);
-
   if (_.isFunction(this.initialize)){
     this.initialize(this.options);
   }
@@ -107,7 +105,7 @@ Marionette.Controller.extend = Marionette.extend;
 // Ensure it can trigger events with Backbone.Events
 _.extend(Marionette.Controller.prototype, Backbone.Events, {
   close: function(){
-    this.unbindAll();
+    this.stopListening();
     this.triggerMethod("close");
     this.unbind();
   }

@@ -45,21 +45,21 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability</h2>
-      <p class="stat">114.02</p>
+      <p class="stat">115.36</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated # Bugs</h2>
-      <p class="stat">0.39</p>
+      <p class="stat">0.37</p>
     </div>
   </div>
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty</h2>
-      <p class="stat">14.61</p>
+      <p class="stat">14.46</p>
     </div>
     <div class="span6">
       <h2 class="header">SLOC/LSLOC</h2>
-      <p class="stat">67 / 35</p>
+      <p class="stat">63 / 33</p>
     </div>
   </div>
 </div>
@@ -92,10 +92,6 @@ Marionette.ItemView =  Marionette.View.extend({
   constructor: function(){
     var args = Array.prototype.slice.apply(arguments);
     Marionette.View.prototype.constructor.apply(this, args);
-
-    if (this.initialEvents){
-      this.initialEvents();
-    }
   },
 
   // Serialize the model or collection for the view. If a model is

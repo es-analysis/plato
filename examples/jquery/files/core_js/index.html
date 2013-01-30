@@ -45,21 +45,21 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability</h2>
-      <p class="stat">112.52</p>
+      <p class="stat">112.47</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated # Bugs</h2>
-      <p class="stat">5.77</p>
+      <p class="stat">5.80</p>
     </div>
   </div>
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty</h2>
-      <p class="stat">106.18</p>
+      <p class="stat">106.23</p>
     </div>
     <div class="span6">
       <h2 class="header">SLOC/LSLOC</h2>
-      <p class="stat">808 / 387</p>
+      <p class="stat">814 / 389</p>
     </div>
   </div>
 </div>
@@ -88,6 +88,10 @@
 
 	// The deferred used on DOM ready
 	readyList,
+
+	// Support: IE9
+	// For `typeof xmlNode.method` instead of `xmlNode.method !== undefined`
+	core_strundefined = typeof undefined,
 
 	// Use the correct document accordingly with window argument (sandbox)
 	document = window.document,
@@ -146,8 +150,9 @@
 	},
 
 	// The ready event handler and self cleanup method
-	DOMContentLoaded = function() {
-		document.removeEventListener( "DOMContentLoaded", DOMContentLoaded, false );
+	completed = function() {
+		document.removeEventListener( "DOMContentLoaded", completed, false );
+		window.removeEventListener( "load", completed, false );
 		jQuery.ready();
 	};
 
@@ -490,6 +495,7 @@ jQuery.extend({
 		if ( obj == null ) {
 			return String( obj );
 		}
+		// Support: Safari <=5.1 (functionish RegExp)
 		return typeof obj === "object" || typeof obj === "function" ?
 			class2type[ core_toString.call(obj) ] || "object" :
 			typeof obj;
@@ -854,13 +860,13 @@ jQuery.ready.promise = function( obj ) {
 			// Handle it asynchronously to allow scripts the opportunity to delay ready
 			setTimeout( jQuery.ready );
 
-		// Standards-based browsers support DOMContentLoaded
 		} else {
+
 			// Use the handy event callback
-			document.addEventListener( "DOMContentLoaded", DOMContentLoaded, false );
+			document.addEventListener( "DOMContentLoaded", completed, false );
 
 			// A fallback to window.onload, that will always work
-			window.addEventListener( "load", jQuery.ready, false );
+			window.addEventListener( "load", completed, false );
 		}
 	}
 	return readyList.promise( obj );

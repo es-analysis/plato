@@ -13,29 +13,29 @@ __report = {
           "physical": 37,
           "logical": 14
         },
-        "cyclomatic": 4,
+        "cyclomatic": 5,
         "halstead": {
           "operators": {
             "distinct": 8,
-            "total": 37,
+            "total": 40,
             "identifiers": [
               "__stripped__"
             ]
           },
           "operands": {
-            "distinct": 13,
-            "total": 44,
+            "distinct": 15,
+            "total": 47,
             "identifiers": [
               "__stripped__"
             ]
           },
-          "length": 81,
-          "vocabulary": 21,
-          "difficulty": 13.538461538461538,
-          "volume": 355.7777112450796,
-          "effort": 4816.682859933386,
-          "bugs": 0.11859257041502654,
-          "time": 267.5934922185214
+          "length": 87,
+          "vocabulary": 23,
+          "difficulty": 12.533333333333333,
+          "volume": 393.54989017696016,
+          "effort": 4932.491956884567,
+          "bugs": 0.13118329672565338,
+          "time": 274.0273309380315
         }
       }
     },

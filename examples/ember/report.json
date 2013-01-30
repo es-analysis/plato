@@ -1,12 +1,12 @@
 {
   "summary": {
     "total": {
-      "sloc": 5991,
-      "maintainability": 4619.570275294288
+      "sloc": 6012,
+      "maintainability": 4658.888352374254
     },
     "average": {
-      "sloc": 166,
-      "maintainability": "128.32"
+      "sloc": 167,
+      "maintainability": "129.41"
     }
   },
   "reports": [
@@ -17,12 +17,15 @@
         "fileSafe": "controllers_array_controller_js",
         "link": "files/controllers_array_controller_js/index.html"
       },
+      "jshint": {
+        "messages": 0
+      },
       "complexity": {
         "aggregate": {
           "line": 1,
           "complexity": {
             "sloc": {
-              "physical": 212,
+              "physical": 215,
               "logical": 55
             },
             "cyclomatic": 7,
@@ -62,37 +65,40 @@
         "fileSafe": "controllers_controller_js",
         "link": "files/controllers_controller_js/index.html"
       },
+      "jshint": {
+        "messages": 1
+      },
       "complexity": {
         "aggregate": {
           "line": 1,
           "complexity": {
             "sloc": {
-              "physical": 79,
-              "logical": 19
+              "physical": 84,
+              "logical": 21
             },
             "cyclomatic": 3,
             "halstead": {
               "operators": {
                 "distinct": 13,
-                "total": 57,
+                "total": 62,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
               "operands": {
-                "distinct": 33,
-                "total": 71,
+                "distinct": 39,
+                "total": 78,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
-              "length": 128,
-              "vocabulary": 46,
-              "difficulty": 13.984848484848484,
-              "volume": 707.0159303752977,
-              "effort": 9887.510662672723,
-              "bugs": 0.23567197679176588,
-              "time": 549.3061479262624
+              "length": 140,
+              "vocabulary": 52,
+              "difficulty": 13,
+              "volume": 798.0615605397529,
+              "effort": 10374.800287016787,
+              "bugs": 0.2660205201799176,
+              "time": 576.3777937231548
             }
           }
         },
@@ -106,6 +112,9 @@
         "fileShort": "controllers/object_controller.js",
         "fileSafe": "controllers_object_controller_js",
         "link": "files/controllers_object_controller_js/index.html"
+      },
+      "jshint": {
+        "messages": 0
       },
       "complexity": {
         "aggregate": {
@@ -152,6 +161,9 @@
         "fileSafe": "controllers_js",
         "link": "files/controllers_js/index.html"
       },
+      "jshint": {
+        "messages": 0
+      },
       "complexity": {
         "aggregate": {
           "line": 1,
@@ -196,6 +208,9 @@
         "fileShort": "core.js",
         "fileSafe": "core_js",
         "link": "files/core_js/index.html"
+      },
+      "jshint": {
+        "messages": 0
       },
       "complexity": {
         "aggregate": {
@@ -242,6 +257,9 @@
         "fileSafe": "ext_function_js",
         "link": "files/ext_function_js/index.html"
       },
+      "jshint": {
+        "messages": 0
+      },
       "complexity": {
         "aggregate": {
           "line": 1,
@@ -286,6 +304,9 @@
         "fileShort": "ext/string.js",
         "fileSafe": "ext_string_js",
         "link": "files/ext_string_js/index.html"
+      },
+      "jshint": {
+        "messages": 0
       },
       "complexity": {
         "aggregate": {
@@ -332,6 +353,9 @@
         "fileSafe": "ext_js",
         "link": "files/ext_js/index.html"
       },
+      "jshint": {
+        "messages": 0
+      },
       "complexity": {
         "aggregate": {
           "line": 1,
@@ -376,6 +400,9 @@
         "fileShort": "main.js",
         "fileSafe": "main_js",
         "link": "files/main_js/index.html"
+      },
+      "jshint": {
+        "messages": 0
       },
       "complexity": {
         "aggregate": {
@@ -422,6 +449,9 @@
         "fileSafe": "mixins_array_js",
         "link": "files/mixins_array_js/index.html"
       },
+      "jshint": {
+        "messages": 0
+      },
       "complexity": {
         "aggregate": {
           "line": 1,
@@ -466,6 +496,9 @@
         "fileShort": "mixins/comparable.js",
         "fileSafe": "mixins_comparable_js",
         "link": "files/mixins_comparable_js/index.html"
+      },
+      "jshint": {
+        "messages": 0
       },
       "complexity": {
         "aggregate": {
@@ -512,6 +545,9 @@
         "fileSafe": "mixins_copyable_js",
         "link": "files/mixins_copyable_js/index.html"
       },
+      "jshint": {
+        "messages": 0
+      },
       "complexity": {
         "aggregate": {
           "line": 1,
@@ -556,6 +592,9 @@
         "fileShort": "mixins/deferred.js",
         "fileSafe": "mixins_deferred_js",
         "link": "files/mixins_deferred_js/index.html"
+      },
+      "jshint": {
+        "messages": 0
       },
       "complexity": {
         "aggregate": {
@@ -602,6 +641,9 @@
         "fileSafe": "mixins_enumerable_js",
         "link": "files/mixins_enumerable_js/index.html"
       },
+      "jshint": {
+        "messages": 1
+      },
       "complexity": {
         "aggregate": {
           "line": 10,
@@ -646,6 +688,9 @@
         "fileShort": "mixins/evented.js",
         "fileSafe": "mixins_evented_js",
         "link": "files/mixins_evented_js/index.html"
+      },
+      "jshint": {
+        "messages": 0
       },
       "complexity": {
         "aggregate": {
@@ -692,6 +737,9 @@
         "fileSafe": "mixins_freezable_js",
         "link": "files/mixins_freezable_js/index.html"
       },
+      "jshint": {
+        "messages": 0
+      },
       "complexity": {
         "aggregate": {
           "line": 7,
@@ -736,6 +784,9 @@
         "fileShort": "mixins/mutable_array.js",
         "fileSafe": "mixins_mutable_array_js",
         "link": "files/mixins_mutable_array_js/index.html"
+      },
+      "jshint": {
+        "messages": 0
       },
       "complexity": {
         "aggregate": {
@@ -782,6 +833,9 @@
         "fileSafe": "mixins_mutable_enumerable_js",
         "link": "files/mixins_mutable_enumerable_js/index.html"
       },
+      "jshint": {
+        "messages": 0
+      },
       "complexity": {
         "aggregate": {
           "line": 1,
@@ -827,37 +881,40 @@
         "fileSafe": "mixins_observable_js",
         "link": "files/mixins_observable_js/index.html"
       },
+      "jshint": {
+        "messages": 0
+      },
       "complexity": {
         "aggregate": {
           "line": 6,
           "complexity": {
             "sloc": {
-              "physical": 510,
-              "logical": 70
+              "physical": 507,
+              "logical": 69
             },
             "cyclomatic": 7,
             "halstead": {
               "operators": {
                 "distinct": 18,
-                "total": 159,
+                "total": 158,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
               "operands": {
-                "distinct": 54,
-                "total": 238,
+                "distinct": 52,
+                "total": 236,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
-              "length": 397,
-              "vocabulary": 72,
-              "difficulty": 39.666666666666664,
-              "volume": 2449.460225572598,
-              "effort": 97161.92228104638,
-              "bugs": 0.8164867418575327,
-              "time": 5397.884571169244
+              "length": 394,
+              "vocabulary": 70,
+              "difficulty": 40.84615384615385,
+              "volume": 2414.937508676317,
+              "effort": 98640.90900824034,
+              "bugs": 0.8049791695587724,
+              "time": 5480.050500457797
             }
           }
         },
@@ -872,42 +929,45 @@
         "fileSafe": "mixins_sortable_js",
         "link": "files/mixins_sortable_js/index.html"
       },
+      "jshint": {
+        "messages": 0
+      },
       "complexity": {
         "aggregate": {
           "line": 6,
           "complexity": {
             "sloc": {
-              "physical": 206,
-              "logical": 109
+              "physical": 217,
+              "logical": 108
             },
             "cyclomatic": 14,
             "halstead": {
               "operators": {
                 "distinct": 22,
-                "total": 278,
+                "total": 274,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
               "operands": {
-                "distinct": 85,
-                "total": 427,
+                "distinct": 86,
+                "total": 424,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
-              "length": 705,
-              "vocabulary": 107,
-              "difficulty": 55.258823529411764,
-              "volume": 4752.734225412808,
-              "effort": 262630.50184428185,
-              "bugs": 1.5842447418042693,
-              "time": 14590.583435793436
+              "length": 698,
+              "vocabulary": 108,
+              "difficulty": 54.23255813953488,
+              "volume": 4714.911476510101,
+              "effort": 255701.71077259432,
+              "bugs": 1.5716371588367004,
+              "time": 14205.650598477463
             }
           }
         },
         "module": "mixins/sortable.js",
-        "maintainability": 126.10710288207261
+        "maintainability": 125.45198295590409
       }
     },
     {
@@ -916,6 +976,9 @@
         "fileShort": "mixins/target_action_support.js",
         "fileSafe": "mixins_target_action_support_js",
         "link": "files/mixins_target_action_support_js/index.html"
+      },
+      "jshint": {
+        "messages": 0
       },
       "complexity": {
         "aggregate": {
@@ -962,6 +1025,9 @@
         "fileSafe": "mixins_js",
         "link": "files/mixins_js/index.html"
       },
+      "jshint": {
+        "messages": 0
+      },
       "complexity": {
         "aggregate": {
           "line": 1,
@@ -1006,6 +1072,9 @@
         "fileShort": "system/application.js",
         "fileSafe": "system_application_js",
         "link": "files/system_application_js/index.html"
+      },
+      "jshint": {
+        "messages": 0
       },
       "complexity": {
         "aggregate": {
@@ -1052,42 +1121,45 @@
         "fileSafe": "system_array_proxy_js",
         "link": "files/system_array_proxy_js/index.html"
       },
+      "jshint": {
+        "messages": 0
+      },
       "complexity": {
         "aggregate": {
           "line": 1,
           "complexity": {
             "sloc": {
-              "physical": 240,
-              "logical": 80
+              "physical": 238,
+              "logical": 79
             },
             "cyclomatic": 9,
             "halstead": {
               "operators": {
                 "distinct": 13,
-                "total": 190,
+                "total": 188,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
               "operands": {
-                "distinct": 68,
-                "total": 282,
+                "distinct": 69,
+                "total": 279,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
-              "length": 472,
-              "vocabulary": 81,
-              "difficulty": 26.955882352941178,
-              "volume": 2992.409201361543,
-              "effort": 80663.03038376043,
-              "bugs": 0.9974697337871811,
-              "time": 4481.279465764468
+              "length": 467,
+              "vocabulary": 82,
+              "difficulty": 26.282608695652176,
+              "volume": 2968.9767861566456,
+              "effort": 78032.4550970301,
+              "bugs": 0.9896589287188818,
+              "time": 4335.1363942794505
             }
           }
         },
         "module": "system/array_proxy.js",
-        "maintainability": 134.66851410724811
+        "maintainability": 133.86590097257954
       }
     },
     {
@@ -1096,6 +1168,9 @@
         "fileShort": "system/container.js",
         "fileSafe": "system_container_js",
         "link": "files/system_container_js/index.html"
+      },
+      "jshint": {
+        "messages": 0
       },
       "complexity": {
         "aggregate": {
@@ -1142,42 +1217,45 @@
         "fileSafe": "system_core_object_js",
         "link": "files/system_core_object_js/index.html"
       },
+      "jshint": {
+        "messages": 0
+      },
       "complexity": {
         "aggregate": {
           "line": 1,
           "complexity": {
             "sloc": {
-              "physical": 476,
-              "logical": 215
+              "physical": 480,
+              "logical": 219
             },
             "cyclomatic": 34,
             "halstead": {
               "operators": {
                 "distinct": 31,
-                "total": 509,
+                "total": 518,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
               "operands": {
-                "distinct": 142,
-                "total": 613,
+                "distinct": 143,
+                "total": 624,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
-              "length": 1122,
-              "vocabulary": 173,
-              "difficulty": 66.91197183098592,
-              "volume": 8341.652871408405,
-              "effort": 558156.4419555421,
-              "bugs": 2.780550957136135,
-              "time": 31008.691219752338
+              "length": 1142,
+              "vocabulary": 174,
+              "difficulty": 67.63636363636363,
+              "volume": 8499.841472259248,
+              "effort": 574898.3686691709,
+              "bugs": 2.8332804907530824,
+              "time": 31938.798259398383
             }
           }
         },
         "module": "system/core_object.js",
-        "maintainability": 112.25996997937912
+        "maintainability": 112.99565865409701
       }
     },
     {
@@ -1186,6 +1264,9 @@
         "fileShort": "system/deferred.js",
         "fileSafe": "system_deferred_js",
         "link": "files/system_deferred_js/index.html"
+      },
+      "jshint": {
+        "messages": 0
       },
       "complexity": {
         "aggregate": {
@@ -1232,6 +1313,9 @@
         "fileSafe": "system_each_proxy_js",
         "link": "files/system_each_proxy_js/index.html"
       },
+      "jshint": {
+        "messages": 0
+      },
       "complexity": {
         "aggregate": {
           "line": 1,
@@ -1277,6 +1361,9 @@
         "fileSafe": "system_lazy_load_js",
         "link": "files/system_lazy_load_js/index.html"
       },
+      "jshint": {
+        "messages": 2
+      },
       "complexity": {
         "aggregate": {
           "line": 6,
@@ -1285,29 +1372,29 @@
               "physical": 37,
               "logical": 14
             },
-            "cyclomatic": 4,
+            "cyclomatic": 5,
             "halstead": {
               "operators": {
                 "distinct": 8,
-                "total": 37,
+                "total": 40,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
               "operands": {
-                "distinct": 13,
-                "total": 44,
+                "distinct": 15,
+                "total": 47,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
-              "length": 81,
-              "vocabulary": 21,
-              "difficulty": 13.538461538461538,
-              "volume": 355.7777112450796,
-              "effort": 4816.682859933386,
-              "bugs": 0.11859257041502654,
-              "time": 267.5934922185214
+              "length": 87,
+              "vocabulary": 23,
+              "difficulty": 12.533333333333333,
+              "volume": 393.54989017696016,
+              "effort": 4932.491956884567,
+              "bugs": 0.13118329672565338,
+              "time": 274.0273309380315
             }
           }
         },
@@ -1321,6 +1408,9 @@
         "fileShort": "system/namespace.js",
         "fileSafe": "system_namespace_js",
         "link": "files/system_namespace_js/index.html"
+      },
+      "jshint": {
+        "messages": 0
       },
       "complexity": {
         "aggregate": {
@@ -1367,6 +1457,9 @@
         "fileSafe": "system_native_array_js",
         "link": "files/system_native_array_js/index.html"
       },
+      "jshint": {
+        "messages": 0
+      },
       "complexity": {
         "aggregate": {
           "line": 1,
@@ -1412,42 +1505,45 @@
         "fileSafe": "system_object_js",
         "link": "files/system_object_js/index.html"
       },
+      "jshint": {
+        "messages": 0
+      },
       "complexity": {
         "aggregate": {
           "line": 1,
           "complexity": {
             "sloc": {
-              "physical": 20,
-              "logical": 4
+              "physical": 21,
+              "logical": 6
             },
             "cyclomatic": 1,
             "halstead": {
               "operators": {
-                "distinct": 3,
-                "total": 9,
+                "distinct": 5,
+                "total": 14,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
               "operands": {
-                "distinct": 9,
-                "total": 13,
+                "distinct": 12,
+                "total": 18,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
-              "length": 22,
-              "vocabulary": 12,
-              "difficulty": 2.1666666666666665,
-              "volume": 78.86917501586544,
-              "effort": 170.8832125343751,
-              "bugs": 0.026289725005288478,
-              "time": 9.493511807465284
+              "length": 32,
+              "vocabulary": 17,
+              "difficulty": 3.75,
+              "volume": 130.79881092001088,
+              "effort": 490.4955409500408,
+              "bugs": 0.04359960364000363,
+              "time": 27.249752275002265
             }
           }
         },
         "module": "system/object.js",
-        "maintainability": 130.95987853391512
+        "maintainability": 171
       }
     },
     {
@@ -1457,37 +1553,40 @@
         "fileSafe": "system_object_proxy_js",
         "link": "files/system_object_proxy_js/index.html"
       },
+      "jshint": {
+        "messages": 0
+      },
       "complexity": {
         "aggregate": {
           "line": 1,
           "complexity": {
             "sloc": {
-              "physical": 135,
-              "logical": 40
+              "physical": 137,
+              "logical": 41
             },
             "cyclomatic": 4,
             "halstead": {
               "operators": {
                 "distinct": 13,
-                "total": 88,
+                "total": 92,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
               "operands": {
-                "distinct": 38,
-                "total": 138,
+                "distinct": 41,
+                "total": 143,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
-              "length": 226,
-              "vocabulary": 51,
-              "difficulty": 23.60526315789474,
-              "volume": 1281.968127285558,
-              "effort": 30261.195004609097,
-              "bugs": 0.427322709095186,
-              "time": 1681.177500256061
+              "length": 235,
+              "vocabulary": 54,
+              "difficulty": 22.670731707317074,
+              "volume": 1352.3985630084153,
+              "effort": 30659.86498332493,
+              "bugs": 0.4507995210028051,
+              "time": 1703.3258324069404
             }
           }
         },
@@ -1501,6 +1600,9 @@
         "fileShort": "system/set.js",
         "fileSafe": "system_set_js",
         "link": "files/system_set_js/index.html"
+      },
+      "jshint": {
+        "messages": 0
       },
       "complexity": {
         "aggregate": {
@@ -1547,6 +1649,9 @@
         "fileSafe": "system_string_js",
         "link": "files/system_string_js/index.html"
       },
+      "jshint": {
+        "messages": 0
+      },
       "complexity": {
         "aggregate": {
           "line": 6,
@@ -1591,6 +1696,9 @@
         "fileShort": "system.js",
         "fileSafe": "system_js",
         "link": "files/system_js/index.html"
+      },
+      "jshint": {
+        "messages": 0
       },
       "complexity": {
         "aggregate": {

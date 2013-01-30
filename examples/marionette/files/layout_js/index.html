@@ -45,17 +45,17 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability</h2>
-      <p class="stat">130.64</p>
+      <p class="stat">130.67</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated # Bugs</h2>
-      <p class="stat">0.61</p>
+      <p class="stat">0.59</p>
     </div>
   </div>
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty</h2>
-      <p class="stat">28.60</p>
+      <p class="stat">28.93</p>
     </div>
     <div class="span6">
       <h2 class="header">SLOC/LSLOC</h2>
@@ -101,7 +101,7 @@ Marionette.Layout = Marionette.ItemView.extend({
     this.initializeRegions();
 
     var args = Array.prototype.slice.apply(arguments);
-    Backbone.Marionette.ItemView.apply(this, args);
+    Marionette.ItemView.apply(this, args);
   },
 
   // Layout's render will use the existing region objects the
@@ -135,7 +135,7 @@ Marionette.Layout = Marionette.ItemView.extend({
     this.destroyRegions();
 
     var args = Array.prototype.slice.apply(arguments);
-    Backbone.Marionette.ItemView.prototype.close.apply(this, args);
+    Marionette.ItemView.prototype.close.apply(this, args);
   },
 
   // Initialize the regions that have been defined in a

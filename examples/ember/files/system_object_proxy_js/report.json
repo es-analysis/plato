@@ -10,32 +10,32 @@
       "line": 1,
       "complexity": {
         "sloc": {
-          "physical": 135,
-          "logical": 40
+          "physical": 137,
+          "logical": 41
         },
         "cyclomatic": 4,
         "halstead": {
           "operators": {
             "distinct": 13,
-            "total": 88,
+            "total": 92,
             "identifiers": [
               "__stripped__"
             ]
           },
           "operands": {
-            "distinct": 38,
-            "total": 138,
+            "distinct": 41,
+            "total": 143,
             "identifiers": [
               "__stripped__"
             ]
           },
-          "length": 226,
-          "vocabulary": 51,
-          "difficulty": 23.60526315789474,
-          "volume": 1281.968127285558,
-          "effort": 30261.195004609097,
-          "bugs": 0.427322709095186,
-          "time": 1681.177500256061
+          "length": 235,
+          "vocabulary": 54,
+          "difficulty": 22.670731707317074,
+          "volume": 1352.3985630084153,
+          "effort": 30659.86498332493,
+          "bugs": 0.4507995210028051,
+          "time": 1703.3258324069404
         }
       }
     },
@@ -144,7 +144,7 @@
       },
       {
         "name": "willWatchProperty",
-        "line": 111,
+        "line": 113,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -178,7 +178,7 @@
       },
       {
         "name": "didUnwatchProperty",
-        "line": 117,
+        "line": 119,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -212,7 +212,7 @@
       },
       {
         "name": "unknownProperty",
-        "line": 123,
+        "line": 125,
         "complexity": {
           "sloc": {
             "physical": 6,
@@ -246,7 +246,7 @@
       },
       {
         "name": "setUnknownProperty",
-        "line": 130,
+        "line": 132,
         "complexity": {
           "sloc": {
             "physical": 5,

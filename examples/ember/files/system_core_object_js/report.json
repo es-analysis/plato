@@ -10,32 +10,32 @@
       "line": 1,
       "complexity": {
         "sloc": {
-          "physical": 476,
-          "logical": 215
+          "physical": 480,
+          "logical": 219
         },
         "cyclomatic": 34,
         "halstead": {
           "operators": {
             "distinct": 31,
-            "total": 509,
+            "total": 518,
             "identifiers": [
               "__stripped__"
             ]
           },
           "operands": {
-            "distinct": 142,
-            "total": 613,
+            "distinct": 143,
+            "total": 624,
             "identifiers": [
               "__stripped__"
             ]
           },
-          "length": 1122,
-          "vocabulary": 173,
-          "difficulty": 66.91197183098592,
-          "volume": 8341.652871408405,
-          "effort": 558156.4419555421,
-          "bugs": 2.780550957136135,
-          "time": 31008.691219752338
+          "length": 1142,
+          "vocabulary": 174,
+          "difficulty": 67.63636363636363,
+          "volume": 8499.841472259248,
+          "effort": 574898.3686691709,
+          "bugs": 2.8332804907530824,
+          "time": 31938.798259398383
         }
       }
     },
@@ -245,6 +245,40 @@
         }
       },
       {
+        "name": "CoreObject.toString",
+        "line": 154,
+        "complexity": {
+          "sloc": {
+            "physical": 1,
+            "logical": 1
+          },
+          "cyclomatic": 1,
+          "halstead": {
+            "operators": {
+              "distinct": 1,
+              "total": 1,
+              "identifiers": [
+                "__stripped__"
+              ]
+            },
+            "operands": {
+              "distinct": 1,
+              "total": 1,
+              "identifiers": [
+                "__stripped__"
+              ]
+            },
+            "length": 2,
+            "vocabulary": 2,
+            "difficulty": 0.5,
+            "volume": 2,
+            "effort": 1,
+            "bugs": 0.0006666666666666666,
+            "time": 0.05555555555555555
+          }
+        }
+      },
+      {
         "name": "reopen",
         "line": 157,
         "complexity": {
@@ -450,7 +484,7 @@
       },
       {
         "name": "makeToString",
-        "line": 327,
+        "line": 329,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -484,7 +518,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 328,
+        "line": 330,
         "complexity": {
           "sloc": {
             "physical": 1,
@@ -518,7 +552,7 @@
       },
       {
         "name": "extend",
-        "line": 347,
+        "line": 349,
         "complexity": {
           "sloc": {
             "physical": 21,
@@ -552,7 +586,7 @@
       },
       {
         "name": "createWithMixins",
-        "line": 369,
+        "line": 371,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -586,7 +620,7 @@
       },
       {
         "name": "create",
-        "line": 375,
+        "line": 377,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -620,7 +654,7 @@
       },
       {
         "name": "reopen",
-        "line": 381,
+        "line": 383,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -654,7 +688,7 @@
       },
       {
         "name": "reopenClass",
-        "line": 387,
+        "line": 389,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -688,7 +722,7 @@
       },
       {
         "name": "detect",
-        "line": 393,
+        "line": 395,
         "complexity": {
           "sloc": {
             "physical": 8,
@@ -722,7 +756,7 @@
       },
       {
         "name": "detectInstance",
-        "line": 402,
+        "line": 404,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -756,7 +790,7 @@
       },
       {
         "name": "metaForProperty",
-        "line": 433,
+        "line": 435,
         "complexity": {
           "sloc": {
             "physical": 6,
@@ -790,7 +824,7 @@
       },
       {
         "name": "eachComputedProperty",
-        "line": 448,
+        "line": 450,
         "complexity": {
           "sloc": {
             "physical": 14,
@@ -823,7 +857,7 @@
         }
       }
     ],
-    "maintainability": 112.25996997937912,
+    "maintainability": 112.99565865409701,
     "module": "system/core_object.js"
   },
   "jshint": {

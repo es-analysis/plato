@@ -10,32 +10,32 @@
       "line": 10,
       "complexity": {
         "sloc": {
-          "physical": 117,
-          "logical": 52
+          "physical": 120,
+          "logical": 53
         },
         "cyclomatic": 5,
         "halstead": {
           "operators": {
             "distinct": 16,
-            "total": 203,
+            "total": 206,
             "identifiers": [
               "__stripped__"
             ]
           },
           "operands": {
-            "distinct": 94,
-            "total": 246,
+            "distinct": 96,
+            "total": 250,
             "identifiers": [
               "__stripped__"
             ]
           },
-          "length": 449,
-          "vocabulary": 110,
-          "difficulty": 20.93617021276596,
-          "volume": 3044.8305113725723,
-          "effort": 63747.08985511939,
-          "bugs": 1.0149435037908574,
-          "time": 3541.504991951077
+          "length": 456,
+          "vocabulary": 112,
+          "difficulty": 20.833333333333332,
+          "volume": 3104.1538444582675,
+          "effort": 64669.87175954723,
+          "bugs": 1.0347179481527558,
+          "time": 3592.7706533081796
         }
       }
     },
@@ -178,7 +178,7 @@
       },
       {
         "name": "exports.display",
-        "line": 47,
+        "line": 48,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -212,7 +212,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 48,
+        "line": 49,
         "complexity": {
           "sloc": {
             "physical": 1,
@@ -246,7 +246,7 @@
       },
       {
         "name": "exports.header",
-        "line": 53,
+        "line": 54,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -280,7 +280,7 @@
       },
       {
         "name": "exports.usage",
-        "line": 58,
+        "line": 59,
         "complexity": {
           "sloc": {
             "physical": 4,
@@ -314,7 +314,7 @@
       },
       {
         "name": "exports.initOptions",
-        "line": 64,
+        "line": 65,
         "complexity": {
           "sloc": {
             "physical": 9,
@@ -348,7 +348,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 66,
+        "line": 67,
         "complexity": {
           "sloc": {
             "physical": 6,
@@ -382,41 +382,75 @@
       },
       {
         "name": "exports.options",
-        "line": 74,
+        "line": 75,
         "complexity": {
           "sloc": {
-            "physical": 9,
-            "logical": 3
+            "physical": 4,
+            "logical": 2
           },
           "cyclomatic": 1,
           "halstead": {
             "operators": {
-              "distinct": 3,
-              "total": 12,
+              "distinct": 2,
+              "total": 6,
               "identifiers": [
                 "__stripped__"
               ]
             },
             "operands": {
-              "distinct": 11,
-              "total": 14,
+              "distinct": 7,
+              "total": 8,
               "identifiers": [
                 "__stripped__"
               ]
             },
-            "length": 26,
-            "vocabulary": 14,
-            "difficulty": 1.9090909090909092,
-            "volume": 98.9912279734977,
-            "effort": 188.98325340395016,
-            "bugs": 0.0329970759911659,
-            "time": 10.499069633552786
+            "length": 14,
+            "vocabulary": 9,
+            "difficulty": 1.1428571428571428,
+            "volume": 44.37895002019238,
+            "effort": 50.718800023077,
+            "bugs": 0.014792983340064125,
+            "time": 2.817711112393167
+          }
+        }
+      },
+      {
+        "name": "exports.optionsFooter",
+        "line": 80,
+        "complexity": {
+          "sloc": {
+            "physical": 6,
+            "logical": 1
+          },
+          "cyclomatic": 1,
+          "halstead": {
+            "operators": {
+              "distinct": 3,
+              "total": 6,
+              "identifiers": [
+                "__stripped__"
+              ]
+            },
+            "operands": {
+              "distinct": 6,
+              "total": 6,
+              "identifiers": [
+                "__stripped__"
+              ]
+            },
+            "length": 12,
+            "vocabulary": 9,
+            "difficulty": 1.5,
+            "volume": 38.03910001730775,
+            "effort": 57.058650025961626,
+            "bugs": 0.012679700005769252,
+            "time": 3.1699250014423126
           }
         }
       },
       {
         "name": "exports.initTasks",
-        "line": 85,
+        "line": 88,
         "complexity": {
           "sloc": {
             "physical": 12,
@@ -450,7 +484,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 91,
+        "line": 94,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -484,7 +518,7 @@
       },
       {
         "name": "exports.tasks",
-        "line": 98,
+        "line": 101,
         "complexity": {
           "sloc": {
             "physical": 24,
@@ -518,7 +552,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 103,
+        "line": 106,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -552,7 +586,7 @@
       },
       {
         "name": "exports.footer",
-        "line": 124,
+        "line": 127,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -585,7 +619,7 @@
         }
       }
     ],
-    "maintainability": 137.69057209688546,
+    "maintainability": 138.93144334164919,
     "module": "grunt/help.js"
   },
   "jshint": {
@@ -599,7 +633,7 @@
       },
       {
         "severity": "error",
-        "line": 43,
+        "line": 44,
         "column": 11,
         "message": "Extra comma.",
         "source": "Extra comma."
@@ -662,147 +696,154 @@
       },
       {
         "severity": "error",
-        "line": 47,
+        "line": 48,
         "column": 1,
         "message": "'exports' is not defined.",
         "source": "'{a}' is not defined."
       },
       {
         "severity": "error",
-        "line": 48,
+        "line": 49,
         "column": 3,
         "message": "'exports' is not defined.",
         "source": "'{a}' is not defined."
       },
       {
         "severity": "error",
-        "line": 48,
+        "line": 49,
         "column": 42,
         "message": "'exports' is not defined.",
         "source": "'{a}' is not defined."
       },
       {
         "severity": "error",
-        "line": 53,
+        "line": 54,
         "column": 1,
         "message": "'exports' is not defined.",
         "source": "'{a}' is not defined."
       },
       {
         "severity": "error",
-        "line": 58,
+        "line": 59,
         "column": 1,
         "message": "'exports' is not defined.",
         "source": "'{a}' is not defined."
       },
       {
         "severity": "error",
-        "line": 60,
+        "line": 61,
         "column": 41,
         "message": "'process' is not defined.",
         "source": "'{a}' is not defined."
       },
       {
         "severity": "error",
-        "line": 64,
+        "line": 65,
         "column": 1,
         "message": "'exports' is not defined.",
         "source": "'{a}' is not defined."
       },
       {
         "severity": "error",
-        "line": 66,
+        "line": 67,
         "column": 3,
         "message": "'exports' is not defined.",
         "source": "'{a}' is not defined."
       },
       {
         "severity": "error",
-        "line": 69,
+        "line": 70,
         "column": 5,
         "message": "'exports' is not defined.",
         "source": "'{a}' is not defined."
       },
       {
         "severity": "error",
-        "line": 74,
+        "line": 75,
         "column": 1,
         "message": "'exports' is not defined.",
         "source": "'{a}' is not defined."
       },
       {
         "severity": "error",
-        "line": 76,
+        "line": 77,
         "column": 3,
         "message": "'exports' is not defined.",
         "source": "'{a}' is not defined."
       },
       {
         "severity": "error",
-        "line": 76,
+        "line": 77,
         "column": 17,
         "message": "'exports' is not defined.",
         "source": "'{a}' is not defined."
       },
       {
         "severity": "error",
-        "line": 85,
+        "line": 80,
         "column": 1,
         "message": "'exports' is not defined.",
         "source": "'{a}' is not defined."
       },
       {
         "severity": "error",
-        "line": 90,
+        "line": 88,
+        "column": 1,
+        "message": "'exports' is not defined.",
+        "source": "'{a}' is not defined."
+      },
+      {
+        "severity": "error",
+        "line": 93,
         "column": 3,
         "message": "'exports' is not defined.",
         "source": "'{a}' is not defined."
       },
       {
         "severity": "error",
-        "line": 92,
+        "line": 95,
         "column": 5,
         "message": "'exports' is not defined.",
         "source": "'{a}' is not defined."
       },
       {
         "severity": "error",
-        "line": 94,
+        "line": 97,
         "column": 5,
         "message": "'exports' is not defined.",
         "source": "'{a}' is not defined."
       },
       {
         "severity": "error",
-        "line": 98,
+        "line": 101,
         "column": 1,
         "message": "'exports' is not defined.",
         "source": "'{a}' is not defined."
       },
       {
         "severity": "error",
-        "line": 100,
+        "line": 103,
         "column": 7,
         "message": "'exports' is not defined.",
         "source": "'{a}' is not defined."
       },
       {
         "severity": "error",
-        "line": 103,
+        "line": 106,
         "column": 5,
         "message": "'exports' is not defined.",
         "source": "'{a}' is not defined."
       },
       {
         "severity": "error",
-        "line": 103,
+        "line": 106,
         "column": 19,
         "message": "'exports' is not defined.",
         "source": "'{a}' is not defined."
       },
       {
         "severity": "error",
-        "line": 124,
+        "line": 127,
         "column": 1,
         "message": "'exports' is not defined.",
         "source": "'{a}' is not defined."

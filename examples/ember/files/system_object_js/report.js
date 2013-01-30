@@ -10,37 +10,72 @@ __report = {
       "line": 1,
       "complexity": {
         "sloc": {
-          "physical": 20,
-          "logical": 4
+          "physical": 21,
+          "logical": 6
         },
         "cyclomatic": 1,
         "halstead": {
           "operators": {
-            "distinct": 3,
-            "total": 9,
+            "distinct": 5,
+            "total": 14,
             "identifiers": [
               "__stripped__"
             ]
           },
           "operands": {
-            "distinct": 9,
-            "total": 13,
+            "distinct": 12,
+            "total": 18,
             "identifiers": [
               "__stripped__"
             ]
           },
-          "length": 22,
-          "vocabulary": 12,
-          "difficulty": 2.1666666666666665,
-          "volume": 78.86917501586544,
-          "effort": 170.8832125343751,
-          "bugs": 0.026289725005288478,
-          "time": 9.493511807465284
+          "length": 32,
+          "vocabulary": 17,
+          "difficulty": 3.75,
+          "volume": 130.79881092001088,
+          "effort": 490.4955409500408,
+          "bugs": 0.04359960364000363,
+          "time": 27.249752275002265
         }
       }
     },
-    "functions": [],
-    "maintainability": 130.95987853391512,
+    "functions": [
+      {
+        "name": "<anonymous>.toString",
+        "line": 21,
+        "complexity": {
+          "sloc": {
+            "physical": 1,
+            "logical": 1
+          },
+          "cyclomatic": 1,
+          "halstead": {
+            "operators": {
+              "distinct": 1,
+              "total": 1,
+              "identifiers": [
+                "__stripped__"
+              ]
+            },
+            "operands": {
+              "distinct": 1,
+              "total": 1,
+              "identifiers": [
+                "__stripped__"
+              ]
+            },
+            "length": 2,
+            "vocabulary": 2,
+            "difficulty": 0.5,
+            "volume": 2,
+            "effort": 1,
+            "bugs": 0.0006666666666666666,
+            "time": 0.05555555555555555
+          }
+        }
+      }
+    ],
+    "maintainability": 171,
     "module": "system/object.js"
   },
   "jshint": {

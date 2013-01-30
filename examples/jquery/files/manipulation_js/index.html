@@ -45,21 +45,21 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability</h2>
-      <p class="stat">110.94</p>
+      <p class="stat">111.11</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated # Bugs</h2>
-      <p class="stat">5.89</p>
+      <p class="stat">5.90</p>
     </div>
   </div>
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty</h2>
-      <p class="stat">92.92</p>
+      <p class="stat">89.99</p>
     </div>
     <div class="span6">
       <h2 class="header">SLOC/LSLOC</h2>
-      <p class="stat">628 / 343</p>
+      <p class="stat">633 / 341</p>
     </div>
   </div>
 </div>
@@ -92,20 +92,24 @@
 	rscriptType = /^$|\/(?:java|ecma)script/i,
 	rscriptTypeMasked = /^true\/(.*)/,
 	rcleanScript = /^\s*<!(?:\[CDATA\[|--)|(?:\]\]|--)>\s*$/g,
+
+	// We have to close these tags to support XHTML (#13200)
 	wrapMap = {
 
 		// Support: IE 9
-		option: [ 1, "<select multiple='multiple'>" ],
+		option: [ 1, "<select multiple='multiple'>", "</select>" ],
 
-		tr: [ 1, "<table>" ],
-		td: [ 3, "<table><tbody><tr>" ],
-		_default: [ 0, "" ]
+		thead: [ 1, "<table>", "</table>" ],
+		tr: [ 2, "<table><tbody>", "</tbody></table>" ],
+		td: [ 3, "<table><tbody><tr>", "</tr></tbody></table>" ],
+
+		_default: [ 0, "", "" ]
 	};
 
 // Support: IE 9
 wrapMap.optgroup = wrapMap.option;
 
-wrapMap.tbody = wrapMap.tfoot = wrapMap.colgroup = wrapMap.caption = wrapMap.thead = wrapMap.col = wrapMap.tr;
+wrapMap.tbody = wrapMap.tfoot = wrapMap.colgroup = wrapMap.caption = wrapMap.col = wrapMap.thead;
 wrapMap.th = wrapMap.td;
 
 jQuery.fn.extend({
@@ -325,15 +329,9 @@ jQuery.fn.extend({
 			var next = this.nextSibling,
 				parent = this.parentNode;
 
-			if ( parent && this.nodeType === 1 || this.nodeType === 11 ) {
-
+			if ( parent ) {
 				jQuery( this ).remove();
-
-				if ( next ) {
-					next.parentNode.insertBefore( elem, next );
-				} else {
-					parent.appendChild( elem );
-				}
+				parent.insertBefore( elem, next );
 			}
 		});
 	},
@@ -389,7 +387,9 @@ jQuery.fn.extend({
 
 						// Keep references to cloned scripts for later restoration
 						if ( hasScripts ) {
-							core_push.apply( scripts, getAll( node, "script" ) );
+							// Support: QtWebKit
+							// jQuery.merge because core_push.apply(_, arraylike) throws
+							jQuery.merge( scripts, getAll( node, "script" ) );
 						}
 					}
 
@@ -455,7 +455,9 @@ jQuery.each({
 			elems = i === last ? this : this.clone( true );
 			jQuery( insert[ i ] )[ original ]( elems );
 
-			core_push.apply( ret, elems );
+			// Support: QtWebKit
+			// .get() because core_push.apply(_, arraylike) throws
+			core_push.apply( ret, elems.get() );
 		}
 
 		return this.pushStack( ret );
@@ -519,7 +521,9 @@ jQuery.extend({
 
 				// Add nodes directly
 				if ( jQuery.type( elem ) === "object" ) {
-					core_push.apply( nodes, elem.nodeType ? [ elem ] : elem );
+					// Support: QtWebKit
+					// jQuery.merge because core_push.apply(_, arraylike) throws
+					jQuery.merge( nodes, elem.nodeType ? [ elem ] : elem );
 
 				// Convert non-html into a text node
 				} else if ( !rhtml.test( elem ) ) {
@@ -532,7 +536,7 @@ jQuery.extend({
 					// Deserialize a standard representation
 					tag = ( rtagName.exec( elem ) || ["", ""] )[ 1 ].toLowerCase();
 					wrap = wrapMap[ tag ] || wrapMap._default;
-					tmp.innerHTML = wrap[ 1 ] + elem.replace( rxhtmlTag, "<$1></$2>" );
+					tmp.innerHTML = wrap[ 1 ] + elem.replace( rxhtmlTag, "<$1></$2>" ) + wrap[ 2 ];
 
 					// Descend through wrappers to the right content
 					j = wrap[ 0 ];
@@ -540,7 +544,9 @@ jQuery.extend({
 						tmp = tmp.firstChild;
 					}
 
-					core_push.apply( nodes, tmp.childNodes );
+					// Support: QtWebKit
+					// jQuery.merge because core_push.apply(_, arraylike) throws
+					jQuery.merge( nodes, tmp.childNodes );
 
 					// Remember the top-level container
 					tmp = fragment.firstChild;
@@ -641,7 +647,6 @@ function restoreScript( elem ) {
 
 	if ( match ) {
 		elem.type = match[ 1 ];
-
 	} else {
 		elem.removeAttribute("type");
 	}

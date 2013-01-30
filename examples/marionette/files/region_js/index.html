@@ -45,21 +45,21 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability</h2>
-      <p class="stat">117.14</p>
+      <p class="stat">117.54</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated # Bugs</h2>
-      <p class="stat">0.76</p>
+      <p class="stat">0.75</p>
     </div>
   </div>
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty</h2>
-      <p class="stat">26.89</p>
+      <p class="stat">26.92</p>
     </div>
     <div class="span6">
       <h2 class="header">SLOC/LSLOC</h2>
-      <p class="stat">160 / 64</p>
+      <p class="stat">158 / 63</p>
     </div>
   </div>
 </div>
@@ -90,8 +90,6 @@
 
 Marionette.Region = function(options){
   this.options = options || {};
-
-  Marionette.addEventBinder(this);
 
   this.el = Marionette.getOption(this, "el");
 

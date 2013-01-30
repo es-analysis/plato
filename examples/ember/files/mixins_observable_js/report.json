@@ -10,39 +10,39 @@
       "line": 6,
       "complexity": {
         "sloc": {
-          "physical": 510,
-          "logical": 70
+          "physical": 507,
+          "logical": 69
         },
         "cyclomatic": 7,
         "halstead": {
           "operators": {
             "distinct": 18,
-            "total": 159,
+            "total": 158,
             "identifiers": [
               "__stripped__"
             ]
           },
           "operands": {
-            "distinct": 54,
-            "total": 238,
+            "distinct": 52,
+            "total": 236,
             "identifiers": [
               "__stripped__"
             ]
           },
-          "length": 397,
-          "vocabulary": 72,
-          "difficulty": 39.666666666666664,
-          "volume": 2449.460225572598,
-          "effort": 97161.92228104638,
-          "bugs": 0.8164867418575327,
-          "time": 5397.884571169244
+          "length": 394,
+          "vocabulary": 70,
+          "difficulty": 40.84615384615385,
+          "volume": 2414.937508676317,
+          "effort": 98640.90900824034,
+          "bugs": 0.8049791695587724,
+          "time": 5480.050500457797
         }
       }
     },
     "functions": [
       {
         "name": "get",
-        "line": 117,
+        "line": 114,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -76,7 +76,7 @@
       },
       {
         "name": "getProperties",
-        "line": 139,
+        "line": 136,
         "complexity": {
           "sloc": {
             "physical": 11,
@@ -110,7 +110,7 @@
       },
       {
         "name": "set",
-        "line": 199,
+        "line": 196,
         "complexity": {
           "sloc": {
             "physical": 4,
@@ -144,7 +144,7 @@
       },
       {
         "name": "setProperties",
-        "line": 216,
+        "line": 213,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -178,7 +178,7 @@
       },
       {
         "name": "beginPropertyChanges",
-        "line": 234,
+        "line": 231,
         "complexity": {
           "sloc": {
             "physical": 4,
@@ -212,7 +212,7 @@
       },
       {
         "name": "endPropertyChanges",
-        "line": 252,
+        "line": 249,
         "complexity": {
           "sloc": {
             "physical": 4,
@@ -246,7 +246,7 @@
       },
       {
         "name": "propertyWillChange",
-        "line": 275,
+        "line": 272,
         "complexity": {
           "sloc": {
             "physical": 4,
@@ -280,7 +280,7 @@
       },
       {
         "name": "propertyDidChange",
-        "line": 298,
+        "line": 295,
         "complexity": {
           "sloc": {
             "physical": 4,
@@ -314,7 +314,7 @@
       },
       {
         "name": "notifyPropertyChange",
-        "line": 311,
+        "line": 308,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -348,7 +348,7 @@
       },
       {
         "name": "addBeforeObserver",
-        "line": 317,
+        "line": 314,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -382,7 +382,7 @@
       },
       {
         "name": "addObserver",
-        "line": 369,
+        "line": 366,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -416,7 +416,7 @@
       },
       {
         "name": "removeObserver",
-        "line": 384,
+        "line": 381,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -450,7 +450,7 @@
       },
       {
         "name": "hasObserverFor",
-        "line": 398,
+        "line": 395,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -484,7 +484,7 @@
       },
       {
         "name": "getPath",
-        "line": 408,
+        "line": 405,
         "complexity": {
           "sloc": {
             "physical": 4,
@@ -518,7 +518,7 @@
       },
       {
         "name": "setPath",
-        "line": 420,
+        "line": 417,
         "complexity": {
           "sloc": {
             "physical": 4,
@@ -552,7 +552,7 @@
       },
       {
         "name": "getWithDefault",
-        "line": 438,
+        "line": 435,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -586,7 +586,7 @@
       },
       {
         "name": "incrementProperty",
-        "line": 455,
+        "line": 452,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -620,7 +620,7 @@
       },
       {
         "name": "decrementProperty",
-        "line": 474,
+        "line": 471,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -654,7 +654,7 @@
       },
       {
         "name": "toggleProperty",
-        "line": 492,
+        "line": 489,
         "complexity": {
           "sloc": {
             "physical": 4,
@@ -688,7 +688,7 @@
       },
       {
         "name": "cacheFor",
-        "line": 507,
+        "line": 504,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -722,7 +722,7 @@
       },
       {
         "name": "observersForKey",
-        "line": 512,
+        "line": 509,
         "complexity": {
           "sloc": {
             "physical": 3,

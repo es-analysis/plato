@@ -10,32 +10,32 @@
       "line": 44,
       "complexity": {
         "sloc": {
-          "physical": 916,
-          "logical": 585
+          "physical": 921,
+          "logical": 589
         },
         "cyclomatic": 62,
         "halstead": {
           "operators": {
             "distinct": 33,
-            "total": 1436,
+            "total": 1444,
             "identifiers": [
               "__stripped__"
             ]
           },
           "operands": {
-            "distinct": 508,
-            "total": 1890,
+            "distinct": 511,
+            "total": 1900,
             "identifiers": [
               "__stripped__"
             ]
           },
-          "length": 3326,
-          "vocabulary": 541,
-          "difficulty": 61.387795275590555,
-          "volume": 30198.36639100799,
-          "effort": 1853811.1336684728,
-          "bugs": 10.066122130335996,
-          "time": 102989.50742602626
+          "length": 3344,
+          "vocabulary": 544,
+          "difficulty": 61.35029354207436,
+          "volume": 30388.475741141134,
+          "effort": 1864341.9070152142,
+          "bugs": 10.12949191371371,
+          "time": 103574.55038973413
         }
       }
     },
@@ -2795,8 +2795,42 @@
         }
       },
       {
+        "name": "<anonymous>",
+        "line": 868,
+        "complexity": {
+          "sloc": {
+            "physical": 1,
+            "logical": 0
+          },
+          "cyclomatic": 1,
+          "halstead": {
+            "operators": {
+              "distinct": 0,
+              "total": 0,
+              "identifiers": [
+                "__stripped__"
+              ]
+            },
+            "operands": {
+              "distinct": 0,
+              "total": 0,
+              "identifiers": [
+                "__stripped__"
+              ]
+            },
+            "length": 0,
+            "time": 0,
+            "bugs": 0,
+            "effort": 0,
+            "volume": 0,
+            "difficulty": 0,
+            "vocabulary": 0
+          }
+        }
+      },
+      {
         "name": "TreeWalker",
-        "line": 887,
+        "line": 892,
         "complexity": {
           "sloc": {
             "physical": 4,
@@ -2830,7 +2864,7 @@
       },
       {
         "name": "_visit",
-        "line": 892,
+        "line": 897,
         "complexity": {
           "sloc": {
             "physical": 11,
@@ -2864,7 +2898,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 894,
+        "line": 899,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -2898,7 +2932,7 @@
       },
       {
         "name": "parent",
-        "line": 903,
+        "line": 908,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -2932,7 +2966,7 @@
       },
       {
         "name": "push",
-        "line": 906,
+        "line": 911,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -2966,7 +3000,7 @@
       },
       {
         "name": "pop",
-        "line": 909,
+        "line": 914,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -3000,7 +3034,7 @@
       },
       {
         "name": "self",
-        "line": 912,
+        "line": 917,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -3034,7 +3068,7 @@
       },
       {
         "name": "find_parent",
-        "line": 915,
+        "line": 920,
         "complexity": {
           "sloc": {
             "physical": 7,
@@ -3068,7 +3102,7 @@
       },
       {
         "name": "in_boolean_context",
-        "line": 922,
+        "line": 927,
         "complexity": {
           "sloc": {
             "physical": 18,
@@ -3102,7 +3136,7 @@
       },
       {
         "name": "loopcontrol_target",
-        "line": 940,
+        "line": 945,
         "complexity": {
           "sloc": {
             "physical": 19,
@@ -3135,7 +3169,7 @@
         }
       }
     ],
-    "maintainability": 131.08730244901844,
+    "maintainability": 131.3027362969568,
     "module": "lib/ast.js"
   },
   "jshint": {
@@ -3401,49 +3435,49 @@
       },
       {
         "severity": "error",
-        "line": 872,
+        "line": 877,
         "column": 46,
         "message": "Extra comma.",
         "source": "Extra comma."
       },
       {
         "severity": "error",
-        "line": 890,
+        "line": 895,
         "column": 2,
         "message": "Unnecessary semicolon.",
         "source": "Unnecessary semicolon."
       },
       {
         "severity": "error",
-        "line": 950,
+        "line": 955,
         "column": 24,
         "message": "'i' is already defined.",
         "source": "'{a}' is already defined."
       },
       {
         "severity": "error",
-        "line": 951,
+        "line": 956,
         "column": 23,
         "message": "'x' is already defined.",
         "source": "'{a}' is already defined."
       },
       {
         "severity": "error",
-        "line": 953,
+        "line": 958,
         "column": 21,
         "message": "Bad line breaking before '||'.",
         "source": "Bad line breaking before '{a}'."
       },
       {
         "severity": "error",
-        "line": 954,
+        "line": 959,
         "column": 21,
         "message": "Bad line breaking before '||'.",
         "source": "Bad line breaking before '{a}'."
       },
       {
         "severity": "error",
-        "line": 955,
+        "line": 960,
         "column": 21,
         "message": "Bad line breaking before '||'.",
         "source": "Bad line breaking before '{a}'."

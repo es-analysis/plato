@@ -10,32 +10,32 @@
       "line": 2,
       "complexity": {
         "sloc": {
-          "physical": 194,
+          "physical": 195,
           "logical": 102
         },
-        "cyclomatic": 29,
+        "cyclomatic": 30,
         "halstead": {
           "operators": {
             "distinct": 27,
-            "total": 214,
+            "total": 219,
             "identifiers": [
               "__stripped__"
             ]
           },
           "operands": {
             "distinct": 59,
-            "total": 244,
+            "total": 248,
             "identifiers": [
               "__stripped__"
             ]
           },
-          "length": 458,
+          "length": 467,
           "vocabulary": 86,
-          "difficulty": 55.83050847457626,
-          "volume": 2943.229257653561,
-          "effort": 164321.98601204794,
-          "bugs": 0.9810764192178537,
-          "time": 9128.999222891553
+          "difficulty": 56.74576271186441,
+          "volume": 3001.0656404458796,
+          "effort": 170297.75871547128,
+          "bugs": 1.0003552134819598,
+          "time": 9460.98659530396
         }
       }
     },
@@ -113,7 +113,7 @@
         "line": 35,
         "complexity": {
           "sloc": {
-            "physical": 161,
+            "physical": 162,
             "logical": 23
           },
           "cyclomatic": 3,
@@ -348,41 +348,41 @@
       },
       {
         "name": "has",
-        "line": 141,
+        "line": 142,
         "complexity": {
           "sloc": {
             "physical": 3,
             "logical": 1
           },
-          "cyclomatic": 1,
+          "cyclomatic": 2,
           "halstead": {
             "operators": {
-              "distinct": 5,
-              "total": 5,
+              "distinct": 8,
+              "total": 10,
               "identifiers": [
                 "__stripped__"
               ]
             },
             "operands": {
-              "distinct": 5,
-              "total": 6,
+              "distinct": 6,
+              "total": 10,
               "identifiers": [
                 "__stripped__"
               ]
             },
-            "length": 11,
-            "vocabulary": 10,
-            "difficulty": 3,
-            "volume": 36.541209043760986,
-            "effort": 109.62362713128296,
-            "bugs": 0.012180403014586996,
-            "time": 6.090201507293497
+            "length": 20,
+            "vocabulary": 14,
+            "difficulty": 6.666666666666667,
+            "volume": 76.14709844115208,
+            "effort": 507.6473229410139,
+            "bugs": 0.025382366147050694,
+            "time": 28.20262905227855
           }
         }
       },
       {
         "name": "empty",
-        "line": 145,
+        "line": 146,
         "complexity": {
           "sloc": {
             "physical": 4,
@@ -416,7 +416,7 @@
       },
       {
         "name": "disable",
-        "line": 150,
+        "line": 151,
         "complexity": {
           "sloc": {
             "physical": 4,
@@ -450,7 +450,7 @@
       },
       {
         "name": "disabled",
-        "line": 155,
+        "line": 156,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -484,7 +484,7 @@
       },
       {
         "name": "lock",
-        "line": 159,
+        "line": 160,
         "complexity": {
           "sloc": {
             "physical": 7,
@@ -518,7 +518,7 @@
       },
       {
         "name": "locked",
-        "line": 167,
+        "line": 168,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -552,7 +552,7 @@
       },
       {
         "name": "fireWith",
-        "line": 171,
+        "line": 172,
         "complexity": {
           "sloc": {
             "physical": 12,
@@ -586,7 +586,7 @@
       },
       {
         "name": "fire",
-        "line": 184,
+        "line": 185,
         "complexity": {
           "sloc": {
             "physical": 4,
@@ -620,7 +620,7 @@
       },
       {
         "name": "fired",
-        "line": 189,
+        "line": 190,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -653,7 +653,7 @@
         }
       }
     ],
-    "maintainability": 118.99164776280763,
+    "maintainability": 118.92293025040671,
     "module": "callbacks.js"
   },
   "jshint": {

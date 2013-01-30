@@ -12,6 +12,10 @@
   <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
 
+  <script>
+    var __options = {"flags":{"complexity":{"logicalor":true,"switchcase":true,"forin":false,"trycatch":false},"jshint":{"options":{},"globals":{}}}}
+  </script>
+
   <link href="assets/css/vendor/bootstrap-3.0.0-wip.css" rel="stylesheet">
   <link href="assets/css/vendor/font-awesome.css" rel="stylesheet">
   <link href="assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
@@ -46,11 +50,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Total SLOC</h2>
-      <p class="stat">6715</p>
+      <p class="stat">6724</p>
     </div>
     <div class="span6">
       <h2 class="header">Average Maintainability</h2>
-      <p class="stat">117.78</p>
+      <p class="stat">119.54</p>
     </div>
   </div>
 </div>
@@ -69,6 +73,12 @@
     <h2 class="span12">Estimated number of bugs</h2>
     <div class="span12"><div id='chart_bugs' class='chart'></div></div>
   </div>
+  
+  <div class="row">
+    <h2 class="span12">Lint errors</h2>
+    <div class="span12"><div id='chart_lint' class='chart'></div></div>
+  </div>
+  
 </div>
 
 
@@ -160,53 +170,59 @@
       
       <li class="span12" id="plato-file-13">
         <span class="fade-left plato-file-fade visible-desktop"></span>
-        <span class="span4 plato-file"><a class="plato-file-link" href="./files/event_js/index.html">event.js</a></span>
+        <span class="span4 plato-file"><a class="plato-file-link" href="./files/event_alias_js/index.html">event-alias.js</a></span>
         <span class="span8 plato-file-chart"></span>
       </li>
       
       <li class="span12" id="plato-file-14">
         <span class="fade-left plato-file-fade visible-desktop"></span>
-        <span class="span4 plato-file"><a class="plato-file-link" href="./files/exports_js/index.html">exports.js</a></span>
+        <span class="span4 plato-file"><a class="plato-file-link" href="./files/event_js/index.html">event.js</a></span>
         <span class="span8 plato-file-chart"></span>
       </li>
       
       <li class="span12" id="plato-file-15">
         <span class="fade-left plato-file-fade visible-desktop"></span>
-        <span class="span4 plato-file"><a class="plato-file-link" href="./files/manipulation_js/index.html">manipulation.js</a></span>
+        <span class="span4 plato-file"><a class="plato-file-link" href="./files/exports_js/index.html">exports.js</a></span>
         <span class="span8 plato-file-chart"></span>
       </li>
       
       <li class="span12" id="plato-file-16">
         <span class="fade-left plato-file-fade visible-desktop"></span>
-        <span class="span4 plato-file"><a class="plato-file-link" href="./files/offset_js/index.html">offset.js</a></span>
+        <span class="span4 plato-file"><a class="plato-file-link" href="./files/manipulation_js/index.html">manipulation.js</a></span>
         <span class="span8 plato-file-chart"></span>
       </li>
       
       <li class="span12" id="plato-file-17">
         <span class="fade-left plato-file-fade visible-desktop"></span>
-        <span class="span4 plato-file"><a class="plato-file-link" href="./files/queue_js/index.html">queue.js</a></span>
+        <span class="span4 plato-file"><a class="plato-file-link" href="./files/offset_js/index.html">offset.js</a></span>
         <span class="span8 plato-file-chart"></span>
       </li>
       
       <li class="span12" id="plato-file-18">
         <span class="fade-left plato-file-fade visible-desktop"></span>
-        <span class="span4 plato-file"><a class="plato-file-link" href="./files/serialize_js/index.html">serialize.js</a></span>
+        <span class="span4 plato-file"><a class="plato-file-link" href="./files/queue_js/index.html">queue.js</a></span>
         <span class="span8 plato-file-chart"></span>
       </li>
       
       <li class="span12" id="plato-file-19">
         <span class="fade-left plato-file-fade visible-desktop"></span>
-        <span class="span4 plato-file"><a class="plato-file-link" href="./files/sizzle_jquery_js/index.html">sizzle-jquery.js</a></span>
+        <span class="span4 plato-file"><a class="plato-file-link" href="./files/serialize_js/index.html">serialize.js</a></span>
         <span class="span8 plato-file-chart"></span>
       </li>
       
       <li class="span12" id="plato-file-20">
         <span class="fade-left plato-file-fade visible-desktop"></span>
-        <span class="span4 plato-file"><a class="plato-file-link" href="./files/support_js/index.html">support.js</a></span>
+        <span class="span4 plato-file"><a class="plato-file-link" href="./files/sizzle_jquery_js/index.html">sizzle-jquery.js</a></span>
         <span class="span8 plato-file-chart"></span>
       </li>
       
       <li class="span12" id="plato-file-21">
+        <span class="fade-left plato-file-fade visible-desktop"></span>
+        <span class="span4 plato-file"><a class="plato-file-link" href="./files/support_js/index.html">support.js</a></span>
+        <span class="span8 plato-file-chart"></span>
+      </li>
+      
+      <li class="span12" id="plato-file-22">
         <span class="fade-left plato-file-fade visible-desktop"></span>
         <span class="span4 plato-file"><a class="plato-file-link" href="./files/traversing_js/index.html">traversing.js</a></span>
         <span class="span8 plato-file-chart"></span>

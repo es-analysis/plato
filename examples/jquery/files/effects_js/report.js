@@ -874,19 +874,19 @@ __report = {
               ]
             },
             "operands": {
-              "distinct": 10,
+              "distinct": 11,
               "total": 33,
               "identifiers": [
                 "__stripped__"
               ]
             },
             "length": 63,
-            "vocabulary": 23,
-            "difficulty": 21.45,
-            "volume": 284.98440323159184,
-            "effort": 6112.915449317645,
-            "bugs": 0.09499480107719728,
-            "time": 339.6064138509803
+            "vocabulary": 24,
+            "difficulty": 19.5,
+            "volume": 288.8526375454329,
+            "effort": 5632.626432135942,
+            "bugs": 0.09628421251514431,
+            "time": 312.923690674219
           }
         }
       },
@@ -1775,7 +1775,7 @@ __report = {
         }
       }
     ],
-    "maintainability": 110.04348757873929,
+    "maintainability": 110.05014058931944,
     "module": "effects.js"
   },
   "jshint": {

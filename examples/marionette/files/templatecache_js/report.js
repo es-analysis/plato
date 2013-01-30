@@ -10,7 +10,7 @@ __report = {
       "line": 6,
       "complexity": {
         "sloc": {
-          "physical": 92,
+          "physical": 94,
           "logical": 38
         },
         "cyclomatic": 7,
@@ -178,7 +178,7 @@ __report = {
       },
       {
         "name": "loadTemplate",
-        "line": 77,
+        "line": 79,
         "complexity": {
           "sloc": {
             "physical": 12,
@@ -212,7 +212,7 @@ __report = {
       },
       {
         "name": "compileTemplate",
-        "line": 94,
+        "line": 96,
         "complexity": {
           "sloc": {
             "physical": 3,

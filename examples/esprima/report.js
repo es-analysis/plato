@@ -17,6 +17,9 @@ __report = {
         "fileSafe": "_tmp_plato_esprima_esprima_js",
         "link": "files/_tmp_plato_esprima_esprima_js/index.html"
       },
+      "jshint": {
+        "messages": 0
+      },
       "complexity": {
         "aggregate": {
           "line": 40,

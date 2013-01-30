@@ -16,26 +16,26 @@
         "cyclomatic": 4,
         "halstead": {
           "operators": {
-            "distinct": 10,
-            "total": 29,
+            "distinct": 12,
+            "total": 33,
             "identifiers": [
               "__stripped__"
             ]
           },
           "operands": {
-            "distinct": 13,
-            "total": 30,
+            "distinct": 14,
+            "total": 34,
             "identifiers": [
               "__stripped__"
             ]
           },
-          "length": 59,
-          "vocabulary": 23,
-          "difficulty": 11.538461538461537,
-          "volume": 266.89015540736375,
-          "effort": 3079.501793161889,
-          "bugs": 0.08896338513578791,
-          "time": 171.0834329534383
+          "length": 67,
+          "vocabulary": 26,
+          "difficulty": 14.57142857142857,
+          "volume": 314.9294611154532,
+          "effort": 4588.972147682317,
+          "bugs": 0.1049764870384844,
+          "time": 254.94289709346205
         }
       }
     },
@@ -51,31 +51,31 @@
           "cyclomatic": 4,
           "halstead": {
             "operators": {
-              "distinct": 9,
-              "total": 18,
+              "distinct": 11,
+              "total": 22,
               "identifiers": [
                 "__stripped__"
               ]
             },
             "operands": {
-              "distinct": 4,
-              "total": 18,
+              "distinct": 5,
+              "total": 22,
               "identifiers": [
                 "__stripped__"
               ]
             },
-            "length": 36,
-            "vocabulary": 13,
-            "difficulty": 20.25,
-            "volume": 133.21582985307933,
-            "effort": 2697.6205545248563,
-            "bugs": 0.04440527661769311,
-            "time": 149.86780858471423
+            "length": 44,
+            "vocabulary": 16,
+            "difficulty": 24.200000000000003,
+            "volume": 176,
+            "effort": 4259.200000000001,
+            "bugs": 0.058666666666666666,
+            "time": 236.62222222222226
           }
         }
       }
     ],
-    "maintainability": 109.97577049703165,
+    "maintainability": 108.4138180532824,
     "module": "helpers.js"
   },
   "jshint": {
