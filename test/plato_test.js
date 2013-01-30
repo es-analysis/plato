@@ -1,7 +1,6 @@
 'use strict';
 
-var util = require('../lib/util'),
-    plato = require('../lib/plato');
+var plato = require('../lib/plato');
 
 /*
   ======== A Handy Little Nodeunit Reference ========
@@ -27,24 +26,6 @@ exports['awesome'] = {
   setUp: function(done) {
     // setup here
     done();
-  },
-  'common prefix': function(test) {
-    test.expect(2);
-
-    var files = [
-      '/lib/foo/bar/a.js',
-      '/lib/foo/bar/baz/b.js',
-      '/lib/foo/bar/qux/c.js',
-    ];
-
-    test.equal(util.findCommonBase(files), '/lib/foo/bar/', 'should find common prefix');
-
-    files = [
-      'single/file/foo.js'
-    ];
-    test.equal(util.findCommonBase(files), '', 'should nto find common prefix for one file');
-
-    test.done();
   },
   'test empty file' : function(test) {
     test.expect(1);

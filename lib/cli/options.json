@@ -4,10 +4,20 @@
     "desc": "Display this help text.",
     "type": "Boolean"
   },
+  "q": {
+    "long": "quiet",
+    "desc": "Reduce output to errors only",
+    "type": "Boolean"
+  },
   "v": {
     "long": "version",
     "desc": "Print the version.",
     "type": "Boolean"
+  },
+  "x": {
+    "long": "exclude",
+    "desc": "File exclusion regex",
+    "type": "String"
   },
   "d": {
     "long": "dir",

@@ -17,5 +17,5 @@ if (cli.args.h) {
 }
 
 cli.exec(function(){
-  console.log('Done!')
+  console.log('Done!');
 });

@@ -74,12 +74,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-casper');
 
-  grunt.registerTask('runbin',function(){
+  grunt.registerTask('runtest',function(){
     var done = this.async();
 
     grunt.util.spawn({
         cmd : './bin/plato',
         args : [
+          '-q',
           '-dtmp',
           '-ttest report',
           'test/fixtures/a.js','test/fixtures/b.js','test/fixtures/empty.js'
@@ -88,7 +89,33 @@ module.exports = function(grunt) {
       function(err, result, code){
         console.log(result.stdout);
         if (err || code !== 0) {
-          grunt.fail('Running plato binary failed');
+          grunt.fatal('Running plato binary failed');
+        }
+        done();
+      }
+    );
+  });
+
+  grunt.registerTask('runbin',function(){
+    var done = this.async();
+
+    grunt.util.spawn({
+        cmd : './bin/plato',
+        args : [
+          '-q',
+          '-r',
+          '-l.jshintrc',
+          '-xvendor|bundles',
+          '-dreports',
+          '-tPlato report',
+          'lib/'
+        ]
+      },
+      function(err, result, code){
+        console.log(result.stdout);
+        if (err || code !== 0) {
+          console.log(err);
+          grunt.fatal('Running plato binary failed');
         }
         done();
       }
@@ -97,7 +124,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('optimize', ['uglify']);
   // Default task.
-  grunt.registerTask('test', ['jshint', 'nodeunit', 'runbin'/*, 'casperjs'*/]);
+  grunt.registerTask('test', ['jshint', 'nodeunit', 'runtest', 'runbin'/*, 'casperjs'*/]);
   grunt.registerTask('default', ['test']);
 
 };
