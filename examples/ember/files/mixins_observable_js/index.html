@@ -44,21 +44,21 @@
 <div class="container aggregate-stats">
   <div class="row">
     <div class="span6">
-      <h2 class="header">Maintainability</h2>
+      <h2 class="header">Maintainability <a href="http://www.virtualmachinery.com/sidebar4.htm"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between -INF and 171 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
       <p class="stat">139.59</p>
     </div>
     <div class="span6">
-      <h2 class="header">Estimated # Bugs</h2>
+      <h2 class="header">Estimated # Bugs  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
       <p class="stat">0.80</p>
     </div>
   </div>
   <div class="row">
     <div class="span6">
-      <h2 class="header">Difficulty</h2>
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
       <p class="stat">40.85</p>
     </div>
     <div class="span6">
-      <h2 class="header">SLOC/LSLOC</h2>
+      <h2 class="header">SLOC/LSLOC <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
       <p class="stat">507 / 69</p>
     </div>
   </div>
@@ -70,11 +70,11 @@
   </div>
   <div class="row">
     <div class="span6">
-      <h3 class="chart-header">By Complexity</h3>
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
       <div id="fn-by-complexity" class="stat"></div>
     </div>
     <div class="span6">
-      <h3 class="chart-header">By SLOC</h3>
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
       <div id="fn-by-sloc" class="stat"></div>
     </div>
   </div>
@@ -617,6 +617,9 @@ Ember.Observable = Ember.Mixin.create(/** @scope Ember.Observable.prototype */ {
 <script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
 <script type="text/javascript" src="report.js"></script>
 <script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+<script>
+  $('[rel=popover]').popover();
+</script>
 
 </body>
 </html>

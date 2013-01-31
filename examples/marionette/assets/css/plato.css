@@ -60,3 +60,7 @@ li {
   line-height:70px;
 }
 
+i.icon[rel=popover] {
+  font-size:23px;
+  color: #0088cc;
+}

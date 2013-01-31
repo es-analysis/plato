@@ -49,11 +49,11 @@
   </div>
   <div class="row">
     <div class="span6">
-      <h2 class="header">Total SLOC</h2>
+      <h2 class="header">Total SLOC <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code" data-original-title="SLOC"></i></h2>
       <p class="stat">6580</p>
     </div>
     <div class="span6">
-      <h2 class="header">Average Maintainability</h2>
+      <h2 class="header">Average Maintainability <a href="http://www.virtualmachinery.com/sidebar4.htm"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between -INF and 171 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
       <p class="stat">115.80</p>
     </div>
   </div>
@@ -62,15 +62,15 @@
 
 <div class="container">
   <div class="row">
-    <h2 class="span12">Maintainability</h2>
+    <h2 class="span12">Maintainability <a href="http://www.virtualmachinery.com/sidebar4.htm"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between -INF and 171 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
     <div class="span12"><div id='chart_maintainability' class='chart'></div></div>
   </div>
   <div class="row">
-    <h2 class="span12">Lines of code</h2>
+    <h2 class="span12">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code" data-original-title="SLOC"></i></h2>
     <div class="span12"><div id='chart_sloc' class='chart'></div></div>
   </div>
   <div class="row">
-    <h2 class="span12">Estimated number of bugs</h2>
+    <h2 class="span12">Estimated number of bugs <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
     <div class="span12"><div id='chart_bugs' class='chart'></div></div>
   </div>
   
@@ -80,8 +80,6 @@
   </div>
   
 </div>
-
-
 
 <div class="container">
   <div class="row">
@@ -158,6 +156,9 @@
 <script type="text/javascript" src="assets/scripts/bundles/core-bundle.js"></script>
 <script type="text/javascript" src="report.js"></script>
 <script type="text/javascript" src="assets/scripts/plato-overview.js"></script>
+<script>
+  $('[rel=popover]').popover();
+</script>
 
 </body>
 </html>
