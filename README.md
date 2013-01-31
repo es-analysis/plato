@@ -35,11 +35,12 @@ Usage : plato [options] file1.js file2.js ... fileN.js
 ## Example
 
 ```shell
-plato -r -d report src/*.js
+plato -r -d report src
 ```
 
 ## Release History
 
+  - 0.4.4 Added quiet mode, exclusion regex, description popovers
   - 0.4.3 Updated dependencies to fix reporting issues
   - 0.4.2 Fixed overview links to files
   - 0.4.1 Fixed jshint option passing
