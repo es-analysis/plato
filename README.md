@@ -20,8 +20,12 @@ Install the module with: `npm install -g plato`
 Usage : plato [options] file1.js file2.js ... fileN.js
   -h, --help
       Display this help text.
+  -q, --quiet
+      Reduce output to errors only
   -v, --version
       Print the version.
+  -x, --exclude : String
+      File exclusion regex
   -d, --dir : String *required*
       The output directory
   -r, --recurse
