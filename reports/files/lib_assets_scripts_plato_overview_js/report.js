@@ -10,32 +10,32 @@ __report = {
       "line": 4,
       "complexity": {
         "sloc": {
-          "physical": 154,
-          "logical": 107
+          "physical": 155,
+          "logical": 108
         },
         "cyclomatic": 7,
         "halstead": {
           "operators": {
             "distinct": 21,
-            "total": 326,
+            "total": 327,
             "identifiers": [
               "__stripped__"
             ]
           },
           "operands": {
-            "distinct": 126,
-            "total": 450,
+            "distinct": 127,
+            "total": 452,
             "identifiers": [
               "__stripped__"
             ]
           },
-          "length": 776,
-          "vocabulary": 147,
-          "difficulty": 37.5,
-          "volume": 5586.9457395930185,
-          "effort": 209510.4652347382,
-          "bugs": 1.8623152465310062,
-          "time": 11639.470290818788
+          "length": 779,
+          "vocabulary": 148,
+          "difficulty": 37.37007874015748,
+          "volume": 5616.164171824951,
+          "effort": 209876.49731874975,
+          "bugs": 1.8720547239416503,
+          "time": 11659.805406597208
         }
       }
     },
@@ -45,7 +45,7 @@ __report = {
         "line": 4,
         "complexity": {
           "sloc": {
-            "physical": 154,
+            "physical": 155,
             "logical": 12
           },
           "cyclomatic": 1,
@@ -249,38 +249,38 @@ __report = {
         "line": 68,
         "complexity": {
           "sloc": {
-            "physical": 81,
-            "logical": 40
+            "physical": 82,
+            "logical": 41
           },
           "cyclomatic": 2,
           "halstead": {
             "operators": {
               "distinct": 10,
-              "total": 83,
+              "total": 84,
               "identifiers": [
                 "__stripped__"
               ]
             },
             "operands": {
-              "distinct": 40,
-              "total": 107,
+              "distinct": 42,
+              "total": 109,
               "identifiers": [
                 "__stripped__"
               ]
             },
-            "length": 190,
-            "vocabulary": 50,
-            "difficulty": 13.375,
-            "volume": 1072.3326760571977,
-            "effort": 14342.449542265018,
-            "bugs": 0.3574442253523992,
-            "time": 796.8027523480565
+            "length": 193,
+            "vocabulary": 52,
+            "difficulty": 12.976190476190476,
+            "volume": 1100.184865601231,
+            "effort": 14276.208375063592,
+            "bugs": 0.3667282885337437,
+            "time": 793.1226875035329
           }
         }
       },
       {
         "name": "<anonymous>",
-        "line": 108,
+        "line": 109,
         "complexity": {
           "sloc": {
             "physical": 23,
@@ -314,7 +314,7 @@ __report = {
       },
       {
         "name": "onGraphClick",
-        "line": 132,
+        "line": 133,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -348,7 +348,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 144,
+        "line": 145,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -382,7 +382,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 153,
+        "line": 154,
         "complexity": {
           "sloc": {
             "physical": 4,
@@ -415,7 +415,7 @@ __report = {
         }
       }
     ],
-    "maintainability": 105.97275745768403,
+    "maintainability": 61.88655689787055,
     "module": "lib/assets/scripts/plato-overview.js"
   },
   "jshint": {

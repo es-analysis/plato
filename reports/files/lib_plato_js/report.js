@@ -10,32 +10,32 @@ __report = {
       "line": 9,
       "complexity": {
         "sloc": {
-          "physical": 207,
-          "logical": 138
+          "physical": 208,
+          "logical": 139
         },
         "cyclomatic": 12,
         "halstead": {
           "operators": {
             "distinct": 19,
-            "total": 363,
+            "total": 364,
             "identifiers": [
               "__stripped__"
             ]
           },
           "operands": {
-            "distinct": 140,
-            "total": 455,
+            "distinct": 141,
+            "total": 457,
             "identifiers": [
               "__stripped__"
             ]
           },
-          "length": 818,
-          "vocabulary": 159,
-          "difficulty": 30.875,
-          "volume": 5981.938257422603,
-          "effort": 184692.34369792286,
-          "bugs": 1.9939794191408675,
-          "time": 10260.685760995715
+          "length": 821,
+          "vocabulary": 160,
+          "difficulty": 30.790780141843975,
+          "volume": 6011.302965902524,
+          "effort": 185092.70798911923,
+          "bugs": 2.0037676553008414,
+          "time": 10282.928221617734
         }
       }
     },
@@ -45,38 +45,38 @@ __report = {
         "line": 35,
         "complexity": {
           "sloc": {
-            "physical": 102,
-            "logical": 20
+            "physical": 103,
+            "logical": 21
           },
           "cyclomatic": 3,
           "halstead": {
             "operators": {
               "distinct": 11,
-              "total": 47,
+              "total": 48,
               "identifiers": [
                 "__stripped__"
               ]
             },
             "operands": {
-              "distinct": 34,
-              "total": 54,
+              "distinct": 35,
+              "total": 56,
               "identifiers": [
                 "__stripped__"
               ]
             },
-            "length": 101,
-            "vocabulary": 45,
-            "difficulty": 8.735294117647058,
-            "volume": 554.6771627292972,
-            "effort": 4845.268156782389,
-            "bugs": 0.1848923875764324,
-            "time": 269.1815642656883
+            "length": 104,
+            "vocabulary": 46,
+            "difficulty": 8.8,
+            "volume": 574.4504434299294,
+            "effort": 5055.163902183379,
+            "bugs": 0.1914834811433098,
+            "time": 280.8424390101877
           }
         }
       },
       {
         "name": "<anonymous>",
-        "line": 50,
+        "line": 51,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -110,7 +110,7 @@ __report = {
       },
       {
         "name": "runReports",
-        "line": 62,
+        "line": 63,
         "complexity": {
           "sloc": {
             "physical": 51,
@@ -144,7 +144,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 63,
+        "line": 64,
         "complexity": {
           "sloc": {
             "physical": 48,
@@ -178,7 +178,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 67,
+        "line": 68,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -212,7 +212,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 91,
+        "line": 92,
         "complexity": {
           "sloc": {
             "physical": 10,
@@ -246,7 +246,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 115,
+        "line": 116,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -280,7 +280,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 119,
+        "line": 120,
         "complexity": {
           "sloc": {
             "physical": 16,
@@ -314,7 +314,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 120,
+        "line": 121,
         "complexity": {
           "sloc": {
             "physical": 14,
@@ -348,7 +348,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 124,
+        "line": 125,
         "complexity": {
           "sloc": {
             "physical": 9,
@@ -382,7 +382,7 @@ __report = {
       },
       {
         "name": "exports.getOverviewReport",
-        "line": 139,
+        "line": 140,
         "complexity": {
           "sloc": {
             "physical": 42,
@@ -416,7 +416,7 @@ __report = {
       },
       {
         "name": "<anonymous>",
-        "line": 153,
+        "line": 154,
         "complexity": {
           "sloc": {
             "physical": 19,
@@ -450,7 +450,7 @@ __report = {
       },
       {
         "name": "writeFile",
-        "line": 182,
+        "line": 183,
         "complexity": {
           "sloc": {
             "physical": 4,
@@ -484,7 +484,7 @@ __report = {
       },
       {
         "name": "writeReport",
-        "line": 187,
+        "line": 188,
         "complexity": {
           "sloc": {
             "physical": 9,
@@ -518,7 +518,7 @@ __report = {
       },
       {
         "name": "writeOverview",
-        "line": 197,
+        "line": 198,
         "complexity": {
           "sloc": {
             "physical": 8,
@@ -552,7 +552,7 @@ __report = {
       },
       {
         "name": "writeFileReport",
-        "line": 206,
+        "line": 207,
         "complexity": {
           "sloc": {
             "physical": 10,
@@ -585,7 +585,7 @@ __report = {
         }
       }
     ],
-    "maintainability": 112.40387141338107,
+    "maintainability": 65.64065356334332,
     "module": "lib/plato.js"
   },
   "jshint": {

@@ -211,7 +211,7 @@ __report = {
         }
       }
     ],
-    "maintainability": 125.29983477604887,
+    "maintainability": 73.27475717897595,
     "module": "lib/util.js"
   },
   "jshint": {

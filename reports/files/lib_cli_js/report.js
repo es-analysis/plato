@@ -211,7 +211,7 @@ __report = {
         }
       }
     ],
-    "maintainability": 102.28876682668195,
+    "maintainability": 59.817992296305235,
     "module": "lib/cli.js"
   },
   "jshint": {

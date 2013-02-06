@@ -75,7 +75,7 @@ __report = {
         }
       }
     ],
-    "maintainability": 133.52115849235165,
+    "maintainability": 78.08254882593663,
     "module": "lib/reporters/complexity/index.js"
   },
   "jshint": {

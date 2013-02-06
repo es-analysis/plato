@@ -245,7 +245,7 @@ __report = {
         }
       }
     ],
-    "maintainability": 107.5436934734243,
+    "maintainability": 62.891048814868014,
     "module": "lib/assets/scripts/codemirror.markpopovertext.js"
   },
   "jshint": {

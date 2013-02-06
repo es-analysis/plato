@@ -1,12 +1,12 @@
 {
   "summary": {
     "total": {
-      "sloc": 774,
-      "maintainability": 1207.3021785452434
+      "sloc": 776,
+      "maintainability": 705.8462453583944
     },
     "average": {
       "sloc": 77,
-      "maintainability": "120.73"
+      "maintainability": "70.58"
     }
   },
   "reports": [
@@ -55,7 +55,7 @@
           }
         },
         "module": "lib/assets/scripts/codemirror.markpopovertext.js",
-        "maintainability": 107.5436934734243
+        "maintainability": 62.891048814868014
       }
     },
     {
@@ -103,7 +103,7 @@
           }
         },
         "module": "lib/assets/scripts/plato-file.js",
-        "maintainability": 116.9365752903897
+        "maintainability": 68.38396215812263
       }
     },
     {
@@ -121,37 +121,37 @@
           "line": 4,
           "complexity": {
             "sloc": {
-              "physical": 154,
-              "logical": 107
+              "physical": 155,
+              "logical": 108
             },
             "cyclomatic": 7,
             "halstead": {
               "operators": {
                 "distinct": 21,
-                "total": 326,
+                "total": 327,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
               "operands": {
-                "distinct": 126,
-                "total": 450,
+                "distinct": 127,
+                "total": 452,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
-              "length": 776,
-              "vocabulary": 147,
-              "difficulty": 37.5,
-              "volume": 5586.9457395930185,
-              "effort": 209510.4652347382,
-              "bugs": 1.8623152465310062,
-              "time": 11639.470290818788
+              "length": 779,
+              "vocabulary": 148,
+              "difficulty": 37.37007874015748,
+              "volume": 5616.164171824951,
+              "effort": 209876.49731874975,
+              "bugs": 1.8720547239416503,
+              "time": 11659.805406597208
             }
           }
         },
         "module": "lib/assets/scripts/plato-overview.js",
-        "maintainability": 105.97275745768403
+        "maintainability": 61.88655689787055
       }
     },
     {
@@ -199,7 +199,7 @@
           }
         },
         "module": "lib/cli.js",
-        "maintainability": 102.28876682668195
+        "maintainability": 59.817992296305235
       }
     },
     {
@@ -247,7 +247,7 @@
           }
         },
         "module": "lib/info.js",
-        "maintainability": 138.19595363191667
+        "maintainability": 80.81634715316764
       }
     },
     {
@@ -295,7 +295,7 @@
           }
         },
         "module": "lib/logger.js",
-        "maintainability": 146.54143068837269
+        "maintainability": 85.6967430926156
       }
     },
     {
@@ -313,37 +313,37 @@
           "line": 9,
           "complexity": {
             "sloc": {
-              "physical": 207,
-              "logical": 138
+              "physical": 208,
+              "logical": 139
             },
             "cyclomatic": 12,
             "halstead": {
               "operators": {
                 "distinct": 19,
-                "total": 363,
+                "total": 364,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
               "operands": {
-                "distinct": 140,
-                "total": 455,
+                "distinct": 141,
+                "total": 457,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
-              "length": 818,
-              "vocabulary": 159,
-              "difficulty": 30.875,
-              "volume": 5981.938257422603,
-              "effort": 184692.34369792286,
-              "bugs": 1.9939794191408675,
-              "time": 10260.685760995715
+              "length": 821,
+              "vocabulary": 160,
+              "difficulty": 30.790780141843975,
+              "volume": 6011.302965902524,
+              "effort": 185092.70798911923,
+              "bugs": 2.0037676553008414,
+              "time": 10282.928221617734
             }
           }
         },
         "module": "lib/plato.js",
-        "maintainability": 112.40387141338107
+        "maintainability": 65.64065356334332
       }
     },
     {
@@ -391,7 +391,7 @@
           }
         },
         "module": "lib/reporters/complexity/index.js",
-        "maintainability": 133.52115849235165
+        "maintainability": 78.08254882593663
       }
     },
     {
@@ -439,7 +439,7 @@
           }
         },
         "module": "lib/reporters/jshint/index.js",
-        "maintainability": 118.59813649499276
+        "maintainability": 69.35563537718875
       }
     },
     {
@@ -487,7 +487,7 @@
           }
         },
         "module": "lib/util.js",
-        "maintainability": 125.29983477604887
+        "maintainability": 73.27475717897595
       }
     }
   ]
