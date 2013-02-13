@@ -10,32 +10,32 @@
       "line": 6,
       "complexity": {
         "sloc": {
-          "physical": 260,
-          "logical": 118
+          "physical": 265,
+          "logical": 120
         },
         "cyclomatic": 13,
         "halstead": {
           "operators": {
             "distinct": 19,
-            "total": 310,
+            "total": 314,
             "identifiers": [
               "__stripped__"
             ]
           },
           "operands": {
-            "distinct": 103,
-            "total": 408,
+            "distinct": 104,
+            "total": 412,
             "identifiers": [
               "__stripped__"
             ]
           },
-          "length": 718,
-          "vocabulary": 122,
-          "difficulty": 37.63106796116505,
-          "volume": 4976.269408370153,
-          "effort": 187262.3322994438,
-          "bugs": 1.6587564694567176,
-          "time": 10403.462905524655
+          "length": 726,
+          "vocabulary": 123,
+          "difficulty": 37.63461538461539,
+          "volume": 5040.265530876288,
+          "effort": 189688.45469086338,
+          "bugs": 1.680088510292096,
+          "time": 10538.247482825744
         }
       }
     },
@@ -283,38 +283,72 @@
         "line": 65,
         "complexity": {
           "sloc": {
-            "physical": 16,
-            "logical": 10
+            "physical": 7,
+            "logical": 5
           },
-          "cyclomatic": 2,
+          "cyclomatic": 1,
           "halstead": {
             "operators": {
-              "distinct": 8,
-              "total": 22,
+              "distinct": 4,
+              "total": 9,
               "identifiers": [
                 "__stripped__"
               ]
             },
             "operands": {
-              "distinct": 12,
-              "total": 22,
+              "distinct": 6,
+              "total": 10,
               "identifiers": [
                 "__stripped__"
               ]
             },
-            "length": 44,
-            "vocabulary": 20,
-            "difficulty": 7.333333333333333,
-            "volume": 190.16483617504394,
-            "effort": 1394.5421319503223,
-            "bugs": 0.06338827872501465,
-            "time": 77.47456288612902
+            "length": 19,
+            "vocabulary": 10,
+            "difficulty": 3.3333333333333335,
+            "volume": 63.11663380285989,
+            "effort": 210.3887793428663,
+            "bugs": 0.021038877934286628,
+            "time": 11.688265519048127
+          }
+        }
+      },
+      {
+        "name": "_renderChildren",
+        "line": 76,
+        "complexity": {
+          "sloc": {
+            "physical": 10,
+            "logical": 6
+          },
+          "cyclomatic": 2,
+          "halstead": {
+            "operators": {
+              "distinct": 6,
+              "total": 15,
+              "identifiers": [
+                "__stripped__"
+              ]
+            },
+            "operands": {
+              "distinct": 8,
+              "total": 14,
+              "identifiers": [
+                "__stripped__"
+              ]
+            },
+            "length": 29,
+            "vocabulary": 14,
+            "difficulty": 5.25,
+            "volume": 110.41329273967051,
+            "effort": 579.6697868832701,
+            "bugs": 0.0368044309132235,
+            "time": 32.20387704907056
           }
         }
       },
       {
         "name": "showCollection",
-        "line": 84,
+        "line": 89,
         "complexity": {
           "sloc": {
             "physical": 8,
@@ -348,7 +382,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 87,
+        "line": 92,
         "complexity": {
           "sloc": {
             "physical": 4,
@@ -382,7 +416,7 @@
       },
       {
         "name": "showEmptyView",
-        "line": 96,
+        "line": 101,
         "complexity": {
           "sloc": {
             "physical": 9,
@@ -416,7 +450,7 @@
       },
       {
         "name": "closeEmptyView",
-        "line": 109,
+        "line": 114,
         "complexity": {
           "sloc": {
             "physical": 6,
@@ -450,7 +484,7 @@
       },
       {
         "name": "getItemView",
-        "line": 119,
+        "line": 124,
         "complexity": {
           "sloc": {
             "physical": 11,
@@ -484,7 +518,7 @@
       },
       {
         "name": "addItemView",
-        "line": 133,
+        "line": 138,
         "complexity": {
           "sloc": {
             "physical": 34,
@@ -518,7 +552,7 @@
       },
       {
         "name": "addChildViewEventForwarding",
-        "line": 170,
+        "line": 175,
         "complexity": {
           "sloc": {
             "physical": 13,
@@ -552,7 +586,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 175,
+        "line": 180,
         "complexity": {
           "sloc": {
             "physical": 7,
@@ -586,7 +620,7 @@
       },
       {
         "name": "renderItemView",
-        "line": 185,
+        "line": 190,
         "complexity": {
           "sloc": {
             "physical": 4,
@@ -620,7 +654,7 @@
       },
       {
         "name": "buildItemView",
-        "line": 191,
+        "line": 196,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -654,7 +688,7 @@
       },
       {
         "name": "removeItemView",
-        "line": 198,
+        "line": 203,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -688,7 +722,7 @@
       },
       {
         "name": "removeChildView",
-        "line": 205,
+        "line": 210,
         "complexity": {
           "sloc": {
             "physical": 16,
@@ -722,7 +756,7 @@
       },
       {
         "name": "checkEmpty",
-        "line": 223,
+        "line": 228,
         "complexity": {
           "sloc": {
             "physical": 7,
@@ -756,7 +790,7 @@
       },
       {
         "name": "appendHtml",
-        "line": 234,
+        "line": 239,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -790,7 +824,7 @@
       },
       {
         "name": "_initChildViewStorage",
-        "line": 240,
+        "line": 245,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -824,7 +858,7 @@
       },
       {
         "name": "close",
-        "line": 246,
+        "line": 251,
         "complexity": {
           "sloc": {
             "physical": 10,
@@ -858,7 +892,7 @@
       },
       {
         "name": "closeChildren",
-        "line": 259,
+        "line": 264,
         "complexity": {
           "sloc": {
             "physical": 6,
@@ -892,7 +926,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 260,
+        "line": 265,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -925,7 +959,7 @@
         }
       }
     ],
-    "maintainability": 129.53572572896786,
+    "maintainability": 76.20364334358663,
     "module": "collectionview.js"
   },
   "jshint": {

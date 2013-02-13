@@ -73,7 +73,8 @@ $(function(){
       data: [],
       xkey: 'label',
       ykeys: ['value'],
-      ymax : 171,
+      ymax : 100,
+      ymin : 0,
       labels: ['Maintainability'],
       barColors : ['#ff9b40']
     };

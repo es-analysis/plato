@@ -1775,7 +1775,7 @@ __report = {
         }
       }
     ],
-    "maintainability": 110.05014058931944,
+    "maintainability": 64.3568073621751,
     "module": "effects.js"
   },
   "jshint": {

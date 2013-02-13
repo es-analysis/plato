@@ -177,7 +177,7 @@ __report = {
         }
       }
     ],
-    "maintainability": 108.41448799347228,
+    "maintainability": 63.40028537629958,
     "module": "grunt/template.js"
   },
   "jshint": {

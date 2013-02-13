@@ -3169,7 +3169,7 @@ __report = {
         }
       }
     ],
-    "maintainability": 131.3027362969568,
+    "maintainability": 76.78522590465309,
     "module": "lib/ast.js"
   },
   "jshint": {

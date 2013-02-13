@@ -449,7 +449,7 @@
         }
       }
     ],
-    "maintainability": 130.67206774590653,
+    "maintainability": 76.41641388649505,
     "module": "layout.js"
   },
   "jshint": {

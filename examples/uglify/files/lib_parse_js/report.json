@@ -3305,7 +3305,7 @@
         }
       }
     ],
-    "maintainability": 105.49791703616566,
+    "maintainability": 61.69468832524307,
     "module": "lib/parse.js"
   },
   "jshint": {

@@ -10,32 +10,32 @@
       "line": 7,
       "complexity": {
         "sloc": {
-          "physical": 133,
-          "logical": 63
+          "physical": 137,
+          "logical": 67
         },
         "cyclomatic": 9,
         "halstead": {
           "operators": {
             "distinct": 18,
-            "total": 170,
+            "total": 181,
             "identifiers": [
               "__stripped__"
             ]
           },
           "operands": {
-            "distinct": 74,
-            "total": 200,
+            "distinct": 78,
+            "total": 212,
             "identifiers": [
               "__stripped__"
             ]
           },
-          "length": 370,
-          "vocabulary": 92,
-          "difficulty": 24.324324324324323,
-          "volume": 2413.7179237410946,
-          "effort": 58712.05760451311,
-          "bugs": 0.8045726412470315,
-          "time": 3261.780978028506
+          "length": 393,
+          "vocabulary": 96,
+          "difficulty": 24.461538461538463,
+          "volume": 2587.8902627834145,
+          "effort": 63303.77719731737,
+          "bugs": 0.8626300875944715,
+          "time": 3516.8765109620763
         }
       }
     },
@@ -182,71 +182,105 @@
         "complexity": {
           "sloc": {
             "physical": 19,
-            "logical": 9
+            "logical": 11
           },
           "cyclomatic": 1,
           "halstead": {
             "operators": {
               "distinct": 5,
-              "total": 20,
+              "total": 24,
               "identifiers": [
                 "__stripped__"
               ]
             },
             "operands": {
-              "distinct": 12,
-              "total": 23,
+              "distinct": 14,
+              "total": 27,
               "identifiers": [
                 "__stripped__"
               ]
             },
-            "length": 43,
-            "vocabulary": 17,
-            "difficulty": 4.791666666666667,
-            "volume": 175.7609021737646,
-            "effort": 842.1876562492888,
-            "bugs": 0.058586967391254866,
-            "time": 46.78820312496049
+            "length": 51,
+            "vocabulary": 19,
+            "difficulty": 4.821428571428571,
+            "volume": 216.64430318562285,
+            "effort": 1044.5350332163957,
+            "bugs": 0.07221476772854095,
+            "time": 58.02972406757754
+          }
+        }
+      },
+      {
+        "name": "_renderChildren",
+        "line": 78,
+        "complexity": {
+          "sloc": {
+            "physical": 4,
+            "logical": 2
+          },
+          "cyclomatic": 1,
+          "halstead": {
+            "operators": {
+              "distinct": 2,
+              "total": 7,
+              "identifiers": [
+                "__stripped__"
+              ]
+            },
+            "operands": {
+              "distinct": 8,
+              "total": 9,
+              "identifiers": [
+                "__stripped__"
+              ]
+            },
+            "length": 16,
+            "vocabulary": 10,
+            "difficulty": 1.125,
+            "volume": 53.1508495181978,
+            "effort": 59.794705707972525,
+            "bugs": 0.017716949839399268,
+            "time": 3.3219280948873626
           }
         }
       },
       {
         "name": "renderCollection",
-        "line": 79,
+        "line": 84,
         "complexity": {
           "sloc": {
-            "physical": 6,
-            "logical": 3
+            "physical": 5,
+            "logical": 2
           },
           "cyclomatic": 1,
           "halstead": {
             "operators": {
               "distinct": 4,
-              "total": 13,
+              "total": 11,
               "identifiers": [
                 "__stripped__"
               ]
             },
             "operands": {
-              "distinct": 12,
-              "total": 16,
+              "distinct": 10,
+              "total": 13,
               "identifiers": [
                 "__stripped__"
               ]
             },
-            "length": 29,
-            "vocabulary": 16,
-            "difficulty": 2.6666666666666665,
-            "volume": 116,
-            "effort": 309.3333333333333,
-            "bugs": 0.03866666666666667,
-            "time": 17.185185185185183
+            "length": 24,
+            "vocabulary": 14,
+            "difficulty": 2.6,
+            "volume": 91.37651812938249,
+            "effort": 237.57894713639448,
+            "bugs": 0.03045883937646083,
+            "time": 13.19883039646636
           }
         }
       },
       {
         "name": "renderModel",
-        "line": 89,
+        "line": 93,
         "complexity": {
           "sloc": {
             "physical": 8,
@@ -280,7 +314,7 @@
       },
       {
         "name": "appendHtml",
-        "line": 102,
+        "line": 106,
         "complexity": {
           "sloc": {
             "physical": 4,
@@ -314,7 +348,7 @@
       },
       {
         "name": "getItemViewContainer",
-        "line": 109,
+        "line": 113,
         "complexity": {
           "sloc": {
             "physical": 23,
@@ -348,7 +382,7 @@
       },
       {
         "name": "resetItemViewContainer",
-        "line": 134,
+        "line": 138,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -381,7 +415,7 @@
         }
       }
     ],
-    "maintainability": 121.1345528057037,
+    "maintainability": 71.36174670290049,
     "module": "compositeview.js"
   },
   "jshint": {

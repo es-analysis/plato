@@ -44,22 +44,22 @@
 <div class="container aggregate-stats">
   <div class="row">
     <div class="span6">
-      <h2 class="header">Maintainability <a href="http://www.virtualmachinery.com/sidebar4.htm"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between -INF and 171 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">121.13</p>
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
+      <p class="stat">71.36</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated # Bugs  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">0.80</p>
+      <p class="stat">0.86</p>
     </div>
   </div>
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">24.32</p>
+      <p class="stat">24.46</p>
     </div>
     <div class="span6">
       <h2 class="header">SLOC/LSLOC <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">133 / 63</p>
+      <p class="stat">137 / 67</p>
     </div>
   </div>
 </div>
@@ -103,7 +103,7 @@ Marionette.CompositeView = Marionette.CollectionView.extend({
     if (this.collection){
       this.listenTo(this.collection, "add", this.addChildView, this);
       this.listenTo(this.collection, "remove", this.removeItemView, this);
-      this.listenTo(this.collection, "reset", this.renderCollection, this);
+      this.listenTo(this.collection, "reset", this._renderChildren, this);
     }
   },
 
@@ -141,22 +141,27 @@ Marionette.CompositeView = Marionette.CollectionView.extend({
   // but the collection will not re-render.
   render: function(){
     this.isClosed = false;
-
     this.resetItemViewContainer();
 
+    this.triggerBeforeRender();
     var html = this.renderModel();
     this.$el.html(html);
-
     // the ui bindings is done here and not at the end of render since they 
     // will not be available until after the model is rendered, but should be
     // available before the collection is rendered.
     this.bindUIElements();
-
     this.triggerMethod("composite:model:rendered");
 
-    this.renderCollection();
+    this._renderChildren();
+
     this.triggerMethod("composite:rendered");
+    this.triggerRendered();
     return this;
+  },
+
+  _renderChildren: function(){
+    Marionette.CollectionView.prototype._renderChildren.call(this);
+    this.triggerMethod("composite:collection:rendered");
   },
 
   // Render the collection for the composite view
@@ -164,7 +169,6 @@ Marionette.CompositeView = Marionette.CollectionView.extend({
     var args = Array.prototype.slice.apply(arguments);
     Marionette.CollectionView.prototype.render.apply(this, args);
 
-    this.triggerMethod("composite:collection:rendered");
   },
 
   // Render an individual model, if we have one, as

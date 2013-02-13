@@ -415,7 +415,7 @@ __report = {
         }
       }
     ],
-    "maintainability": 125.33619836374996,
+    "maintainability": 73.29602243494149,
     "module": "serialize.js"
   },
   "jshint": {

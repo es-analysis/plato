@@ -517,7 +517,7 @@
         }
       }
     ],
-    "maintainability": 118.12018442689475,
+    "maintainability": 69.0761312437981,
     "module": "deferred.js"
   },
   "jshint": {

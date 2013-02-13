@@ -1163,7 +1163,7 @@ __report = {
         }
       }
     ],
-    "maintainability": 111.49401660095113,
+    "maintainability": 65.20117929880183,
     "module": "attributes.js"
   },
   "jshint": {

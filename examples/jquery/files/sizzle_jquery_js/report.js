@@ -40,7 +40,7 @@ __report = {
       }
     },
     "functions": [],
-    "maintainability": 115.91470615315308,
+    "maintainability": 67.78637786734097,
     "module": "sizzle-jquery.js"
   },
   "jshint": {

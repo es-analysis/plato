@@ -279,7 +279,7 @@ __report = {
         }
       }
     ],
-    "maintainability": 114.9553912569456,
+    "maintainability": 67.22537500406176,
     "module": "ajax/xhr.js"
   },
   "jshint": {

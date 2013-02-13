@@ -177,7 +177,7 @@ __report = {
         }
       }
     ],
-    "maintainability": 123.87909095370037,
+    "maintainability": 72.44391283842127,
     "module": "dimensions.js"
   },
   "jshint": {

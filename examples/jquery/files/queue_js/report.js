@@ -551,7 +551,7 @@ __report = {
         }
       }
     ],
-    "maintainability": 120.05919770863095,
+    "maintainability": 70.21005713955026,
     "module": "queue.js"
   },
   "jshint": {

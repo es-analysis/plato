@@ -245,7 +245,7 @@ __report = {
         }
       }
     ],
-    "maintainability": 123.44633138057756,
+    "maintainability": 72.19083706466523,
     "module": "util/namespace.js"
   },
   "jshint": {

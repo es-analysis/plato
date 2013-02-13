@@ -75,7 +75,7 @@ __report = {
         }
       }
     ],
-    "maintainability": 97.27788271513333,
+    "maintainability": 56.887650710604284,
     "module": "triggermethod.js"
   },
   "jshint": {

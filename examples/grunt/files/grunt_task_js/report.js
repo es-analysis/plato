@@ -1129,7 +1129,7 @@ __report = {
         }
       }
     ],
-    "maintainability": 110.22805303585068,
+    "maintainability": 64.46084972856765,
     "module": "grunt/task.js"
   },
   "jshint": {

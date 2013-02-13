@@ -211,7 +211,7 @@
         }
       }
     ],
-    "maintainability": 112.99759564902789,
+    "maintainability": 66.08046529182917,
     "module": "ajax/jsonp.js"
   },
   "jshint": {

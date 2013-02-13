@@ -1129,7 +1129,7 @@
         }
       }
     ],
-    "maintainability": 124.4605525884097,
+    "maintainability": 72.78394888211093,
     "module": "grunt/log.js"
   },
   "jshint": {

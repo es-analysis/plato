@@ -143,7 +143,7 @@ __report = {
         }
       }
     ],
-    "maintainability": 129.88303873069717,
+    "maintainability": 75.95499340976443,
     "module": "createObject.js"
   },
   "jshint": {

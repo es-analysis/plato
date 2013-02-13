@@ -245,7 +245,7 @@
         }
       }
     ],
-    "maintainability": 121.23892489231906,
+    "maintainability": 70.89995607737957,
     "module": "templatecache.js"
   },
   "jshint": {

@@ -1163,7 +1163,7 @@ __report = {
         }
       }
     ],
-    "maintainability": 129.1968885152821,
+    "maintainability": 75.55373597384919,
     "module": "lib/transform.js"
   },
   "jshint": {

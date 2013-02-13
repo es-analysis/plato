@@ -1,12 +1,12 @@
 __report = {
   "summary": {
     "total": {
-      "sloc": 1564,
-      "maintainability": 2225.413562882274
+      "sloc": 1573,
+      "maintainability": 1302.3860241678922
     },
     "average": {
-      "sloc": 86,
-      "maintainability": "123.63"
+      "sloc": 87,
+      "maintainability": "72.35"
     }
   },
   "reports": [
@@ -55,7 +55,7 @@ __report = {
           }
         },
         "module": "application.js",
-        "maintainability": 134.83916628288588
+        "maintainability": 78.85331361572274
       }
     },
     {
@@ -103,7 +103,7 @@ __report = {
           }
         },
         "module": "approuter.js",
-        "maintainability": 98.49888377834546
+        "maintainability": 57.601686420085066
       }
     },
     {
@@ -151,7 +151,7 @@ __report = {
           }
         },
         "module": "bindEntityEvents.js",
-        "maintainability": 134.92800579163907
+        "maintainability": 78.90526654481816
       }
     },
     {
@@ -199,7 +199,7 @@ __report = {
           }
         },
         "module": "callbacks.js",
-        "maintainability": 136.76282358706914
+        "maintainability": 79.97825940764277
       }
     },
     {
@@ -217,37 +217,37 @@ __report = {
           "line": 6,
           "complexity": {
             "sloc": {
-              "physical": 260,
-              "logical": 118
+              "physical": 265,
+              "logical": 120
             },
             "cyclomatic": 13,
             "halstead": {
               "operators": {
                 "distinct": 19,
-                "total": 310,
+                "total": 314,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
               "operands": {
-                "distinct": 103,
-                "total": 408,
+                "distinct": 104,
+                "total": 412,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
-              "length": 718,
-              "vocabulary": 122,
-              "difficulty": 37.63106796116505,
-              "volume": 4976.269408370153,
-              "effort": 187262.3322994438,
-              "bugs": 1.6587564694567176,
-              "time": 10403.462905524655
+              "length": 726,
+              "vocabulary": 123,
+              "difficulty": 37.63461538461539,
+              "volume": 5040.265530876288,
+              "effort": 189688.45469086338,
+              "bugs": 1.680088510292096,
+              "time": 10538.247482825744
             }
           }
         },
         "module": "collectionview.js",
-        "maintainability": 129.53572572896786
+        "maintainability": 76.20364334358663
       }
     },
     {
@@ -265,37 +265,37 @@ __report = {
           "line": 7,
           "complexity": {
             "sloc": {
-              "physical": 133,
-              "logical": 63
+              "physical": 137,
+              "logical": 67
             },
             "cyclomatic": 9,
             "halstead": {
               "operators": {
                 "distinct": 18,
-                "total": 170,
+                "total": 181,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
               "operands": {
-                "distinct": 74,
-                "total": 200,
+                "distinct": 78,
+                "total": 212,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
-              "length": 370,
-              "vocabulary": 92,
-              "difficulty": 24.324324324324323,
-              "volume": 2413.7179237410946,
-              "effort": 58712.05760451311,
-              "bugs": 0.8045726412470315,
-              "time": 3261.780978028506
+              "length": 393,
+              "vocabulary": 96,
+              "difficulty": 24.461538461538463,
+              "volume": 2587.8902627834145,
+              "effort": 63303.77719731737,
+              "bugs": 0.8626300875944715,
+              "time": 3516.8765109620763
             }
           }
         },
         "module": "compositeview.js",
-        "maintainability": 121.1345528057037
+        "maintainability": 71.36174670290049
       }
     },
     {
@@ -343,7 +343,7 @@ __report = {
           }
         },
         "module": "controller.js",
-        "maintainability": 130.03998220343232
+        "maintainability": 76.04677321838147
       }
     },
     {
@@ -391,7 +391,7 @@ __report = {
           }
         },
         "module": "createObject.js",
-        "maintainability": 129.88303873069717
+        "maintainability": 75.95499340976443
       }
     },
     {
@@ -439,7 +439,7 @@ __report = {
           }
         },
         "module": "domRefresh.js",
-        "maintainability": 143.5427255572538
+        "maintainability": 83.94311436096713
       }
     },
     {
@@ -487,7 +487,7 @@ __report = {
           }
         },
         "module": "helpers.js",
-        "maintainability": 108.4138180532824
+        "maintainability": 63.399893598410756
       }
     },
     {
@@ -535,7 +535,7 @@ __report = {
           }
         },
         "module": "itemview.js",
-        "maintainability": 115.3624143762209
+        "maintainability": 67.46340022001222
       }
     },
     {
@@ -583,7 +583,7 @@ __report = {
           }
         },
         "module": "layout.js",
-        "maintainability": 130.67206774590653
+        "maintainability": 76.41641388649505
       }
     },
     {
@@ -631,7 +631,7 @@ __report = {
           }
         },
         "module": "module.js",
-        "maintainability": 121.67689849610514
+        "maintainability": 71.15608099187435
       }
     },
     {
@@ -679,7 +679,7 @@ __report = {
           }
         },
         "module": "region.js",
-        "maintainability": 117.54113287141408
+        "maintainability": 68.73750460316613
       }
     },
     {
@@ -727,7 +727,7 @@ __report = {
           }
         },
         "module": "renderer.js",
-        "maintainability": 130.50422748721516
+        "maintainability": 76.31826168842991
       }
     },
     {
@@ -775,7 +775,7 @@ __report = {
           }
         },
         "module": "templatecache.js",
-        "maintainability": 121.23892489231906
+        "maintainability": 70.89995607737957
       }
     },
     {
@@ -823,7 +823,7 @@ __report = {
           }
         },
         "module": "triggermethod.js",
-        "maintainability": 97.27788271513333
+        "maintainability": 56.887650710604284
       }
     },
     {
@@ -871,7 +871,7 @@ __report = {
           }
         },
         "module": "view.js",
-        "maintainability": 123.56129177868324
+        "maintainability": 72.25806536765101
       }
     }
   ]

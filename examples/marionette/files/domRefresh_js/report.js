@@ -279,7 +279,7 @@ __report = {
         }
       }
     ],
-    "maintainability": 143.5427255572538,
+    "maintainability": 83.94311436096713,
     "module": "domRefresh.js"
   },
   "jshint": {

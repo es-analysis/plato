@@ -347,7 +347,7 @@ __report = {
         }
       }
     ],
-    "maintainability": 117.54113287141408,
+    "maintainability": 68.73750460316613,
     "module": "region.js"
   },
   "jshint": {

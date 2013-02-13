@@ -44,22 +44,22 @@
 <div class="container aggregate-stats">
   <div class="row">
     <div class="span6">
-      <h2 class="header">Maintainability <a href="http://www.virtualmachinery.com/sidebar4.htm"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between -INF and 171 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">106.20</p>
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
+      <p class="stat">62.12</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated # Bugs  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">23.11</p>
+      <p class="stat">23.08</p>
     </div>
   </div>
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">283.50</p>
+      <p class="stat">283.10</p>
     </div>
     <div class="span6">
       <h2 class="header">SLOC/LSLOC <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">1927 / 1292</p>
+      <p class="stat">1925 / 1290</p>
     </div>
   </div>
 </div>
@@ -712,7 +712,10 @@ merge(Compressor.prototype, {
               case "typeof": return typeof ev(e);
               case "void": return void ev(e);
               case "~": return ~ev(e);
-              case "-": return -ev(e);
+              case "-":
+                e = ev(e);
+                if (e === 0) throw def;
+                return -e;
               case "+": return +ev(e);
             }
             throw def;
@@ -753,12 +756,7 @@ merge(Compressor.prototype, {
         });
         def(AST_SymbolRef, function(){
             var d = this.definition();
-            if (d && d.constant) {
-                var orig = d.orig[0];
-                if (orig) orig = orig.init[0];
-                orig = orig && orig.value;
-                if (orig) return ev(orig);
-            }
+            if (d && d.constant && d.init) return ev(d.init);
             throw def;
         });
     })(function(node, func){

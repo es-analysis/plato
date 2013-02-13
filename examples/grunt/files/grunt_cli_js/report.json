@@ -177,7 +177,7 @@
         }
       }
     ],
-    "maintainability": 126.29010017232318,
+    "maintainability": 73.8538597498966,
     "module": "grunt/cli.js"
   },
   "jshint": {

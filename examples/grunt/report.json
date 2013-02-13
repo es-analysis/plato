@@ -2,11 +2,11 @@
   "summary": {
     "total": {
       "sloc": 2393,
-      "maintainability": 1841.6759303377587
+      "maintainability": 1077.0034680337772
     },
     "average": {
       "sloc": 159,
-      "maintainability": "122.78"
+      "maintainability": "71.80"
     }
   },
   "reports": [
@@ -55,7 +55,7 @@
           }
         },
         "module": "grunt/cli.js",
-        "maintainability": 126.29010017232318
+        "maintainability": 73.8538597498966
       }
     },
     {
@@ -103,7 +103,7 @@
           }
         },
         "module": "grunt/config.js",
-        "maintainability": 125.91282284496404
+        "maintainability": 73.63322973389711
       }
     },
     {
@@ -151,7 +151,7 @@
           }
         },
         "module": "grunt/event.js",
-        "maintainability": 128.5847571285384
+        "maintainability": 75.19576440265404
       }
     },
     {
@@ -199,7 +199,7 @@
           }
         },
         "module": "grunt/fail.js",
-        "maintainability": 116.06407729852288
+        "maintainability": 67.87372941434087
       }
     },
     {
@@ -247,7 +247,7 @@
           }
         },
         "module": "grunt/file.js",
-        "maintainability": 113.467130148596
+        "maintainability": 66.35504687052398
       }
     },
     {
@@ -295,7 +295,7 @@
           }
         },
         "module": "grunt/help.js",
-        "maintainability": 138.93144334164919
+        "maintainability": 81.24645809453169
       }
     },
     {
@@ -343,7 +343,7 @@
           }
         },
         "module": "grunt/log.js",
-        "maintainability": 124.4605525884097
+        "maintainability": 72.78394888211093
       }
     },
     {
@@ -391,7 +391,7 @@
           }
         },
         "module": "grunt/option.js",
-        "maintainability": 134.3152242801101
+        "maintainability": 78.54691478369013
       }
     },
     {
@@ -439,7 +439,7 @@
           }
         },
         "module": "grunt/task.js",
-        "maintainability": 110.22805303585068
+        "maintainability": 64.46084972856765
       }
     },
     {
@@ -487,7 +487,7 @@
           }
         },
         "module": "grunt/template.js",
-        "maintainability": 108.41448799347228
+        "maintainability": 63.40028537629958
       }
     },
     {
@@ -535,7 +535,7 @@
           }
         },
         "module": "grunt/util.js",
-        "maintainability": 122.45525771559906
+        "maintainability": 71.61126182198775
       }
     },
     {
@@ -583,7 +583,7 @@
           }
         },
         "module": "grunt.js",
-        "maintainability": 114.51274136081202
+        "maintainability": 66.96651541567954
       }
     },
     {
@@ -631,7 +631,7 @@
           }
         },
         "module": "util/exit.js",
-        "maintainability": 137.35118903470953
+        "maintainability": 80.32233276883598
       }
     },
     {
@@ -679,7 +679,7 @@
           }
         },
         "module": "util/namespace.js",
-        "maintainability": 123.44633138057756
+        "maintainability": 72.19083706466523
       }
     },
     {
@@ -727,7 +727,7 @@
           }
         },
         "module": "util/task.js",
-        "maintainability": 117.2417620136243
+        "maintainability": 68.56243392609608
       }
     }
   ]

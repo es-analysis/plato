@@ -381,7 +381,7 @@ __report = {
         }
       }
     ],
-    "maintainability": 105.65949060503628,
+    "maintainability": 61.78917579241888,
     "module": "offset.js"
   },
   "jshint": {

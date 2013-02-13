@@ -1,12 +1,12 @@
 __report = {
   "summary": {
     "total": {
-      "sloc": 6724,
-      "maintainability": 2749.4331875691455
+      "sloc": 6744,
+      "maintainability": 1613.7154489800146
     },
     "average": {
-      "sloc": 292,
-      "maintainability": "119.54"
+      "sloc": 293,
+      "maintainability": "70.16"
     }
   },
   "reports": [
@@ -55,7 +55,7 @@ __report = {
           }
         },
         "module": "ajax/jsonp.js",
-        "maintainability": 112.99759564902789
+        "maintainability": 66.08046529182917
       }
     },
     {
@@ -103,7 +103,7 @@ __report = {
           }
         },
         "module": "ajax/script.js",
-        "maintainability": 129.66879737142455
+        "maintainability": 75.82970606516055
       }
     },
     {
@@ -151,7 +151,7 @@ __report = {
           }
         },
         "module": "ajax/xhr.js",
-        "maintainability": 114.9553912569456
+        "maintainability": 67.22537500406176
       }
     },
     {
@@ -199,7 +199,7 @@ __report = {
           }
         },
         "module": "ajax.js",
-        "maintainability": 96.77126690136376
+        "maintainability": 56.591384152844306
       }
     },
     {
@@ -247,7 +247,7 @@ __report = {
           }
         },
         "module": "attributes.js",
-        "maintainability": 111.49401660095113
+        "maintainability": 65.20117929880183
       }
     },
     {
@@ -295,7 +295,7 @@ __report = {
           }
         },
         "module": "callbacks.js",
-        "maintainability": 118.92293025040671
+        "maintainability": 69.54557324585188
       }
     },
     {
@@ -343,7 +343,7 @@ __report = {
           }
         },
         "module": "core.js",
-        "maintainability": 112.47048301358707
+        "maintainability": 65.77221228864741
       }
     },
     {
@@ -361,37 +361,37 @@ __report = {
           "line": 1,
           "complexity": {
             "sloc": {
-              "physical": 571,
-              "logical": 272
+              "physical": 580,
+              "logical": 277
             },
-            "cyclomatic": 101,
+            "cyclomatic": 103,
             "halstead": {
               "operators": {
                 "distinct": 35,
-                "total": 819,
+                "total": 825,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
               "operands": {
                 "distinct": 214,
-                "total": 1072,
+                "total": 1083,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
-              "length": 1891,
+              "length": 1908,
               "vocabulary": 249,
-              "difficulty": 87.66355140186916,
-              "volume": 15052.36365354074,
-              "effort": 1319543.6548617957,
-              "bugs": 5.017454551180247,
-              "time": 73307.98082565532
+              "difficulty": 88.56308411214953,
+              "volume": 15187.683686385897,
+              "effort": 1345068.1077861153,
+              "bugs": 5.062561228795299,
+              "time": 74726.00598811751
             }
           }
         },
         "module": "css.js",
-        "maintainability": 111.34019251256207
+        "maintainability": 64.76767284981304
       }
     },
     {
@@ -402,44 +402,44 @@ __report = {
         "link": "files/data_js/index.html"
       },
       "jshint": {
-        "messages": 1
+        "messages": 0
       },
       "complexity": {
         "aggregate": {
-          "line": 1,
+          "line": 12,
           "complexity": {
             "sloc": {
-              "physical": 341,
-              "logical": 155
+              "physical": 346,
+              "logical": 153
             },
-            "cyclomatic": 58,
+            "cyclomatic": 36,
             "halstead": {
               "operators": {
-                "distinct": 31,
-                "total": 428,
+                "distinct": 29,
+                "total": 387,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
               "operands": {
-                "distinct": 97,
-                "total": 507,
+                "distinct": 92,
+                "total": 495,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
-              "length": 935,
-              "vocabulary": 128,
-              "difficulty": 81.01546391752578,
-              "volume": 6545,
-              "effort": 530246.2113402062,
-              "bugs": 2.1816666666666666,
-              "time": 29458.12285223368
+              "length": 882,
+              "vocabulary": 121,
+              "difficulty": 78.01630434782608,
+              "volume": 6102.437375276193,
+              "effort": 476089.6115330964,
+              "bugs": 2.034145791758731,
+              "time": 26449.4228629498
             }
           }
         },
         "module": "data.js",
-        "maintainability": 106.43440695005444
+        "maintainability": 68.4932339011747
       }
     },
     {
@@ -487,7 +487,7 @@ __report = {
           }
         },
         "module": "deferred.js",
-        "maintainability": 118.12018442689475
+        "maintainability": 69.0761312437981
       }
     },
     {
@@ -535,7 +535,7 @@ __report = {
           }
         },
         "module": "deprecated.js",
-        "maintainability": 171
+        "maintainability": 100
       }
     },
     {
@@ -583,7 +583,7 @@ __report = {
           }
         },
         "module": "dimensions.js",
-        "maintainability": 123.87909095370037
+        "maintainability": 72.44391283842127
       }
     },
     {
@@ -631,7 +631,7 @@ __report = {
           }
         },
         "module": "effects.js",
-        "maintainability": 110.05014058931944
+        "maintainability": 64.3568073621751
       }
     },
     {
@@ -679,7 +679,7 @@ __report = {
           }
         },
         "module": "event-alias.js",
-        "maintainability": 153.4074652910566
+        "maintainability": 89.71196800646585
       }
     },
     {
@@ -704,30 +704,30 @@ __report = {
             "halstead": {
               "operators": {
                 "distinct": 36,
-                "total": 1327,
+                "total": 1330,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
               "operands": {
-                "distinct": 222,
-                "total": 1641,
+                "distinct": 227,
+                "total": 1647,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
-              "length": 2968,
-              "vocabulary": 258,
-              "difficulty": 133.05405405405406,
-              "volume": 23777.322494096217,
-              "effort": 3163669.1523901536,
-              "bugs": 7.925774164698739,
-              "time": 175759.39735500852
+              "length": 2977,
+              "vocabulary": 263,
+              "difficulty": 130.59911894273128,
+              "volume": 23931.861831123184,
+              "effort": 3125480.0698038675,
+              "bugs": 7.977287277041062,
+              "time": 173637.7816557704
             }
           }
         },
         "module": "event.js",
-        "maintainability": 102.16642054356154
+        "maintainability": 59.758563804778426
       }
     },
     {
@@ -775,7 +775,7 @@ __report = {
           }
         },
         "module": "exports.js",
-        "maintainability": 171
+        "maintainability": 100
       }
     },
     {
@@ -793,37 +793,37 @@ __report = {
           "line": 1,
           "complexity": {
             "sloc": {
-              "physical": 633,
-              "logical": 341
+              "physical": 639,
+              "logical": 344
             },
             "cyclomatic": 110,
             "halstead": {
               "operators": {
                 "distinct": 33,
-                "total": 968,
+                "total": 967,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
               "operands": {
                 "distinct": 227,
-                "total": 1238,
+                "total": 1244,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
-              "length": 2206,
+              "length": 2211,
               "vocabulary": 260,
-              "difficulty": 89.98678414096916,
-              "volume": 17697.34339554077,
-              "effort": 1592527.0200031337,
-              "bugs": 5.899114465180257,
-              "time": 88473.72333350743
+              "difficulty": 90.42290748898678,
+              "volume": 17737.455234605914,
+              "effort": 1603872.2737688147,
+              "bugs": 5.912485078201971,
+              "time": 89104.0152093786
             }
           }
         },
         "module": "manipulation.js",
-        "maintainability": 111.11129391682077
+        "maintainability": 64.91768974229178
       }
     },
     {
@@ -871,7 +871,7 @@ __report = {
           }
         },
         "module": "offset.js",
-        "maintainability": 105.65949060503628
+        "maintainability": 61.78917579241888
       }
     },
     {
@@ -919,7 +919,7 @@ __report = {
           }
         },
         "module": "queue.js",
-        "maintainability": 120.05919770863095
+        "maintainability": 70.21005713955026
       }
     },
     {
@@ -967,7 +967,7 @@ __report = {
           }
         },
         "module": "serialize.js",
-        "maintainability": 125.33619836374996
+        "maintainability": 73.29602243494149
       }
     },
     {
@@ -1015,7 +1015,7 @@ __report = {
           }
         },
         "module": "sizzle-jquery.js",
-        "maintainability": 115.91470615315308
+        "maintainability": 67.78637786734097
       }
     },
     {
@@ -1063,7 +1063,7 @@ __report = {
           }
         },
         "module": "support.js",
-        "maintainability": 79.49854641677427
+        "maintainability": 46.49037802150543
       }
     },
     {
@@ -1111,7 +1111,7 @@ __report = {
           }
         },
         "module": "traversing.js",
-        "maintainability": 127.17537209412366
+        "maintainability": 74.3715626281425
       }
     }
   ]

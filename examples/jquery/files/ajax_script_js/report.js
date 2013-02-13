@@ -245,7 +245,7 @@ __report = {
         }
       }
     ],
-    "maintainability": 129.66879737142455,
+    "maintainability": 75.82970606516055,
     "module": "ajax/script.js"
   },
   "jshint": {

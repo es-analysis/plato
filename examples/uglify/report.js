@@ -1,12 +1,12 @@
 __report = {
   "summary": {
     "total": {
-      "sloc": 6580,
-      "maintainability": 1042.1885102160613
+      "sloc": 6603,
+      "maintainability": 609.3074137590908
     },
     "average": {
-      "sloc": 731,
-      "maintainability": "115.80"
+      "sloc": 733,
+      "maintainability": "67.70"
     }
   },
   "reports": [
@@ -55,7 +55,7 @@ __report = {
           }
         },
         "module": "lib/ast.js",
-        "maintainability": 131.3027362969568
+        "maintainability": 76.78522590465309
       }
     },
     {
@@ -73,37 +73,37 @@ __report = {
           "line": 44,
           "complexity": {
             "sloc": {
-              "physical": 1927,
-              "logical": 1292
+              "physical": 1925,
+              "logical": 1290
             },
-            "cyclomatic": 344,
+            "cyclomatic": 343,
             "halstead": {
               "operators": {
                 "distinct": 54,
-                "total": 3629,
+                "total": 3624,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
               "operands": {
                 "distinct": 402,
-                "total": 4221,
+                "total": 4215,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
-              "length": 7850,
+              "length": 7839,
               "vocabulary": 456,
-              "difficulty": 283.5,
-              "volume": 69338.18661119323,
-              "effort": 19657375.904273283,
-              "bugs": 23.112728870397746,
-              "time": 1092076.4391262934
+              "difficulty": 283.0970149253731,
+              "volume": 69241.02482103743,
+              "effort": 19601927.437209364,
+              "bugs": 23.080341607012475,
+              "time": 1088995.9687338537
             }
           }
         },
         "module": "lib/compress.js",
-        "maintainability": 106.19605417487199
+        "maintainability": 62.116384819627406
       }
     },
     {
@@ -151,7 +151,7 @@ __report = {
           }
         },
         "module": "lib/mozilla-ast.js",
-        "maintainability": 106.65954001031575
+        "maintainability": 62.37400000603261
       }
     },
     {
@@ -169,37 +169,37 @@ __report = {
           "line": 44,
           "complexity": {
             "sloc": {
-              "physical": 1152,
-              "logical": 827
+              "physical": 1177,
+              "logical": 841
             },
-            "cyclomatic": 154,
+            "cyclomatic": 159,
             "halstead": {
               "operators": {
                 "distinct": 40,
-                "total": 1904,
+                "total": 1974,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
               "operands": {
-                "distinct": 396,
-                "total": 2453,
+                "distinct": 398,
+                "total": 2523,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
-              "length": 4357,
-              "vocabulary": 436,
-              "difficulty": 123.88888888888889,
-              "volume": 38202.97910305307,
-              "effort": 4732924.633322686,
-              "bugs": 12.734326367684357,
-              "time": 262940.2574068159
+              "length": 4497,
+              "vocabulary": 438,
+              "difficulty": 126.78391959798995,
+              "volume": 39460.21740702648,
+              "effort": 5002921.031051649,
+              "bugs": 13.15340580234216,
+              "time": 277940.05728064716
             }
           }
         },
         "module": "lib/output.js",
-        "maintainability": 120.67349910087907
+        "maintainability": 70.40250491146314
       }
     },
     {
@@ -247,7 +247,7 @@ __report = {
           }
         },
         "module": "lib/parse.js",
-        "maintainability": 105.49791703616566
+        "maintainability": 61.69468832524307
       }
     },
     {
@@ -272,30 +272,30 @@ __report = {
             "halstead": {
               "operators": {
                 "distinct": 37,
-                "total": 1066,
+                "total": 1068,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
               "operands": {
                 "distinct": 249,
-                "total": 1214,
+                "total": 1216,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
-              "length": 2280,
+              "length": 2284,
               "vocabulary": 286,
-              "difficulty": 90.19678714859438,
-              "volume": 18604.506647854727,
-              "effort": 1678066.726121162,
-              "bugs": 6.201502215951575,
-              "time": 93225.92922895345
+              "difficulty": 90.34538152610442,
+              "volume": 18637.14613320184,
+              "effort": 1683780.0779618819,
+              "bugs": 6.212382044400614,
+              "time": 93543.33766454899
             }
           }
         },
         "module": "lib/scope.js",
-        "maintainability": 109.19313136810501
+        "maintainability": 63.84944474600895
       }
     },
     {
@@ -343,7 +343,7 @@ __report = {
           }
         },
         "module": "lib/sourcemap.js",
-        "maintainability": 111.76145630900575
+        "maintainability": 65.35757678889226
       }
     },
     {
@@ -391,7 +391,7 @@ __report = {
           }
         },
         "module": "lib/transform.js",
-        "maintainability": 129.1968885152821
+        "maintainability": 75.55373597384919
       }
     },
     {
@@ -439,7 +439,7 @@ __report = {
           }
         },
         "module": "lib/utils.js",
-        "maintainability": 121.70728740447916
+        "maintainability": 71.17385228332114
       }
     }
   ]

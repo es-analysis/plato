@@ -415,7 +415,7 @@ __report = {
         }
       }
     ],
-    "maintainability": 134.92800579163907,
+    "maintainability": 78.90526654481816,
     "module": "bindEntityEvents.js"
   },
   "jshint": {

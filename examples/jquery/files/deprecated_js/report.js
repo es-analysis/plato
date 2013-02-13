@@ -40,7 +40,7 @@ __report = {
       }
     },
     "functions": [],
-    "maintainability": 171,
+    "maintainability": 100,
     "module": "deprecated.js"
   },
   "jshint": {

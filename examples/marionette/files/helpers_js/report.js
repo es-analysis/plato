@@ -75,7 +75,7 @@ __report = {
         }
       }
     ],
-    "maintainability": 108.4138180532824,
+    "maintainability": 63.399893598410756,
     "module": "helpers.js"
   },
   "jshint": {

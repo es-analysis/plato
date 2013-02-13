@@ -75,7 +75,7 @@ __report = {
         }
       }
     ],
-    "maintainability": 171,
+    "maintainability": 100,
     "module": "exports.js"
   },
   "jshint": {

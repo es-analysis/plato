@@ -211,7 +211,7 @@ __report = {
         }
       }
     ],
-    "maintainability": 116.06407729852288,
+    "maintainability": 67.87372941434087,
     "module": "grunt/fail.js"
   },
   "jshint": {

@@ -177,7 +177,7 @@ __report = {
         }
       }
     ],
-    "maintainability": 111.76145630900575,
+    "maintainability": 65.35757678889226,
     "module": "lib/sourcemap.js"
   },
   "jshint": {

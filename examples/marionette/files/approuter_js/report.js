@@ -109,7 +109,7 @@ __report = {
         }
       }
     ],
-    "maintainability": 98.49888377834546,
+    "maintainability": 57.601686420085066,
     "module": "approuter.js"
   },
   "jshint": {

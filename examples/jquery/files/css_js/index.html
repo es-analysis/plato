@@ -44,22 +44,22 @@
 <div class="container aggregate-stats">
   <div class="row">
     <div class="span6">
-      <h2 class="header">Maintainability <a href="http://www.virtualmachinery.com/sidebar4.htm"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between -INF and 171 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">111.34</p>
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
+      <p class="stat">64.77</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated # Bugs  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">5.02</p>
+      <p class="stat">5.06</p>
     </div>
   </div>
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">87.66</p>
+      <p class="stat">88.56</p>
     </div>
     <div class="span6">
       <h2 class="header">SLOC/LSLOC <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">571 / 272</p>
+      <p class="stat">580 / 277</p>
     </div>
   </div>
 </div>
@@ -138,7 +138,7 @@ function getStyles( elem ) {
 }
 
 function showHide( elements, show ) {
-	var elem,
+	var display, elem, hidden,
 		values = [],
 		index = 0,
 		length = elements.length;
@@ -148,11 +148,13 @@ function showHide( elements, show ) {
 		if ( !elem.style ) {
 			continue;
 		}
+
 		values[ index ] = jQuery._data( elem, "olddisplay" );
+		display = elem.style.display;
 		if ( show ) {
 			// Reset the inline display of this element to learn if it is
 			// being hidden by cascaded rules or not
-			if ( !values[ index ] && elem.style.display === "none" ) {
+			if ( !values[ index ] && display === "none" ) {
 				elem.style.display = "";
 			}
 
@@ -162,8 +164,15 @@ function showHide( elements, show ) {
 			if ( elem.style.display === "" && isHidden( elem ) ) {
 				values[ index ] = jQuery._data( elem, "olddisplay", css_defaultDisplay(elem.nodeName) );
 			}
-		} else if ( !values[ index ] && !isHidden( elem ) ) {
-			jQuery._data( elem, "olddisplay", jQuery.css( elem, "display" ) );
+		} else {
+
+			if ( !values[ index ] ) {
+				hidden = isHidden( elem );
+
+				if ( display && display !== "none" || !hidden ) {
+					jQuery._data( elem, "olddisplay", hidden ? display : jQuery.css( elem, "display" ) );
+				}
+			}
 		}
 	}
 
@@ -618,7 +627,7 @@ if ( jQuery.expr && jQuery.expr.filters ) {
 	jQuery.expr.filters.hidden = function( elem ) {
 		// Support: Opera <= 12.12
 		// Opera reports offsetWidths and offsetHeights less than zero on some elements
-		return elem.offsetWidth <= 0 || elem.offsetHeight <= 0;
+		return elem.offsetWidth <= 0 && elem.offsetHeight <= 0;
 	};
 
 	jQuery.expr.filters.visible = function( elem ) {

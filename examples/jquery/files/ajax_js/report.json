@@ -959,7 +959,7 @@
         }
       }
     ],
-    "maintainability": 96.77126690136376,
+    "maintainability": 56.591384152844306,
     "module": "ajax.js"
   },
   "jshint": {

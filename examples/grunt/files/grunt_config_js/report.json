@@ -449,7 +449,7 @@
         }
       }
     ],
-    "maintainability": 125.91282284496404,
+    "maintainability": 73.63322973389711,
     "module": "grunt/config.js"
   },
   "jshint": {

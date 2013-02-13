@@ -109,7 +109,7 @@ __report = {
         }
       }
     ],
-    "maintainability": 130.03998220343232,
+    "maintainability": 76.04677321838147,
     "module": "controller.js"
   },
   "jshint": {

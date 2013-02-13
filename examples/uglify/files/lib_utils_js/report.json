@@ -1469,7 +1469,7 @@
         }
       }
     ],
-    "maintainability": 121.70728740447916,
+    "maintainability": 71.17385228332114,
     "module": "lib/utils.js"
   },
   "jshint": {

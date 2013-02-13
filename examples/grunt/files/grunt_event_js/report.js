@@ -40,7 +40,7 @@ __report = {
       }
     },
     "functions": [],
-    "maintainability": 128.5847571285384,
+    "maintainability": 75.19576440265404,
     "module": "grunt/event.js"
   },
   "jshint": {

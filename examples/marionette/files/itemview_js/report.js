@@ -177,7 +177,7 @@ __report = {
         }
       }
     ],
-    "maintainability": 115.3624143762209,
+    "maintainability": 67.46340022001222,
     "module": "itemview.js"
   },
   "jshint": {

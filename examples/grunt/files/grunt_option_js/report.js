@@ -211,7 +211,7 @@ __report = {
         }
       }
     ],
-    "maintainability": 134.3152242801101,
+    "maintainability": 78.54691478369013,
     "module": "grunt/option.js"
   },
   "jshint": {

@@ -1027,7 +1027,7 @@
         }
       }
     ],
-    "maintainability": 117.2417620136243,
+    "maintainability": 68.56243392609608,
     "module": "util/task.js"
   },
   "jshint": {

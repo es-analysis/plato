@@ -17,25 +17,25 @@
         "halstead": {
           "operators": {
             "distinct": 37,
-            "total": 1066,
+            "total": 1068,
             "identifiers": [
               "__stripped__"
             ]
           },
           "operands": {
             "distinct": 249,
-            "total": 1214,
+            "total": 1216,
             "identifiers": [
               "__stripped__"
             ]
           },
-          "length": 2280,
+          "length": 2284,
           "vocabulary": 286,
-          "difficulty": 90.19678714859438,
-          "volume": 18604.506647854727,
-          "effort": 1678066.726121162,
-          "bugs": 6.201502215951575,
-          "time": 93225.92922895345
+          "difficulty": 90.34538152610442,
+          "volume": 18637.14613320184,
+          "effort": 1683780.0779618819,
+          "bugs": 6.212382044400614,
+          "time": 93543.33766454899
         }
       }
     },
@@ -188,25 +188,25 @@
           "halstead": {
             "operators": {
               "distinct": 17,
-              "total": 125,
+              "total": 127,
               "identifiers": [
                 "__stripped__"
               ]
             },
             "operands": {
-              "distinct": 51,
-              "total": 145,
+              "distinct": 52,
+              "total": 147,
               "identifiers": [
                 "__stripped__"
               ]
             },
-            "length": 270,
-            "vocabulary": 68,
-            "difficulty": 24.166666666666668,
-            "volume": 1643.6149671375917,
-            "effort": 39720.69503915847,
-            "bugs": 0.5478716557125306,
-            "time": 2206.7052799532485
+            "length": 274,
+            "vocabulary": 69,
+            "difficulty": 24.028846153846157,
+            "volume": 1673.7357011572185,
+            "effort": 40217.93766530663,
+            "bugs": 0.5579119003857395,
+            "time": 2234.3298702948127
           }
         }
       },
@@ -1639,7 +1639,7 @@
         }
       }
     ],
-    "maintainability": 109.19313136810501,
+    "maintainability": 63.84944474600895,
     "module": "lib/scope.js"
   },
   "jshint": {

@@ -245,7 +245,7 @@ __report = {
         }
       }
     ],
-    "maintainability": 136.76282358706914,
+    "maintainability": 79.97825940764277,
     "module": "callbacks.js"
   },
   "jshint": {

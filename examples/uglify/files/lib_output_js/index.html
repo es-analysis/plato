@@ -44,22 +44,22 @@
 <div class="container aggregate-stats">
   <div class="row">
     <div class="span6">
-      <h2 class="header">Maintainability <a href="http://www.virtualmachinery.com/sidebar4.htm"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between -INF and 171 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">120.67</p>
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
+      <p class="stat">70.40</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated # Bugs  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">12.73</p>
+      <p class="stat">13.15</p>
     </div>
   </div>
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">123.89</p>
+      <p class="stat">126.78</p>
     </div>
     <div class="span6">
       <h2 class="header">SLOC/LSLOC <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">1152 / 827</p>
+      <p class="stat">1177 / 841</p>
     </div>
   </div>
 </div>
@@ -459,6 +459,16 @@ function OutputStream(options) {
             if (start && !start._comments_dumped) {
                 start._comments_dumped = true;
                 var comments = start.comments_before;
+
+                // XXX: ugly fix for https://github.com/mishoo/UglifyJS2/issues/112
+                //      if this node is `return` or `throw`, we cannot allow comments before
+                //      the returned or thrown value.
+                if (self instanceof AST_Exit &&
+                    self.value && self.value.start.comments_before.length > 0) {
+                    comments = (comments || []).concat(self.value.start.comments_before);
+                    self.value.start.comments_before = [];
+                }
+
                 if (c.test) {
                     comments = comments.filter(function(comment){
                         return c.test(comment.value);
@@ -583,8 +593,20 @@ function OutputStream(options) {
     PARENS(AST_New, function(output){
         var p = output.parent();
         if (no_constructor_parens(this, output)
-            && (p instanceof AST_Dot // (new Date).getTime()
+            && (p instanceof AST_PropAccess // (new Date).getTime(), (new Date)["getTime"]()
                 || p instanceof AST_Call && p.expression === this)) // (new foo)(bar)
+            return true;
+    });
+
+    PARENS(AST_Number, function(output){
+        var p = output.parent();
+        if (this.getValue() < 0 && p instanceof AST_PropAccess && p.expression === this)
+            return true;
+    });
+
+    PARENS(AST_NaN, function(output){
+        var p = output.parent();
+        if (p instanceof AST_PropAccess && p.expression === this)
             return true;
     });
 
@@ -1016,7 +1038,7 @@ function OutputStream(options) {
     DEFPRINT(AST_Dot, function(self, output){
         var expr = self.expression;
         expr.print(output);
-        if (expr instanceof AST_Number) {
+        if (expr instanceof AST_Number && expr.getValue() >= 0) {
             if (!/[xa-f.]/i.test(output.last())) {
                 output.print(".");
             }
@@ -1143,6 +1165,9 @@ function OutputStream(options) {
         if (output.option("ascii_only"))
             str = output.to_ascii(str);
         output.print(str);
+        var p = output.parent();
+        if (p instanceof AST_Binary && /^in/.test(p.operator) && p.left === self)
+            output.print(" ");
     });
 
     function force_statement(stat, output) {

@@ -1163,7 +1163,7 @@ __report = {
         }
       }
     ],
-    "maintainability": 127.17537209412366,
+    "maintainability": 74.3715626281425,
     "module": "traversing.js"
   },
   "jshint": {
