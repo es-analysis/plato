@@ -45,21 +45,21 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">68.38</p>
+      <p class="stat">68.73</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated # Bugs  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">1.30</p>
+      <p class="stat">1.45</p>
     </div>
   </div>
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">20.10</p>
+      <p class="stat">20.16</p>
     </div>
     <div class="span6">
       <h2 class="header">SLOC/LSLOC <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">102 / 79</p>
+      <p class="stat">115 / 89</p>
     </div>
   </div>
 </div>
@@ -113,31 +113,40 @@ $(function(){
 
   var byComplexity = [], bySloc = [];
 
-  __report.complexity.functions.forEach(function(fn,i){
-    byComplexity.push({
-      label : fn.name,
-      value : fn.complexity.cyclomatic
-    });
-    bySloc.push({
-      label : fn.name,
-      value : fn.complexity.sloc.physical,
-      formatter: function (x) { return x + " lines"; }
-    });
+  var popoverTemplate = _.template($('#complexity-popover-template').text());
+  var gutterIcon = $('<a><i class="plato-gutter-icon icon-cog"></i></a>');
 
-    var name = fn.name === '<anonymous>' ? 'function\\s*\\([^)]*\\)' : fn.name;
-    var line = fn.line - 1;
-    var className = 'plato-mark-fn-' + i;
-    var gutter = {
-      gutterId : 'plato-gutter-complexity',
-      el : $('<a name="' + className + '"><i class="plato-gutter-icon icon-cog"></i></a>')[0]
-    };
-    var popover = {
-      type : 'popover',
-      title : fn.name === '<anonymous>' ? '&lt;anonymous&gt;' : 'function ' + fn.name + '',
-      content : _.template($('#complexity-popover-template').text())(fn)
-    };
-    cm.markPopoverText({line : line, ch:0}, name, className, gutter, popover);
+  var popovers = cm.operation(function(){
+    var queuedPopovers = [];
+    __report.complexity.functions.forEach(function(fn,i){
+      byComplexity.push({
+        label : fn.name,
+        value : fn.complexity.cyclomatic
+      });
+      bySloc.push({
+        label : fn.name,
+        value : fn.complexity.sloc.physical,
+        formatter: function (x) { return x + " lines"; }
+      });
+
+      var name = fn.name === '<anonymous>' ? 'function\\s*\\([^)]*\\)' : fn.name;
+      var line = fn.line - 1;
+      var className = 'plato-mark-fn-' + i;
+      var gutter = {
+        gutterId : 'plato-gutter-complexity',
+        el : gutterIcon.clone().attr('name',className)[0]
+      };
+      var popover = {
+        type : 'popover',
+        title : fn.name === '<anonymous>' ? '&lt;anonymous&gt;' : 'function ' + fn.name + '',
+        content : popoverTemplate(fn)
+      };
+      queuedPopovers.push(cm.markPopoverText({line : line, ch:0}, name, className, gutter, popover));
+    });
+    return queuedPopovers;
   });
+
+  popovers.forEach(function(fn){fn();});
 
   var scrollToLine = function(i) {
     var origScroll = [window.pageXOffset,window.pageYOffset];
@@ -155,9 +164,10 @@ $(function(){
       { element: 'fn-by-sloc', data: bySloc }
     ]);
   },0);
-  setTimeout(function(){
+
+  cm.operation(function(){
     addLintMessages(__report);
-  },0);
+  });
 
 
   function drawCharts(charts) {
@@ -180,10 +190,13 @@ $(function(){
         lines[message.line] += '<div class="plato-jshint-message text-'+message.severity+'">' + text + '</div>';
       }
     });
-    var gutterIcon = $('<a><i class="plato-gutter-icon icon-eye-open"></i></a>');
+    var marker = document.createElement('a');
+    marker.innerHTML = '<i class="plato-gutter-icon icon-eye-open"></i>';
     Object.keys(lines).forEach(function(line){
-      cm.setGutterMarker(line - 1, 'plato-gutter-jshint', gutterIcon.clone()[0]);
-      cm.addLineWidget(line - 1, $('<div>' + lines[line] + '</div>')[0]);
+      var lineWidget = document.createElement('div');
+      lineWidget.innerHTML = lines[line];
+      cm.setGutterMarker(line - 1, 'plato-gutter-jshint', marker.cloneNode(true));
+      cm.addLineWidget(line - 1, lineWidget);
     });
   }
 });</textarea>

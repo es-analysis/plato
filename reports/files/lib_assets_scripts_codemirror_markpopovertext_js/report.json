@@ -10,14 +10,14 @@
       "line": 3,
       "complexity": {
         "sloc": {
-          "physical": 73,
+          "physical": 75,
           "logical": 54
         },
-        "cyclomatic": 11,
+        "cyclomatic": 10,
         "halstead": {
           "operators": {
             "distinct": 23,
-            "total": 143,
+            "total": 144,
             "identifiers": [
               "__stripped__"
             ]
@@ -29,13 +29,13 @@
               "__stripped__"
             ]
           },
-          "length": 316,
+          "length": 317,
           "vocabulary": 107,
           "difficulty": 23.684523809523807,
-          "volume": 2130.3035677027624,
-          "effort": 50455.22557076959,
-          "bugs": 0.7101011892342541,
-          "time": 2803.0680872649773
+          "volume": 2137.0450346891635,
+          "effort": 50614.89400612012,
+          "bugs": 0.7123483448963878,
+          "time": 2811.9385558955623
         }
       }
     },
@@ -45,7 +45,7 @@
         "line": 3,
         "complexity": {
           "sloc": {
-            "physical": 73,
+            "physical": 75,
             "logical": 3
           },
           "cyclomatic": 1,
@@ -113,38 +113,72 @@
         "line": 17,
         "complexity": {
           "sloc": {
-            "physical": 57,
-            "logical": 32
+            "physical": 59,
+            "logical": 18
           },
-          "cyclomatic": 8,
+          "cyclomatic": 5,
           "halstead": {
             "operators": {
-              "distinct": 16,
-              "total": 97,
+              "distinct": 15,
+              "total": 56,
               "identifiers": [
                 "__stripped__"
               ]
             },
             "operands": {
-              "distinct": 60,
-              "total": 117,
+              "distinct": 35,
+              "total": 68,
               "identifiers": [
                 "__stripped__"
               ]
             },
-            "length": 214,
-            "vocabulary": 76,
-            "difficulty": 15.6,
-            "volume": 1337.0564878769273,
-            "effort": 20858.081210880067,
-            "bugs": 0.4456854959589758,
-            "time": 1158.782289493337
+            "length": 124,
+            "vocabulary": 50,
+            "difficulty": 14.571428571428571,
+            "volume": 699.8381675320658,
+            "effort": 10197.641869752959,
+            "bugs": 0.23327938917735525,
+            "time": 566.53565943072
           }
         }
       },
       {
         "name": "<anonymous>",
-        "line": 53,
+        "line": 41,
+        "complexity": {
+          "sloc": {
+            "physical": 34,
+            "logical": 14
+          },
+          "cyclomatic": 3,
+          "halstead": {
+            "operators": {
+              "distinct": 11,
+              "total": 42,
+              "identifiers": [
+                "__stripped__"
+              ]
+            },
+            "operands": {
+              "distinct": 33,
+              "total": 49,
+              "identifiers": [
+                "__stripped__"
+              ]
+            },
+            "length": 91,
+            "vocabulary": 44,
+            "difficulty": 8.166666666666666,
+            "volume": 496.80827729599406,
+            "effort": 4057.2675979172845,
+            "bugs": 0.16560275909866468,
+            "time": 225.40375543984914
+          }
+        }
+      },
+      {
+        "name": "<anonymous>",
+        "line": 55,
         "complexity": {
           "sloc": {
             "physical": 8,
@@ -178,7 +212,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 57,
+        "line": 59,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -212,7 +246,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 47,
+        "line": 49,
         "complexity": {
           "sloc": {
             "physical": 6,
@@ -245,7 +279,7 @@
         }
       }
     ],
-    "maintainability": 62.891048814868014,
+    "maintainability": 65.3509536143966,
     "module": "lib/assets/scripts/codemirror.markpopovertext.js"
   },
   "jshint": {

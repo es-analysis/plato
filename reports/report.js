@@ -1,12 +1,12 @@
 __report = {
   "summary": {
     "total": {
-      "sloc": 776,
-      "maintainability": 705.8462453583944
+      "sloc": 791,
+      "maintainability": 708.6550717076888
     },
     "average": {
-      "sloc": 77,
-      "maintainability": "70.58"
+      "sloc": 79,
+      "maintainability": "70.87"
     }
   },
   "reports": [
@@ -25,14 +25,14 @@ __report = {
           "line": 3,
           "complexity": {
             "sloc": {
-              "physical": 73,
+              "physical": 75,
               "logical": 54
             },
-            "cyclomatic": 11,
+            "cyclomatic": 10,
             "halstead": {
               "operators": {
                 "distinct": 23,
-                "total": 143,
+                "total": 144,
                 "identifiers": [
                   "__stripped__"
                 ]
@@ -44,18 +44,18 @@ __report = {
                   "__stripped__"
                 ]
               },
-              "length": 316,
+              "length": 317,
               "vocabulary": 107,
               "difficulty": 23.684523809523807,
-              "volume": 2130.3035677027624,
-              "effort": 50455.22557076959,
-              "bugs": 0.7101011892342541,
-              "time": 2803.0680872649773
+              "volume": 2137.0450346891635,
+              "effort": 50614.89400612012,
+              "bugs": 0.7123483448963878,
+              "time": 2811.9385558955623
             }
           }
         },
         "module": "lib/assets/scripts/codemirror.markpopovertext.js",
-        "maintainability": 62.891048814868014
+        "maintainability": 65.3509536143966
       }
     },
     {
@@ -73,37 +73,37 @@ __report = {
           "line": 4,
           "complexity": {
             "sloc": {
-              "physical": 102,
-              "logical": 79
+              "physical": 115,
+              "logical": 89
             },
             "cyclomatic": 7,
             "halstead": {
               "operators": {
                 "distinct": 17,
-                "total": 248,
+                "total": 274,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
               "operands": {
-                "distinct": 126,
-                "total": 298,
+                "distinct": 137,
+                "total": 325,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
-              "length": 546,
-              "vocabulary": 143,
-              "difficulty": 20.103174603174605,
-              "volume": 3909.2897498810003,
-              "effort": 78589.13441625853,
-              "bugs": 1.3030965832936667,
-              "time": 4366.063023125474
+              "length": 599,
+              "vocabulary": 154,
+              "difficulty": 20.164233576642335,
+              "volume": 4352.805137876247,
+              "effort": 87770.97951374548,
+              "bugs": 1.450935045958749,
+              "time": 4876.165528541415
             }
           }
         },
         "module": "lib/assets/scripts/plato-file.js",
-        "maintainability": 68.38396215812263
+        "maintainability": 68.73288370788842
       }
     },
     {

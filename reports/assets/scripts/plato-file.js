@@ -29,31 +29,40 @@ $(function(){
 
   var byComplexity = [], bySloc = [];
 
-  __report.complexity.functions.forEach(function(fn,i){
-    byComplexity.push({
-      label : fn.name,
-      value : fn.complexity.cyclomatic
-    });
-    bySloc.push({
-      label : fn.name,
-      value : fn.complexity.sloc.physical,
-      formatter: function (x) { return x + " lines"; }
-    });
+  var popoverTemplate = _.template($('#complexity-popover-template').text());
+  var gutterIcon = $('<a><i class="plato-gutter-icon icon-cog"></i></a>');
 
-    var name = fn.name === '<anonymous>' ? 'function\\s*\\([^)]*\\)' : fn.name;
-    var line = fn.line - 1;
-    var className = 'plato-mark-fn-' + i;
-    var gutter = {
-      gutterId : 'plato-gutter-complexity',
-      el : $('<a name="' + className + '"><i class="plato-gutter-icon icon-cog"></i></a>')[0]
-    };
-    var popover = {
-      type : 'popover',
-      title : fn.name === '<anonymous>' ? '&lt;anonymous&gt;' : 'function ' + fn.name + '',
-      content : _.template($('#complexity-popover-template').text())(fn)
-    };
-    cm.markPopoverText({line : line, ch:0}, name, className, gutter, popover);
+  var popovers = cm.operation(function(){
+    var queuedPopovers = [];
+    __report.complexity.functions.forEach(function(fn,i){
+      byComplexity.push({
+        label : fn.name,
+        value : fn.complexity.cyclomatic
+      });
+      bySloc.push({
+        label : fn.name,
+        value : fn.complexity.sloc.physical,
+        formatter: function (x) { return x + " lines"; }
+      });
+
+      var name = fn.name === '<anonymous>' ? 'function\\s*\\([^)]*\\)' : fn.name;
+      var line = fn.line - 1;
+      var className = 'plato-mark-fn-' + i;
+      var gutter = {
+        gutterId : 'plato-gutter-complexity',
+        el : gutterIcon.clone().attr('name',className)[0]
+      };
+      var popover = {
+        type : 'popover',
+        title : fn.name === '<anonymous>' ? '&lt;anonymous&gt;' : 'function ' + fn.name + '',
+        content : popoverTemplate(fn)
+      };
+      queuedPopovers.push(cm.markPopoverText({line : line, ch:0}, name, className, gutter, popover));
+    });
+    return queuedPopovers;
   });
+
+  popovers.forEach(function(fn){fn();});
 
   var scrollToLine = function(i) {
     var origScroll = [window.pageXOffset,window.pageYOffset];
@@ -71,9 +80,10 @@ $(function(){
       { element: 'fn-by-sloc', data: bySloc }
     ]);
   },0);
-  setTimeout(function(){
+
+  cm.operation(function(){
     addLintMessages(__report);
-  },0);
+  });
 
 
   function drawCharts(charts) {
@@ -96,10 +106,13 @@ $(function(){
         lines[message.line] += '<div class="plato-jshint-message text-'+message.severity+'">' + text + '</div>';
       }
     });
-    var gutterIcon = $('<a><i class="plato-gutter-icon icon-eye-open"></i></a>');
+    var marker = document.createElement('a');
+    marker.innerHTML = '<i class="plato-gutter-icon icon-eye-open"></i>';
     Object.keys(lines).forEach(function(line){
-      cm.setGutterMarker(line - 1, 'plato-gutter-jshint', gutterIcon.clone()[0]);
-      cm.addLineWidget(line - 1, $('<div>' + lines[line] + '</div>')[0]);
+      var lineWidget = document.createElement('div');
+      lineWidget.innerHTML = lines[line];
+      cm.setGutterMarker(line - 1, 'plato-gutter-jshint', marker.cloneNode(true));
+      cm.addLineWidget(line - 1, lineWidget);
     });
   }
 });
