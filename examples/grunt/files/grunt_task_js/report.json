@@ -17,25 +17,25 @@
         "halstead": {
           "operators": {
             "distinct": 31,
-            "total": 948,
+            "total": 947,
             "identifiers": [
               "__stripped__"
             ]
           },
           "operands": {
             "distinct": 237,
-            "total": 1068,
+            "total": 1067,
             "identifiers": [
               "__stripped__"
             ]
           },
-          "length": 2016,
+          "length": 2014,
           "vocabulary": 268,
-          "difficulty": 69.84810126582279,
-          "volume": 16261.235807962868,
-          "effort": 1135816.4454220142,
-          "bugs": 5.420411935987623,
-          "time": 63100.913634556346
+          "difficulty": 69.78270042194093,
+          "volume": 16245.103629581952,
+          "effort": 1133627.1999065026,
+          "bugs": 5.415034543193984,
+          "time": 62979.28888369459
         }
       }
     },
@@ -324,25 +324,25 @@
           "halstead": {
             "operators": {
               "distinct": 8,
-              "total": 32,
+              "total": 31,
               "identifiers": [
                 "__stripped__"
               ]
             },
             "operands": {
               "distinct": 19,
-              "total": 40,
+              "total": 39,
               "identifiers": [
                 "__stripped__"
               ]
             },
-            "length": 72,
+            "length": 70,
             "vocabulary": 27,
-            "difficulty": 8.421052631578947,
-            "volume": 342.3519001557698,
-            "effort": 2882.963369732798,
-            "bugs": 0.11411730005192326,
-            "time": 160.1646316518221
+            "difficulty": 8.210526315789474,
+            "volume": 332.8421251514428,
+            "effort": 2732.809027559215,
+            "bugs": 0.11094737505048094,
+            "time": 151.82272375328972
           }
         }
       },
@@ -1129,7 +1129,7 @@
         }
       }
     ],
-    "maintainability": 64.46084972856765,
+    "maintainability": 64.46328963285306,
     "module": "grunt/task.js"
   },
   "jshint": {

@@ -1,12 +1,12 @@
 {
   "summary": {
     "total": {
-      "sloc": 2393,
-      "maintainability": 1077.0034680337772
+      "sloc": 2402,
+      "maintainability": 1076.6678284844736
     },
     "average": {
-      "sloc": 159,
-      "maintainability": "71.80"
+      "sloc": 160,
+      "maintainability": "71.78"
     }
   },
   "reports": [
@@ -217,37 +217,37 @@
           "line": 10,
           "complexity": {
             "sloc": {
-              "physical": 414,
-              "logical": 253
+              "physical": 423,
+              "logical": 258
             },
-            "cyclomatic": 49,
+            "cyclomatic": 50,
             "halstead": {
               "operators": {
-                "distinct": 29,
-                "total": 793,
+                "distinct": 30,
+                "total": 809,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
               "operands": {
-                "distinct": 199,
-                "total": 907,
+                "distinct": 200,
+                "total": 923,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
-              "length": 1700,
-              "vocabulary": 228,
-              "difficulty": 66.08793969849246,
-              "volume": 13315.913024080062,
-              "effort": 880021.2569657735,
-              "bugs": 4.4386376746933545,
-              "time": 48890.069831431865
+              "length": 1732,
+              "vocabulary": 230,
+              "difficulty": 69.22500000000001,
+              "volume": 13588.388768235658,
+              "effort": 940656.2124811135,
+              "bugs": 4.5294629227452194,
+              "time": 52258.67847117297
             }
           }
         },
         "module": "grunt/file.js",
-        "maintainability": 66.35504687052398
+        "maintainability": 66.0169674169352
       }
     },
     {
@@ -416,30 +416,30 @@
             "halstead": {
               "operators": {
                 "distinct": 31,
-                "total": 948,
+                "total": 947,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
               "operands": {
                 "distinct": 237,
-                "total": 1068,
+                "total": 1067,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
-              "length": 2016,
+              "length": 2014,
               "vocabulary": 268,
-              "difficulty": 69.84810126582279,
-              "volume": 16261.235807962868,
-              "effort": 1135816.4454220142,
-              "bugs": 5.420411935987623,
-              "time": 63100.913634556346
+              "difficulty": 69.78270042194093,
+              "volume": 16245.103629581952,
+              "effort": 1133627.1999065026,
+              "bugs": 5.415034543193984,
+              "time": 62979.28888369459
             }
           }
         },
         "module": "grunt/task.js",
-        "maintainability": 64.46084972856765
+        "maintainability": 64.46328963285306
       }
     },
     {

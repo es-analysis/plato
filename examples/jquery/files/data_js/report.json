@@ -10,32 +10,32 @@
       "line": 12,
       "complexity": {
         "sloc": {
-          "physical": 346,
-          "logical": 153
+          "physical": 355,
+          "logical": 149
         },
         "cyclomatic": 36,
         "halstead": {
           "operators": {
             "distinct": 29,
-            "total": 387,
+            "total": 380,
             "identifiers": [
               "__stripped__"
             ]
           },
           "operands": {
             "distinct": 92,
-            "total": 495,
+            "total": 488,
             "identifiers": [
               "__stripped__"
             ]
           },
-          "length": 882,
+          "length": 868,
           "vocabulary": 121,
-          "difficulty": 78.01630434782608,
-          "volume": 6102.437375276193,
-          "effort": 476089.6115330964,
-          "bugs": 2.034145791758731,
-          "time": 26449.4228629498
+          "difficulty": 76.91304347826086,
+          "volume": 6005.573289954349,
+          "effort": 461906.91956214095,
+          "bugs": 2.0018577633181165,
+          "time": 25661.49553123005
         }
       }
     },
@@ -215,38 +215,38 @@
         "line": 110,
         "complexity": {
           "sloc": {
-            "physical": 20,
-            "logical": 8
+            "physical": 29,
+            "logical": 4
           },
           "cyclomatic": 4,
           "halstead": {
             "operators": {
               "distinct": 10,
-              "total": 23,
+              "total": 16,
               "identifiers": [
                 "__stripped__"
               ]
             },
             "operands": {
               "distinct": 8,
-              "total": 30,
+              "total": 23,
               "identifiers": [
                 "__stripped__"
               ]
             },
-            "length": 53,
+            "length": 39,
             "vocabulary": 18,
-            "difficulty": 18.75,
-            "volume": 221.00602507644254,
-            "effort": 4143.862970183298,
-            "bugs": 0.07366867502548084,
-            "time": 230.21460945462766
+            "difficulty": 14.375,
+            "volume": 162.62707505625016,
+            "effort": 2337.764203933596,
+            "bugs": 0.05420902501875005,
+            "time": 129.875789107422
           }
         }
       },
       {
         "name": "remove",
-        "line": 130,
+        "line": 139,
         "complexity": {
           "sloc": {
             "physical": 40,
@@ -280,7 +280,7 @@
       },
       {
         "name": "hasData",
-        "line": 170,
+        "line": 179,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -314,7 +314,7 @@
       },
       {
         "name": "discard",
-        "line": 175,
+        "line": 184,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -348,7 +348,7 @@
       },
       {
         "name": "data_discard",
-        "line": 184,
+        "line": 193,
         "complexity": {
           "sloc": {
             "physical": 4,
@@ -382,7 +382,7 @@
       },
       {
         "name": "acceptData",
-        "line": 201,
+        "line": 210,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -416,7 +416,7 @@
       },
       {
         "name": "hasData",
-        "line": 205,
+        "line": 214,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -450,7 +450,7 @@
       },
       {
         "name": "data",
-        "line": 209,
+        "line": 218,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -484,7 +484,7 @@
       },
       {
         "name": "removeData",
-        "line": 213,
+        "line": 222,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -518,7 +518,7 @@
       },
       {
         "name": "_data",
-        "line": 224,
+        "line": 233,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -552,7 +552,7 @@
       },
       {
         "name": "_removeData",
-        "line": 228,
+        "line": 237,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -586,7 +586,7 @@
       },
       {
         "name": "data",
-        "line": 234,
+        "line": 243,
         "complexity": {
           "sloc": {
             "physical": 87,
@@ -620,7 +620,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 264,
+        "line": 273,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -654,7 +654,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 269,
+        "line": 278,
         "complexity": {
           "sloc": {
             "physical": 51,
@@ -688,7 +688,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 302,
+        "line": 311,
         "complexity": {
           "sloc": {
             "physical": 17,
@@ -722,7 +722,7 @@
       },
       {
         "name": "removeData",
-        "line": 322,
+        "line": 331,
         "complexity": {
           "sloc": {
             "physical": 5,
@@ -756,7 +756,7 @@
       },
       {
         "name": "<anonymous>",
-        "line": 323,
+        "line": 332,
         "complexity": {
           "sloc": {
             "physical": 3,
@@ -790,7 +790,7 @@
       },
       {
         "name": "dataAttr",
-        "line": 329,
+        "line": 338,
         "complexity": {
           "sloc": {
             "physical": 29,
@@ -823,7 +823,7 @@
         }
       }
     ],
-    "maintainability": 68.4932339011747,
+    "maintainability": 68.87550910510252,
     "module": "data.js"
   },
   "jshint": {
