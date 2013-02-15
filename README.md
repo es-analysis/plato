@@ -42,9 +42,15 @@ Usage : plato [options] file1.js file2.js ... fileN.js
 plato -r -d report src
 ```
 
+## Data sources
+
+  - Complexity data by [Phil Booth](https://github.com/philbooth)'s [complexity-report](https://github.com/philbooth/complexityReport.js)
+  - Lint data from [jshint](https://github.com/jshint/jshint/)
+
 ## Release History
 
-  - 0.4.5 Performance improvements on file view
+  - 0.4.6 Performance improvements on file view
+  - 0.4.5 Updated complexity-report to 0.7.0 to prefer the 0-100 based maintainability index
   - 0.4.4 Added quiet mode, exclusion regex, description popovers
   - 0.4.3 Updated dependencies to fix reporting issues
   - 0.4.2 Fixed overview links to files
