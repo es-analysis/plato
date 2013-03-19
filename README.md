@@ -49,6 +49,7 @@ plato -r -d report src
 
 ## Release History
 
+  - 0.4.7 Updated jshint to 1.1.0 (via #22) to jshint to address #16
   - 0.4.6 Performance improvements on file view
   - 0.4.5 Updated complexity-report to 0.7.0 to prefer the 0-100 based maintainability index
   - 0.4.4 Added quiet mode, exclusion regex, description popovers
