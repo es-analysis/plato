@@ -45,21 +45,21 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">73.27</p>
+      <p class="stat">71.90</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated # Bugs  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">0.25</p>
+      <p class="stat">0.39</p>
     </div>
   </div>
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">16.94</p>
+      <p class="stat">18.21</p>
     </div>
     <div class="span6">
       <h2 class="header">SLOC/LSLOC <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">34 / 24</p>
+      <p class="stat">54 / 36</p>
     </div>
   </div>
 </div>
@@ -84,6 +84,14 @@
   <div class="row">
     <textarea id="file-source" class="span12">'use strict';
 
+// node api
+var fs = require('fs');
+
+// local lib
+var Logger = require('./logger');
+
+var log = new Logger(Logger.WARNING);
+
 exports.findCommonBase = function(files) {
   if (!files || files.length === 1) return '';
   var first = files[0];
@@ -104,7 +112,19 @@ exports.formatJSON = function (report) {
   return JSON.stringify(report, function(k,v){
     if (k === 'identifiers') return ['__stripped__'];
     return v;
-  },2);
+  });
+};
+
+exports.readJSON = function (file) {
+  var result;
+  log.debug('Parsing JSON from file %s', file);
+  try {
+    var src = fs.readFileSync(file);
+    result = JSON.parse(src);
+  } catch(e) {
+    log.warning('Could not parse JSON from file %s', file);
+  }
+  return result;
 };
 
 exports.stripComments = function (str) {

@@ -88,6 +88,7 @@ module.exports = function(grunt) {
       },
       function(err, result, code){
         console.log(result.stdout);
+        console.log(result.stderr);
         if (err || code !== 0) {
           grunt.fatal('Running plato binary failed');
         }

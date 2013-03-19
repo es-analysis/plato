@@ -45,21 +45,21 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">65.64</p>
+      <p class="stat">66.00</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated # Bugs  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">2.00</p>
+      <p class="stat">2.31</p>
     </div>
   </div>
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">30.79</p>
+      <p class="stat">32.85</p>
     </div>
     <div class="span6">
       <h2 class="header">SLOC/LSLOC <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">208 / 139</p>
+      <p class="stat">231 / 154</p>
     </div>
   </div>
 </div>
@@ -84,7 +84,7 @@
   <div class="row">
     <textarea id="file-source" class="span12">/*
  * plato
- * https://github.com/joverson/plato
+ * https://github.com/jsoverson/plato
  *
  * Copyright (c) 2012 Jarrod Overson
  * Licensed under the MIT license.
@@ -103,6 +103,8 @@ var _ = require('lodash');
 
 // local lib
 var util = require('./util'),
+    OverviewHistory = require('./models/OverviewHistory'),
+    FileHistory = require('./models/FileHistory'),
     Logger = require('./logger'),
     reporters = {
       complexity : require('./reporters/complexity'),
@@ -180,7 +182,6 @@ exports.inspect = function(files, outputDir, options, done) {
             error = true;
             log.error('Error reading file : ', e.toString());
             log.error(e.stack);
-            return;
           }
         });
 
@@ -203,12 +204,13 @@ exports.inspect = function(files, outputDir, options, done) {
   } else {
     fs.mkdirp(fileOutputDir,function(){
       runReports(files,function(){
-        var reportFile = path.join(outputDir, 'report');
+        var reportFilePrefix = path.join(outputDir, 'report');
         var overview = path.join(outputDir, 'index.html');
 
         fs.copy(assets, path.join(outputDir, 'assets'), function(){
           var overviewReport = exports.getOverviewReport(reports);
-          writeReport(reportFile, overviewReport);
+          updateHistoricalOverview(reportFilePrefix, overviewReport);
+          writeReport(reportFilePrefix, overviewReport);
           writeOverview(overview, overviewReport, {
             title : options.title,
             flags : flags
@@ -264,19 +266,37 @@ exports.getOverviewReport = function (reports) {
   };
 };
 
+function updateHistoricalOverview(outfilePrefix, overview) {
+  var existingData = util.readJSON(outfilePrefix + '.history.json') || {};
+  var history = new OverviewHistory(existingData);
+  history.addReport(overview);
+  writeReport(outfilePrefix + '.history', history.toJSON(), '__history');
+}
+
+function updateHistoricalReport(outfilePrefix, overview) {
+  var existingData = util.readJSON(outfilePrefix + '.history.json') || {};
+  var history = new FileHistory(existingData);
+  history.addReport(overview);
+  writeReport(outfilePrefix + '.history', history.toJSON(), '__history');
+}
+
+
+
 function writeFile(file, source) {
   log.info('Writing file "%s".', file);
   fs.writeFileSync(file, source, 'utf8');
 }
 
-function writeReport(outfile, report) {
+function writeReport(outfilePrefix, report, exportName) {
   var formatted = util.formatJSON(report);
 
-  writeFile(outfile + '.json', formatted);
+  writeFile(outfilePrefix + '.json', formatted);
 
-  var module = '__report = ' + formatted;
+  exportName = exportName || '__report';
 
-  writeFile(outfile + '.js', module);
+  var module = exportName + ' = ' + formatted;
+
+  writeFile(outfilePrefix + '.js', module);
 }
 
 function writeOverview(outfile, report, options) {
@@ -295,8 +315,11 @@ function writeFileReport(outdir, report, source) {
     report : report
   });
   var indexPath = path.join(outdir,'index.html');
+  var outfilePrefix = path.join(outdir,'report');
+
   writeFile(indexPath, parsed);
-  writeReport(path.join(outdir,'report'), report);
+  updateHistoricalReport(outfilePrefix, report, '__history');
+  writeReport(outfilePrefix, report);
 }</textarea>
   </div>
 </div>
