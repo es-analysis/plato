@@ -1,0 +1,42 @@
+/*
+
+*/
+
+body {
+  background: #383838;
+  color: #D2D1D0;
+}
+
+.heading, .aggregate-stats {
+  margin-top: .25em;
+  text-align: center;
+  background: #585858;
+  border: 1px solid #535353;
+  -webkit-box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, .4);
+  box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, .4);
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+.heading h1 {
+  padding: .25em 0;
+  font-weight: 200;
+}
+
+.aggregate-stats {
+  background: #4A4A4A;
+}
+
+.aggregate-stats .stat {
+  color: #D2D1D0;
+  text-shadow: 1px 1px 1px #858585;
+  line-height: 70px;
+  font-size: 70px;
+}
+
+.aggregate-stats .stat small {
+  font-size: 18px;
+  display: block;
+  color: #252525;
+  margin-top: -10px;
+  text-shadow: none;
+}
