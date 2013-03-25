@@ -98,11 +98,11 @@ $(function(){
     var data = _.map(history,function(record){
       var date = new Date(record.date);
       return {
-        date : date.getFullYear() + '-' + date.getMonth() + '-' + date.getDay(),
+        date : date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate(),
         maintainability : parseFloat(record.maintainability).toFixed(2),
         sloc : record.sloc
       };
-    });
+    }).slice(-20);
     Morris.Line({
       element: 'chart_historical_sloc',
       data: data,
