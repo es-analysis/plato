@@ -45,21 +45,29 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">61.89</p>
+      <p class="stat">61.60</p>
     </div>
     <div class="span6">
-      <h2 class="header">Estimated # Bugs  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">1.87</p>
+      <h2 class="header">SLOC/LSLOC <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
+      <p class="stat">184 / 133</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span6">
+      <p id="chart_historical_maint" class="historical chart"></p>
+    </div>
+    <div class="span6">
+      <p id="chart_historical_sloc" class="historical chart"></p>
     </div>
   </div>
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">37.37</p>
+      <p class="stat">38.32</p>
     </div>
     <div class="span6">
-      <h2 class="header">SLOC/LSLOC <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">155 / 108</p>
+      <h2 class="header">Estimated # Bugs  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
+      <p class="stat">2.26</p>
     </div>
   </div>
 </div>
@@ -82,7 +90,7 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="span12">/*global $:false, _:false, Morris:false, __report:false, __options: false, Raphael:false */
+    <textarea id="file-source" class="span12">/*global $:false, _:false, Morris:false, __report:false, __history:false, __options: false, Raphael:false */
 /*jshint browser:true*/
 
 $(function(){
@@ -90,8 +98,6 @@ $(function(){
 
   // Workaround for jshint complaint I don't want to turn off.
   var raphael = Raphael;
-
-  //  $('.plato-file-link').fitText(1.2, { minFontSize: '20px', maxFontSize: '28px' });
 
   var colors = [
     '#01939A',
@@ -141,7 +147,7 @@ $(function(){
         horizontalGraph(chart,1,value, Math.min(value, width), 'sloc', getColor(value,colors,[400,600]));
 
         value = report.complexity.aggregate.complexity.halstead.bugs.toFixed(2);
-        horizontalGraph(chart,2,value, value * 5, 'est bugs', getColor(value,colors,[1,5]));
+        horizontalGraph(chart,2,value, value * 5, 'est errors', getColor(value,colors,[1,5]));
 
         value = report.jshint.messages;
         horizontalGraph(chart,3,value, value * 5, 'lint errors', getColor(value,colors,[1,10]));
@@ -150,7 +156,7 @@ $(function(){
   }
 
   function drawOverviewCharts(reports) {
-    $('.chart').empty();
+    $('.overview .chart').empty();
 
     var maintainability = {
       element: 'chart_maintainability',
@@ -176,7 +182,7 @@ $(function(){
       data: [],
       xkey: 'label',
       ykeys: ['value'],
-      labels: ['Bugs'],
+      labels: ['Errors'],
       ymax: 20,
       barColors : ['#ff9b40']
     };
@@ -232,10 +238,41 @@ $(function(){
     return charts;
   }
 
+  function drawHistoricalChart(history) {
+    $('.historical  .chart').empty();
+    var data = _.map(history,function(record){
+      var date = new Date(record.date);
+      return {
+        date : date.getFullYear() + '-' + date.getMonth() + '-' + date.getDay(),
+        average_maintainability : parseFloat(record.average.maintainability),
+        average_sloc : record.average.sloc
+      };
+    });
+    Morris.Line({
+      element: 'chart_historical_sloc',
+      data: data,
+      xkey: 'date',
+      ykeys: ['average_sloc'],
+      labels: ['Average Lines'],
+      parseTime : false
+    });
+    Morris.Line({
+      element: 'chart_historical_maint',
+      data: data,
+      xkey: 'date',
+      ykeys: ['average_maintainability'],
+      labels: ['Maintainability'],
+      ymax: 100,
+      parseTime : false
+    });
+  }
+
+  drawHistoricalChart(__history);
   drawOverviewCharts(__report.reports);
   drawFileCharts(__report.reports);
 
   $(window).on('resize', _.debounce(function(){
+    drawHistoricalChart(__history);
     drawFileCharts(__report.reports);
     drawOverviewCharts(__report.reports);
   },200));
@@ -262,6 +299,7 @@ $(function(){
 <script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
 <script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
 <script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
 <script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
 <script>
   $('[rel=popover]').popover();

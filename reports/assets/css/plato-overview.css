@@ -1,6 +1,14 @@
 .chart {
   margin: 0 auto;
-  height:300px;
+  height: 200px;
+}
+
+.overview .chart {
+  height: 250px;
+}
+
+.historical .chart {
+  height:200px;
 }
 
 .chart rect {

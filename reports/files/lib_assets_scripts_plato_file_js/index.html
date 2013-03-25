@@ -45,21 +45,29 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">68.73</p>
+      <p class="stat">67.49</p>
     </div>
     <div class="span6">
-      <h2 class="header">Estimated # Bugs  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">1.45</p>
+      <h2 class="header">SLOC/LSLOC <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
+      <p class="stat">145 / 113</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span6">
+      <p id="chart_historical_maint" class="historical chart"></p>
+    </div>
+    <div class="span6">
+      <p id="chart_historical_sloc" class="historical chart"></p>
     </div>
   </div>
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">20.16</p>
+      <p class="stat">21.14</p>
     </div>
     <div class="span6">
-      <h2 class="header">SLOC/LSLOC <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">115 / 89</p>
+      <h2 class="header">Estimated # Bugs  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
+      <p class="stat">1.83</p>
     </div>
   </div>
 </div>
@@ -82,7 +90,7 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="span12">/*global $:false, _:false, Morris:false, CodeMirror:false, __report:false */
+    <textarea id="file-source" class="span12">/*global $:false, _:false, Morris:false, CodeMirror:false, __report:false, __history:false */
 /*jshint browser:true*/
 
 $(function(){
@@ -159,10 +167,11 @@ $(function(){
 
   // yield to the browser
   setTimeout(function(){
-    drawCharts([
+    drawFunctionCharts([
       { element: 'fn-by-complexity', data: byComplexity },
       { element: 'fn-by-sloc', data: bySloc }
     ]);
+    drawHistoricalCharts(__history);
   },0);
 
   cm.operation(function(){
@@ -170,9 +179,38 @@ $(function(){
   });
 
 
-  function drawCharts(charts) {
+  function drawFunctionCharts(charts) {
     charts.forEach(function(chart){
       Morris.Donut(chart).on('click',scrollToLine);
+    });
+  }
+
+  function drawHistoricalCharts(history) {
+    $('.historical.chart').empty();
+    var data = _.map(history,function(record){
+      var date = new Date(record.date);
+      return {
+        date : date.getFullYear() + '-' + date.getMonth() + '-' + date.getDay(),
+        maintainability : parseFloat(record.maintainability).toFixed(2),
+        sloc : record.sloc
+      };
+    });
+    Morris.Line({
+      element: 'chart_historical_sloc',
+      data: data,
+      xkey: 'date',
+      ykeys: ['sloc'],
+      labels: ['Lines of Code'],
+      parseTime : false
+    });
+    Morris.Line({
+      element: 'chart_historical_maint',
+      data: data,
+      xkey: 'date',
+      ykeys: ['maintainability'],
+      labels: ['Maintainability'],
+      ymax: 100,
+      parseTime : false
     });
   }
 
@@ -222,6 +260,7 @@ $(function(){
 <script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
 <script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
 <script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
 <script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
 <script>
   $('[rel=popover]').popover();

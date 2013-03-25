@@ -1,4 +1,4 @@
-/*global $:false, _:false, Morris:false, __report:false, __options: false, Raphael:false */
+/*global $:false, _:false, Morris:false, __report:false, __history:false, __options: false, Raphael:false */
 /*jshint browser:true*/
 
 $(function(){
@@ -6,8 +6,6 @@ $(function(){
 
   // Workaround for jshint complaint I don't want to turn off.
   var raphael = Raphael;
-
-  //  $('.plato-file-link').fitText(1.2, { minFontSize: '20px', maxFontSize: '28px' });
 
   var colors = [
     '#01939A',
@@ -57,7 +55,7 @@ $(function(){
         horizontalGraph(chart,1,value, Math.min(value, width), 'sloc', getColor(value,colors,[400,600]));
 
         value = report.complexity.aggregate.complexity.halstead.bugs.toFixed(2);
-        horizontalGraph(chart,2,value, value * 5, 'est bugs', getColor(value,colors,[1,5]));
+        horizontalGraph(chart,2,value, value * 5, 'est errors', getColor(value,colors,[1,5]));
 
         value = report.jshint.messages;
         horizontalGraph(chart,3,value, value * 5, 'lint errors', getColor(value,colors,[1,10]));
@@ -66,7 +64,7 @@ $(function(){
   }
 
   function drawOverviewCharts(reports) {
-    $('.chart').empty();
+    $('.overview .chart').empty();
 
     var maintainability = {
       element: 'chart_maintainability',
@@ -92,7 +90,7 @@ $(function(){
       data: [],
       xkey: 'label',
       ykeys: ['value'],
-      labels: ['Bugs'],
+      labels: ['Errors'],
       ymax: 20,
       barColors : ['#ff9b40']
     };
@@ -148,10 +146,41 @@ $(function(){
     return charts;
   }
 
+  function drawHistoricalChart(history) {
+    $('.historical  .chart').empty();
+    var data = _.map(history,function(record){
+      var date = new Date(record.date);
+      return {
+        date : date.getFullYear() + '-' + date.getMonth() + '-' + date.getDay(),
+        average_maintainability : parseFloat(record.average.maintainability),
+        average_sloc : record.average.sloc
+      };
+    });
+    Morris.Line({
+      element: 'chart_historical_sloc',
+      data: data,
+      xkey: 'date',
+      ykeys: ['average_sloc'],
+      labels: ['Average Lines'],
+      parseTime : false
+    });
+    Morris.Line({
+      element: 'chart_historical_maint',
+      data: data,
+      xkey: 'date',
+      ykeys: ['average_maintainability'],
+      labels: ['Maintainability'],
+      ymax: 100,
+      parseTime : false
+    });
+  }
+
+  drawHistoricalChart(__history);
   drawOverviewCharts(__report.reports);
   drawFileCharts(__report.reports);
 
   $(window).on('resize', _.debounce(function(){
+    drawHistoricalChart(__history);
     drawFileCharts(__report.reports);
     drawOverviewCharts(__report.reports);
   },200));
