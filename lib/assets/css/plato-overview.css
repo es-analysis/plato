@@ -1,6 +1,14 @@
 .chart {
   margin: 0 auto;
-  height:300px;
+  height: 200px;
+}
+
+.overview .chart {
+  height: 250px;
+}
+
+.historical .chart {
+  height:200px;
 }
 
 .chart rect {
@@ -37,7 +45,7 @@
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9f9f9', endColorstr='#00ffffff',GradientType=1 ); /* IE6-9 */
 }
 
-.plato-file-fade {
+.fadeout {
   position: absolute;
   height: 50px;
   z-index: 10;
@@ -45,29 +53,16 @@
   width:70px
 }
 
-.plato-file {
+.file {
   white-space: nowrap;
 }
 
 
-.plato-file-link {
+.file-link {
   text-align: right;
   direction: rtl;
   overflow: hidden;
   height:40px;
-}
-
-@media (max-width: 767px) {
-  .plato-file-link {
-    text-align: center;
-  }
-}
-
-.plato-file-chart {
-  height:55px;
-}
-
-.plato-file-link {
   font-size:20px;
   color: #334B6D;
   display:block;
@@ -75,7 +70,41 @@
   text-decoration: underline;
 }
 
-.plato-file-link:hover {
+.file-link:hover {
   color: #3B71B1;
+}
+
+.file-chart label {
+  width: 75px;
+  text-align: right;
+  margin-right: 10px;
+}
+
+.file-chart .chart-value {
+  margin-left: 3px;
+  font-size:11px;
+}
+
+.horizontal-bar {
+  display:inline-block;
+  height:8px;
+  border-radius: 0 4px 4px 0;
+}
+
+.threshold-0 .horizontal-bar {
+  background-color: #01939A;
+}
+.threshold-1 .horizontal-bar {
+  background-color: #FFAB00;
+}
+.threshold-2 .horizontal-bar {
+  background-color: #FF0700;
+}
+
+
+@media (max-width: 767px) {
+  .file-link {
+    text-align: center;
+  }
 }
 
