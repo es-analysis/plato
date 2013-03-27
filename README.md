@@ -34,6 +34,8 @@ Usage : plato [options] file1.js file2.js ... fileN.js
       Specify a jshintrc file for JSHint linting
   -t, --title : String
       Title of the report
+  -D, --date : String
+      Time to use as the report date (seconds, > 9999999999 assumed to be ms)
 ```
 
 ## Example
@@ -49,6 +51,7 @@ plato -r -d report src
 
 ## Release History
 
+  - 0.5.0 Added historical reports
   - 0.4.7 Updated jshint to 1.1.0 (via #22) to jshint to address #16
   - 0.4.6 Performance improvements on file view
   - 0.4.5 Updated complexity-report to 0.7.0 to prefer the 0-100 based maintainability index
