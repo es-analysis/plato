@@ -8,7 +8,6 @@ Visualize JavaScript source complexity with plato.
 
  - [jquery](http://jsoverson.github.com/plato/examples/jquery/)
  - [grunt](http://jsoverson.github.com/plato/examples/grunt/)
- - [uglifyjs](http://jsoverson.github.com/plato/examples/uglify/)
  - [marionettejs](http://jsoverson.github.com/plato/examples/marionette/)
 
 ## Installation
