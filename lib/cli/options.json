@@ -41,5 +41,10 @@
     "long": "title",
     "desc": "Title of the report",
     "type": "String"
+  },
+  "D": {
+    "long": "date",
+    "desc": "Time to use as the report date (seconds, > 9999999999 assumed to be ms)",
+    "type": "String"
   }
 }
