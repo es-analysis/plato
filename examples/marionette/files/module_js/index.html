@@ -45,21 +45,29 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">71.16</p>
+      <p class="stat">71.78</p>
     </div>
     <div class="span6">
-      <h2 class="header">Estimated # Bugs  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">1.08</p>
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
+      <p class="stat">201</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="span6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="span6">
+      <p id="chart_historical_sloc" class="chart"></p>
     </div>
   </div>
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">30.42</p>
+      <p class="stat">30.43</p>
     </div>
     <div class="span6">
-      <h2 class="header">SLOC/LSLOC <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">207 / 88</p>
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
+      <p class="stat">1.04</p>
     </div>
   </div>
 </div>
@@ -119,7 +127,7 @@ _.extend(Marionette.Module.prototype, Backbone.Events, {
     this._finalizerCallbacks.add(callback);
   },
 
-  // Start the module, and run all of it's initializers
+  // Start the module, and run all of its initializers
   start: function(options){
     // Prevent re-starting a module that is already started
     if (this._isInitialized){ return; }
@@ -127,11 +135,7 @@ _.extend(Marionette.Module.prototype, Backbone.Events, {
     // start the sub-modules (depth-first hierarchy)
     _.each(this.submodules, function(mod){
       // check to see if we should start the sub-module with this parent
-      var startWithParent = true;
-      startWithParent = mod.startWithParent;
-
-      // start the sub-module
-      if (startWithParent){
+      if (mod.startWithParent){
         mod.start(options);
       }
     });
@@ -185,7 +189,7 @@ _.extend(Marionette.Module.prototype, Backbone.Events, {
       this.app,
       Backbone,
       Marionette,
-      $, _,
+      Marionette.$, _,
       customArgs
     ]);
 
@@ -206,12 +210,11 @@ _.extend(Marionette.Module, {
 
   // Create a module, hanging off the app parameter as the parent object.
   create: function(app, moduleNames, moduleDefinition){
-    var that = this;
     var module = app;
 
     // get the custom args passed in after the module definition and
     // get rid of the module name and definition function
-    var customArgs = slice.apply(arguments);
+    var customArgs = slice(arguments);
     customArgs.splice(0, 3);
 
     // split the module names and get the length
@@ -225,9 +228,9 @@ _.extend(Marionette.Module, {
     // Loop through all the parts of the module definition
     _.each(moduleNames, function(moduleName, i){
       var parentModule = module;
-      module = that._getModule(parentModule, moduleName, app);
-      that._addModuleDefinition(parentModule, module, moduleDefinitions[i], customArgs);
-    });
+      module = this._getModule(parentModule, moduleName, app);
+      this._addModuleDefinition(parentModule, module, moduleDefinitions[i], customArgs);
+    }, this);
 
     // Return the last module in the definition chain
     return module;
@@ -274,7 +277,6 @@ _.extend(Marionette.Module, {
 
     // `and` the two together, ensuring a single `false` will prevent it
     // from starting with the parent
-    var tmp = module.startWithParent;
     module.startWithParent = module.startWithParent && startWithParent;
 
     // setup auto-start if needed
@@ -316,10 +318,7 @@ _.extend(Marionette.Module, {
 <script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
 <script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
 <script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
 <script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
-<script>
-  $('[rel=popover]').popover();
-</script>
-
 </body>
 </html>

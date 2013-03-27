@@ -1,3 +1,7 @@
+.historical .chart {
+  height: 200px;
+}
+
 .CodeMirror {
   height: auto;
 }

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap-3.0.0-wip.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <ul class="nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>backbone.marionette.collectionview.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="span6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
+      <p class="stat">72.89</p>
+    </div>
+    <div class="span6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
+      <p class="stat">233</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="span6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="span6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
+      <p class="stat">40.00</p>
+    </div>
+    <div class="span6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
+      <p class="stat">1.64</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="span6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="span6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="span12">// Collection View
+// ---------------
+
+// A view that iterates over a Backbone.Collection
+// and renders an individual ItemView for each model.
+Marionette.CollectionView = Marionette.View.extend({
+  constructor: function(){
+    Marionette.View.prototype.constructor.apply(this, arguments);
+    this.initChildViewStorage();
+    this.initialEvents();
+    this.onShowCallbacks = new Marionette.Callbacks();
+  },
+
+  // Configured the initial events that the collection view
+  // binds to. Override this method to prevent the initial
+  // events, or to add your own initial events.
+  initialEvents: function(){
+    if (this.collection){
+      this.bindTo(this.collection, "add", this.addChildView, this);
+      this.bindTo(this.collection, "remove", this.removeItemView, this);
+      this.bindTo(this.collection, "reset", this.render, this);
+    }
+  },
+
+  // Handle a child item added to the collection
+  addChildView: function(item, collection, options){
+    this.closeEmptyView();
+    var ItemView = this.getItemView(item);
+    return this.addItemView(item, ItemView, options.index);
+  },
+
+  // Override from `Marionette.View` to guarantee the `onShow` method
+  // of child views is called.
+  onShowCalled: function(){
+    this.onShowCallbacks.run();
+  },
+
+  // Internal method to trigger the before render callbacks
+  // and events
+  triggerBeforeRender: function(){
+    if (this.beforeRender) { this.beforeRender(); }
+    this.trigger("before:render", this);
+    this.trigger("collection:before:render", this);
+  },
+
+  // Internal method to trigger the rendered callbacks and
+  // events
+  triggerRendered: function(){
+    if (this.onRender) { this.onRender(); }
+    this.trigger("render", this);
+    this.trigger("collection:rendered", this);
+  },
+
+  // Render the collection of items. Override this method to
+  // provide your own implementation of a render function for
+  // the collection view.
+  render: function(){
+    this.triggerBeforeRender();
+    this.closeEmptyView();
+    this.closeChildren();
+
+    if (this.collection && this.collection.length > 0) {
+      this.showCollection();
+    } else {
+      this.showEmptyView();
+    }
+
+    this.triggerRendered();
+    return this;
+  },
+
+  // Internal method to loop through each item in the
+  // collection view and show it
+  showCollection: function(){
+    var that = this;
+    var ItemView;
+    this.collection.each(function(item, index){
+      ItemView = that.getItemView(item);
+      that.addItemView(item, ItemView, index);
+    });
+  },
+
+  // Internal method to show an empty view in place of
+  // a collection of item views, when the collection is
+  // empty
+  showEmptyView: function(){
+    var EmptyView = this.options.emptyView || this.emptyView;
+    if (EmptyView && !this._showingEmptyView){
+      this._showingEmptyView = true;
+      var model = new Backbone.Model();
+      this.addItemView(model, EmptyView, 0);
+    }
+  },
+
+  // Internal method to close an existing emptyView instance
+  // if one exists. Called when a collection view has been
+  // rendered empty, and then an item is added to the collection.
+  closeEmptyView: function(){
+    if (this._showingEmptyView){
+      this.closeChildren();
+      delete this._showingEmptyView;
+    }
+  },
+
+  // Retrieve the itemView type, either from `this.options.itemView`
+  // or from the `itemView` in the object definition. The "options"
+  // takes precedence.
+  getItemView: function(item){
+    var itemView = this.options.itemView || this.itemView;
+
+    if (!itemView){
+      var err = new Error("An `itemView` must be specified");
+      err.name = "NoItemViewError";
+      throw err;
+    }
+
+    return itemView;
+  },
+
+  // Render the child item's view and add it to the
+  // HTML for the collection view.
+  addItemView: function(item, ItemView, index){
+    var that = this;
+
+    var view = this.buildItemView(item, ItemView);
+
+    // Store the child view itself so we can properly
+    // remove and/or close it later
+    this.storeChild(view);
+    if (this.onItemAdded){ this.onItemAdded(view); }
+    this.trigger("item:added", view);
+
+    // Render it and show it
+    var renderResult = this.renderItemView(view, index);
+
+    // call onShow for child item views
+    if (view.onShow){
+      this.onShowCallbacks.add(view.onShow, view);
+    }
+
+    // Forward all child item view events through the parent,
+    // prepending "itemview:" to the event name
+    var childBinding = this.bindTo(view, "all", function(){
+      var args = slice.call(arguments);
+      args[0] = "itemview:" + args[0];
+      args.splice(1, 0, view);
+
+      that.trigger.apply(that, args);
+    });
+
+    // Store all child event bindings so we can unbind
+    // them when removing / closing the child view
+    this.childBindings = this.childBindings || {};
+    this.childBindings[view.cid] = childBinding;
+
+    return renderResult;
+  },
+
+  // render the item view
+  renderItemView: function(view, index) {
+    view.render();
+    this.appendHtml(this, view, index);
+  },
+
+  // Build an `itemView` for every model in the collection.
+  buildItemView: function(item, ItemView){
+    var itemViewOptions;
+
+    if (_.isFunction(this.itemViewOptions)){
+      itemViewOptions = this.itemViewOptions(item);
+    } else {
+      itemViewOptions = this.itemViewOptions;
+    }
+
+    var options = _.extend({model: item}, itemViewOptions);
+    var view = new ItemView(options);
+    return view;
+  },
+
+  // Remove the child view and close it
+  removeItemView: function(item){
+    var view = this.children[item.cid];
+    if (view){
+      var childBinding = this.childBindings[view.cid];
+      if (childBinding) {
+        this.unbindFrom(childBinding);
+        delete this.childBindings[view.cid];
+      }
+      view.close();
+      delete this.children[item.cid];
+    }
+
+    if (!this.collection || this.collection.length === 0){
+      this.showEmptyView();
+    }
+
+    this.trigger("item:removed", view);
+  },
+
+  // Append the HTML to the collection's `el`.
+  // Override this method to do something other
+  // then `.append`.
+  appendHtml: function(collectionView, itemView, index){
+    collectionView.$el.append(itemView.el);
+  },
+
+  // Store references to all of the child `itemView`
+  // instances so they can be managed and cleaned up, later.
+  storeChild: function(view){
+    this.children[view.model.cid] = view;
+  },
+
+  // Internal method to set up the `children` object for
+  // storing all of the child views
+  initChildViewStorage: function(){
+    this.children = {};
+  },
+
+  // Handle cleanup and other closing needs for
+  // the collection of views.
+  close: function(){
+    this.trigger("collection:before:close");
+    this.closeChildren();
+    this.trigger("collection:closed");
+    Marionette.View.prototype.close.apply(this, arguments);
+  },
+
+  // Close the child views that this collection view
+  // is holding on to, if any
+  closeChildren: function(){
+    var that = this;
+    if (this.children){
+      _.each(_.clone(this.children), function(childView){
+        that.removeItemView(childView.model);
+      });
+    }
+  }
+});</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

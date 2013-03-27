@@ -45,21 +45,29 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">76.20</p>
+      <p class="stat">76.83</p>
     </div>
     <div class="span6">
-      <h2 class="header">Estimated # Bugs  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">1.68</p>
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
+      <p class="stat">257</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="span6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="span6">
+      <p id="chart_historical_sloc" class="chart"></p>
     </div>
   </div>
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">37.63</p>
+      <p class="stat">35.73</p>
     </div>
     <div class="span6">
-      <h2 class="header">SLOC/LSLOC <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">265 / 120</p>
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
+      <p class="stat">1.59</p>
     </div>
   </div>
 </div>
@@ -96,8 +104,7 @@ Marionette.CollectionView = Marionette.View.extend({
   constructor: function(options){
     this._initChildViewStorage();
 
-    var args = Array.prototype.slice.apply(arguments);
-    Marionette.View.prototype.constructor.apply(this, args);
+    Marionette.View.prototype.constructor.apply(this, slice(arguments));
 
     this._initialEvents();
   },
@@ -171,12 +178,11 @@ Marionette.CollectionView = Marionette.View.extend({
   // Internal method to loop through each item in the
   // collection view and show it
   showCollection: function(){
-    var that = this;
     var ItemView;
     this.collection.each(function(item, index){
-      ItemView = that.getItemView(item);
-      that.addItemView(item, ItemView, index);
-    });
+      ItemView = this.getItemView(item);
+      this.addItemView(item, ItemView, index);
+    }, this);
   },
 
   // Internal method to show an empty view in place of
@@ -209,9 +215,7 @@ Marionette.CollectionView = Marionette.View.extend({
     var itemView = Marionette.getOption(this, "itemView");
 
     if (!itemView){
-      var err = new Error("An `itemView` must be specified");
-      err.name = "NoItemViewError";
-      throw err;
+      throwError("An `itemView` must be specified", "NoItemViewError");
     }
 
     return itemView;
@@ -220,12 +224,10 @@ Marionette.CollectionView = Marionette.View.extend({
   // Render the child item's view and add it to the
   // HTML for the collection view.
   addItemView: function(item, ItemView, index){
-    var that = this;
-
     // get the itemViewOptions if any were specified
     var itemViewOptions = Marionette.getOption(this, "itemViewOptions");
     if (_.isFunction(itemViewOptions)){
-      itemViewOptions = itemViewOptions.call(this, item);
+      itemViewOptions = itemViewOptions.call(this, item, index);
     }
 
     // build the view 
@@ -262,7 +264,7 @@ Marionette.CollectionView = Marionette.View.extend({
     // Forward all child item view events through the parent,
     // prepending "itemview:" to the event name
     this.listenTo(view, "all", function(){
-      var args = slice.call(arguments);
+      var args = slice(arguments);
       args[0] = prefix + ":" + args[0];
       args.splice(1, 0, view);
 
@@ -279,8 +281,7 @@ Marionette.CollectionView = Marionette.View.extend({
   // Build an `itemView` for every model in the collection.
   buildItemView: function(item, ItemViewType, itemViewOptions){
     var options = _.extend({model: item}, itemViewOptions);
-    var view = new ItemViewType(options);
-    return view;
+    return new ItemViewType(options);
   },
 
   // get the child view by item it holds, and remove it
@@ -298,9 +299,9 @@ Marionette.CollectionView = Marionette.View.extend({
     if (view){
       this.stopListening(view);
 
-      if (view.close){
-        view.close();
-      }
+      // call 'close' or 'remove', depending on which is found
+      if (view.close) { view.close(); }
+      else if (view.remove) { view.remove(); }
 
       this.children.remove(view);
     }
@@ -339,8 +340,7 @@ Marionette.CollectionView = Marionette.View.extend({
     this.closeChildren();
     this.triggerMethod("collection:closed");
 
-    var args = Array.prototype.slice.apply(arguments);
-    Marionette.View.prototype.close.apply(this, args);
+    Marionette.View.prototype.close.apply(this, slice(arguments));
   },
 
   // Close the child views that this collection view
@@ -374,10 +374,7 @@ Marionette.CollectionView = Marionette.View.extend({
 <script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
 <script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
 <script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
 <script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
-<script>
-  $('[rel=popover]').popover();
-</script>
-
 </body>
 </html>

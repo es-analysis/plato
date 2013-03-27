@@ -45,21 +45,29 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">71.36</p>
+      <p class="stat">71.68</p>
     </div>
     <div class="span6">
-      <h2 class="header">Estimated # Bugs  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">0.86</p>
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
+      <p class="stat">128</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="span6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="span6">
+      <p id="chart_historical_sloc" class="chart"></p>
     </div>
   </div>
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">24.46</p>
+      <p class="stat">20.16</p>
     </div>
     <div class="span6">
-      <h2 class="header">SLOC/LSLOC <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">137 / 67</p>
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
+      <p class="stat">0.75</p>
     </div>
   </div>
 </div>
@@ -90,8 +98,7 @@
 // an item view as `modelView`, for the top leaf
 Marionette.CompositeView = Marionette.CollectionView.extend({
   constructor: function(options){
-    var args = Array.prototype.slice.apply(arguments);
-    Marionette.CollectionView.apply(this, args);
+    Marionette.CollectionView.apply(this, slice(arguments));
 
     this.itemView = this.getItemView();
   },
@@ -115,9 +122,7 @@ Marionette.CompositeView = Marionette.CollectionView.extend({
     var itemView = Marionette.getOption(this, "itemView") || this.constructor;
 
     if (!itemView){
-      var err = new Error("An `itemView` must be specified");
-      err.name = "NoItemViewError";
-      throw err;
+      throwError("An `itemView` must be specified", "NoItemViewError");
     }
 
     return itemView;
@@ -140,6 +145,7 @@ Marionette.CompositeView = Marionette.CollectionView.extend({
   // this again will tell the model's view to re-render itself
   // but the collection will not re-render.
   render: function(){
+    this.isRendered = true;
     this.isClosed = false;
     this.resetItemViewContainer();
 
@@ -160,15 +166,10 @@ Marionette.CompositeView = Marionette.CollectionView.extend({
   },
 
   _renderChildren: function(){
-    Marionette.CollectionView.prototype._renderChildren.call(this);
-    this.triggerMethod("composite:collection:rendered");
-  },
-
-  // Render the collection for the composite view
-  renderCollection: function(){
-    var args = Array.prototype.slice.apply(arguments);
-    Marionette.CollectionView.prototype.render.apply(this, args);
-
+    if (this.isRendered){
+      Marionette.CollectionView.prototype._renderChildren.call(this);
+      this.triggerMethod("composite:collection:rendered");
+    }
   },
 
   // Render an individual model, if we have one, as
@@ -205,9 +206,7 @@ Marionette.CompositeView = Marionette.CollectionView.extend({
       var selector = _.result(containerView, "itemViewContainer");
       container = containerView.$(selector);
       if (container.length <= 0) {
-        var err = new Error("The specified `itemViewContainer` was not found: " + containerView.itemViewContainer);
-        err.name = "ItemViewContainerMissingError";
-        throw err;
+        throwError("The specified `itemViewContainer` was not found: " + containerView.itemViewContainer, "ItemViewContainerMissingError");
       }
 
     } else {
@@ -247,10 +246,7 @@ Marionette.CompositeView = Marionette.CollectionView.extend({
 <script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
 <script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
 <script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
 <script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
-<script>
-  $('[rel=popover]').popover();
-</script>
-
 </body>
 </html>

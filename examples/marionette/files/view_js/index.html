@@ -45,21 +45,29 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">72.26</p>
+      <p class="stat">72.75</p>
     </div>
     <div class="span6">
-      <h2 class="header">Estimated # Bugs  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">0.98</p>
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
+      <p class="stat">173</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="span6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="span6">
+      <p id="chart_historical_sloc" class="chart"></p>
     </div>
   </div>
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">24.38</p>
+      <p class="stat">27.31</p>
     </div>
     <div class="span6">
-      <h2 class="header">SLOC/LSLOC <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">153 / 71</p>
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
+      <p class="stat">1.07</p>
     </div>
   </div>
 </div>
@@ -129,7 +137,6 @@ Marionette.View = Backbone.View.extend({
   configureTriggers: function(){
     if (!this.triggers) { return; }
 
-    var that = this;
     var triggerEvents = {};
 
     // Allow `triggers` to be configured as a function
@@ -146,7 +153,7 @@ Marionette.View = Backbone.View.extend({
         if (e && e.preventDefault){ e.preventDefault(); }
         if (e && e.stopPropagation){ e.stopPropagation(); }
 
-        // buil the args for the event
+        // build the args for the event
         var args = {
           view: this,
           model: this.model,
@@ -154,10 +161,10 @@ Marionette.View = Backbone.View.extend({
         };
 
         // trigger the event
-        that.triggerMethod(value, args);
+        this.triggerMethod(value, args);
       };
 
-    });
+    }, this);
 
     return triggerEvents;
   },
@@ -215,6 +222,10 @@ Marionette.View = Backbone.View.extend({
     this.isClosed = true;
     this.triggerMethod("close");
 
+    // unbind UI elements
+    this.unbindUIElements();
+
+    // remove the view from the DOM
     this.remove();
   },
 
@@ -223,20 +234,37 @@ Marionette.View = Backbone.View.extend({
   bindUIElements: function(){
     if (!this.ui) { return; }
 
-    var that = this;
-
-    if (!this.uiBindings) {
-      // We want to store the ui hash in uiBindings, since afterwards the values in the ui hash
-      // will be overridden with jQuery selectors.
-      this.uiBindings = _.result(this, "ui");
+    // store the ui hash in _uiBindings so they can be reset later
+    // and so re-rendering the view will be able to find the bindings
+    if (!this._uiBindings){
+      this._uiBindings = this.ui;
     }
 
-    // refreshing the associated selectors since they should point to the newly rendered elements.
+    // get the bindings result, as a function or otherwise
+    var bindings = _.result(this, "_uiBindings");
+
+    // empty the ui so we don't have anything to start with
     this.ui = {};
-    _.each(_.keys(this.uiBindings), function(key) {
-      var selector = that.uiBindings[key];
-      that.ui[key] = that.$(selector);
-    });
+
+    // bind each of the selectors
+    _.each(_.keys(bindings), function(key) {
+      var selector = bindings[key];
+      this.ui[key] = this.$(selector);
+    }, this);
+  },
+
+  // This method unbinds the elements specified in the "ui" hash
+  unbindUIElements: function(){
+    if (!this.ui){ return; }
+
+    // delete all of the existing ui bindings
+    _.each(this.ui, function($el, name){
+      delete this.ui[name];
+    }, this);
+
+    // reset the ui element to the original bindings configuration
+    this.ui = this._uiBindings;
+    delete this._uiBindings;
   }
 });</textarea>
   </div>
@@ -261,10 +289,7 @@ Marionette.View = Backbone.View.extend({
 <script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
 <script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
 <script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
 <script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
-<script>
-  $('[rel=popover]').popover();
-</script>
-
 </body>
 </html>

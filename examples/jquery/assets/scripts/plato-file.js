@@ -1,8 +1,11 @@
-/*global $:false, _:false, Morris:false, CodeMirror:false, __report:false */
+/*global $:false, _:false, Morris:false, CodeMirror:false, __report:false, __history:false */
 /*jshint browser:true*/
 
 $(function(){
   "use strict";
+
+  // bootstrap popover
+  $('[rel=popover]').popover();
 
   _.templateSettings = {
     interpolate : /\{\{(.+?)\}\}/g
@@ -75,10 +78,11 @@ $(function(){
 
   // yield to the browser
   setTimeout(function(){
-    drawCharts([
+    drawFunctionCharts([
       { element: 'fn-by-complexity', data: byComplexity },
       { element: 'fn-by-sloc', data: bySloc }
     ]);
+    drawHistoricalCharts(__history);
   },0);
 
   cm.operation(function(){
@@ -86,9 +90,38 @@ $(function(){
   });
 
 
-  function drawCharts(charts) {
+  function drawFunctionCharts(charts) {
     charts.forEach(function(chart){
       Morris.Donut(chart).on('click',scrollToLine);
+    });
+  }
+
+  function drawHistoricalCharts(history) {
+    $('.historical.chart').empty();
+    var data = _.map(history,function(record){
+      var date = new Date(record.date);
+      return {
+        date : date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate(),
+        maintainability : parseFloat(record.maintainability).toFixed(2),
+        sloc : record.sloc
+      };
+    }).slice(-20);
+    Morris.Line({
+      element: 'chart_historical_sloc',
+      data: data,
+      xkey: 'date',
+      ykeys: ['sloc'],
+      labels: ['Lines of Code'],
+      parseTime : false
+    });
+    Morris.Line({
+      element: 'chart_historical_maint',
+      data: data,
+      xkey: 'date',
+      ykeys: ['maintainability'],
+      labels: ['Maintainability'],
+      ymax: 100,
+      parseTime : false
     });
   }
 

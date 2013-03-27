@@ -45,21 +45,29 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">78.85</p>
+      <p class="stat">80.24</p>
     </div>
     <div class="span6">
-      <h2 class="header">Estimated # Bugs  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">0.54</p>
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
+      <p class="stat">86</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="span6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="span6">
+      <p id="chart_historical_sloc" class="chart"></p>
     </div>
   </div>
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">13.98</p>
+      <p class="stat">15.47</p>
     </div>
     <div class="span6">
-      <h2 class="header">SLOC/LSLOC <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">77 / 35</p>
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
+      <p class="stat">0.58</p>
     </div>
   </div>
 </div>
@@ -89,7 +97,8 @@
 // Stores and starts up `Region` objects, includes an
 // event aggregator as `app.vent`
 Marionette.Application = function(options){
-  this.initCallbacks = new Marionette.Callbacks();
+  this._initRegionManager();
+  this._initCallbacks = new Marionette.Callbacks();
   this.vent = new Backbone.Wreqr.EventAggregator();
   this.commands = new Backbone.Wreqr.Commands();
   this.reqres = new Backbone.Wreqr.RequestResponse();
@@ -117,7 +126,7 @@ _.extend(Marionette.Application.prototype, Backbone.Events, {
   // method is called, or run immediately if added after `start`
   // has already been called.
   addInitializer: function(initializer){
-    this.initCallbacks.add(initializer);
+    this._initCallbacks.add(initializer);
   },
 
   // kick off all of the application's processes.
@@ -125,7 +134,7 @@ _.extend(Marionette.Application.prototype, Backbone.Events, {
   // to the app, and runs all of the initializer functions
   start: function(options){
     this.triggerMethod("initialize:before", options);
-    this.initCallbacks.run(options, this);
+    this._initCallbacks.run(options, this);
     this.triggerMethod("initialize:after", options);
 
     this.triggerMethod("start", options);
@@ -134,32 +143,40 @@ _.extend(Marionette.Application.prototype, Backbone.Events, {
   // Add regions to your app. 
   // Accepts a hash of named strings or Region objects
   // addRegions({something: "#someRegion"})
-  // addRegions{{something: Region.extend({el: "#someRegion"}) });
+  // addRegions({something: Region.extend({el: "#someRegion"}) });
   addRegions: function(regions){
-    var that = this;
-    _.each(regions, function (region, name) {
-      var regionManager = Marionette.Region.buildRegion(region, Marionette.Region);
-      that[name] = regionManager;
-    });
+    return this._regionManager.addRegions(regions);
   },
 
   // Removes a region from your app.
   // Accepts the regions name
   // removeRegion('myRegion')
   removeRegion: function(region) {
-    this[region].close();
-    delete this[region];
+    this._regionManager.removeRegion(region);
   },
 
   // Create a module, attached to the application
   module: function(moduleNames, moduleDefinition){
     // slice the args, and add this application object as the
     // first argument of the array
-    var args = slice.call(arguments);
+    var args = slice(arguments);
     args.unshift(this);
 
     // see the Marionette.Module object for more information
     return Marionette.Module.create.apply(Marionette.Module, args);
+  },
+
+  // Internal method to set up the region manager
+  _initRegionManager: function(){
+    this._regionManager = new Marionette.RegionManager();
+
+    this.listenTo(this._regionManager, "region:add", function(name, region){
+      this[name] = region;
+    });
+
+    this.listenTo(this._regionManager, "region:remove", function(name, region){
+      delete this[name];
+    });
   }
 });
 
@@ -187,10 +204,7 @@ Marionette.Application.extend = Marionette.extend;</textarea>
 <script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
 <script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
 <script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
 <script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
-<script>
-  $('[rel=popover]').popover();
-</script>
-
 </body>
 </html>

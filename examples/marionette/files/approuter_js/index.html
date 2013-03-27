@@ -45,21 +45,29 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">57.60</p>
+      <p class="stat">73.56</p>
     </div>
     <div class="span6">
-      <h2 class="header">Estimated # Bugs  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">0.35</p>
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
+      <p class="stat">31</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="span6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="span6">
+      <p id="chart_historical_sloc" class="chart"></p>
     </div>
   </div>
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">21.15</p>
+      <p class="stat">13.20</p>
     </div>
     <div class="span6">
-      <h2 class="header">SLOC/LSLOC <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">47 / 31</p>
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
+      <p class="stat">0.21</p>
     </div>
   </div>
 </div>
@@ -94,7 +102,7 @@
 //
 // App routers can only take one `controller` object. 
 // It is recommended that you divide your controller
-// objects in to smaller peices of related functionality
+// objects in to smaller pieces of related functionality
 // and have multiple routers / controllers, instead of
 // just one giant router and controller.
 //
@@ -103,8 +111,7 @@
 Marionette.AppRouter = Backbone.Router.extend({
 
   constructor: function(options){
-    var args = Array.prototype.slice.apply(arguments);
-    Backbone.Router.prototype.constructor.apply(this, args);
+    Backbone.Router.prototype.constructor.apply(this, slice(arguments));
 
     this.options = options;
 
@@ -117,34 +124,19 @@ Marionette.AppRouter = Backbone.Router.extend({
   // Internal method to process the `appRoutes` for the
   // router, and turn them in to routes that trigger the
   // specified method on the specified `controller`.
-  processAppRoutes: function(controller, appRoutes){
-    var method, methodName;
-    var route, routesLength, i;
-    var routes = [];
-    var router = this;
+  processAppRoutes: function(controller, appRoutes) {
+    var routeNames = _.keys(appRoutes).reverse(); // Backbone requires reverted order of routes
 
-    for(route in appRoutes){
-      if (appRoutes.hasOwnProperty(route)){
-        routes.unshift([route, appRoutes[route]]);
-      }
-    }
+    _.each(routeNames, function(route) {
+      var methodName = appRoutes[route];
+      var method = controller[methodName];
 
-    routesLength = routes.length;
-    for (i = 0; i < routesLength; i++){
-      route = routes[i][0];
-      methodName = routes[i][1];
-      method = controller[methodName];
-
-      if (!method){
-        var msg = "Method '" + methodName + "' was not found on the controller";
-        var err = new Error(msg);
-        err.name = "NoMethodError";
-        throw err;
+      if (!method) {
+        throw new Error("Method '" + methodName + "' was not found on the controller");
       }
 
-      method = _.bind(method, controller);
-      router.route(route, methodName, method);
-    }
+      this.route(route, methodName, _.bind(method, controller));
+    }, this);
   }
 });</textarea>
   </div>
@@ -169,10 +161,7 @@ Marionette.AppRouter = Backbone.Router.extend({
 <script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
 <script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
 <script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
 <script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
-<script>
-  $('[rel=popover]').popover();
-</script>
-
 </body>
 </html>

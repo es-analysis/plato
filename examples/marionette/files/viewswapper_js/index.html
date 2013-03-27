@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap-3.0.0-wip.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <ul class="nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>viewswapper.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="span6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
+      <p class="stat">72.36</p>
+    </div>
+    <div class="span6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
+      <p class="stat">131</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="span6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="span6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
+      <p class="stat">31.44</p>
+    </div>
+    <div class="span6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
+      <p class="stat">0.84</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="span6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="span6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="span12">// View Swapper
+// ------------
+//
+// Switch out views based on events that are triggered
+// by the currently displayed view. Enables easy "edit in
+// place" features, "loading" screens, and more.
+
+Marionette.ViewSwapper = Marionette.View.extend({
+  constructor: function(options){
+    this._swapperViews = {};
+    this._currentViewBindings = new Marionette.EventBinder();
+
+    Marionette.View.prototype.constructor.apply(this, arguments);
+
+    this.views = Marionette.getOption(this, "views");
+    this.swapOn = Marionette.getOption(this, "swapOn");
+    this.initialView = Marionette.getOption(this, "initialView");
+
+    this._setupViewEvents("swapper", this);
+  },
+
+  // Render the current view. If no current view is set, it
+  // will render the `initialView` that was configured.
+  render: function(){
+    var initialView;
+
+    if (!this.currentView){
+      initialView = Marionette.getOption(this, "initialView");
+      this._swapView(initialView);
+    }
+
+    this.currentView.render();
+    this.$el.append(this.currentView.$el);
+    this.showView(this.currentView);
+  },
+
+  // Show a view that is being swapped in. Override this method to
+  // set up your own custom fade in / show method
+  showView: function(view){
+    view.$el.show();
+  },
+
+  // Hide a view that is being swapped out. Override this method to
+  // set up your own custom fade out / hide method
+  hideView: function(view){
+    view.$el.hide();
+  },
+
+  // Ensure the views that were configured for this view swapper get closed
+  close: function(){
+    _.each(this.views, function(view, name){
+      view.close();
+    });
+    this._swapperViews = {};
+    Marionette.View.prototype.close.apply(this, arguments);
+  },
+
+  // Get a view by name, throwing an exception if the view instance
+  // is not found.
+  _getView: function(viewName){
+    var originalView, error;
+    var swapperView = this._swapperViews[viewName];
+
+    if (viewName === "swapper"){
+      error = new Error("Cannot display 'swapper' as a view.");
+      error.name = "InvalidViewName";
+      throw error;
+    }
+
+    if (!swapperView){
+      originalView = this.views[viewName];
+
+      if (!originalView){
+        error = new Error("Cannot show view in ViewSwapper. View '" + viewName + "' not found.");
+        error.name = "ViewNotFoundError";
+        throw error;
+      }
+
+      swapperView = this._buildSwapperView(originalView);
+      this._swapperViews[viewName] = swapperView;
+    }
+
+    return swapperView;
+  },
+
+  // Decorate the configured view with information that the view swapper
+  // needs, to keep track of the view's current state.
+  _buildSwapperView: function(originalView){
+    var swapperView = Marionette.createObject(originalView);
+    _.extend(swapperView, {
+      
+      // Prevent the underlying view from being rendered more than once
+      render: function(){
+        if (this._hasBeenRendered){
+          return this;
+        } else {
+          this._hasBeenRendered = true;
+          return originalView.render.apply(originalView, arguments);
+        }
+      }
+
+    });
+
+    return swapperView;
+  },
+
+  // Set up the event handlers for the individual views, so that the
+  // swapping can happen when a view event is triggered
+  _setupViewEvents: function(viewName, view){
+    if (!this.swapOn || !this.swapOn[viewName]){ return; }
+    var that = this;
+
+    // close the previous view's event bindings
+    this._currentViewBindings.unbindAll();
+
+    // set up the new view's event bindings
+    _.each(this.swapOn[viewName], function(targetViewName, eventName){
+
+      that._currentViewBindings.bindTo(view, eventName, function(){
+        that._swapView(targetViewName);
+        that.render();
+      });
+
+    });
+  },
+
+  // Do the swapping of the views to the new view, by name
+  _swapView: function(viewName){
+    if (this.currentView){
+      this.hideView(this.currentView);
+    }
+
+    var view = this._getView(viewName);
+    this._setupViewEvents(viewName, view);
+
+    this.currentView = view;
+  }
+});</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

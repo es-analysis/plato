@@ -45,21 +45,29 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">68.74</p>
+      <p class="stat">67.40</p>
     </div>
     <div class="span6">
-      <h2 class="header">Estimated # Bugs  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">0.75</p>
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
+      <p class="stat">181</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="span6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="span6">
+      <p id="chart_historical_sloc" class="chart"></p>
     </div>
   </div>
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">26.92</p>
+      <p class="stat">32.21</p>
     </div>
     <div class="span6">
-      <h2 class="header">SLOC/LSLOC <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">158 / 63</p>
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
+      <p class="stat">0.88</p>
     </div>
   </div>
 </div>
@@ -162,12 +170,28 @@ _.extend(Marionette.Region, {
     }
     
     // build the region instance
-
-    var regionManager = new RegionType({
+    var region = new RegionType({
       el: selector
     });
 
-    return regionManager;
+    // override the `getEl` function if we have a parentEl
+    // this must be overridden to ensure the selector is found
+    // on the first use of the region. if we try to assign the
+    // region's `el` to `parentEl.find(selector)` in the object
+    // literal to build the region, the element will not be
+    // guaranteed to be in the DOM already, and will cause problems
+    if (regionConfig.parentEl){
+
+      region.getEl = function(selector) {
+        var parentEl = regionConfig.parentEl;
+        if (_.isFunction(parentEl)){
+          parentEl = parentEl();
+        }
+        return parentEl.find(selector);
+      };
+    }
+
+    return region;
   }
 
 });
@@ -185,10 +209,14 @@ _.extend(Marionette.Region.prototype, Backbone.Events, {
   show: function(view){
 
     this.ensureEl();
-    this.close();
 
-    view.render();
-    this.open(view);
+    if (view !== this.currentView) {
+      this.close();
+      view.render();
+      this.open(view);
+    } else {
+      view.render();
+    }
 
     Marionette.triggerMethod.call(view, "show");
     Marionette.triggerMethod.call(this, "show", view);
@@ -205,7 +233,7 @@ _.extend(Marionette.Region.prototype, Backbone.Events, {
   // Override this method to change how the region finds the
   // DOM element that it manages. Return a jQuery selector object.
   getEl: function(selector){
-    return $(selector);
+    return Marionette.$(selector);
   },
 
   // Override this method to change how the new view is
@@ -220,7 +248,10 @@ _.extend(Marionette.Region.prototype, Backbone.Events, {
     var view = this.currentView;
     if (!view || view.isClosed){ return; }
 
+    // call 'close' or 'remove', depending on which is found
     if (view.close) { view.close(); }
+    else if (view.remove) { view.remove(); }
+
     Marionette.triggerMethod.call(this, "close");
 
     delete this.currentView;
@@ -268,10 +299,7 @@ Marionette.Region.extend = Marionette.extend;</textarea>
 <script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
 <script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
 <script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
 <script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
-<script>
-  $('[rel=popover]').popover();
-</script>
-
 </body>
 </html>
