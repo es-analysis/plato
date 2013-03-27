@@ -40,7 +40,7 @@ function runCommand() {
   $1
 }
 
-for DAYS_AGO in 60 30 20 10 0; do
+for DAYS_AGO in 210 180 150 120 90 60 30 0; do
   DATE=$(date -j -f "%a %b %d %T %Z %Y" "`date -v -${DAYS_AGO}d`" "+%s")
 
   echo Using date $DATE / $(date -j -f "%s" "$DATE" "+%a %b %d %T %Z %Y")
