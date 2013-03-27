@@ -45,11 +45,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">66.00</p>
+      <p class="stat">65.35</p>
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">231</p>
+      <p class="stat">238</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">32.85</p>
+      <p class="stat">37.14</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">2.31</p>
+      <p class="stat">2.44</p>
     </div>
   </div>
 </div>
@@ -148,6 +148,12 @@ exports.inspect = function(files, outputDir, options, done) {
 
   if (options.q) log.level = Logger.ERROR;
 
+  if (options.date) {
+    // if we think we were given seconds
+    if (options.date < 10000000000 ) options.date = options.date * 1000;
+    options.date = new Date(options.date);
+  }
+
   var reports = [];
 
   var fileOutputDir = path.join(outputDir,fileDir);
@@ -198,7 +204,7 @@ exports.inspect = function(files, outputDir, options, done) {
         if (outputDir) {
           var outdir = path.join(fileOutputDir, report.info.fileSafe);
           if (!fs.existsSync(outdir)) fs.mkdirSync(outdir);
-          writeFileReport(outdir, report, source);
+          writeFileReport(outdir, report, source, options);
         }
       }
     });
@@ -217,7 +223,7 @@ exports.inspect = function(files, outputDir, options, done) {
 
         fs.copy(assets, path.join(outputDir, 'assets'), function(){
           var overviewReport = exports.getOverviewReport(reports);
-          updateHistoricalOverview(reportFilePrefix, overviewReport);
+          updateHistoricalOverview(reportFilePrefix, overviewReport, options);
           writeReport(reportFilePrefix, overviewReport);
           writeOverview(overview, overviewReport, {
             title : options.title,
@@ -274,17 +280,18 @@ exports.getOverviewReport = function (reports) {
   };
 };
 
-function updateHistoricalOverview(outfilePrefix, overview) {
+function updateHistoricalOverview(outfilePrefix, overview, options) {
   var existingData = util.readJSON(outfilePrefix + '.history.json') || {};
   var history = new OverviewHistory(existingData);
-  history.addReport(overview);
+  history.addReport(overview, options.date);
   writeReport(outfilePrefix + '.history', history.toJSON(), '__history');
 }
 
-function updateHistoricalReport(outfilePrefix, overview) {
+function updateHistoricalReport(outfilePrefix, overview, options) {
   var existingData = util.readJSON(outfilePrefix + '.history.json') || {};
   var history = new FileHistory(existingData);
-  history.addReport(overview);
+  overview.date = options.date;
+  history.addReport(overview, options.date);
   writeReport(outfilePrefix + '.history', history.toJSON(), '__history');
 }
 
@@ -316,7 +323,7 @@ function writeOverview(outfile, report, options) {
   writeFile(outfile, parsed);
 }
 
-function writeFileReport(outdir, report, source) {
+function writeFileReport(outdir, report, source, options) {
   var overviewSource = fs.readFileSync(fileTemplate).toString();
   var parsed = _.template(overviewSource, {
     source : source,
@@ -326,7 +333,7 @@ function writeFileReport(outdir, report, source) {
   var outfilePrefix = path.join(outdir,'report');
 
   writeFile(indexPath, parsed);
-  updateHistoricalReport(outfilePrefix, report, '__history');
+  updateHistoricalReport(outfilePrefix, report, options);
   writeReport(outfilePrefix, report);
 }</textarea>
   </div>
