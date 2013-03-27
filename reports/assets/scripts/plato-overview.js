@@ -4,6 +4,9 @@
 $(function(){
   "use strict";
 
+  // bootstrap popover
+  $('[rel=popover]').popover();
+
   // @todo put client side templates into a JST
   var fileGraphTemplate = _.template(
     '<div class="threshold-<%= threshold %>">' +

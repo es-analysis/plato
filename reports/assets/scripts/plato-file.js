@@ -4,6 +4,9 @@
 $(function(){
   "use strict";
 
+  // bootstrap popover
+  $('[rel=popover]').popover();
+
   _.templateSettings = {
     interpolate : /\{\{(.+?)\}\}/g
   };
