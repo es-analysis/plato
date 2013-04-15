@@ -50,6 +50,7 @@
     "posix-getopt": "~1.0.0",
     "lodash": "~1.0.1",
     "fs-extra": "~0.3.2",
-    "jshint": "~1.1.0"
+    "jshint": "~1.1.0",
+    "eventemitter2": "~0.4.11"
   }
 }
