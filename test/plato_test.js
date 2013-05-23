@@ -22,7 +22,7 @@ var plato = require('../lib/plato');
     test.ifError(value)
 */
 
-exports['awesome'] = {
+exports['plato'] = {
   setUp: function(done) {
     // setup here
     done();

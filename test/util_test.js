@@ -24,7 +24,7 @@ var util = require('../lib/util');
     test.ifError(value)
 */
 
-exports['awesome'] = {
+exports['util'] = {
   setUp: function(done) {
     // setup here
     done();
