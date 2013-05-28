@@ -48,6 +48,10 @@ plato -r -d report src
   - Complexity data by [Phil Booth](https://github.com/philbooth)'s [complexity-report](https://github.com/philbooth/complexityReport.js)
   - Lint data from [jshint](https://github.com/jshint/jshint/)
 
+## Contributors
+  - [Jarrod Overson](https://github.com/jsoverson)
+  - [Craig Davis](https://github.com/there4)
+
 ## Release History
 
   - 0.5.0 Added historical reports
