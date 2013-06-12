@@ -61,4 +61,11 @@ exports['util'] = {
 
     test.done();
   },
+  'escape HTML': function(test) {
+      test.expect(1);
+
+      test.equal(util.escapeHTML('<div>"test&\'</div>'), '&lt;div&gt;&quot;test&amp;&#039;&lt;/div&gt;', 'should convert HTML tags into HTML special characters');
+
+      test.done();
+  }
 };
