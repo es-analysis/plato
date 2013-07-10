@@ -90,9 +90,9 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="span12">"use strict";
+    <textarea id="file-source" class="span12">&quot;use strict&quot;;
 
-var JSHINT = require("jshint").JSHINT;
+var JSHINT = require(&quot;jshint&quot;).JSHINT;
 
 exports.process = function (source, options/*, reportInfo */) {
   var results = lint(source, options.options, options.globals);
@@ -108,7 +108,7 @@ function generateReport(data) {
 
   data.results.forEach(function (result) {
     out.messages.push({
-      severity : 'error',
+      severity : &#039;error&#039;,
       line     : result.error.line,
       column   : result.error.character,
       message  : result.error.reason,
@@ -126,7 +126,7 @@ function lint(source, config, globals) {
   var data = [];
 
   // Remove potential Unicode BOM.
-  source = source.replace(/^\uFEFF/, "");
+  source = source.replace(/^\uFEFF/, &quot;&quot;);
 
   if (!JSHINT(source, config, globals)) {
     JSHINT.errors.forEach(function (err) {

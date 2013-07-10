@@ -90,9 +90,9 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="span12">"use strict";
+    <textarea id="file-source" class="span12">&quot;use strict&quot;;
 
-var cr = require('complexity-report');
+var cr = require(&#039;complexity-report&#039;);
 
 exports.process = function(source, options, reportInfo) {
   var report = cr.run(source, options);

@@ -90,11 +90,11 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="span12">'use strict';
+    <textarea id="file-source" class="span12">&#039;use strict&#039;;
 
 // Project metadata.
-var pkg = require('../package.json'),
-    options = require('./cli/options.json');
+var pkg = require(&#039;../package.json&#039;),
+    options = require(&#039;./cli/options.json&#039;);
 
 exports.name = pkg.name;
 
@@ -103,17 +103,17 @@ exports.version = function() {
 };
 
 exports.help = function() {
-  console.log('\nUsage : %s [options] file1.js file2.js ... fileN.js', pkg.name);
+  console.log(&#039;\nUsage : %s [options] file1.js file2.js ... fileN.js&#039;, pkg.name);
   Object.keys(options).forEach(function(shortOption){
     var option = options[shortOption];
     console.log(
-      '  -%s%s%s%s',
+      &#039;  -%s%s%s%s&#039;,
       shortOption,
-      option.long ? ', --' + option.long : '',
-      option.type !== 'Boolean' ? ' : ' + option.type : '',
-      option.required ? ' *required*' : ''
+      option.long ? &#039;, --&#039; + option.long : &#039;&#039;,
+      option.type !== &#039;Boolean&#039; ? &#039; : &#039; + option.type : &#039;&#039;,
+      option.required ? &#039; *required*&#039; : &#039;&#039;
     );
-    console.log('      %s', option.desc);
+    console.log(&#039;      %s&#039;, option.desc);
   });
 };</textarea>
   </div>

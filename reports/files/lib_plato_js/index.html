@@ -45,7 +45,7 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">65.35</p>
+      <p class="stat">65.27</p>
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">37.14</p>
+      <p class="stat">38.87</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">2.44</p>
+      <p class="stat">2.46</p>
     </div>
   </div>
 </div>
@@ -98,31 +98,31 @@
  * Licensed under the MIT license.
  */
 
-'use strict';
+&#039;use strict&#039;;
 
 // node api
-var path = require('path');
+var path = require(&#039;path&#039;);
 
 // node api with sugar
-var fs = require('fs-extra');
+var fs = require(&#039;fs-extra&#039;);
 
 // vendor
-var _ = require('lodash');
+var _ = require(&#039;lodash&#039;);
 
 // local lib
-var util = require('./util'),
-    OverviewHistory = require('./models/OverviewHistory'),
-    FileHistory = require('./models/FileHistory'),
-    Logger = require('./logger'),
+var util = require(&#039;./util&#039;),
+    OverviewHistory = require(&#039;./models/OverviewHistory&#039;),
+    FileHistory = require(&#039;./models/FileHistory&#039;),
+    Logger = require(&#039;./logger&#039;),
     reporters = {
-      complexity : require('./reporters/complexity'),
-      jshint : require('./reporters/jshint')
+      complexity : require(&#039;./reporters/complexity&#039;),
+      jshint : require(&#039;./reporters/jshint&#039;)
     };
 
-var overviewTemplate = __dirname + '/templates/overview.html',
-    fileTemplate = __dirname + '/templates/file.html',
-    assets = __dirname + '/assets/',
-    fileDir = 'files';
+var overviewTemplate = __dirname + &#039;/templates/overview.html&#039;,
+    fileTemplate = __dirname + &#039;/templates/file.html&#039;,
+    assets = __dirname + &#039;/assets/&#039;,
+    fileDir = &#039;files&#039;;
 
 var log = new Logger(Logger.WARNING);
 
@@ -150,33 +150,33 @@ exports.inspect = function(files, outputDir, options, done) {
 
   if (options.date) {
     // if we think we were given seconds
-    if (options.date < 10000000000 ) options.date = options.date * 1000;
+    if (options.date &lt; 10000000000 ) options.date = options.date * 1000;
     options.date = new Date(options.date);
   }
 
   var reports = [];
 
-  var fileOutputDir = path.join(outputDir,fileDir);
+  var fileOutputDir = outputDir ? path.join(outputDir,fileDir) : false;
 
   var commonBasePath = util.findCommonBase(files);
 
   var runReports = function(files,done) {
     files.forEach(function(file) {
-      if (options.exclude && options.exclude.test(file)) return;
+      if (options.exclude &amp;&amp; options.exclude.test(file)) return;
 
-      if (options.recurse && fs.statSync(file).isDirectory()) {
+      if (options.recurse &amp;&amp; fs.statSync(file).isDirectory()) {
         files = fs.readdirSync(file).map(function(innerFile){
           return path.join(file,innerFile);
         });
         runReports(files);
       } else if (file.match(/\.js$/)) {
-        log.info('Reading "%s"', file);
+        log.info(&#039;Reading &quot;%s&quot;&#039;, file);
 
-        var fileShort = file.replace(commonBasePath, '');
-        var fileSafe = fileShort.replace(/[^a-zA-Z0-9]/g,'_');
+        var fileShort = file.replace(commonBasePath, &#039;&#039;);
+        var fileSafe = fileShort.replace(/[^a-zA-Z0-9]/g,&#039;_&#039;);
         var source = fs.readFileSync(file).toString().trim();
         if (!source) {
-          log.info('Not parsing empty file "%s"', file);
+          log.info(&#039;Not parsing empty file &quot;%s&quot;&#039;, file);
           return;
         }
         var report = {
@@ -184,7 +184,7 @@ exports.inspect = function(files, outputDir, options, done) {
             file : file,
             fileShort : fileShort,
             fileSafe : fileSafe,
-            link : fileDir + '/' + fileSafe + '/index.html'
+            link : fileDir + &#039;/&#039; + fileSafe + &#039;/index.html&#039;
           }
         };
 
@@ -194,14 +194,14 @@ exports.inspect = function(files, outputDir, options, done) {
             report[name] = reporter.process(source, flags[name], report.info);
           } catch(e) {
             error = true;
-            log.error('Error reading file : ', e.toString());
+            log.error(&#039;Error reading file : &#039;, e.toString());
             log.error(e.stack);
           }
         });
 
         if (error) return;
         reports.push(report);
-        if (outputDir) {
+        if (fileOutputDir) {
           var outdir = path.join(fileOutputDir, report.info.fileSafe);
           if (!fs.existsSync(outdir)) fs.mkdirSync(outdir);
           writeFileReport(outdir, report, source, options);
@@ -211,17 +211,17 @@ exports.inspect = function(files, outputDir, options, done) {
     if (done) done();
   };
 
-  if (!outputDir) {
+  if (!fileOutputDir) {
     runReports(files,function(){
       done(reports);
     });
   } else {
     fs.mkdirp(fileOutputDir,function(){
       runReports(files,function(){
-        var reportFilePrefix = path.join(outputDir, 'report');
-        var overview = path.join(outputDir, 'index.html');
+        var reportFilePrefix = path.join(outputDir, &#039;report&#039;);
+        var overview = path.join(outputDir, &#039;index.html&#039;);
 
-        fs.copy(assets, path.join(outputDir, 'assets'), function(){
+        fs.copy(assets, path.join(outputDir, &#039;assets&#039;), function(){
           var overviewReport = exports.getOverviewReport(reports);
           updateHistoricalOverview(reportFilePrefix, overviewReport, options);
           writeReport(reportFilePrefix, overviewReport);
@@ -252,7 +252,7 @@ exports.getOverviewReport = function (reports) {
   };
 
   reports.forEach(function(report){
-    // clone objects so we don't have to worry about side effects
+    // clone objects so we don&#039;t have to worry about side effects
     summary.total.sloc += report.complexity.aggregate.complexity.sloc.physical;
     summary.total.maintainability += report.complexity.maintainability;
 
@@ -281,37 +281,37 @@ exports.getOverviewReport = function (reports) {
 };
 
 function updateHistoricalOverview(outfilePrefix, overview, options) {
-  var existingData = util.readJSON(outfilePrefix + '.history.json') || {};
+  var existingData = util.readJSON(outfilePrefix + &#039;.history.json&#039;) || {};
   var history = new OverviewHistory(existingData);
   history.addReport(overview, options.date);
-  writeReport(outfilePrefix + '.history', history.toJSON(), '__history');
+  writeReport(outfilePrefix + &#039;.history&#039;, history.toJSON(), &#039;__history&#039;);
 }
 
 function updateHistoricalReport(outfilePrefix, overview, options) {
-  var existingData = util.readJSON(outfilePrefix + '.history.json') || {};
+  var existingData = util.readJSON(outfilePrefix + &#039;.history.json&#039;) || {};
   var history = new FileHistory(existingData);
   overview.date = options.date;
   history.addReport(overview, options.date);
-  writeReport(outfilePrefix + '.history', history.toJSON(), '__history');
+  writeReport(outfilePrefix + &#039;.history&#039;, history.toJSON(), &#039;__history&#039;);
 }
 
 
 
 function writeFile(file, source) {
-  log.info('Writing file "%s".', file);
-  fs.writeFileSync(file, source, 'utf8');
+  log.info(&#039;Writing file &quot;%s&quot;.&#039;, file);
+  fs.writeFileSync(file, source, &#039;utf8&#039;);
 }
 
 function writeReport(outfilePrefix, report, exportName) {
   var formatted = util.formatJSON(report);
 
-  writeFile(outfilePrefix + '.json', formatted);
+  writeFile(outfilePrefix + &#039;.json&#039;, formatted);
 
-  exportName = exportName || '__report';
+  exportName = exportName || &#039;__report&#039;;
 
-  var module = exportName + ' = ' + formatted;
+  var module = exportName + &#039; = &#039; + formatted;
 
-  writeFile(outfilePrefix + '.js', module);
+  writeFile(outfilePrefix + &#039;.js&#039;, module);
 }
 
 function writeOverview(outfile, report, options) {
@@ -326,11 +326,11 @@ function writeOverview(outfile, report, options) {
 function writeFileReport(outdir, report, source, options) {
   var overviewSource = fs.readFileSync(fileTemplate).toString();
   var parsed = _.template(overviewSource, {
-    source : source,
+    source : util.escapeHTML(source),
     report : report
   });
-  var indexPath = path.join(outdir,'index.html');
-  var outfilePrefix = path.join(outdir,'report');
+  var indexPath = path.join(outdir,&#039;index.html&#039;);
+  var outfilePrefix = path.join(outdir,&#039;report&#039;);
 
   writeFile(indexPath, parsed);
   updateHistoricalReport(outfilePrefix, report, options);

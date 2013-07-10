@@ -93,33 +93,33 @@
     <textarea id="file-source" class="span12">/*global CodeMirror:false, $:false*/
 
 (function(){
-  "use strict";
+  &quot;use strict&quot;;
 
   function makeid(num){
     num = num || 5;
-    var text = "";
-    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    var text = &quot;&quot;;
+    var possible = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789&quot;;
 
-    for( var i=0; i < num; i++ )
+    for( var i=0; i &lt; num; i++ )
       text += possible.charAt(Math.floor(Math.random() * possible.length));
 
     return text;
   }
 
   CodeMirror.prototype.markPopoverText = function(lineObj, regex, className, gutter, message){
-    var re = new RegExp('(' + regex + ')', 'g');
+    var re = new RegExp(&#039;(&#039; + regex + &#039;)&#039;, &#039;g&#039;);
     var cursor = this.getSearchCursor(re, lineObj);
 
-    var match, internalClass = 'plato-mark-' + makeid(10);
+    var match, internalClass = &#039;plato-mark-&#039; + makeid(10);
     while (match = cursor.findNext()) {
       if (cursor.to().line !== lineObj.line) break;
       this.markText(
         { line : lineObj.line, ch : cursor.from().ch },
         { line : lineObj.line, ch : cursor.to().ch },
         {
-          className   : 'plato-mark ' + internalClass + ' ' + (className || ''),
-          startStyle  : 'plato-mark-start',
-          endStyle    : 'plato-mark-end'
+          className   : &#039;plato-mark &#039; + internalClass + &#039; &#039; + (className || &#039;&#039;),
+          startStyle  : &#039;plato-mark-start&#039;,
+          endStyle    : &#039;plato-mark-end&#039;
         }
       );
     }
@@ -131,36 +131,36 @@
     // return a function to bind hover events, to be run after
     // the codemirror operations are executed
     return function(){
-      var markStart = $('.plato-mark-start.' + internalClass);
-      var markSpans = $('.' + internalClass);
+      var markStart = $(&#039;.plato-mark-start.&#039; + internalClass);
+      var markSpans = $(&#039;.&#039; + internalClass);
 
-      if (message.type === 'popover') {
+      if (message.type === &#039;popover&#039;) {
 
         var triggered = false;
         markSpans.add(gutter.el)
-          .on('mouseenter touchstart',function(e){
+          .on(&#039;mouseenter touchstart&#039;,function(e){
             e.preventDefault();
             triggered = true;
-            markSpans.addClass('active');
-            markStart.popover('show');
+            markSpans.addClass(&#039;active&#039;);
+            markStart.popover(&#039;show&#039;);
           })
-          .on('mouseleave touchend',function(e){
+          .on(&#039;mouseleave touchend&#039;,function(e){
             e.preventDefault();
-            markSpans.removeClass('active');
+            markSpans.removeClass(&#039;active&#039;);
             triggered = false;
             setTimeout(function(){
-              if (!triggered) markStart.popover('hide');
+              if (!triggered) markStart.popover(&#039;hide&#039;);
             },200);
           });
 
         markStart.popover({
-          trigger : 'manual',
+          trigger : &#039;manual&#039;,
           content : message.content,
           html : true,
           title : message.title,
-          placement : 'top'
+          placement : &#039;top&#039;
         });
-      } else if (message.type === 'block') {
+      } else if (message.type === &#039;block&#039;) {
         this.addLineWidget(lineObj.line, $(message.content)[0]);
       }
     };

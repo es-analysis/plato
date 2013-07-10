@@ -90,7 +90,7 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="span12">"use strict";
+    <textarea id="file-source" class="span12">&quot;use strict&quot;;
 
 module.exports = Logger;
 
@@ -99,17 +99,17 @@ function Logger(level) {
 }
 
 var levels = [
-  'TRACE',
-  'DEBUG',
-  'INFO',
-  'WARNING',
-  'ERROR'
+  &#039;TRACE&#039;,
+  &#039;DEBUG&#039;,
+  &#039;INFO&#039;,
+  &#039;WARNING&#039;,
+  &#039;ERROR&#039;
 ];
 
 levels.forEach(function(level, i){
   Logger[level] = i;
   Logger.prototype[level.toLowerCase()] = function() {
-    if (i >= this.level) console.log.apply(console,arguments);
+    if (i &gt;= this.level) console.log.apply(console,arguments);
   };
 });</textarea>
   </div>

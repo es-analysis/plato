@@ -90,15 +90,15 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="span12">'use strict';
+    <textarea id="file-source" class="span12">&#039;use strict&#039;;
 
-var _ = require('lodash');
+var _ = require(&#039;lodash&#039;);
 
 module.exports = History;
 
 function History(data) {
   this.length = 0;
-  if (data && data.length) {
+  if (data &amp;&amp; data.length) {
     // using lodash to catch array-like objects
     _.each(data, function(record, index){
       this[index] = _.cloneDeep(record);

@@ -90,21 +90,21 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="span12">'use strict';
+    <textarea id="file-source" class="span12">&#039;use strict&#039;;
 
 // Node api
-var fs = require('fs');
+var fs = require(&#039;fs&#039;);
 
 // External libs.
-var getopt = require('posix-getopt');
+var getopt = require(&#039;posix-getopt&#039;);
 
 // Local lib
-var plato = require('./plato'),
-    info = require('./info'),
-    util = require('./util');
+var plato = require(&#039;./plato&#039;),
+    info = require(&#039;./info&#039;),
+    util = require(&#039;./util&#039;);
 
 exports.exec = function(options, done) {
-  if (typeof options === 'function') {
+  if (typeof options === &#039;function&#039;) {
     done = options;
     options = undefined;
   }
@@ -119,14 +119,14 @@ exports.exec = function(options, done) {
   var outputDir = exports.args.d.value;
   var platoOptions = {
     recurse : !!exports.args.r,
-    title : exports.args.t && exports.args.t.value,
-    exclude : exports.args.x && new RegExp(exports.args.x.value),
-    date : exports.args.D && exports.args.D.value
+    title : exports.args.t &amp;&amp; exports.args.t.value,
+    exclude : exports.args.x &amp;&amp; new RegExp(exports.args.x.value),
+    date : exports.args.D &amp;&amp; exports.args.D.value
   };
 
   if (exports.args.l) {
     var jshintrc = {};
-    if (typeof exports.args.l.value === 'string') {
+    if (typeof exports.args.l.value === &#039;string&#039;) {
       var json = fs.readFileSync(exports.args.l.value).toString();
 
       jshintrc = JSON.parse(util.stripComments(json));
@@ -139,21 +139,21 @@ exports.exec = function(options, done) {
   plato.inspect(files, outputDir, platoOptions, done);
 };
 
-exports.options = require('./cli/options');
+exports.options = require(&#039;./cli/options&#039;);
 
 exports.args = parseArgs(exports.options);
 
 
 function parseArgs(options) {//  \/\\*(?:(?!\\*\/)|.|\\n)*?\\*\/
-  var optionString = '',
+  var optionString = &#039;&#039;,
       required = [],
       modal = false;
 
   Object.keys(options).forEach(function(option){
     var def = options[option];
     optionString += option;
-    if (def.type === 'String') optionString += ':';
-    if (def.long) optionString += '(' + def.long + ')';
+    if (def.type === &#039;String&#039;) optionString += &#039;:&#039;;
+    if (def.long) optionString += &#039;(&#039; + def.long + &#039;)&#039;;
     if (def.required) required.push(option);
   });
 
@@ -175,14 +175,14 @@ function parseArgs(options) {//  \/\\*(?:(?!\\*\/)|.|\\n)*?\\*\/
   if (!modal) {
     required.forEach(function(option) {
       if (!args[option] || !args[option].value) {
-        console.log("Must specify a value for option %s (%s : %s)", option, options[option].long, options[option].desc);
+        console.log(&quot;Must specify a value for option %s (%s : %s)&quot;, option, options[option].long, options[option].desc);
         info.help();
         process.exit(1);
       }
     });
   }
 
-  // what's left in argv
+  // what&#039;s left in argv
   args.files = process.argv.slice(parser.optind());
   return args;
 }</textarea>
