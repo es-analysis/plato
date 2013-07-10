@@ -1,7 +1,7 @@
 {
   "name": "plato",
   "description": "JavaScript source analysis and visualizer",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "homepage": "https://github.com/jsoverson/plato",
   "author": {
     "name": "Jarrod Overson",
