@@ -43,6 +43,12 @@ Usage : plato [options] file1.js file2.js ... fileN.js
 plato -r -d report src
 ```
 
+Extended example
+
+```
+plato -r -d report -l .jshintrc -t "My Awesome App" -x .json routes/*.js
+```
+
 ## Data sources
 
   - Complexity data by [Phil Booth](https://github.com/philbooth)'s [complexity-report](https://github.com/philbooth/complexityReport.js)
