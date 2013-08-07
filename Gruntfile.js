@@ -58,9 +58,12 @@ module.exports = function(grunt) {
         tasks: ['jshint:test', 'nodeunit']
       }
     },
-    casperjs : {
-      test : {
-        src: 'test/casper-overview.js',
+    casper : {
+      test: {
+        src: [
+          'test/casper-overview.js',
+          'test/casper-sortable-file-list.js'
+        ],
         options : {
           test : true,
           direct : true
