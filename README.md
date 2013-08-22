@@ -60,6 +60,8 @@ plato -r -d report -l .jshintrc -t "My Awesome App" -x .json routes/*.js
 
 ## Release History
 
+  - 0.6.1 Fixed width overflow issues in file reports
+  - 0.6.0 updated major dependency complexity-report
   - 0.5.0 Added historical reports
   - 0.4.7 Updated jshint to 1.1.0 (via #22) to jshint to address #16
   - 0.4.6 Performance improvements on file view
