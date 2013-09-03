@@ -128,7 +128,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('optimize', ['uglify']);
   // Default task.
-  grunt.registerTask('test', ['jshint', 'nodeunit', 'runtest', 'runbin'/*, 'casperjs'*/]);
+  grunt.registerTask('test', ['jshint', 'nodeunit', 'runtest', 'runbin', 'casper']);
   grunt.registerTask('default', ['test']);
 
 };
