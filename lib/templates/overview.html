@@ -95,6 +95,20 @@
   <div class="row">
     <h1 class="span12">Files</h1>
   </div>
+
+  <div class="row">
+    <div class="btn-group btn-group-justified">
+      <button type="button" id="button-complexity" class="btn complexity">complexity</button>
+      <button type="button" id="button-sloc" class="btn sloc">sloc</button>
+      <button type="button" id="button-bugs" class="btn bugs">est errors</button>
+      <button type="button" id="button-lint" class="btn lint">lint errors</button>
+    </div>
+  </div>
+
+  <div class="row">
+    &nbsp;
+  </div>
+
   <div class="row">
     <ul class="file-list list-unstyled">
       <% report.reports.forEach(function(item,i) { %>
@@ -124,5 +138,6 @@
 <script type="text/javascript" src="report.js"></script>
 <script type="text/javascript" src="report.history.js"></script>
 <script type="text/javascript" src="assets/scripts/plato-overview.js"></script>
+<script type="text/javascript" src="assets/scripts/plato-sortable-file-list.js"></script>
 </body>
 </html>
