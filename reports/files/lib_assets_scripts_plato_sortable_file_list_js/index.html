@@ -37,7 +37,7 @@
 
 <div class="jumbotron">
   <div class="container">
-    <h1>lib/reporters/jshint/index.js</h1>
+    <h1>lib/assets/scripts/plato-sortable-file-list.js</h1>
   </div>
 </div>
 
@@ -45,11 +45,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">69.36</p>
+      <p class="stat">79.93</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">52</p>
+      <p class="stat">87</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">16.33</p>
+      <p class="stat">8.88</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">0.33</p>
+      <p class="stat">0.42</p>
     </div>
   </div>
 </div>
@@ -90,58 +90,112 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="col-md-12">&quot;use strict&quot;;
+    <textarea id="file-source" class="col-md-12">/* global $:false, _:false */
+/* jshint browser:true */
 
-var JSHINT = require(&quot;jshint&quot;).JSHINT;
+/*
+  author: david linse &lt;davidlinse@gmail.com&gt;
+  version: 0.0.1
 
-exports.process = function (source, options/*, reportInfo */) {
-  var results = lint(source, options.options, options.globals);
-  var report = generateReport(results);
-  return report;
-};
+  A very first draft to add the ability to sort
+  the &quot;file-list&quot; by the displayed &#039;numbers&#039; for:
 
-function generateReport(data) {
+   + lint-errors
+   + complexity
+   + lines of code
+   + estimated errors
 
-  var out = {
-    messages : []
-  };
+  A group of buttons is added to the template above
+  to trigger the update of the file-list.
+*/
 
-  data.results.forEach(function (result) {
-    out.messages.push({
-      severity : &#039;error&#039;,
-      line     : result.error.line,
-      column   : result.error.character,
-      message  : result.error.reason,
-      source   : result.error.raw
-    });
-  });
+$(function sortable_file_list () {
 
-  return out;
-}
+  &quot;use strict&quot;;
 
-function lint(source, config, globals) {
-  config = config || {};
+    var file_list = $(&#039;ul.file-list&#039;);
 
-  var results = [];
-  var data = [];
+    var files = file_list.find(&#039;li&#039;);
 
-  // Remove potential Unicode BOM.
-  source = source.replace(/^\uFEFF/, &quot;&quot;);
+    // work-horse
+    // @param:  key  The &#039;data-&lt;key&gt;&#039; to sort by
+    // @return: descending sorted array of &lt;li&gt; elements
+    //
+    var _sortBy = function (key) {
+        return _.sortBy(files, function (el) {
+            return Number($(el).find(&#039;span[data-lint]&#039;).attr(key)) * -1;
+        });
+    };
 
-  if (!JSHINT(source, config, globals)) {
-    JSHINT.errors.forEach(function (err) {
-      if (err) results.push({ error: err });
-    });
-  }
+    // sorter
 
-  var lintData = JSHINT.data();
-  if (lintData) data.push(lintData);
+    var _sortByLintErr = function _sortByLintErr () {
+        return _sortBy(&#039;data-lint&#039;);
+    };
 
-  return {
-    results : results,
-    data : data
-  };
-}</textarea>
+    var _sortBySLOC = function _sortBySLOC () {
+        return _sortBy(&#039;data-sloc&#039;);
+    };
+
+    var _sortByBugs = function _sortByBugs () {
+        return _sortBy(&#039;data-bugs&#039;);
+    };
+
+    var _sortByComplexity = function _sortByComplexity () {
+        return _sortBy(&#039;data-complexity&#039;);
+    };
+
+    // appends the &#039;list&#039; of &#039;&lt;li&gt;&#039; elements
+    // to its parent &#039;&lt;ul&gt;&#039;.
+    // @param: a list of &#039;&lt;li&gt;&#039;&#039; elements
+    //
+    var _update_list = function _update_list (list) {
+      file_list.append($(list));
+    };
+
+    // button event-handler
+
+    var _byComplexity = function () {
+      _update_list(_sortByComplexity());
+    };
+
+    var _byBugs = function () {
+      _update_list(_sortByBugs());
+    };
+
+    var _bySLOC = function () {
+      _update_list(_sortBySLOC());
+    };
+
+    var _byLint = function () {
+      _update_list(_sortByLintErr());
+    };
+
+    // styling
+
+    var _update_state = function _update_state (target) {
+
+        var prev = $(&#039;button.on&#039;);
+            prev.removeClass(&#039;on&#039;);
+
+        var current = $(target);
+            current.addClass(&#039;on&#039;);
+    };
+
+    // setup button events
+
+    $(&#039;button#button-complexity&#039;).on(&#039;click&#039;, _byComplexity);
+    $(&#039;button#button-bugs&#039;).on(&#039;click&#039;, _byBugs);
+    $(&#039;button#button-sloc&#039;).on(&#039;click&#039;, _bySLOC);
+    $(&#039;button#button-lint&#039;).on(&#039;click&#039;, _byLint);
+
+    // styling update for buttons
+
+    var all = $(&#039;button.btn&#039;);
+        all.on(&#039;click&#039;, function (evt) {
+          _update_state(evt.target);
+        });
+});</textarea>
   </div>
 </div>
 
