@@ -64,6 +64,10 @@
   text-align:center;
 }
 
+.CodeMirror pre {
+  z-index:4;
+}
+
 .CodeMirror-linewidget {
   background-color: hsl(240, 20%, 96%);
   font-size:12px;
