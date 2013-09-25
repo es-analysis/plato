@@ -4,3 +4,12 @@ node_js:
   - "0.10"
 before_script: 
   - npm install -g grunt-cli
+  - mkdir ~/bin
+  - export PATH=~/bin:$PATH
+  - echo "installing CasperJS latest master"
+  - git clone https://github.com/n1k0/casperjs.git ~/casperjs
+  - ln -sf ~/casperjs/bin/casperjs ~/bin/casperjs
+  - casperjs --version
+  - npm install --dev
+
+script: npm test && casperjs test test/casper-*.js
