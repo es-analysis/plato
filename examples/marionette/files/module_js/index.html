@@ -13,7 +13,7 @@
   <![endif]-->
 
   <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
-  <link href="../../assets/css/vendor/bootstrap-3.0.0-wip.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
   <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
   <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
   <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
@@ -26,8 +26,8 @@
 
 <div class="navbar navbar-fixed-top">
   <div class="container">
-    <a class="brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
-    <ul class="nav">
+    <a class="navbar-brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
       <li>
         <a href="../../index.html">Report Home</a>
       </li>
@@ -43,29 +43,29 @@
 
 <div class="container aggregate-stats">
   <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
       <p class="stat">71.78</p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
       <p class="stat">201</p>
     </div>
   </div>
   <div class="row historical">
-    <div class="span6">
+    <div class="col-md-6">
       <p id="chart_historical_maint" class="chart"></p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <p id="chart_historical_sloc" class="chart"></p>
     </div>
   </div>
   <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
       <p class="stat">30.43</p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
       <p class="stat">1.04</p>
     </div>
@@ -77,11 +77,11 @@
     <h2 class="header">Function weight</h2>
   </div>
   <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
       <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
       <div id="fn-by-complexity" class="stat"></div>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
       <div id="fn-by-sloc" class="stat"></div>
     </div>
@@ -90,7 +90,7 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="span12">// Module
+    <textarea id="file-source" class="col-md-12">// Module
 // ------
 
 // A simple module system, used to create privacy and encapsulation in
@@ -115,7 +115,7 @@ Marionette.Module = function(moduleName, app){
 _.extend(Marionette.Module.prototype, Backbone.Events, {
 
   // Initializer for a specific module. Initializers are run when the
-  // module's `start` method is called.
+  // module&#039;s `start` method is called.
   addInitializer: function(callback){
     this._initializerCallbacks.add(callback);
   },
@@ -140,23 +140,23 @@ _.extend(Marionette.Module.prototype, Backbone.Events, {
       }
     });
 
-    // run the callbacks to "start" the current module
-    this.triggerMethod("before:start", options);
+    // run the callbacks to &quot;start&quot; the current module
+    this.triggerMethod(&quot;before:start&quot;, options);
 
     this._initializerCallbacks.run(options, this);
     this._isInitialized = true;
 
-    this.triggerMethod("start", options);
+    this.triggerMethod(&quot;start&quot;, options);
   },
 
   // Stop this module by running its finalizers and then stop all of
   // the sub-modules for this module
   stop: function(){
-    // if we are not initialized, don't bother finalizing
+    // if we are not initialized, don&#039;t bother finalizing
     if (!this._isInitialized){ return; }
     this._isInitialized = false;
 
-    Marionette.triggerMethod.call(this, "before:stop");
+    Marionette.triggerMethod.call(this, &quot;before:stop&quot;);
 
     // stop the sub-modules; depth-first, to make sure the
     // sub-modules are stopped / finalized before parents
@@ -169,7 +169,7 @@ _.extend(Marionette.Module.prototype, Backbone.Events, {
     this._initializerCallbacks.reset();
     this._finalizerCallbacks.reset();
 
-    Marionette.triggerMethod.call(this, "stop");
+    Marionette.triggerMethod.call(this, &quot;stop&quot;);
   },
 
   // Configure the module with a definition function and any custom args
@@ -218,7 +218,7 @@ _.extend(Marionette.Module, {
     customArgs.splice(0, 3);
 
     // split the module names and get the length
-    moduleNames = moduleNames.split(".");
+    moduleNames = moduleNames.split(&quot;.&quot;);
     var length = moduleNames.length;
 
     // store the module definition for the last module in the chain
@@ -241,7 +241,7 @@ _.extend(Marionette.Module, {
     var module = parentModule[moduleName];
 
     if (!module){
-      // Create a new module if we don't have one
+      // Create a new module if we don&#039;t have one
       module = new Marionette.Module(moduleName, app);
       parentModule[moduleName] = module;
       // store the module on the parent
@@ -277,10 +277,10 @@ _.extend(Marionette.Module, {
 
     // `and` the two together, ensuring a single `false` will prevent it
     // from starting with the parent
-    module.startWithParent = module.startWithParent && startWithParent;
+    module.startWithParent = module.startWithParent &amp;&amp; startWithParent;
 
     // setup auto-start if needed
-    if (module.startWithParent && !module.startWithParentIsConfigured){
+    if (module.startWithParent &amp;&amp; !module.startWithParentIsConfigured){
 
       // only configure this once
       module.startWithParentIsConfigured = true;

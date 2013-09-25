@@ -47,10 +47,10 @@ $(function(){
       el.append(horizontalBar(value, Math.min(value, width), 'sloc', [400,600]));
 
       value = el.data('bugs');
-      el.append(horizontalBar(value, value * 5, 'est errors', [1,5]));
+      el.append(horizontalBar(value, Math.min(value * 5, width), 'est errors', [1,5]));
 
       value = el.data('lint');
-      el.append(horizontalBar(value, value * 5, 'lint errors', [1,10]));
+      el.append(horizontalBar(value, Math.min(value * 5, width), 'lint errors', [1,10]));
     });
   }
 

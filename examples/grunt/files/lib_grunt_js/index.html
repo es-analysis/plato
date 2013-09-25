@@ -13,7 +13,7 @@
   <![endif]-->
 
   <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
-  <link href="../../assets/css/vendor/bootstrap-3.0.0-wip.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
   <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
   <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
   <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
@@ -26,8 +26,8 @@
 
 <div class="navbar navbar-fixed-top">
   <div class="container">
-    <a class="brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
-    <ul class="nav">
+    <a class="navbar-brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
       <li>
         <a href="../../index.html">Report Home</a>
       </li>
@@ -43,29 +43,29 @@
 
 <div class="container aggregate-stats">
   <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
       <p class="stat">66.31</p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
       <p class="stat">147</p>
     </div>
   </div>
   <div class="row historical">
-    <div class="span6">
+    <div class="col-md-6">
       <p id="chart_historical_maint" class="chart"></p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <p id="chart_historical_sloc" class="chart"></p>
     </div>
   </div>
   <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
       <p class="stat">20.50</p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
       <p class="stat">1.14</p>
     </div>
@@ -77,11 +77,11 @@
     <h2 class="header">Function weight</h2>
   </div>
   <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
       <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
       <div id="fn-by-complexity" class="stat"></div>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
       <div id="fn-by-sloc" class="stat"></div>
     </div>
@@ -90,62 +90,62 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="span12">/*
+    <textarea id="file-source" class="col-md-12">/*
  * grunt
  * http://gruntjs.com/
  *
- * Copyright (c) 2013 "Cowboy" Ben Alman
+ * Copyright (c) 2013 &quot;Cowboy&quot; Ben Alman
  * Licensed under the MIT license.
  * https://github.com/gruntjs/grunt/blob/master/LICENSE-MIT
  */
 
-'use strict';
+&#039;use strict&#039;;
 
 // Nodejs libs.
-var path = require('path');
+var path = require(&#039;path&#039;);
 
 // This allows grunt to require() .coffee files.
-require('coffee-script');
+require(&#039;coffee-script&#039;);
 
 // The module to be exported.
 var grunt = module.exports = {};
 
 // Expose internal grunt libs.
 function gRequire(name) {
-  return grunt[name] = require('./grunt/' + name);
+  return grunt[name] = require(&#039;./grunt/&#039; + name);
 }
-var util = gRequire('util');
-gRequire('template');
-gRequire('event');
-var fail = gRequire('fail');
-gRequire('file');
-var option = gRequire('option');
-var config = gRequire('config');
-var task = gRequire('task');
-var log = gRequire('log');
-var help = gRequire('help');
-gRequire('cli');
+var util = gRequire(&#039;util&#039;);
+gRequire(&#039;template&#039;);
+gRequire(&#039;event&#039;);
+var fail = gRequire(&#039;fail&#039;);
+gRequire(&#039;file&#039;);
+var option = gRequire(&#039;option&#039;);
+var config = gRequire(&#039;config&#039;);
+var task = gRequire(&#039;task&#039;);
+var log = gRequire(&#039;log&#039;);
+var help = gRequire(&#039;help&#039;);
+gRequire(&#039;cli&#039;);
 var verbose = grunt.verbose = log.verbose;
 
 // Expose some grunt metadata.
-grunt.package = require('../package.json');
+grunt.package = require(&#039;../package.json&#039;);
 grunt.version = grunt.package.version;
 
 // Expose specific grunt lib methods on grunt.
 function gExpose(obj, methodName, newMethodName) {
   grunt[newMethodName || methodName] = obj[methodName].bind(obj);
 }
-gExpose(task, 'registerTask');
-gExpose(task, 'registerMultiTask');
-gExpose(task, 'registerInitTask');
-gExpose(task, 'renameTask');
-gExpose(task, 'loadTasks');
-gExpose(task, 'loadNpmTasks');
-gExpose(config, 'init', 'initConfig');
-gExpose(fail, 'warn');
-gExpose(fail, 'fatal');
+gExpose(task, &#039;registerTask&#039;);
+gExpose(task, &#039;registerMultiTask&#039;);
+gExpose(task, &#039;registerInitTask&#039;);
+gExpose(task, &#039;renameTask&#039;);
+gExpose(task, &#039;loadTasks&#039;);
+gExpose(task, &#039;loadNpmTasks&#039;);
+gExpose(config, &#039;init&#039;, &#039;initConfig&#039;);
+gExpose(fail, &#039;warn&#039;);
+gExpose(fail, &#039;fatal&#039;);
 
-// Expose the task interface. I've never called this manually, and have no idea
+// Expose the task interface. I&#039;ve never called this manually, and have no idea
 // how it will work. But it might.
 grunt.tasks = function(tasks, options, done) {
   // Update options with passed-in options.
@@ -153,14 +153,14 @@ grunt.tasks = function(tasks, options, done) {
 
   // Display the grunt version and quit if the user did --version.
   var _tasks, _options;
-  if (option('version')) {
+  if (option(&#039;version&#039;)) {
     // Not --verbose.
-    log.writeln('grunt v' + grunt.version);
+    log.writeln(&#039;grunt v&#039; + grunt.version);
 
-    if (option('verbose')) {
+    if (option(&#039;verbose&#039;)) {
       // --verbose
-      verbose.writeln('Install path: ' + path.resolve(__dirname, '..'));
-      // Yes, this is a total hack, but we don't want to log all that verbose
+      verbose.writeln(&#039;Install path: &#039; + path.resolve(__dirname, &#039;..&#039;));
+      // Yes, this is a total hack, but we don&#039;t want to log all that verbose
       // task initialization stuff here.
       grunt.log.muted = true;
       // Initialize task system so that available tasks can be listed.
@@ -170,16 +170,16 @@ grunt.tasks = function(tasks, options, done) {
 
       // Display available tasks (for shell completion, etc).
       _tasks = Object.keys(grunt.task._tasks).sort();
-      verbose.writeln('Available tasks: ' + _tasks.join(' '));
+      verbose.writeln(&#039;Available tasks: &#039; + _tasks.join(&#039; &#039;));
 
       // Display available options (for shell completion, etc).
       _options = [];
       Object.keys(grunt.cli.optlist).forEach(function(long) {
         var o = grunt.cli.optlist[long];
-        _options.push('--' + (o.negate ? 'no-' : '') + long);
-        if (o.short) { _options.push('-' + o.short); }
+        _options.push(&#039;--&#039; + (o.negate ? &#039;no-&#039; : &#039;&#039;) + long);
+        if (o.short) { _options.push(&#039;-&#039; + o.short); }
       });
-      verbose.writeln('Available options: ' + _options.join(' '));
+      verbose.writeln(&#039;Available options: &#039; + _options.join(&#039; &#039;));
     }
 
     return;
@@ -189,32 +189,32 @@ grunt.tasks = function(tasks, options, done) {
   log.initColors();
 
   // Display help and quit if the user did --help.
-  if (option('help')) {
+  if (option(&#039;help&#039;)) {
     help.display();
     return;
   }
 
   // A little header stuff.
-  verbose.header('Initializing').writeflags(option.flags(), 'Command-line options');
+  verbose.header(&#039;Initializing&#039;).writeflags(option.flags(), &#039;Command-line options&#039;);
 
   // Determine and output which tasks will be run.
-  var tasksSpecified = tasks && tasks.length > 0;
-  tasks = task.parseArgs([tasksSpecified ? tasks : 'default']);
+  var tasksSpecified = tasks &amp;&amp; tasks.length &gt; 0;
+  tasks = task.parseArgs([tasksSpecified ? tasks : &#039;default&#039;]);
 
   // Initialize tasks.
   task.init(tasks);
 
   verbose.writeln();
   if (!tasksSpecified) {
-    verbose.writeln('No tasks specified, running default tasks.');
+    verbose.writeln(&#039;No tasks specified, running default tasks.&#039;);
   }
-  verbose.writeflags(tasks, 'Running tasks');
+  verbose.writeflags(tasks, &#039;Running tasks&#039;);
 
   // Handle otherwise unhandleable (probably asynchronous) exceptions.
   var uncaughtHandler = function(e) {
     fail.fatal(e, fail.code.TASK_FAILURE);
   };
-  process.on('uncaughtException', uncaughtHandler);
+  process.on(&#039;uncaughtException&#039;, uncaughtHandler);
 
   // Report, etc when all tasks have completed.
   task.options({
@@ -222,17 +222,17 @@ grunt.tasks = function(tasks, options, done) {
       fail.warn(e, fail.code.TASK_FAILURE);
     },
     done: function() {
-      // Stop handling uncaught exceptions so that we don't leave any
+      // Stop handling uncaught exceptions so that we don&#039;t leave any
       // unwanted process-level side effects behind. There is no need to do
       // this in the error callback, because fail.warn() will either kill
       // the process, or with --force keep on going all the way here.
-      process.removeListener('uncaughtException', uncaughtHandler);
+      process.removeListener(&#039;uncaughtException&#039;, uncaughtHandler);
 
       // Output a final fail / success report.
       fail.report();
 
       if (done) {
-        // Execute "done" function when done (only if passed, of course).
+        // Execute &quot;done&quot; function when done (only if passed, of course).
         done();
       } else {
         // Otherwise, explicitly exit.

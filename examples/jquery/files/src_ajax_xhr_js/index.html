@@ -13,7 +13,7 @@
   <![endif]-->
 
   <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
-  <link href="../../assets/css/vendor/bootstrap-3.0.0-wip.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
   <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
   <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
   <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
@@ -26,8 +26,8 @@
 
 <div class="navbar navbar-fixed-top">
   <div class="container">
-    <a class="brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
-    <ul class="nav">
+    <a class="navbar-brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
       <li>
         <a href="../../index.html">Report Home</a>
       </li>
@@ -43,31 +43,31 @@
 
 <div class="container aggregate-stats">
   <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">67.23</p>
+      <p class="stat">66.00</p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">111</p>
+      <p class="stat">119</p>
     </div>
   </div>
   <div class="row historical">
-    <div class="span6">
+    <div class="col-md-6">
       <p id="chart_historical_maint" class="chart"></p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <p id="chart_historical_sloc" class="chart"></p>
     </div>
   </div>
   <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">32.27</p>
+      <p class="stat">32.52</p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">0.71</p>
+      <p class="stat">0.73</p>
     </div>
   </div>
 </div>
@@ -77,11 +77,11 @@
     <h2 class="header">Function weight</h2>
   </div>
   <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
       <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
       <div id="fn-by-complexity" class="stat"></div>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
       <div id="fn-by-sloc" class="stat"></div>
     </div>
@@ -90,7 +90,13 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="span12">jQuery.ajaxSettings.xhr = function() {
+    <textarea id="file-source" class="col-md-12">define([
+	&quot;../core&quot;,
+	&quot;../var/support&quot;,
+	&quot;../ajax&quot;
+], function( jQuery, support ) {
+
+jQuery.ajaxSettings.xhr = function() {
 	try {
 		return new XMLHttpRequest();
 	} catch( e ) {}
@@ -111,21 +117,21 @@ var xhrSupported = jQuery.ajaxSettings.xhr(),
 	xhrCallbacks = {};
 
 if ( window.ActiveXObject ) {
-	jQuery( window ).on( "unload", function() {
-		for( var key in xhrCallbacks ) {
+	jQuery( window ).on( &quot;unload&quot;, function() {
+		for ( var key in xhrCallbacks ) {
 			xhrCallbacks[ key ]();
 		}
 		xhrCallbacks = undefined;
 	});
 }
 
-jQuery.support.cors = !!xhrSupported && ( "withCredentials" in xhrSupported );
-jQuery.support.ajax = xhrSupported = !!xhrSupported;
+support.cors = !!xhrSupported &amp;&amp; ( &quot;withCredentials&quot; in xhrSupported );
+support.ajax = xhrSupported = !!xhrSupported;
 
 jQuery.ajaxTransport(function( options ) {
 	var callback;
 	// Cross domain only allowed if supported through XMLHttpRequest
-	if ( jQuery.support.cors || xhrSupported && !options.crossDomain ) {
+	if ( support.cors || xhrSupported &amp;&amp; !options.crossDomain ) {
 		return {
 			send: function( headers, complete ) {
 				var i, id,
@@ -138,16 +144,16 @@ jQuery.ajaxTransport(function( options ) {
 					}
 				}
 				// Override mime type if needed
-				if ( options.mimeType && xhr.overrideMimeType ) {
+				if ( options.mimeType &amp;&amp; xhr.overrideMimeType ) {
 					xhr.overrideMimeType( options.mimeType );
 				}
 				// X-Requested-With header
 				// For cross-domain requests, seeing as conditions for a preflight are
 				// akin to a jigsaw puzzle, we simply never set it to be sure.
 				// (it can always be set on a per-request basis or even using ajaxSetup)
-				// For same-domain requests, won't change header if already provided.
-				if ( !options.crossDomain && !headers["X-Requested-With"] ) {
-					headers["X-Requested-With"] = "XMLHttpRequest";
+				// For same-domain requests, won&#039;t change header if already provided.
+				if ( !options.crossDomain &amp;&amp; !headers[&quot;X-Requested-With&quot;] ) {
+					headers[&quot;X-Requested-With&quot;] = &quot;XMLHttpRequest&quot;;
 				}
 				// Set headers
 				for ( i in headers ) {
@@ -159,9 +165,9 @@ jQuery.ajaxTransport(function( options ) {
 						if ( callback ) {
 							delete xhrCallbacks[ id ];
 							callback = xhr.onload = xhr.onerror = null;
-							if ( type === "abort" ) {
+							if ( type === &quot;abort&quot; ) {
 								xhr.abort();
-							} else if ( type === "error" ) {
+							} else if ( type === &quot;error&quot; ) {
 								complete(
 									// file protocol always yields status 0, assume 404
 									xhr.status || 404,
@@ -174,7 +180,7 @@ jQuery.ajaxTransport(function( options ) {
 									// Support: IE9
 									// #11426: When requesting binary data, IE9 will throw an exception
 									// on any attempt to access responseText
-									typeof xhr.responseText === "string" ? {
+									typeof xhr.responseText === &quot;string&quot; ? {
 										text: xhr.responseText
 									} : undefined,
 									xhr.getAllResponseHeaders()
@@ -185,13 +191,13 @@ jQuery.ajaxTransport(function( options ) {
 				};
 				// Listen to events
 				xhr.onload = callback();
-				xhr.onerror = callback("error");
+				xhr.onerror = callback(&quot;error&quot;);
 				// Create the abort callback
-				callback = xhrCallbacks[( id = xhrId++ )] = callback("abort");
+				callback = xhrCallbacks[( id = xhrId++ )] = callback(&quot;abort&quot;);
 				// Do send the request
 				// This may raise an exception which is actually
 				// handled in jQuery.ajax (so no try/catch here)
-				xhr.send( options.hasContent && options.data || null );
+				xhr.send( options.hasContent &amp;&amp; options.data || null );
 			},
 			abort: function() {
 				if ( callback ) {
@@ -200,6 +206,8 @@ jQuery.ajaxTransport(function( options ) {
 			}
 		};
 	}
+});
+
 });</textarea>
   </div>
 </div>

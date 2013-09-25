@@ -13,7 +13,7 @@
   <![endif]-->
 
   <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
-  <link href="../../assets/css/vendor/bootstrap-3.0.0-wip.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
   <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
   <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
   <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
@@ -26,8 +26,8 @@
 
 <div class="navbar navbar-fixed-top">
   <div class="container">
-    <a class="brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
-    <ul class="nav">
+    <a class="navbar-brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
       <li>
         <a href="../../index.html">Report Home</a>
       </li>
@@ -43,31 +43,31 @@
 
 <div class="container aggregate-stats">
   <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">68.86</p>
+      <p class="stat">68.63</p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">334</p>
+      <p class="stat">176</p>
     </div>
   </div>
   <div class="row historical">
-    <div class="span6">
+    <div class="col-md-6">
       <p id="chart_historical_maint" class="chart"></p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <p id="chart_historical_sloc" class="chart"></p>
     </div>
   </div>
   <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">89.79</p>
+      <p class="stat">52.19</p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">1.93</p>
+      <p class="stat">1.00</p>
     </div>
   </div>
 </div>
@@ -77,11 +77,11 @@
     <h2 class="header">Function weight</h2>
   </div>
   <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
       <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
       <div id="fn-by-complexity" class="stat"></div>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
       <div id="fn-by-sloc" class="stat"></div>
     </div>
@@ -90,195 +90,58 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="span12">/*
+    <textarea id="file-source" class="col-md-12">define([
+	&quot;./core&quot;,
+	&quot;./var/rnotwhite&quot;,
+	&quot;./core/access&quot;,
+	&quot;./data/var/data_priv&quot;,
+	&quot;./data/var/data_user&quot;
+], function( jQuery, rnotwhite, access, data_priv, data_user ) {
+
+/*
 	Implementation Summary
 
 	1. Enforce API surface and semantic compatibility with 1.9.x branch
-	2. Improve the module's maintainability by reducing the storage
+	2. Improve the module&#039;s maintainability by reducing the storage
 		paths to a single mechanism.
-	3. Use the same single mechanism to support "private" and "user" data.
-	4. _Never_ expose "private" data to user code (TODO: Drop _data, _removeData)
+	3. Use the same single mechanism to support &quot;private&quot; and &quot;user&quot; data.
+	4. _Never_ expose &quot;private&quot; data to user code (TODO: Drop _data, _removeData)
 	5. Avoid exposing implementation details on user objects (eg. expando properties)
 	6. Provide a clear path for implementation upgrade to WeakMap in 2014
 */
-var data_user, data_priv,
-	rbrace = /(?:\{[\s\S]*\}|\[[\s\S]*\])$/,
+var rbrace = /(?:\{[\s\S]*\}|\[[\s\S]*\])$/,
 	rmultiDash = /([A-Z])/g;
 
-function Data() {
-	this.cache = {};
-	this.expando = jQuery.expando + Math.random();
-}
+function dataAttr( elem, key, data ) {
+	var name;
 
-Data.uid = 1;
+	// If nothing was found internally, try to fetch any
+	// data from the HTML5 data-* attribute
+	if ( data === undefined &amp;&amp; elem.nodeType === 1 ) {
+		name = &quot;data-&quot; + key.replace( rmultiDash, &quot;-$1&quot; ).toLowerCase();
+		data = elem.getAttribute( name );
 
-Data.prototype = {
-	key: function( owner ) {
-		var descriptor = {},
-			// Check if the owner object already has a cache key
-			unlock = owner[ this.expando ];
-
-		// If not, create one
-		if ( !unlock ) {
-			unlock = Data.uid++;
-
-			// Secure it in a non-enumerable, non-writable property
+		if ( typeof data === &quot;string&quot; ) {
 			try {
-				descriptor[ this.expando ] = { value: unlock };
-				Object.defineProperties( owner, descriptor );
+				data = data === &quot;true&quot; ? true :
+					data === &quot;false&quot; ? false :
+					data === &quot;null&quot; ? null :
+					// Only convert to a number if it doesn&#039;t change the string
+					+data + &quot;&quot; === data ? +data :
+					rbrace.test( data ) ? JSON.parse( data ) :
+					data;
+			} catch( e ) {}
 
-			// Support: Android<4
-			// Fallback to a less secure definition
-			} catch ( e ) {
-				descriptor[ this.expando ] = unlock;
-				jQuery.extend( owner, descriptor );
-			}
-		}
-
-		// Ensure the cache object
-		if ( !this.cache[ unlock ] ) {
-			this.cache[ unlock ] = {};
-		}
-
-		return unlock;
-	},
-	set: function( owner, data, value ) {
-		var prop,
-			// There may be an unlock assigned to this node,
-			// if there is no entry for this "owner", create one inline
-			// and set the unlock as though an owner entry had always existed
-			unlock = this.key( owner ),
-			cache = this.cache[ unlock ];
-
-		// Handle: [ owner, key, value ] args
-		if ( typeof data === "string" ) {
-			cache[ data ] = value;
-
-		// Handle: [ owner, { properties } ] args
+			// Make sure we set the data so it isn&#039;t changed later
+			data_user.set( elem, key, data );
 		} else {
-			// Support an expectation from the old data system where plain
-			// objects used to initialize would be set to the cache by
-			// reference, instead of having properties and values copied.
-			// Note, this will kill the connection between
-			// "this.cache[ unlock ]" and "cache"
-			if ( jQuery.isEmptyObject( cache ) ) {
-				this.cache[ unlock ] = data;
-			// Otherwise, copy the properties one-by-one to the cache object
-			} else {
-				for ( prop in data ) {
-					cache[ prop ] = data[ prop ];
-				}
-			}
+			data = undefined;
 		}
-
-		return this;
-	},
-	get: function( owner, key ) {
-		// Either a valid cache is found, or will be created.
-		// New caches will be created and the unlock returned,
-		// allowing direct access to the newly created
-		// empty data object. A valid owner object must be provided.
-		var cache = this.cache[ this.key( owner ) ];
-
-		return key === undefined ?
-			cache : cache[ key ];
-	},
-	access: function( owner, key, value ) {
-		// In cases where either:
-		//
-		//   1. No key was specified
-		//   2. A string key was specified, but no value provided
-		//
-		// Take the "read" path and allow the get method to determine
-		// which value to return, respectively either:
-		//
-		//   1. The entire cache object
-		//   2. The data stored at the key
-		//
-		if ( key === undefined ||
-				((key && typeof key === "string") && value === undefined) ) {
-			return this.get( owner, key );
-		}
-
-		// [*]When the key is not a string, or both a key and value
-		// are specified, set or extend (existing objects) with either:
-		//
-		//   1. An object of properties
-		//   2. A key and value
-		//
-		this.set( owner, key, value );
-
-		// Since the "set" path can have two possible entry points
-		// return the expected data based on which path was taken[*]
-		return value !== undefined ? value : key;
-	},
-	remove: function( owner, key ) {
-		var i, name,
-				unlock = this.key( owner ),
-				cache = this.cache[ unlock ];
-
-		if ( key === undefined ) {
-			this.cache[ unlock ] = {};
-		} else {
-			// Support array or space separated string of keys
-			if ( jQuery.isArray( key ) ) {
-				// If "name" is an array of keys...
-				// When data is initially created, via ("key", "val") signature,
-				// keys will be converted to camelCase.
-				// Since there is no way to tell _how_ a key was added, remove
-				// both plain key and camelCase key. #12786
-				// This will only penalize the array argument path.
-				name = key.concat( key.map( jQuery.camelCase ) );
-			} else {
-				// Try the string as a key before any manipulation
-				if ( key in cache ) {
-					name = [ key ];
-				} else {
-					// If a key with the spaces exists, use it.
-					// Otherwise, create an array by matching non-whitespace
-					name = jQuery.camelCase( key );
-					name = name in cache ?
-						[ name ] : ( name.match( core_rnotwhite ) || [] );
-				}
-			}
-
-			i = name.length;
-			while ( i-- ) {
-				delete cache[ name[i] ];
-			}
-		}
-	},
-	hasData: function( owner ) {
-		return !jQuery.isEmptyObject(
-			this.cache[ this.key( owner ) ]
-		);
-	},
-	discard: function( owner ) {
-		delete this.cache[ this.key( owner ) ];
 	}
-};
-
-// This will be used by remove()/cleanData() in manipulation to sever
-// remaining references to node objects. One day we'll replace the dual
-// arrays with a WeakMap and this won't be an issue.
-// (Splices the data objects out of the internal cache arrays)
-function data_discard( owner ) {
-	data_user.discard( owner );
-	data_priv.discard( owner );
+	return data;
 }
-
-// These may be used throughout the jQuery core codebase
-data_user = new Data();
-data_priv = new Data();
-
 
 jQuery.extend({
-	// This is no longer relevant to jQuery core, but must remain
-	// supported for the sake of jQuery 1.9.x API surface compatibility.
-	acceptData: function() {
-		return true;
-	},
-
 	hasData: function( elem ) {
 		return data_user.hasData( elem ) || data_priv.hasData( elem );
 	},
@@ -288,29 +151,24 @@ jQuery.extend({
 	},
 
 	removeData: function( elem, name ) {
-		return data_user.remove( elem, name );
+		data_user.remove( elem, name );
 	},
 
-	// TODO: Replace all calls to _data and _removeData with direct
-	// calls to
-	//
-	// data_priv.access( elem, name, data );
-	//
-	// data_priv.remove( elem, name );
-	//
+	// TODO: Now that all calls to _data and _removeData have been replaced
+	// with direct calls to data_priv methods, these can be deprecated.
 	_data: function( elem, name, data ) {
 		return data_priv.access( elem, name, data );
 	},
 
 	_removeData: function( elem, name ) {
-		return data_priv.remove( elem, name );
+		data_priv.remove( elem, name );
 	}
 });
 
 jQuery.fn.extend({
 	data: function( key, value ) {
 		var attrs, name,
-			elem = this[0],
+			elem = this[ 0 ],
 			i = 0,
 			data = null;
 
@@ -319,17 +177,17 @@ jQuery.fn.extend({
 			if ( this.length ) {
 				data = data_user.get( elem );
 
-				if ( elem.nodeType === 1 && !data_priv.get( elem, "hasDataAttrs" ) ) {
+				if ( elem.nodeType === 1 &amp;&amp; !data_priv.get( elem, &quot;hasDataAttrs&quot; ) ) {
 					attrs = elem.attributes;
-					for ( ; i < attrs.length; i++ ) {
-						name = attrs[i].name;
+					for ( ; i &lt; attrs.length; i++ ) {
+						name = attrs[ i ].name;
 
-						if ( name.indexOf( "data-" ) === 0 ) {
-							name = jQuery.camelCase( name.substring(5) );
+						if ( name.indexOf( &quot;data-&quot; ) === 0 ) {
+							name = jQuery.camelCase( name.slice(5) );
 							dataAttr( elem, name, data[ name ] );
 						}
 					}
-					data_priv.set( elem, "hasDataAttrs", true );
+					data_priv.set( elem, &quot;hasDataAttrs&quot;, true );
 				}
 			}
 
@@ -337,22 +195,22 @@ jQuery.fn.extend({
 		}
 
 		// Sets multiple values
-		if ( typeof key === "object" ) {
+		if ( typeof key === &quot;object&quot; ) {
 			return this.each(function() {
 				data_user.set( this, key );
 			});
 		}
 
-		return jQuery.access( this, function( value ) {
+		return access( this, function( value ) {
 			var data,
-					camelKey = jQuery.camelCase( key );
+				camelKey = jQuery.camelCase( key );
 
 			// The calling jQuery object (element matches) is not empty
-			// (and therefore has an element appears at this[0]) and the
+			// (and therefore has an element appears at this[ 0 ]) and the
 			// `value` parameter was not undefined. An empty jQuery object
-			// will result in `undefined` for elem = this[0] which will
+			// will result in `undefined` for elem = this[ 0 ] which will
 			// throw an exception if an attempt to read a data cache is made.
-			if ( elem && value === undefined ) {
+			if ( elem &amp;&amp; value === undefined ) {
 				// Attempt to get data from the cache
 				// with the key as-is
 				data = data_user.get( elem, key );
@@ -367,21 +225,21 @@ jQuery.fn.extend({
 					return data;
 				}
 
-				// Attempt to "discover" the data in
+				// Attempt to &quot;discover&quot; the data in
 				// HTML5 custom data-* attrs
 				data = dataAttr( elem, camelKey, undefined );
 				if ( data !== undefined ) {
 					return data;
 				}
 
-				// We tried really hard, but the data doesn't exist.
-				return undefined;
+				// We tried really hard, but the data doesn&#039;t exist.
+				return;
 			}
 
 			// Set the data...
 			this.each(function() {
 				// First, attempt to store a copy or reference of any
-				// data that might've been store with a camelCased key.
+				// data that might&#039;ve been store with a camelCased key.
 				var data = data_user.get( this, camelKey );
 
 				// For HTML5 data-* attribute interop, we have to
@@ -389,14 +247,14 @@ jQuery.fn.extend({
 				// This might not apply to all properties...*
 				data_user.set( this, camelKey, value );
 
-				// *... In the case of properties that might ACTUALLY
+				// *... In the case of properties that might _actually_
 				// have dashes, we need to also store a copy of that
 				// unchanged property.
-				if ( /-/.test( key ) && data !== undefined ) {
+				if ( key.indexOf(&quot;-&quot;) !== -1 &amp;&amp; data !== undefined ) {
 					data_user.set( this, key, value );
 				}
 			});
-		}, null, value, arguments.length > 1, null, true );
+		}, null, value, arguments.length &gt; 1, null, true );
 	},
 
 	removeData: function( key ) {
@@ -406,35 +264,8 @@ jQuery.fn.extend({
 	}
 });
 
-function dataAttr( elem, key, data ) {
-	var name;
-
-	// If nothing was found internally, try to fetch any
-	// data from the HTML5 data-* attribute
-	if ( data === undefined && elem.nodeType === 1 ) {
-
-		name = "data-" + key.replace( rmultiDash, "-$1" ).toLowerCase();
-		data = elem.getAttribute( name );
-
-		if ( typeof data === "string" ) {
-			try {
-				data = data === "true" ? true :
-				data === "false" ? false :
-				data === "null" ? null :
-				// Only convert to a number if it doesn't change the string
-				+data + "" === data ? +data :
-				rbrace.test( data ) ?
-					JSON.parse( data ) : data;
-			} catch( e ) {}
-
-			// Make sure we set the data so it isn't changed later
-			data_user.set( elem, key, data );
-		} else {
-			data = undefined;
-		}
-	}
-	return data;
-}</textarea>
+return jQuery;
+});</textarea>
   </div>
 </div>
 

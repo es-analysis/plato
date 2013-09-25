@@ -13,7 +13,7 @@
   <![endif]-->
 
   <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
-  <link href="../../assets/css/vendor/bootstrap-3.0.0-wip.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
   <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
   <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
   <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
@@ -26,8 +26,8 @@
 
 <div class="navbar navbar-fixed-top">
   <div class="container">
-    <a class="brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
-    <ul class="nav">
+    <a class="navbar-brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
       <li>
         <a href="../../index.html">Report Home</a>
       </li>
@@ -43,29 +43,29 @@
 
 <div class="container aggregate-stats">
   <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
       <p class="stat">63.40</p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
       <p class="stat">86</p>
     </div>
   </div>
   <div class="row historical">
-    <div class="span6">
+    <div class="col-md-6">
       <p id="chart_historical_maint" class="chart"></p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <p id="chart_historical_sloc" class="chart"></p>
     </div>
   </div>
   <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
       <p class="stat">25.20</p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
       <p class="stat">0.67</p>
     </div>
@@ -77,11 +77,11 @@
     <h2 class="header">Function weight</h2>
   </div>
   <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
       <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
       <div id="fn-by-complexity" class="stat"></div>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
       <div id="fn-by-sloc" class="stat"></div>
     </div>
@@ -90,26 +90,26 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="span12">/*
+    <textarea id="file-source" class="col-md-12">/*
  * grunt
  * http://gruntjs.com/
  *
- * Copyright (c) 2013 "Cowboy" Ben Alman
+ * Copyright (c) 2013 &quot;Cowboy&quot; Ben Alman
  * Licensed under the MIT license.
  * https://github.com/gruntjs/grunt/blob/master/LICENSE-MIT
  */
 
-'use strict';
+&#039;use strict&#039;;
 
-var grunt = require('../grunt');
+var grunt = require(&#039;../grunt&#039;);
 
 // The module to be exported.
 var template = module.exports = {};
 
 // External libs.
-template.date = require('dateformat');
+template.date = require(&#039;dateformat&#039;);
 
-// Format today's date.
+// Format today&#039;s date.
 template.today = function(format) {
   return template.date(new Date(), format);
 };
@@ -124,24 +124,24 @@ template.addDelimiters = function(name, opener, closer) {
   delimiters.opener = opener;
   delimiters.closer = closer;
   // Generate RegExp patterns dynamically.
-  var a = delimiters.opener.replace(/(.)/g, '\\$1');
-  var b = '([\\s\\S]+?)' + delimiters.closer.replace(/(.)/g, '\\$1');
+  var a = delimiters.opener.replace(/(.)/g, &#039;\\$1&#039;);
+  var b = &#039;([\\s\\S]+?)&#039; + delimiters.closer.replace(/(.)/g, &#039;\\$1&#039;);
   // Used by Lo-Dash.
   delimiters.lodash = {
-    evaluate: new RegExp(a + b, 'g'),
-    interpolate: new RegExp(a + '=' + b, 'g'),
-    escape: new RegExp(a + '-' + b, 'g')
+    evaluate: new RegExp(a + b, &#039;g&#039;),
+    interpolate: new RegExp(a + &#039;=&#039; + b, &#039;g&#039;),
+    escape: new RegExp(a + &#039;-&#039; + b, &#039;g&#039;)
   };
 };
 
 // The underscore default template syntax should be a pretty sane default for
 // the config system.
-template.addDelimiters('config', '<%', '%>');
+template.addDelimiters(&#039;config&#039;, &#039;&lt;%&#039;, &#039;%&gt;&#039;);
 
 // Set Lo-Dash template delimiters.
 template.setDelimiters = function(name) {
   // Get the appropriate delimiters.
-  var delimiters = allDelimiters[name in allDelimiters ? name : 'config'];
+  var delimiters = allDelimiters[name in allDelimiters ? name : &#039;config&#039;];
   // Tell Lo-Dash which delimiters to use.
   grunt.util._.templateSettings = delimiters.lodash;
   // Return the delimiters.
@@ -156,16 +156,16 @@ template.process = function(tmpl, options) {
   // Clone data, initializing to config data or empty object if omitted.
   var data = Object.create(options.data || grunt.config.data || {});
   // Expose grunt so that grunt utilities can be accessed, but only if it
-  // doesn't conflict with an existing .grunt property.
-  if (!('grunt' in data)) { data.grunt = grunt; }
+  // doesn&#039;t conflict with an existing .grunt property.
+  if (!(&#039;grunt&#039; in data)) { data.grunt = grunt; }
   // Keep track of last change.
   var last = tmpl;
   try {
     // As long as tmpl contains template tags, render it and get the result,
     // otherwise just use the template string.
-    while (tmpl.indexOf(delimiters.opener) >= 0) {
+    while (tmpl.indexOf(delimiters.opener) &gt;= 0) {
       tmpl = grunt.util._.template(tmpl, data);
-      // Abort if template didn't change - nothing left to process!
+      // Abort if template didn&#039;t change - nothing left to process!
       if (tmpl === last) { break; }
       last = tmpl;
     }
@@ -173,13 +173,13 @@ template.process = function(tmpl, options) {
     // In upgrading to Lo-Dash (or Underscore.js 1.3.3), \n and \r in template
     // tags now causes an exception to be thrown. Warn the user why this is
     // happening. https://github.com/documentcloud/underscore/issues/553
-    if (String(e) === 'SyntaxError: Unexpected token ILLEGAL' && /\n|\r/.test(tmpl)) {
-      grunt.log.errorlns('A special character was detected in this template. ' +
-        'Inside template tags, the \\n and \\r special characters must be ' +
-        'escaped as \\\\n and \\\\r. (grunt 0.4.0+)');
+    if (String(e) === &#039;SyntaxError: Unexpected token ILLEGAL&#039; &amp;&amp; /\n|\r/.test(tmpl)) {
+      grunt.log.errorlns(&#039;A special character was detected in this template. &#039; +
+        &#039;Inside template tags, the \\n and \\r special characters must be &#039; +
+        &#039;escaped as \\\\n and \\\\r. (grunt 0.4.0+)&#039;);
     }
     // Slightly better error message.
-    e.message = 'An error occurred while processing a template (' + e.message + ').';
+    e.message = &#039;An error occurred while processing a template (&#039; + e.message + &#039;).&#039;;
     grunt.warn(e, grunt.fail.code.TEMPLATE_ERROR);
   }
   // Normalize linefeeds and return.

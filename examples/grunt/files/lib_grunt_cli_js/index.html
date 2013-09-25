@@ -13,7 +13,7 @@
   <![endif]-->
 
   <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
-  <link href="../../assets/css/vendor/bootstrap-3.0.0-wip.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
   <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
   <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
   <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
@@ -26,8 +26,8 @@
 
 <div class="navbar navbar-fixed-top">
   <div class="container">
-    <a class="brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
-    <ul class="nav">
+    <a class="navbar-brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
       <li>
         <a href="../../index.html">Report Home</a>
       </li>
@@ -43,29 +43,29 @@
 
 <div class="container aggregate-stats">
   <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
       <p class="stat">73.85</p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
       <p class="stat">119</p>
     </div>
   </div>
   <div class="row historical">
-    <div class="span6">
+    <div class="col-md-6">
       <p id="chart_historical_maint" class="chart"></p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <p id="chart_historical_sloc" class="chart"></p>
     </div>
   </div>
   <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
       <p class="stat">23.77</p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
       <p class="stat">0.78</p>
     </div>
@@ -77,11 +77,11 @@
     <h2 class="header">Function weight</h2>
   </div>
   <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
       <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
       <div id="fn-by-complexity" class="stat"></div>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
       <div id="fn-by-sloc" class="stat"></div>
     </div>
@@ -90,36 +90,36 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="span12">/*
+    <textarea id="file-source" class="col-md-12">/*
  * grunt
  * http://gruntjs.com/
  *
- * Copyright (c) 2013 "Cowboy" Ben Alman
+ * Copyright (c) 2013 &quot;Cowboy&quot; Ben Alman
  * Licensed under the MIT license.
  * https://github.com/gruntjs/grunt/blob/master/LICENSE-MIT
  */
 
-'use strict';
+&#039;use strict&#039;;
 
-var grunt = require('../grunt');
+var grunt = require(&#039;../grunt&#039;);
 
 // Nodejs libs.
-var path = require('path');
+var path = require(&#039;path&#039;);
 
 // External libs.
-var nopt = require('nopt');
+var nopt = require(&#039;nopt&#039;);
 
 // This is only executed when run via command line.
 var cli = module.exports = function(options, done) {
-  // CLI-parsed options override any passed-in "default" options.
+  // CLI-parsed options override any passed-in &quot;default&quot; options.
   if (options) {
     // For each defult option...
     Object.keys(options).forEach(function(key) {
       if (!(key in cli.options)) {
-        // If this option doesn't exist in the parsed cli.options, add it in.
+        // If this option doesn&#039;t exist in the parsed cli.options, add it in.
         cli.options[key] = options[key];
       } else if (cli.optlist[key].type === Array) {
-        // If this option's type is Array, append it to any existing array
+        // If this option&#039;s type is Array, append it to any existing array
         // (or create a new array).
         [].push.apply(cli.options[key], options[key]);
       }
@@ -133,64 +133,64 @@ var cli = module.exports = function(options, done) {
 // Default options.
 var optlist = cli.optlist = {
   help: {
-    short: 'h',
-    info: 'Display this help text.',
+    short: &#039;h&#039;,
+    info: &#039;Display this help text.&#039;,
     type: Boolean
   },
   base: {
-    info: 'Specify an alternate base path. By default, all file paths are relative to the Gruntfile. (grunt.file.setBase) *',
+    info: &#039;Specify an alternate base path. By default, all file paths are relative to the Gruntfile. (grunt.file.setBase) *&#039;,
     type: path
   },
   color: {
-    info: 'Disable colored output.',
+    info: &#039;Disable colored output.&#039;,
     type: Boolean,
     negate: true
   },
   gruntfile: {
-    info: 'Specify an alternate Gruntfile. By default, grunt looks in the current or parent directories for the nearest Gruntfile.js or Gruntfile.coffee file.',
+    info: &#039;Specify an alternate Gruntfile. By default, grunt looks in the current or parent directories for the nearest Gruntfile.js or Gruntfile.coffee file.&#039;,
     type: path
   },
   debug: {
-    short: 'd',
-    info: 'Enable debugging mode for tasks that support it.',
+    short: &#039;d&#039;,
+    info: &#039;Enable debugging mode for tasks that support it.&#039;,
     type: Number
   },
   stack: {
-    info: 'Print a stack trace when exiting with a warning or fatal error.',
+    info: &#039;Print a stack trace when exiting with a warning or fatal error.&#039;,
     type: Boolean
   },
   force: {
-    short: 'f',
-    info: 'A way to force your way past warnings. Want a suggestion? Don\'t use this option, fix your code.',
+    short: &#039;f&#039;,
+    info: &#039;A way to force your way past warnings. Want a suggestion? Don\&#039;t use this option, fix your code.&#039;,
     type: Boolean
   },
   tasks: {
-    info: 'Additional directory paths to scan for task and "extra" files. (grunt.loadTasks) *',
+    info: &#039;Additional directory paths to scan for task and &quot;extra&quot; files. (grunt.loadTasks) *&#039;,
     type: Array
   },
   npm: {
-    info: 'Npm-installed grunt plugins to scan for task and "extra" files. (grunt.loadNpmTasks) *',
+    info: &#039;Npm-installed grunt plugins to scan for task and &quot;extra&quot; files. (grunt.loadNpmTasks) *&#039;,
     type: Array
   },
   write: {
-    info: 'Disable writing files (dry run).',
+    info: &#039;Disable writing files (dry run).&#039;,
     type: Boolean,
     negate: true
   },
   verbose: {
-    short: 'v',
-    info: 'Verbose mode. A lot more information output.',
+    short: &#039;v&#039;,
+    info: &#039;Verbose mode. A lot more information output.&#039;,
     type: Boolean
   },
   version: {
-    short: 'V',
-    info: 'Print the grunt version. Combine with --verbose for more info.',
+    short: &#039;V&#039;,
+    info: &#039;Print the grunt version. Combine with --verbose for more info.&#039;,
     type: Boolean
   },
   // Even though shell auto-completion is now handled by grunt-cli, leave this
   // option here for display in the --help screen.
   completion: {
-    info: 'Output shell auto-completion rules. See the grunt-cli documentation for more information.',
+    info: &#039;Output shell auto-completion rules. See the grunt-cli documentation for more information.&#039;,
     type: String
   },
 };
@@ -202,7 +202,7 @@ var known = {};
 Object.keys(optlist).forEach(function(key) {
   var short = optlist[key].short;
   if (short) {
-    aliases[short] = '--' + key;
+    aliases[short] = &#039;--&#039; + key;
   }
   known[key] = optlist[key].type;
 });
@@ -212,9 +212,9 @@ cli.tasks = parsed.argv.remain;
 cli.options = parsed;
 delete parsed.argv;
 
-// Initialize any Array options that weren't initialized.
+// Initialize any Array options that weren&#039;t initialized.
 Object.keys(optlist).forEach(function(key) {
-  if (optlist[key].type === Array && !(key in cli.options)) {
+  if (optlist[key].type === Array &amp;&amp; !(key in cli.options)) {
     cli.options[key] = [];
   }
 });</textarea>

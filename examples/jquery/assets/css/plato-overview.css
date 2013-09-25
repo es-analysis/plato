@@ -108,3 +108,10 @@
   }
 }
 
+.complexity, .sloc, .bugs, .lint {
+  font-weight: normal;
+}
+
+.on { /* marking 'sorting buttons' active */
+  font-weight: bold;
+}

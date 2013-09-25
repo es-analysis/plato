@@ -13,7 +13,7 @@
   <![endif]-->
 
   <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
-  <link href="../../assets/css/vendor/bootstrap-3.0.0-wip.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
   <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
   <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
   <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
@@ -26,8 +26,8 @@
 
 <div class="navbar navbar-fixed-top">
   <div class="container">
-    <a class="brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
-    <ul class="nav">
+    <a class="navbar-brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
       <li>
         <a href="../../index.html">Report Home</a>
       </li>
@@ -43,29 +43,29 @@
 
 <div class="container aggregate-stats">
   <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
       <p class="stat">73.63</p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
       <p class="stat">109</p>
     </div>
   </div>
   <div class="row historical">
-    <div class="span6">
+    <div class="col-md-6">
       <p id="chart_historical_maint" class="chart"></p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <p id="chart_historical_sloc" class="chart"></p>
     </div>
   </div>
   <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
       <p class="stat">32.07</p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
       <p class="stat">0.95</p>
     </div>
@@ -77,11 +77,11 @@
     <h2 class="header">Function weight</h2>
   </div>
   <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
       <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
       <div id="fn-by-complexity" class="stat"></div>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
       <div id="fn-by-sloc" class="stat"></div>
     </div>
@@ -90,26 +90,26 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="span12">/*
+    <textarea id="file-source" class="col-md-12">/*
  * grunt
  * http://gruntjs.com/
  *
- * Copyright (c) 2013 "Cowboy" Ben Alman
+ * Copyright (c) 2013 &quot;Cowboy&quot; Ben Alman
  * Licensed under the MIT license.
  * https://github.com/gruntjs/grunt/blob/master/LICENSE-MIT
  */
 
-'use strict';
+&#039;use strict&#039;;
 
-var grunt = require('../grunt');
+var grunt = require(&#039;../grunt&#039;);
 
 // Get/set config data. If value was passed, set. Otherwise, get.
 var config = module.exports = function(prop, value) {
   if (arguments.length === 2) {
-    // Two arguments were passed, set the property's value.
+    // Two arguments were passed, set the property&#039;s value.
     return config.set(prop, value);
   } else {
-    // Get the property's value (or the entire data object).
+    // Get the property&#039;s value (or the entire data object).
     return config.get(prop);
   }
 };
@@ -119,18 +119,18 @@ config.data = {};
 
 // Escape any . in name with \. so dot-based namespacing works properly.
 config.escape = function(str) {
-  return str.replace(/\./g, '\\.');
+  return str.replace(/\./g, &#039;\\.&#039;);
 };
 
 // Return prop as a string.
 config.getPropString = function(prop) {
-  return Array.isArray(prop) ? prop.map(config.escape).join('.') : prop;
+  return Array.isArray(prop) ? prop.map(config.escape).join(&#039;.&#039;) : prop;
 };
 
 // Get raw, unprocessed config data.
 config.getRaw = function(prop) {
   if (prop) {
-    // Prop was passed, get that specific property's value.
+    // Prop was passed, get that specific property&#039;s value.
     return grunt.util.namespace.get(config.data, config.getPropString(prop));
   } else {
     // No prop was passed, return the entire config.data object.
@@ -138,9 +138,9 @@ config.getRaw = function(prop) {
   }
 };
 
-// Match '<%= FOO %>' where FOO is a propString, eg. foo or foo.bar but not
+// Match &#039;&lt;%= FOO %&gt;&#039; where FOO is a propString, eg. foo or foo.bar but not
 // a method call like foo() or foo.bar().
-var propStringTmplRe = /^<%=\s*([a-z0-9_$]+(?:\.[a-z0-9_$]+)*)\s*%>$/i;
+var propStringTmplRe = /^&lt;%=\s*([a-z0-9_$]+(?:\.[a-z0-9_$]+)*)\s*%&gt;$/i;
 
 // Get config data, recursively processing templates.
 config.get = function(prop) {
@@ -152,14 +152,14 @@ config.get = function(prop) {
 config.process = function(raw) {
   return grunt.util.recurse(raw, function(value) {
     // If the value is not a string, return it.
-    if (typeof value !== 'string') { return value; }
+    if (typeof value !== &#039;string&#039;) { return value; }
     // If possible, access the specified property via config.get, in case it
-    // doesn't refer to a string, but instead refers to an object or array.
+    // doesn&#039;t refer to a string, but instead refers to an object or array.
     var matches = value.match(propStringTmplRe);
     var result;
     if (matches) {
       result = config.get(matches[1]);
-      // If the result retrieved from the config data wasn't null or undefined,
+      // If the result retrieved from the config data wasn&#039;t null or undefined,
       // return it.
       if (result != null) { return result; }
     }
@@ -175,7 +175,7 @@ config.set = function(prop, value) {
 
 // Initialize config data.
 config.init = function(obj) {
-  grunt.verbose.write('Initializing config...').ok();
+  grunt.verbose.write(&#039;Initializing config...&#039;).ok();
   // Initialize and return data.
   return (config.data = obj || {});
 };
@@ -185,26 +185,26 @@ config.init = function(obj) {
 config.requires = function() {
   var p = grunt.util.pluralize;
   var props = grunt.util.toArray(arguments).map(config.getPropString);
-  var msg = 'Verifying propert' + p(props.length, 'y/ies') +
-    ' ' + grunt.log.wordlist(props) + ' exist' + p(props.length, 's') +
-    ' in config...';
+  var msg = &#039;Verifying propert&#039; + p(props.length, &#039;y/ies&#039;) +
+    &#039; &#039; + grunt.log.wordlist(props) + &#039; exist&#039; + p(props.length, &#039;s&#039;) +
+    &#039; in config...&#039;;
   grunt.verbose.write(msg);
-  var failProps = config.data && props.filter(function(prop) {
+  var failProps = config.data &amp;&amp; props.filter(function(prop) {
     return config.get(prop) == null;
   }).map(function(prop) {
-    return '"' + prop + '"';
+    return &#039;&quot;&#039; + prop + &#039;&quot;&#039;;
   });
-  if (config.data && failProps.length === 0) {
+  if (config.data &amp;&amp; failProps.length === 0) {
     grunt.verbose.ok();
     return true;
   } else {
     grunt.verbose.or.write(msg);
-    grunt.log.error().error('Unable to process task.');
+    grunt.log.error().error(&#039;Unable to process task.&#039;);
     if (!config.data) {
-      throw grunt.util.error('Unable to load config.');
+      throw grunt.util.error(&#039;Unable to load config.&#039;);
     } else {
-      throw grunt.util.error('Required config propert' +
-        p(failProps.length, 'y/ies') + ' ' + failProps.join(', ') + ' missing.');
+      throw grunt.util.error(&#039;Required config propert&#039; +
+        p(failProps.length, &#039;y/ies&#039;) + &#039; &#039; + failProps.join(&#039;, &#039;) + &#039; missing.&#039;);
     }
   }
 };</textarea>

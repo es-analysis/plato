@@ -13,7 +13,7 @@
   <![endif]-->
 
   <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
-  <link href="../../assets/css/vendor/bootstrap-3.0.0-wip.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
   <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
   <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
   <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
@@ -26,8 +26,8 @@
 
 <div class="navbar navbar-fixed-top">
   <div class="container">
-    <a class="brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
-    <ul class="nav">
+    <a class="navbar-brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
       <li>
         <a href="../../index.html">Report Home</a>
       </li>
@@ -43,29 +43,29 @@
 
 <div class="container aggregate-stats">
   <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
       <p class="stat">64.46</p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
       <p class="stat">436</p>
     </div>
   </div>
   <div class="row historical">
-    <div class="span6">
+    <div class="col-md-6">
       <p id="chart_historical_maint" class="chart"></p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <p id="chart_historical_sloc" class="chart"></p>
     </div>
   </div>
   <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
       <p class="stat">69.78</p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
       <p class="stat">5.42</p>
     </div>
@@ -77,11 +77,11 @@
     <h2 class="header">Function weight</h2>
   </div>
   <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
       <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
       <div id="fn-by-complexity" class="stat"></div>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
       <div id="fn-by-sloc" class="stat"></div>
     </div>
@@ -90,23 +90,23 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="span12">/*
+    <textarea id="file-source" class="col-md-12">/*
  * grunt
  * http://gruntjs.com/
  *
- * Copyright (c) 2013 "Cowboy" Ben Alman
+ * Copyright (c) 2013 &quot;Cowboy&quot; Ben Alman
  * Licensed under the MIT license.
  * https://github.com/gruntjs/grunt/blob/master/LICENSE-MIT
  */
 
-'use strict';
+&#039;use strict&#039;;
 
-var grunt = require('../grunt');
+var grunt = require(&#039;../grunt&#039;);
 
 // Nodejs libs.
-var path = require('path');
+var path = require(&#039;path&#039;);
 
-// Extend generic "task" util lib.
+// Extend generic &quot;task&quot; util lib.
 var parent = grunt.util.task.create();
 
 // The module to be exported.
@@ -130,7 +130,7 @@ task.registerTask = function(name) {
   registry.tasks.push(name);
   // Register task.
   parent.registerTask.apply(task, arguments);
-  // This task, now that it's been registered.
+  // This task, now that it&#039;s been registered.
   var thisTask = task._tasks[name];
   // Metadata about the current task.
   thisTask.meta = grunt.util._.clone(registry.meta);
@@ -140,7 +140,7 @@ task.registerTask = function(name) {
     // Initialize the errorcount for this task.
     errorcount = grunt.fail.errorcount;
     // Return the number of errors logged during this task.
-    Object.defineProperty(this, 'errorCount', {
+    Object.defineProperty(this, &#039;errorCount&#039;, {
       enumerable: true,
       get: function() {
         return grunt.fail.errorcount - errorcount;
@@ -150,29 +150,29 @@ task.registerTask = function(name) {
     this.requires = task.requires.bind(task);
     // Expose config.requires on `this`.
     this.requiresConfig = grunt.config.requires;
-    // Return an options object with the specified defaults overriden by task-
-    // specific overrides, via the "options" property.
+    // Return an options object with the specified defaults overwritten by task-
+    // specific overrides, via the &quot;options&quot; property.
     this.options = function() {
       var args = [{}].concat(grunt.util.toArray(arguments)).concat([
-        grunt.config([name, 'options'])
+        grunt.config([name, &#039;options&#039;])
       ]);
       return grunt.util._.extend.apply(null, args);
     };
     // If this task was an alias or a multi task called without a target,
     // only log if in verbose mode.
-    var logger = _fn.alias || (thisTask.multi && (!arg || arg === '*')) ? 'verbose' : 'log';
+    var logger = _fn.alias || (thisTask.multi &amp;&amp; (!arg || arg === &#039;*&#039;)) ? &#039;verbose&#039; : &#039;log&#039;;
     // Actually log.
-    grunt[logger].header('Running "' + this.nameArgs + '"' +
-      (this.name !== this.nameArgs ? ' (' + this.name + ')' : '') + ' task');
-    // If --debug was specified, log the path to this task's source file.
-    grunt[logger].debug('Task source: ' + thisTask.meta.filepath);
+    grunt[logger].header(&#039;Running &quot;&#039; + this.nameArgs + &#039;&quot;&#039; +
+      (this.name !== this.nameArgs ? &#039; (&#039; + this.name + &#039;)&#039; : &#039;&#039;) + &#039; task&#039;);
+    // If --debug was specified, log the path to this task&#039;s source file.
+    grunt[logger].debug(&#039;Task source: &#039; + thisTask.meta.filepath);
     // Actually run the task.
     return _fn.apply(this, arguments);
   };
   return task;
 };
 
-// Multi task targets can't start with _ or be a reserved property (options).
+// Multi task targets can&#039;t start with _ or be a reserved property (options).
 function isValidMultiTaskTarget(target) {
   return !/^_|^options$/.test(target);
 }
@@ -181,23 +181,23 @@ function isValidMultiTaskTarget(target) {
 task.normalizeMultiTaskFiles = function(data, target) {
   var prop, obj;
   var files = [];
-  if (grunt.util.kindOf(data) === 'object') {
-    if ('src' in data || 'dest' in data) {
+  if (grunt.util.kindOf(data) === &#039;object&#039;) {
+    if (&#039;src&#039; in data || &#039;dest&#039; in data) {
       obj = {};
       for (prop in data) {
-        if (prop !== 'options') {
+        if (prop !== &#039;options&#039;) {
           obj[prop] = data[prop];
         }
       }
       files.push(obj);
-    } else if (grunt.util.kindOf(data.files) === 'object') {
+    } else if (grunt.util.kindOf(data.files) === &#039;object&#039;) {
       for (prop in data.files) {
         files.push({src: data.files[prop], dest: grunt.config.process(prop)});
       }
     } else if (Array.isArray(data.files)) {
       data.files.forEach(function(obj) {
         var prop;
-        if ('src' in obj || 'dest' in obj) {
+        if (&#039;src&#039; in obj || &#039;dest&#039; in obj) {
           files.push(obj);
         } else {
           for (prop in obj) {
@@ -212,13 +212,13 @@ task.normalizeMultiTaskFiles = function(data, target) {
 
   // If no src/dest or files were specified, return an empty files array.
   if (files.length === 0) {
-    grunt.verbose.writeln('File: ' + '[no files]'.yellow);
+    grunt.verbose.writeln(&#039;File: &#039; + &#039;[no files]&#039;.yellow);
     return [];
   }
 
   // Process all normalized file objects.
   files = grunt.util._(files).chain().forEach(function(obj) {
-    if (!('src' in obj) || !obj.src) { return; }
+    if (!(&#039;src&#039; in obj) || !obj.src) { return; }
     // Normalize .src properties to flattened array.
     if (Array.isArray(obj.src)) {
       obj.src = grunt.util._.flatten(obj.src);
@@ -242,7 +242,7 @@ task.normalizeMultiTaskFiles = function(data, target) {
         result.src = grunt.config.process(mapObj.src);
         result.dest = grunt.config.process(mapObj.dest);
         // Remove unwanted properties.
-        ['expand', 'cwd', 'flatten', 'rename', 'ext'].forEach(function(prop) {
+        [&#039;expand&#039;, &#039;cwd&#039;, &#039;flatten&#039;, &#039;rename&#039;, &#039;ext&#039;].forEach(function(prop) {
           delete result[prop];
         });
         return result;
@@ -254,13 +254,13 @@ task.normalizeMultiTaskFiles = function(data, target) {
     // Make a clone of the orig obj available.
     result.orig = grunt.util._.extend({}, obj);
 
-    if ('src' in result) {
+    if (&#039;src&#039; in result) {
       // Expose an expand-on-demand getter method as .src.
-      Object.defineProperty(result, 'src', {
+      Object.defineProperty(result, &#039;src&#039;, {
         enumerable: true,
         get: function fn() {
           var src;
-          if (!('result' in fn)) {
+          if (!(&#039;result&#039; in fn)) {
             src = obj.src;
             // If src is an array, flatten it. Otherwise, make it into an array.
             src = Array.isArray(src) ? grunt.util._.flatten(src) : [src];
@@ -272,7 +272,7 @@ task.normalizeMultiTaskFiles = function(data, target) {
       });
     }
 
-    if ('dest' in result) {
+    if (&#039;dest&#039; in result) {
       result.dest = obj.dest;
     }
 
@@ -280,17 +280,17 @@ task.normalizeMultiTaskFiles = function(data, target) {
   }).flatten().value();
 
   // Log this.file src and dest properties when --verbose is specified.
-  if (grunt.option('verbose')) {
+  if (grunt.option(&#039;verbose&#039;)) {
     files.forEach(function(obj) {
       var output = [];
-      if ('src' in obj) {
-        output.push(obj.src.length > 0 ? grunt.log.wordlist(obj.src) : '[no src]'.yellow);
+      if (&#039;src&#039; in obj) {
+        output.push(obj.src.length &gt; 0 ? grunt.log.wordlist(obj.src) : &#039;[no src]&#039;.yellow);
       }
-      if ('dest' in obj) {
-        output.push('-> ' + (obj.dest ? String(obj.dest).cyan : '[no dest]'.yellow));
+      if (&#039;dest&#039; in obj) {
+        output.push(&#039;-&gt; &#039; + (obj.dest ? String(obj.dest).cyan : &#039;[no dest]&#039;.yellow));
       }
-      if (output.length > 0) {
-        grunt.verbose.writeln('Files: ' + output.join(' '));
+      if (output.length &gt; 0) {
+        grunt.verbose.writeln(&#039;Files: &#039; + output.join(&#039; &#039;));
       }
     });
   }
@@ -298,12 +298,12 @@ task.normalizeMultiTaskFiles = function(data, target) {
   return files;
 };
 
-// This is the most common "multi task" pattern.
+// This is the most common &quot;multi task&quot; pattern.
 task.registerMultiTask = function(name, info, fn) {
-  // If optional "info" string is omitted, shuffle arguments a bit.
+  // If optional &quot;info&quot; string is omitted, shuffle arguments a bit.
   if (fn == null) {
     fn = info;
-    info = 'Custom multi task.';
+    info = &#039;Custom multi task.&#039;;
   }
   // Store a reference to the task object, in case the task gets renamed.
   var thisTask;
@@ -312,21 +312,21 @@ task.registerMultiTask = function(name, info, fn) {
     var name = thisTask.name;
     // Arguments (sans target) as an array.
     this.args = grunt.util.toArray(arguments).slice(1);
-    // If a target wasn't specified, run this task once for each target.
-    if (!target || target === '*') {
+    // If a target wasn&#039;t specified, run this task once for each target.
+    if (!target || target === &#039;*&#039;) {
       return task.runAllTargets(name, this.args);
     } else if (!isValidMultiTaskTarget(target)) {
-      throw new Error('Invalid target "' + target + '" specified.');
+      throw new Error(&#039;Invalid target &quot;&#039; + target + &#039;&quot; specified.&#039;);
     }
     // Fail if any required config properties have been omitted.
     this.requiresConfig([name, target]);
-    // Return an options object with the specified defaults overriden by task-
-    // and/or target-specific overrides, via the "options" property.
+    // Return an options object with the specified defaults overwritten by task-
+    // and/or target-specific overrides, via the &quot;options&quot; property.
     this.options = function() {
       var targetObj = grunt.config([name, target]);
       var args = [{}].concat(grunt.util.toArray(arguments)).concat([
-        grunt.config([name, 'options']),
-        grunt.util.kindOf(targetObj) === 'object' ? targetObj.options : {}
+        grunt.config([name, &#039;options&#039;]),
+        grunt.util.kindOf(targetObj) === &#039;object&#039; ? targetObj.options : {}
       ]);
       return grunt.util._.extend.apply(null, args);
     };
@@ -335,15 +335,15 @@ task.registerMultiTask = function(name, info, fn) {
     // Expose normalized files object.
     this.files = task.normalizeMultiTaskFiles(this.data, target);
     // Expose normalized, flattened, uniqued array of src files.
-    Object.defineProperty(this, 'filesSrc', {
+    Object.defineProperty(this, &#039;filesSrc&#039;, {
       enumerable: true,
       get: function() {
-        return grunt.util._(this.files).chain().pluck('src').flatten().uniq().value();
+        return grunt.util._(this.files).chain().pluck(&#039;src&#039;).flatten().uniq().value();
       }.bind(this)
     });
     // Expose the current target.
     this.target = target;
-    // Recreate flags object so that the target isn't set as a flag.
+    // Recreate flags object so that the target isn&#039;t set as a flag.
     this.flags = {};
     this.args.forEach(function(arg) { this.flags[arg] = true; }, this);
     // Call original task function, passing in the target and any other args.
@@ -354,7 +354,7 @@ task.registerMultiTask = function(name, info, fn) {
   thisTask.multi = true;
 };
 
-// Init tasks don't require properties in config, and as such will preempt
+// Init tasks don&#039;t require properties in config, and as such will preempt
 // config loading errors.
 task.registerInitTask = function(name, info, fn) {
   task.registerTask(name, info, fn);
@@ -370,19 +370,19 @@ task.renameTask = function(oldname, newname) {
   return parent.renameTask.apply(task, arguments);
 };
 
-// If a property wasn't passed, run all task targets in turn.
+// If a property wasn&#039;t passed, run all task targets in turn.
 task.runAllTargets = function(taskname, args) {
   // Get an array of sub-property keys under the given config object.
   var targets = Object.keys(grunt.config.getRaw(taskname) || {});
   // Fail if there are no actual properties to iterate over.
   if (targets.length === 0) {
-    grunt.log.error('No "' + taskname + '" targets found.');
+    grunt.log.error(&#039;No &quot;&#039; + taskname + &#039;&quot; targets found.&#039;);
     return false;
   }
   // Iterate over all valid target properties, running a task for each.
   targets.filter(isValidMultiTaskTarget).forEach(function(target) {
     // Be sure to pass in any additionally specified args.
-    task.run([taskname, target].concat(args || []).join(':'));
+    task.run([taskname, target].concat(args || []).join(&#039;:&#039;));
   });
 };
 
@@ -394,26 +394,26 @@ function loadTask(filepath) {
   // Reset registry.
   registry = {tasks: [], untasks: [], meta: {info: lastInfo, filepath: filepath}};
   var filename = path.basename(filepath);
-  var msg = 'Loading "' + filename + '" tasks...';
+  var msg = &#039;Loading &quot;&#039; + filename + &#039;&quot; tasks...&#039;;
   var regCount = 0;
   var fn;
   try {
     // Load taskfile.
     fn = require(path.resolve(filepath));
-    if (typeof fn === 'function') {
+    if (typeof fn === &#039;function&#039;) {
       fn.call(grunt, grunt);
     }
     grunt.verbose.write(msg).ok();
     // Log registered/renamed/unregistered tasks.
-    ['un', ''].forEach(function(prefix) {
-      var list = grunt.util._.chain(registry[prefix + 'tasks']).uniq().sort().value();
-      if (list.length > 0) {
+    [&#039;un&#039;, &#039;&#039;].forEach(function(prefix) {
+      var list = grunt.util._.chain(registry[prefix + &#039;tasks&#039;]).uniq().sort().value();
+      if (list.length &gt; 0) {
         regCount++;
-        grunt.verbose.writeln((prefix ? '- ' : '+ ') + grunt.log.wordlist(list));
+        grunt.verbose.writeln((prefix ? &#039;- &#039; : &#039;+ &#039;) + grunt.log.wordlist(list));
       }
     });
     if (regCount === 0) {
-      grunt.verbose.error('No tasks were registered or unregistered.');
+      grunt.verbose.error(&#039;No tasks were registered or unregistered.&#039;);
     }
   } catch(e) {
     // Something went wrong.
@@ -428,13 +428,13 @@ function loadTasksMessage(info) {
   // Only keep track of names of top-level loaded tasks and collections,
   // not sub-tasks.
   if (loadTaskDepth === 0) { lastInfo = info; }
-  grunt.verbose.subhead('Registering ' + info + ' tasks.');
+  grunt.verbose.subhead(&#039;Registering &#039; + info + &#039; tasks.&#039;);
 }
 
 // Load tasks and handlers from a given directory.
 function loadTasks(tasksdir) {
   try {
-    var files = grunt.file.glob.sync('*.{js,coffee}', {cwd: tasksdir, maxDepth: 1});
+    var files = grunt.file.glob.sync(&#039;*.{js,coffee}&#039;, {cwd: tasksdir, maxDepth: 1});
     // Load tasks from files.
     files.forEach(function(filename) {
       loadTask(path.join(tasksdir, filename));
@@ -446,30 +446,30 @@ function loadTasks(tasksdir) {
 
 // Load tasks and handlers from a given directory.
 task.loadTasks = function(tasksdir) {
-  loadTasksMessage('"' + tasksdir + '"');
+  loadTasksMessage(&#039;&quot;&#039; + tasksdir + &#039;&quot;&#039;);
   if (grunt.file.exists(tasksdir)) {
     loadTasks(tasksdir);
   } else {
-    grunt.log.error('Tasks directory "' + tasksdir + '" not found.');
+    grunt.log.error(&#039;Tasks directory &quot;&#039; + tasksdir + &#039;&quot; not found.&#039;);
   }
 };
 
 // Load tasks and handlers from a given locally-installed Npm module (installed
 // relative to the base dir).
 task.loadNpmTasks = function(name) {
-  loadTasksMessage('"' + name + '" local Npm module');
-  var root = path.resolve('node_modules');
-  var pkgfile = path.join(root, name, 'package.json');
+  loadTasksMessage(&#039;&quot;&#039; + name + &#039;&quot; local Npm module&#039;);
+  var root = path.resolve(&#039;node_modules&#039;);
+  var pkgfile = path.join(root, name, &#039;package.json&#039;);
   var pkg = grunt.file.exists(pkgfile) ? grunt.file.readJSON(pkgfile) : {keywords: []};
 
   // Process collection plugins.
-  if (pkg.keywords && pkg.keywords.indexOf('gruntcollection') !== -1) {
+  if (pkg.keywords &amp;&amp; pkg.keywords.indexOf(&#039;gruntcollection&#039;) !== -1) {
     loadTaskDepth++;
     Object.keys(pkg.dependencies).forEach(function(depName) {
-      // Npm sometimes pulls dependencies out if they're shared, so find
+      // Npm sometimes pulls dependencies out if they&#039;re shared, so find
       // upwards if not found locally.
-      var filepath = grunt.file.findup('node_modules/' + depName, {
-        cwd: path.resolve('node_modules', name),
+      var filepath = grunt.file.findup(&#039;node_modules/&#039; + depName, {
+        cwd: path.resolve(&#039;node_modules&#039;, name),
         nocase: true
       });
       if (filepath) {
@@ -482,11 +482,11 @@ task.loadNpmTasks = function(name) {
   }
 
   // Process task plugins.
-  var tasksdir = path.join(root, name, 'tasks');
+  var tasksdir = path.join(root, name, &#039;tasks&#039;);
   if (grunt.file.exists(tasksdir)) {
     loadTasks(tasksdir);
   } else {
-    grunt.log.error('Local Npm module "' + name + '" not found. Is it installed?');
+    grunt.log.error(&#039;Local Npm module &quot;&#039; + name + &#039;&quot; not found. Is it installed?&#039;);
   }
 };
 
@@ -495,45 +495,45 @@ task.init = function(tasks, options) {
   if (!options) { options = {}; }
 
   // Were only init tasks specified?
-  var allInit = tasks.length > 0 && tasks.every(function(name) {
+  var allInit = tasks.length &gt; 0 &amp;&amp; tasks.every(function(name) {
     var obj = task._taskPlusArgs(name).task;
-    return obj && obj.init;
+    return obj &amp;&amp; obj.init;
   });
 
   // Get any local Gruntfile or tasks that might exist. Use --gruntfile override
   // if specified, otherwise search the current directory or any parent.
-  var gruntfile = allInit ? null : grunt.option('gruntfile') ||
-    grunt.file.findup('Gruntfile.{js,coffee}', {nocase: true});
+  var gruntfile = allInit ? null : grunt.option(&#039;gruntfile&#039;) ||
+    grunt.file.findup(&#039;Gruntfile.{js,coffee}&#039;, {nocase: true});
 
-  var msg = 'Reading "' + (gruntfile ? path.basename(gruntfile) : '???') + '" Gruntfile...';
-  if (gruntfile && grunt.file.exists(gruntfile)) {
+  var msg = &#039;Reading &quot;&#039; + (gruntfile ? path.basename(gruntfile) : &#039;???&#039;) + &#039;&quot; Gruntfile...&#039;;
+  if (gruntfile &amp;&amp; grunt.file.exists(gruntfile)) {
     grunt.verbose.writeln().write(msg).ok();
     // Change working directory so that all paths are relative to the
-    // Gruntfile's location (or the --base option, if specified).
-    process.chdir(grunt.option('base') || path.dirname(gruntfile));
+    // Gruntfile&#039;s location (or the --base option, if specified).
+    process.chdir(grunt.option(&#039;base&#039;) || path.dirname(gruntfile));
     // Load local tasks, if the file exists.
-    loadTasksMessage('Gruntfile');
+    loadTasksMessage(&#039;Gruntfile&#039;);
     loadTask(gruntfile);
   } else if (options.help || allInit) {
-    // Don't complain about missing Gruntfile.
-  } else if (grunt.option('gruntfile')) {
-    // If --config override was specified and it doesn't exist, complain.
+    // Don&#039;t complain about missing Gruntfile.
+  } else if (grunt.option(&#039;gruntfile&#039;)) {
+    // If --config override was specified and it doesn&#039;t exist, complain.
     grunt.log.writeln().write(msg).error();
-    grunt.fatal('Unable to find "' + gruntfile + '" Gruntfile.', grunt.fail.code.MISSING_GRUNTFILE);
-  } else if (!grunt.option('help')) {
+    grunt.fatal(&#039;Unable to find &quot;&#039; + gruntfile + &#039;&quot; Gruntfile.&#039;, grunt.fail.code.MISSING_GRUNTFILE);
+  } else if (!grunt.option(&#039;help&#039;)) {
     grunt.verbose.writeln().write(msg).error();
     grunt.log.writelns(
-      'A valid Gruntfile could not be found. Please see the getting ' +
-      'started guide for more information on how to configure grunt: ' +
-      'http://gruntjs.com/getting-started'
+      &#039;A valid Gruntfile could not be found. Please see the getting &#039; +
+      &#039;started guide for more information on how to configure grunt: &#039; +
+      &#039;http://gruntjs.com/getting-started&#039;
     );
-    grunt.fatal('Unable to find Gruntfile.', grunt.fail.code.MISSING_GRUNTFILE);
+    grunt.fatal(&#039;Unable to find Gruntfile.&#039;, grunt.fail.code.MISSING_GRUNTFILE);
   }
 
   // Load all user-specified --npm tasks.
-  (grunt.option('npm') || []).forEach(task.loadNpmTasks);
+  (grunt.option(&#039;npm&#039;) || []).forEach(task.loadNpmTasks);
   // Load all user-specified --tasks.
-  (grunt.option('tasks') || []).forEach(task.loadTasks);
+  (grunt.option(&#039;tasks&#039;) || []).forEach(task.loadTasks);
 };</textarea>
   </div>
 </div>

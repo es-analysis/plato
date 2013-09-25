@@ -13,7 +13,7 @@
   <![endif]-->
 
   <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
-  <link href="../../assets/css/vendor/bootstrap-3.0.0-wip.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
   <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
   <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
   <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
@@ -26,8 +26,8 @@
 
 <div class="navbar navbar-fixed-top">
   <div class="container">
-    <a class="brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
-    <ul class="nav">
+    <a class="navbar-brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
       <li>
         <a href="../../index.html">Report Home</a>
       </li>
@@ -43,31 +43,31 @@
 
 <div class="container aggregate-stats">
   <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">67.40</p>
+      <p class="stat">67.16</p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">181</p>
+      <p class="stat">188</p>
     </div>
   </div>
   <div class="row historical">
-    <div class="span6">
+    <div class="col-md-6">
       <p id="chart_historical_maint" class="chart"></p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <p id="chart_historical_sloc" class="chart"></p>
     </div>
   </div>
   <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">32.21</p>
+      <p class="stat">32.04</p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">0.88</p>
+      <p class="stat">0.92</p>
     </div>
   </div>
 </div>
@@ -77,11 +77,11 @@
     <h2 class="header">Function weight</h2>
   </div>
   <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
       <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
       <div id="fn-by-complexity" class="stat"></div>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
       <div id="fn-by-sloc" class="stat"></div>
     </div>
@@ -90,7 +90,7 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="span12">// Region 
+    <textarea id="file-source" class="col-md-12">// Region 
 // ------
 //
 // Manage the visual regions of your composite application. See
@@ -99,11 +99,11 @@
 Marionette.Region = function(options){
   this.options = options || {};
 
-  this.el = Marionette.getOption(this, "el");
+  this.el = Marionette.getOption(this, &quot;el&quot;);
 
   if (!this.el){
-    var err = new Error("An 'el' must be specified for a region.");
-    err.name = "NoElError";
+    var err = new Error(&quot;An &#039;el&#039; must be specified for a region.&quot;);
+    err.name = &quot;NoElError&quot;;
     throw err;
   }
 
@@ -128,19 +128,20 @@ _.extend(Marionette.Region, {
   //
   // ```js
   // {
-  //   selector: "#foo",
+  //   selector: &quot;#foo&quot;,
   //   regionType: MyCustomRegion
   // }
   // ```
   //
   buildRegion: function(regionConfig, defaultRegionType){
-    var regionIsString = (typeof regionConfig === "string");
-    var regionSelectorIsString = (typeof regionConfig.selector === "string");
-    var regionTypeIsUndefined = (typeof regionConfig.regionType === "undefined");
-    var regionIsType = (typeof regionConfig === "function");
 
-    if (!regionIsType && !regionIsString && !regionSelectorIsString) {
-      throw new Error("Region must be specified as a Region type, a selector string or an object with selector property");
+    var regionIsString = (typeof regionConfig === &quot;string&quot;);
+    var regionSelectorIsString = (typeof regionConfig.selector === &quot;string&quot;);
+    var regionTypeIsUndefined = (typeof regionConfig.regionType === &quot;undefined&quot;);
+    var regionIsType = (typeof regionConfig === &quot;function&quot;);
+
+    if (!regionIsType &amp;&amp; !regionIsString &amp;&amp; !regionSelectorIsString) {
+      throw new Error(&quot;Region must be specified as a Region type, a selector string or an object with selector property&quot;);
     }
 
     var selector, RegionType;
@@ -161,7 +162,7 @@ _.extend(Marionette.Region, {
       RegionType = regionConfig;
     }
 
-    if (!regionIsType && regionTypeIsUndefined) {
+    if (!regionIsType &amp;&amp; regionTypeIsUndefined) {
       RegionType = defaultRegionType;
     }
 
@@ -177,7 +178,7 @@ _.extend(Marionette.Region, {
     // override the `getEl` function if we have a parentEl
     // this must be overridden to ensure the selector is found
     // on the first use of the region. if we try to assign the
-    // region's `el` to `parentEl.find(selector)` in the object
+    // region&#039;s `el` to `parentEl.find(selector)` in the object
     // literal to build the region, the element will not be
     // guaranteed to be in the DOM already, and will cause problems
     if (regionConfig.parentEl){
@@ -210,18 +211,24 @@ _.extend(Marionette.Region.prototype, Backbone.Events, {
 
     this.ensureEl();
 
-    if (view !== this.currentView) {
+    var isViewClosed = view.isClosed || _.isUndefined(view.$el);
+
+    var isDifferentView = view !== this.currentView;
+
+    if (isDifferentView) {
       this.close();
-      view.render();
-      this.open(view);
-    } else {
-      view.render();
     }
 
-    Marionette.triggerMethod.call(view, "show");
-    Marionette.triggerMethod.call(this, "show", view);
+    view.render();
 
+    if (isDifferentView || isViewClosed) {
+      this.open(view);
+    }
+    
     this.currentView = view;
+
+    Marionette.triggerMethod.call(this, &quot;show&quot;, view);
+    Marionette.triggerMethod.call(view, &quot;show&quot;);
   },
 
   ensureEl: function(){
@@ -248,11 +255,11 @@ _.extend(Marionette.Region.prototype, Backbone.Events, {
     var view = this.currentView;
     if (!view || view.isClosed){ return; }
 
-    // call 'close' or 'remove', depending on which is found
+    // call &#039;close&#039; or &#039;remove&#039;, depending on which is found
     if (view.close) { view.close(); }
     else if (view.remove) { view.remove(); }
 
-    Marionette.triggerMethod.call(this, "close");
+    Marionette.triggerMethod.call(this, &quot;close&quot;);
 
     delete this.currentView;
   },
@@ -268,14 +275,14 @@ _.extend(Marionette.Region.prototype, Backbone.Events, {
   // Reset the region by closing any existing view and
   // clearing out the cached `$el`. The next time a view
   // is shown via this region, the region will re-query the
-  // DOM for the region's `el`.
+  // DOM for the region&#039;s `el`.
   reset: function(){
     this.close();
     delete this.$el;
   }
 });
 
-// Copy the `extend` function used by Backbone's classes
+// Copy the `extend` function used by Backbone&#039;s classes
 Marionette.Region.extend = Marionette.extend;</textarea>
   </div>
 </div>

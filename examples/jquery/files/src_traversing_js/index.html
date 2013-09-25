@@ -13,7 +13,7 @@
   <![endif]-->
 
   <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
-  <link href="../../assets/css/vendor/bootstrap-3.0.0-wip.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
   <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
   <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
   <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
@@ -26,8 +26,8 @@
 
 <div class="navbar navbar-fixed-top">
   <div class="container">
-    <a class="brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
-    <ul class="nav">
+    <a class="navbar-brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
       <li>
         <a href="../../index.html">Report Home</a>
       </li>
@@ -43,31 +43,31 @@
 
 <div class="container aggregate-stats">
   <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">74.42</p>
+      <p class="stat">71.97</p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">287</p>
+      <p class="stat">201</p>
     </div>
   </div>
   <div class="row historical">
-    <div class="span6">
+    <div class="col-md-6">
       <p id="chart_historical_maint" class="chart"></p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <p id="chart_historical_sloc" class="chart"></p>
     </div>
   </div>
   <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">73.95</p>
+      <p class="stat">53.76</p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">2.61</p>
+      <p class="stat">1.66</p>
     </div>
   </div>
 </div>
@@ -77,11 +77,11 @@
     <h2 class="header">Function weight</h2>
   </div>
   <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
       <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
       <div id="fn-by-complexity" class="stat"></div>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
       <div id="fn-by-sloc" class="stat"></div>
     </div>
@@ -90,10 +90,16 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="span12">var runtil = /Until$/,
-	rparentsprev = /^(?:parents|prev(?:Until|All))/,
-	isSimple = /^.[^:#\[\.,]*$/,
-	rneedsContext = jQuery.expr.match.needsContext,
+    <textarea id="file-source" class="col-md-12">define([
+	&quot;./core&quot;,
+	&quot;./var/indexOf&quot;,
+	&quot;./traversing/var/rneedsContext&quot;,
+	&quot;./core/init&quot;,
+	&quot;./traversing/findFilter&quot;,
+	&quot;./selector&quot;
+], function( jQuery, indexOf, rneedsContext ) {
+
+var rparentsprev = /^(?:parents|prev(?:Until|All))/,
 	// methods guaranteed to produce a unique set when starting from a unique set
 	guaranteedUnique = {
 		children: true,
@@ -102,40 +108,43 @@
 		prev: true
 	};
 
-jQuery.fn.extend({
-	find: function( selector ) {
-		var self, matched, i,
-			l = this.length;
+jQuery.extend({
+	dir: function( elem, dir, until ) {
+		var matched = [],
+			truncate = until !== undefined;
 
-		if ( typeof selector !== "string" ) {
-			self = this;
-			return this.pushStack( jQuery( selector ).filter(function() {
-				for ( i = 0; i < l; i++ ) {
-					if ( jQuery.contains( self[ i ], this ) ) {
-						return true;
-					}
+		while ( (elem = elem[ dir ]) &amp;&amp; elem.nodeType !== 9 ) {
+			if ( elem.nodeType === 1 ) {
+				if ( truncate &amp;&amp; jQuery( elem ).is( until ) ) {
+					break;
 				}
-			}) );
+				matched.push( elem );
+			}
 		}
-
-		matched = [];
-		for ( i = 0; i < l; i++ ) {
-			jQuery.find( selector, this[ i ], matched );
-		}
-
-		// Needed because $( selector, context ) becomes $( context ).find( selector )
-		matched = this.pushStack( l > 1 ? jQuery.unique( matched ) : matched );
-		matched.selector = ( this.selector ? this.selector + " " : "" ) + selector;
 		return matched;
 	},
 
+	sibling: function( n, elem ) {
+		var matched = [];
+
+		for ( ; n; n = n.nextSibling ) {
+			if ( n.nodeType === 1 &amp;&amp; n !== elem ) {
+				matched.push( n );
+			}
+		}
+
+		return matched;
+	}
+});
+
+jQuery.fn.extend({
 	has: function( target ) {
 		var targets = jQuery( target, this ),
 			l = targets.length;
 
 		return this.filter(function() {
 			var i = 0;
-			for ( ; i < l; i++ ) {
+			for ( ; i &lt; l; i++ ) {
 				if ( jQuery.contains( this, targets[i] ) ) {
 					return true;
 				}
@@ -143,42 +152,23 @@ jQuery.fn.extend({
 		});
 	},
 
-	not: function( selector ) {
-		return this.pushStack( winnow(this, selector, false) );
-	},
-
-	filter: function( selector ) {
-		return this.pushStack( winnow(this, selector, true) );
-	},
-
-	is: function( selector ) {
-		return !!selector && (
-			typeof selector === "string" ?
-				// If this is a positional/relative selector, check membership in the returned set
-				// so $("p:first").is("p:last") won't return true for a doc with two "p".
-				rneedsContext.test( selector ) ?
-					jQuery( selector, this.context ).index( this[ 0 ] ) >= 0 :
-					jQuery.filter( selector, this ).length > 0 :
-				this.filter( selector ).length > 0 );
-	},
-
 	closest: function( selectors, context ) {
 		var cur,
 			i = 0,
 			l = this.length,
 			matched = [],
-			pos = ( rneedsContext.test( selectors ) || typeof selectors !== "string" ) ?
+			pos = ( rneedsContext.test( selectors ) || typeof selectors !== &quot;string&quot; ) ?
 				jQuery( selectors, context || this.context ) :
 				0;
 
-		for ( ; i < l; i++ ) {
-			for ( cur = this[i]; cur && cur !== context; cur = cur.parentNode ) {
+		for ( ; i &lt; l; i++ ) {
+			for ( cur = this[i]; cur &amp;&amp; cur !== context; cur = cur.parentNode ) {
 				// Always skip document fragments
-				if ( cur.nodeType < 11 && (pos ?
-					pos.index(cur) > -1 :
+				if ( cur.nodeType &lt; 11 &amp;&amp; (pos ?
+					pos.index(cur) &gt; -1 :
 
-					// Don't pass non-elements to Sizzle
-					cur.nodeType === 1 &&
+					// Don&#039;t pass non-elements to Sizzle
+					cur.nodeType === 1 &amp;&amp;
 						jQuery.find.matchesSelector(cur, selectors)) ) {
 
 					cur = matched.push( cur );
@@ -187,7 +177,7 @@ jQuery.fn.extend({
 			}
 		}
 
-		return this.pushStack( matched.length > 1 ? jQuery.unique( matched ) : matched );
+		return this.pushStack( matched.length &gt; 1 ? jQuery.unique( matched ) : matched );
 	},
 
 	// Determine the position of an element within
@@ -196,16 +186,16 @@ jQuery.fn.extend({
 
 		// No argument, return index in parent
 		if ( !elem ) {
-			return ( this[ 0 ] && this[ 0 ].parentNode ) ? this.first().prevAll().length : -1;
+			return ( this[ 0 ] &amp;&amp; this[ 0 ].parentNode ) ? this.first().prevAll().length : -1;
 		}
 
 		// index in selector
-		if ( typeof elem === "string" ) {
-			return core_indexOf.call( jQuery( elem ), this[ 0 ] );
+		if ( typeof elem === &quot;string&quot; ) {
+			return indexOf.call( jQuery( elem ), this[ 0 ] );
 		}
 
 		// Locate the position of the desired element
-		return core_indexOf.call( this,
+		return indexOf.call( this,
 
 			// If it receives a jQuery object, the first element is used
 			elem.jquery ? elem[ 0 ] : elem
@@ -213,9 +203,9 @@ jQuery.fn.extend({
 	},
 
 	add: function( selector, context ) {
-		var set = typeof selector === "string" ?
+		var set = typeof selector === &quot;string&quot; ?
 				jQuery( selector, context ) :
-				jQuery.makeArray( selector && selector.nodeType ? [ selector ] : selector ),
+				jQuery.makeArray( selector &amp;&amp; selector.nodeType ? [ selector ] : selector ),
 			all = jQuery.merge( this.get(), set );
 
 		return this.pushStack( jQuery.unique(all) );
@@ -229,39 +219,38 @@ jQuery.fn.extend({
 });
 
 function sibling( cur, dir ) {
-	while ( (cur = cur[dir]) && cur.nodeType !== 1 ) {}
-
+	while ( (cur = cur[dir]) &amp;&amp; cur.nodeType !== 1 ) {}
 	return cur;
 }
 
 jQuery.each({
 	parent: function( elem ) {
 		var parent = elem.parentNode;
-		return parent && parent.nodeType !== 11 ? parent : null;
+		return parent &amp;&amp; parent.nodeType !== 11 ? parent : null;
 	},
 	parents: function( elem ) {
-		return jQuery.dir( elem, "parentNode" );
+		return jQuery.dir( elem, &quot;parentNode&quot; );
 	},
 	parentsUntil: function( elem, i, until ) {
-		return jQuery.dir( elem, "parentNode", until );
+		return jQuery.dir( elem, &quot;parentNode&quot;, until );
 	},
 	next: function( elem ) {
-		return sibling( elem, "nextSibling" );
+		return sibling( elem, &quot;nextSibling&quot; );
 	},
 	prev: function( elem ) {
-		return sibling( elem, "previousSibling" );
+		return sibling( elem, &quot;previousSibling&quot; );
 	},
 	nextAll: function( elem ) {
-		return jQuery.dir( elem, "nextSibling" );
+		return jQuery.dir( elem, &quot;nextSibling&quot; );
 	},
 	prevAll: function( elem ) {
-		return jQuery.dir( elem, "previousSibling" );
+		return jQuery.dir( elem, &quot;previousSibling&quot; );
 	},
 	nextUntil: function( elem, i, until ) {
-		return jQuery.dir( elem, "nextSibling", until );
+		return jQuery.dir( elem, &quot;nextSibling&quot;, until );
 	},
 	prevUntil: function( elem, i, until ) {
-		return jQuery.dir( elem, "previousSibling", until );
+		return jQuery.dir( elem, &quot;previousSibling&quot;, until );
 	},
 	siblings: function( elem ) {
 		return jQuery.sibling( ( elem.parentNode || {} ).firstChild, elem );
@@ -270,27 +259,27 @@ jQuery.each({
 		return jQuery.sibling( elem.firstChild );
 	},
 	contents: function( elem ) {
-		return jQuery.nodeName( elem, "iframe" ) ?
-			elem.contentDocument || elem.contentWindow.document :
-			jQuery.merge( [], elem.childNodes );
+		return elem.contentDocument || jQuery.merge( [], elem.childNodes );
 	}
 }, function( name, fn ) {
 	jQuery.fn[ name ] = function( until, selector ) {
 		var matched = jQuery.map( this, fn, until );
 
-		if ( !runtil.test( name ) ) {
+		if ( name.slice( -5 ) !== &quot;Until&quot; ) {
 			selector = until;
 		}
 
-		if ( selector && typeof selector === "string" ) {
+		if ( selector &amp;&amp; typeof selector === &quot;string&quot; ) {
 			matched = jQuery.filter( selector, matched );
 		}
 
-		if ( this.length > 1 ) {
+		if ( this.length &gt; 1 ) {
+			// Remove duplicates
 			if ( !guaranteedUnique[ name ] ) {
 				jQuery.unique( matched );
 			}
 
+			// Reverse order for parents* and prev-derivatives
 			if ( rparentsprev.test( name ) ) {
 				matched.reverse();
 			}
@@ -300,83 +289,8 @@ jQuery.each({
 	};
 });
 
-jQuery.extend({
-	filter: function( expr, elems, not ) {
-		if ( not ) {
-			expr = ":not(" + expr + ")";
-		}
-
-		return elems.length === 1 ?
-			jQuery.find.matchesSelector( elems[ 0 ], expr ) ? [ elems[ 0 ] ] : [] :
-			jQuery.find.matches( expr, elems );
-	},
-
-	dir: function( elem, dir, until ) {
-		var matched = [],
-			truncate = until !== undefined;
-
-		while ( (elem = elem[ dir ]) && elem.nodeType !== 9 ) {
-			if ( elem.nodeType === 1 ) {
-				if ( truncate && jQuery( elem ).is( until ) ) {
-					break;
-				}
-				matched.push( elem );
-			}
-		}
-		return matched;
-	},
-
-	sibling: function( n, elem ) {
-		var matched = [];
-
-		for ( ; n; n = n.nextSibling ) {
-			if ( n.nodeType === 1 && n !== elem ) {
-				matched.push( n );
-			}
-		}
-
-		return matched;
-	}
-});
-
-// Implement the identical functionality for filter and not
-function winnow( elements, qualifier, keep ) {
-
-	// Can't pass null or undefined to indexOf in Firefox 4
-	// Set to 0 to skip string check
-	qualifier = qualifier || 0;
-
-	var filtered;
-
-	if ( jQuery.isFunction( qualifier ) ) {
-		return jQuery.grep(elements, function( elem, i ) {
-			var retVal = !!qualifier.call( elem, i, elem );
-			return retVal === keep;
-		});
-	}
-
-	if ( qualifier.nodeType ) {
-		return jQuery.grep(elements, function( elem ) {
-			return ( elem === qualifier ) === keep;
-		});
-	}
-
-	if ( typeof qualifier === "string" ) {
-		filtered = jQuery.grep(elements, function( elem ) {
-			return elem.nodeType === 1;
-		});
-
-		if ( isSimple.test( qualifier ) ) {
-			return jQuery.filter( qualifier, filtered, !keep );
-		}
-
-		qualifier = jQuery.filter( qualifier, filtered );
-	}
-
-	return jQuery.grep(elements, function( elem ) {
-		return ( core_indexOf.call( qualifier, elem ) >= 0 ) === keep;
-	});
-}</textarea>
+return jQuery;
+});</textarea>
   </div>
 </div>
 

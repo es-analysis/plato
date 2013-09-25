@@ -13,7 +13,7 @@
   <![endif]-->
 
   <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
-  <link href="../../assets/css/vendor/bootstrap-3.0.0-wip.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
   <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
   <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
   <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
@@ -26,8 +26,8 @@
 
 <div class="navbar navbar-fixed-top">
   <div class="container">
-    <a class="brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
-    <ul class="nav">
+    <a class="navbar-brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
       <li>
         <a href="../../index.html">Report Home</a>
       </li>
@@ -43,29 +43,29 @@
 
 <div class="container aggregate-stats">
   <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
       <p class="stat">68.56</p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
       <p class="stat">314</p>
     </div>
   </div>
   <div class="row historical">
-    <div class="span6">
+    <div class="col-md-6">
       <p id="chart_historical_maint" class="chart"></p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <p id="chart_historical_sloc" class="chart"></p>
     </div>
   </div>
   <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
       <p class="stat">67.25</p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
       <p class="stat">2.43</p>
     </div>
@@ -77,11 +77,11 @@
     <h2 class="header">Function weight</h2>
   </div>
   <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
       <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
       <div id="fn-by-complexity" class="stat"></div>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
       <div id="fn-by-sloc" class="stat"></div>
     </div>
@@ -90,18 +90,18 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="span12">/*
+    <textarea id="file-source" class="col-md-12">/*
  * grunt
  * http://gruntjs.com/
  *
- * Copyright (c) 2013 "Cowboy" Ben Alman
+ * Copyright (c) 2013 &quot;Cowboy&quot; Ben Alman
  * Licensed under the MIT license.
  * https://github.com/gruntjs/grunt/blob/master/LICENSE-MIT
  */
 
 (function(exports) {
 
-  'use strict';
+  &#039;use strict&#039;;
 
   // Construct-o-rama.
   function Task() {
@@ -113,7 +113,7 @@
     this._queue = [];
     // Queue placeholder (for dealing with nested tasks).
     this._placeholder = {placeholder: true};
-    // Queue marker (for clearing the queue programatically).
+    // Queue marker (for clearing the queue programmatically).
     this._marker = {marker: true};
     // Options.
     this._options = {};
@@ -145,26 +145,26 @@
 
   // Register a new task.
   Task.prototype.registerTask = function(name, info, fn) {
-    // If optional "info" string is omitted, shuffle arguments a bit.
+    // If optional &quot;info&quot; string is omitted, shuffle arguments a bit.
     if (fn == null) {
       fn = info;
       info = null;
     }
     // String or array of strings was passed instead of fn.
     var tasks;
-    if (typeof fn !== 'function') {
+    if (typeof fn !== &#039;function&#039;) {
       // Array of task names.
       tasks = this.parseArgs([fn]);
       // This task function just runs the specified tasks.
       fn = this.run.bind(this, fn);
       fn.alias = true;
-      // Generate an info string if one wasn't explicitly passed.
+      // Generate an info string if one wasn&#039;t explicitly passed.
       if (!info) {
-        info = 'Alias for "' + tasks.join('", "') + '" task' +
-          (tasks.length === 1 ? '' : 's') + '.';
+        info = &#039;Alias for &quot;&#039; + tasks.join(&#039;&quot;, &quot;&#039;) + &#039;&quot; task&#039; +
+          (tasks.length === 1 ? &#039;&#039; : &#039;s&#039;) + &#039;.&#039;;
       }
     } else if (!info) {
-      info = 'Custom task.';
+      info = &#039;Custom task.&#039;;
     }
     // Add task into cache.
     this._tasks[name] = {name: name, info: info, fn: fn};
@@ -179,7 +179,7 @@
 
   // Rename a task. This might be useful if you want to override the default
   // behavior of a task, while retaining the old name. This is a billion times
-  // easier to implement than some kind of in-task "super" functionality.
+  // easier to implement than some kind of in-task &quot;super&quot; functionality.
   Task.prototype.renameTask = function(oldname, newname) {
     // Rename task.
     this._tasks[newname] = this._tasks[oldname];
@@ -192,11 +192,11 @@
   };
 
   // Argument parsing helper. Supports these signatures:
-  //  fn('foo')                 // ['foo']
-  //  fn('foo', 'bar', 'baz')   // ['foo', 'bar', 'baz']
-  //  fn(['foo', 'bar', 'baz']) // ['foo', 'bar', 'baz']
+  //  fn(&#039;foo&#039;)                 // [&#039;foo&#039;]
+  //  fn(&#039;foo&#039;, &#039;bar&#039;, &#039;baz&#039;)   // [&#039;foo&#039;, &#039;bar&#039;, &#039;baz&#039;]
+  //  fn([&#039;foo&#039;, &#039;bar&#039;, &#039;baz&#039;]) // [&#039;foo&#039;, &#039;bar&#039;, &#039;baz&#039;]
   Task.prototype.parseArgs = function(args) {
-    // Return the first argument if it's an array, otherwise return an array
+    // Return the first argument if it&#039;s an array, otherwise return an array
     // of all arguments.
     return Array.isArray(args[0]) ? args[0] : [].slice.call(args);
   };
@@ -206,19 +206,19 @@
   Task.prototype.splitArgs = function(str) {
     if (!str) { return []; }
     // Store placeholder for \\ followed by \:
-    str = str.replace(/\\\\/g, '\uFFFF').replace(/\\:/g, '\uFFFE');
+    str = str.replace(/\\\\/g, &#039;\uFFFF&#039;).replace(/\\:/g, &#039;\uFFFE&#039;);
     // Split on :
-    return str.split(':').map(function(s) {
+    return str.split(&#039;:&#039;).map(function(s) {
       // Restore place-held : followed by \\
-      return s.replace(/\uFFFE/g, ':').replace(/\uFFFF/g, '\\');
+      return s.replace(/\uFFFE/g, &#039;:&#039;).replace(/\uFFFF/g, &#039;\\&#039;);
     });
   };
 
   // Given a task name, determine which actual task will be called, and what
-  // arguments will be passed into the task callback. "foo" -> task "foo", no
-  // args. "foo:bar:baz" -> task "foo:bar:baz" with no args (if "foo:bar:baz"
-  // task exists), otherwise task "foo:bar" with arg "baz" (if "foo:bar" task
-  // exists), otherwise task "foo" with args "bar" and "baz".
+  // arguments will be passed into the task callback. &quot;foo&quot; -&gt; task &quot;foo&quot;, no
+  // args. &quot;foo:bar:baz&quot; -&gt; task &quot;foo:bar:baz&quot; with no args (if &quot;foo:bar:baz&quot;
+  // task exists), otherwise task &quot;foo:bar&quot; with arg &quot;baz&quot; (if &quot;foo:bar&quot; task
+  // exists), otherwise task &quot;foo&quot; with args &quot;bar&quot; and &quot;baz&quot;.
   Task.prototype._taskPlusArgs = function(name) {
     // Get task name / argument parts.
     var parts = this.splitArgs(name);
@@ -227,10 +227,10 @@
     var task;
     do {
       // Get a task.
-      task = this._tasks[parts.slice(0, i).join(':')];
-      // If the task doesn't exist, decrement `i`, and if `i` is greater than
+      task = this._tasks[parts.slice(0, i).join(&#039;:&#039;)];
+      // If the task doesn&#039;t exist, decrement `i`, and if `i` is greater than
       // 0, repeat.
-    } while (!task && --i > 0);
+    } while (!task &amp;&amp; --i &gt; 0);
     // Just the args.
     var args = parts.slice(i);
     // Maybe you want to use them as flags instead of as positional args?
@@ -257,10 +257,10 @@
   Task.prototype.run = function() {
     // Parse arguments into an array, returning an array of task+args objects.
     var things = this.parseArgs(arguments).map(this._taskPlusArgs, this);
-    // Throw an exception if any tasks weren't found.
+    // Throw an exception if any tasks weren&#039;t found.
     var fails = things.filter(function(thing) { return !thing.task; });
-    if (fails.length > 0) {
-      this._throwIfRunning(new Error('Task "' + fails[0].nameArgs + '" not found.'));
+    if (fails.length &gt; 0) {
+      this._throwIfRunning(new Error(&#039;Task &quot;&#039; + fails[0].nameArgs + &#039;&quot; not found.&#039;));
       return this;
     }
     // Append things to queue in the correct spot.
@@ -269,7 +269,7 @@
     return this;
   };
 
-  // Add a marker to the queue to facilitate clearing it programatically.
+  // Add a marker to the queue to facilitate clearing it programmatically.
   Task.prototype.mark = function() {
     this._push(this._marker);
     // Make chainable!
@@ -286,8 +286,8 @@
       var err = null;
       if (success === false) {
         // Since false was passed, the task failed generically.
-        err = new Error('Task "' + context.nameArgs + '" failed.');
-      } else if (success instanceof Error || {}.toString.call(success) === '[object Error]') {
+        err = new Error(&#039;Task &quot;&#039; + context.nameArgs + &#039;&quot; failed.&#039;);
+      } else if (success instanceof Error || {}.toString.call(success) === &#039;[object Error]&#039;) {
         // An error object was passed, so the task failed specifically.
         err = success;
         success = false;
@@ -297,11 +297,11 @@
       }
       // The task has ended, reset the current task object.
       this.current = {};
-      // A task has "failed" only if it returns false (async) or if the
+      // A task has &quot;failed&quot; only if it returns false (async) or if the
       // function returned by .async is passed false.
       this._success[context.nameArgs] = success;
       // If task failed, call error handler.
-      if (!success && this._options.error) {
+      if (!success &amp;&amp; this._options.error) {
         this._options.error.call({name: context.name, nameArgs: context.nameArgs}, err);
       }
       done(err, success);
@@ -325,7 +325,7 @@
       // Get the current task and run it, setting `this` inside the task
       // function to be something useful.
       var success = fn.call(context);
-      // If the async flag wasn't set, process the next task in the queue.
+      // If the async flag wasn&#039;t set, process the next task in the queue.
       if (!async) {
         complete(success);
       }
@@ -346,7 +346,7 @@
       do {
         thing = this._queue.shift();
       } while (thing === this._placeholder || thing === this._marker);
-      // If queue was empty, we're all done.
+      // If queue was empty, we&#039;re all done.
       if (!thing) {
         this._running = false;
         if (this._options.done) {
@@ -399,8 +399,8 @@
     this.parseArgs(arguments).forEach(function(name) {
       var success = this._success[name];
       if (!success) {
-        throw new Error('Required task "' + name +
-          '" ' + (success === false ? 'failed' : 'must be run first') + '.');
+        throw new Error(&#039;Required task &quot;&#039; + name +
+          &#039;&quot; &#039; + (success === false ? &#039;failed&#039; : &#039;must be run first&#039;) + &#039;.&#039;);
       }
     }.bind(this));
   };
@@ -412,7 +412,7 @@
     }.bind(this));
   };
 
-}(typeof exports === 'object' && exports || this));</textarea>
+}(typeof exports === &#039;object&#039; &amp;&amp; exports || this));</textarea>
   </div>
 </div>
 

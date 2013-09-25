@@ -13,7 +13,7 @@
   <![endif]-->
 
   <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
-  <link href="../../assets/css/vendor/bootstrap-3.0.0-wip.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
   <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
   <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
   <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
@@ -26,8 +26,8 @@
 
 <div class="navbar navbar-fixed-top">
   <div class="container">
-    <a class="brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
-    <ul class="nav">
+    <a class="navbar-brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
       <li>
         <a href="../../index.html">Report Home</a>
       </li>
@@ -43,31 +43,31 @@
 
 <div class="container aggregate-stats">
   <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">65.57</p>
+      <p class="stat">64.02</p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">124</p>
+      <p class="stat">171</p>
     </div>
   </div>
   <div class="row historical">
-    <div class="span6">
+    <div class="col-md-6">
       <p id="chart_historical_maint" class="chart"></p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <p id="chart_historical_sloc" class="chart"></p>
     </div>
   </div>
   <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">39.98</p>
+      <p class="stat">41.26</p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">0.87</p>
+      <p class="stat">1.02</p>
     </div>
   </div>
 </div>
@@ -77,11 +77,11 @@
     <h2 class="header">Function weight</h2>
   </div>
   <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
       <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
       <div id="fn-by-complexity" class="stat"></div>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
       <div id="fn-by-sloc" class="stat"></div>
     </div>
@@ -90,7 +90,11 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="span12">/*
+    <textarea id="file-source" class="col-md-12">define([
+	&quot;./core&quot;
+], function( jQuery ) {
+
+/*
  * Optional (non-Sizzle) selector module for custom builds.
  *
  * Note that this DOES NOT SUPPORT many documented jQuery
@@ -103,19 +107,20 @@
  * :has(selector)
  * :not(complex selector)
  * custom selectors via Sizzle extensions
- * Leading combinators (e.g., $collection.find("> *"))
+ * Leading combinators (e.g., $collection.find(&quot;&gt; *&quot;))
  * Reliable functionality on XML fragments
  * Requiring all parts of a selector to match elements under context
- *   (e.g., $div.find("div > *") now matches children of $div)
+ *   (e.g., $div.find(&quot;div &gt; *&quot;) now matches children of $div)
  * Matching against non-elements
  * Reliable sorting of disconnected nodes
  * querySelectorAll bug fixes (e.g., unreliable :focus on WebKit)
  *
  * If any of these are unacceptable tradeoffs, either use Sizzle or
- * customize this stub for the project's specific needs.
+ * customize this stub for the project&#039;s specific needs.
  */
 
-var selector_hasDuplicate,
+var docElem = window.document.documentElement,
+	selector_hasDuplicate,
 	matches = docElem.webkitMatchesSelector ||
 		docElem.mozMatchesSelector ||
 		docElem.oMatchesSelector ||
@@ -127,11 +132,11 @@ var selector_hasDuplicate,
 			return 0;
 		}
 
-		var compare = b.compareDocumentPosition && a.compareDocumentPosition && a.compareDocumentPosition( b );
+		var compare = b.compareDocumentPosition &amp;&amp; a.compareDocumentPosition &amp;&amp; a.compareDocumentPosition( b );
 
 		if ( compare ) {
 			// Disconnected nodes
-			if ( compare & 1 ) {
+			if ( compare &amp; 1 ) {
 
 				// Choose the first element that is related to our document
 				if ( a === document || jQuery.contains(document, a) ) {
@@ -145,7 +150,7 @@ var selector_hasDuplicate,
 				return 0;
 			}
 
-			return compare & 4 ? -1 : 1;
+			return compare &amp; 4 ? -1 : 1;
 		}
 
 		// Not directly comparable, sort on existence of method
@@ -154,11 +159,21 @@ var selector_hasDuplicate,
 
 jQuery.extend({
 	find: function( selector, context, results, seed ) {
-		var elem,
+		var elem, nodeType,
 			i = 0;
 
 		results = results || [];
 		context = context || document;
+
+		// Same basic safeguard as Sizzle
+		if ( !selector || typeof selector !== &quot;string&quot; ) {
+			return results;
+		}
+
+		// Early return if context is not an element or document
+		if ( (nodeType = context.nodeType) !== 1 &amp;&amp; nodeType !== 9 ) {
+			return [];
+		}
 
 		if ( seed ) {
 			while ( (elem = seed[i++]) ) {
@@ -196,7 +211,7 @@ jQuery.extend({
 	},
 	text: function( elem ) {
 		var node,
-			ret = "",
+			ret = &quot;&quot;,
 			i = 0,
 			nodeType = elem.nodeType;
 
@@ -218,15 +233,17 @@ jQuery.extend({
 	},
 	contains: function( a, b ) {
 		var adown = a.nodeType === 9 ? a.documentElement : a,
-			bup = b && b.parentNode;
-		return a === bup || !!( bup && bup.nodeType === 1 && adown.contains(bup) );
+			bup = b &amp;&amp; b.parentNode;
+		return a === bup || !!( bup &amp;&amp; bup.nodeType === 1 &amp;&amp; adown.contains(bup) );
 	},
 	isXMLDoc: function( elem ) {
-		return (elem.ownerDocument || elem).documentElement.nodeName !== "HTML";
+		return (elem.ownerDocument || elem).documentElement.nodeName !== &quot;HTML&quot;;
 	},
 	expr: {
+		attrHandle: {},
 		match: {
-			needsContext: /^[\x20\t\r\n\f]*[>+~]/
+			bool: /^(?:checked|selected|async|autofocus|autoplay|controls|defer|disabled|hidden|ismap|loop|multiple|open|readonly|required|scoped)$/i,
+			needsContext: /^[\x20\t\r\n\f]*[&gt;+~]/
 		}
 	}
 });
@@ -237,7 +254,12 @@ jQuery.extend( jQuery.find, {
 	},
 	matchesSelector: function( elem, expr ) {
 		return matches.call( elem, expr );
+	},
+	attr: function( elem, name ) {
+		return elem.getAttribute( name );
 	}
+});
+
 });</textarea>
   </div>
 </div>

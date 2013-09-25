@@ -13,7 +13,7 @@
   <![endif]-->
 
   <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
-  <link href="../../assets/css/vendor/bootstrap-3.0.0-wip.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
   <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
   <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
   <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
@@ -26,8 +26,8 @@
 
 <div class="navbar navbar-fixed-top">
   <div class="container">
-    <a class="brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
-    <ul class="nav">
+    <a class="navbar-brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
       <li>
         <a href="../../index.html">Report Home</a>
       </li>
@@ -43,29 +43,29 @@
 
 <div class="container aggregate-stats">
   <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
       <p class="stat">76.83</p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
       <p class="stat">257</p>
     </div>
   </div>
   <div class="row historical">
-    <div class="span6">
+    <div class="col-md-6">
       <p id="chart_historical_maint" class="chart"></p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <p id="chart_historical_sloc" class="chart"></p>
     </div>
   </div>
   <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
       <p class="stat">35.73</p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
       <p class="stat">1.59</p>
     </div>
@@ -77,11 +77,11 @@
     <h2 class="header">Function weight</h2>
   </div>
   <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
       <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
       <div id="fn-by-complexity" class="stat"></div>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
       <div id="fn-by-sloc" class="stat"></div>
     </div>
@@ -90,7 +90,7 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="span12">// Collection View
+    <textarea id="file-source" class="col-md-12">// Collection View
 // ---------------
 
 // A view that iterates over a Backbone.Collection
@@ -98,7 +98,7 @@
 Marionette.CollectionView = Marionette.View.extend({
   // used as the prefix for item view events
   // that are forwarded through the collectionview
-  itemViewEventPrefix: "itemview",
+  itemViewEventPrefix: &quot;itemview&quot;,
 
   // constructor
   constructor: function(options){
@@ -114,9 +114,9 @@ Marionette.CollectionView = Marionette.View.extend({
   // events, or to add your own initial events.
   _initialEvents: function(){
     if (this.collection){
-      this.listenTo(this.collection, "add", this.addChildView, this);
-      this.listenTo(this.collection, "remove", this.removeItemView, this);
-      this.listenTo(this.collection, "reset", this.render, this);
+      this.listenTo(this.collection, &quot;add&quot;, this.addChildView, this);
+      this.listenTo(this.collection, &quot;remove&quot;, this.removeItemView, this);
+      this.listenTo(this.collection, &quot;reset&quot;, this.render, this);
     }
   },
 
@@ -132,22 +132,22 @@ Marionette.CollectionView = Marionette.View.extend({
   // of child views is called.
   onShowCalled: function(){
     this.children.each(function(child){
-      Marionette.triggerMethod.call(child, "show");
+      Marionette.triggerMethod.call(child, &quot;show&quot;);
     });
   },
 
   // Internal method to trigger the before render callbacks
   // and events
   triggerBeforeRender: function(){
-    this.triggerMethod("before:render", this);
-    this.triggerMethod("collection:before:render", this);
+    this.triggerMethod(&quot;before:render&quot;, this);
+    this.triggerMethod(&quot;collection:before:render&quot;, this);
   },
 
   // Internal method to trigger the rendered callbacks and
   // events
   triggerRendered: function(){
-    this.triggerMethod("render", this);
-    this.triggerMethod("collection:rendered", this);
+    this.triggerMethod(&quot;render&quot;, this);
+    this.triggerMethod(&quot;collection:rendered&quot;, this);
   },
 
   // Render the collection of items. Override this method to
@@ -168,7 +168,7 @@ Marionette.CollectionView = Marionette.View.extend({
     this.closeEmptyView();
     this.closeChildren();
 
-    if (this.collection && this.collection.length > 0) {
+    if (this.collection &amp;&amp; this.collection.length &gt; 0) {
       this.showCollection();
     } else {
       this.showEmptyView();
@@ -189,9 +189,9 @@ Marionette.CollectionView = Marionette.View.extend({
   // a collection of item views, when the collection is
   // empty
   showEmptyView: function(){
-    var EmptyView = Marionette.getOption(this, "emptyView");
+    var EmptyView = Marionette.getOption(this, &quot;emptyView&quot;);
 
-    if (EmptyView && !this._showingEmptyView){
+    if (EmptyView &amp;&amp; !this._showingEmptyView){
       this._showingEmptyView = true;
       var model = new Backbone.Model();
       this.addItemView(model, EmptyView, 0);
@@ -209,23 +209,23 @@ Marionette.CollectionView = Marionette.View.extend({
   },
 
   // Retrieve the itemView type, either from `this.options.itemView`
-  // or from the `itemView` in the object definition. The "options"
+  // or from the `itemView` in the object definition. The &quot;options&quot;
   // takes precedence.
   getItemView: function(item){
-    var itemView = Marionette.getOption(this, "itemView");
+    var itemView = Marionette.getOption(this, &quot;itemView&quot;);
 
     if (!itemView){
-      throwError("An `itemView` must be specified", "NoItemViewError");
+      throwError(&quot;An `itemView` must be specified&quot;, &quot;NoItemViewError&quot;);
     }
 
     return itemView;
   },
 
-  // Render the child item's view and add it to the
+  // Render the child item&#039;s view and add it to the
   // HTML for the collection view.
   addItemView: function(item, ItemView, index){
     // get the itemViewOptions if any were specified
-    var itemViewOptions = Marionette.getOption(this, "itemViewOptions");
+    var itemViewOptions = Marionette.getOption(this, &quot;itemViewOptions&quot;);
     if (_.isFunction(itemViewOptions)){
       itemViewOptions = itemViewOptions.call(this, item, index);
     }
@@ -237,7 +237,7 @@ Marionette.CollectionView = Marionette.View.extend({
     this.addChildViewEventForwarding(view);
 
     // this view is about to be added
-    this.triggerMethod("before:item:added", view);
+    this.triggerMethod(&quot;before:item:added&quot;, view);
 
     // Store the child view itself so we can properly
     // remove and/or close it later
@@ -246,26 +246,26 @@ Marionette.CollectionView = Marionette.View.extend({
     // Render it and show it
     this.renderItemView(view, index);
 
-    // call the "show" method if the collection view
+    // call the &quot;show&quot; method if the collection view
     // has already been shown
     if (this._isShown){
-      Marionette.triggerMethod.call(view, "show");
+      Marionette.triggerMethod.call(view, &quot;show&quot;);
     }
 
     // this view was added
-    this.triggerMethod("after:item:added", view);
+    this.triggerMethod(&quot;after:item:added&quot;, view);
   },
 
-  // Set up the child view event forwarding. Uses an "itemview:"
+  // Set up the child view event forwarding. Uses an &quot;itemview:&quot;
   // prefix in front of all forwarded events.
   addChildViewEventForwarding: function(view){
-    var prefix = Marionette.getOption(this, "itemViewEventPrefix");
+    var prefix = Marionette.getOption(this, &quot;itemViewEventPrefix&quot;);
 
     // Forward all child item view events through the parent,
-    // prepending "itemview:" to the event name
-    this.listenTo(view, "all", function(){
+    // prepending &quot;itemview:&quot; to the event name
+    this.listenTo(view, &quot;all&quot;, function(){
       var args = slice(arguments);
-      args[0] = prefix + ":" + args[0];
+      args[0] = prefix + &quot;:&quot; + args[0];
       args.splice(1, 0, view);
 
       Marionette.triggerMethod.apply(this, args);
@@ -299,26 +299,26 @@ Marionette.CollectionView = Marionette.View.extend({
     if (view){
       this.stopListening(view);
 
-      // call 'close' or 'remove', depending on which is found
+      // call &#039;close&#039; or &#039;remove&#039;, depending on which is found
       if (view.close) { view.close(); }
       else if (view.remove) { view.remove(); }
 
       this.children.remove(view);
     }
 
-    this.triggerMethod("item:removed", view);
+    this.triggerMethod(&quot;item:removed&quot;, view);
   },
 
   // helper to show the empty view if the collection is empty
   checkEmpty: function() {
-    // check if we're empty now, and if we are, show the
+    // check if we&#039;re empty now, and if we are, show the
     // empty view
     if (!this.collection || this.collection.length === 0){
       this.showEmptyView();
     }
   },
 
-  // Append the HTML to the collection's `el`.
+  // Append the HTML to the collection&#039;s `el`.
   // Override this method to do something other
   // then `.append`.
   appendHtml: function(collectionView, itemView, index){
@@ -336,9 +336,9 @@ Marionette.CollectionView = Marionette.View.extend({
   close: function(){
     if (this.isClosed){ return; }
 
-    this.triggerMethod("collection:before:close");
+    this.triggerMethod(&quot;collection:before:close&quot;);
     this.closeChildren();
-    this.triggerMethod("collection:closed");
+    this.triggerMethod(&quot;collection:closed&quot;);
 
     Marionette.View.prototype.close.apply(this, slice(arguments));
   },

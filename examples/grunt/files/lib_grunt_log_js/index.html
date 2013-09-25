@@ -13,7 +13,7 @@
   <![endif]-->
 
   <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
-  <link href="../../assets/css/vendor/bootstrap-3.0.0-wip.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
   <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
   <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
   <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
@@ -26,8 +26,8 @@
 
 <div class="navbar navbar-fixed-top">
   <div class="container">
-    <a class="brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
-    <ul class="nav">
+    <a class="navbar-brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
       <li>
         <a href="../../index.html">Report Home</a>
       </li>
@@ -43,29 +43,29 @@
 
 <div class="container aggregate-stats">
   <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
       <p class="stat">71.76</p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
       <p class="stat">343</p>
     </div>
   </div>
   <div class="row historical">
-    <div class="span6">
+    <div class="col-md-6">
       <p id="chart_historical_maint" class="chart"></p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <p id="chart_historical_sloc" class="chart"></p>
     </div>
   </div>
   <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
       <p class="stat">57.01</p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
       <p class="stat">2.87</p>
     </div>
@@ -77,11 +77,11 @@
     <h2 class="header">Function weight</h2>
   </div>
   <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
       <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
       <div id="fn-by-complexity" class="stat"></div>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
       <div id="fn-by-sloc" class="stat"></div>
     </div>
@@ -90,39 +90,39 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="span12">/*
+    <textarea id="file-source" class="col-md-12">/*
  * grunt
  * http://gruntjs.com/
  *
- * Copyright (c) 2013 "Cowboy" Ben Alman
+ * Copyright (c) 2013 &quot;Cowboy&quot; Ben Alman
  * Licensed under the MIT license.
  * https://github.com/gruntjs/grunt/blob/master/LICENSE-MIT
  */
 
-'use strict';
+&#039;use strict&#039;;
 
-var grunt = require('../grunt');
+var grunt = require(&#039;../grunt&#039;);
 
 // Nodejs libs.
-var util = require('util');
+var util = require(&#039;util&#039;);
 
 // The module to be exported.
 var log = module.exports = {};
 
 // External lib. Requiring this here modifies the String prototype!
-var colors = require('colors');
+var colors = require(&#039;colors&#039;);
 
 // Disable colors if --no-colors was passed.
 log.initColors = function() {
   var util = grunt.util;
-  if (grunt.option('no-color')) {
+  if (grunt.option(&#039;no-color&#039;)) {
     // String color getters should just return the string.
-    colors.mode = 'none';
+    colors.mode = &#039;none&#039;;
     // Strip colors from strings passed to console.log.
-    util.hooker.hook(console, 'log', function() {
+    util.hooker.hook(console, &#039;log&#039;, function() {
       var args = util.toArray(arguments);
       return util.hooker.filter(this, args.map(function(arg) {
-        return util.kindOf(arg) === 'string' ? colors.stripColors(arg) : arg;
+        return util.kindOf(arg) === &#039;string&#039; ? colors.stripColors(arg) : arg;
       }));
     });
   }
@@ -139,33 +139,33 @@ var hasLogged;
 
 // Parse certain markup in strings to be logged.
 function markup(str) {
-  str = str || '';
+  str = str || &#039;&#039;;
   // Make _foo_ underline.
-  str = str.replace(/(\s|^)_(\S|\S[\s\S]+?\S)_(?=[\s,.!?]|$)/g, '$1' + '$2'.underline);
+  str = str.replace(/(\s|^)_(\S|\S[\s\S]+?\S)_(?=[\s,.!?]|$)/g, &#039;$1&#039; + &#039;$2&#039;.underline);
   // Make *foo* bold.
-  str = str.replace(/(\s|^)\*(\S|\S[\s\S]+?\S)\*(?=[\s,.!?]|$)/g, '$1' + '$2'.bold);
+  str = str.replace(/(\s|^)\*(\S|\S[\s\S]+?\S)\*(?=[\s,.!?]|$)/g, &#039;$1&#039; + &#039;$2&#039;.bold);
   return str;
 }
 
-// Similar to util.format in the standard library, however it'll always
+// Similar to util.format in the standard library, however it&#039;ll always
 // cast the first argument to a string and treat it as the format string.
 function format(args) {
   // Args is a argument array so copy it in order to avoid wonky behavior.
   args = [].slice.call(args, 0);
-  if (args.length > 0) {
+  if (args.length &gt; 0) {
     args[0] = String(args[0]);
   }
   return util.format.apply(util, args);
 }
 
 function write(msg) {
-  msg = msg || '';
+  msg = msg || &#039;&#039;;
   // Actually write output.
-  if (!log.muted && !suppressOutput) {
+  if (!log.muted &amp;&amp; !suppressOutput) {
     hasLogged = true;
     // Users should probably use the colors-provided methods, but if they
-    // don't, this should strip extraneous color codes.
-    if (grunt.option('no-color')) { msg = colors.stripColors(msg); }
+    // don&#039;t, this should strip extraneous color codes.
+    if (grunt.option(&#039;no-color&#039;)) { msg = colors.stripColors(msg); }
     // Actually write to stdout.
     process.stdout.write(markup(msg));
   }
@@ -173,8 +173,8 @@ function write(msg) {
 
 function writeln(msg) {
   // Write blank line if no msg is passed in.
-  msg = msg || '';
-  write(msg + '\n');
+  msg = msg || &#039;&#039;;
+  write(msg + &#039;\n&#039;);
 }
 
 // Write output.
@@ -191,10 +191,10 @@ log.writeln = function() {
 
 log.warn = function() {
   var msg = format(arguments);
-  if (arguments.length > 0) {
-    writeln('>> '.red + grunt.util._.trim(msg).replace(/\n/g, '\n>> '.red));
+  if (arguments.length &gt; 0) {
+    writeln(&#039;&gt;&gt; &#039;.red + grunt.util._.trim(msg).replace(/\n/g, &#039;\n&gt;&gt; &#039;.red));
   } else {
-    writeln('ERROR'.red);
+    writeln(&#039;ERROR&#039;.red);
   }
   return log;
 };
@@ -205,10 +205,10 @@ log.error = function() {
 };
 log.ok = function() {
   var msg = format(arguments);
-  if (arguments.length > 0) {
-    writeln('>> '.green + grunt.util._.trim(msg).replace(/\n/g, '\n>> '.green));
+  if (arguments.length &gt; 0) {
+    writeln(&#039;&gt;&gt; &#039;.green + grunt.util._.trim(msg).replace(/\n/g, &#039;\n&gt;&gt; &#039;.green));
   } else {
-    writeln('OK'.green);
+    writeln(&#039;OK&#039;.green);
   }
   return log;
 };
@@ -249,8 +249,8 @@ log.subhead = function() {
 // For debugging.
 log.debug = function() {
   var msg = format(arguments);
-  if (grunt.option('debug')) {
-    writeln('[D] ' + msg.magenta);
+  if (grunt.option(&#039;debug&#039;)) {
+    writeln(&#039;[D] &#039; + msg.magenta);
   }
   return log;
 };
@@ -273,17 +273,17 @@ log.writeflags = function(obj, prefix) {
   var wordlist;
   if (Array.isArray(obj)) {
     wordlist = log.wordlist(obj);
-  } else if (typeof obj === 'object' && obj) {
+  } else if (typeof obj === &#039;object&#039; &amp;&amp; obj) {
     wordlist = log.wordlist(Object.keys(obj).map(function(key) {
       var val = obj[key];
-      return key + (val === true ? '' : '=' + JSON.stringify(val));
+      return key + (val === true ? &#039;&#039; : &#039;=&#039; + JSON.stringify(val));
     }));
   }
-  writeln((prefix || 'Flags') + ': ' + (wordlist || '(none)'.cyan));
+  writeln((prefix || &#039;Flags&#039;) + &#039;: &#039; + (wordlist || &#039;(none)&#039;.cyan));
   return log;
 };
 
-// Create explicit "verbose" and "notverbose" functions, one for each already-
+// Create explicit &quot;verbose&quot; and &quot;notverbose&quot; functions, one for each already-
 // defined log function, that do the same thing but ONLY if -v or --verbose is
 // specified (or not specified).
 log.verbose = {};
@@ -291,20 +291,20 @@ log.notverbose = {};
 
 // Iterate over all exported functions.
 Object.keys(log).filter(function(key) {
-  return typeof log[key] === 'function';
+  return typeof log[key] === &#039;function&#039;;
 }).forEach(function(key) {
-  // Like any other log function, but suppresses output if the "verbose" option
+  // Like any other log function, but suppresses output if the &quot;verbose&quot; option
   // IS NOT set.
   log.verbose[key] = function() {
-    suppressOutput = !grunt.option('verbose');
+    suppressOutput = !grunt.option(&#039;verbose&#039;);
     log[key].apply(log, arguments);
     suppressOutput = false;
     return log.verbose;
   };
-  // Like any other log function, but suppresses output if the "verbose" option
+  // Like any other log function, but suppresses output if the &quot;verbose&quot; option
   // IS set.
   log.notverbose[key] = function() {
-    suppressOutput = grunt.option('verbose');
+    suppressOutput = grunt.option(&#039;verbose&#039;);
     log[key].apply(log, arguments);
     suppressOutput = false;
     return log.notverbose;
@@ -312,8 +312,8 @@ Object.keys(log).filter(function(key) {
 });
 
 // A way to switch between verbose and notverbose modes. For example, this will
-// write 'foo' if verbose logging is enabled, otherwise write 'bar':
-// verbose.write('foo').or.write('bar');
+// write &#039;foo&#039; if verbose logging is enabled, otherwise write &#039;bar&#039;:
+// verbose.write(&#039;foo&#039;).or.write(&#039;bar&#039;);
 log.verbose.or = log.notverbose;
 log.notverbose.or = log.verbose;
 
@@ -322,8 +322,8 @@ log.notverbose.or = log.verbose;
 // Pretty-format a word list.
 log.wordlist = function(arr, options) {
   options = grunt.util._.defaults(options || {}, {
-    separator: ', ',
-    color: 'cyan'
+    separator: &#039;, &#039;,
+    color: &#039;cyan&#039;
   });
   return arr.map(function(item) {
     return options.color ? String(item)[options.color] : item;
@@ -332,7 +332,7 @@ log.wordlist = function(arr, options) {
 
 // Return a string, uncolored (suitable for testing .length, etc).
 log.uncolor = function(str) {
-  return str.replace(/\x1B\[\d+m/g, '');
+  return str.replace(/\x1B\[\d+m/g, &#039;&#039;);
 };
 
 // Word-wrap text to a given width, permitting ANSI color codes.
@@ -341,7 +341,7 @@ log.wraptext = function(width, text) {
   // grab 1st character or ansi code from string
   // if ansi code, add to array and save for later, strip from front of string
   // if character, add to array and increment counter, strip from front of string
-  // if width + 1 is reached and current character isn't space:
+  // if width + 1 is reached and current character isn&#039;t space:
   //  slice off everything after last space in array and prepend it to string
   //  etc
 
@@ -367,30 +367,30 @@ log.wraptext = function(width, text) {
     } else if (matches[2]) {
       // If this is the first character and a previous color code was set, push
       // that onto the captured array first.
-      if (charlen === 0 && color) { captured.push(color); }
+      if (charlen === 0 &amp;&amp; color) { captured.push(color); }
       // Push the matched character.
       captured.push(matches[2]);
       // Increment the current charlen.
       charlen++;
       // If not yet at the width limit or a space was matched, continue.
-      if (charlen <= width || matches[2] === ' ') { continue; }
-      // The current charlen exceeds the width and a space wasn't matched.
-      // "Roll everything back" until the last space character.
-      tmp = captured.lastIndexOf(' ');
-      text = captured.slice(tmp === -1 ? tmp : tmp + 1).join('') + text;
+      if (charlen &lt;= width || matches[2] === &#039; &#039;) { continue; }
+      // The current charlen exceeds the width and a space wasn&#039;t matched.
+      // &quot;Roll everything back&quot; until the last space character.
+      tmp = captured.lastIndexOf(&#039; &#039;);
+      text = captured.slice(tmp === -1 ? tmp : tmp + 1).join(&#039;&#039;) + text;
       captured = captured.slice(0, tmp);
     }
 
     // The limit has been reached. Push captured string onto result array.
-    result.push(captured.join(''));
+    result.push(captured.join(&#039;&#039;));
 
     // Reset captured array and charlen.
     captured = [];
     charlen = 0;
   }
 
-  result.push(captured.join(''));
-  return result.join('\n');
+  result.push(captured.join(&#039;&#039;));
+  return result.join(&#039;\n&#039;);
 };
 
 // todo: write unit tests
@@ -402,24 +402,24 @@ log.wraptext = function(width, text) {
 // }
 //
 // function log(n, text) {
-//   console.log(Array(n + 1).join('-'));
+//   console.log(Array(n + 1).join(&#039;-&#039;));
 //   console.log(wrap(n, text));
 // }
 //
-// var text = 'this is '.red + 'a simple'.yellow.inverse + ' test of'.green + ' ' + 'some wrapped'.blue + ' text over '.inverse.magenta + 'many lines'.red;
+// var text = &#039;this is &#039;.red + &#039;a simple&#039;.yellow.inverse + &#039; test of&#039;.green + &#039; &#039; + &#039;some wrapped&#039;.blue + &#039; text over &#039;.inverse.magenta + &#039;many lines&#039;.red;
 // logs(text);
 //
-// var text = 'foolish '.red.inverse + 'monkeys'.yellow + ' eating'.green + ' ' + 'delicious'.inverse.blue + ' bananas '.magenta + 'forever'.red;
+// var text = &#039;foolish &#039;.red.inverse + &#039;monkeys&#039;.yellow + &#039; eating&#039;.green + &#039; &#039; + &#039;delicious&#039;.inverse.blue + &#039; bananas &#039;.magenta + &#039;forever&#039;.red;
 // logs(text);
 //
-// var text = 'foolish monkeys eating delicious bananas forever'.rainbow;
+// var text = &#039;foolish monkeys eating delicious bananas forever&#039;.rainbow;
 // logs(text);
 
 // Format output into columns, wrapping words as-necessary.
 log.table = function(widths, texts) {
   var rows = [];
   widths.forEach(function(width, i) {
-    var lines = log.wraptext(width, texts[i]).split('\n');
+    var lines = log.wraptext(width, texts[i]).split(&#039;\n&#039;);
     lines.forEach(function(line, j) {
       var row = rows[j];
       if (!row) { row = rows[j] = []; }
@@ -429,18 +429,18 @@ log.table = function(widths, texts) {
 
   var lines = [];
   rows.forEach(function(row) {
-    var txt = '';
+    var txt = &#039;&#039;;
     var column;
-    for (var i = 0; i < row.length; i++) {
-      column = row[i] || '';
+    for (var i = 0; i &lt; row.length; i++) {
+      column = row[i] || &#039;&#039;;
       txt += column;
       var diff = widths[i] - log.uncolor(column).length;
-      if (diff > 0) { txt += grunt.util.repeat(diff, ' '); }
+      if (diff &gt; 0) { txt += grunt.util.repeat(diff, &#039; &#039;); }
     }
     lines.push(txt);
   });
 
-  return lines.join('\n');
+  return lines.join(&#039;\n&#039;);
 };</textarea>
   </div>
 </div>

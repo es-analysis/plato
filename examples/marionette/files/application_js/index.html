@@ -13,7 +13,7 @@
   <![endif]-->
 
   <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
-  <link href="../../assets/css/vendor/bootstrap-3.0.0-wip.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
   <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
   <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
   <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
@@ -26,8 +26,8 @@
 
 <div class="navbar navbar-fixed-top">
   <div class="container">
-    <a class="brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
-    <ul class="nav">
+    <a class="navbar-brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
       <li>
         <a href="../../index.html">Report Home</a>
       </li>
@@ -43,31 +43,31 @@
 
 <div class="container aggregate-stats">
   <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">80.24</p>
+      <p class="stat">81.44</p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">86</p>
+      <p class="stat">98</p>
     </div>
   </div>
   <div class="row historical">
-    <div class="span6">
+    <div class="col-md-6">
       <p id="chart_historical_maint" class="chart"></p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <p id="chart_historical_sloc" class="chart"></p>
     </div>
   </div>
   <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">15.47</p>
+      <p class="stat">15.71</p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">0.58</p>
+      <p class="stat">0.63</p>
     </div>
   </div>
 </div>
@@ -77,11 +77,11 @@
     <h2 class="header">Function weight</h2>
   </div>
   <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
       <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
       <div id="fn-by-complexity" class="stat"></div>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
       <div id="fn-by-sloc" class="stat"></div>
     </div>
@@ -90,7 +90,7 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="span12">// Application
+    <textarea id="file-source" class="col-md-12">// Application
 // -----------
 
 // Contain and manage the composite application as a whole.
@@ -129,30 +129,42 @@ _.extend(Marionette.Application.prototype, Backbone.Events, {
     this._initCallbacks.add(initializer);
   },
 
-  // kick off all of the application's processes.
+  // kick off all of the application&#039;s processes.
   // initializes all of the regions that have been added
   // to the app, and runs all of the initializer functions
   start: function(options){
-    this.triggerMethod("initialize:before", options);
+    this.triggerMethod(&quot;initialize:before&quot;, options);
     this._initCallbacks.run(options, this);
-    this.triggerMethod("initialize:after", options);
+    this.triggerMethod(&quot;initialize:after&quot;, options);
 
-    this.triggerMethod("start", options);
+    this.triggerMethod(&quot;start&quot;, options);
   },
 
   // Add regions to your app. 
   // Accepts a hash of named strings or Region objects
-  // addRegions({something: "#someRegion"})
-  // addRegions({something: Region.extend({el: "#someRegion"}) });
+  // addRegions({something: &quot;#someRegion&quot;})
+  // addRegions({something: Region.extend({el: &quot;#someRegion&quot;}) });
   addRegions: function(regions){
     return this._regionManager.addRegions(regions);
   },
 
-  // Removes a region from your app.
+  // Close all regions in the app, without removing them
+  closeRegions: function(){
+    this._regionManager.closeRegions();
+  },
+
+  // Removes a region from your app, by name
   // Accepts the regions name
-  // removeRegion('myRegion')
+  // removeRegion(&#039;myRegion&#039;)
   removeRegion: function(region) {
     this._regionManager.removeRegion(region);
+  },
+  
+  // Provides alternative access to regions
+  // Accepts the region name
+  // getRegion(&#039;main&#039;)
+  getRegion: function(region) {
+    return this._regionManager.get(region);
   },
 
   // Create a module, attached to the application
@@ -170,17 +182,17 @@ _.extend(Marionette.Application.prototype, Backbone.Events, {
   _initRegionManager: function(){
     this._regionManager = new Marionette.RegionManager();
 
-    this.listenTo(this._regionManager, "region:add", function(name, region){
+    this.listenTo(this._regionManager, &quot;region:add&quot;, function(name, region){
       this[name] = region;
     });
 
-    this.listenTo(this._regionManager, "region:remove", function(name, region){
+    this.listenTo(this._regionManager, &quot;region:remove&quot;, function(name, region){
       delete this[name];
     });
   }
 });
 
-// Copy the `extend` function used by Backbone's classes
+// Copy the `extend` function used by Backbone&#039;s classes
 Marionette.Application.extend = Marionette.extend;</textarea>
   </div>
 </div>
