@@ -5,7 +5,7 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     nodeunit: {
-      files: ['test/**/*_test.js'],
+      files: ['test/**/*_test.js']
     },
     jshint: {
       options: {
@@ -42,7 +42,7 @@ module.exports = function(grunt) {
             'lib/assets/scripts/vendor/codemirror/util/searchcursor.js'
           ]
         }
-      },
+      }
     },
     watch: {
       gruntfile: {
@@ -56,11 +56,14 @@ module.exports = function(grunt) {
       test: {
         files: '<%= jshint.test.src %>',
         tasks: ['jshint:test', 'nodeunit']
-      },
+      }
     },
-    casperjs : {
-      test : {
-        src: 'test/casper-overview.js',
+    casper : {
+      test: {
+        src: [
+          'test/casper-overview.js',
+          'test/casper-sortable-file-list.js'
+        ],
         options : {
           test : true,
           direct : true
