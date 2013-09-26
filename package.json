@@ -2,7 +2,7 @@
   "name": "plato",
   "description": "JavaScript source analysis and visualizer",
   "version": "0.6.2",
-  "homepage": "https://github.com/jsoverson/plato",
+  "homepage": "https://github.com/es-analysis/plato",
   "author": {
     "name": "Jarrod Overson",
     "email": "jsoverson@gmail.com",
@@ -10,16 +10,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/jsoverson/plato.git"
+    "url": "git://github.com/es-analysis/plato.git"
   },
   "bugs": {
-    "url": "https://github.com/jsoverson/plato/issues"
+    "url": "https://github.com/es-analysis/plato/issues"
   },
   "bin": "bin/plato",
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/jsoverson/plato/blob/master/LICENSE-MIT"
+      "url": "https://github.com/es-analysis/plato/blob/master/LICENSE-MIT"
     }
   ],
   "main": "lib/plato",
