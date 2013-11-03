@@ -57,6 +57,7 @@ plato -r -d report -l .jshintrc -t "My Awesome App" -x .json routes/*.js
 ## Contributors
   - [Jarrod Overson](https://github.com/jsoverson)
   - [Craig Davis](https://github.com/there4)
+  - [David Linse](https://github.com/davidlinse)
 
 ## Release History
 
