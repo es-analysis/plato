@@ -83,3 +83,7 @@ plato -r -d report -l .jshintrc -t "My Awesome App" -x .json routes/*.js
 ## License
 Copyright (c) 2012 Jarrod Overson  
 Licensed under the MIT license.
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/es-analysis/plato/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
