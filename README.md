@@ -16,7 +16,7 @@ Install the module with: `npm install -g plato`
 ## Usage
 
 ```
-Usage : plato [options] file1.js file2.js ... fileN.js
+Usage : plato [options] -d <output_dir> <input files>
   -h, --help
       Display this help text.
   -q, --quiet
