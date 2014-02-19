@@ -15,6 +15,8 @@ Install the module with: `npm install -g plato`
 
 ## Usage
 
+### From the commandline
+
 ```
 Usage : plato [options] -d <output_dir> <input files>
   -h, --help
@@ -37,16 +39,41 @@ Usage : plato [options] -d <output_dir> <input files>
       Time to use as the report date (seconds, > 9999999999 assumed to be ms)
 ```
 
-## Example
+__Example__
 
 ```shell
 plato -r -d report src
 ```
 
-Extended example
+__Extended example__
 
 ```
 plato -r -d report -l .jshintrc -t "My Awesome App" -x .json routes/*.js
+```
+
+### From scripts
+
+```
+var plato = require('plato');
+
+var files = [
+  'path/to/javascript/file1.js',
+  ...
+  'path/to/javascript/fileN.js'
+];
+
+var outputDir = './output/dir';
+// null options for this example
+var options = {
+  title: 'Your title here'
+};
+
+var callback = function (report){ 
+// once done the analysis,
+// execute this
+};
+
+plato.inspect(files, outputDir, {}, callback);
 ```
 
 ## Data sources
