@@ -87,6 +87,8 @@ plato.inspect(files, outputDir, {}, callback);
 
 ## Release History
 
+  - 1.0.1 fix issue with first line hashbang
+  - 1.0.0 promote to 1.0.0 with bug fixes
   - 0.6.2 Added sortable file list, updated to bootstrap 3
   - 0.6.1 Fixed width overflow issues in file reports
   - 0.6.0 updated major dependency complexity-report
