@@ -76,4 +76,18 @@ exports['plato'] = {
       test.done();
     });
   },
+  'test file with shebang' : function(test) {
+    test.expect(1);
+
+    var files = [
+      'test/fixtures/a.js',
+      'test/fixtures/b.js',
+      'test/fixtures/shebang.js'
+    ];
+
+    plato.inspect(files, null, {}, function(reports){
+      test.equal(reports.length, 3, 'Should report on files starting with a shebang');
+      test.done();
+    });
+  },
 };
