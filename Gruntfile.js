@@ -61,7 +61,6 @@ module.exports = function(grunt) {
     casper : {
       options : {
         test : true,
-        direct : true,
         'fail-fast': true,
         'log-level': 'debug'
       },
