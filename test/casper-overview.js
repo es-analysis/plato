@@ -21,18 +21,12 @@ casper.start('./tmp/index.html', function() {
   }, 'Every file chart has an svg drawn');
 });
 
-casper.then(function(){
-  this.evaluate(function(){
-    // click svgin the sloc chart, should respond and
-    // change document location to the last file
-    var element = document.querySelectorAll('#chart_sloc svg')[0];
-    var evt = document.createEvent("HTMLEvents");
-    evt.initEvent('click', true, true); // event type,bubbling,cancelable
-    return element.dispatchEvent(evt);
-  });
+casper.then(function () {
+  this.click('#chart_sloc svg');
 });
 
-casper.then(function() {
+casper.waitForSelectorTextChange('.jumbotron h1', function() {
+  this.test.comment('Text of .jumbotron h1 has changed.');
   this.test.assertSelectorHasText('.jumbotron h1', 'b.js');
 });
 
