@@ -60,13 +60,20 @@ module.exports = function(grunt) {
     },
     casper : {
       test: {
-        src: [
-          'test/casper-overview.js',
-          'test/casper-sortable-file-list.js'
-        ],
+        files: {
+          'reports/casper.xml': [
+            'test/casper-overview.js',
+            'test/casper-sortable-file-list.js'
+          ],
+        },
         options : {
-          test : true,
-          direct : true
+          test: true,
+          verbose: true,
+          'fail-fast': true,
+          'log-level': 'error',
+          concise: true,
+          parallel : false,
+          concurrency : 2
         }
       }
     }
@@ -128,7 +135,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('optimize', ['uglify']);
   // Default task.
-  grunt.registerTask('test', ['jshint', 'nodeunit', 'runtest', 'runbin'/*, 'casperjs'*/]);
+  grunt.registerTask('test', ['jshint', 'nodeunit', 'runtest', 'runbin', 'casper']);
   grunt.registerTask('default', ['test']);
 
 };
