@@ -83,6 +83,10 @@
     <h2 class="col-md-12">Estimated errors in implementation <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
     <div class="col-md-12"><div id='chart_bugs' class='chart js-chart'></div></div>
   </div>
+  <div class="row">
+    <h2 class="col-md-12">Estimated difficulty <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+    <div class="col-md-12"><div id='chart_difficulty' class='chart js-chart'></div></div>
+  </div>
   <% if (options.flags.jshint) { %>
   <div class="row">
     <h2 class="col-md-12">Lint errors</h2>
@@ -103,6 +107,7 @@
         <button type="button" id="button-sloc" class="btn btn-default sloc">sloc</button>
         <button type="button" id="button-bugs" class="btn btn-default bugs">est errors</button>
         <button type="button" id="button-lint" class="btn btn-default lint">lint errors</button>
+        <button type="button" id="button-difficulty" class="btn btn-default difficulty">difficulty</button>
       </div>
     </div>
   </div>
@@ -123,6 +128,7 @@
               data-sloc="<%= item.complexity.aggregate.complexity.sloc.physical %>"
               data-bugs="<%= item.complexity.aggregate.complexity.halstead.bugs.toFixed(2) %>"
               data-complexity="<%= item.complexity.aggregate.complexity.cyclomatic%>"
+              data-difficulty="<%= item.complexity.aggregate.complexity.halstead.difficulty.toFixed(2) %>""
           ></span>
         </div>
       </li>
