@@ -64,14 +64,16 @@ exports['plato'] = {
       'test/fixtures/b.js'
     ];
 
-    test.expect((files.length * 2) + 1);
+    test.expect((files.length * 2) + 3);
 
     plato.inspect(files, null, {}, function(reports){
       var overview = plato.getOverviewReport(reports);
       test.ok(overview.summary.total.sloc > 0, 'Should contain total sloc');
       test.ok(overview.summary.total.maintainability > 0, 'Should contain total maintainability');
+      test.ok(overview.summary.total.difficulty > 0, 'Should contain total difficulty');
       test.ok(overview.summary.average.sloc > 0, 'Should contain average sloc');
       test.ok(overview.summary.average.maintainability > 0, 'Should contain average maintainability');
+      test.ok(overview.summary.average.difficulty > 0, 'Should contain average difficulty');
       test.equal(overview.reports.length, files.length,'Should contain right number of reports');
       test.done();
     });
