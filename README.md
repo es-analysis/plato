@@ -1,4 +1,4 @@
-# plato 
+# plato
 
 [![Build Status](https://travis-ci.org/es-analysis/plato.png?branch=master)](https://travis-ci.org/jsoverson/plato)
 
@@ -68,7 +68,7 @@ var options = {
   title: 'Your title here'
 };
 
-var callback = function (report){ 
+var callback = function (report){
 // once done the analysis,
 // execute this
 };
@@ -110,7 +110,7 @@ plato.inspect(files, outputDir, {}, callback);
   - 0.1.0 initial release
 
 ## License
-Copyright (c) 2012 Jarrod Overson  
+Copyright (c) 2012 Jarrod Overson
 Licensed under the MIT license.
 
 

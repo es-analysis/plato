@@ -2,12 +2,12 @@
 
 // [Issue 16][gh]: Support for JSHint style globals
 // -----------------------------------------------------------------------------
-// 
+//
 // This issue is resolved by upgrading to jshint version 1.1. There was a bug
 // that required that there by no space in the global comment:
 //
 //     /*global $ */
-// 
+//
 // In their [1.0.0 RC1][jshint], they've patched this problem. This test should catch any
 // regression to this behavior.
 
@@ -23,7 +23,7 @@ exports['issue_16'] = {
   },
 
   'Respect global comment': function(test) {
-  
+
     var file = "test/fixtures/issue_16.js",
         source = fs.readFileSync(file).toString().trim(),
         config = {},
