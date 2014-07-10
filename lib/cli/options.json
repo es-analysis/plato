@@ -46,5 +46,10 @@
     "long": "date",
     "desc": "Time to use as the report date (seconds, > 9999999999 assumed to be ms)",
     "type": "String"
+  },
+  "n": {
+    "long": "noempty",
+    "desc": "Skips empty lines from line count",
+    "type": "Boolean"
   }
 }
