@@ -59,15 +59,17 @@ module.exports = function(grunt) {
       }
     },
     casper : {
+      options : {
+        test : true,
+        'fail-fast': true,
+        'log-level': 'debug'
+      },
       test: {
         src: [
           'test/casper-overview.js',
-          'test/casper-sortable-file-list.js'
+          'test/casper-sortable-file-list.js',
+          'test/casper-sortable-metrics.js'
         ],
-        options : {
-          test : true,
-          direct : true
-        }
       }
     }
   });
