@@ -1,6 +1,6 @@
 # plato
 
-[![Build Status](https://travis-ci.org/es-analysis/plato.png?branch=master)](https://travis-ci.org/jsoverson/plato)
+[![Build Status](https://travis-ci.org/es-analysis/plato.png?branch=master)](https://travis-ci.org/es-analysis/plato)
 
 Visualize JavaScript source complexity with plato.
 
