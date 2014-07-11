@@ -1,10 +1,6 @@
-/* global document */
+/* global document, casper */
 
 'use strict';
-
-var casper = require('casper').create({
-    exitOnError: true
-});
 
 
 casper.on("page.error", function(msg) {
