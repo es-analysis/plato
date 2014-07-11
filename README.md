@@ -84,6 +84,7 @@ plato.inspect(files, outputDir, {}, callback);
 ## Contributors
   - [Jarrod Overson](https://github.com/jsoverson)
   - [Craig Davis](https://github.com/there4)
+  - [David Linse](https://github.com/davidlinse)
 
 ## Release History
 
