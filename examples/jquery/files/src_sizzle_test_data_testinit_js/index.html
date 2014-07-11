@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - src/sizzle/test/data/testinit.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>src/sizzle/test/data/testinit.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">76.53</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">136</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">18.79</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">0.84</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">var fireNative,
+	jQuery = this.jQuery || &quot;jQuery&quot;, // For testing .noConflict()
+	$ = this.$ || &quot;$&quot;,
+	originaljQuery = jQuery,
+	original$ = $;
+
+(function() {
+	// Config parameter to force basic code paths
+	QUnit.config.urlConfig.push({
+		id: &quot;basic&quot;,
+		label: &quot;Bypass optimizations&quot;,
+		tooltip: &quot;Force use of the most basic code by disabling native querySelectorAll; contains; compareDocumentPosition&quot;
+	});
+	if ( QUnit.urlParams.basic ) {
+		document.querySelectorAll = null;
+		document.documentElement.contains = null;
+		document.documentElement.compareDocumentPosition = null;
+		// Return array of length two to pass assertion
+		// But support should be false as its not native
+		document.getElementsByClassName = function() { return [ 0, 1 ]; };
+	}
+})();
+
+/**
+ * Returns an array of elements with the given IDs
+ * @example q(&quot;main&quot;, &quot;foo&quot;, &quot;bar&quot;)
+ * @result [&lt;div id=&quot;main&quot;&gt;, &lt;span id=&quot;foo&quot;&gt;, &lt;input id=&quot;bar&quot;&gt;]
+ */
+function q() {
+	var r = [],
+		i = 0;
+
+	for ( ; i &lt; arguments.length; i++ ) {
+		r.push( document.getElementById( arguments[i] ) );
+	}
+	return r;
+}
+
+/**
+ * Asserts that a select matches the given IDs
+ * @param {String} a - Assertion name
+ * @param {String} b - Sizzle selector
+ * @param {String} c - Array of ids to construct what is expected
+ * @example t(&quot;Check for something&quot;, &quot;//[a]&quot;, [&quot;foo&quot;, &quot;baar&quot;]);
+ * @result returns true if &quot;//[a]&quot; return two elements with the IDs &#039;foo&#039; and &#039;baar&#039;
+ */
+function t( a, b, c ) {
+	var f = Sizzle(b),
+		s = &quot;&quot;,
+		i = 0;
+
+	for ( ; i &lt; f.length; i++ ) {
+		s += ( s &amp;&amp; &quot;,&quot; ) + &#039;&quot;&#039; + f[ i ].id + &#039;&quot;&#039;;
+	}
+
+	deepEqual(f, q.apply( q, c ), a + &quot; (&quot; + b + &quot;)&quot;);
+}
+
+/**
+ * Add random number to url to stop caching
+ *
+ * @example url(&quot;data/test.html&quot;)
+ * @result &quot;data/test.html?10538358428943&quot;
+ *
+ * @example url(&quot;data/test.php?foo=bar&quot;)
+ * @result &quot;data/test.php?foo=bar&amp;10538358345554&quot;
+ */
+function url( value ) {
+	return value + (/\?/.test(value) ? &quot;&amp;&quot; : &quot;?&quot;) + new Date().getTime() + &quot;&quot; + parseInt(Math.random()*100000);
+}
+
+var createWithFriesXML = function() {
+	var string = &#039;&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt; \
+	&lt;soap:Envelope xmlns:soap=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot; \
+		xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; \
+		xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt; \
+		&lt;soap:Body&gt; \
+			&lt;jsconf xmlns=&quot;http://www.example.com/ns1&quot;&gt; \
+				&lt;response xmlns:ab=&quot;http://www.example.com/ns2&quot;&gt; \
+					&lt;meta&gt; \
+						&lt;component id=&quot;seite1&quot; class=&quot;component&quot;&gt; \
+							&lt;properties xmlns:cd=&quot;http://www.example.com/ns3&quot;&gt; \
+								&lt;property name=&quot;prop1&quot;&gt; \
+									&lt;thing /&gt; \
+									&lt;value&gt;1&lt;/value&gt; \
+								&lt;/property&gt; \
+								&lt;property name=&quot;prop2&quot;&gt; \
+									&lt;thing att=&quot;something&quot; /&gt; \
+								&lt;/property&gt; \
+								&lt;foo_bar&gt;foo&lt;/foo_bar&gt; \
+							&lt;/properties&gt; \
+						&lt;/component&gt; \
+					&lt;/meta&gt; \
+				&lt;/response&gt; \
+			&lt;/jsconf&gt; \
+		&lt;/soap:Body&gt; \
+	&lt;/soap:Envelope&gt;&#039;;
+
+	return jQuery.parseXML( string );
+};
+
+fireNative = document.createEvent ?
+	function( node, type ) {
+		var event = document.createEvent(&quot;HTMLEvents&quot;);
+		event.initEvent( type, true, true );
+		node.dispatchEvent( event );
+	} :
+	function( node, type ) {
+		var event = document.createEventObject();
+		node.fireEvent( &quot;on&quot; + type, event );
+	};
+
+function testIframeWithCallback( title, fileName, func ) {
+	test( title, function() {
+		var iframe;
+
+		stop();
+		window.iframeCallback = function() {
+			var self = this,
+				args = arguments;
+			setTimeout(function() {
+				window.iframeCallback = undefined;
+				iframe.remove();
+				func.apply( self, args );
+				func = function() {};
+				start();
+			}, 0 );
+		};
+		iframe = jQuery( &quot;&lt;div/&gt;&quot; ).css({ position: &quot;absolute&quot;, width: &quot;500px&quot;, left: &quot;-600px&quot; })
+			.append( jQuery( &quot;&lt;iframe/&gt;&quot; ).attr( &quot;src&quot;, url( &quot;./data/&quot; + fileName ) ) )
+			.appendTo( &quot;#qunit-fixture&quot; );
+	});
+};
+window.iframeCallback = undefined;
+
+function moduleTeardown() {}</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

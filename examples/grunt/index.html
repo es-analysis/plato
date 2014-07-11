@@ -18,7 +18,6 @@
 
   <link href="assets/css/vendor/bootstrap.css" rel="stylesheet">
   <link href="assets/css/vendor/font-awesome.css" rel="stylesheet">
-  <link href="assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
   <link href="assets/css/vendor/morris.css" rel="stylesheet">
   <link href="assets/css/plato.css" rel="stylesheet">
   <link href="assets/css/plato-overview.css" rel="stylesheet">
@@ -28,7 +27,7 @@
 
 <div class="navbar navbar-fixed-top">
   <div class="container">
-    <a class="navbar-brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
     <ul class="nav navbar-nav">
       <li class="active">
         <a href="index.html">Report Home</a>
@@ -49,12 +48,12 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      <h2 class="header">Total/Average Lines <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code" data-original-title="SLOC"></i></h2>
-      <p class="stat">2469 / 164</p>
+      <h2 class="header">Total/Average Lines <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code" data-original-title="SLOC" data-container="body"></i></h2>
+      <p class="stat">1959 / 178</p>
     </div>
     <div class="col-md-6">
-      <h2 class="header">Average Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">71.57</p>
+      <h2 class="header">Average Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index" data-container="body"></i></a></h2>
+      <p class="stat">70.77</p>
     </div>
   </div>
 </div>
@@ -72,15 +71,15 @@
 
 <div class="container overview">
   <div class="row">
-    <h2 class="col-md-12">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
+    <h2 class="col-md-12">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index" data-container="body"></i></a></h2>
     <div class="col-md-12"><div id='chart_maintainability' class='chart js-chart'></div></div>
   </div>
   <div class="row">
-    <h2 class="col-md-12">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code" data-original-title="SLOC"></i></h2>
+    <h2 class="col-md-12">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code" data-original-title="SLOC" data-container="body"></i></h2>
     <div class="col-md-12"><div id='chart_sloc' class='chart js-chart'></div></div>
   </div>
   <div class="row">
-    <h2 class="col-md-12">Estimated errors in implementation <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
+    <h2 class="col-md-12">Estimated errors in implementation <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
     <div class="col-md-12"><div id='chart_bugs' class='chart js-chart'></div></div>
   </div>
   
@@ -121,7 +120,7 @@
         <span class="col-md-8 file-chart js-file-chart"
               data-lint="6"
               data-sloc="119"
-              data-bugs="0.78"
+              data-bugs="0.79"
               data-complexity="6"
           ></span>
         </div>
@@ -132,9 +131,9 @@
           <span class="fade-left fadeout visible-large"></span>
           <span class="col-md-4 file"><a class="file-link" href="./files/lib_grunt_config_js/index.html">lib/grunt/config.js</a></span>
         <span class="col-md-8 file-chart js-file-chart"
-              data-lint="6"
-              data-sloc="109"
-              data-bugs="0.95"
+              data-lint="5"
+              data-sloc="115"
+              data-bugs="1.01"
               data-complexity="10"
           ></span>
         </div>
@@ -158,7 +157,7 @@
           <span class="fade-left fadeout visible-large"></span>
           <span class="col-md-4 file"><a class="file-link" href="./files/lib_grunt_fail_js/index.html">lib/grunt/fail.js</a></span>
         <span class="col-md-8 file-chart js-file-chart"
-              data-lint="7"
+              data-lint="5"
               data-sloc="75"
               data-bugs="0.62"
               data-complexity="13"
@@ -172,9 +171,9 @@
           <span class="col-md-4 file"><a class="file-link" href="./files/lib_grunt_file_js/index.html">lib/grunt/file.js</a></span>
         <span class="col-md-8 file-chart js-file-chart"
               data-lint="20"
-              data-sloc="429"
-              data-bugs="4.62"
-              data-complexity="55"
+              data-sloc="457"
+              data-bugs="4.89"
+              data-complexity="56"
           ></span>
         </div>
       </li>
@@ -195,22 +194,9 @@
       <li class="col-md-12">
         <div class="row">
           <span class="fade-left fadeout visible-large"></span>
-          <span class="col-md-4 file"><a class="file-link" href="./files/lib_grunt_log_js/index.html">lib/grunt/log.js</a></span>
-        <span class="col-md-8 file-chart js-file-chart"
-              data-lint="8"
-              data-sloc="343"
-              data-bugs="2.87"
-              data-complexity="32"
-          ></span>
-        </div>
-      </li>
-      
-      <li class="col-md-12">
-        <div class="row">
-          <span class="fade-left fadeout visible-large"></span>
           <span class="col-md-4 file"><a class="file-link" href="./files/lib_grunt_option_js/index.html">lib/grunt/option.js</a></span>
         <span class="col-md-8 file-chart js-file-chart"
-              data-lint="4"
+              data-lint="2"
               data-sloc="33"
               data-bugs="0.25"
               data-complexity="6"
@@ -224,9 +210,9 @@
           <span class="col-md-4 file"><a class="file-link" href="./files/lib_grunt_task_js/index.html">lib/grunt/task.js</a></span>
         <span class="col-md-8 file-chart js-file-chart"
               data-lint="7"
-              data-sloc="436"
-              data-bugs="5.42"
-              data-complexity="59"
+              data-sloc="458"
+              data-bugs="5.63"
+              data-complexity="61"
           ></span>
         </div>
       </li>
@@ -247,51 +233,12 @@
       <li class="col-md-12">
         <div class="row">
           <span class="fade-left fadeout visible-large"></span>
-          <span class="col-md-4 file"><a class="file-link" href="./files/lib_grunt_util_js/index.html">lib/grunt/util.js</a></span>
-        <span class="col-md-8 file-chart js-file-chart"
-              data-lint="23"
-              data-sloc="180"
-              data-bugs="1.62"
-              data-complexity="26"
-          ></span>
-        </div>
-      </li>
-      
-      <li class="col-md-12">
-        <div class="row">
-          <span class="fade-left fadeout visible-large"></span>
           <span class="col-md-4 file"><a class="file-link" href="./files/lib_grunt_js/index.html">lib/grunt.js</a></span>
         <span class="col-md-8 file-chart js-file-chart"
-              data-lint="10"
-              data-sloc="147"
-              data-bugs="1.14"
+              data-lint="13"
+              data-sloc="156"
+              data-bugs="1.24"
               data-complexity="10"
-          ></span>
-        </div>
-      </li>
-      
-      <li class="col-md-12">
-        <div class="row">
-          <span class="fade-left fadeout visible-large"></span>
-          <span class="col-md-4 file"><a class="file-link" href="./files/lib_util_exit_js/index.html">lib/util/exit.js</a></span>
-        <span class="col-md-8 file-chart js-file-chart"
-              data-lint="6"
-              data-sloc="17"
-              data-bugs="0.05"
-              data-complexity="3"
-          ></span>
-        </div>
-      </li>
-      
-      <li class="col-md-12">
-        <div class="row">
-          <span class="fade-left fadeout visible-large"></span>
-          <span class="col-md-4 file"><a class="file-link" href="./files/lib_util_namespace_js/index.html">lib/util/namespace.js</a></span>
-        <span class="col-md-8 file-chart js-file-chart"
-              data-lint="1"
-              data-sloc="54"
-              data-bugs="0.33"
-              data-complexity="6"
           ></span>
         </div>
       </li>
@@ -302,9 +249,9 @@
           <span class="col-md-4 file"><a class="file-link" href="./files/lib_util_task_js/index.html">lib/util/task.js</a></span>
         <span class="col-md-8 file-chart js-file-chart"
               data-lint="1"
-              data-sloc="314"
-              data-bugs="2.43"
-              data-complexity="28"
+              data-sloc="333"
+              data-bugs="2.60"
+              data-complexity="31"
           ></span>
         </div>
       </li>

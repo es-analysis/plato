@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title></title>
+  <title>Plato - src/core.js</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
@@ -15,7 +15,6 @@
   <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
   <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
   <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
-  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
   <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
   <link href="../../assets/css/plato.css" rel="stylesheet">
   <link href="../../assets/css/plato-file.css" rel="stylesheet">
@@ -26,7 +25,7 @@
 
 <div class="navbar navbar-fixed-top">
   <div class="container">
-    <a class="navbar-brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
     <ul class="nav navbar-nav">
       <li>
         <a href="../../index.html">Report Home</a>
@@ -44,12 +43,12 @@
 <div class="container aggregate-stats">
   <div class="row">
     <div class="col-md-6">
-      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">66.09</p>
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">67.00</p>
     </div>
     <div class="col-md-6">
-      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">518</p>
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">482</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,12 +61,12 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">88.48</p>
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">84.74</p>
     </div>
     <div class="col-md-6">
-      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">3.56</p>
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">3.30</p>
     </div>
   </div>
 </div>
@@ -78,11 +77,11 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
       <div id="fn-by-complexity" class="stat"></div>
     </div>
     <div class="col-md-6">
-      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
       <div id="fn-by-sloc" class="stat"></div>
     </div>
   </div>
@@ -90,28 +89,21 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="col-md-12">define(function( require ) {
+    <textarea id="file-source" class="col-md-12">define([
+	&quot;./var/arr&quot;,
+	&quot;./var/slice&quot;,
+	&quot;./var/concat&quot;,
+	&quot;./var/push&quot;,
+	&quot;./var/indexOf&quot;,
+	&quot;./var/class2type&quot;,
+	&quot;./var/toString&quot;,
+	&quot;./var/hasOwn&quot;,
+	&quot;./var/support&quot;
+], function( arr, slice, concat, push, indexOf, class2type, toString, hasOwn, support ) {
 
 var
-	arr = require( &quot;./var/arr&quot; ),
-	slice = require( &quot;./var/slice&quot; ),
-	concat = require( &quot;./var/concat&quot; ),
-	push = require( &quot;./var/push&quot; ),
-	indexOf = require( &quot;./var/indexOf&quot; ),
-	class2type = require( &quot;./var/class2type&quot; ),
-	toString = require( &quot;./var/toString&quot; ),
-	hasOwn = require( &quot;./var/hasOwn&quot; ),
-	trim = require( &quot;./var/trim&quot; ),
-	support = require( &quot;./var/support&quot; ),
-
 	// Use the correct document accordingly with window argument (sandbox)
 	document = window.document,
-
-	// Map over jQuery in case of overwrite
-	_jQuery = window.jQuery,
-
-	// Map over the $ in case of overwrite
-	_$ = window.$,
 
 	version = &quot;@VERSION&quot;,
 
@@ -121,6 +113,10 @@ var
 		// Need init if jQuery is called (just allow error to be thrown if not included)
 		return new jQuery.fn.init( selector, context );
 	},
+
+	// Support: Android&lt;4.1
+	// Make sure we trim BOM and NBSP
+	rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g,
 
 	// Matches dashed string for camelizing
 	rmsPrefix = /^-ms-/,
@@ -150,13 +146,13 @@ jQuery.fn = jQuery.prototype = {
 	// Get the Nth element in the matched element set OR
 	// Get the whole matched element set as a clean array
 	get: function( num ) {
-		return num == null ?
+		return num != null ?
 
-			// Return a &#039;clean&#039; array
-			this.toArray() :
+			// Return just the one element from the set
+			( num &lt; 0 ? this[ num + this.length ] : this[ num ] ) :
 
-			// Return just the object
-			( num &lt; 0 ? this[ this.length + num ] : this[ num ] );
+			// Return all the elements in a clean array
+			slice.call( this );
 	},
 
 	// Take an array of elements and push it onto the stack
@@ -181,6 +177,12 @@ jQuery.fn = jQuery.prototype = {
 		return jQuery.each( this, callback, args );
 	},
 
+	map: function( callback ) {
+		return this.pushStack( jQuery.map(this, function( elem, i ) {
+			return callback.call( elem, i, elem );
+		}));
+	},
+
 	slice: function() {
 		return this.pushStack( slice.apply( this, arguments ) );
 	},
@@ -197,12 +199,6 @@ jQuery.fn = jQuery.prototype = {
 		var len = this.length,
 			j = +i + ( i &lt; 0 ? len : 0 );
 		return this.pushStack( j &gt;= 0 &amp;&amp; j &lt; len ? [ this[j] ] : [] );
-	},
-
-	map: function( callback ) {
-		return this.pushStack( jQuery.map(this, function( elem, i ) {
-			return callback.call( elem, i, elem );
-		}));
 	},
 
 	end: function() {
@@ -226,9 +222,10 @@ jQuery.extend = jQuery.fn.extend = function() {
 	// Handle a deep copy situation
 	if ( typeof target === &quot;boolean&quot; ) {
 		deep = target;
-		target = arguments[1] || {};
-		// skip the boolean and the target
-		i = 2;
+
+		// Skip the boolean and the target
+		target = arguments[ i ] || {};
+		i++;
 	}
 
 	// Handle case when target is a string or something (possible in deep copy)
@@ -236,10 +233,10 @@ jQuery.extend = jQuery.fn.extend = function() {
 		target = {};
 	}
 
-	// extend jQuery itself if only one argument is passed
-	if ( length === i ) {
+	// Extend jQuery itself if only one argument is passed
+	if ( i === length ) {
 		target = this;
-		--i;
+		i--;
 	}
 
 	for ( ; i &lt; length; i++ ) {
@@ -287,21 +284,12 @@ jQuery.extend({
 	// Assume jQuery is ready without the ready module
 	isReady: true,
 
-	noConflict: function( deep ) {
-		if ( window.$ === jQuery ) {
-			window.$ = _$;
-		}
-
-		if ( deep &amp;&amp; window.jQuery === jQuery ) {
-			window.jQuery = _jQuery;
-		}
-
-		return jQuery;
+	error: function( msg ) {
+		throw new Error( msg );
 	},
 
-	// See test/unit/core.js for details concerning isFunction.
-	// Since version 1.3, DOM methods and functions like alert
-	// aren&#039;t supported. They return false on IE (#2968).
+	noop: function() {},
+
 	isFunction: function( obj ) {
 		return jQuery.type(obj) === &quot;function&quot;;
 	},
@@ -316,17 +304,8 @@ jQuery.extend({
 		// parseFloat NaNs numeric-cast false positives (null|true|false|&quot;&quot;)
 		// ...but misinterprets leading-number strings, particularly hex literals (&quot;0x...&quot;)
 		// subtraction forces infinities to NaN
-		return obj - parseFloat( obj ) &gt;= 0;
-	},
-
-	type: function( obj ) {
-		if ( obj == null ) {
-			return String( obj );
-		}
-		// Support: Android &lt; 4.0, iOS &lt; 6 (functionish RegExp)
-		return typeof obj === &quot;object&quot; || typeof obj === &quot;function&quot; ?
-			class2type[ toString.call(obj) ] || &quot;object&quot; :
-			typeof obj;
+		// adding 1 corrects loss of precision from parseFloat (#15100)
+		return !jQuery.isArray( obj ) &amp;&amp; (obj - parseFloat( obj ) + 1) &gt;= 0;
 	},
 
 	isPlainObject: function( obj ) {
@@ -338,16 +317,8 @@ jQuery.extend({
 			return false;
 		}
 
-		// Support: Firefox &lt;20
-		// The try/catch suppresses exceptions thrown when attempting to access
-		// the &quot;constructor&quot; property of certain host objects, ie. |window.location|
-		// https://bugzilla.mozilla.org/show_bug.cgi?id=814622
-		try {
-			if ( obj.constructor &amp;&amp;
-					!hasOwn.call( obj.constructor.prototype, &quot;isPrototypeOf&quot; ) ) {
-				return false;
-			}
-		} catch ( e ) {
+		if ( obj.constructor &amp;&amp;
+				!hasOwn.call( obj.constructor.prototype, &quot;isPrototypeOf&quot; ) ) {
 			return false;
 		}
 
@@ -364,36 +335,26 @@ jQuery.extend({
 		return true;
 	},
 
-	error: function( msg ) {
-		throw new Error( msg );
+	type: function( obj ) {
+		if ( obj == null ) {
+			return obj + &quot;&quot;;
+		}
+		// Support: Android&lt;4.0, iOS&lt;6 (functionish RegExp)
+		return typeof obj === &quot;object&quot; || typeof obj === &quot;function&quot; ?
+			class2type[ toString.call(obj) ] || &quot;object&quot; :
+			typeof obj;
 	},
-
-	noop: function() {},
 
 	// Evaluates a script in a global context
 	globalEval: function( code ) {
-		var script,
-			indirect = eval;
+		var script = document.createElement( &quot;script&quot; );
 
-		code = jQuery.trim( code );
-
-		if ( code ) {
-			// If the code includes a valid, prologue position
-			// strict mode pragma, execute code by injecting a
-			// script tag into the document.
-			if ( code.indexOf(&quot;use strict&quot;) === 1 ) {
-				script = document.createElement(&quot;script&quot;);
-				script.text = code;
-				document.head.appendChild( script ).parentNode.removeChild( script );
-			} else {
-			// Otherwise, avoid the DOM node creation, insertion
-			// and removal by using an indirect global eval
-				indirect( code );
-			}
-		}
+		script.text = code;
+		document.head.appendChild( script ).parentNode.removeChild( script );
 	},
 
 	// Convert dashed to camelCase; used by the css and data modules
+	// Support: IE9-11+
 	// Microsoft forgot to hump their vendor prefix (#9572)
 	camelCase: function( string ) {
 		return string.replace( rmsPrefix, &quot;ms-&quot; ).replace( rdashAlpha, fcamelCase );
@@ -453,8 +414,11 @@ jQuery.extend({
 		return obj;
 	},
 
+	// Support: Android&lt;4.1
 	trim: function( text ) {
-		return text == null ? &quot;&quot; : trim.call( text );
+		return text == null ?
+			&quot;&quot; :
+			( text + &quot;&quot; ).replace( rtrim, &quot;&quot; );
 	},
 
 	// results is for internal usage only
@@ -493,23 +457,23 @@ jQuery.extend({
 		return first;
 	},
 
-	grep: function( elems, callback, inv ) {
-		var retVal,
-			ret = [],
+	grep: function( elems, callback, invert ) {
+		var callbackInverse,
+			matches = [],
 			i = 0,
-			length = elems.length;
-		inv = !!inv;
+			length = elems.length,
+			callbackExpect = !invert;
 
 		// Go through the array, only saving the items
 		// that pass the validator function
 		for ( ; i &lt; length; i++ ) {
-			retVal = !!callback( elems[ i ], i );
-			if ( inv !== retVal ) {
-				ret.push( elems[ i ] );
+			callbackInverse = !callback( elems[ i ], i );
+			if ( callbackInverse !== callbackExpect ) {
+				matches.push( elems[ i ] );
 			}
 		}
 
-		return ret;
+		return matches;
 	},
 
 	// arg is for internal usage only
@@ -526,7 +490,7 @@ jQuery.extend({
 				value = callback( elems[ i ], i, arg );
 
 				if ( value != null ) {
-					ret[ ret.length ] = value;
+					ret.push( value );
 				}
 			}
 
@@ -536,7 +500,7 @@ jQuery.extend({
 				value = callback( elems[ i ], i, arg );
 
 				if ( value != null ) {
-					ret[ ret.length ] = value;
+					ret.push( value );
 				}
 			}
 		}
@@ -593,7 +557,7 @@ function isArraylike( obj ) {
 	var length = obj.length,
 		type = jQuery.type( obj );
 
-	if ( jQuery.isWindow( obj ) ) {
+	if ( type === &quot;function&quot; || jQuery.isWindow( obj ) ) {
 		return false;
 	}
 
@@ -601,9 +565,8 @@ function isArraylike( obj ) {
 		return true;
 	}
 
-	return type === &quot;array&quot; || type !== &quot;function&quot; &amp;&amp;
-		( length === 0 ||
-		typeof length === &quot;number&quot; &amp;&amp; length &gt; 0 &amp;&amp; ( length - 1 ) in obj );
+	return type === &quot;array&quot; || length === 0 ||
+		typeof length === &quot;number&quot; &amp;&amp; length &gt; 0 &amp;&amp; ( length - 1 ) in obj;
 }
 
 return jQuery;

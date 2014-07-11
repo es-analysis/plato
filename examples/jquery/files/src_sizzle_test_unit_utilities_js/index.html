@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - src/sizzle/test/unit/utilities.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>src/sizzle/test/unit/utilities.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">57.93</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">169</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">37.42</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">2.05</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">module(&quot;utilities&quot;, { teardown: moduleTeardown });
+
+function testAttr( doc ) {
+	expect( 9 );
+
+	var el;
+	if ( doc ) {
+		// XML
+		el = doc.createElement( &quot;input&quot; );
+		el.setAttribute( &quot;type&quot;, &quot;checkbox&quot; );
+	} else {
+		// Set checked on creation by creating with a fragment
+		// See http://jsfiddle.net/8sVgA/1/show/light in oldIE
+		el = jQuery( &quot;&lt;input type=&#039;checkbox&#039; checked=&#039;checked&#039; /&gt;&quot; )[0];
+	}
+
+	// Set it again for good measure
+	el.setAttribute( &quot;checked&quot;, &quot;checked&quot; );
+	el.setAttribute( &quot;id&quot;, &quot;id&quot; );
+	el.setAttribute( &quot;value&quot;, &quot;on&quot; );
+
+	strictEqual( Sizzle.attr( el, &quot;nonexistent&quot; ), null, &quot;nonexistent&quot; );
+	strictEqual( Sizzle.attr( el, &quot;id&quot; ), &quot;id&quot;, &quot;existent&quot; );
+	strictEqual( Sizzle.attr( el, &quot;value&quot; ), &quot;on&quot;, &quot;value&quot; );
+	strictEqual( Sizzle.attr( el, &quot;checked&quot; ), &quot;checked&quot;, &quot;boolean&quot; );
+	strictEqual( Sizzle.attr( el, &quot;href&quot; ), null, &quot;interpolation risk&quot; );
+	strictEqual( Sizzle.attr( el, &quot;constructor&quot; ), null,
+		&quot;Object.prototype property \&quot;constructor\&quot; (negative)&quot; );
+	strictEqual( Sizzle.attr( el, &quot;watch&quot; ), null,
+		&quot;Gecko Object.prototype property \&quot;watch\&quot; (negative)&quot; );
+	el.setAttribute( &quot;constructor&quot;, &quot;foo&quot; );
+	el.setAttribute( &quot;watch&quot;, &quot;bar&quot; );
+	strictEqual( Sizzle.attr( el, &quot;constructor&quot; ), &quot;foo&quot;,
+		&quot;Object.prototype property \&quot;constructor\&quot;&quot; );
+	strictEqual( Sizzle.attr( el, &quot;watch&quot; ), &quot;bar&quot;,
+		&quot;Gecko Object.prototype property \&quot;watch\&quot;&quot; );
+}
+
+test(&quot;Sizzle.attr (HTML)&quot;, function() {
+	testAttr();
+});
+
+test(&quot;Sizzle.attr (XML)&quot;, function() {
+	testAttr( jQuery.parseXML(&quot;&lt;root/&gt;&quot;) );
+});
+
+test(&quot;Sizzle.contains&quot;, function() {
+	expect( 16 );
+
+	var container = document.getElementById(&quot;nonnodes&quot;),
+		element = container.firstChild,
+		text = element.nextSibling,
+		nonContained = container.nextSibling,
+		detached = document.createElement(&quot;a&quot;);
+	ok( element &amp;&amp; element.nodeType === 1, &quot;preliminary: found element&quot; );
+	ok( text &amp;&amp; text.nodeType === 3, &quot;preliminary: found text&quot; );
+	ok( nonContained, &quot;preliminary: found non-descendant&quot; );
+	ok( Sizzle.contains(container, element), &quot;child&quot; );
+	ok( Sizzle.contains(container.parentNode, element), &quot;grandchild&quot; );
+	ok( Sizzle.contains(container, text), &quot;text child&quot; );
+	ok( Sizzle.contains(container.parentNode, text), &quot;text grandchild&quot; );
+	ok( !Sizzle.contains(container, container), &quot;self&quot; );
+	ok( !Sizzle.contains(element, container), &quot;parent&quot; );
+	ok( !Sizzle.contains(container, nonContained), &quot;non-descendant&quot; );
+	ok( !Sizzle.contains(container, document), &quot;document&quot; );
+	ok( !Sizzle.contains(container, document.documentElement), &quot;documentElement (negative)&quot; );
+	ok( !Sizzle.contains(container, null), &quot;Passing null does not throw an error&quot; );
+	ok( Sizzle.contains(document, document.documentElement), &quot;documentElement (positive)&quot; );
+	ok( Sizzle.contains(document, element), &quot;document container (positive)&quot; );
+	ok( !Sizzle.contains(document, detached), &quot;document container (negative)&quot; );
+});
+
+if ( jQuery(&quot;&lt;svg xmlns=&#039;http://www.w3.org/2000/svg&#039; version=&#039;1.1&#039; height=&#039;1&#039; width=&#039;1&#039;&gt;&lt;g/&gt;&lt;/svg&gt;&quot;)[0].firstChild ) {
+	test(&quot;Sizzle.contains in SVG (jQuery #10832)&quot;, function() {
+		expect( 4 );
+
+		var svg = jQuery(
+			&quot;&lt;svg xmlns=&#039;http://www.w3.org/2000/svg&#039; version=&#039;1.1&#039; height=&#039;1&#039; width=&#039;1&#039;&gt;&quot; +
+				&quot;&lt;g&gt;&lt;circle cx=&#039;1&#039; cy=&#039;1&#039; r=&#039;1&#039; /&gt;&lt;/g&gt;&quot; +
+			&quot;&lt;/svg&gt;&quot;
+		).appendTo(&quot;#qunit-fixture&quot;)[0];
+
+		ok( Sizzle.contains( svg, svg.firstChild ), &quot;root child&quot; );
+		ok( Sizzle.contains( svg.firstChild, svg.firstChild.firstChild ), &quot;element child&quot; );
+		ok( Sizzle.contains( svg, svg.firstChild.firstChild ), &quot;root granchild&quot; );
+		ok( !Sizzle.contains( svg.firstChild.firstChild, svg.firstChild ), &quot;parent (negative)&quot; );
+	});
+}
+
+test(&quot;Sizzle.uniqueSort&quot;, function() {
+	expect( 14 );
+
+	function Arrayish( arr ) {
+		var i = this.length = arr.length;
+		while ( i-- ) {
+			this[ i ] = arr[ i ];
+		}
+	}
+	Arrayish.prototype = {
+		slice: [].slice,
+		sort: [].sort,
+		splice: [].splice
+	};
+
+	var i, tests,
+		detached = [],
+		body = document.body,
+		fixture = document.getElementById(&quot;qunit-fixture&quot;),
+		detached1 = document.createElement(&quot;p&quot;),
+		detached2 = document.createElement(&quot;ul&quot;),
+		detachedChild = detached1.appendChild( document.createElement(&quot;a&quot;) ),
+		detachedGrandchild = detachedChild.appendChild( document.createElement(&quot;b&quot;) );
+
+	for ( i = 0; i &lt; 12; i++ ) {
+		detached.push( document.createElement(&quot;li&quot;) );
+		detached[i].id = &quot;detached&quot; + i;
+		detached2.appendChild( document.createElement(&quot;li&quot;) ).id = &quot;detachedChild&quot; + i;
+	}
+
+	tests = {
+		&quot;Empty&quot;: {
+			input: [],
+			expected: []
+		},
+		&quot;Single-element&quot;: {
+			input: [ fixture ],
+			expected: [ fixture ]
+		},
+		&quot;No duplicates&quot;: {
+			input: [ fixture, body ],
+			expected: [ body, fixture ]
+		},
+		&quot;Duplicates&quot;: {
+			input: [ body, fixture, fixture, body ],
+			expected: [ body, fixture ]
+		},
+		&quot;Detached&quot;: {
+			input: detached.slice( 0 ),
+			expected: detached.slice( 0 )
+		},
+		&quot;Detached children&quot;: {
+			input: [
+				detached2.childNodes[0],
+				detached2.childNodes[1],
+				detached2.childNodes[2],
+				detached2.childNodes[3]
+			],
+			expected: [
+				detached2.childNodes[0],
+				detached2.childNodes[1],
+				detached2.childNodes[2],
+				detached2.childNodes[3]
+			]
+		},
+		&quot;Attached/detached mixture&quot;: {
+			input: [ detached1, fixture, detached2, document, detachedChild, body, detachedGrandchild ],
+			expected: [ document, body, fixture ],
+			length: 3
+		}
+	};
+
+	jQuery.each( tests, function( label, test ) {
+		var length = test.length || test.input.length;
+		deepEqual( Sizzle.uniqueSort( test.input ).slice( 0, length ), test.expected, label + &quot; (array)&quot; );
+		deepEqual( Sizzle.uniqueSort( new Arrayish(test.input) ).slice( 0, length ), test.expected, label + &quot; (quasi-array)&quot; );
+	});
+});
+
+testIframeWithCallback( &quot;Sizzle.uniqueSort works cross-window (jQuery #14381)&quot;, &quot;mixed_sort.html&quot;, deepEqual );</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

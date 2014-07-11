@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title></title>
+  <title>Plato - src/css.js</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
@@ -15,7 +15,6 @@
   <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
   <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
   <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
-  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
   <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
   <link href="../../assets/css/plato.css" rel="stylesheet">
   <link href="../../assets/css/plato-file.css" rel="stylesheet">
@@ -26,7 +25,7 @@
 
 <div class="navbar navbar-fixed-top">
   <div class="container">
-    <a class="navbar-brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
     <ul class="nav navbar-nav">
       <li>
         <a href="../../index.html">Report Home</a>
@@ -44,12 +43,12 @@
 <div class="container aggregate-stats">
   <div class="row">
     <div class="col-md-6">
-      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">60.45</p>
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">61.27</p>
     </div>
     <div class="col-md-6">
-      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">455</p>
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">450</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,12 +61,12 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">78.13</p>
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">75.81</p>
     </div>
     <div class="col-md-6">
-      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">3.81</p>
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">3.70</p>
     </div>
   </div>
 </div>
@@ -78,11 +77,11 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
       <div id="fn-by-complexity" class="stat"></div>
     </div>
     <div class="col-md-6">
-      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
       <div id="fn-by-sloc" class="stat"></div>
     </div>
   </div>
@@ -90,54 +89,52 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="col-md-12">// Require more than a few needed variables
-// Keep in mind that a dependency array cannot be used with CommonJS+AMD syntax
-define(function( require ) {
+    <textarea id="file-source" class="col-md-12">define([
+	&quot;./core&quot;,
+	&quot;./var/pnum&quot;,
+	&quot;./core/access&quot;,
+	&quot;./css/var/rmargin&quot;,
+	&quot;./css/var/rnumnonpx&quot;,
+	&quot;./css/var/cssExpand&quot;,
+	&quot;./css/var/isHidden&quot;,
+	&quot;./css/var/getStyles&quot;,
+	&quot;./css/curCSS&quot;,
+	&quot;./css/defaultDisplay&quot;,
+	&quot;./css/addGetHookIf&quot;,
+	&quot;./css/support&quot;,
+	&quot;./data/var/data_priv&quot;,
+
+	&quot;./core/init&quot;,
+	&quot;./css/swap&quot;,
+	&quot;./core/ready&quot;,
+	&quot;./selector&quot; // contains
+], function( jQuery, pnum, access, rmargin, rnumnonpx, cssExpand, isHidden,
+	getStyles, curCSS, defaultDisplay, addGetHookIf, support, data_priv ) {
 
 var
-	jQuery = require( &quot;./core&quot; ),
-	pnum = require( &quot;./var/pnum&quot; ),
-	access = require( &quot;./core/access&quot; ),
-	rmargin = require( &quot;./css/var/rmargin&quot; ),
-	rnumnonpx = require( &quot;./css/var/rnumnonpx&quot; ),
-	cssExpand = require( &quot;./css/var/cssExpand&quot; ),
-	isHidden = require( &quot;./css/var/isHidden&quot; ),
-	getStyles = require( &quot;./css/var/getStyles&quot; ),
-	curCSS = require( &quot;./css/curCSS&quot; ),
-	support = require( &quot;./css/support&quot; ),
-	defaultDisplay = require( &quot;./css/defaultDisplay&quot; ),
-	addGetHookIf = require( &quot;./css/addGetHookIf&quot; ),
-	data_priv = require( &quot;./data/var/data_priv&quot; ),
-
-	// swappable if display is none or starts with table except &quot;table&quot;, &quot;table-cell&quot;, or &quot;table-caption&quot;
-	// see here for display values: https://developer.mozilla.org/en-US/docs/CSS/display
+	// Swappable if display is none or starts with table except &quot;table&quot;, &quot;table-cell&quot;, or &quot;table-caption&quot;
+	// See here for display values: https://developer.mozilla.org/en-US/docs/CSS/display
 	rdisplayswap = /^(none|table(?!-c[ea]).+)/,
 	rnumsplit = new RegExp( &quot;^(&quot; + pnum + &quot;)(.*)$&quot;, &quot;i&quot; ),
 	rrelNum = new RegExp( &quot;^([+-])=(&quot; + pnum + &quot;)&quot;, &quot;i&quot; ),
 
 	cssShow = { position: &quot;absolute&quot;, visibility: &quot;hidden&quot;, display: &quot;block&quot; },
 	cssNormalTransform = {
-		letterSpacing: 0,
-		fontWeight: 400
+		letterSpacing: &quot;0&quot;,
+		fontWeight: &quot;400&quot;
 	},
 
 	cssPrefixes = [ &quot;Webkit&quot;, &quot;O&quot;, &quot;Moz&quot;, &quot;ms&quot; ];
 
-// Dependencies not needed as vars
-require( &quot;./core/init&quot; );
-require( &quot;./css/swap&quot; );
-require( &quot;./core/ready&quot; );
-require( &quot;./selector&quot; ); // contains
-
-// return a css property mapped to a potentially vendor prefixed property
+// Return a css property mapped to a potentially vendor prefixed property
 function vendorPropName( style, name ) {
 
-	// shortcut for names that are not vendor prefixed
+	// Shortcut for names that are not vendor prefixed
 	if ( name in style ) {
 		return name;
 	}
 
-	// check for vendor prefixed names
+	// Check for vendor prefixed names
 	var capName = name[0].toUpperCase() + name.slice(1),
 		origName = name,
 		i = cssPrefixes.length;
@@ -151,9 +148,6 @@ function vendorPropName( style, name ) {
 
 	return origName;
 }
-
-
-
 
 function setPositiveNumber( elem, value, subtract ) {
 	var matches = rnumsplit.exec( value );
@@ -173,7 +167,7 @@ function augmentWidthOrHeight( elem, name, extra, isBorderBox, styles ) {
 		val = 0;
 
 	for ( ; i &lt; 4; i += 2 ) {
-		// both box models exclude margin, so add it if we want it
+		// Both box models exclude margin, so add it if we want it
 		if ( extra === &quot;margin&quot; ) {
 			val += jQuery.css( elem, extra + cssExpand[ i ], true, styles );
 		}
@@ -184,15 +178,15 @@ function augmentWidthOrHeight( elem, name, extra, isBorderBox, styles ) {
 				val -= jQuery.css( elem, &quot;padding&quot; + cssExpand[ i ], true, styles );
 			}
 
-			// at this point, extra isn&#039;t border nor margin, so remove border
+			// At this point, extra isn&#039;t border nor margin, so remove border
 			if ( extra !== &quot;margin&quot; ) {
 				val -= jQuery.css( elem, &quot;border&quot; + cssExpand[ i ] + &quot;Width&quot;, true, styles );
 			}
 		} else {
-			// at this point, extra isn&#039;t content, so add padding
+			// At this point, extra isn&#039;t content, so add padding
 			val += jQuery.css( elem, &quot;padding&quot; + cssExpand[ i ], true, styles );
 
-			// at this point, extra isn&#039;t content nor padding, so add border
+			// At this point, extra isn&#039;t content nor padding, so add border
 			if ( extra !== &quot;padding&quot; ) {
 				val += jQuery.css( elem, &quot;border&quot; + cssExpand[ i ] + &quot;Width&quot;, true, styles );
 			}
@@ -210,7 +204,7 @@ function getWidthOrHeight( elem, name, extra ) {
 		styles = getStyles( elem ),
 		isBorderBox = jQuery.css( elem, &quot;boxSizing&quot;, false, styles ) === &quot;border-box&quot;;
 
-	// some non-html elements return undefined for offsetWidth, so check for null/undefined
+	// Some non-html elements return undefined for offsetWidth, so check for null/undefined
 	// svg - https://bugzilla.mozilla.org/show_bug.cgi?id=649285
 	// MathML - https://bugzilla.mozilla.org/show_bug.cgi?id=491668
 	if ( val &lt;= 0 || val == null ) {
@@ -225,7 +219,7 @@ function getWidthOrHeight( elem, name, extra ) {
 			return val;
 		}
 
-		// we need the check for style in case a browser which returns unreliable values
+		// Check for style in case a browser which returns unreliable values
 		// for getComputedStyle silently falls back to the reliable elem.style
 		valueIsBorderBox = isBorderBox &amp;&amp;
 			( support.boxSizingReliable() || val === elem.style[ name ] );
@@ -234,7 +228,7 @@ function getWidthOrHeight( elem, name, extra ) {
 		val = parseFloat( val ) || 0;
 	}
 
-	// use the active box-sizing model to add/subtract irrelevant styles
+	// Use the active box-sizing model to add/subtract irrelevant styles
 	return ( val +
 		augmentWidthOrHeight(
 			elem,
@@ -274,13 +268,10 @@ function showHide( elements, show ) {
 				values[ index ] = data_priv.access( elem, &quot;olddisplay&quot;, defaultDisplay(elem.nodeName) );
 			}
 		} else {
+			hidden = isHidden( elem );
 
-			if ( !values[ index ] ) {
-				hidden = isHidden( elem );
-
-				if ( display &amp;&amp; display !== &quot;none&quot; || !hidden ) {
-					data_priv.set( elem, &quot;olddisplay&quot;, hidden ? display : jQuery.css(elem, &quot;display&quot;) );
-				}
+			if ( display !== &quot;none&quot; || !hidden ) {
+				data_priv.set( elem, &quot;olddisplay&quot;, hidden ? display : jQuery.css( elem, &quot;display&quot; ) );
 			}
 		}
 	}
@@ -301,12 +292,14 @@ function showHide( elements, show ) {
 }
 
 jQuery.extend({
+
 	// Add in style property hooks for overriding the default
 	// behavior of getting and setting a style property
 	cssHooks: {
 		opacity: {
 			get: function( elem, computed ) {
 				if ( computed ) {
+
 					// We should always get a number back from opacity
 					var ret = curCSS( elem, &quot;opacity&quot; );
 					return ret === &quot;&quot; ? &quot;1&quot; : ret;
@@ -319,6 +312,8 @@ jQuery.extend({
 	cssNumber: {
 		&quot;columnCount&quot;: true,
 		&quot;fillOpacity&quot;: true,
+		&quot;flexGrow&quot;: true,
+		&quot;flexShrink&quot;: true,
 		&quot;fontWeight&quot;: true,
 		&quot;lineHeight&quot;: true,
 		&quot;opacity&quot;: true,
@@ -332,12 +327,12 @@ jQuery.extend({
 	// Add in properties whose names you wish to fix before
 	// setting or getting the value
 	cssProps: {
-		// normalize float css property
 		&quot;float&quot;: &quot;cssFloat&quot;
 	},
 
 	// Get and set the style property on a DOM Node
 	style: function( elem, name, value, extra ) {
+
 		// Don&#039;t set styles on text and comment nodes
 		if ( !elem || elem.nodeType === 3 || elem.nodeType === 8 || !elem.style ) {
 			return;
@@ -350,33 +345,32 @@ jQuery.extend({
 
 		name = jQuery.cssProps[ origName ] || ( jQuery.cssProps[ origName ] = vendorPropName( style, origName ) );
 
-		// gets hook for the prefixed version
-		// followed by the unprefixed version
+		// Gets hook for the prefixed version, then unprefixed version
 		hooks = jQuery.cssHooks[ name ] || jQuery.cssHooks[ origName ];
 
 		// Check if we&#039;re setting a value
 		if ( value !== undefined ) {
 			type = typeof value;
 
-			// convert relative number strings (+= or -=) to relative numbers. #7345
+			// Convert &quot;+=&quot; or &quot;-=&quot; to relative numbers (#7345)
 			if ( type === &quot;string&quot; &amp;&amp; (ret = rrelNum.exec( value )) ) {
 				value = ( ret[1] + 1 ) * ret[2] + parseFloat( jQuery.css( elem, name ) );
 				// Fixes bug #9237
 				type = &quot;number&quot;;
 			}
 
-			// Make sure that null and NaN values aren&#039;t set. See: #7116
+			// Make sure that null and NaN values aren&#039;t set (#7116)
 			if ( value == null || value !== value ) {
 				return;
 			}
 
-			// If a number was passed in, add &#039;px&#039; to the (except for certain CSS properties)
+			// If a number, add &#039;px&#039; to the (except for certain CSS properties)
 			if ( type === &quot;number&quot; &amp;&amp; !jQuery.cssNumber[ origName ] ) {
 				value += &quot;px&quot;;
 			}
 
-			// Fixes #8908, it can be done more correctly by specifying setters in cssHooks,
-			// but it would mean to define eight (for every problematic property) identical functions
+			// Support: IE9-11+
+			// background-* props affect original clone&#039;s values
 			if ( !support.clearCloneStyle &amp;&amp; value === &quot;&quot; &amp;&amp; name.indexOf( &quot;background&quot; ) === 0 ) {
 				style[ name ] = &quot;inherit&quot;;
 			}
@@ -404,8 +398,7 @@ jQuery.extend({
 		// Make sure that we&#039;re working with the right name
 		name = jQuery.cssProps[ origName ] || ( jQuery.cssProps[ origName ] = vendorPropName( elem.style, origName ) );
 
-		// gets hook for the prefixed version
-		// followed by the unprefixed version
+		// Try prefixed name followed by the unprefixed name
 		hooks = jQuery.cssHooks[ name ] || jQuery.cssHooks[ origName ];
 
 		// If a hook was provided get the computed value from there
@@ -418,12 +411,12 @@ jQuery.extend({
 			val = curCSS( elem, name, styles );
 		}
 
-		//convert &quot;normal&quot; to computed value
+		// Convert &quot;normal&quot; to computed value
 		if ( val === &quot;normal&quot; &amp;&amp; name in cssNormalTransform ) {
 			val = cssNormalTransform[ name ];
 		}
 
-		// Return, converting to number if forced or a qualifier was provided and val looks numeric
+		// Make numeric if forced or a qualifier was provided and val looks numeric
 		if ( extra === &quot;&quot; || extra ) {
 			num = parseFloat( val );
 			return extra === true || jQuery.isNumeric( num ) ? num || 0 : val;
@@ -436,9 +429,10 @@ jQuery.each([ &quot;height&quot;, &quot;width&quot; ], function( i, name ) {
 	jQuery.cssHooks[ name ] = {
 		get: function( elem, computed, extra ) {
 			if ( computed ) {
-				// certain elements can have dimension info if we invisibly show them
-				// however, it must have a current display style that would benefit from this
-				return elem.offsetWidth === 0 &amp;&amp; rdisplayswap.test( jQuery.css( elem, &quot;display&quot; ) ) ?
+
+				// Certain elements can have dimension info if we invisibly show them
+				// but it must have a current display style that would benefit
+				return rdisplayswap.test( jQuery.css( elem, &quot;display&quot; ) ) &amp;&amp; elem.offsetWidth === 0 ?
 					jQuery.swap( elem, cssShow, function() {
 						return getWidthOrHeight( elem, name, extra );
 					}) :
@@ -463,10 +457,8 @@ jQuery.each([ &quot;height&quot;, &quot;width&quot; ], function( i, name ) {
 
 // Support: Android 2.3
 jQuery.cssHooks.marginRight = addGetHookIf( support.reliableMarginRight,
-	function ( elem, computed ) {
+	function( elem, computed ) {
 		if ( computed ) {
-			// WebKit Bug 13343 - getComputedStyle returns wrong value for margin-right
-			// Work around by temporarily setting element display to inline-block
 			return jQuery.swap( elem, { &quot;display&quot;: &quot;inline-block&quot; },
 				curCSS, [ elem, &quot;marginRight&quot; ] );
 		}
@@ -484,7 +476,7 @@ jQuery.each({
 			var i = 0,
 				expanded = {},
 
-				// assumes a single number if not a string
+				// Assumes a single number if not a string
 				parts = typeof value === &quot;string&quot; ? value.split(&quot; &quot;) : [ value ];
 
 			for ( ; i &lt; 4; i++ ) {

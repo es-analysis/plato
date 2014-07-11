@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title></title>
+  <title>Plato - lib/grunt/task.js</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
@@ -15,7 +15,6 @@
   <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
   <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
   <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
-  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
   <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
   <link href="../../assets/css/plato.css" rel="stylesheet">
   <link href="../../assets/css/plato-file.css" rel="stylesheet">
@@ -26,7 +25,7 @@
 
 <div class="navbar navbar-fixed-top">
   <div class="container">
-    <a class="navbar-brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
     <ul class="nav navbar-nav">
       <li>
         <a href="../../index.html">Report Home</a>
@@ -44,12 +43,12 @@
 <div class="container aggregate-stats">
   <div class="row">
     <div class="col-md-6">
-      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">64.46</p>
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">63.61</p>
     </div>
     <div class="col-md-6">
-      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">436</p>
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">458</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,12 +61,12 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">69.78</p>
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">71.26</p>
     </div>
     <div class="col-md-6">
-      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">5.42</p>
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">5.63</p>
     </div>
   </div>
 </div>
@@ -78,11 +77,11 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
       <div id="fn-by-complexity" class="stat"></div>
     </div>
     <div class="col-md-6">
-      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
       <div id="fn-by-sloc" class="stat"></div>
     </div>
   </div>
@@ -94,7 +93,7 @@
  * grunt
  * http://gruntjs.com/
  *
- * Copyright (c) 2013 &quot;Cowboy&quot; Ben Alman
+ * Copyright (c) 2014 &quot;Cowboy&quot; Ben Alman
  * Licensed under the MIT license.
  * https://github.com/gruntjs/grunt/blob/master/LICENSE-MIT
  */
@@ -137,6 +136,8 @@ task.registerTask = function(name) {
   // Override task function.
   var _fn = thisTask.fn;
   thisTask.fn = function(arg) {
+    // Guaranteed to always be the actual task name.
+    var name = thisTask.name;
     // Initialize the errorcount for this task.
     errorcount = grunt.fail.errorcount;
     // Return the number of errors logged during this task.
@@ -156,7 +157,9 @@ task.registerTask = function(name) {
       var args = [{}].concat(grunt.util.toArray(arguments)).concat([
         grunt.config([name, &#039;options&#039;])
       ]);
-      return grunt.util._.extend.apply(null, args);
+      var options = grunt.util._.extend.apply(null, args);
+      grunt.verbose.writeflags(options, &#039;Options&#039;);
+      return options;
     };
     // If this task was an alias or a multi task called without a target,
     // only log if in verbose mode.
@@ -195,7 +198,7 @@ task.normalizeMultiTaskFiles = function(data, target) {
         files.push({src: data.files[prop], dest: grunt.config.process(prop)});
       }
     } else if (Array.isArray(data.files)) {
-      data.files.forEach(function(obj) {
+      grunt.util._.flatten(data.files).forEach(function(obj) {
         var prop;
         if (&#039;src&#039; in obj || &#039;dest&#039; in obj) {
           files.push(obj);
@@ -328,8 +331,15 @@ task.registerMultiTask = function(name, info, fn) {
         grunt.config([name, &#039;options&#039;]),
         grunt.util.kindOf(targetObj) === &#039;object&#039; ? targetObj.options : {}
       ]);
-      return grunt.util._.extend.apply(null, args);
+      var options = grunt.util._.extend.apply(null, args);
+      grunt.verbose.writeflags(options, &#039;Options&#039;);
+      return options;
     };
+    // Expose the current target.
+    this.target = target;
+    // Recreate flags object so that the target isn&#039;t set as a flag.
+    this.flags = {};
+    this.args.forEach(function(arg) { this.flags[arg] = true; }, this);
     // Expose data on `this` (as well as task.current).
     this.data = grunt.config([name, target]);
     // Expose normalized files object.
@@ -341,11 +351,6 @@ task.registerMultiTask = function(name, info, fn) {
         return grunt.util._(this.files).chain().pluck(&#039;src&#039;).flatten().uniq().value();
       }.bind(this)
     });
-    // Expose the current target.
-    this.target = target;
-    // Recreate flags object so that the target isn&#039;t set as a flag.
-    this.flags = {};
-    this.args.forEach(function(arg) { this.flags[arg] = true; }, this);
     // Call original task function, passing in the target and any other args.
     return fn.apply(this, this.args);
   });
@@ -363,24 +368,33 @@ task.registerInitTask = function(name, info, fn) {
 
 // Override built-in renameTask to use the registry.
 task.renameTask = function(oldname, newname) {
-  // Add and remove task.
-  registry.untasks.push(oldname);
-  registry.tasks.push(newname);
-  // Actually rename task.
-  return parent.renameTask.apply(task, arguments);
+  var result;
+  try {
+    // Actually rename task.
+    result = parent.renameTask.apply(task, arguments);
+    // Add and remove task.
+    registry.untasks.push(oldname);
+    registry.tasks.push(newname);
+    // Return result.
+    return result;
+  } catch(e) {
+    grunt.log.error(e.message);
+  }
 };
 
 // If a property wasn&#039;t passed, run all task targets in turn.
 task.runAllTargets = function(taskname, args) {
   // Get an array of sub-property keys under the given config object.
   var targets = Object.keys(grunt.config.getRaw(taskname) || {});
+  // Remove invalid target properties.
+  targets = targets.filter(isValidMultiTaskTarget);
   // Fail if there are no actual properties to iterate over.
   if (targets.length === 0) {
     grunt.log.error(&#039;No &quot;&#039; + taskname + &#039;&quot; targets found.&#039;);
     return false;
   }
-  // Iterate over all valid target properties, running a task for each.
-  targets.filter(isValidMultiTaskTarget).forEach(function(target) {
+  // Iterate over all targets, running a task for each.
+  targets.forEach(function(target) {
     // Be sure to pass in any additionally specified args.
     task.run([taskname, target].concat(args || []).join(&#039;:&#039;));
   });
@@ -413,7 +427,7 @@ function loadTask(filepath) {
       }
     });
     if (regCount === 0) {
-      grunt.verbose.error(&#039;No tasks were registered or unregistered.&#039;);
+      grunt.verbose.warn(&#039;No tasks were registered or unregistered.&#039;);
     }
   } catch(e) {
     // Something went wrong.
@@ -502,11 +516,18 @@ task.init = function(tasks, options) {
 
   // Get any local Gruntfile or tasks that might exist. Use --gruntfile override
   // if specified, otherwise search the current directory or any parent.
-  var gruntfile = allInit ? null : grunt.option(&#039;gruntfile&#039;) ||
-    grunt.file.findup(&#039;Gruntfile.{js,coffee}&#039;, {nocase: true});
+  var gruntfile, msg;
+  if (allInit || options.gruntfile === false) {
+    gruntfile = null;
+  } else {
+    gruntfile = grunt.option(&#039;gruntfile&#039;) ||
+      grunt.file.findup(&#039;Gruntfile.{js,coffee}&#039;, {nocase: true});
+    msg = &#039;Reading &quot;&#039; + (gruntfile ? path.basename(gruntfile) : &#039;???&#039;) + &#039;&quot; Gruntfile...&#039;;
+  }
 
-  var msg = &#039;Reading &quot;&#039; + (gruntfile ? path.basename(gruntfile) : &#039;???&#039;) + &#039;&quot; Gruntfile...&#039;;
-  if (gruntfile &amp;&amp; grunt.file.exists(gruntfile)) {
+  if (options.gruntfile === false) {
+    // Grunt was run as a lib with {gruntfile: false}.
+  } else if (gruntfile &amp;&amp; grunt.file.exists(gruntfile)) {
     grunt.verbose.writeln().write(msg).ok();
     // Change working directory so that all paths are relative to the
     // Gruntfile&#039;s location (or the --base option, if specified).

@@ -61,22 +61,41 @@ $(function sortable_file_list () {
       file_list.append($(list));
     };
 
+
+    var _update_metrics_order = function _update_metrics_order (metric_name) {
+
+      var reorder = function reorder () {
+
+        var metric = $(this).children().find('label').filter(function() {
+          return $(this).text() === metric_name;
+        }).parent();
+
+        $(metric).prependTo($(this));
+      };
+
+      $("div [class*='js-file-chart']").each(reorder);
+    };
+
     // button event-handler
 
     var _byComplexity = function () {
       _update_list(_sortByComplexity());
+      _update_metrics_order('complexity');
     };
 
     var _byBugs = function () {
       _update_list(_sortByBugs());
+      _update_metrics_order('est errors');
     };
 
     var _bySLOC = function () {
       _update_list(_sortBySLOC());
+      _update_metrics_order('sloc');
     };
 
     var _byLint = function () {
       _update_list(_sortByLintErr());
+      _update_metrics_order('lint errors');
     };
 
     // styling

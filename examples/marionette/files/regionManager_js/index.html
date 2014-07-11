@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title></title>
+  <title>Plato - regionManager.js</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
@@ -15,7 +15,6 @@
   <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
   <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
   <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
-  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
   <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
   <link href="../../assets/css/plato.css" rel="stylesheet">
   <link href="../../assets/css/plato-file.css" rel="stylesheet">
@@ -26,7 +25,7 @@
 
 <div class="navbar navbar-fixed-top">
   <div class="container">
-    <a class="navbar-brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
     <ul class="nav navbar-nav">
       <li>
         <a href="../../index.html">Report Home</a>
@@ -44,12 +43,12 @@
 <div class="container aggregate-stats">
   <div class="row">
     <div class="col-md-6">
-      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">74.30</p>
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">74.08</p>
     </div>
     <div class="col-md-6">
-      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">128</p>
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">122</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,12 +61,12 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">28.67</p>
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">29.78</p>
     </div>
     <div class="col-md-6">
-      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">0.95</p>
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">0.76</p>
     </div>
   </div>
 </div>
@@ -78,11 +77,11 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
       <div id="fn-by-complexity" class="stat"></div>
     </div>
     <div class="col-md-6">
-      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
       <div id="fn-by-sloc" class="stat"></div>
     </div>
   </div>
@@ -94,26 +93,26 @@
 // ------------------------
 //
 // Manage one or more related `Marionette.Region` objects.
-Marionette.RegionManager = (function(Marionette){
+Marionette.RegionManager = (function(Marionette) {
 
   var RegionManager = Marionette.Controller.extend({
-    constructor: function(options){
+    constructor: function(options) {
       this._regions = {};
-      Marionette.Controller.prototype.constructor.call(this, options);
+      Marionette.Controller.call(this, options);
     },
 
     // Add multiple regions using an object literal, where
     // each key becomes the region name, and each value is
     // the region definition.
-    addRegions: function(regionDefinitions, defaults){
+    addRegions: function(regionDefinitions, defaults) {
       var regions = {};
 
-      _.each(regionDefinitions, function(definition, name){
-        if (typeof definition === &quot;string&quot;){
-          definition = { selector: definition };
+      _.each(regionDefinitions, function(definition, name) {
+        if (_.isString(definition)) {
+          definition = {selector: definition};
         }
 
-        if (definition.selector){
+        if (definition.selector) {
           definition = _.defaults({}, definition, defaults);
         }
 
@@ -126,99 +125,93 @@ Marionette.RegionManager = (function(Marionette){
 
     // Add an individual region to the region manager,
     // and return the region instance
-    addRegion: function(name, definition){
+    addRegion: function(name, definition) {
       var region;
 
       var isObject = _.isObject(definition);
       var isString = _.isString(definition);
       var hasSelector = !!definition.selector;
 
-      if (isString || (isObject &amp;&amp; hasSelector)){
+      if (isString || (isObject &amp;&amp; hasSelector)) {
         region = Marionette.Region.buildRegion(definition, Marionette.Region);
-      } else if (_.isFunction(definition)){
+      } else if (_.isFunction(definition)) {
         region = Marionette.Region.buildRegion(definition, Marionette.Region);
       } else {
         region = definition;
       }
 
+      this.triggerMethod(&#039;before:add:region&#039;, name, region);
+
       this._store(name, region);
-      this.triggerMethod(&quot;region:add&quot;, name, region);
+
+      this.triggerMethod(&#039;add:region&#039;, name, region);
       return region;
     },
 
     // Get a region by name
-    get: function(name){
+    get: function(name) {
       return this._regions[name];
     },
 
+    // Gets all the regions contained within
+    // the `regionManager` instance.
+    getRegions: function(){
+      return _.clone(this._regions);
+    },
+
     // Remove a region by name
-    removeRegion: function(name){
+    removeRegion: function(name) {
       var region = this._regions[name];
       this._remove(name, region);
     },
 
-    // Close all regions in the region manager, and
+    // Empty all regions in the region manager, and
     // remove them
-    removeRegions: function(){
-      _.each(this._regions, function(region, name){
+    removeRegions: function() {
+      _.each(this._regions, function(region, name) {
         this._remove(name, region);
       }, this);
     },
 
-    // Close all regions in the region manager, but
+    // Empty all regions in the region manager, but
     // leave them attached
-    closeRegions: function(){
-      _.each(this._regions, function(region, name){
-        region.close();
+    emptyRegions: function() {
+      _.each(this._regions, function(region) {
+        region.empty();
       }, this);
     },
 
-    // Close all regions and shut down the region
+    // Destroy all regions and shut down the region
     // manager entirely
-    close: function(){
+    destroy: function() {
       this.removeRegions();
-      var args = Array.prototype.slice.call(arguments);
-      Marionette.Controller.prototype.close.apply(this, args);
+      Marionette.Controller.prototype.destroy.apply(this, arguments);
     },
 
     // internal method to store regions
-    _store: function(name, region){
+    _store: function(name, region) {
       this._regions[name] = region;
       this._setLength();
     },
 
     // internal method to remove a region
-    _remove: function(name, region){
-      region.close();
+    _remove: function(name, region) {
+      this.triggerMethod(&#039;before:remove:region&#039;, name, region);
+      region.empty();
+      region.stopListening();
       delete this._regions[name];
       this._setLength();
-      this.triggerMethod(&quot;region:remove&quot;, name, region);
+      this.triggerMethod(&#039;remove:region&#039;, name, region);
     },
 
     // set the number of regions current held
-    _setLength: function(){
+    _setLength: function() {
       this.length = _.size(this._regions);
     }
 
   });
 
-  // Borrowing this code from Backbone.Collection:
-  // http://backbonejs.org/docs/backbone.html#section-106
-  //
-  // Mix in methods from Underscore, for iteration, and other
-  // collection related features.
-  var methods = [&#039;forEach&#039;, &#039;each&#039;, &#039;map&#039;, &#039;find&#039;, &#039;detect&#039;, &#039;filter&#039;, 
-    &#039;select&#039;, &#039;reject&#039;, &#039;every&#039;, &#039;all&#039;, &#039;some&#039;, &#039;any&#039;, &#039;include&#039;, 
-    &#039;contains&#039;, &#039;invoke&#039;, &#039;toArray&#039;, &#039;first&#039;, &#039;initial&#039;, &#039;rest&#039;, 
-    &#039;last&#039;, &#039;without&#039;, &#039;isEmpty&#039;, &#039;pluck&#039;];
-
-  _.each(methods, function(method) {
-    RegionManager.prototype[method] = function() {
-      var regions = _.values(this._regions);
-      var args = [regions].concat(_.toArray(arguments));
-      return _[method].apply(_, args);
-    };
-  });
+  Marionette.actAsCollection(RegionManager.prototype, &#039;_regions&#039;);
 
   return RegionManager;
 })(Marionette);</textarea>

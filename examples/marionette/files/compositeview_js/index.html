@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title></title>
+  <title>Plato - compositeview.js</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
@@ -15,7 +15,6 @@
   <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
   <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
   <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
-  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
   <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
   <link href="../../assets/css/plato.css" rel="stylesheet">
   <link href="../../assets/css/plato-file.css" rel="stylesheet">
@@ -26,7 +25,7 @@
 
 <div class="navbar navbar-fixed-top">
   <div class="container">
-    <a class="navbar-brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
     <ul class="nav navbar-nav">
       <li>
         <a href="../../index.html">Report Home</a>
@@ -44,12 +43,12 @@
 <div class="container aggregate-stats">
   <div class="row">
     <div class="col-md-6">
-      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">71.41</p>
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">72.14</p>
     </div>
     <div class="col-md-6">
-      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">130</p>
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">173</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,12 +61,12 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">21.76</p>
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">26.41</p>
     </div>
     <div class="col-md-6">
-      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">0.77</p>
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">0.93</p>
     </div>
   </div>
 </div>
@@ -78,11 +77,11 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
       <div id="fn-by-complexity" class="stat"></div>
     </div>
     <div class="col-md-6">
-      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
       <div id="fn-by-sloc" class="stat"></div>
     </div>
   </div>
@@ -90,52 +89,67 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="col-md-12">// Composite View
+    <textarea id="file-source" class="col-md-12">/* jshint maxstatements: 17, maxlen: 117 */
+
+// Composite View
 // --------------
 
 // Used for rendering a branch-leaf, hierarchical structure.
 // Extends directly from CollectionView and also renders an
-// an item view as `modelView`, for the top leaf
+// a child view as `modelView`, for the top leaf
 Marionette.CompositeView = Marionette.CollectionView.extend({
 
   // Setting up the inheritance chain which allows changes to
   // Marionette.CollectionView.prototype.constructor which allows overriding
-  constructor: function(){
-    Marionette.CollectionView.prototype.constructor.apply(this, slice(arguments));
+  // option to pass &#039;{sort: false}&#039; to prevent the CompositeView from
+  // maintaining the sorted order of the collection.
+  // This will fallback onto appending childView&#039;s to the end.
+  constructor: function() {
+    Marionette.CollectionView.apply(this, arguments);
   },
 
   // Configured the initial events that the composite view
   // binds to. Override this method to prevent the initial
   // events, or to add your own initial events.
-  _initialEvents: function(){
-    if (this.collection){
-      this.listenTo(this.collection, &quot;add&quot;, this.addChildView, this);
-      this.listenTo(this.collection, &quot;remove&quot;, this.removeItemView, this);
-      this.listenTo(this.collection, &quot;reset&quot;, this._renderChildren, this);
-    }
+  _initialEvents: function() {
+
+    // Bind only after composite view is rendered to avoid adding child views
+    // to nonexistent childViewContainer
+    this.once(&#039;render&#039;, function() {
+      if (this.collection) {
+        this.listenTo(this.collection, &#039;add&#039;, this._onCollectionAdd);
+        this.listenTo(this.collection, &#039;remove&#039;, this._onCollectionRemove);
+        this.listenTo(this.collection, &#039;reset&#039;, this._renderChildren);
+
+        if (this.sort) {
+          this.listenTo(this.collection, &#039;sort&#039;, this._sortViews);
+        }
+      }
+    });
+
   },
 
-  // Retrieve the `itemView` to be used when rendering each of
+  // Retrieve the `childView` to be used when rendering each of
   // the items in the collection. The default is to return
-  // `this.itemView` or Marionette.CompositeView if no `itemView`
+  // `this.childView` or Marionette.CompositeView if no `childView`
   // has been defined
-  getItemView: function(item){
-    var itemView = Marionette.getOption(this, &quot;itemView&quot;) || this.constructor;
+  getChildView: function(child) {
+    var childView = this.getOption(&#039;childView&#039;) || this.constructor;
 
-    if (!itemView){
-      throwError(&quot;An `itemView` must be specified&quot;, &quot;NoItemViewError&quot;);
+    if (!childView) {
+      throwError(&#039;A &quot;childView&quot; must be specified&#039;, &#039;NoChildViewError&#039;);
     }
 
-    return itemView;
+    return childView;
   },
 
   // Serialize the collection for the view.
   // You can override the `serializeData` method in your own view
   // definition, to provide custom serialization for your view&#039;s data.
-  serializeData: function(){
+  serializeData: function() {
     var data = {};
 
-    if (this.model){
+    if (this.model) {
       data = this.model.toJSON();
     }
 
@@ -145,84 +159,114 @@ Marionette.CompositeView = Marionette.CollectionView.extend({
   // Renders the model once, and the collection once. Calling
   // this again will tell the model&#039;s view to re-render itself
   // but the collection will not re-render.
-  render: function(){
+  render: function() {
+    this._ensureViewIsIntact();
     this.isRendered = true;
-    this.isClosed = false;
-    this.resetItemViewContainer();
+    this.resetChildViewContainer();
 
-    this.triggerBeforeRender();
-    var html = this.renderModel();
-    this.$el.html(html);
-    // the ui bindings is done here and not at the end of render since they
-    // will not be available until after the model is rendered, but should be
-    // available before the collection is rendered.
-    this.bindUIElements();
-    this.triggerMethod(&quot;composite:model:rendered&quot;);
+    this.triggerMethod(&#039;before:render&#039;, this);
 
+    this._renderRoot();
     this._renderChildren();
 
-    this.triggerMethod(&quot;composite:rendered&quot;);
-    this.triggerRendered();
+    this.triggerMethod(&#039;render&#039;, this);
     return this;
   },
 
-  _renderChildren: function(){
-    if (this.isRendered){
+  _renderChildren: function() {
+    if (this.isRendered) {
       Marionette.CollectionView.prototype._renderChildren.call(this);
-      this.triggerMethod(&quot;composite:collection:rendered&quot;);
     }
   },
 
-  // Render an individual model, if we have one, as
-  // part of a composite view (branch / leaf). For example:
-  // a treeview.
-  renderModel: function(){
+  // Render the root template that the children
+  // views are appended to
+  _renderRoot: function() {
     var data = {};
     data = this.serializeData();
     data = this.mixinTemplateHelpers(data);
 
+    this.triggerMethod(&#039;before:render:template&#039;);
+
     var template = this.getTemplate();
-    return Marionette.Renderer.render(template, data);
+    var html = Marionette.Renderer.render(template, data);
+    this.attachElContent(html);
+
+    // the ui bindings is done here and not at the end of render since they
+    // will not be available until after the model is rendered, but should be
+    // available before the collection is rendered.
+    this.bindUIElements();
+    this.triggerMethod(&#039;render:template&#039;);
   },
 
-  // Appends the `el` of itemView instances to the specified
-  // `itemViewContainer` (a jQuery selector). Override this method to
-  // provide custom logic of how the child item view instances have their
-  // HTML appended to the composite view instance.
-  appendHtml: function(cv, iv, index){
-    var $container = this.getItemViewContainer(cv);
-    $container.append(iv.el);
+  // Attaches the content of the root.
+  // This method can be overriden to optimize rendering,
+  // or to render in a non standard way.
+  //
+  // For example, using `innerHTML` instead of `$el.html`
+  //
+  // ```js
+  // attachElContent: function(html) {
+  //   this.el.innerHTML = html;
+  //   return this;
+  // }
+  // ```
+  attachElContent: function(html) {
+    this.$el.html(html);
+
+    return this;
   },
 
-  // Internal method to ensure an `$itemViewContainer` exists, for the
-  // `appendHtml` method to use.
-  getItemViewContainer: function(containerView){
-    if (&quot;$itemViewContainer&quot; in containerView){
-      return containerView.$itemViewContainer;
+  // You might need to override this if you&#039;ve overridden attachHtml
+  attachBuffer: function(compositeView, buffer) {
+    var $container = this.getChildViewContainer(compositeView);
+    $container.append(buffer);
+  },
+
+  // Internal method. Append a view to the end of the $el.
+  // Overidden from CollectionView to ensure view is appended to
+  // childViewContainer
+  _insertAfter: function (childView) {
+    var $container = this.getChildViewContainer(this);
+    $container.append(childView.el);
+  },
+
+  // Internal method to ensure an `$childViewContainer` exists, for the
+  // `attachHtml` method to use.
+  getChildViewContainer: function(containerView) {
+    if (&#039;$childViewContainer&#039; in containerView) {
+      return containerView.$childViewContainer;
     }
 
     var container;
-    var itemViewContainer = Marionette.getOption(containerView, &quot;itemViewContainer&quot;);
-    if (itemViewContainer){
+    var childViewContainer = Marionette.getOption(containerView, &#039;childViewContainer&#039;);
+    if (childViewContainer) {
 
-      var selector = _.isFunction(itemViewContainer) ? itemViewContainer() : itemViewContainer;
-      container = containerView.$(selector);
+      var selector = _.isFunction(childViewContainer) ? childViewContainer.call(containerView) : childViewContainer;
+
+      if (selector.charAt(0) === &#039;@&#039; &amp;&amp; containerView.ui) {
+        container = containerView.ui[selector.substr(4)];
+      } else {
+        container = containerView.$(selector);
+      }
+
       if (container.length &lt;= 0) {
-        throwError(&quot;The specified `itemViewContainer` was not found: &quot; + containerView.itemViewContainer, &quot;ItemViewContainerMissingError&quot;);
+        throwError(&#039;The specified &quot;childViewContainer&quot; was not found: &#039; +
+          containerView.childViewContainer, &#039;ChildViewContainerMissingError&#039;);
       }
 
     } else {
       container = containerView.$el;
     }
 
-    containerView.$itemViewContainer = container;
+    containerView.$childViewContainer = container;
     return container;
   },
 
-  // Internal method to reset the `$itemViewContainer` on render
-  resetItemViewContainer: function(){
-    if (this.$itemViewContainer){
-      delete this.$itemViewContainer;
+  // Internal method to reset the `$childViewContainer` on render
+  resetChildViewContainer: function() {
+    if (this.$childViewContainer) {
+      delete this.$childViewContainer;
     }
   }
 });</textarea>

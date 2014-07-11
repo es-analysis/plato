@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title></title>
+  <title>Plato - view.js</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
@@ -15,7 +15,6 @@
   <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
   <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
   <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
-  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
   <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
   <link href="../../assets/css/plato.css" rel="stylesheet">
   <link href="../../assets/css/plato-file.css" rel="stylesheet">
@@ -26,7 +25,7 @@
 
 <div class="navbar navbar-fixed-top">
   <div class="container">
-    <a class="navbar-brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
     <ul class="nav navbar-nav">
       <li>
         <a href="../../index.html">Report Home</a>
@@ -44,12 +43,12 @@
 <div class="container aggregate-stats">
   <div class="row">
     <div class="col-md-6">
-      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">72.67</p>
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">70.60</p>
     </div>
     <div class="col-md-6">
-      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">173</p>
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">228</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,12 +61,12 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">27.32</p>
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">33.23</p>
     </div>
     <div class="col-md-6">
-      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">1.09</p>
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">1.61</p>
     </div>
   </div>
 </div>
@@ -78,11 +77,11 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
       <div id="fn-by-complexity" class="stat"></div>
     </div>
     <div class="col-md-6">
-      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
       <div id="fn-by-sloc" class="stat"></div>
     </div>
   </div>
@@ -90,32 +89,40 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="col-md-12">// Marionette.View
+    <textarea id="file-source" class="col-md-12">/* jshint maxlen: 114, nonew: false */
+// Marionette.View
 // ---------------
 
-// The core view type that other Marionette views extend from.
+// The core view class that other Marionette views extend from.
 Marionette.View = Backbone.View.extend({
 
-  constructor: function(){
-    _.bindAll(this, &quot;render&quot;);
+  constructor: function(options) {
+    _.bindAll(this, &#039;render&#039;);
 
-    var args = Array.prototype.slice.apply(arguments);
-    Backbone.View.prototype.constructor.apply(this, args);
+    // this exposes view options to the view initializer
+    // this is a backfill since backbone removed the assignment
+    // of this.options
+    // at some point however this may be removed
+    this.options = _.extend({}, _.result(this, &#039;options&#039;), _.isFunction(options) ? options.call(this) : options);
+    // parses out the @ui DSL for events
+    this.events = this.normalizeUIKeys(_.result(this, &#039;events&#039;));
+
+    if (_.isObject(this.behaviors)) {
+      new Marionette.Behaviors(this);
+    }
+
+    Backbone.View.apply(this, arguments);
 
     Marionette.MonitorDOMRefresh(this);
-    this.listenTo(this, &quot;show&quot;, this.onShowCalled, this);
+    this.listenTo(this, &#039;show&#039;, this.onShowCalled);
   },
-
-  // import the &quot;triggerMethod&quot; to trigger events with corresponding
-  // methods if the method exists 
-  triggerMethod: Marionette.triggerMethod,
 
   // Get the template for this view
   // instance. You can set a `template` attribute in the view
   // definition or pass a `template: &quot;whatever&quot;` parameter in
   // to the constructor options.
-  getTemplate: function(){
-    return Marionette.getOption(this, &quot;template&quot;);
+  getTemplate: function() {
+    return this.getOption(&#039;template&#039;);
   },
 
   // Mix in template helper methods. Looks for a
@@ -123,35 +130,53 @@ Marionette.View = Backbone.View.extend({
   // object literal, or a function that returns an object
   // literal. All methods and attributes from this object
   // are copies to the object passed in.
-  mixinTemplateHelpers: function(target){
+  mixinTemplateHelpers: function(target) {
     target = target || {};
-    var templateHelpers = Marionette.getOption(this, &quot;templateHelpers&quot;);
-    if (_.isFunction(templateHelpers)){
+    var templateHelpers = this.getOption(&#039;templateHelpers&#039;);
+    if (_.isFunction(templateHelpers)) {
       templateHelpers = templateHelpers.call(this);
     }
     return _.extend(target, templateHelpers);
   },
 
+
+  normalizeUIKeys: function(hash) {
+    var ui = _.result(this, &#039;ui&#039;);
+    var uiBindings = _.result(this, &#039;_uiBindings&#039;);
+    return Marionette.normalizeUIKeys(hash, uiBindings || ui);
+  },
+
   // Configure `triggers` to forward DOM events to view
   // events. `triggers: {&quot;click .foo&quot;: &quot;do:foo&quot;}`
-  configureTriggers: function(){
+  configureTriggers: function() {
     if (!this.triggers) { return; }
 
     var triggerEvents = {};
 
     // Allow `triggers` to be configured as a function
-    var triggers = _.result(this, &quot;triggers&quot;);
+    var triggers = this.normalizeUIKeys(_.result(this, &#039;triggers&#039;));
 
     // Configure the triggers, prevent default
     // action and stop propagation of DOM events
-    _.each(triggers, function(value, key){
+    _.each(triggers, function(value, key) {
+
+      var hasOptions = _.isObject(value);
+      var eventName = hasOptions ? value.event : value;
 
       // build the event handler function for the DOM event
-      triggerEvents[key] = function(e){
+      triggerEvents[key] = function(e) {
 
         // stop the event in its tracks
-        if (e &amp;&amp; e.preventDefault){ e.preventDefault(); }
-        if (e &amp;&amp; e.stopPropagation){ e.stopPropagation(); }
+        if (e) {
+          var prevent = e.preventDefault;
+          var stop = e.stopPropagation;
+
+          var shouldPrevent = hasOptions ? value.preventDefault : prevent;
+          var shouldStop = hasOptions ? value.stopPropagation : stop;
+
+          if (shouldPrevent &amp;&amp; prevent) { prevent.apply(e); }
+          if (shouldStop &amp;&amp; stop) { stop.apply(e); }
+        }
 
         // build the args for the event
         var args = {
@@ -161,7 +186,7 @@ Marionette.View = Backbone.View.extend({
         };
 
         // trigger the event
-        this.triggerMethod(value, args);
+        this.triggerMethod(eventName, args);
       };
 
     }, this);
@@ -169,58 +194,71 @@ Marionette.View = Backbone.View.extend({
     return triggerEvents;
   },
 
-  // Overriding Backbone.View&#039;s delegateEvents to handle 
+  // Overriding Backbone.View&#039;s delegateEvents to handle
   // the `triggers`, `modelEvents`, and `collectionEvents` configuration
-  delegateEvents: function(events){
+  delegateEvents: function(events) {
     this._delegateDOMEvents(events);
-    Marionette.bindEntityEvents(this, this.model, Marionette.getOption(this, &quot;modelEvents&quot;));
-    Marionette.bindEntityEvents(this, this.collection, Marionette.getOption(this, &quot;collectionEvents&quot;));
+    this.bindEntityEvents(this.model, this.getOption(&#039;modelEvents&#039;));
+    this.bindEntityEvents(this.collection, this.getOption(&#039;collectionEvents&#039;));
   },
 
   // internal method to delegate DOM events and triggers
-  _delegateDOMEvents: function(events){
+  _delegateDOMEvents: function(events) {
     events = events || this.events;
-    if (_.isFunction(events)){ events = events.call(this); }
+    if (_.isFunction(events)) { events = events.call(this); }
+
+    // normalize ui keys
+    events = this.normalizeUIKeys(events);
 
     var combinedEvents = {};
+
+    // look up if this view has behavior events
+    var behaviorEvents = _.result(this, &#039;behaviorEvents&#039;) || {};
     var triggers = this.configureTriggers();
-    _.extend(combinedEvents, events, triggers);
+
+    // behavior events will be overriden by view events and or triggers
+    _.extend(combinedEvents, behaviorEvents, events, triggers);
 
     Backbone.View.prototype.delegateEvents.call(this, combinedEvents);
   },
 
   // Overriding Backbone.View&#039;s undelegateEvents to handle unbinding
   // the `triggers`, `modelEvents`, and `collectionEvents` config
-  undelegateEvents: function(){
+  undelegateEvents: function() {
     var args = Array.prototype.slice.call(arguments);
     Backbone.View.prototype.undelegateEvents.apply(this, args);
-
-    Marionette.unbindEntityEvents(this, this.model, Marionette.getOption(this, &quot;modelEvents&quot;));
-    Marionette.unbindEntityEvents(this, this.collection, Marionette.getOption(this, &quot;collectionEvents&quot;));
+    this.unbindEntityEvents(this.model, this.getOption(&#039;modelEvents&#039;));
+    this.unbindEntityEvents(this.collection, this.getOption(&#039;collectionEvents&#039;));
   },
 
   // Internal method, handles the `show` event.
-  onShowCalled: function(){},
+  onShowCalled: function() {},
 
-  // Default `close` implementation, for removing a view from the
-  // DOM and unbinding it. Regions will call this method
-  // for you. You can specify an `onClose` method in your view to
-  // add custom code that is called after the view is closed.
-  close: function(){
-    if (this.isClosed) { return; }
-
-    // allow the close to be stopped by returning `false`
-    // from the `onBeforeClose` method
-    var shouldClose = this.triggerMethod(&quot;before:close&quot;);
-    if (shouldClose === false){
-      return;
+  // Internal helper method to verify whether the view hasn&#039;t been destroyed
+  _ensureViewIsIntact: function() {
+    if (this.isDestroyed) {
+      var err = new Error(&#039;Cannot use a view thats already been destroyed.&#039;);
+      err.name = &#039;ViewDestroyedError&#039;;
+      throw err;
     }
+  },
 
-    // mark as closed before doing the actual close, to
-    // prevent infinite loops within &quot;close&quot; event handlers
-    // that are trying to close other views
-    this.isClosed = true;
-    this.triggerMethod(&quot;close&quot;);
+  // Default `destroy` implementation, for removing a view from the
+  // DOM and unbinding it. Regions will call this method
+  // for you. You can specify an `onDestroy` method in your view to
+  // add custom code that is called after the view is destroyed.
+  destroy: function() {
+    if (this.isDestroyed) { return; }
+
+    var args = Array.prototype.slice.call(arguments);
+
+    this.triggerMethod.apply(this, [&#039;before:destroy&#039;].concat(args));
+
+    // mark as destroyed before doing the actual destroy, to
+    // prevent infinite loops within &quot;destroy&quot; event handlers
+    // that are trying to destroy other views
+    this.isDestroyed = true;
+    this.triggerMethod.apply(this, [&#039;destroy&#039;].concat(args));
 
     // unbind UI elements
     this.unbindUIElements();
@@ -231,17 +269,17 @@ Marionette.View = Backbone.View.extend({
 
   // This method binds the elements specified in the &quot;ui&quot; hash inside the view&#039;s code with
   // the associated jQuery selectors.
-  bindUIElements: function(){
+  bindUIElements: function() {
     if (!this.ui) { return; }
 
     // store the ui hash in _uiBindings so they can be reset later
     // and so re-rendering the view will be able to find the bindings
-    if (!this._uiBindings){
+    if (!this._uiBindings) {
       this._uiBindings = this.ui;
     }
 
     // get the bindings result, as a function or otherwise
-    var bindings = _.result(this, &quot;_uiBindings&quot;);
+    var bindings = _.result(this, &#039;_uiBindings&#039;);
 
     // empty the ui so we don&#039;t have anything to start with
     this.ui = {};
@@ -254,18 +292,35 @@ Marionette.View = Backbone.View.extend({
   },
 
   // This method unbinds the elements specified in the &quot;ui&quot; hash
-  unbindUIElements: function(){
-    if (!this.ui || !this._uiBindings){ return; }
+  unbindUIElements: function() {
+    if (!this.ui || !this._uiBindings) { return; }
 
     // delete all of the existing ui bindings
-    _.each(this.ui, function($el, name){
+    _.each(this.ui, function($el, name) {
       delete this.ui[name];
     }, this);
 
     // reset the ui element to the original bindings configuration
     this.ui = this._uiBindings;
     delete this._uiBindings;
-  }
+  },
+
+  // import the `triggerMethod` to trigger events with corresponding
+  // methods if the method exists
+  triggerMethod: Marionette.triggerMethod,
+
+  // Imports the &quot;normalizeMethods&quot; to transform hashes of
+  // events=&gt;function references/names to a hash of events=&gt;function references
+  normalizeMethods: Marionette.normalizeMethods,
+
+  // Proxy `getOption` to enable getting options from this or this.options by name.
+  getOption: Marionette.proxyGetOption,
+
+  // Proxy `unbindEntityEvents` to enable binding view&#039;s events from another entity.
+  bindEntityEvents: Marionette.proxyBindEntityEvents,
+
+  // Proxy `unbindEntityEvents` to enable unbinding view&#039;s events from another entity.
+  unbindEntityEvents: Marionette.proxyUnbindEntityEvents
 });</textarea>
   </div>
 </div>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title></title>
+  <title>Plato - module.js</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
@@ -15,7 +15,6 @@
   <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
   <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
   <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
-  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
   <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
   <link href="../../assets/css/plato.css" rel="stylesheet">
   <link href="../../assets/css/plato-file.css" rel="stylesheet">
@@ -26,7 +25,7 @@
 
 <div class="navbar navbar-fixed-top">
   <div class="container">
-    <a class="navbar-brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
     <ul class="nav navbar-nav">
       <li>
         <a href="../../index.html">Report Home</a>
@@ -44,12 +43,12 @@
 <div class="container aggregate-stats">
   <div class="row">
     <div class="col-md-6">
-      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">71.78</p>
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">72.30</p>
     </div>
     <div class="col-md-6">
-      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">201</p>
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">261</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,12 +61,12 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">30.43</p>
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">40.61</p>
     </div>
     <div class="col-md-6">
-      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">1.04</p>
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">1.50</p>
     </div>
   </div>
 </div>
@@ -78,11 +77,11 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
       <div id="fn-by-complexity" class="stat"></div>
     </div>
     <div class="col-md-6">
-      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
       <div id="fn-by-sloc" class="stat"></div>
     </div>
   </div>
@@ -90,98 +89,116 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="col-md-12">// Module
+    <textarea id="file-source" class="col-md-12">/* jshint maxparams: 9 */
+
+// Module
 // ------
 
 // A simple module system, used to create privacy and encapsulation in
 // Marionette applications
-Marionette.Module = function(moduleName, app){
+Marionette.Module = function(moduleName, app, options) {
   this.moduleName = moduleName;
+  this.options = _.extend({}, this.options, options);
+  // Allow for a user to overide the initialize
+  // for a given module instance.
+  this.initialize = options.initialize || this.initialize;
 
-  // store sub-modules
+  // Set up an internal store for sub-modules.
   this.submodules = {};
 
   this._setupInitializersAndFinalizers();
 
-  // store the configuration for this module
+  // Set an internal reference to the app
+  // within a module.
   this.app = app;
+
+  // By default modules start with their parents.
   this.startWithParent = true;
 
-  this.triggerMethod = Marionette.triggerMethod;
+  if (_.isFunction(this.initialize)) {
+    this.initialize(moduleName, app, this.options);
+  }
 };
+
+Marionette.Module.extend = Marionette.extend;
 
 // Extend the Module prototype with events / listenTo, so that the module
 // can be used as an event aggregator or pub/sub.
 _.extend(Marionette.Module.prototype, Backbone.Events, {
 
+  // Initialize is an empty function by default. Override it with your own
+  // initialization logic when extending Marionette.Module.
+  initialize: function() {},
+
   // Initializer for a specific module. Initializers are run when the
   // module&#039;s `start` method is called.
-  addInitializer: function(callback){
+  addInitializer: function(callback) {
     this._initializerCallbacks.add(callback);
   },
 
   // Finalizers are run when a module is stopped. They are used to teardown
   // and finalize any variables, references, events and other code that the
   // module had set up.
-  addFinalizer: function(callback){
+  addFinalizer: function(callback) {
     this._finalizerCallbacks.add(callback);
   },
 
   // Start the module, and run all of its initializers
-  start: function(options){
+  start: function(options) {
     // Prevent re-starting a module that is already started
-    if (this._isInitialized){ return; }
+    if (this._isInitialized) { return; }
 
     // start the sub-modules (depth-first hierarchy)
-    _.each(this.submodules, function(mod){
+    _.each(this.submodules, function(mod) {
       // check to see if we should start the sub-module with this parent
-      if (mod.startWithParent){
+      if (mod.startWithParent) {
         mod.start(options);
       }
     });
 
     // run the callbacks to &quot;start&quot; the current module
-    this.triggerMethod(&quot;before:start&quot;, options);
+    this.triggerMethod(&#039;before:start&#039;, options);
 
     this._initializerCallbacks.run(options, this);
     this._isInitialized = true;
 
-    this.triggerMethod(&quot;start&quot;, options);
+    this.triggerMethod(&#039;start&#039;, options);
   },
 
   // Stop this module by running its finalizers and then stop all of
   // the sub-modules for this module
-  stop: function(){
+  stop: function() {
     // if we are not initialized, don&#039;t bother finalizing
-    if (!this._isInitialized){ return; }
+    if (!this._isInitialized) { return; }
     this._isInitialized = false;
 
-    Marionette.triggerMethod.call(this, &quot;before:stop&quot;);
+    this.triggerMethod(&#039;before:stop&#039;);
 
     // stop the sub-modules; depth-first, to make sure the
     // sub-modules are stopped / finalized before parents
-    _.each(this.submodules, function(mod){ mod.stop(); });
+    _.each(this.submodules, function(mod) { mod.stop(); });
 
     // run the finalizers
-    this._finalizerCallbacks.run(undefined,this);
+    this._finalizerCallbacks.run(undefined, this);
 
     // reset the initializers and finalizers
     this._initializerCallbacks.reset();
     this._finalizerCallbacks.reset();
 
-    Marionette.triggerMethod.call(this, &quot;stop&quot;);
+    this.triggerMethod(&#039;stop&#039;);
   },
 
   // Configure the module with a definition function and any custom args
   // that are to be passed in to the definition function
-  addDefinition: function(moduleDefinition, customArgs){
+  addDefinition: function(moduleDefinition, customArgs) {
     this._runModuleDefinition(moduleDefinition, customArgs);
   },
 
   // Internal method: run the module definition function with the correct
   // arguments
-  _runModuleDefinition: function(definition, customArgs){
-    if (!definition){ return; }
+  _runModuleDefinition: function(definition, customArgs) {
+    // If there is no definition short circut the method.
+    if (!definition) { return; }
 
     // build the correct list of arguments for the module definition
     var args = _.flatten([
@@ -189,7 +206,7 @@ _.extend(Marionette.Module.prototype, Backbone.Events, {
       this.app,
       Backbone,
       Marionette,
-      Marionette.$, _,
+      Backbone.$, _,
       customArgs
     ]);
 
@@ -199,36 +216,42 @@ _.extend(Marionette.Module.prototype, Backbone.Events, {
   // Internal method: set up new copies of initializers and finalizers.
   // Calling this method will wipe out all existing initializers and
   // finalizers.
-  _setupInitializersAndFinalizers: function(){
+  _setupInitializersAndFinalizers: function() {
     this._initializerCallbacks = new Marionette.Callbacks();
     this._finalizerCallbacks = new Marionette.Callbacks();
-  }
+  },
+
+  // import the `triggerMethod` to trigger events with corresponding
+  // methods if the method exists
+  triggerMethod: Marionette.triggerMethod
 });
 
-// Type methods to create modules
+// Class methods to create modules
 _.extend(Marionette.Module, {
 
   // Create a module, hanging off the app parameter as the parent object.
-  create: function(app, moduleNames, moduleDefinition){
+  create: function(app, moduleNames, moduleDefinition) {
     var module = app;
 
     // get the custom args passed in after the module definition and
     // get rid of the module name and definition function
-    var customArgs = slice(arguments);
+    var customArgs = slice.call(arguments);
     customArgs.splice(0, 3);
 
-    // split the module names and get the length
-    moduleNames = moduleNames.split(&quot;.&quot;);
+    // Split the module names and get the number of submodules.
+    // i.e. an example module name of `Doge.Wow.Amaze` would
+    // then have the potential for 3 module definitions.
+    moduleNames = moduleNames.split(&#039;.&#039;);
     var length = moduleNames.length;
 
     // store the module definition for the last module in the chain
     var moduleDefinitions = [];
-    moduleDefinitions[length-1] = moduleDefinition;
+    moduleDefinitions[length - 1] = moduleDefinition;
 
     // Loop through all the parts of the module definition
-    _.each(moduleNames, function(moduleName, i){
+    _.each(moduleNames, function(moduleName, i) {
       var parentModule = module;
-      module = this._getModule(parentModule, moduleName, app);
+      module = this._getModule(parentModule, moduleName, app, moduleDefinition);
       this._addModuleDefinition(parentModule, module, moduleDefinitions[i], customArgs);
     }, this);
 
@@ -236,13 +259,16 @@ _.extend(Marionette.Module, {
     return module;
   },
 
-  _getModule: function(parentModule, moduleName, app, def, args){
+  _getModule: function(parentModule, moduleName, app, def, args) {
+    var options = _.extend({}, def);
+    var ModuleClass = this.getClass(def);
+
     // Get an existing module of this name if we have one
     var module = parentModule[moduleName];
 
-    if (!module){
+    if (!module) {
       // Create a new module if we don&#039;t have one
-      module = new Marionette.Module(moduleName, app);
+      module = new ModuleClass(moduleName, app, options);
       parentModule[moduleName] = module;
       // store the module on the parent
       parentModule.submodules[moduleName] = module;
@@ -251,49 +277,84 @@ _.extend(Marionette.Module, {
     return module;
   },
 
-  _addModuleDefinition: function(parentModule, module, def, args){
-    var fn; 
-    var startWithParent;
+  // ## Module Classes
+  //
+  // Module classes can be used as an alternative to the define pattern.
+  // The extend function of a Module is identical to the extend functions
+  // on other Backbone and Marionette classes.
+  // This allows module lifecyle events like `onStart` and `onStop` to be called directly.
+  getClass: function(moduleDefinition) {
+    var ModuleClass = Marionette.Module;
 
-    if (_.isFunction(def)){
-      // if a function is supplied for the module definition
-      fn = def;
-      startWithParent = true;
-
-    } else if (_.isObject(def)){
-      // if an object is supplied
-      fn = def.define;
-      startWithParent = def.startWithParent;
-      
-    } else {
-      // if nothing is supplied
-      startWithParent = true;
+    if (!moduleDefinition) {
+      return ModuleClass;
     }
 
-    // add module definition if needed
-    if (fn){
+    // If all of the module&#039;s functionality is defined inside its class,
+    // then the class can be passed in directly. `MyApp.module(&quot;Foo&quot;, FooModule)`.
+    if (moduleDefinition.prototype instanceof ModuleClass) {
+      return moduleDefinition;
+    }
+
+    return moduleDefinition.moduleClass || ModuleClass;
+  },
+
+  // Add the module definition and add a startWithParent initializer function.
+  // This is complicated because module definitions are heavily overloaded
+  // and support an anonymous function, module class, or options object
+  _addModuleDefinition: function(parentModule, module, def, args) {
+    var fn = this._getDefine(def);
+    var startWithParent = this._getStartWithParent(def, module);
+
+    if (fn) {
       module.addDefinition(fn, args);
     }
 
-    // `and` the two together, ensuring a single `false` will prevent it
-    // from starting with the parent
-    module.startWithParent = module.startWithParent &amp;&amp; startWithParent;
+    this._addStartWithParent(parentModule, module, startWithParent);
+  },
 
-    // setup auto-start if needed
-    if (module.startWithParent &amp;&amp; !module.startWithParentIsConfigured){
+  _getStartWithParent: function(def, module) {
+    var swp;
 
-      // only configure this once
-      module.startWithParentIsConfigured = true;
-
-      // add the module initializer config
-      parentModule.addInitializer(function(options){
-        if (module.startWithParent){
-          module.start(options);
-        }
-      });
-
+    if (_.isFunction(def) &amp;&amp; (def.prototype instanceof Marionette.Module)) {
+      swp = module.constructor.prototype.startWithParent;
+      return _.isUndefined(swp) ? true : swp;
     }
 
+    if (_.isObject(def)) {
+      swp = def.startWithParent;
+      return _.isUndefined(swp) ? true : swp;
+    }
+
+    return true;
+  },
+
+  _getDefine: function(def) {
+    if (_.isFunction(def) &amp;&amp; !(def.prototype instanceof Marionette.Module)) {
+      return def;
+    }
+
+    if (_.isObject(def)) {
+      return def.define;
+    }
+
+    return null;
+  },
+
+  _addStartWithParent: function(parentModule, module, startWithParent) {
+    module.startWithParent = module.startWithParent &amp;&amp; startWithParent;
+
+    if (!module.startWithParent || !!module.startWithParentIsConfigured) {
+      return;
+    }
+
+    module.startWithParentIsConfigured = true;
+
+    parentModule.addInitializer(function(options) {
+      if (module.startWithParent) {
+        module.start(options);
+      }
+    });
   }
 });</textarea>
   </div>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title></title>
+  <title>Plato - lib/grunt/file.js</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
@@ -15,7 +15,6 @@
   <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
   <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
   <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
-  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
   <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
   <link href="../../assets/css/plato.css" rel="stylesheet">
   <link href="../../assets/css/plato-file.css" rel="stylesheet">
@@ -26,7 +25,7 @@
 
 <div class="navbar navbar-fixed-top">
   <div class="container">
-    <a class="navbar-brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
     <ul class="nav navbar-nav">
       <li>
         <a href="../../index.html">Report Home</a>
@@ -44,12 +43,12 @@
 <div class="container aggregate-stats">
   <div class="row">
     <div class="col-md-6">
-      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">65.75</p>
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">66.08</p>
     </div>
     <div class="col-md-6">
-      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">429</p>
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">457</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,12 +61,12 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">69.65</p>
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">73.15</p>
     </div>
     <div class="col-md-6">
-      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">4.62</p>
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">4.89</p>
     </div>
   </div>
 </div>
@@ -78,11 +77,11 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
       <div id="fn-by-complexity" class="stat"></div>
     </div>
     <div class="col-md-6">
-      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
       <div id="fn-by-sloc" class="stat"></div>
     </div>
   </div>
@@ -94,7 +93,7 @@
  * grunt
  * http://gruntjs.com/
  *
- * Copyright (c) 2013 &quot;Cowboy&quot; Ben Alman
+ * Copyright (c) 2014 &quot;Cowboy&quot; Ben Alman
  * Licensed under the MIT license.
  * https://github.com/gruntjs/grunt/blob/master/LICENSE-MIT
  */
@@ -225,9 +224,17 @@ file.expand = function() {
 
 var pathSeparatorRe = /[\/\\]/g;
 
+// The &quot;ext&quot; option refers to either everything after the first dot (default)
+// or everything after the last dot.
+var extDotRe = {
+  first: /(\.[^\/]*)?$/,
+  last: /(\.[^\/\.]*)?$/,
+};
+
 // Build a multi task &quot;files&quot; object dynamically.
 file.expandMapping = function(patterns, destBase, options) {
   options = grunt.util._.defaults({}, options, {
+    extDot: &#039;first&#039;,
     rename: function(destBase, destPath) {
       return path.join(destBase || &#039;&#039;, destPath);
     }
@@ -242,8 +249,8 @@ file.expandMapping = function(patterns, destBase, options) {
       destPath = path.basename(destPath);
     }
     // Change the extension?
-    if (options.ext) {
-      destPath = destPath.replace(/(\.[^\/]*)?$/, options.ext);
+    if (&#039;ext&#039; in options) {
+      destPath = destPath.replace(extDotRe[options.extDot], options.ext);
     }
     // Generate destination filename.
     var dest = options.rename(destBase, destPath, options);
@@ -305,6 +312,8 @@ file.recurse = function recurse(rootdir, callback, subdir) {
 
 // The default file encoding to use.
 file.defaultEncoding = &#039;utf8&#039;;
+// Whether to preserve the BOM on file.read rather than strip it.
+file.preserveBOM = false;
 
 // Read a file, return its contents.
 file.read = function(filepath, options) {
@@ -318,7 +327,7 @@ file.read = function(filepath, options) {
     if (options.encoding !== null) {
       contents = iconv.decode(contents, options.encoding || file.defaultEncoding);
       // Strip any BOM that might exist.
-      if (contents.charCodeAt(0) === 0xFEFF) {
+      if (!file.preserveBOM &amp;&amp; contents.charCodeAt(0) === 0xFEFF) {
         contents = contents.substring(1);
       }
     }
@@ -386,7 +395,25 @@ file.write = function(filepath, contents, options) {
 };
 
 // Read a file, optionally processing its content, then write the output.
-file.copy = function(srcpath, destpath, options) {
+// Or read a directory, recursively creating directories, reading files,
+// processing content, writing output.
+file.copy = function copy(srcpath, destpath, options) {
+  if (file.isDir(srcpath)) {
+    // Copy a directory, recursively.
+    // Explicitly create new dest directory.
+    file.mkdir(destpath);
+    // Iterate over all sub-files/dirs, recursing.
+    fs.readdirSync(srcpath).forEach(function(filepath) {
+      copy(path.join(srcpath, filepath), path.join(destpath, filepath), options);
+    });
+  } else {
+    // Copy a single file.
+    file._copy(srcpath, destpath, options);
+  }
+};
+
+// Read a file, optionally processing its content, then write the output.
+file._copy = function(srcpath, destpath, options) {
   if (!options) { options = {}; }
   // If a process function was specified, and noProcess isn&#039;t true or doesn&#039;t
   // match the srcpath, process the file&#039;s source.
@@ -400,7 +427,7 @@ file.copy = function(srcpath, destpath, options) {
   if (process) {
     grunt.verbose.write(&#039;Processing source...&#039;);
     try {
-      contents = options.process(contents, srcpath);
+      contents = options.process(contents, srcpath, destpath);
       grunt.verbose.ok();
     } catch(e) {
       grunt.verbose.error();
@@ -513,7 +540,7 @@ file.doesPathContain = function(ancestor) {
 file.isPathCwd = function() {
   var filepath = path.join.apply(path, arguments);
   try {
-    return file.arePathsEquivalent(process.cwd(), fs.realpathSync(filepath));
+    return file.arePathsEquivalent(fs.realpathSync(process.cwd()), fs.realpathSync(filepath));
   } catch(e) {
     return false;
   }
@@ -523,7 +550,7 @@ file.isPathCwd = function() {
 file.isPathInCwd = function() {
   var filepath = path.join.apply(path, arguments);
   try {
-    return file.doesPathContain(process.cwd(), fs.realpathSync(filepath));
+    return file.doesPathContain(fs.realpathSync(process.cwd()), fs.realpathSync(filepath));
   } catch(e) {
     return false;
   }
