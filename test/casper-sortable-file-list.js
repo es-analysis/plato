@@ -17,6 +17,7 @@ casper.then(function() {
     this.test.assertExists('button#button-sloc');
     this.test.assertExists('button#button-lint');
     this.test.assertExists('button#button-bugs');
+    this.test.assertExists('button#button-difficulty');
 });
 
 
