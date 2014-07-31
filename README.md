@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/es-analysis/plato.png?branch=master)](https://travis-ci.org/es-analysis/plato)
 
+[![Codeship Status for es-analysis/plato](https://www.codeship.io/projects/479c7b90-f024-0131-6150-66d8ca7dad4d/status)](https://www.codeship.io/projects/27326)
+
 Visualize JavaScript source complexity with plato.
 
 ## Example report on popular projects
