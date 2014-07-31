@@ -101,7 +101,9 @@
         <button type="button" id="button-complexity" class="btn btn-default complexity">complexity</button>
         <button type="button" id="button-sloc" class="btn btn-default sloc">sloc</button>
         <button type="button" id="button-bugs" class="btn btn-default bugs">est errors</button>
+        <% if (options.flags.jshint) { %>
         <button type="button" id="button-lint" class="btn btn-default lint">lint errors</button>
+        <% } %>
       </div>
     </div>
   </div>
@@ -118,7 +120,7 @@
           <span class="fade-left fadeout visible-large"></span>
           <span class="col-md-4 file"><a class="file-link" href="./<%= item.info.link %>"><%= item.info.fileShort %></a></span>
         <span class="col-md-8 file-chart js-file-chart"
-              data-lint="<%= item.jshint.messages %>"
+              data-lint="<%= item.jshint && item.jshint.messages %>"
               data-sloc="<%= item.complexity.aggregate.complexity.sloc.physical %>"
               data-bugs="<%= item.complexity.aggregate.complexity.halstead.bugs.toFixed(2) %>"
               data-complexity="<%= item.complexity.aggregate.complexity.cyclomatic%>"
