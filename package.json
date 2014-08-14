@@ -48,9 +48,10 @@
   ],
   "dependencies": {
     "complexity-report": "~0.10.3",
-    "posix-getopt": "~1.0.0",
-    "lodash": "~1.0.1",
+    "eslint": "^0.7.4",
     "fs-extra": "~0.3.2",
-    "jshint": "~2.5.1"
+    "jshint": "~2.5.1",
+    "lodash": "~1.0.1",
+    "posix-getopt": "~1.0.0"
   }
 }
