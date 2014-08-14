@@ -37,6 +37,11 @@
     "desc": "Specify a jshintrc file for JSHint linting",
     "type": "String"
   },
+  "e": {
+    "long": "eslint",
+    "desc": "Specify a eslintrc file for ESLint linting",
+    "type": "String"
+  },
   "t": {
     "long": "title",
     "desc": "Title of the report",
