@@ -30,7 +30,7 @@ exports['util'] = {
     done();
   },
   'common prefix': function(test) {
-    test.expect(3);
+    test.expect(5);
 
     var files = [
       '/lib/foo/bar/a.js',
@@ -50,6 +50,18 @@ exports['util'] = {
       'no/common/prefix.js'
     ];
     test.equal(util.findCommonBase(files), '', 'should not find a prefix for files with no prefix');
+
+    files = [
+      '/lib/foo/bar.js',
+      '/lib/foo/baz.js'
+    ];
+    test.equal(util.findCommonBase(files), '/lib/foo/', 'should only find common directory prefix');
+
+    files = [
+      'bar.js',
+      'baz.js'
+    ];
+    test.equal(util.findCommonBase(files), '', 'should not find a prefix for files in the current directory');
 
     test.done();
   },
