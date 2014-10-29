@@ -90,6 +90,9 @@ plato.inspect(files, outputDir, {}, callback);
 
 ## Release History
 
+  - 1.2.1 Bumping versions for jshint and lodash
+  - 1.2.0 add ability to disable jshint
+  - 1.1.0 fix issue with running casperjs tests
   - 1.0.1 fix issue with first line hashbang
   - 1.0.0 promote to 1.0.0 with bug fixes
   - 0.6.2 Added sortable file list, updated to bootstrap 3
