@@ -1,7 +1,7 @@
 {
   "name": "plato",
   "description": "JavaScript source analysis and visualizer",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "homepage": "https://github.com/es-analysis/plato",
   "author": {
     "name": "Jarrod Overson",
@@ -47,7 +47,7 @@
     "analyze"
   ],
   "dependencies": {
-    "complexity-report": "~0.10.3",
+    "escomplex-js": "~0.1.4",
     "posix-getopt": "~1.0.0",
     "lodash": "~2.4.1",
     "fs-extra": "~0.3.2",
