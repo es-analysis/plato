@@ -3,6 +3,5 @@ node_module
 node_modules
 .idea
 *.sass-cache
-test/
 tmp/
 reports/
