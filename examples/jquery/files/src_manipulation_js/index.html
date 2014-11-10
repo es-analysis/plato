@@ -44,11 +44,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
-      <p class="stat">62.33</p>
+      <p class="stat">62.32</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">580</p>
+      <p class="stat">585</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,11 +62,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">83.58</p>
+      <p class="stat">83.37</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
-      <p class="stat">5.27</p>
+      <p class="stat">5.29</p>
     </div>
   </div>
 </div>
@@ -96,15 +96,15 @@
 	&quot;./core/access&quot;,
 	&quot;./manipulation/var/rcheckableType&quot;,
 	&quot;./manipulation/support&quot;,
-	&quot;./data/var/data_priv&quot;,
-	&quot;./data/var/data_user&quot;,
+	&quot;./data/var/dataPriv&quot;,
+	&quot;./data/var/dataUser&quot;,
 
 	&quot;./core/init&quot;,
 	&quot;./data/accepts&quot;,
 	&quot;./traversing&quot;,
 	&quot;./selector&quot;,
 	&quot;./event&quot;
-], function( jQuery, concat, push, access, rcheckableType, support, data_priv, data_user ) {
+], function( jQuery, concat, push, access, rcheckableType, support, dataPriv, dataUser ) {
 
 var
 	rxhtmlTag = /&lt;(?!area|br|col|embed|hr|img|input|link|meta|param)(([\w:]+)[^&gt;]*)\/&gt;/gi,
@@ -137,7 +137,6 @@ wrapMap.optgroup = wrapMap.option;
 wrapMap.tbody = wrapMap.tfoot = wrapMap.colgroup = wrapMap.caption = wrapMap.thead;
 wrapMap.th = wrapMap.td;
 
-// Support: 1.x compatibility
 // Manipulating tables requires a tbody
 function manipulationTarget( elem, content ) {
 	return jQuery.nodeName( elem, &quot;table&quot; ) &amp;&amp;
@@ -171,8 +170,8 @@ function setGlobalEval( elems, refElements ) {
 		l = elems.length;
 
 	for ( ; i &lt; l; i++ ) {
-		data_priv.set(
-			elems[ i ], &quot;globalEval&quot;, !refElements || data_priv.get( refElements[ i ], &quot;globalEval&quot; )
+		dataPriv.set(
+			elems[ i ], &quot;globalEval&quot;, !refElements || dataPriv.get( refElements[ i ], &quot;globalEval&quot; )
 		);
 	}
 }
@@ -185,9 +184,9 @@ function cloneCopyEvent( src, dest ) {
 	}
 
 	// 1. Copy private data: events, handlers, etc.
-	if ( data_priv.hasData( src ) ) {
-		pdataOld = data_priv.access( src );
-		pdataCur = data_priv.set( dest, pdataOld );
+	if ( dataPriv.hasData( src ) ) {
+		pdataOld = dataPriv.access( src );
+		pdataCur = dataPriv.set( dest, pdataOld );
 		events = pdataOld.events;
 
 		if ( events ) {
@@ -203,17 +202,21 @@ function cloneCopyEvent( src, dest ) {
 	}
 
 	// 2. Copy user data
-	if ( data_user.hasData( src ) ) {
-		udataOld = data_user.access( src );
+	if ( dataUser.hasData( src ) ) {
+		udataOld = dataUser.access( src );
 		udataCur = jQuery.extend( {}, udataOld );
 
-		data_user.set( dest, udataCur );
+		dataUser.set( dest, udataCur );
 	}
 }
 
 function getAll( context, tag ) {
-	var ret = context.getElementsByTagName ? context.getElementsByTagName( tag || &quot;*&quot; ) :
-			context.querySelectorAll ? context.querySelectorAll( tag || &quot;*&quot; ) :
+	// Support: IE9-11+
+	// Use typeof to avoid zero-argument method invocation on host objects (#15151)
+	var ret = typeof context.getElementsByTagName !== &quot;undefined&quot; ?
+			context.getElementsByTagName( tag || &quot;*&quot; ) :
+			typeof context.querySelectorAll !== &quot;undefined&quot; ?
+				context.querySelectorAll( tag || &quot;*&quot; ) :
 			[];
 
 	return tag === undefined || tag &amp;&amp; jQuery.nodeName( context, tag ) ?
@@ -292,7 +295,7 @@ jQuery.extend({
 
 				// Add nodes directly
 				if ( jQuery.type( elem ) === &quot;object&quot; ) {
-					// Support: QtWebKit, PhantomJS
+					// Support: Android&lt;4.1, PhantomJS&lt;2
 					// push.apply(_, arraylike) throws on ancient WebKit
 					jQuery.merge( nodes, elem.nodeType ? [ elem ] : elem );
 
@@ -315,7 +318,7 @@ jQuery.extend({
 						tmp = tmp.lastChild;
 					}
 
-					// Support: QtWebKit, PhantomJS
+					// Support: Android&lt;4.1, PhantomJS&lt;2
 					// push.apply(_, arraylike) throws on ancient WebKit
 					jQuery.merge( nodes, tmp.childNodes );
 
@@ -371,9 +374,9 @@ jQuery.extend({
 
 		for ( ; (elem = elems[ i ]) !== undefined; i++ ) {
 			if ( jQuery.acceptData( elem ) ) {
-				key = elem[ data_priv.expando ];
+				key = elem[ dataPriv.expando ];
 
-				if ( key &amp;&amp; (data = data_priv.cache[ key ]) ) {
+				if ( key &amp;&amp; (data = dataPriv.cache[ key ]) ) {
 					if ( data.events ) {
 						for ( type in data.events ) {
 							if ( special[ type ] ) {
@@ -385,14 +388,14 @@ jQuery.extend({
 							}
 						}
 					}
-					if ( data_priv.cache[ key ] ) {
+					if ( dataPriv.cache[ key ] ) {
 						// Discard any remaining `private` data
-						delete data_priv.cache[ key ];
+						delete dataPriv.cache[ key ];
 					}
 				}
 			}
 			// Discard any remaining `user` data
-			delete data_user.cache[ elem[ data_user.expando ] ];
+			delete dataUser.cache[ elem[ dataUser.expando ] ];
 		}
 	}
 });
@@ -522,7 +525,7 @@ jQuery.fn.extend({
 					elem = 0;
 
 				// If using innerHTML throws an exception, use the fallback method
-				} catch( e ) {}
+				} catch ( e ) {}
 			}
 
 			if ( elem ) {
@@ -591,7 +594,8 @@ jQuery.fn.extend({
 				scripts = jQuery.map( getAll( fragment, &quot;script&quot; ), disableScript );
 				hasScripts = scripts.length;
 
-				// Use the original fragment for the last item instead of the first because it can end up
+				// Use the original fragment for the last item
+				// instead of the first because it can end up
 				// being emptied incorrectly in certain situations (#8070).
 				for ( ; i &lt; l; i++ ) {
 					node = fragment;
@@ -601,8 +605,8 @@ jQuery.fn.extend({
 
 						// Keep references to cloned scripts for later restoration
 						if ( hasScripts ) {
-							// Support: QtWebKit
-							// jQuery.merge because push.apply(_, arraylike) throws
+							// Support: Android&lt;4.1, PhantomJS&lt;2
+							// push.apply(_, arraylike) throws on ancient WebKit
 							jQuery.merge( scripts, getAll( node, &quot;script&quot; ) );
 						}
 					}
@@ -620,7 +624,8 @@ jQuery.fn.extend({
 					for ( i = 0; i &lt; hasScripts; i++ ) {
 						node = scripts[ i ];
 						if ( rscriptType.test( node.type || &quot;&quot; ) &amp;&amp;
-							!data_priv.access( node, &quot;globalEval&quot; ) &amp;&amp; jQuery.contains( doc, node ) ) {
+							!dataPriv.access( node, &quot;globalEval&quot; ) &amp;&amp;
+							jQuery.contains( doc, node ) ) {
 
 							if ( node.src ) {
 								// Optional AJAX dependency, but won&#039;t run scripts if not present
@@ -658,8 +663,8 @@ jQuery.each({
 			elems = i === last ? this : this.clone( true );
 			jQuery( insert[ i ] )[ original ]( elems );
 
-			// Support: QtWebKit
-			// .get() because push.apply(_, arraylike) throws
+			// Support: Android&lt;4.1, PhantomJS&lt;2
+			// .get() because push.apply(_, arraylike) throws on ancient WebKit
 			push.apply( ret, elems.get() );
 		}
 

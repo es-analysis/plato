@@ -44,11 +44,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
-      <p class="stat">53.74</p>
+      <p class="stat">53.86</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">799</p>
+      <p class="stat">801</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,11 +62,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">75.08</p>
+      <p class="stat">75.29</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
-      <p class="stat">5.81</p>
+      <p class="stat">5.75</p>
     </div>
   </div>
 </div>
@@ -101,10 +101,6 @@
 ], function( jQuery, rnotwhite, nonce, rquery ) {
 
 var
-	// Document location
-	ajaxLocParts,
-	ajaxLocation,
-
 	rhash = /#.*$/,
 	rts = /([?&amp;])_=[^&amp;]*/,
 	rheaders = /^(.*?):[ \t]*([^\r\n]*)$/mg,
@@ -133,22 +129,13 @@ var
 	transports = {},
 
 	// Avoid comment-prolog char sequence (#10098); must appease lint and evade compression
-	allTypes = &quot;*/&quot;.concat(&quot;*&quot;);
+	allTypes = &quot;*/&quot;.concat( &quot;*&quot; ),
 
-// Support: IE6
-// Exception accessing window.location.href if document.domain is set (#8138)
-try {
-	ajaxLocation = location.href;
-} catch( e ) {
-	// Use the href attribute of an A element
-	// since IE will modify it given document.location
-	ajaxLocation = document.createElement( &quot;a&quot; );
-	ajaxLocation.href = &quot;&quot;;
-	ajaxLocation = ajaxLocation.href;
-}
+	// Document location
+	ajaxLocation = location.href,
 
-// Segment location into parts
-ajaxLocParts = rurl.exec( ajaxLocation.toLowerCase() ) || [];
+	// Segment location into parts
+	ajaxLocParts = rurl.exec( ajaxLocation.toLowerCase() ) || [];
 
 // Base &quot;constructor&quot; for jQuery.ajaxPrefilter and jQuery.ajaxTransport
 function addToPrefiltersOrTransports( structure ) {
@@ -193,7 +180,9 @@ function inspectPrefiltersOrTransports( structure, options, originalOptions, jqX
 		inspected[ dataType ] = true;
 		jQuery.each( structure[ dataType ] || [], function( _, prefilterOrFactory ) {
 			var dataTypeOrTransport = prefilterOrFactory( options, originalOptions, jqXHR );
-			if ( typeof dataTypeOrTransport === &quot;string&quot; &amp;&amp; !seekingTransport &amp;&amp; !inspected[ dataTypeOrTransport ] ) {
+			if ( typeof dataTypeOrTransport === &quot;string&quot; &amp;&amp;
+				!seekingTransport &amp;&amp; !inspected[ dataTypeOrTransport ] ) {
+
 				options.dataTypes.unshift( dataTypeOrTransport );
 				inspect( dataTypeOrTransport );
 				return false;
@@ -366,7 +355,10 @@ function ajaxConvert( s, response, jqXHR, isSuccess ) {
 						try {
 							response = conv( response );
 						} catch ( e ) {
-							return { state: &quot;parsererror&quot;, error: conv ? e : &quot;No conversion from &quot; + prev + &quot; to &quot; + current };
+							return {
+								state: &quot;parsererror&quot;,
+								error: conv ? e : &quot;No conversion from &quot; + prev + &quot; to &quot; + current
+							};
 						}
 					}
 				}
@@ -500,9 +492,10 @@ jQuery.extend({
 			// Callbacks context
 			callbackContext = s.context || s,
 			// Context for global events is callbackContext if it is a DOM node or jQuery collection
-			globalEventContext = s.context &amp;&amp; ( callbackContext.nodeType || callbackContext.jquery ) ?
-				jQuery( callbackContext ) :
-				jQuery.event,
+			globalEventContext = s.context &amp;&amp;
+				( callbackContext.nodeType || callbackContext.jquery ) ?
+					jQuery( callbackContext ) :
+					jQuery.event,
 			// Deferreds
 			deferred = jQuery.Deferred(),
 			completeDeferred = jQuery.Callbacks(&quot;once memory&quot;),
@@ -686,7 +679,8 @@ jQuery.extend({
 		jqXHR.setRequestHeader(
 			&quot;Accept&quot;,
 			s.dataTypes[ 0 ] &amp;&amp; s.accepts[ s.dataTypes[0] ] ?
-				s.accepts[ s.dataTypes[0] ] + ( s.dataTypes[ 0 ] !== &quot;*&quot; ? &quot;, &quot; + allTypes + &quot;; q=0.01&quot; : &quot;&quot; ) :
+				s.accepts[ s.dataTypes[0] ] +
+					( s.dataTypes[ 0 ] !== &quot;*&quot; ? &quot;, &quot; + allTypes + &quot;; q=0.01&quot; : &quot;&quot; ) :
 				s.accepts[ &quot;*&quot; ]
 		);
 
@@ -696,7 +690,9 @@ jQuery.extend({
 		}
 
 		// Allow custom headers/mimetypes and early abort
-		if ( s.beforeSend &amp;&amp; ( s.beforeSend.call( callbackContext, jqXHR, s ) === false || state === 2 ) ) {
+		if ( s.beforeSend &amp;&amp;
+			( s.beforeSend.call( callbackContext, jqXHR, s ) === false || state === 2 ) ) {
+
 			// Abort if not done already and return
 			return jqXHR.abort();
 		}
@@ -722,6 +718,12 @@ jQuery.extend({
 			if ( fireGlobals ) {
 				globalEventContext.trigger( &quot;ajaxSend&quot;, [ jqXHR, s ] );
 			}
+
+			// If request was aborted inside ajaxSend, stop there
+			if ( state === 2 ) {
+				return jqXHR;
+			}
+
 			// Timeout
 			if ( s.async &amp;&amp; s.timeout &gt; 0 ) {
 				timeoutTimer = setTimeout(function() {

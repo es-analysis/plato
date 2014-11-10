@@ -48,7 +48,7 @@
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">141</p>
+      <p class="stat">142</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,11 +62,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">46.70</p>
+      <p class="stat">47.01</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
-      <p class="stat">1.05</p>
+      <p class="stat">1.04</p>
     </div>
   </div>
 </div>
@@ -92,11 +92,10 @@
     <textarea id="file-source" class="col-md-12">define([
 	&quot;../core&quot;,
 	&quot;../var/rnotwhite&quot;,
-	&quot;../var/strundefined&quot;,
 	&quot;../core/access&quot;,
 	&quot;./support&quot;,
 	&quot;../selector&quot;
-], function( jQuery, rnotwhite, strundefined, access, support ) {
+], function( jQuery, rnotwhite, access, support ) {
 
 var nodeHook, boolHook,
 	attrHandle = jQuery.expr.attrHandle;
@@ -124,7 +123,7 @@ jQuery.extend({
 		}
 
 		// Fallback to prop when attributes are not supported
-		if ( typeof elem.getAttribute === strundefined ) {
+		if ( typeof elem.getAttribute === &quot;undefined&quot; ) {
 			return jQuery.prop( elem, name, value );
 		}
 
@@ -141,7 +140,9 @@ jQuery.extend({
 			if ( value === null ) {
 				jQuery.removeAttr( elem, name );
 
-			} else if ( hooks &amp;&amp; &quot;set&quot; in hooks &amp;&amp; (ret = hooks.set( elem, value, name )) !== undefined ) {
+			} else if ( hooks &amp;&amp; &quot;set&quot; in hooks &amp;&amp;
+				(ret = hooks.set( elem, value, name )) !== undefined ) {
+
 				return ret;
 
 			} else {

@@ -48,7 +48,7 @@
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">158</p>
+      <p class="stat">163</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,7 +62,7 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">66.21</p>
+      <p class="stat">66.95</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
@@ -92,10 +92,9 @@
     <textarea id="file-source" class="col-md-12">define([
 	&quot;../core&quot;,
 	&quot;../var/rnotwhite&quot;,
-	&quot;../var/strundefined&quot;,
-	&quot;../data/var/data_priv&quot;,
+	&quot;../data/var/dataPriv&quot;,
 	&quot;../core/init&quot;
-], function( jQuery, rnotwhite, strundefined, data_priv ) {
+], function( jQuery, rnotwhite, dataPriv ) {
 
 var rclass = /[\t\r\n\f]/g;
 
@@ -195,7 +194,9 @@ jQuery.fn.extend({
 
 		if ( jQuery.isFunction( value ) ) {
 			return this.each(function( i ) {
-				jQuery( this ).toggleClass( value.call(this, i, this.className, stateVal), stateVal );
+				jQuery( this ).toggleClass(
+					value.call(this, i, this.className, stateVal), stateVal
+				);
 			});
 		}
 
@@ -217,17 +218,19 @@ jQuery.fn.extend({
 				}
 
 			// Toggle whole class name
-			} else if ( type === strundefined || type === &quot;boolean&quot; ) {
+			} else if ( value === undefined || type === &quot;boolean&quot; ) {
 				if ( this.className ) {
 					// store className if set
-					data_priv.set( this, &quot;__className__&quot;, this.className );
+					dataPriv.set( this, &quot;__className__&quot;, this.className );
 				}
 
 				// If the element has a class name or if we&#039;re passed `false`,
 				// then remove the whole classname (if there was one, the above saved it).
 				// Otherwise bring back whatever was previously saved (if anything),
 				// falling back to the empty string if nothing was stored.
-				this.className = this.className || value === false ? &quot;&quot; : data_priv.get( this, &quot;__className__&quot; ) || &quot;&quot;;
+				this.className = this.className || value === false ?
+					&quot;&quot; :
+					dataPriv.get( this, &quot;__className__&quot; ) || &quot;&quot;;
 			}
 		});
 	},
@@ -237,7 +240,9 @@ jQuery.fn.extend({
 			i = 0,
 			l = this.length;
 		for ( ; i &lt; l; i++ ) {
-			if ( this[i].nodeType === 1 &amp;&amp; (&quot; &quot; + this[i].className + &quot; &quot;).replace(rclass, &quot; &quot;).indexOf( className ) &gt;= 0 ) {
+			if ( this[i].nodeType === 1 &amp;&amp;
+				(&quot; &quot; + this[i].className + &quot; &quot;).replace(rclass, &quot; &quot;).indexOf( className ) &gt;= 0 ) {
+
 				return true;
 			}
 		}

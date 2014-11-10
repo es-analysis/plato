@@ -48,7 +48,7 @@
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">39</p>
+      <p class="stat">42</p>
     </div>
   </div>
   <div class="row historical">
@@ -96,7 +96,8 @@
 
 jQuery.each( (&quot;blur focus focusin focusout load resize scroll unload click dblclick &quot; +
 	&quot;mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave &quot; +
-	&quot;change select submit keydown keypress keyup error contextmenu&quot;).split(&quot; &quot;), function( i, name ) {
+	&quot;change select submit keydown keypress keyup error contextmenu&quot;).split(&quot; &quot;),
+	function( i, name ) {
 
 	// Handle event binding
 	jQuery.fn[ name ] = function( data, fn ) {
@@ -123,7 +124,9 @@ jQuery.fn.extend({
 	},
 	undelegate: function( selector, types, fn ) {
 		// ( namespace ) or ( selector, types [, fn] )
-		return arguments.length === 1 ? this.off( selector, &quot;**&quot; ) : this.off( types, selector || &quot;**&quot;, fn );
+		return arguments.length === 1 ?
+			this.off( selector, &quot;**&quot; ) :
+			this.off( types, selector || &quot;**&quot;, fn );
 	}
 });
 

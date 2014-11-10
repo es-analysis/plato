@@ -44,11 +44,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
-      <p class="stat">81.87</p>
+      <p class="stat">79.79</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">116</p>
+      <p class="stat">160</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,11 +62,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">16.64</p>
+      <p class="stat">24.80</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
-      <p class="stat">0.72</p>
+      <p class="stat">1.10</p>
     </div>
   </div>
 </div>
@@ -96,18 +96,20 @@
 // Stores and starts up `Region` objects, includes an
 // event aggregator as `app.vent`
 Marionette.Application = function(options) {
-  this._initRegionManager();
+  this.options = options;
+  this._initializeRegions(options);
   this._initCallbacks = new Marionette.Callbacks();
-  var globalCh = Backbone.Wreqr.radio.channel(&#039;global&#039;);
-  this.vent = globalCh.vent;
-  this.commands = globalCh.commands;
-  this.reqres = globalCh.reqres;
   this.submodules = {};
-
   _.extend(this, options);
+  this._initChannel();
+  this.initialize.apply(this, arguments);
 };
 
 _.extend(Marionette.Application.prototype, Backbone.Events, {
+  // Initialize is an empty function by default. Override it with your own
+  // initialization logic.
+  initialize: function() {},
+
   // Command execution, facilitated by Backbone.Wreqr.Commands
   execute: function() {
     this.commands.execute.apply(this.commands, arguments);
@@ -144,14 +146,14 @@ _.extend(Marionette.Application.prototype, Backbone.Events, {
 
   // Empty all regions in the app, without removing them
   emptyRegions: function() {
-    this._regionManager.emptyRegions();
+    return this._regionManager.emptyRegions();
   },
 
   // Removes a region from your app, by name
   // Accepts the regions name
   // removeRegion(&#039;myRegion&#039;)
   removeRegion: function(region) {
-    this._regionManager.removeRegion(region);
+    return this._regionManager.removeRegion(region);
   },
 
   // Provides alternative access to regions
@@ -181,9 +183,39 @@ _.extend(Marionette.Application.prototype, Backbone.Events, {
     return ModuleClass.create.apply(ModuleClass, args);
   },
 
+  // Enable easy overriding of the default `RegionManager`
+  // for customized region interactions and business-specific
+  // view logic for better control over single regions.
+  getRegionManager: function() {
+    return new Marionette.RegionManager();
+  },
+
+  // Internal method to initialize the regions that have been defined in a
+  // `regions` attribute on the application instance
+  _initializeRegions: function(options) {
+    var regions = _.isFunction(this.regions) ? this.regions(options) : this.regions || {};
+
+    this._initRegionManager();
+
+    // Enable users to define `regions` in instance options.
+    var optionRegions = Marionette.getOption(options, &#039;regions&#039;);
+
+    // Enable region options to be a function
+    if (_.isFunction(optionRegions)) {
+      optionRegions = optionRegions.call(this, options);
+    }
+
+    // Overwrite current regions with those passed in options
+    _.extend(regions, optionRegions);
+
+    this.addRegions(regions);
+
+    return this;
+  },
+
   // Internal method to set up the region manager
   _initRegionManager: function() {
-    this._regionManager = new Marionette.RegionManager();
+    this._regionManager = this.getRegionManager();
 
     this.listenTo(this._regionManager, &#039;before:add:region&#039;, function(name) {
       this.triggerMethod(&#039;before:add:region&#039;, name);
@@ -204,9 +236,21 @@ _.extend(Marionette.Application.prototype, Backbone.Events, {
     });
   },
 
+  // Internal method to setup the Wreqr.radio channel
+  _initChannel: function() {
+    this.channelName = _.result(this, &#039;channelName&#039;) || &#039;global&#039;;
+    this.channel = _.result(this, &#039;channel&#039;) || Backbone.Wreqr.radio.channel(this.channelName);
+    this.vent = _.result(this, &#039;vent&#039;) || this.channel.vent;
+    this.commands = _.result(this, &#039;commands&#039;) || this.channel.commands;
+    this.reqres = _.result(this, &#039;reqres&#039;) || this.channel.reqres;
+  },
+
   // import the `triggerMethod` to trigger events with corresponding
   // methods if the method exists
-  triggerMethod: Marionette.triggerMethod
+  triggerMethod: Marionette.triggerMethod,
+
+  // Proxy `getOption` to enable getting options from this or this.options by name.
+  getOption: Marionette.proxyGetOption
 });
 
 // Copy the `extend` function used by Backbone&#039;s classes

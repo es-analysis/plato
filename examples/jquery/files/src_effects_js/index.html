@@ -48,7 +48,7 @@
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">668</p>
+      <p class="stat">673</p>
     </div>
   </div>
   <div class="row historical">
@@ -95,7 +95,7 @@
 	&quot;./css/var/cssExpand&quot;,
 	&quot;./css/var/isHidden&quot;,
 	&quot;./css/defaultDisplay&quot;,
-	&quot;./data/var/data_priv&quot;,
+	&quot;./data/var/dataPriv&quot;,
 
 	&quot;./core/init&quot;,
 	&quot;./effects/Tween&quot;,
@@ -103,7 +103,7 @@
 	&quot;./css&quot;,
 	&quot;./deferred&quot;,
 	&quot;./traversing&quot;
-], function( jQuery, pnum, cssExpand, isHidden, defaultDisplay, data_priv ) {
+], function( jQuery, pnum, cssExpand, isHidden, defaultDisplay, dataPriv ) {
 
 var
 	fxNow, timerId,
@@ -145,7 +145,9 @@ var
 
 				// Update scale, tolerating zero or NaN from tween.cur(),
 				// break the loop if scale is unchanged or perfect, or if we&#039;ve just had enough
-				} while ( scale !== (scale = tween.cur() / target) &amp;&amp; scale !== 1 &amp;&amp; --maxIterations );
+				} while (
+					scale !== (scale = tween.cur() / target) &amp;&amp; scale !== 1 &amp;&amp; --maxIterations
+				);
 			}
 
 			// Update tween properties
@@ -219,7 +221,7 @@ function defaultPrefilter( elem, props, opts ) {
 		orig = {},
 		style = elem.style,
 		hidden = elem.nodeType &amp;&amp; isHidden( elem ),
-		dataShow = data_priv.get( elem, &quot;fxshow&quot; );
+		dataShow = dataPriv.get( elem, &quot;fxshow&quot; );
 
 	// Handle queue: false promises
 	if ( !opts.queue ) {
@@ -260,7 +262,7 @@ function defaultPrefilter( elem, props, opts ) {
 
 		// Test default display if display is currently &quot;none&quot;
 		checkDisplay = display === &quot;none&quot; ?
-			data_priv.get( elem, &quot;olddisplay&quot; ) || defaultDisplay( elem.nodeName ) : display;
+			dataPriv.get( elem, &quot;olddisplay&quot; ) || defaultDisplay( elem.nodeName ) : display;
 
 		if ( checkDisplay === &quot;inline&quot; &amp;&amp; jQuery.css( elem, &quot;float&quot; ) === &quot;none&quot; ) {
 			style.display = &quot;inline-block&quot;;
@@ -284,7 +286,8 @@ function defaultPrefilter( elem, props, opts ) {
 			toggle = toggle || value === &quot;toggle&quot;;
 			if ( value === ( hidden ? &quot;hide&quot; : &quot;show&quot; ) ) {
 
-				// If there is dataShow left over from a stopped hide or show and we are going to proceed with show, we should pretend to be hidden
+				// If there is dataShow left over from a stopped hide or show
+				// and we are going to proceed with show, we should pretend to be hidden
 				if ( value === &quot;show&quot; &amp;&amp; dataShow &amp;&amp; dataShow[ prop ] !== undefined ) {
 					hidden = true;
 				} else {
@@ -305,7 +308,7 @@ function defaultPrefilter( elem, props, opts ) {
 				hidden = dataShow.hidden;
 			}
 		} else {
-			dataShow = data_priv.access( elem, &quot;fxshow&quot;, {} );
+			dataShow = dataPriv.access( elem, &quot;fxshow&quot;, {} );
 		}
 
 		// Store state if its toggle - enables .stop().toggle() to &quot;reverse&quot;
@@ -322,7 +325,7 @@ function defaultPrefilter( elem, props, opts ) {
 		anim.done(function() {
 			var prop;
 
-			data_priv.remove( elem, &quot;fxshow&quot; );
+			dataPriv.remove( elem, &quot;fxshow&quot; );
 			for ( prop in orig ) {
 				jQuery.style( elem, prop, orig[ prop ] );
 			}
@@ -572,7 +575,7 @@ jQuery.fn.extend({
 				var anim = Animation( this, jQuery.extend( {}, prop ), optall );
 
 				// Empty animations, or finishing resolves immediately
-				if ( empty || data_priv.get( this, &quot;finish&quot; ) ) {
+				if ( empty || dataPriv.get( this, &quot;finish&quot; ) ) {
 					anim.stop( true );
 				}
 			};
@@ -602,7 +605,7 @@ jQuery.fn.extend({
 			var dequeue = true,
 				index = type != null &amp;&amp; type + &quot;queueHooks&quot;,
 				timers = jQuery.timers,
-				data = data_priv.get( this );
+				data = dataPriv.get( this );
 
 			if ( index ) {
 				if ( data[ index ] &amp;&amp; data[ index ].stop ) {
@@ -617,7 +620,9 @@ jQuery.fn.extend({
 			}
 
 			for ( index = timers.length; index--; ) {
-				if ( timers[ index ].elem === this &amp;&amp; (type == null || timers[ index ].queue === type) ) {
+				if ( timers[ index ].elem === this &amp;&amp;
+					(type == null || timers[ index ].queue === type) ) {
+
 					timers[ index ].anim.stop( gotoEnd );
 					dequeue = false;
 					timers.splice( index, 1 );
@@ -638,7 +643,7 @@ jQuery.fn.extend({
 		}
 		return this.each(function() {
 			var index,
-				data = data_priv.get( this ),
+				data = dataPriv.get( this ),
 				queue = data[ type + &quot;queue&quot; ],
 				hooks = data[ type + &quot;queueHooks&quot; ],
 				timers = jQuery.timers,

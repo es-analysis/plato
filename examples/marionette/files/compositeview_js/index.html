@@ -44,11 +44,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
-      <p class="stat">72.14</p>
+      <p class="stat">70.14</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">173</p>
+      <p class="stat">176</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,11 +62,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">26.41</p>
+      <p class="stat">29.88</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
-      <p class="stat">0.93</p>
+      <p class="stat">0.98</p>
     </div>
   </div>
 </div>
@@ -115,18 +115,16 @@ Marionette.CompositeView = Marionette.CollectionView.extend({
 
     // Bind only after composite view is rendered to avoid adding child views
     // to nonexistent childViewContainer
-    this.once(&#039;render&#039;, function() {
-      if (this.collection) {
-        this.listenTo(this.collection, &#039;add&#039;, this._onCollectionAdd);
-        this.listenTo(this.collection, &#039;remove&#039;, this._onCollectionRemove);
-        this.listenTo(this.collection, &#039;reset&#039;, this._renderChildren);
 
-        if (this.sort) {
-          this.listenTo(this.collection, &#039;sort&#039;, this._sortViews);
-        }
+    if (this.collection) {
+      this.listenTo(this.collection, &#039;add&#039;, this._onCollectionAdd);
+      this.listenTo(this.collection, &#039;remove&#039;, this._onCollectionRemove);
+      this.listenTo(this.collection, &#039;reset&#039;, this._renderChildren);
+
+      if (this.sort) {
+        this.listenTo(this.collection, &#039;sort&#039;, this._sortViews);
       }
-    });
-
+    }
   },
 
   // Retrieve the `childView` to be used when rendering each of
@@ -137,7 +135,10 @@ Marionette.CompositeView = Marionette.CollectionView.extend({
     var childView = this.getOption(&#039;childView&#039;) || this.constructor;
 
     if (!childView) {
-      throwError(&#039;A &quot;childView&quot; must be specified&#039;, &#039;NoChildViewError&#039;);
+      throw new Marionette.Error({
+        name: &#039;NoChildViewError&#039;,
+        message: &#039;A &quot;childView&quot; must be specified&#039;
+      });
     }
 
     return childView;
@@ -149,8 +150,8 @@ Marionette.CompositeView = Marionette.CollectionView.extend({
   serializeData: function() {
     var data = {};
 
-    if (this.model) {
-      data = this.model.toJSON();
+    if (this.model){
+      data = _.partial(this.serializeModel, this.model).apply(this, arguments);
     }
 
     return data;
@@ -166,7 +167,7 @@ Marionette.CompositeView = Marionette.CollectionView.extend({
 
     this.triggerMethod(&#039;before:render&#039;, this);
 
-    this._renderRoot();
+    this._renderTemplate();
     this._renderChildren();
 
     this.triggerMethod(&#039;render&#039;, this);
@@ -181,7 +182,7 @@ Marionette.CompositeView = Marionette.CollectionView.extend({
 
   // Render the root template that the children
   // views are appended to
-  _renderRoot: function() {
+  _renderTemplate: function() {
     var data = {};
     data = this.serializeData();
     data = this.mixinTemplateHelpers(data);
@@ -189,7 +190,7 @@ Marionette.CompositeView = Marionette.CollectionView.extend({
     this.triggerMethod(&#039;before:render:template&#039;);
 
     var template = this.getTemplate();
-    var html = Marionette.Renderer.render(template, data);
+    var html = Marionette.Renderer.render(template, data, this);
     this.attachElContent(html);
 
     // the ui bindings is done here and not at the end of render since they
@@ -200,7 +201,7 @@ Marionette.CompositeView = Marionette.CollectionView.extend({
   },
 
   // Attaches the content of the root.
-  // This method can be overriden to optimize rendering,
+  // This method can be overridden to optimize rendering,
   // or to render in a non standard way.
   //
   // For example, using `innerHTML` instead of `$el.html`
@@ -251,8 +252,10 @@ Marionette.CompositeView = Marionette.CollectionView.extend({
       }
 
       if (container.length &lt;= 0) {
-        throwError(&#039;The specified &quot;childViewContainer&quot; was not found: &#039; +
-          containerView.childViewContainer, &#039;ChildViewContainerMissingError&#039;);
+        throw new Marionette.Error({
+          name: &#039;ChildViewContainerMissingError&#039;,
+          message: &#039;The specified &quot;childViewContainer&quot; was not found: &#039; + containerView.childViewContainer
+        });
       }
 
     } else {

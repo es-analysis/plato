@@ -48,7 +48,7 @@
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">172</p>
+      <p class="stat">174</p>
     </div>
   </div>
   <div class="row historical">
@@ -118,21 +118,23 @@
  * customize this stub for the project&#039;s specific needs.
  */
 
-var docElem = window.document.documentElement,
-	selector_hasDuplicate,
+var hasDuplicate,
+	docElem = window.document.documentElement,
 	matches = docElem.matches ||
 		docElem.webkitMatchesSelector ||
 		docElem.mozMatchesSelector ||
 		docElem.oMatchesSelector ||
 		docElem.msMatchesSelector,
-	selector_sortOrder = function( a, b ) {
+	sortOrder = function( a, b ) {
 		// Flag for duplicate removal
 		if ( a === b ) {
-			selector_hasDuplicate = true;
+			hasDuplicate = true;
 			return 0;
 		}
 
-		var compare = b.compareDocumentPosition &amp;&amp; a.compareDocumentPosition &amp;&amp; a.compareDocumentPosition( b );
+		var compare = b.compareDocumentPosition &amp;&amp;
+			a.compareDocumentPosition &amp;&amp;
+			a.compareDocumentPosition( b );
 
 		if ( compare ) {
 			// Disconnected nodes
@@ -193,10 +195,10 @@ jQuery.extend({
 			i = 0,
 			j = 0;
 
-		selector_hasDuplicate = false;
-		results.sort( selector_sortOrder );
+		hasDuplicate = false;
+		results.sort( sortOrder );
 
-		if ( selector_hasDuplicate ) {
+		if ( hasDuplicate ) {
 			while ( (elem = results[i++]) ) {
 				if ( elem === results[ i ] ) {
 					j = duplicates.push( i );

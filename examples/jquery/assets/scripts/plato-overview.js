@@ -49,8 +49,10 @@ $(function(){
       value = el.data('bugs');
       el.append(horizontalBar(value, Math.min(value * 5, width), 'est errors', [1,5]));
 
-      value = el.data('lint');
-      el.append(horizontalBar(value, Math.min(value * 5, width), 'lint errors', [1,10]));
+      if (__options.flags.jshint) {
+        value = el.data('lint');
+        el.append(horizontalBar(value, Math.min(value * 5, width), 'lint errors', [1,10]));
+      }
     });
   }
 

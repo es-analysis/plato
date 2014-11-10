@@ -44,11 +44,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
-      <p class="stat">74.08</p>
+      <p class="stat">74.53</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">122</p>
+      <p class="stat">129</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,11 +62,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">29.78</p>
+      <p class="stat">25.96</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
-      <p class="stat">0.76</p>
+      <p class="stat">0.73</p>
     </div>
   </div>
 </div>
@@ -101,10 +101,15 @@ Marionette.RegionManager = (function(Marionette) {
       Marionette.Controller.call(this, options);
     },
 
-    // Add multiple regions using an object literal, where
+    // Add multiple regions using an object literal or a
+    // function that returns an object literal, where
     // each key becomes the region name, and each value is
     // the region definition.
     addRegions: function(regionDefinitions, defaults) {
+      if (_.isFunction(regionDefinitions)) {
+        regionDefinitions = regionDefinitions.apply(this, arguments);
+      }
+
       var regions = {};
 
       _.each(regionDefinitions, function(definition, name) {
@@ -128,16 +133,10 @@ Marionette.RegionManager = (function(Marionette) {
     addRegion: function(name, definition) {
       var region;
 
-      var isObject = _.isObject(definition);
-      var isString = _.isString(definition);
-      var hasSelector = !!definition.selector;
-
-      if (isString || (isObject &amp;&amp; hasSelector)) {
-        region = Marionette.Region.buildRegion(definition, Marionette.Region);
-      } else if (_.isFunction(definition)) {
-        region = Marionette.Region.buildRegion(definition, Marionette.Region);
-      } else {
+      if (definition instanceof Marionette.Region) {
         region = definition;
+      } else {
+        region = Marionette.Region.buildRegion(definition, Marionette.Region);
       }
 
       this.triggerMethod(&#039;before:add:region&#039;, name, region);
@@ -163,29 +162,37 @@ Marionette.RegionManager = (function(Marionette) {
     removeRegion: function(name) {
       var region = this._regions[name];
       this._remove(name, region);
+
+      return region;
     },
 
     // Empty all regions in the region manager, and
     // remove them
     removeRegions: function() {
+      var regions = this.getRegions();
       _.each(this._regions, function(region, name) {
         this._remove(name, region);
       }, this);
+
+      return regions;
     },
 
     // Empty all regions in the region manager, but
     // leave them attached
     emptyRegions: function() {
-      _.each(this._regions, function(region) {
+      var regions = this.getRegions();
+      _.each(regions, function(region) {
         region.empty();
       }, this);
+
+      return regions;
     },
 
     // Destroy all regions and shut down the region
     // manager entirely
     destroy: function() {
       this.removeRegions();
-      Marionette.Controller.prototype.destroy.apply(this, arguments);
+      return Marionette.Controller.prototype.destroy.apply(this, arguments);
     },
 
     // internal method to store regions

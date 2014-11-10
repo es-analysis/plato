@@ -48,7 +48,7 @@
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">13</p>
+      <p class="stat">20</p>
     </div>
   </div>
   <div class="row historical">
@@ -95,7 +95,14 @@
 ], function( jQuery ) {
 
 // Attach a bunch of functions for handling common AJAX events
-jQuery.each( [ &quot;ajaxStart&quot;, &quot;ajaxStop&quot;, &quot;ajaxComplete&quot;, &quot;ajaxError&quot;, &quot;ajaxSuccess&quot;, &quot;ajaxSend&quot; ], function( i, type ) {
+jQuery.each([
+	&quot;ajaxStart&quot;,
+	&quot;ajaxStop&quot;,
+	&quot;ajaxComplete&quot;,
+	&quot;ajaxError&quot;,
+	&quot;ajaxSuccess&quot;,
+	&quot;ajaxSend&quot;
+], function( i, type ) {
 	jQuery.fn[ type ] = function( fn ) {
 		return this.on( type, fn );
 	};

@@ -118,10 +118,10 @@
 	// so they&#039;re executed at the same time to save the second computation.
 	function computePixelPositionAndBoxSizingReliable() {
 		div.style.cssText =
-			// Support: Firefox&lt;29, Android 2.3
+			// Support: Android 2.3
 			// Vendor-prefix box-sizing
-			&quot;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;&quot; +
-			&quot;box-sizing:border-box;display:block;margin-top:1%;top:1%;&quot; +
+			&quot;-webkit-box-sizing:border-box;box-sizing:border-box;&quot; +
+			&quot;display:block;margin-top:1%;top:1%;&quot; +
 			&quot;border:1px;padding:1px;width:4px;position:absolute&quot;;
 		div.innerHTML = &quot;&quot;;
 		docElem.appendChild( container );
@@ -163,10 +163,10 @@
 
 				// Reset CSS: box-sizing; display; margin; border; padding
 				marginDiv.style.cssText = div.style.cssText =
-					// Support: Firefox&lt;29, Android 2.3
+					// Support: Android 2.3
 					// Vendor-prefix box-sizing
-					&quot;-webkit-box-sizing:content-box;-moz-box-sizing:content-box;&quot; +
-					&quot;box-sizing:content-box;display:block;margin:0;border:0;padding:0&quot;;
+					&quot;-webkit-box-sizing:content-box;box-sizing:content-box;&quot; +
+					&quot;display:block;margin:0;border:0;padding:0&quot;;
 				marginDiv.style.marginRight = marginDiv.style.width = &quot;0&quot;;
 				div.style.width = &quot;1px&quot;;
 				docElem.appendChild( container );

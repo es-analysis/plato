@@ -44,7 +44,7 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
-      <p class="stat">65.68</p>
+      <p class="stat">65.39</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
@@ -62,7 +62,7 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">18.06</p>
+      <p class="stat">15.84</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
@@ -95,7 +95,13 @@
 ], function( jQuery ) {
 
 var iframe,
-	elemdisplay = {};
+	elemdisplay = {
+
+		// Support: Firefox
+		// We have to pre-define these values for FF (#10227)
+		HTML: &quot;block&quot;,
+		BODY: &quot;block&quot;
+	};
 
 /**
  * Retrieve the actual display of a element
@@ -104,15 +110,9 @@ var iframe,
  */
 // Called only from within defaultDisplay
 function actualDisplay( name, doc ) {
-	var style,
-		elem = jQuery( doc.createElement( name ) ).appendTo( doc.body ),
+	var elem = jQuery( doc.createElement( name ) ).appendTo( doc.body ),
 
-		// getDefaultComputedStyle might be reliably used only on attached element
-		display = window.getDefaultComputedStyle &amp;&amp; ( style = window.getDefaultComputedStyle( elem[ 0 ] ) ) ?
-
-			// Use of this method is a temporary fix (more like optimization) until something better comes along,
-			// since it was removed from specification and supported only in FF
-			style.display : jQuery.css( elem[ 0 ], &quot;display&quot; );
+		display = jQuery.css( elem[ 0 ], &quot;display&quot; );
 
 	// We don&#039;t have any data stored on the element,
 	// so use &quot;detach&quot; method as fast way to get rid of the element
@@ -136,10 +136,11 @@ function defaultDisplay( nodeName ) {
 		if ( display === &quot;none&quot; || !display ) {
 
 			// Use the already-created iframe if possible
-			iframe = (iframe || jQuery( &quot;&lt;iframe frameborder=&#039;0&#039; width=&#039;0&#039; height=&#039;0&#039;/&gt;&quot; )).appendTo( doc.documentElement );
+			iframe = (iframe || jQuery( &quot;&lt;iframe frameborder=&#039;0&#039; width=&#039;0&#039; height=&#039;0&#039;/&gt;&quot; ))
+				.appendTo( doc.documentElement );
 
 			// Always write a new HTML skeleton so Webkit and Firefox don&#039;t choke on reuse
-			doc = iframe[ 0 ].contentDocument;
+			doc = ( iframe[ 0 ].contentWindow || iframe[ 0 ].contentDocument ).document;
 
 			// Support: IE
 			doc.write();
@@ -157,7 +158,6 @@ function defaultDisplay( nodeName ) {
 }
 
 return defaultDisplay;
-
 });</textarea>
   </div>
 </div>

@@ -44,11 +44,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
-      <p class="stat">48.40</p>
+      <p class="stat">48.37</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">122</p>
+      <p class="stat">123</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,11 +62,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">36.60</p>
+      <p class="stat">37.78</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
-      <p class="stat">0.65</p>
+      <p class="stat">0.63</p>
     </div>
   </div>
 </div>
@@ -114,7 +114,10 @@ var rootjQuery,
 
 		// Handle HTML strings
 		if ( typeof selector === &quot;string&quot; ) {
-			if ( selector[0] === &quot;&lt;&quot; &amp;&amp; selector[ selector.length - 1 ] === &quot;&gt;&quot; &amp;&amp; selector.length &gt;= 3 ) {
+			if ( selector[0] === &quot;&lt;&quot; &amp;&amp;
+				selector[ selector.length - 1 ] === &quot;&gt;&quot; &amp;&amp;
+				selector.length &gt;= 3 ) {
+
 				// Assume that strings that start and end with &lt;&gt; are HTML and skip the regex check
 				match = [ null, selector, null ];
 
@@ -157,9 +160,7 @@ var rootjQuery,
 				} else {
 					elem = document.getElementById( match[2] );
 
-					// Support: Blackberry 4.6
-					// gEBID returns nodes no longer in the document (#6963)
-					if ( elem &amp;&amp; elem.parentNode ) {
+					if ( elem ) {
 						// Inject the element directly into the jQuery object
 						this.length = 1;
 						this[0] = elem;
@@ -189,7 +190,7 @@ var rootjQuery,
 		// HANDLE: $(function)
 		// Shortcut for document ready
 		} else if ( jQuery.isFunction( selector ) ) {
-			return typeof rootjQuery.ready !== &quot;undefined&quot; ?
+			return rootjQuery.ready !== undefined ?
 				rootjQuery.ready( selector ) :
 				// Execute immediately if ready is not present
 				selector( jQuery );

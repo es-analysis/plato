@@ -48,7 +48,7 @@
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">482</p>
+      <p class="stat">487</p>
     </div>
   </div>
   <div class="row historical">
@@ -253,7 +253,9 @@ jQuery.extend = jQuery.fn.extend = function() {
 				}
 
 				// Recurse if we&#039;re merging plain objects or arrays
-				if ( deep &amp;&amp; copy &amp;&amp; ( jQuery.isPlainObject(copy) || (copyIsArray = jQuery.isArray(copy)) ) ) {
+				if ( deep &amp;&amp; copy &amp;&amp; ( jQuery.isPlainObject(copy) ||
+					(copyIsArray = jQuery.isArray(copy)) ) ) {
+
 					if ( copyIsArray ) {
 						copyIsArray = false;
 						clone = src &amp;&amp; jQuery.isArray(src) ? src : [];
@@ -339,7 +341,7 @@ jQuery.extend({
 		if ( obj == null ) {
 			return obj + &quot;&quot;;
 		}
-		// Support: Android&lt;4.0, iOS&lt;6 (functionish RegExp)
+		// Support: Android&lt;4.0 (functionish RegExp)
 		return typeof obj === &quot;object&quot; || typeof obj === &quot;function&quot; ?
 			class2type[ toString.call(obj) ] || &quot;object&quot; :
 			typeof obj;
@@ -443,6 +445,8 @@ jQuery.extend({
 		return arr == null ? -1 : indexOf.call( arr, elem, i );
 	},
 
+	// Support: Android&lt;4.1, PhantomJS&lt;2
+	// push.apply(_, arraylike) throws on ancient WebKit
 	merge: function( first, second ) {
 		var len = +second.length,
 			j = 0,
@@ -549,7 +553,8 @@ jQuery.extend({
 });
 
 // Populate the class2type map
-jQuery.each(&quot;Boolean Number String Function Array Date RegExp Object Error&quot;.split(&quot; &quot;), function(i, name) {
+jQuery.each(&quot;Boolean Number String Function Array Date RegExp Object Error&quot;.split(&quot; &quot;),
+function(i, name) {
 	class2type[ &quot;[object &quot; + name + &quot;]&quot; ] = name.toLowerCase();
 });
 

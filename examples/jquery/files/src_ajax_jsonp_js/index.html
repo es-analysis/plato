@@ -48,7 +48,7 @@
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">89</p>
+      <p class="stat">91</p>
     </div>
   </div>
   <div class="row historical">
@@ -115,7 +115,9 @@ jQuery.ajaxPrefilter( &quot;json jsonp&quot;, function( s, originalSettings, jqX
 	var callbackName, overwritten, responseContainer,
 		jsonProp = s.jsonp !== false &amp;&amp; ( rjsonp.test( s.url ) ?
 			&quot;url&quot; :
-			typeof s.data === &quot;string&quot; &amp;&amp; !( s.contentType || &quot;&quot; ).indexOf(&quot;application/x-www-form-urlencoded&quot;) &amp;&amp; rjsonp.test( s.data ) &amp;&amp; &quot;data&quot;
+			typeof s.data === &quot;string&quot; &amp;&amp;
+				!( s.contentType || &quot;&quot; ).indexOf(&quot;application/x-www-form-urlencoded&quot;) &amp;&amp;
+				rjsonp.test( s.data ) &amp;&amp; &quot;data&quot;
 		);
 
 	// Handle iff the expected data type is &quot;jsonp&quot; or we have a parameter to set

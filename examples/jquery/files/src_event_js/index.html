@@ -44,11 +44,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
-      <p class="stat">57.64</p>
+      <p class="stat">57.66</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">868</p>
+      <p class="stat">880</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,7 +62,7 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">126.53</p>
+      <p class="stat">125.33</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
@@ -91,17 +91,16 @@
   <div class="row">
     <textarea id="file-source" class="col-md-12">define([
 	&quot;./core&quot;,
-	&quot;./var/strundefined&quot;,
 	&quot;./var/rnotwhite&quot;,
 	&quot;./var/hasOwn&quot;,
 	&quot;./var/slice&quot;,
 	&quot;./event/support&quot;,
-	&quot;./data/var/data_priv&quot;,
+	&quot;./data/var/dataPriv&quot;,
 
 	&quot;./core/init&quot;,
 	&quot;./data/accepts&quot;,
 	&quot;./selector&quot;
-], function( jQuery, strundefined, rnotwhite, hasOwn, slice, support, data_priv ) {
+], function( jQuery, rnotwhite, hasOwn, slice, support, dataPriv ) {
 
 var
 	rkeyEvent = /^key/,
@@ -136,7 +135,7 @@ jQuery.event = {
 		var handleObjIn, eventHandle, tmp,
 			events, t, handleObj,
 			special, handlers, type, namespaces, origType,
-			elemData = data_priv.get( elem );
+			elemData = dataPriv.get( elem );
 
 		// Don&#039;t attach events to noData or text/comment nodes (but allow plain objects)
 		if ( !elemData ) {
@@ -163,7 +162,7 @@ jQuery.event = {
 			eventHandle = elemData.handle = function( e ) {
 				// Discard the second event of a jQuery.event.trigger() and
 				// when an event is called after a page has unloaded
-				return typeof jQuery !== strundefined &amp;&amp; jQuery.event.triggered !== e.type ?
+				return typeof jQuery !== &quot;undefined&quot; &amp;&amp; jQuery.event.triggered !== e.type ?
 					jQuery.event.dispatch.apply( elem, arguments ) : undefined;
 			};
 		}
@@ -208,7 +207,9 @@ jQuery.event = {
 				handlers.delegateCount = 0;
 
 				// Only use addEventListener if the special events handler returns false
-				if ( !special.setup || special.setup.call( elem, data, namespaces, eventHandle ) === false ) {
+				if ( !special.setup ||
+					special.setup.call( elem, data, namespaces, eventHandle ) === false ) {
+
 					if ( elem.addEventListener ) {
 						elem.addEventListener( type, eventHandle, false );
 					}
@@ -242,7 +243,7 @@ jQuery.event = {
 		var j, origCount, tmp,
 			events, t, handleObj,
 			special, handlers, type, namespaces, origType,
-			elemData = data_priv.hasData( elem ) &amp;&amp; data_priv.get( elem );
+			elemData = dataPriv.hasData( elem ) &amp;&amp; dataPriv.get( elem );
 
 		if ( !elemData || !(events = elemData.events) ) {
 			return;
@@ -277,7 +278,8 @@ jQuery.event = {
 				if ( ( mappedTypes || origType === handleObj.origType ) &amp;&amp;
 					( !handler || handler.guid === handleObj.guid ) &amp;&amp;
 					( !tmp || tmp.test( handleObj.namespace ) ) &amp;&amp;
-					( !selector || selector === handleObj.selector || selector === &quot;**&quot; &amp;&amp; handleObj.selector ) ) {
+					( !selector || selector === handleObj.selector ||
+						selector === &quot;**&quot; &amp;&amp; handleObj.selector ) ) {
 					handlers.splice( j, 1 );
 
 					if ( handleObj.selector ) {
@@ -292,7 +294,9 @@ jQuery.event = {
 			// Remove generic event handler if we removed something and no more handlers exist
 			// (avoids potential for endless recursion during removal of special event handlers)
 			if ( origCount &amp;&amp; !handlers.length ) {
-				if ( !special.teardown || special.teardown.call( elem, namespaces, elemData.handle ) === false ) {
+				if ( !special.teardown ||
+					special.teardown.call( elem, namespaces, elemData.handle ) === false ) {
+
 					jQuery.removeEvent( elem, type, elemData.handle );
 				}
 
@@ -303,7 +307,7 @@ jQuery.event = {
 		// Remove the expando if it&#039;s no longer used
 		if ( jQuery.isEmptyObject( events ) ) {
 			delete elemData.handle;
-			data_priv.remove( elem, &quot;events&quot; );
+			dataPriv.remove( elem, &quot;events&quot; );
 		}
 	},
 
@@ -342,7 +346,7 @@ jQuery.event = {
 		// Trigger bitmask: &amp; 1 for native handlers; &amp; 2 for jQuery (always true)
 		event.isTrigger = onlyHandlers ? 2 : 3;
 		event.namespace = namespaces.join(&quot;.&quot;);
-		event.namespace_re = event.namespace ?
+		event.rnamespace = event.namespace ?
 			new RegExp( &quot;(^|\\.)&quot; + namespaces.join(&quot;\\.(?:.*\\.|)&quot;) + &quot;(\\.|$)&quot; ) :
 			null;
 
@@ -391,7 +395,8 @@ jQuery.event = {
 				special.bindType || type;
 
 			// jQuery handler
-			handle = ( data_priv.get( cur, &quot;events&quot; ) || {} )[ event.type ] &amp;&amp; data_priv.get( cur, &quot;handle&quot; );
+			handle = ( dataPriv.get( cur, &quot;events&quot; ) || {} )[ event.type ] &amp;&amp;
+				dataPriv.get( cur, &quot;handle&quot; );
 			if ( handle ) {
 				handle.apply( cur, data );
 			}
@@ -447,7 +452,7 @@ jQuery.event = {
 		var i, j, ret, matched, handleObj,
 			handlerQueue = [],
 			args = slice.call( arguments ),
-			handlers = ( data_priv.get( this, &quot;events&quot; ) || {} )[ event.type ] || [],
+			handlers = ( dataPriv.get( this, &quot;events&quot; ) || {} )[ event.type ] || [],
 			special = jQuery.event.special[ event.type ] || {};
 
 		// Use the fix-ed jQuery.Event rather than the (read-only) native event
@@ -468,17 +473,18 @@ jQuery.event = {
 			event.currentTarget = matched.elem;
 
 			j = 0;
-			while ( (handleObj = matched.handlers[ j++ ]) &amp;&amp; !event.isImmediatePropagationStopped() ) {
+			while ( (handleObj = matched.handlers[ j++ ]) &amp;&amp;
+				!event.isImmediatePropagationStopped() ) {
 
 				// Triggered event must either 1) have no namespace, or 2) have namespace(s)
 				// a subset or equal to those in the bound event (both can have no namespace).
-				if ( !event.namespace_re || event.namespace_re.test( handleObj.namespace ) ) {
+				if ( !event.rnamespace || event.rnamespace.test( handleObj.namespace ) ) {
 
 					event.handleObj = handleObj;
 					event.data = handleObj.data;
 
-					ret = ( (jQuery.event.special[ handleObj.origType ] || {}).handle || handleObj.handler )
-							.apply( matched.elem, args );
+					ret = ( (jQuery.event.special[ handleObj.origType ] || {}).handle ||
+						handleObj.handler ).apply( matched.elem, args );
 
 					if ( ret !== undefined ) {
 						if ( (event.result = ret) === false ) {
@@ -545,7 +551,8 @@ jQuery.event = {
 	},
 
 	// Includes some event props shared by KeyEvent and MouseEvent
-	props: &quot;altKey bubbles cancelable ctrlKey currentTarget eventPhase metaKey relatedTarget shiftKey target timeStamp view which&quot;.split(&quot; &quot;),
+	props: ( &quot;altKey bubbles cancelable ctrlKey currentTarget eventPhase &quot; +
+		&quot;metaKey relatedTarget shiftKey target timeStamp view which&quot; ).split(&quot; &quot;),
 
 	fixHooks: {},
 
@@ -563,7 +570,8 @@ jQuery.event = {
 	},
 
 	mouseHooks: {
-		props: &quot;button buttons clientX clientY offsetX offsetY pageX pageY screenX screenY toElement&quot;.split(&quot; &quot;),
+		props: ( &quot;button buttons clientX clientY offsetX offsetY pageX pageY &quot; +
+			&quot;screenX screenY toElement&quot; ).split(&quot; &quot;),
 		filter: function( event, original ) {
 			var eventDoc, doc, body,
 				button = original.button;
@@ -574,8 +582,12 @@ jQuery.event = {
 				doc = eventDoc.documentElement;
 				body = eventDoc.body;
 
-				event.pageX = original.clientX + ( doc &amp;&amp; doc.scrollLeft || body &amp;&amp; body.scrollLeft || 0 ) - ( doc &amp;&amp; doc.clientLeft || body &amp;&amp; body.clientLeft || 0 );
-				event.pageY = original.clientY + ( doc &amp;&amp; doc.scrollTop  || body &amp;&amp; body.scrollTop  || 0 ) - ( doc &amp;&amp; doc.clientTop  || body &amp;&amp; body.clientTop  || 0 );
+				event.pageX = original.clientX +
+					( doc &amp;&amp; doc.scrollLeft || body &amp;&amp; body.scrollLeft || 0 ) -
+					( doc &amp;&amp; doc.clientLeft || body &amp;&amp; body.clientLeft || 0 );
+				event.pageY = original.clientY +
+					( doc &amp;&amp; doc.scrollTop  || body &amp;&amp; body.scrollTop  || 0 ) -
+					( doc &amp;&amp; doc.clientTop  || body &amp;&amp; body.clientTop  || 0 );
 			}
 
 			// Add which for click: 1 === left; 2 === middle; 3 === right
@@ -615,13 +627,7 @@ jQuery.event = {
 			event[ prop ] = originalEvent[ prop ];
 		}
 
-		// Support: Cordova 2.5 (WebKit) (#13255)
-		// All events should have a target; Cordova deviceready doesn&#039;t
-		if ( !event.target ) {
-			event.target = document;
-		}
-
-		// Support: Safari 6.0+, Chrome&lt;28
+		// Support: Safari 6.0+
 		// Target should not be a text node (#504, #13143)
 		if ( event.target.nodeType === 3 ) {
 			event.target = event.target.parentNode;
@@ -751,6 +757,7 @@ jQuery.Event = function( src, props ) {
 // jQuery.Event is based on DOM3 Events as specified by the ECMAScript Language Binding
 // http://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/ecma-script-binding.html
 jQuery.Event.prototype = {
+	constructor: jQuery.Event,
 	isDefaultPrevented: returnFalse,
 	isPropagationStopped: returnFalse,
 	isImmediatePropagationStopped: returnFalse,
@@ -787,7 +794,10 @@ jQuery.Event.prototype = {
 };
 
 // Create mouseenter/leave events using mouseover/out and event-time checks
-// Support: Chrome 15+
+// so that event delegation works in jQuery.
+// Do the same for pointerenter/pointerleave and pointerover/pointerout
+// Support: Safari&lt;7.0
+// Safari doesn&#039;t support mouseenter/mouseleave at all.
 jQuery.each({
 	mouseenter: &quot;mouseover&quot;,
 	mouseleave: &quot;mouseout&quot;,
@@ -829,23 +839,23 @@ if ( !support.focusinBubbles ) {
 		jQuery.event.special[ fix ] = {
 			setup: function() {
 				var doc = this.ownerDocument || this,
-					attaches = data_priv.access( doc, fix );
+					attaches = dataPriv.access( doc, fix );
 
 				if ( !attaches ) {
 					doc.addEventListener( orig, handler, true );
 				}
-				data_priv.access( doc, fix, ( attaches || 0 ) + 1 );
+				dataPriv.access( doc, fix, ( attaches || 0 ) + 1 );
 			},
 			teardown: function() {
 				var doc = this.ownerDocument || this,
-					attaches = data_priv.access( doc, fix ) - 1;
+					attaches = dataPriv.access( doc, fix ) - 1;
 
 				if ( !attaches ) {
 					doc.removeEventListener( orig, handler, true );
-					data_priv.remove( doc, fix );
+					dataPriv.remove( doc, fix );
 
 				} else {
-					data_priv.access( doc, fix, attaches );
+					dataPriv.access( doc, fix, attaches );
 				}
 			}
 		};
@@ -916,7 +926,9 @@ jQuery.fn.extend({
 			// ( event )  dispatched jQuery.Event
 			handleObj = types.handleObj;
 			jQuery( types.delegateTarget ).off(
-				handleObj.namespace ? handleObj.origType + &quot;.&quot; + handleObj.namespace : handleObj.origType,
+				handleObj.namespace ?
+					handleObj.origType + &quot;.&quot; + handleObj.namespace :
+					handleObj.origType,
 				handleObj.selector,
 				handleObj.handler
 			);

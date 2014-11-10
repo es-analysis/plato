@@ -48,7 +48,7 @@
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">111</p>
+      <p class="stat">116</p>
     </div>
   </div>
   <div class="row historical">
@@ -115,7 +115,12 @@ function buildParams( prefix, obj, traditional, add ) {
 
 			} else {
 				// Item is non-scalar (array or object), encode its numeric index.
-				buildParams( prefix + &quot;[&quot; + ( typeof v === &quot;object&quot; ? i : &quot;&quot; ) + &quot;]&quot;, v, traditional, add );
+				buildParams(
+					prefix + &quot;[&quot; + ( typeof v === &quot;object&quot; ? i : &quot;&quot; ) + &quot;]&quot;,
+					v,
+					traditional,
+					add
+				);
 			}
 		});
 
