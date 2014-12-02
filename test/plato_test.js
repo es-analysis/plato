@@ -36,8 +36,18 @@ exports['plato'] = {
       'test/fixtures/empty.js'
     ];
 
-    plato.inspect(files, null, {}, function(reports){
+    plato.inspect(files, null, {}, function(reports) {
       test.equal(reports.length, 2, 'Should not attempt to report on empty files');
+      test.done();
+    });
+  },
+  'test file glob' : function(test) {
+    test.expect(1);
+    
+    var files = './test/fixtures/*.js';
+    
+    plato.inspect(files, null, {}, function(reports) {
+      test.equal(reports.length, 5, 'Should properly test against the array produced by the glob');
       test.done();
     });
   },
@@ -49,8 +59,8 @@ exports['plato'] = {
       'test/fixtures/b.js'
     ];
 
-    plato.inspect(files, null, {}, function(reports){
-      reports.forEach(function(report){
+    plato.inspect(files, null, {}, function(reports) {
+      reports.forEach(function(report) {
         test.ok(report.complexity, 'Should contain a complexity report');
         test.ok(report.jshint, 'Should contain a jshint report');
       });
@@ -66,7 +76,7 @@ exports['plato'] = {
 
     test.expect((files.length * 2) + 1);
 
-    plato.inspect(files, null, {}, function(reports){
+    plato.inspect(files, null, {}, function(reports) {
       var overview = plato.getOverviewReport(reports);
       test.ok(overview.summary.total.sloc > 0, 'Should contain total sloc');
       test.ok(overview.summary.total.maintainability > 0, 'Should contain total maintainability');
@@ -85,7 +95,7 @@ exports['plato'] = {
       'test/fixtures/shebang.js'
     ];
 
-    plato.inspect(files, null, {}, function(reports){
+    plato.inspect(files, null, {}, function(reports) {
       test.equal(reports.length, 3, 'Should report on files starting with a shebang');
       test.done();
     });
@@ -97,7 +107,7 @@ exports['plato'] = {
       'test/fixtures/multipleEmptyLines.js'
     ];
 
-    plato.inspect(files, null, {noempty : true}, function(reports){
+    plato.inspect(files, null, {noempty : true}, function(reports) {
       var overview = plato.getOverviewReport(reports);
       test.ok(overview.summary.total.sloc === 10, 'Should contain total sloc without empty lines counted');
       test.done();
