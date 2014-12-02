@@ -11,6 +11,8 @@ Visualize JavaScript source complexity with plato.
  - [jquery](http://es-analysis.github.com/plato/examples/jquery/)
  - [grunt](http://es-analysis.github.com/plato/examples/grunt/)
  - [marionettejs](http://es-analysis.github.com/plato/examples/marionette/)
+ - [dojo](http://htmlpreview.github.io/?https://github.com/ainthek/plato-reports/blob/master/reports/dojo/index.html)
+ - [cujojs/when](http://htmlpreview.github.io/?https://github.com/ainthek/plato-reports/blob/master/reports/cujojs/when/index.html)
 
 ## Installation
 Install the module with: `npm install -g plato`
