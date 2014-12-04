@@ -64,12 +64,14 @@ exports['plato'] = {
       'test/fixtures/b.js'
     ];
 
-    test.expect((files.length * 2) + 1);
+    test.expect((files.length * 3) + 1);
 
     plato.inspect(files, null, {}, function(reports){
       var overview = plato.getOverviewReport(reports);
+      test.ok(overview.summary.total.jshint >= 0, 'Should contain total jshint issues');
       test.ok(overview.summary.total.sloc > 0, 'Should contain total sloc');
       test.ok(overview.summary.total.maintainability > 0, 'Should contain total maintainability');
+      test.ok(overview.summary.average.jshint >= 0, 'Should contain average jshint issues');
       test.ok(overview.summary.average.sloc > 0, 'Should contain average sloc');
       test.ok(overview.summary.average.maintainability > 0, 'Should contain average maintainability');
       test.equal(overview.reports.length, files.length,'Should contain right number of reports');
