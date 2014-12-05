@@ -52,7 +52,7 @@
             <div class="reportBlock maintainabilityList">
                 <h2 class="reportTitle">Worst Maintainability Scores</h2>
                 <ul class="list-unstyled">
-<% _.each(_.first(_.sortBy(report.reports, function (report) { return -1 * report.complexity.maintainability; }), 5), function(report, i) { %>
+<% _.each(_.first(_.sortBy(report.reports, function (report) { return report.complexity.maintainability; }), 5), function(report, i) { %>
                     <li>
                         <strong><%= report.complexity.maintainability.toFixed(0) %> score</strong>
                         <small><%= report.info.fileShort %></small>
