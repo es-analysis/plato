@@ -48,7 +48,7 @@
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">123</p>
+      <p class="stat">124</p>
     </div>
   </div>
   <div class="row historical">
@@ -102,7 +102,8 @@ var rootjQuery,
 	// A simple way to check for HTML strings
 	// Prioritize #id over &lt;tag&gt; to avoid XSS via location.hash (#9521)
 	// Strict HTML recognition (#11290: must start with &lt;)
-	rquickExpr = /^(?:\s*(&lt;[\w\W]+&gt;)[^&gt;]*|#([\w-]*))$/,
+	// Shortcut simple #id case for speed
+	rquickExpr = /^(?:\s*(&lt;[\w\W]+&gt;)[^&gt;]*|#([\w-]+))$/,
 
 	init = jQuery.fn.init = function( selector, context ) {
 		var match, elem;
