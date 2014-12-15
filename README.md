@@ -90,6 +90,8 @@ plato.inspect(files, outputDir, {}, callback);
 
 ## Release History
 
+  - 1.3.0 Merged 107,130,128,119,114. Numerous bug fixed.
+    - Minor bumped for changes to parsing of files passed. Technically a breaking change but effectively a bug fix + feature so bumping minor.
   - 1.2.1 Bumping versions for jshint and lodash
   - 1.2.0 add ability to disable jshint
   - 1.1.0 fix issue with running casperjs tests
