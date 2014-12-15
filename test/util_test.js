@@ -4,6 +4,8 @@ var fs = require('fs');
 
 var util = require('../lib/util');
 
+var path = require('path');
+
 /*
   ======== A Handy Little Nodeunit Reference ========
   https://github.com/caolan/nodeunit
@@ -30,7 +32,13 @@ exports['util'] = {
     done();
   },
   'common prefix': function(test) {
-    test.expect(3);
+    // Store value of current path separator (environment-specific)
+    var sep = path.sep;
+
+    test.expect(6);
+
+    // Explicitly set path for OSX/*nix environment path prefixing
+    path.sep = '/';
 
     var files = [
       '/lib/foo/bar/a.js',
@@ -50,6 +58,30 @@ exports['util'] = {
       'no/common/prefix.js'
     ];
     test.equal(util.findCommonBase(files), '', 'should not find a prefix for files with no prefix');
+
+    files = [
+      '/lib/foo/bar.js',
+      '/lib/foo/baz.js'
+    ];
+    test.equal(util.findCommonBase(files), '/lib/foo/', 'should only find common directory prefix');
+
+    files = [
+      'bar.js',
+      'baz.js'
+    ];
+    test.equal(util.findCommonBase(files), '', 'should not find a prefix for files in the current directory');
+
+    // Explicitly set path for Windows environment path prefixing
+    path.sep = '\\';
+
+    files = [
+      'C:\\lib\\foo\\bar.js',
+      'C:\\lib\\foo\\baz.js'
+    ];
+    test.equal(util.findCommonBase(files), 'C:\\lib\\foo\\', 'should only find common directory prefix with proper Windows backslash separator');
+
+    // Explicitly set path back to original separator (environment-specific)
+    path.sep = sep;
 
     test.done();
   },
