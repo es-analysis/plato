@@ -27,7 +27,7 @@ casper.then(function () {
 
 casper.waitForSelectorTextChange('.jumbotron h1', function() {
   this.test.comment('Text of .jumbotron h1 has changed.');
-  this.test.assertSelectorHasText('.jumbotron h1', 'b.js');
+  this.test.assertSelectorHasText('.jumbotron h1', 'a.js');
 });
 
 casper.run(function() {
