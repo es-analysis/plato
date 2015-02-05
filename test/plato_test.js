@@ -43,9 +43,9 @@ exports['plato'] = {
   },
   'test file glob' : function(test) {
     test.expect(1);
-    
+
     var files = './test/fixtures/*.js';
-    
+
     plato.inspect(files, null, {}, function(reports) {
       test.equal(reports.length, 5, 'Should properly test against the array produced by the glob');
       test.done();
@@ -114,5 +114,21 @@ exports['plato'] = {
       test.ok(overview.summary.total.sloc === 10, 'Should contain total sloc without empty lines counted');
       test.done();
      });
+  },
+
+  'should run jshint with default config' : function(test) {
+
+    var files = [
+      'test/fixtures/a.js',
+      'test/fixtures/b.js'
+    ];
+
+    test.expect(1);
+
+    plato.inspect(files, null, {}, function(reports) {
+      var overview = plato.getOverviewReport(reports);
+      test.ok(overview.summary.total.jshint === 2, 'Should contain total jshint issues');
+      test.done();
+    });
   }
 };
