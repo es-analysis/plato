@@ -115,7 +115,6 @@ exports['plato'] = {
       test.done();
      });
   },
-
   'should run jshint with default config' : function(test) {
 
     var files = [
@@ -128,6 +127,19 @@ exports['plato'] = {
     plato.inspect(files, null, {}, function(reports) {
       var overview = plato.getOverviewReport(reports);
       test.ok(overview.summary.total.jshint === 2, 'Should contain total jshint issues');
+      test.done();
+    });
+  },
+  'test file ending checks' : function(test) {
+    var files = [
+      'test/fixtures/test.es'
+    ];
+    
+    text.expect(1);
+    
+    plato.inspect(files, null, {}, function(reports) {
+      var overview = plato.getOverviewReport(reports);
+      test.ok(reports.length === 1, 'Should analyze 1 file');
       test.done();
     });
   }
