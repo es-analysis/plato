@@ -1,0 +1,28 @@
+{
+  "name": "plato",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "build": "babel --out-dir dist src",
+    "watch": "babel -w --out-dir dist src",
+    "test": "mocha --inline-diffs --check-leaks --compilers js:babel/register --ui tdd --recursive test"
+  },
+  "author": "Jarrod Overson",
+  "license": "NONE",
+  "dependencies": {
+    "debug": "^2.1.2",
+    "liftoff": "^2.0.2",
+    "minimist": "^1.1.0",
+    "nedb": "^1.1.2",
+    "out": "^0.5.4",
+    "winston": "^0.9.0"
+  },
+  "devDependencies": {
+    "babel": "^5.0.8",
+    "mocha": "^2.2.1"
+  }
+}
