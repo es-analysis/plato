@@ -135,7 +135,7 @@ exports['plato'] = {
       'test/fixtures/test.es'
     ];
     
-    text.expect(1);
+    test.expect(1);
     
     plato.inspect(files, null, {}, function(reports) {
       var overview = plato.getOverviewReport(reports);
