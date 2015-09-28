@@ -85,7 +85,7 @@ plato.inspect(files, outputDir, {}, callback);
 ## Data sources
 
   - Complexity data by [Phil Booth](https://github.com/philbooth)'s [complexity-report](https://github.com/philbooth/complexityReport.js)
-  - Lint data from [jshint](https://github.com/jshint/jshint/)
+  - Lint data from [jshint](https://github.com/jshint/jshint/) and [eslint](https://github.com/eslint/eslint)
 
 ## Contributors
   - [Jarrod Overson](https://github.com/jsoverson)
