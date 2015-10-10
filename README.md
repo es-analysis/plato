@@ -79,7 +79,7 @@ var callback = function (report){
 // execute this
 };
 
-plato.inspect(files, outputDir, {}, callback);
+plato.inspect(files, outputDir, options, callback);
 ```
 
 ## Data sources
