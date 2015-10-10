@@ -54,6 +54,6 @@
     "lodash": "^3.3.1",
     "posix-getopt": "~1.1.0",
     "complexity-report": "~0.10.3",
-    "eslint": "^0.7.4"
+    "eslint": "^1.5.1"
   }
 }
