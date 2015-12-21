@@ -18,7 +18,8 @@ describe('file/generate-report', function(){
   it('should generate an individual file report', function(done) {
     input.merge('args', {
       batchId: '',
-      file: '',
+      file: './fixtures/source/testa.js',
+      fileContents: fs.readFileSync('./fixtures/source/testa.js', {encoding : 'utf-8'}),
       template: fs.readFileSync('./fixtures/templates/file-report.hb', {encoding : 'utf-8'}),
       widgets: [
         './fixtures/widgets/widgetA',
@@ -39,7 +40,6 @@ describe('file/generate-report', function(){
       var html = output.shift();
       console.log(html);
       assert(html.match(/<h2>Sloc : 2<\/h2>/));
-      assert(html.match(/<h2>Bytes : 10<\/h2>/));
       done();
     });
   });

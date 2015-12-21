@@ -1,0 +1,14 @@
+
+
+module.exports = {
+  files : [
+    'src/**/*.js'
+  ],
+  reporters : [
+  ],
+  options : {
+    eslint: {},
+    jscs: {},
+    complexity: {}
+  }
+};
