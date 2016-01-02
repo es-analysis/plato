@@ -11,20 +11,19 @@ import findDb from '../../../src/commands/db/find';
 describe('db/find', function(){
   var input, output;
   beforeEach(function(){
-    input = Input.init();
-    output = Output.init();
+    input = {};
+    output = {};
   });
 
-  it('should insert json objects into database', function(done) {
+  it('should find json objects in the database', function(done) {
     var db = new NeDB();
     input.args = {db};
     var document = { file : 'test.js', src : 'var a = 2;' };
     db.insert(document, (err, newDoc) => {
       input.args.query = { _id : newDoc._id };
       findDb.run([input, output], (err, input, output) => {
-        let results = output.pop();
-        assert.equal(results.length, 1);
-        assert.deepEqual(results[0], newDoc);
+        assert.equal(output.data.documents.length, 1);
+        assert.deepEqual(output.data.documents[0], newDoc);
         done();
       });
     });

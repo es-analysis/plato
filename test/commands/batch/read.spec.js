@@ -4,7 +4,7 @@ import assert from 'assert';
 import fs from 'fs';
 
 import NeDB from 'nedb';
-import {Input, Output} from 'clapi';
+import extend from 'extend';
 
 import batchStore from '../../../src/commands/batch/store';
 import batchRead from '../../../src/commands/batch/read';
@@ -12,24 +12,25 @@ import batchRead from '../../../src/commands/batch/read';
 describe('batch/read', function(){
   var input, output;
   beforeEach(function(){
-    input = Input.init();
-    output = Output.init();
+    input = {};
+    output = {};
   });
 
   it('should save an entire run to the db', function(done) {
     var db = new NeDB();
-    input.merge('args', {
+    extend(input, {args:{
       db,
       cwd: process.cwd(),
       files: ['./fixtures/source/testa.js', './fixtures/source/testb.js'],
-      reporters: ['./fixtures/reporters/test-reporter1', './fixtures/reporters/test-reporter2']
-    });
+      reporters: [require('../../../fixtures/reporters/test-reporter1'), require('../../../fixtures/reporters/test-reporter2')]
+    }});
     batchStore.run([input, output], (err, input, output) => {
-      var batchDoc = output.shift();
+      if (err) return done(err);
+      var batchDoc = output.data.batch;
       input.args.id = batchDoc._id;
-      batchRead.run([input, Output.init()], (err, input, output) => {
-        if (err) done (err);
-        assert.equal(output.pop().length, 4);
+      batchRead.run([input, {}], (err, input, output) => {
+        if (err) return done(err);
+        assert.equal(output.data.reports.length, 2);
         done();
       });
     });

@@ -3,7 +3,7 @@ import path from 'path';
 import fs from 'fs';
 
 import async from 'async';
-import { Command, Output } from 'clapi';
+import { Command } from 'clapi';
 import fileReader from 'clapi-filereader';
 import Handlebars from 'handlebars';
 
@@ -31,7 +31,7 @@ function action(input, output, done) {
 
   var template = Handlebars.compile(args.template);
 
-  var context = Object.assign({}, {scripts: args.scripts, file: args.file}, args.data);
+  var context = input.cloneWith({scripts: args.scripts, file: args.file}, args.data);
 
   var readOps = args.scripts.map(
       fileObj =>
@@ -45,7 +45,7 @@ function action(input, output, done) {
 
   async.parallel(templateOps, (err, results) => {
     if (err) console.log(err);
-    output.push(...results);
+    output.data.template_output = results;
     done();
   });
 }

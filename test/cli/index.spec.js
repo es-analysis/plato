@@ -1,38 +1,25 @@
 
 import assert from 'assert';
 import fs from 'fs';
-
+import extend from 'extend';
 import NeDB from 'nedb';
-import {Input, Output} from 'clapi';
 
-import cli from '../../src/cli';
+import cli, {findrcfile} from '../../src/cli';
 
 describe('cli/index', function(){
   var input, output;
   beforeEach(function(){
-    input = Input.init();
-    output = Output.init();
+    input = {};
+    output = {};
   });
   
-  describe('default', () => {
-    it('should save a run to a db instance', function(done) {
-      var db = new NeDB();
-      input.merge('args', {
-        db,
-        cwd: process.cwd(),
-        files: ['./fixtures/source/testa.js', './fixtures/source/testb.js'],
-        reporters: ['./fixtures/reporters/test-reporter1', './fixtures/reporters/test-reporter2']
-      });
-      cli.run([input, output], (err, input, output) => {
-        db.find({ type: 'batch' }).sort({ date: 1 }).limit(1).exec(function (err, docs) {
-          if (err) return done(err);
-          assert.equal(docs.length, 1);
-          var batch = docs[0];
-          db.find({ type : 'report', batchId : batch._id }, (err, docs) => {
-            assert.equal(docs.length, 4);
-            done(err);
-          })
-        });
+  describe('findrcfile', () => {
+    it('should modify input args based off of rcfile', function(done) {
+      let input = {args:{files: "SHOULD BE OVERRIDDEN"}, cwd: process.cwd()};
+      console.log(input);
+      findrcfile(input, {}, (err) => {
+        assert.notEqual(input.args.files, "SHOULD BE OVERRIDDEN");
+        done(err);
       });
     });
   });

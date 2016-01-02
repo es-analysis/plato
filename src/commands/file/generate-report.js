@@ -24,8 +24,7 @@ const command = Command.init((input, output, done) => {
   
   var template = Handlebars.compile(args.template);
   
-  var response = template(args.data);
-  output.push(response);
+  output.stdout = template(args.data);
   
   done();
   

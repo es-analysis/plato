@@ -2,24 +2,30 @@
 import path from 'path';
 
 import async from 'async';
-import { Command, Output } from 'clapi';
+import extend from 'extend';
+import { Command } from 'clapi';
 import fileReader from 'clapi-filereader';
 
-import batchReports from '../file/analyze-multi';
+import analyzeMulti from '../file/analyze-multi';
+import logger from '../../logger';
 
-batchReports.pre(fileReader);
+analyzeMulti.pre(fileReader);
 
 const command = Command.init((input, output, done) => {
   var files = input.args.files;
+  output.data.reports = [];
   async.parallel(files.map((file) => {
+      logger.log('running file [%s]', file);
       return (cb) => {
-        batchReports.run([input.merged('args', {file}), Output.init()], (err, input, output) => {
-          cb(err, output.pop());
+        let childInput = input.cloneWith({args:{file}});
+        analyzeMulti.run([childInput, {}], (err, input, output) => {
+          cb(err, output.data.reports);
         })
       };
     }),
     (err, results) => {
-      output.push(...results);
+      logger.log('finished running reports on %s files (%s reports)', files.length, results.length);
+      output.data.reports.push(...results);
       done(err);
     }
   );

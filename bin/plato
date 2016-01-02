@@ -1,7 +1,22 @@
 #!/usr/bin/env node
 
+var minimist = require('minimist');
 
-var cli = require ('../dist/cli');
+var cli = require('../dist/cli').default;
 
-cli.launch(process.argv.slice(2));
+var args = minimist(process.argv.slice(2));
+
+var command = args._.shift() || 'default';
+
+console.log('Command: %s', command);
+
+cli.run(command, [{args : args}], function(err, input, output){
+  if (err) {
+    if (err.stack) console.log(err.stack);
+    console.log('not ok: plato exited with error [%s]', err);
+    return;
+  }
+  
+  console.log('ok');
+});
 

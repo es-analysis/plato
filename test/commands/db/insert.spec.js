@@ -11,8 +11,8 @@ import insertDb from '../../../src/commands/db/insert';
 describe('db/insert', function(){
   var input, output;
   beforeEach(function(){
-    input = Input.init();
-    output = Output.init();
+    input = {};
+    output = {};
   });
 
   it('should insert json objects into database', function(done) {
@@ -22,7 +22,7 @@ describe('db/insert', function(){
       document : { file : 'test.js', src : 'var a = 2;' }
     };
     insertDb.run([input, output], (err, input, output) => {
-      let result = output.pop();
+      let result = output.data.documents[0];
       assert.equal(result.file, 'test.js');
       db.find({ file : 'test.js' }, function (err, docs) {
         assert(!err);

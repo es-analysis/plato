@@ -6,18 +6,15 @@ import { Command, Output } from 'clapi';
 import fileReader from 'clapi-filereader';
 
 import batchFiles from './run';
-
-function flatmap(arrays) {
-  return [].concat.apply([], arrays);
-}
+import find from '../db/find';
 
 const command = Command.init((input, output, done) => {
-  let [id, db] = [input.args.id, input.args.db];
+  let id = input.args.id;
   
-  db.find({ type: 'report', batchId: id}, (err, docs) => {
-    if (err) done(err);
-    output.push(docs);
-    done();
+  let query = { type: 'report', batchId: id};
+  find.run([input.cloneWith({args: {query}})], (err, _, result) => {
+    output.data.reports = result.data.documents;
+    done(err);
   });
   
 });

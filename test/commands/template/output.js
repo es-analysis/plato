@@ -2,21 +2,20 @@
 
 import assert from 'assert';
 import fs from 'fs';
-
+import extend from 'extend';
 import NeDB from 'nedb';
-import {Input, Output} from 'clapi';
 
 import outputTemplate from '../../../src/commands/template/output';
 
 describe('file/generate-report', function(){
   var input, output;
   beforeEach(function(){
-    input = Input.init();
-    output = Output.init();
+    input = {};
+    output = {};
   });
 
   it('should generate a template', function(done) {
-    input.merge('args', {
+    extend(true, input, {args:{
       template: fs.readFileSync('./fixtures/templates/file-report.hb', {encoding : 'utf-8'}),
       widgets: [
         './fixtures/widgets/widgetA'
@@ -30,23 +29,23 @@ describe('file/generate-report', function(){
           }
         }
       }
-    });
+    }});
     outputTemplate.run([input, output], (err, input, output) => {
       var file;
       
       console.log(output.data);
       // comes from input
-      file = output.shift();
+      file = output.data.template_output.shift();
       assert.deepEqual(file.path, ['testa.js']);
       assert.equal(file.contents, '\nvar a = 2;\n');
       
       // comes from widget
-      file = output.shift();
+      file = output.data.template_output.shift();
       assert.deepEqual(file.path, ['depA.js']);
       assert.equal(file.contents, 'var depA = true;');
       
       // should be final template
-      file = output.shift();
+      file = output.data.template_output.shift();
       console.log(file.contents);
       assert.deepEqual(file.path, ['files', 'output_example.js']);
       assert(file.contents.match(/<h2>Sloc : 2<\/h2>/));

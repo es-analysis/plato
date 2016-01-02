@@ -4,19 +4,19 @@ import assert from 'assert';
 import fs from 'fs';
 
 import NeDB from 'nedb';
-import {Input, Output} from 'clapi';
+import extend from 'extend';
 
 import generateReport from '../../../src/commands/file/generate-report';
 
 describe('file/generate-report', function(){
   var input, output;
   beforeEach(function(){
-    input = Input.init();
-    output = Output.init();
+    input = {};
+    output = {};
   });
 
   it('should generate an individual file report', function(done) {
-    input.merge('args', {
+    extend(true, input, {args: {
       batchId: '',
       file: './fixtures/source/testa.js',
       fileContents: fs.readFileSync('./fixtures/source/testa.js', {encoding : 'utf-8'}),
@@ -35,11 +35,10 @@ describe('file/generate-report', function(){
           }
         }
       }
-    });
+    }});
     generateReport.run([input, output], (err, input, output) => {
-      var html = output.shift();
-      console.log(html);
-      assert(html.match(/<h2>Sloc : 2<\/h2>/));
+      console.log(output.stdout);
+      assert(output.stdout.match(/<h2>Sloc : 2<\/h2>/));
       done();
     });
   });

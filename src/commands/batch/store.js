@@ -2,36 +2,49 @@
 import path from 'path';
 
 import async from 'async';
-import { Command, Output } from 'clapi';
+import { Command } from 'clapi';
 import fileReader from 'clapi-filereader';
 
 import batchFiles from './run';
+import insert from '../db/insert';
+import {flatmap} from '../../util';
 
-function flatmap(arrays) {
-  return [].concat.apply([], arrays);
-}
+import logger from '../../logger';
 
 const command = Command.init((input, output, done) => {
   var db = input.args.db;
-  batchFiles.run([input, Output.init()], (err, input, innerOutput) => {
+  batchFiles.run([input, {}], (err, input, innerOutput) => {
+    if (err) return done(err);
+
     var batchDocument = {
       type : 'batch',
       date : new Date(),
-      files : innerOutput.data.length
+      files : innerOutput.data.reports.length
     };
-    db.insert(batchDocument, (err, batchDocument) => {
-      var id = batchDocument._id;
-      var inserts = flatmap(innerOutput.data).map(report => cb => {
-        report.batchId = id;
-        report.type = 'report';
-        db.insert(report, cb)
+
+    insert.run([input.cloneWith({args: {document: batchDocument}}), {}], (err, _, insertOutput) => {
+      console.log(err);
+      if (err) return done(err);
+      
+      var id = insertOutput.data.documents[0]._id;
+
+      logger.log(innerOutput.data.reports.length);
+
+      var inserts = innerOutput.data.reports.map(reports => ({
+          batchId: id,
+          type: 'report',
+          reports: reports,
+        }));
+    
+      insert.run([input.cloneWith({args:{document: inserts}})], (err, input, result) => {
+        if (err) return done(err);
+        output.data.batch = batchDocument;
+        output.data.results = result.data.documents;
+        done();
       });
-      async.parallel(inserts, (err, results) => {
-        output.push(batchDocument);
-        output.push(results);
-        done(err);
-      })
+      
     });
+    
   });
 });
 
