@@ -23,7 +23,6 @@ const command = Command.init((input, output, done) => {
     };
 
     insert.run([input.cloneWith({args: {document: batchDocument}}), {}], (err, _, insertOutput) => {
-      console.log(err);
       if (err) return done(err);
       
       var id = insertOutput.data.documents[0]._id;
