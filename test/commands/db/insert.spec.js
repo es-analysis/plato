@@ -1,10 +1,8 @@
 
 
 import assert from 'assert';
-import fs from 'fs';
 
 import NeDB from 'nedb';
-import {Input, Output} from 'clapi';
 
 import insertDb from '../../../src/commands/db/insert';
 

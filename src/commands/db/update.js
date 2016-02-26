@@ -4,13 +4,18 @@ import { Command } from 'clapi';
 import initdb from './_initdb';
 
 const command = Command.init((input, output, done) => {
-  output.data.documents = output.data.documents || [];
-  input.args.db.insert(input.args.document, (err, newDoc) => {
+  const args = input.args;
+
+  const query = args.query;
+  const update = args.update;
+  const options = args.updateOptions || {}; 
+  
+  input.args.db.update(query, update, options, (err, numReplaced) => {
     if (err) return done(err.message ? new Error(err.message) : err);
-    if (Array.isArray(newDoc)) output.data.documents.push(...newDoc);
-    else output.data.documents.push(newDoc);
+    output.data.documentsUpdated = numReplaced;
     done();
   });
+
 });
 
 command.pre(initdb);

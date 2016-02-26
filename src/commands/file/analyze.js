@@ -1,21 +1,21 @@
 
 import { Command } from 'clapi';
 
+import { resolveAnalyzer } from '../../util';
+
 const command = Command.init((input, output, done) => {
   var args = input.args;
   
-  if (!args.reporter) return done('A reporter must be defined to run analysis.'); 
+  if (!args.analyzer) return done('An analyzer must be defined before running on a file.'); 
   
   try {
-    let reporter = typeof args.reporter === 'string' ? require(args.reporter) : args.reporter;
-    let instance = reporter.create();
-    instance.setup(args.reporterConfig || {});
+    let analyzer = resolveAnalyzer(args.analyzer);
+    let instance = analyzer.module(analyzer.config);
     instance.run(args.fileContents, (err, result) => {
-      output.data.reports.push({
-        file : args.file,
-        reporter : instance.id,
+      output.data.report = {
+        analyzer : analyzer.id,
         result : result
-      });
+      };
       done();
     });
   } catch (e) {
@@ -23,6 +23,7 @@ const command = Command.init((input, output, done) => {
   }
 });
 
+// translates file arg to fileContents;
 command.pre(require('clapi-filereader'));
 
 command.pre((input, output) => {

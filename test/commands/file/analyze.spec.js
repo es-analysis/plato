@@ -3,8 +3,6 @@
 import assert from 'assert';
 import fs from 'fs';
 
-import clapi from 'clapi';
-
 import fileReport from '../../../src/commands/file/analyze';
 
 describe('file/analyze', function(){
@@ -18,10 +16,10 @@ describe('file/analyze', function(){
     input.args = {
       fileContents: fs.readFileSync('./fixtures/source/testa.js', {encoding:'utf-8'}),
       cwd: process.cwd(),
-      reporter: require('../../../fixtures/reporters/test-reporter1')
+      analyzer: require('../../helpers').analyzers1
     };
     fileReport.run([input, output], (err, input, output) => {
-      var data = output.data.reports.pop();
+      var data = output.data.report;
       assert.equal(data.result.sloc, 3);
       done();
     });

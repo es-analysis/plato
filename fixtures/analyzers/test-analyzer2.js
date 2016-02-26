@@ -1,10 +1,9 @@
 
 
-exports.create = function() {
+module.exports = function(config) {
   return {
-    id: 'bytecount',
-    setup: function(config) {
-      this.config = config || {};
+    aggregate: function(reports, done) {
+      done(null, ['rep2']);
     },
     run: function (src, done) {
       var results = {};

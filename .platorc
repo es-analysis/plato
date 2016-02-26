@@ -4,12 +4,23 @@ module.exports = {
   files : [
     'src/**/*.js'
   ],
-  reporters : [
-    'plato-reporter-complexity'
+  analyzers : [
+    'plato-analyzer-complexity',
+    'plato-analyzer-eslint'
   ],
-  options : {
-    eslint: {},
-    jscs: {},
-    complexity: {}
-  }
+  reporters : [
+    'plato-reporter-console',
+    {
+      module: 'plato-reporter-json',
+      config: {
+        outDir: 'reports'
+      }
+    },
+    {
+      module: 'plato-reporter-default',
+      config: {
+        outDir: 'reports-html'
+      }
+    }
+  ]
 };

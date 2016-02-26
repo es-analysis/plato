@@ -18,9 +18,8 @@ describe('file/analyze-multi', function(){
     extend(true, input, {args: {
       cwd: process.cwd(),
       fileContents: fs.readFileSync('./fixtures/source/testa.js', {encoding : 'utf-8'}),
-      reporters: [require('../../../fixtures/reporters/test-reporter1'), require('../../../fixtures/reporters/test-reporter2')]
+      analyzers: require('../../helpers').analyzers2
     }});
-    console.log(input);
     analyzeMulti.run([input, output], (err, input, output) => {
       let reports = output.data.reports;
       let [ file1report1, file1report2 ] = reports;

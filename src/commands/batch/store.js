@@ -1,49 +1,53 @@
 
-import path from 'path';
+import util from 'util';
 
-import async from 'async';
 import { Command } from 'clapi';
-import fileReader from 'clapi-filereader';
 
-import batchFiles from './run';
+import batchAnalyze from './analyze';
 import insert from '../db/insert';
-import {flatmap} from '../../util';
+import update from '../db/update';
 
 import logger from '../../logger';
 
 const command = Command.init((input, output, done) => {
-  var db = input.args.db;
-  batchFiles.run([input, {}], (err, input, innerOutput) => {
+  
+  batchAnalyze.run([input, {}], (err, input, runOutput) => {
     if (err) return done(err);
 
-    var batchDocument = {
-      type : 'batch',
-      date : new Date(),
-      files : innerOutput.data.reports.length
-    };
-
-    insert.run([input.cloneWith({args: {document: batchDocument}}), {}], (err, _, insertOutput) => {
+    insert.run([input.cloneWith({args: {document: runOutput.data.batch}}), {}], (err, _, batchResult) => {
       if (err) return done(err);
       
-      var id = insertOutput.data.documents[0]._id;
-
-      logger.log(innerOutput.data.reports.length);
-
-      var inserts = innerOutput.data.reports.map(reports => ({
-          batchId: id,
-          type: 'report',
-          reports: reports,
-        }));
-    
-      insert.run([input.cloneWith({args:{document: inserts}})], (err, input, result) => {
-        if (err) return done(err);
-        output.data.batch = batchDocument;
-        output.data.results = result.data.documents;
-        done();
-      });
+      const batchDocument = batchResult.data.documents[0];
       
-    });
+      logger.silly('batch-insert', 'inserted batch document : %s', util.inspect(batchDocument));
+      
+      logger.log(runOutput.data.reports.length);
+
+      const documents = runOutput.data.reports.map(reports => ({
+        batchId: batchDocument._id,
+        type: 'report',
+        created: Date.now(),
+        reports: reports,
+      }));
     
+      insert.run([input.cloneWith({args:{document: documents}})], (err, input, reportResults) => {
+        if (err) return done(err);
+
+        output.data.results = reportResults.data.documents;
+
+        logger.silly('file-insert', 'inserted files %s', util.inspect(output.data.results));
+
+        const entries = output.data.results.map((result)=> ({file:result.reports.file, id: result._id}));
+        logger.silly('batch-update', 'updating batch with entries: %s', util.inspect(entries));
+        update.run([input.cloneWith({args:{query:{_id:batchDocument._id}, update:{$set: {entries}}}})], (err, input, updateResult)=>{
+          if (err) return done(err);
+          if (updateResult.data.documentsUpdated < 1) logger.error('unsuccessfully updated batch entry in the database.');
+          else logger.verbose('successfully updated batch with entry ids');
+          output.data.batch = batchDocument;
+          done();
+        });
+      });
+    });
   });
 });
 

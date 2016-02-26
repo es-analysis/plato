@@ -1,4 +1,7 @@
 
-exports.log = function(...args) {
-  console.log(...args);
-};
+import npmlog from 'npmlog';
+
+npmlog.enableColor();
+npmlog.heading = 'plato';
+npmlog.level = 'silly';
+export default npmlog;
