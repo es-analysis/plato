@@ -1,7 +1,13 @@
 
-export default function(input, output, done) {
+import Datastore from 'nedb';
+
+export {
+  loadDb as default,
+  Datastore as Datastore
+};
+
+function loadDb(input, output, done) {
   if (typeof input.args.db === 'string') {
-    var Datastore = require('nedb');
     let db = new Datastore({ filename: input.args.db, timestampData: true });
     db.loadDatabase((err) => {
       input.args.db = db;

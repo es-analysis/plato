@@ -29,12 +29,10 @@ describe('get-all', function(){
 
     // storing two batches
     batchStore.run([storeInput, {}], (err, input, first) => {
-      console.log(err);
       if (err) return done(err);
       idFirst = first.data.batch._id;
       setTimeout(()=> {
         batchStore.run([storeInput, {}], (err, input, second) => {
-          console.log(err);
           if (err) return done(err);
           idLast = second.data.batch._id;
           assert(idFirst);

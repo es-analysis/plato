@@ -9,33 +9,48 @@ import findup from 'findup';
 import chalk from 'chalk';
 
 import store from '../commands/batch/store';
-import generate from '../commands/generate';
+import batchGetAll from '../commands/batch/get-all';
+import batchAnalyze from '../commands/batch/analyze';
+import dbFind from '../commands/db/find';
+import report from '../commands/report';
+import analyze from '../commands/file/analyze-multi';
+import println from '../println';
 
 import {flatmap} from '../util';
 import logger from '../logger';
 
-const cli = clapi.Application.init();
+const cli = clapi.create();
 
 const rcfile = '.platorc';
 const dbfile = '.platodb';
 
-cli.pre(findrcfile);
-cli.pre(defaults);
-cli.pre(expandFiles);
+cli.before(findrcfile);
+cli.before(defaults);
+cli.before(expandFiles);
 
 cli.command('default', store);
-cli.command('report', generate);
+cli.command('store', store);
+cli.command('report', report);
+cli.command('get-all', batchGetAll);
+cli.command('batch-analyze', batchAnalyze);
+cli.command('analyze', analyze);
+cli.command('db-find', dbFind);
 
-generate.post((input, output) => {
+report.after((input, output) => {
   Object.keys(output.reporters).forEach(reporter => {
     process.stdout.write(chalk.yellow(`:: ${reporter}\n`));
     process.stdout.write(output.reporters[reporter] + '\n');
   });
 });
 
-cli.command('help', () => {
-  logger.debug('help');
-});
+cli.command('help', function() {
+  println(`
+  Usage: plato [command] [options]
+
+  Commands:
+  `);
+  println(Object.keys(cli.commands).map(cmd => `  ${cmd} : ${cli.commands[cmd].description}`).join('\n'));
+}).description = 'Help text';
 
 export default cli;
 

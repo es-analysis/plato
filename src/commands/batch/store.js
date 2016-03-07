@@ -1,15 +1,28 @@
 
 import util from 'util';
 
-import { Command } from 'clapi';
+import Command from 'clapi';
 
 import batchAnalyze from './analyze';
 import insert from '../db/insert';
 import update from '../db/update';
-
 import logger from '../../logger';
+import schema from '../../middleware/schema';
+import types from '../../types';
 
-const command = Command.init((input, output, done) => {
+const command = Command.create();
+
+command.description = 'Run analysis and store reports to local database';
+
+command.use(schema({
+  args: {
+    analyzers: types.analyzers,
+    files: types.files,
+    db: types.db,
+  }
+}));
+
+command.add((input, output, done) => {
   
   batchAnalyze.run([input, {}], (err, input, runOutput) => {
     if (err) return done(err);

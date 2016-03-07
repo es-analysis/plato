@@ -6,7 +6,7 @@ import extend from 'extend';
 import NeDB from 'nedb';
 
 import batchStore from '../../src/commands/batch/store';
-import generate from '../../src/commands/generate';
+import generate from '../../src/commands/report';
 
 describe('generate', function(){
   let input, output, batchId;

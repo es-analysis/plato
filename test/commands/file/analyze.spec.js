@@ -1,7 +1,6 @@
 
 
 import assert from 'assert';
-import fs from 'fs';
 
 import fileReport from '../../../src/commands/file/analyze';
 
@@ -14,7 +13,7 @@ describe('file/analyze', function(){
 
   it('should read a file and output content', function(done) {
     input.args = {
-      fileContents: fs.readFileSync('./fixtures/source/testa.js', {encoding:'utf-8'}),
+      file: './fixtures/source/testa.js',
       cwd: process.cwd(),
       analyzer: require('../../helpers').analyzers1
     };

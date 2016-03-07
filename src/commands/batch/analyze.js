@@ -1,15 +1,25 @@
 
 import async from 'async';
-import { Command } from 'clapi';
-import fileReader from 'clapi-filereader';
+import Command from 'clapi';
 
 import analyzeMulti from '../file/analyze-multi';
 import logger from '../../logger';
 import { resolveAnalyzer } from '../../util';
+import schema from '../../middleware/schema';
+import types from '../../types';
 
-analyzeMulti.pre(fileReader);
+const command = Command.create();
 
-const command = Command.init((input, output, done) => {
+command.description = 'Run multiple analyzers on multiple files and summarize results';
+
+command.use(schema({
+  args: {
+    files: types.files,
+    analyzers: types.analyzers
+  }
+}));
+
+command.add((input, output, done) => {
   const files = input.args.files;
   
   const analyzeFns = files.map((file) => {

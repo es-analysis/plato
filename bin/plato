@@ -8,15 +8,16 @@ var args = minimist(process.argv.slice(2));
 
 var command = args._.shift() || 'default';
 
-console.log('Command: %s', command);
+if (command === 'default' && (args.h || args.help)) command = 'help';
 
 cli.run(command, [{args : args}], function(err, input, output){
   if (err) {
-    if (err.stack) console.log(err.stack);
-    console.log('not ok: plato exited with error [%s]', err);
+    //if (err.stack) console.log(err.stack);
+    console.log(err.toString());
+    console.log('not ok: plato exited with error');
     return;
   }
   
-  console.log('ok');
+  console.log('\nok');
 });
 

@@ -1,10 +1,24 @@
 
-import { Command } from 'clapi';
+import Command from 'clapi';
 
 import find from '../db/find';
 import logger from '../../logger';
+import schema from '../../middleware/schema';
 
-const command = Command.init((input, output, done) => {
+import types from '../../types';
+
+const command = Command.create();
+
+command.description = 'Get all reports for specified batchId (none for latest)';
+
+command.use(schema({
+  args: {
+    '?batchId': types.batchId,
+    db: types.db,
+  }
+}));
+
+command.add((input, output, done) => {
   let findArgs = {
     query: {type: 'batch'},
     sort: {created: -1},
@@ -29,7 +43,7 @@ const command = Command.init((input, output, done) => {
       query: { type: 'report', batchId: output.data.batch._id }
     };
     find.run([{args: reportArgs}], (err, _, reportResult) => {
-      if (err) return dnoe(err);
+      if (err) return done(err);
       output.data.reports = reportResult.data.documents;
       logger.verbose('find-reports', 'got %s reports with batch id %s', output.data.reports.length, output.data.batch._id);
       done();

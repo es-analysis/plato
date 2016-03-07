@@ -1,12 +1,10 @@
 
-
-module.exports = function(config) {
-  
+module.exports = function(config, logger) {
   return {
     aggregate: function(reports, done) {
       done(null, ['rep1']);
     },
-    run: function (src, done) {
+    run: function (filename, src, done) {
       var results = {};
 
       if (config.skipWhitespace) results.sloc = src.split('\n').filter(function(line){return !(line.match(/^\s*$/))}).length;

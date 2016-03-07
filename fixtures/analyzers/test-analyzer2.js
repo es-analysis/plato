@@ -1,11 +1,10 @@
 
-
-module.exports = function(config) {
+module.exports = function(config, logger) {
   return {
     aggregate: function(reports, done) {
       done(null, ['rep2']);
     },
-    run: function (src, done) {
+    run: function (filename, src, done) {
       var results = {};
 
       results.bytes = src.split('').length;

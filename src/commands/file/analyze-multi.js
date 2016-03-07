@@ -1,21 +1,38 @@
 
 import async from 'async';
-import { Command } from 'clapi';
+import Command from 'clapi';
 
-import fileReport from './analyze';
+import analyze from './analyze';
+import schema from '../../middleware/schema';
+import readFile from '../../middleware/read-file';
+import types from '../../types';
 
-const command = Command.init((input, output, done) => {
+const command = Command.create();
+
+command.description = 'Run multiple analyzers on a single file';
+
+command.use(readFile('file', 'fileContents'));
+
+command.use(schema({
+  args: {
+    analyzers: types.analyzers,
+    file: String,
+    '?fileContents': types.fileContents
+  }
+}));
+
+command.add((input, output, done) => {  
   var analyzers = input.args.analyzers;
   async.parallel(analyzers.map((analyzer) => {
     return (cb) => {
-      fileReport.run([input.cloneWith({args:{analyzer}}), {}], (err, input, output) => {
+      analyze.run([input.cloneWith({args:{analyzer}}), {}], (err, input, output) => {
         cb(err, output.data.report);
       });
     };
   }),
     (err, results) => {
       if (err) return done(err);
-      output.data.file = input.args.file;
+      output.data.file = input.args.file || '<none>';
       output.data.reports = results;
       done(err);
     }

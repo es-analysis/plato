@@ -1,13 +1,27 @@
 
 import async from 'async';
-import { Command } from 'clapi';
-import extend from 'extend';
+import Command from 'clapi';
 
 import batchGet from './batch/get-all';
 import logger from '../logger';
 import {resolveReporter} from '../util';
+import schema from '../middleware/schema';
 
-const command = Command.init((input, output, done) => {
+import types from '../types';
+
+const command = Command.create();
+
+command.description = 'Generate reports off of latest batch or specified batchId';
+
+command.use(schema({
+  args: {
+    reporters: types.reporters,
+    db: types.db,
+    '?batchId': types.batchId,
+  }
+}));
+
+command.add((input, output, done) => {
   
   batchGet.run([input], (err, _, batchResult) => {
     if (err) return done(err);
@@ -47,7 +61,7 @@ const command = Command.init((input, output, done) => {
 
 });
 
-command.pre((i, o, cb) => {
+command.before((i, o, cb) => {
   i.args.reporters = i.args.reporters || [];
   cb();
 });

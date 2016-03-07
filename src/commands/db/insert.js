@@ -1,9 +1,20 @@
 
-import { Command } from 'clapi';
+import Command from 'clapi';
 
+import schema from '../../middleware/schema';
 import initdb from './_initdb';
+import types from '../../types';
 
-const command = Command.init((input, output, done) => {
+const command = Command.create();
+
+command.use(schema({
+  args: {
+    db: types.db,
+    document: types.document
+  }
+}));
+
+command.add((input, output, done) => {
   output.data.documents = output.data.documents || [];
   input.args.db.insert(input.args.document, (err, newDoc) => {
     if (err) return done(err.message ? new Error(err.message) : err);
@@ -13,6 +24,6 @@ const command = Command.init((input, output, done) => {
   });
 });
 
-command.pre(initdb);
+command.before(initdb);
 
 export default command;

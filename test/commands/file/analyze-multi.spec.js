@@ -1,7 +1,6 @@
 
 
 import assert from 'assert';
-import fs from 'fs';
 
 import extend from 'extend';
 
@@ -17,7 +16,7 @@ describe('file/analyze-multi', function(){
   it('should batch multiple file reads and report runs', function(done) {
     extend(true, input, {args: {
       cwd: process.cwd(),
-      fileContents: fs.readFileSync('./fixtures/source/testa.js', {encoding : 'utf-8'}),
+      file: './fixtures/source/testa.js',
       analyzers: require('../../helpers').analyzers2
     }});
     analyzeMulti.run([input, output], (err, input, output) => {
