@@ -9,13 +9,13 @@ module.exports = {
     'plato-analyzer-eslint'
   ],
   reporters : [
-    'plato-reporter-console',
     {
       module: 'plato-reporter-json',
       config: {
         outDir: 'reports'
       }
     },
+    'plato-reporter-console',
     {
       module: 'plato-reporter-default',
       config: {
