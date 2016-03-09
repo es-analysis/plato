@@ -3,8 +3,9 @@
 var minimist = require('minimist');
 
 var cli = require('../dist/cli').default;
+var normalizeCliArguments = require('../dist/bin-util').default;
 
-var args = minimist(process.argv.slice(2));
+var args = normalizeCliArguments(minimist(process.argv.slice(2)));
 
 var command = args._.shift() || 'default';
 

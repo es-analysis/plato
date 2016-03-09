@@ -1,10 +1,12 @@
 
+import dotparts from '../dot-parts';
+
 export default function(...properties) {
   return {
-    before: function(input, output, done) {
+    before(input, output, done) {
       for (var i = 0; i < properties.length; i++) {
         let dotNotation = properties[i];
-        let [root, prop] = getParentObject(input, dotNotation);
+        let [root, prop] = dotparts(input, dotNotation);
         if (typeof root[prop] === 'string') {
           try {
             root[prop] = JSON.parse(root[prop]);
@@ -18,11 +20,3 @@ export default function(...properties) {
   };
 }
 
-export function getParentObject(obj, def) {
-  var props = typeof def === 'string' ? def.split('.') : def;
-  if (props.length > 1) {
-    return getParentObject(obj[props[0]], props.slice(1));
-  } else {
-    return [obj, props[0]];
-  }
-}

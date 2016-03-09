@@ -7,8 +7,8 @@ import batchAnalyze from './analyze';
 import insert from '../db/insert';
 import update from '../db/update';
 import logger from '../../logger';
-import schema from '../../middleware/schema';
 import types from '../../types';
+import schema from '../../middleware/schema';
 
 const command = Command.create();
 
