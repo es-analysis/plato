@@ -50,7 +50,7 @@
     "escomplex-js": "~1.2.0",
     "fs-extra": "^0.3.2",
     "glob": "~4.4.1",
-    "jshint": "~2.6.3",
+    "jshint": "~2.9.0",
     "lodash": "^3.3.1",
     "posix-getopt": "~1.1.0",
     "complexity-report": "~0.10.3",
