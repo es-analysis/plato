@@ -71,7 +71,8 @@ var files = [
 var outputDir = './output/dir';
 // null options for this example
 var options = {
-  title: 'Your title here'
+  title: 'Your title here',
+  date: '2016/06/08'
 };
 
 var callback = function (report){
