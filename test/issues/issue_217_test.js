@@ -19,8 +19,7 @@ exports['issue_217'] = {
             "unused": false
           })
         },
-        globals = [],
-        report = linter.process(source, config, globals);
+        report = linter.process(source, config, {});
 
     test.equal(report.messages.length, 0, "Report returned with messages");
     test.done();
