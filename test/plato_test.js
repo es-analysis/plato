@@ -127,7 +127,7 @@ exports['plato'] = {
 
     plato.inspect(files, null, {}, function(reports) {
       var overview = plato.getOverviewReport(reports);
-      test.ok(overview.summary.total.jshint === 2, 'Should contain total jshint issues');
+      test.ok(overview.summary.total.jshint === 4, 'Should contain total jshint issues');
       test.done();
     });
   }

@@ -26,9 +26,16 @@ exports['issue_16'] = {
 
     var file = "test/fixtures/issue_16.js",
         source = fs.readFileSync(file).toString().trim(),
-        config = {},
-        globals = [],
-        report = linter.process(source, config, globals);
+        options = {},
+        report = {
+          info : {
+            file : '',
+            fileShort : '',
+            fileSafe : '',
+            link : ''
+          }
+        };
+        report = linter.process(source, options, report.info);
 
     test.equal(report.messages.length, 0, "Report returned with messages");
     test.done();
