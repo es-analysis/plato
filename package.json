@@ -55,6 +55,7 @@
     "lodash": "~4.13.1",
     "posix-getopt": "~1.2.0",
     "complexity-report": "2.0.0-alpha",
-    "eslint": "~3.0.1"
+    "eslint": "~3.0.1",
+    "esprima": "~2.7.2"
   }
 }
