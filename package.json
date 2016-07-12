@@ -1,8 +1,9 @@
 {
   "name": "plato",
   "description": "JavaScript source analysis and visualizer",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "homepage": "https://github.com/es-analysis/plato",
+  "license": "MIT",
   "author": {
     "name": "Jarrod Overson",
     "email": "jsoverson@gmail.com",
@@ -30,12 +31,12 @@
     "test": "grunt test"
   },
   "devDependencies": {
-    "grunt": "~0.4.1",
+    "grunt": "~1.0.1",
     "grunt-casper": "~0.4.0",
-    "grunt-contrib-jshint": "~0.10",
-    "grunt-contrib-nodeunit": "^0.4.1",
-    "grunt-contrib-uglify": "~0.2.0",
-    "grunt-contrib-watch": "~0.6.1"
+    "grunt-contrib-jshint": "~1.0.0",
+    "grunt-contrib-nodeunit": "~1.0.0",
+    "grunt-contrib-uglify": "~1.0.1",
+    "grunt-contrib-watch": "~1.0.0"
   },
   "keywords": [
     "halstead",
@@ -47,13 +48,13 @@
     "analyze"
   ],
   "dependencies": {
-    "escomplex-js": "~1.2.0",
-    "fs-extra": "^0.3.2",
-    "glob": "~4.4.1",
-    "jshint": "~2.6.3",
-    "lodash": "^3.3.1",
-    "posix-getopt": "~1.1.0",
-    "complexity-report": "~0.10.3",
-    "eslint": "^1.5.1"
+    "escomplex": "2.0.0-alpha",
+    "fs-extra": "~0.30.0",
+    "glob": "~7.0.5",
+    "jshint": "~2.9.2",
+    "lodash": "~4.13.1",
+    "posix-getopt": "~1.2.0",
+    "complexity-report": "2.0.0-alpha",
+    "eslint": "~3.0.1"
   }
 }
