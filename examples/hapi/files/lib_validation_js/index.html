@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - lib/validation.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>lib/validation.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">63.89</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">228</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">39.38</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">1.02</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">&#039;use strict&#039;;
+
+// Load modules
+
+const Boom = require(&#039;boom&#039;);
+const Hoek = require(&#039;hoek&#039;);
+const Joi = require(&#039;joi&#039;);
+
+
+// Declare internals
+
+const internals = {};
+
+
+exports.compile = function (rule) {
+
+    // null, undefined, true - anything allowed
+    // false - nothing allowed
+    // {...} - ... allowed
+
+    return (rule === false ? Joi.object({}).allow(null)
+                           : typeof rule === &#039;function&#039; ? rule
+                                                        : !rule || rule === true ? null                     // false tested earlier
+                                                                                 : Joi.compile(rule));
+};
+
+
+exports.query = function (request, next) {
+
+    return internals.input(&#039;query&#039;, request, next);
+};
+
+
+exports.payload = function (request, next) {
+
+    if (request.method === &#039;get&#039; ||
+        request.method === &#039;head&#039;) {                // When route.method is &#039;*&#039;
+
+        return next();
+    }
+
+    return internals.input(&#039;payload&#039;, request, next);
+};
+
+
+exports.params = function (request, next) {
+
+    return internals.input(&#039;params&#039;, request, next);
+};
+
+
+exports.headers = function (request, next) {
+
+    return internals.input(&#039;headers&#039;, request, next);
+};
+
+
+internals.input = function (source, request, next) {
+
+    const postValidate = (err, value) =&gt; {
+
+        request.orig[source] = request[source];
+        if (value !== undefined) {
+            request[source] = value;
+        }
+
+        if (!err) {
+            return next();
+        }
+
+        if (err.isDeveloperError) {
+            return next(err);
+        }
+
+        // failAction: &#039;error&#039;, &#039;log&#039;, &#039;ignore&#039;, function (source, err, next)
+
+        if (request.route.settings.validate.failAction === &#039;ignore&#039;) {
+            return next();
+        }
+
+        // Prepare error
+
+        const error = (err.isBoom ? err : Boom.badRequest(err.message, err));
+        error.output.payload.validation = { source: source, keys: [] };
+        if (err.details) {
+            for (let i = 0; i &lt; err.details.length; ++i) {
+                error.output.payload.validation.keys.push(Hoek.escapeHtml(err.details[i].path));
+            }
+        }
+
+        if (request.route.settings.validate.errorFields) {
+            const fields = Object.keys(request.route.settings.validate.errorFields);
+            for (let i = 0; i &lt; fields.length; ++i) {
+                const field = fields[i];
+                error.output.payload[field] = request.route.settings.validate.errorFields[field];
+            }
+        }
+
+        request._log([&#039;validation&#039;, &#039;error&#039;, source], error);
+
+        // Log only
+
+        if (request.route.settings.validate.failAction === &#039;log&#039;) {
+            return next();
+        }
+
+        // Return error
+
+        if (typeof request.route.settings.validate.failAction !== &#039;function&#039;) {
+            return next(error);
+        }
+
+        // Custom handler
+
+        request._protect.run(next, (exit) =&gt; {
+
+            const reply = request.server._replier.interface(request, request.route.realm, exit);
+            request.route.settings.validate.failAction(request, reply, source, error);
+        });
+    };
+
+    const localOptions = {
+        context: {
+            headers: request.headers,
+            params: request.params,
+            query: request.query,
+            payload: request.payload,
+            auth: request.auth
+        }
+    };
+
+    delete localOptions.context[source];
+    Hoek.merge(localOptions, request.route.settings.validate.options);
+
+    const schema = request.route.settings.validate[source];
+    if (typeof schema !== &#039;function&#039;) {
+        return Joi.validate(request[source], schema, localOptions, postValidate);
+    }
+
+    request._protect.run(postValidate, (exit) =&gt; {
+
+        return schema(request[source], localOptions, exit);
+    });
+};
+
+
+exports.response = function (request, next) {
+
+    if (request.route.settings.response.sample) {
+        const currentSample = Math.ceil((Math.random() * 100));
+        if (currentSample &gt; request.route.settings.response.sample) {
+            return next();
+        }
+    }
+
+    const response = request.response;
+    const statusCode = response.isBoom ? response.output.statusCode : response.statusCode;
+
+    const statusSchema = request.route.settings.response.status[statusCode];
+    if (statusCode &gt;= 400 &amp;&amp;
+        !statusSchema) {
+
+        return next();          // Do not validate errors by default
+    }
+
+    const schema = statusSchema || request.route.settings.response.schema;
+    if (schema === null) {
+        return next();          // No rules
+    }
+
+    if (!response.isBoom &amp;&amp;
+        request.response.variety !== &#039;plain&#039;) {
+
+        return next(Boom.badImplementation(&#039;Cannot validate non-object response&#039;));
+    }
+
+    const postValidate = (err, value) =&gt; {
+
+        if (!err) {
+            if (value !== undefined &amp;&amp;
+                request.route.settings.response.modify) {
+
+                if (response.isBoom) {
+                    response.output.payload = value;
+                }
+                else {
+                    response.source = value;
+                }
+            }
+
+            return next();
+        }
+
+        // failAction: &#039;error&#039;, &#039;log&#039;
+
+        if (request.route.settings.response.failAction === &#039;log&#039;) {
+            request._log([&#039;validation&#039;, &#039;response&#039;, &#039;error&#039;], err.message);
+            return next();
+        }
+
+        return next(Boom.badImplementation(err.message));
+    };
+
+    const localOptions = {
+        context: {
+            headers: request.headers,
+            params: request.params,
+            query: request.query,
+            payload: request.payload,
+            auth: {
+                isAuthenticated: request.auth.isAuthenticated,
+                credentials: request.auth.credentials
+            }
+        }
+    };
+
+    const source = response.isBoom ? response.output.payload : response.source;
+    Hoek.merge(localOptions, request.route.settings.response.options);
+
+    if (typeof schema !== &#039;function&#039;) {
+        return Joi.validate(source, schema, localOptions, postValidate);
+    }
+
+    request._protect.run(postValidate, (exit) =&gt; {
+
+        return schema(source, localOptions, exit);
+    });
+};</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

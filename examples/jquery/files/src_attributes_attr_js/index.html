@@ -44,11 +44,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
-      <p class="stat">64.82</p>
+      <p class="stat">66.05</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">142</p>
+      <p class="stat">137</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,11 +62,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">47.01</p>
+      <p class="stat">44.82</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
-      <p class="stat">1.04</p>
+      <p class="stat">0.97</p>
     </div>
   </div>
 </div>
@@ -89,36 +89,38 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="col-md-12">define([
+    <textarea id="file-source" class="col-md-12">define( [
 	&quot;../core&quot;,
-	&quot;../var/rnotwhite&quot;,
 	&quot;../core/access&quot;,
 	&quot;./support&quot;,
+	&quot;../var/rnotwhite&quot;,
 	&quot;../selector&quot;
-], function( jQuery, rnotwhite, access, support ) {
+], function( jQuery, access, support, rnotwhite ) {
 
-var nodeHook, boolHook,
+&quot;use strict&quot;;
+
+var boolHook,
 	attrHandle = jQuery.expr.attrHandle;
 
-jQuery.fn.extend({
+jQuery.fn.extend( {
 	attr: function( name, value ) {
 		return access( this, jQuery.attr, name, value, arguments.length &gt; 1 );
 	},
 
 	removeAttr: function( name ) {
-		return this.each(function() {
+		return this.each( function() {
 			jQuery.removeAttr( this, name );
-		});
+		} );
 	}
-});
+} );
 
-jQuery.extend({
+jQuery.extend( {
 	attr: function( elem, name, value ) {
-		var hooks, ret,
+		var ret, hooks,
 			nType = elem.nodeType;
 
-		// don&#039;t get/set attributes on text, comment and attribute nodes
-		if ( !elem || nType === 3 || nType === 8 || nType === 2 ) {
+		// Don&#039;t get/set attributes on text, comment and attribute nodes
+		if ( nType === 3 || nType === 8 || nType === 2 ) {
 			return;
 		}
 
@@ -127,60 +129,36 @@ jQuery.extend({
 			return jQuery.prop( elem, name, value );
 		}
 
-		// All attributes are lowercase
+		// Attribute hooks are determined by the lowercase version
 		// Grab necessary hook if one is defined
 		if ( nType !== 1 || !jQuery.isXMLDoc( elem ) ) {
-			name = name.toLowerCase();
-			hooks = jQuery.attrHooks[ name ] ||
-				( jQuery.expr.match.bool.test( name ) ? boolHook : nodeHook );
+			hooks = jQuery.attrHooks[ name.toLowerCase() ] ||
+				( jQuery.expr.match.bool.test( name ) ? boolHook : undefined );
 		}
 
 		if ( value !== undefined ) {
-
 			if ( value === null ) {
 				jQuery.removeAttr( elem, name );
+				return;
+			}
 
-			} else if ( hooks &amp;&amp; &quot;set&quot; in hooks &amp;&amp;
-				(ret = hooks.set( elem, value, name )) !== undefined ) {
-
+			if ( hooks &amp;&amp; &quot;set&quot; in hooks &amp;&amp;
+				( ret = hooks.set( elem, value, name ) ) !== undefined ) {
 				return ret;
-
-			} else {
-				elem.setAttribute( name, value + &quot;&quot; );
-				return value;
 			}
 
-		} else if ( hooks &amp;&amp; &quot;get&quot; in hooks &amp;&amp; (ret = hooks.get( elem, name )) !== null ) {
+			elem.setAttribute( name, value + &quot;&quot; );
+			return value;
+		}
+
+		if ( hooks &amp;&amp; &quot;get&quot; in hooks &amp;&amp; ( ret = hooks.get( elem, name ) ) !== null ) {
 			return ret;
-
-		} else {
-			ret = jQuery.find.attr( elem, name );
-
-			// Non-existent attributes return null, we normalize to undefined
-			return ret == null ?
-				undefined :
-				ret;
 		}
-	},
 
-	removeAttr: function( elem, value ) {
-		var name, propName,
-			i = 0,
-			attrNames = value &amp;&amp; value.match( rnotwhite );
+		ret = jQuery.find.attr( elem, name );
 
-		if ( attrNames &amp;&amp; elem.nodeType === 1 ) {
-			while ( (name = attrNames[i++]) ) {
-				propName = jQuery.propFix[ name ] || name;
-
-				// Boolean attributes get special treatment (#10870)
-				if ( jQuery.expr.match.bool.test( name ) ) {
-					// Set corresponding property to false
-					elem[ propName ] = false;
-				}
-
-				elem.removeAttribute( name );
-			}
-		}
+		// Non-existent attributes return null, we normalize to undefined
+		return ret == null ? undefined : ret;
 	},
 
 	attrHooks: {
@@ -197,13 +175,26 @@ jQuery.extend({
 				}
 			}
 		}
+	},
+
+	removeAttr: function( elem, value ) {
+		var name,
+			i = 0,
+			attrNames = value &amp;&amp; value.match( rnotwhite );
+
+		if ( attrNames &amp;&amp; elem.nodeType === 1 ) {
+			while ( ( name = attrNames[ i++ ] ) ) {
+				elem.removeAttribute( name );
+			}
+		}
 	}
-});
+} );
 
 // Hooks for boolean attributes
 boolHook = {
 	set: function( elem, value, name ) {
 		if ( value === false ) {
+
 			// Remove boolean attributes when set to false
 			jQuery.removeAttr( elem, name );
 		} else {
@@ -212,25 +203,29 @@ boolHook = {
 		return name;
 	}
 };
+
 jQuery.each( jQuery.expr.match.bool.source.match( /\w+/g ), function( i, name ) {
 	var getter = attrHandle[ name ] || jQuery.find.attr;
 
 	attrHandle[ name ] = function( elem, name, isXML ) {
-		var ret, handle;
+		var ret, handle,
+			lowercaseName = name.toLowerCase();
+
 		if ( !isXML ) {
+
 			// Avoid an infinite loop by temporarily removing this function from the getter
-			handle = attrHandle[ name ];
-			attrHandle[ name ] = ret;
+			handle = attrHandle[ lowercaseName ];
+			attrHandle[ lowercaseName ] = ret;
 			ret = getter( elem, name, isXML ) != null ?
-				name.toLowerCase() :
+				lowercaseName :
 				null;
-			attrHandle[ name ] = handle;
+			attrHandle[ lowercaseName ] = handle;
 		}
 		return ret;
 	};
-});
+} );
 
-});</textarea>
+} );</textarea>
   </div>
 </div>
 

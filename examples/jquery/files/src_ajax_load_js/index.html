@@ -44,7 +44,7 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
-      <p class="stat">65.56</p>
+      <p class="stat">68.78</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
@@ -62,11 +62,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">20.71</p>
+      <p class="stat">18.36</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
-      <p class="stat">0.38</p>
+      <p class="stat">0.35</p>
     </div>
   </div>
 </div>
@@ -89,33 +89,26 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="col-md-12">define([
+    <textarea id="file-source" class="col-md-12">define( [
 	&quot;../core&quot;,
 	&quot;../core/parseHTML&quot;,
 	&quot;../ajax&quot;,
 	&quot;../traversing&quot;,
 	&quot;../manipulation&quot;,
-	&quot;../selector&quot;,
-	// Optional event/alias dependency
-	&quot;../event/alias&quot;
+	&quot;../selector&quot;
 ], function( jQuery ) {
 
-// Keep a copy of the old load method
-var _load = jQuery.fn.load;
+&quot;use strict&quot;;
 
 /**
  * Load a url into a page
  */
 jQuery.fn.load = function( url, params, callback ) {
-	if ( typeof url !== &quot;string&quot; &amp;&amp; _load ) {
-		return _load.apply( this, arguments );
-	}
-
 	var selector, type, response,
 		self = this,
-		off = url.indexOf(&quot; &quot;);
+		off = url.indexOf( &quot; &quot; );
 
-	if ( off &gt;= 0 ) {
+	if ( off &gt; -1 ) {
 		selector = jQuery.trim( url.slice( off ) );
 		url = url.slice( 0, off );
 	}
@@ -134,14 +127,16 @@ jQuery.fn.load = function( url, params, callback ) {
 
 	// If we have elements to modify, make the request
 	if ( self.length &gt; 0 ) {
-		jQuery.ajax({
+		jQuery.ajax( {
 			url: url,
 
-			// if &quot;type&quot; variable is undefined, then &quot;GET&quot; method will be used
-			type: type,
+			// If &quot;type&quot; variable is undefined, then &quot;GET&quot; method will be used.
+			// Make value of this field explicit since
+			// user can override it through ajaxSetup method
+			type: type || &quot;GET&quot;,
 			dataType: &quot;html&quot;,
 			data: params
-		}).done(function( responseText ) {
+		} ).done( function( responseText ) {
 
 			// Save response for use in complete callback
 			response = arguments;
@@ -150,20 +145,25 @@ jQuery.fn.load = function( url, params, callback ) {
 
 				// If a selector was specified, locate the right elements in a dummy div
 				// Exclude scripts to avoid IE &#039;Permission Denied&#039; errors
-				jQuery(&quot;&lt;div&gt;&quot;).append( jQuery.parseHTML( responseText ) ).find( selector ) :
+				jQuery( &quot;&lt;div&gt;&quot; ).append( jQuery.parseHTML( responseText ) ).find( selector ) :
 
 				// Otherwise use the full result
 				responseText );
 
-		}).complete( callback &amp;&amp; function( jqXHR, status ) {
-			self.each( callback, response || [ jqXHR.responseText, status, jqXHR ] );
-		});
+		// If the request succeeds, this function gets &quot;data&quot;, &quot;status&quot;, &quot;jqXHR&quot;
+		// but they are ignored because response was set above.
+		// If it fails, this function gets &quot;jqXHR&quot;, &quot;status&quot;, &quot;error&quot;
+		} ).always( callback &amp;&amp; function( jqXHR, status ) {
+			self.each( function() {
+				callback.apply( this, response || [ jqXHR.responseText, status, jqXHR ] );
+			} );
+		} );
 	}
 
 	return this;
 };
 
-});</textarea>
+} );</textarea>
   </div>
 </div>
 

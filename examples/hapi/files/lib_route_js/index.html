@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - lib/route.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>lib/route.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">45.76</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">471</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">67.20</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">5.02</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">&#039;use strict&#039;;
+
+// Load modules
+
+const Boom = require(&#039;boom&#039;);
+const Catbox = require(&#039;catbox&#039;);
+const Hoek = require(&#039;hoek&#039;);
+const Subtext = require(&#039;subtext&#039;);
+const Auth = require(&#039;./auth&#039;);
+const Cors = require(&#039;./cors&#039;);
+const Defaults = require(&#039;./defaults&#039;);
+const Ext = require(&#039;./ext&#039;);
+const Handler = require(&#039;./handler&#039;);
+const Validation = require(&#039;./validation&#039;);
+const Schema = require(&#039;./schema&#039;);
+
+
+// Declare internals
+
+const internals = {};
+
+
+exports = module.exports = internals.Route = function (route, connection, plugin, options) {
+
+    options = options || {};
+
+    // Apply plugin environment (before schema validation)
+
+    const realm = plugin.realm;
+    if (realm.modifiers.route.vhost ||
+        realm.modifiers.route.prefix) {
+
+        route = Hoek.cloneWithShallow(route, [&#039;config&#039;]);       // config is left unchanged
+        route.path = (realm.modifiers.route.prefix ? realm.modifiers.route.prefix + (route.path !== &#039;/&#039; ? route.path : &#039;&#039;) : route.path);
+        route.vhost = realm.modifiers.route.vhost || route.vhost;
+    }
+
+    // Setup and validate route configuration
+
+    Hoek.assert(route.path, &#039;Route missing path&#039;);
+    const routeDisplay = route.method + &#039; &#039; + route.path;
+    Hoek.assert(route.handler || (route.config &amp;&amp; route.config.handler), &#039;Missing or undefined handler:&#039;, routeDisplay);
+    Hoek.assert(!!route.handler ^ !!(route.config &amp;&amp; route.config.handler), &#039;Handler must only appear once:&#039;, routeDisplay);            // XOR
+    Hoek.assert(route.path === &#039;/&#039; || route.path[route.path.length - 1] !== &#039;/&#039; || !connection.settings.router.stripTrailingSlash, &#039;Path cannot end with a trailing slash when connection configured to strip:&#039;, routeDisplay);
+
+    route = Schema.apply(&#039;route&#039;, route, routeDisplay);
+
+    const handler = route.handler || route.config.handler;
+    const method = route.method.toLowerCase();
+    Hoek.assert(method !== &#039;head&#039;, &#039;Method name not allowed:&#039;, routeDisplay);
+
+    // Apply settings in order: {connection} &lt;- {handler} &lt;- {realm} &lt;- {route}
+
+    const handlerDefaults = Handler.defaults(method, handler, connection.server);
+    let base = Hoek.applyToDefaultsWithShallow(connection.settings.routes, handlerDefaults, [&#039;bind&#039;]);
+    base = Hoek.applyToDefaultsWithShallow(base, realm.settings, [&#039;bind&#039;]);
+    this.settings = Hoek.applyToDefaultsWithShallow(base, route.config || {}, [&#039;bind&#039;]);
+    this.settings.handler = handler;
+    this.settings = Schema.apply(&#039;routeConfig&#039;, this.settings, routeDisplay);
+
+    const socketTimeout = (this.settings.timeout.socket === undefined ? 2 * 60 * 1000 : this.settings.timeout.socket);
+    Hoek.assert(!this.settings.timeout.server || !socketTimeout || this.settings.timeout.server &lt; socketTimeout, &#039;Server timeout must be shorter than socket timeout:&#039;, routeDisplay);
+    Hoek.assert(!this.settings.payload.timeout || !socketTimeout || this.settings.payload.timeout &lt; socketTimeout, &#039;Payload timeout must be shorter than socket timeout:&#039;, routeDisplay);
+
+    this.connection = connection;
+    this.server = connection.server;
+    this.path = route.path;
+    this.method = method;
+    this.plugin = plugin;
+
+    this.settings.vhost = route.vhost;
+    this.settings.plugins = this.settings.plugins || {};            // Route-specific plugins settings, namespaced using plugin name
+    this.settings.app = this.settings.app || {};                    // Route-specific application settings
+
+    // Path parsing
+
+    this._special = !!options.special;
+    this._analysis = this.connection._router.analyze(this.path);
+    this.params = this._analysis.params;
+    this.fingerprint = this._analysis.fingerprint;
+
+    this.public = {
+        method: this.method,
+        path: this.path,
+        vhost: this.vhost,
+        realm: this.plugin.realm,
+        settings: this.settings,
+        fingerprint: this.fingerprint
+    };
+
+    // Validation
+
+    const validation = this.settings.validate;
+    if (this.method === &#039;get&#039;) {
+
+        // Assert on config, not on merged settings
+
+        Hoek.assert(!route.config || !route.config.payload, &#039;Cannot set payload settings on HEAD or GET request:&#039;, routeDisplay);
+        Hoek.assert(!route.config || !route.config.validate || !route.config.validate.payload, &#039;Cannot validate HEAD or GET requests:&#039;, routeDisplay);
+
+        validation.payload = null;
+    }
+
+    [&#039;headers&#039;, &#039;params&#039;, &#039;query&#039;, &#039;payload&#039;].forEach((type) =&gt; {
+
+        validation[type] = Validation.compile(validation[type]);
+    });
+
+    if (this.settings.response.schema !== undefined ||
+        this.settings.response.status) {
+
+        this.settings.response._validate = true;
+
+        const rule = this.settings.response.schema;
+        this.settings.response.status = this.settings.response.status || {};
+        const statuses = Object.keys(this.settings.response.status);
+
+        if (rule === true &amp;&amp;
+            !statuses.length) {
+
+            this.settings.response._validate = false;
+        }
+        else {
+            this.settings.response.schema = Validation.compile(rule);
+            for (let i = 0; i &lt; statuses.length; ++i) {
+                const code = statuses[i];
+                this.settings.response.status[code] = Validation.compile(this.settings.response.status[code]);
+            }
+        }
+    }
+
+    // Payload parsing
+
+    if (this.method === &#039;get&#039;) {
+        this.settings.payload = null;
+    }
+    else {
+        if (this.settings.payload.allow) {
+            this.settings.payload.allow = [].concat(this.settings.payload.allow);
+        }
+    }
+
+    Hoek.assert(!this.settings.validate.payload || this.settings.payload.parse, &#039;Route payload must be set to \&#039;parse\&#039; when payload validation enabled:&#039;, routeDisplay);
+    Hoek.assert(!this.settings.jsonp || typeof this.settings.jsonp === &#039;string&#039;, &#039;Bad route JSONP parameter name:&#039;, routeDisplay);
+
+    // Authentication configuration
+
+    this.settings.auth = (this._special ? false : this.connection.auth._setupRoute(this.settings.auth, route.path));
+
+    // Cache
+
+    if (this.method === &#039;get&#039; &amp;&amp;
+        typeof this.settings.cache === &#039;object&#039; &amp;&amp;
+        (this.settings.cache.expiresIn || this.settings.cache.expiresAt)) {
+
+        this.settings.cache._statuses = Hoek.mapToObject(this.settings.cache.statuses);
+        this._cache = new Catbox.Policy({ expiresIn: this.settings.cache.expiresIn, expiresAt: this.settings.cache.expiresAt });
+    }
+
+    // CORS
+
+    this.settings.cors = Cors.route(this.settings.cors);
+
+    // Security
+
+    if (this.settings.security) {
+        this.settings.security = Hoek.applyToDefaults(Defaults.security, this.settings.security);
+
+        const security = this.settings.security;
+        if (security.hsts) {
+            if (security.hsts === true) {
+                security._hsts = &#039;max-age=15768000&#039;;
+            }
+            else if (typeof security.hsts === &#039;number&#039;) {
+                security._hsts = &#039;max-age=&#039; + security.hsts;
+            }
+            else {
+                security._hsts = &#039;max-age=&#039; + (security.hsts.maxAge || 15768000);
+                if (security.hsts.includeSubdomains || security.hsts.includeSubDomains) {
+                    security._hsts = security._hsts + &#039;; includeSubDomains&#039;;
+                }
+                if (security.hsts.preload) {
+                    security._hsts = security._hsts + &#039;; preload&#039;;
+                }
+            }
+        }
+
+        if (security.xframe) {
+            if (security.xframe === true) {
+                security._xframe = &#039;DENY&#039;;
+            }
+            else if (typeof security.xframe === &#039;string&#039;) {
+                security._xframe = security.xframe.toUpperCase();
+            }
+            else if (security.xframe.rule === &#039;allow-from&#039;) {
+                if (!security.xframe.source) {
+                    security._xframe = &#039;SAMEORIGIN&#039;;
+                }
+                else {
+                    security._xframe = &#039;ALLOW-FROM &#039; + security.xframe.source;
+                }
+            }
+            else {
+                security._xframe = security.xframe.rule.toUpperCase();
+            }
+        }
+    }
+
+    // Handler
+
+    this.settings.handler = Handler.configure(this.settings.handler, this);
+    this._prerequisites = Handler.prerequisitesConfig(this.settings.pre, this.server);
+
+    // Route lifecycle
+
+    this._extensions = {
+        onPreResponse: this._combineExtensions(&#039;onPreResponse&#039;)
+    };
+
+    if (this._special) {
+        this._cycle = [Handler.execute];
+        return;
+    }
+
+    this._extensions.onPreAuth = this._combineExtensions(&#039;onPreAuth&#039;);
+    this._extensions.onPostAuth = this._combineExtensions(&#039;onPostAuth&#039;);
+    this._extensions.onPreHandler = this._combineExtensions(&#039;onPreHandler&#039;);
+    this._extensions.onPostHandler = this._combineExtensions(&#039;onPostHandler&#039;);
+
+    this.rebuild();
+};
+
+
+internals.Route.prototype._combineExtensions = function (type, subscribe) {
+
+    const ext = new Ext(this.server);
+
+    const events = this.settings.ext[type];
+    if (events) {
+        for (let i = 0; i &lt; events.length; ++i) {
+            const event = Hoek.shallow(events[i]);
+            Hoek.assert(!event.options.sandbox, &#039;Cannot specify sandbox option for route extension&#039;);
+            event.plugin = this.plugin;
+            ext.add(event);
+        }
+    }
+
+    const connection = this.connection._extensions[type];
+    const realm = this.plugin.realm._extensions[type];
+
+    ext.merge([connection, realm]);
+
+    connection.subscribe(this);
+    realm.subscribe(this);
+
+    return ext;
+};
+
+
+internals.Route.prototype.rebuild = function (event) {
+
+    if (event) {
+        this._extensions[event.type].add(event);
+        if (event.type === &#039;onPreResponse&#039;) {
+            return;
+        }
+    }
+
+    // Build lifecycle array
+
+    const cycle = [];
+
+    // &#039;onRequest&#039;
+
+    if (this.settings.jsonp) {
+        cycle.push(internals.parseJSONP);
+    }
+
+    if (this.settings.state.parse) {
+        cycle.push(internals.state);
+    }
+
+    if (this._extensions.onPreAuth.nodes) {
+        cycle.push(this._extensions.onPreAuth);
+    }
+
+    const authenticate = (this.settings.auth !== false);                          // Anything other than &#039;false&#039; can still require authentication
+    if (authenticate) {
+        cycle.push(Auth.authenticate);
+    }
+
+    if (this.method !== &#039;get&#039;) {
+        cycle.push(internals.payload);
+
+        if (authenticate) {
+            cycle.push(Auth.payload);
+        }
+    }
+
+    if (this._extensions.onPostAuth.nodes) {
+        cycle.push(this._extensions.onPostAuth);
+    }
+
+    if (this.settings.validate.headers) {
+        cycle.push(Validation.headers);
+    }
+
+    if (this.settings.validate.params) {
+        cycle.push(Validation.params);
+    }
+
+    if (this.settings.jsonp) {
+        cycle.push(internals.cleanupJSONP);
+    }
+
+    if (this.settings.validate.query) {
+        cycle.push(Validation.query);
+    }
+
+    if (this.settings.validate.payload) {
+        cycle.push(Validation.payload);
+    }
+
+    if (this._extensions.onPreHandler.nodes) {
+        cycle.push(this._extensions.onPreHandler);
+    }
+
+    cycle.push(Handler.execute);                                     // Must not call next() with an Error
+
+    if (this._extensions.onPostHandler.nodes) {
+        cycle.push(this._extensions.onPostHandler);                 // An error from here on will override any result set in handler()
+    }
+
+    if (this.settings.response._validate &amp;&amp;
+        this.settings.response.sample !== 0) {
+
+        cycle.push(Validation.response);
+    }
+
+    this._cycle = cycle;
+};
+
+
+internals.state = function (request, next) {
+
+    request.state = {};
+
+    const req = request.raw.req;
+    const cookies = req.headers.cookie;
+    if (!cookies) {
+        return next();
+    }
+
+    request.connection.states.parse(cookies, (err, state, failed) =&gt; {
+
+        request.state = state || {};
+
+        // Clear cookies
+
+        for (let i = 0; i &lt; failed.length; ++i) {
+            const item = failed[i];
+
+            if (item.settings.clearInvalid) {
+                request._clearState(item.name);
+            }
+        }
+
+        // failAction: &#039;error&#039;, &#039;log&#039;, &#039;ignore&#039;
+
+        if (!err ||
+            request.route.settings.state.failAction === &#039;ignore&#039;) {
+
+            return next();
+        }
+
+        request._log([&#039;state&#039;, &#039;error&#039;], { header: cookies, errors: err.data });
+        return next(request.route.settings.state.failAction === &#039;error&#039; ? err : null);
+    });
+};
+
+
+internals.payload = function (request, next) {
+
+    if (request.method === &#039;get&#039; ||
+        request.method === &#039;head&#039;) {            // When route.method is &#039;*&#039;
+
+        return next();
+    }
+
+    const onParsed = (err, parsed) =&gt; {
+
+        request.mime = parsed.mime;
+        request.payload = parsed.payload || null;
+
+        if (!err) {
+            return next();
+        }
+
+        const failAction = request.route.settings.payload.failAction;         // failAction: &#039;error&#039;, &#039;log&#039;, &#039;ignore&#039;
+        if (failAction !== &#039;ignore&#039;) {
+            request._log([&#039;payload&#039;, &#039;error&#039;], err);
+        }
+
+        if (failAction === &#039;error&#039;) {
+            return next(err);
+        }
+
+        return next();
+    };
+
+    Subtext.parse(request.raw.req, request._tap(), request.route.settings.payload, (err, parsed) =&gt; {
+
+        if (!err ||
+            !request._isPayloadPending) {
+
+            request._isPayloadPending = false;
+            return onParsed(err, parsed);
+        }
+
+        // Flush out any pending request payload not consumed due to errors
+
+        const stream = request.raw.req;
+
+        const read = () =&gt; {
+
+            stream.read();
+        };
+
+        const end = () =&gt; {
+
+            stream.removeListener(&#039;readable&#039;, read);
+            stream.removeListener(&#039;error&#039;, end);
+            stream.removeListener(&#039;end&#039;, end);
+
+            request._isPayloadPending = false;
+            return onParsed(err, parsed);
+        };
+
+        stream.on(&#039;readable&#039;, read);
+        stream.once(&#039;error&#039;, end);
+        stream.once(&#039;end&#039;, end);
+    });
+};
+
+
+internals.jsonpRegex = /^[\w\$\[\]\.]+$/;
+
+
+internals.parseJSONP = function (request, next) {
+
+    const jsonp = request.query[request.route.settings.jsonp];
+    if (jsonp) {
+        if (internals.jsonpRegex.test(jsonp) === false) {
+            return next(Boom.badRequest(&#039;Invalid JSONP parameter value&#039;));
+        }
+
+        request.jsonp = jsonp;
+    }
+
+    return next();
+};
+
+
+internals.cleanupJSONP = function (request, next) {
+
+    if (request.jsonp) {
+        delete request.query[request.route.settings.jsonp];
+    }
+
+    return next();
+};</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

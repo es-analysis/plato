@@ -44,11 +44,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
-      <p class="stat">69.63</p>
+      <p class="stat">68.18</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">95</p>
+      <p class="stat">143</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,11 +62,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">26.98</p>
+      <p class="stat">24.86</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
-      <p class="stat">0.64</p>
+      <p class="stat">0.74</p>
     </div>
   </div>
 </div>
@@ -89,86 +89,134 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="col-md-12">define([
+    <textarea id="file-source" class="col-md-12">define( [
 	&quot;../core&quot;,
 	&quot;../core/access&quot;,
-	&quot;./support&quot;
+	&quot;./support&quot;,
+	&quot;../selector&quot;
 ], function( jQuery, access, support ) {
 
-var rfocusable = /^(?:input|select|textarea|button)$/i;
+&quot;use strict&quot;;
 
-jQuery.fn.extend({
+var rfocusable = /^(?:input|select|textarea|button)$/i,
+	rclickable = /^(?:a|area)$/i;
+
+jQuery.fn.extend( {
 	prop: function( name, value ) {
 		return access( this, jQuery.prop, name, value, arguments.length &gt; 1 );
 	},
 
 	removeProp: function( name ) {
-		return this.each(function() {
+		return this.each( function() {
 			delete this[ jQuery.propFix[ name ] || name ];
-		});
+		} );
 	}
-});
+} );
 
-jQuery.extend({
-	propFix: {
-		&quot;for&quot;: &quot;htmlFor&quot;,
-		&quot;class&quot;: &quot;className&quot;
-	},
-
+jQuery.extend( {
 	prop: function( elem, name, value ) {
-		var ret, hooks, notxml,
+		var ret, hooks,
 			nType = elem.nodeType;
 
 		// Don&#039;t get/set properties on text, comment and attribute nodes
-		if ( !elem || nType === 3 || nType === 8 || nType === 2 ) {
+		if ( nType === 3 || nType === 8 || nType === 2 ) {
 			return;
 		}
 
-		notxml = nType !== 1 || !jQuery.isXMLDoc( elem );
+		if ( nType !== 1 || !jQuery.isXMLDoc( elem ) ) {
 
-		if ( notxml ) {
 			// Fix name and attach hooks
 			name = jQuery.propFix[ name ] || name;
 			hooks = jQuery.propHooks[ name ];
 		}
 
 		if ( value !== undefined ) {
-			return hooks &amp;&amp; &quot;set&quot; in hooks &amp;&amp; (ret = hooks.set( elem, value, name )) !== undefined ?
-				ret :
-				( elem[ name ] = value );
+			if ( hooks &amp;&amp; &quot;set&quot; in hooks &amp;&amp;
+				( ret = hooks.set( elem, value, name ) ) !== undefined ) {
+				return ret;
+			}
 
-		} else {
-			return hooks &amp;&amp; &quot;get&quot; in hooks &amp;&amp; (ret = hooks.get( elem, name )) !== null ?
-				ret :
-				elem[ name ];
+			return ( elem[ name ] = value );
 		}
+
+		if ( hooks &amp;&amp; &quot;get&quot; in hooks &amp;&amp; ( ret = hooks.get( elem, name ) ) !== null ) {
+			return ret;
+		}
+
+		return elem[ name ];
 	},
 
 	propHooks: {
 		tabIndex: {
 			get: function( elem ) {
-				return elem.hasAttribute( &quot;tabindex&quot; ) ||
-					rfocusable.test( elem.nodeName ) || elem.href ?
-						elem.tabIndex :
-						-1;
+
+				// Support: IE &lt;=9 - 11 only
+				// elem.tabIndex doesn&#039;t always return the
+				// correct value when it hasn&#039;t been explicitly set
+				// https://web.archive.org/web/20141116233347/http://fluidproject.org/blog/2008/01/09/getting-setting-and-removing-tabindex-values-with-javascript/
+				// Use proper attribute retrieval(#12072)
+				var tabindex = jQuery.find.attr( elem, &quot;tabindex&quot; );
+
+				if ( tabindex ) {
+					return parseInt( tabindex, 10 );
+				}
+
+				if (
+					rfocusable.test( elem.nodeName ) ||
+					rclickable.test( elem.nodeName ) &amp;&amp;
+					elem.href
+				) {
+					return 0;
+				}
+
+				return -1;
 			}
 		}
-	}
-});
+	},
 
+	propFix: {
+		&quot;for&quot;: &quot;htmlFor&quot;,
+		&quot;class&quot;: &quot;className&quot;
+	}
+} );
+
+// Support: IE &lt;=11 only
+// Accessing the selectedIndex property
+// forces the browser to respect setting selected
+// on the option
+// The getter ensures a default option is selected
+// when in an optgroup
+// eslint rule &quot;no-unused-expressions&quot; is disabled for this code
+// since it considers such accessions noop
 if ( !support.optSelected ) {
 	jQuery.propHooks.selected = {
 		get: function( elem ) {
+
+			/* eslint no-unused-expressions: &quot;off&quot; */
+
 			var parent = elem.parentNode;
 			if ( parent &amp;&amp; parent.parentNode ) {
 				parent.parentNode.selectedIndex;
 			}
 			return null;
+		},
+		set: function( elem ) {
+
+			/* eslint no-unused-expressions: &quot;off&quot; */
+
+			var parent = elem.parentNode;
+			if ( parent ) {
+				parent.selectedIndex;
+
+				if ( parent.parentNode ) {
+					parent.parentNode.selectedIndex;
+				}
+			}
 		}
 	};
 }
 
-jQuery.each([
+jQuery.each( [
 	&quot;tabIndex&quot;,
 	&quot;readOnly&quot;,
 	&quot;maxLength&quot;,
@@ -181,9 +229,9 @@ jQuery.each([
 	&quot;contentEditable&quot;
 ], function() {
 	jQuery.propFix[ this.toLowerCase() ] = this;
-});
+} );
 
-});</textarea>
+} );</textarea>
   </div>
 </div>
 

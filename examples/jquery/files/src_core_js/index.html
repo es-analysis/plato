@@ -44,7 +44,7 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
-      <p class="stat">67.28</p>
+      <p class="stat">67.59</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
@@ -62,11 +62,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">83.69</p>
+      <p class="stat">77.08</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
-      <p class="stat">3.27</p>
+      <p class="stat">3.20</p>
     </div>
   </div>
 </div>
@@ -89,8 +89,14 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="col-md-12">define([
+    <textarea id="file-source" class="col-md-12">/* global Symbol */
+// Defining this global in .eslintrc would create a danger of using the global
+// unguarded in another place, it seems safer to define global only for this module
+
+define( [
 	&quot;./var/arr&quot;,
+	&quot;./var/document&quot;,
+	&quot;./var/getProto&quot;,
 	&quot;./var/slice&quot;,
 	&quot;./var/concat&quot;,
 	&quot;./var/push&quot;,
@@ -98,29 +104,34 @@
 	&quot;./var/class2type&quot;,
 	&quot;./var/toString&quot;,
 	&quot;./var/hasOwn&quot;,
-	&quot;./var/support&quot;
-], function( arr, slice, concat, push, indexOf, class2type, toString, hasOwn, support ) {
+	&quot;./var/fnToString&quot;,
+	&quot;./var/ObjectFunctionString&quot;,
+	&quot;./var/support&quot;,
+	&quot;./core/DOMEval&quot;
+], function( arr, document, getProto, slice, concat, push, indexOf,
+	class2type, toString, hasOwn, fnToString, ObjectFunctionString,
+	support, DOMEval ) {
+
+&quot;use strict&quot;;
 
 var
-	// Use the correct document accordingly with window argument (sandbox)
-	document = window.document,
-
 	version = &quot;@VERSION&quot;,
 
 	// Define a local copy of jQuery
 	jQuery = function( selector, context ) {
+
 		// The jQuery object is actually just the init constructor &#039;enhanced&#039;
 		// Need init if jQuery is called (just allow error to be thrown if not included)
 		return new jQuery.fn.init( selector, context );
 	},
 
-	// Support: Android&lt;4.1
+	// Support: Android &lt;=4.0 only
 	// Make sure we trim BOM and NBSP
 	rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g,
 
 	// Matches dashed string for camelizing
 	rmsPrefix = /^-ms-/,
-	rdashAlpha = /-([\da-z])/gi,
+	rdashAlpha = /-([a-z])/g,
 
 	// Used by jQuery.camelCase as callback to replace()
 	fcamelCase = function( all, letter ) {
@@ -128,13 +139,11 @@ var
 	};
 
 jQuery.fn = jQuery.prototype = {
+
 	// The current version of jQuery being used
 	jquery: version,
 
 	constructor: jQuery,
-
-	// Start with an empty selector
-	selector: &quot;&quot;,
 
 	// The default length of a jQuery object is 0
 	length: 0,
@@ -146,13 +155,14 @@ jQuery.fn = jQuery.prototype = {
 	// Get the Nth element in the matched element set OR
 	// Get the whole matched element set as a clean array
 	get: function( num ) {
-		return num != null ?
 
-			// Return just the one element from the set
-			( num &lt; 0 ? this[ num + this.length ] : this[ num ] ) :
+		// Return all the elements in a clean array
+		if ( num == null ) {
+			return slice.call( this );
+		}
 
-			// Return all the elements in a clean array
-			slice.call( this );
+		// Return just the one element from the set
+		return num &lt; 0 ? this[ num + this.length ] : this[ num ];
 	},
 
 	// Take an array of elements and push it onto the stack
@@ -164,23 +174,20 @@ jQuery.fn = jQuery.prototype = {
 
 		// Add the old object onto the stack (as a reference)
 		ret.prevObject = this;
-		ret.context = this.context;
 
 		// Return the newly-formed element set
 		return ret;
 	},
 
 	// Execute a callback for every element in the matched set.
-	// (You can seed the arguments with an array of args, but this is
-	// only used internally.)
-	each: function( callback, args ) {
-		return jQuery.each( this, callback, args );
+	each: function( callback ) {
+		return jQuery.each( this, callback );
 	},
 
 	map: function( callback ) {
-		return this.pushStack( jQuery.map(this, function( elem, i ) {
+		return this.pushStack( jQuery.map( this, function( elem, i ) {
 			return callback.call( elem, i, elem );
-		}));
+		} ) );
 	},
 
 	slice: function() {
@@ -198,11 +205,11 @@ jQuery.fn = jQuery.prototype = {
 	eq: function( i ) {
 		var len = this.length,
 			j = +i + ( i &lt; 0 ? len : 0 );
-		return this.pushStack( j &gt;= 0 &amp;&amp; j &lt; len ? [ this[j] ] : [] );
+		return this.pushStack( j &gt;= 0 &amp;&amp; j &lt; len ? [ this[ j ] ] : [] );
 	},
 
 	end: function() {
-		return this.prevObject || this.constructor(null);
+		return this.prevObject || this.constructor();
 	},
 
 	// For internal use only.
@@ -214,7 +221,7 @@ jQuery.fn = jQuery.prototype = {
 
 jQuery.extend = jQuery.fn.extend = function() {
 	var options, name, src, copy, copyIsArray, clone,
-		target = arguments[0] || {},
+		target = arguments[ 0 ] || {},
 		i = 1,
 		length = arguments.length,
 		deep = false;
@@ -229,7 +236,7 @@ jQuery.extend = jQuery.fn.extend = function() {
 	}
 
 	// Handle case when target is a string or something (possible in deep copy)
-	if ( typeof target !== &quot;object&quot; &amp;&amp; !jQuery.isFunction(target) ) {
+	if ( typeof target !== &quot;object&quot; &amp;&amp; !jQuery.isFunction( target ) ) {
 		target = {};
 	}
 
@@ -240,8 +247,10 @@ jQuery.extend = jQuery.fn.extend = function() {
 	}
 
 	for ( ; i &lt; length; i++ ) {
+
 		// Only deal with non-null/undefined values
-		if ( (options = arguments[ i ]) != null ) {
+		if ( ( options = arguments[ i ] ) != null ) {
+
 			// Extend the base object
 			for ( name in options ) {
 				src = target[ name ];
@@ -253,15 +262,15 @@ jQuery.extend = jQuery.fn.extend = function() {
 				}
 
 				// Recurse if we&#039;re merging plain objects or arrays
-				if ( deep &amp;&amp; copy &amp;&amp; ( jQuery.isPlainObject(copy) ||
-					(copyIsArray = jQuery.isArray(copy)) ) ) {
+				if ( deep &amp;&amp; copy &amp;&amp; ( jQuery.isPlainObject( copy ) ||
+					( copyIsArray = jQuery.isArray( copy ) ) ) ) {
 
 					if ( copyIsArray ) {
 						copyIsArray = false;
-						clone = src &amp;&amp; jQuery.isArray(src) ? src : [];
+						clone = src &amp;&amp; jQuery.isArray( src ) ? src : [];
 
 					} else {
-						clone = src &amp;&amp; jQuery.isPlainObject(src) ? src : {};
+						clone = src &amp;&amp; jQuery.isPlainObject( src ) ? src : {};
 					}
 
 					// Never move original objects, clone them
@@ -279,7 +288,8 @@ jQuery.extend = jQuery.fn.extend = function() {
 	return target;
 };
 
-jQuery.extend({
+jQuery.extend( {
+
 	// Unique for each copy of jQuery on the page
 	expando: &quot;jQuery&quot; + ( version + Math.random() ).replace( /\D/g, &quot;&quot; ),
 
@@ -293,7 +303,7 @@ jQuery.extend({
 	noop: function() {},
 
 	isFunction: function( obj ) {
-		return jQuery.type(obj) === &quot;function&quot;;
+		return jQuery.type( obj ) === &quot;function&quot;;
 	},
 
 	isArray: Array.isArray,
@@ -303,34 +313,46 @@ jQuery.extend({
 	},
 
 	isNumeric: function( obj ) {
-		// parseFloat NaNs numeric-cast false positives (null|true|false|&quot;&quot;)
-		// ...but misinterprets leading-number strings, particularly hex literals (&quot;0x...&quot;)
-		// subtraction forces infinities to NaN
-		// adding 1 corrects loss of precision from parseFloat (#15100)
-		return !jQuery.isArray( obj ) &amp;&amp; (obj - parseFloat( obj ) + 1) &gt;= 0;
+
+		// As of jQuery 3.0, isNumeric is limited to
+		// strings and numbers (primitives or objects)
+		// that can be coerced to finite numbers (gh-2662)
+		var type = jQuery.type( obj );
+		return ( type === &quot;number&quot; || type === &quot;string&quot; ) &amp;&amp;
+
+			// parseFloat NaNs numeric-cast false positives (&quot;&quot;)
+			// ...but misinterprets leading-number strings, particularly hex literals (&quot;0x...&quot;)
+			// subtraction forces infinities to NaN
+			!isNaN( obj - parseFloat( obj ) );
 	},
 
 	isPlainObject: function( obj ) {
-		// Not plain objects:
-		// - Any object or value whose internal [[Class]] property is not &quot;[object Object]&quot;
-		// - DOM nodes
-		// - window
-		if ( jQuery.type( obj ) !== &quot;object&quot; || obj.nodeType || jQuery.isWindow( obj ) ) {
+		var proto, Ctor;
+
+		// Detect obvious negatives
+		// Use toString instead of jQuery.type to catch host objects
+		if ( !obj || toString.call( obj ) !== &quot;[object Object]&quot; ) {
 			return false;
 		}
 
-		if ( obj.constructor &amp;&amp;
-				!hasOwn.call( obj.constructor.prototype, &quot;isPrototypeOf&quot; ) ) {
-			return false;
+		proto = getProto( obj );
+
+		// Objects with no prototype (e.g., `Object.create( null )`) are plain
+		if ( !proto ) {
+			return true;
 		}
 
-		// If the function hasn&#039;t returned already, we&#039;re confident that
-		// |obj| is a plain object, created by {} or constructed with new Object
-		return true;
+		// Objects with prototype are plain iff they were constructed by a global Object function
+		Ctor = hasOwn.call( proto, &quot;constructor&quot; ) &amp;&amp; proto.constructor;
+		return typeof Ctor === &quot;function&quot; &amp;&amp; fnToString.call( Ctor ) === ObjectFunctionString;
 	},
 
 	isEmptyObject: function( obj ) {
+
+		/* eslint-disable no-unused-vars */
+		// See https://github.com/eslint/eslint/issues/6125
 		var name;
+
 		for ( name in obj ) {
 			return false;
 		}
@@ -341,22 +363,20 @@ jQuery.extend({
 		if ( obj == null ) {
 			return obj + &quot;&quot;;
 		}
-		// Support: Android&lt;4.0 (functionish RegExp)
+
+		// Support: Android &lt;=2.3 only (functionish RegExp)
 		return typeof obj === &quot;object&quot; || typeof obj === &quot;function&quot; ?
-			class2type[ toString.call(obj) ] || &quot;object&quot; :
+			class2type[ toString.call( obj ) ] || &quot;object&quot; :
 			typeof obj;
 	},
 
 	// Evaluates a script in a global context
 	globalEval: function( code ) {
-		var script = document.createElement( &quot;script&quot; );
-
-		script.text = code;
-		document.head.appendChild( script ).parentNode.removeChild( script );
+		DOMEval( code );
 	},
 
 	// Convert dashed to camelCase; used by the css and data modules
-	// Support: IE9-11+
+	// Support: IE &lt;=9 - 11, Edge 12 - 13
 	// Microsoft forgot to hump their vendor prefix (#9572)
 	camelCase: function( string ) {
 		return string.replace( rmsPrefix, &quot;ms-&quot; ).replace( rdashAlpha, fcamelCase );
@@ -366,40 +386,20 @@ jQuery.extend({
 		return elem.nodeName &amp;&amp; elem.nodeName.toLowerCase() === name.toLowerCase();
 	},
 
-	// args is for internal usage only
-	each: function( obj, callback, args ) {
-		var i = 0,
-			length = obj.length,
-			isArray = isArraylike( obj );
+	each: function( obj, callback ) {
+		var length, i = 0;
 
-		if ( args ) {
-			if ( isArray ) {
-				for ( ; i &lt; length; i++ ) {
-					if ( callback.apply( obj[ i ], args ) === false ) {
-						break;
-					}
-				}
-			} else {
-				for ( i in obj ) {
-					if ( callback.apply( obj[ i ], args ) === false ) {
-						break;
-					}
+		if ( isArrayLike( obj ) ) {
+			length = obj.length;
+			for ( ; i &lt; length; i++ ) {
+				if ( callback.call( obj[ i ], i, obj[ i ] ) === false ) {
+					break;
 				}
 			}
-
-		// A special, fast, case for the most common use of each
 		} else {
-			if ( isArray ) {
-				for ( ; i &lt; length; i++ ) {
-					if ( callback.call( obj[ i ], i, obj[ i ] ) === false ) {
-						break;
-					}
-				}
-			} else {
-				for ( i in obj ) {
-					if ( callback.call( obj[ i ], i, obj[ i ] ) === false ) {
-						break;
-					}
+			for ( i in obj ) {
+				if ( callback.call( obj[ i ], i, obj[ i ] ) === false ) {
+					break;
 				}
 			}
 		}
@@ -407,7 +407,7 @@ jQuery.extend({
 		return obj;
 	},
 
-	// Support: Android&lt;4.1
+	// Support: Android &lt;=4.0 only
 	trim: function( text ) {
 		return text == null ?
 			&quot;&quot; :
@@ -419,7 +419,7 @@ jQuery.extend({
 		var ret = results || [];
 
 		if ( arr != null ) {
-			if ( isArraylike( Object(arr) ) ) {
+			if ( isArrayLike( Object( arr ) ) ) {
 				jQuery.merge( ret,
 					typeof arr === &quot;string&quot; ?
 					[ arr ] : arr
@@ -436,7 +436,7 @@ jQuery.extend({
 		return arr == null ? -1 : indexOf.call( arr, elem, i );
 	},
 
-	// Support: Android&lt;4.1, PhantomJS&lt;2
+	// Support: Android &lt;=4.0 only, PhantomJS 1 only
 	// push.apply(_, arraylike) throws on ancient WebKit
 	merge: function( first, second ) {
 		var len = +second.length,
@@ -473,14 +473,13 @@ jQuery.extend({
 
 	// arg is for internal usage only
 	map: function( elems, callback, arg ) {
-		var value,
+		var length, value,
 			i = 0,
-			length = elems.length,
-			isArray = isArraylike( elems ),
 			ret = [];
 
 		// Go through the array, translating each of the items to their new values
-		if ( isArray ) {
+		if ( isArrayLike( elems ) ) {
+			length = elems.length;
 			for ( ; i &lt; length; i++ ) {
 				value = callback( elems[ i ], i, arg );
 
@@ -541,24 +540,29 @@ jQuery.extend({
 	// jQuery.support is not used in Core but other projects attach their
 	// properties to it so it needs to exist.
 	support: support
-});
+} );
+
+if ( typeof Symbol === &quot;function&quot; ) {
+	jQuery.fn[ Symbol.iterator ] = arr[ Symbol.iterator ];
+}
 
 // Populate the class2type map
-jQuery.each(&quot;Boolean Number String Function Array Date RegExp Object Error&quot;.split(&quot; &quot;),
-function(i, name) {
+jQuery.each( &quot;Boolean Number String Function Array Date RegExp Object Error Symbol&quot;.split( &quot; &quot; ),
+function( i, name ) {
 	class2type[ &quot;[object &quot; + name + &quot;]&quot; ] = name.toLowerCase();
-});
+} );
 
-function isArraylike( obj ) {
-	var length = obj.length,
+function isArrayLike( obj ) {
+
+	// Support: real iOS 8.2 only (not reproducible in simulator)
+	// `in` check used to prevent JIT error (gh-2145)
+	// hasOwn isn&#039;t used here due to false negatives
+	// regarding Nodelist length in IE
+	var length = !!obj &amp;&amp; &quot;length&quot; in obj &amp;&amp; obj.length,
 		type = jQuery.type( obj );
 
 	if ( type === &quot;function&quot; || jQuery.isWindow( obj ) ) {
 		return false;
-	}
-
-	if ( obj.nodeType === 1 &amp;&amp; length ) {
-		return true;
 	}
 
 	return type === &quot;array&quot; || length === 0 ||
@@ -566,7 +570,7 @@ function isArraylike( obj ) {
 }
 
 return jQuery;
-});</textarea>
+} );</textarea>
   </div>
 </div>
 

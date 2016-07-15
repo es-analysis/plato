@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - lib/plugin.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>lib/plugin.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">61.14</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">586</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">71.21</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">6.28</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">&#039;use strict&#039;;
+
+// Load modules
+
+const Catbox = require(&#039;catbox&#039;);
+const Hoek = require(&#039;hoek&#039;);
+const Items = require(&#039;items&#039;);
+const Kilt = require(&#039;kilt&#039;);
+const Connection = require(&#039;./connection&#039;);
+const Ext = require(&#039;./ext&#039;);
+const Package = require(&#039;../package.json&#039;);
+const Promises = require(&#039;./promises&#039;);
+const Schema = require(&#039;./schema&#039;);
+
+
+// Declare internals
+
+const internals = {};
+
+
+exports = module.exports = internals.Plugin = function (server, connections, env, parent) {         // env can be a realm or plugin name
+
+    Kilt.call(this, connections, server._events);
+
+    this._parent = parent;
+
+    // Public interface
+
+    this.root = server;
+    this.app = this.root._app;
+    this.connections = connections;
+    this.load = this.root._heavy.load;
+    this.methods = this.root._methods.methods;
+    this.mime = this.root._mime;
+    this.plugins = this.root._plugins;
+    this.settings = this.root._settings;
+    this.version = Package.version;
+
+    this.realm = typeof env !== &#039;string&#039; ? env : {
+        _extensions: {
+            onPreAuth: new Ext(this.root),
+            onPostAuth: new Ext(this.root),
+            onPreHandler: new Ext(this.root),
+            onPostHandler: new Ext(this.root),
+            onPreResponse: new Ext(this.root)
+        },
+        modifiers: {
+            route: {}
+        },
+        plugin: env,
+        pluginOptions: {},
+        plugins: {},
+        settings: {
+            bind: undefined,
+            files: {
+                relativeTo: undefined
+            }
+        }
+    };
+
+    this.auth = {
+        default: (opts) =&gt; this._applyChild(&#039;auth.default&#039;, &#039;auth&#039;, &#039;default&#039;, [opts]),
+        scheme: (name, scheme) =&gt; this._applyChild(&#039;auth.scheme&#039;, &#039;auth&#039;, &#039;scheme&#039;, [name, scheme]),
+        strategy: (name, scheme, mode, opts) =&gt; this._applyChild(&#039;auth.strategy&#039;, &#039;auth&#039;, &#039;strategy&#039;, [name, scheme, mode, opts]),
+        test: (name, request, next) =&gt; request.connection.auth.test(name, request, next)
+    };
+
+    this.cache.provision = (opts, callback) =&gt; {
+
+        if (!callback) {
+            return Promises.wrap(null, this.cache.provision, [opts]);
+        }
+
+        return this.root._createCache(opts, callback);
+    };
+
+    this._single();
+
+    // Decorations
+
+    const methods = Object.keys(this.root._decorations);
+    for (let i = 0; i &lt; methods.length; ++i) {
+        const method = methods[i];
+        this[method] = this.root._decorations[method];
+    }
+};
+
+Hoek.inherits(internals.Plugin, Kilt);
+
+
+internals.Plugin.prototype._single = function () {
+
+    if (this.connections &amp;&amp;
+        this.connections.length === 1) {
+
+        this.info = this.connections[0].info;
+        this.listener = this.connections[0].listener;
+        this.registrations = this.connections[0].registrations;
+        this.auth.api = this.connections[0].auth.api;
+    }
+    else {
+        this.info = null;
+        this.listener = null;
+        this.registrations = null;
+        this.auth.api = null;
+    }
+};
+
+
+internals.Plugin.prototype.select = function (/* labels */) {
+
+    let labels = [];
+    for (let i = 0; i &lt; arguments.length; ++i) {
+        labels.push(arguments[i]);
+    }
+
+    labels = Hoek.flatten(labels);
+    return this._select(labels);
+};
+
+
+internals.Plugin.prototype._select = function (labels, plugin) {
+
+    let connections = this.connections;
+
+    if (labels &amp;&amp;
+        labels.length) {            // Captures both empty arrays and empty strings
+
+        Hoek.assert(this.connections, &#039;Cannot select inside a connectionless plugin&#039;);
+
+        connections = [];
+        for (let i = 0; i &lt; this.connections.length; ++i) {
+            const connection = this.connections[i];
+            if (Hoek.intersect(connection.settings.labels, labels).length) {
+                connections.push(connection);
+            }
+        }
+
+        if (!plugin &amp;&amp;
+            connections.length === this.connections.length) {
+
+            return this;
+        }
+    }
+
+    const env = (plugin !== undefined ? plugin : this.realm);                     // Allow empty string
+    return new internals.Plugin(this.root, connections, env, this);
+};
+
+
+internals.Plugin.prototype._clone = function (connections, plugin) {
+
+    const env = (plugin !== undefined ? plugin : this.realm);                     // Allow empty string
+    return new internals.Plugin(this.root, connections, env, this);
+};
+
+
+internals.Plugin.prototype.register = function (plugins /*, [options], callback */) {
+
+    let options = (typeof arguments[1] === &#039;object&#039; ? arguments[1] : {});
+    const callback = (typeof arguments[1] === &#039;object&#039; ? arguments[2] : arguments[1]);
+
+    if (!callback) {
+        return Promises.wrap(this, this.register, [plugins, options]);
+    }
+
+    if (this.realm.modifiers.route.prefix ||
+        this.realm.modifiers.route.vhost) {
+
+        options = Hoek.clone(options);
+        options.routes = options.routes || {};
+
+        options.routes.prefix = (this.realm.modifiers.route.prefix || &#039;&#039;) + (options.routes.prefix || &#039;&#039;) || undefined;
+        options.routes.vhost = this.realm.modifiers.route.vhost || options.routes.vhost;
+    }
+
+    options = Schema.apply(&#039;register&#039;, options);
+
+    /*
+        const register = function (server, options, next) { return next(); };
+        register.attributes = {
+            pkg: require(&#039;../package.json&#039;),
+            name: &#039;plugin&#039;,
+            version: &#039;1.1.1&#039;,
+            multiple: false,
+            dependencies: [],
+            connections: false,
+            once: true
+        };
+
+        const item = {
+            register: register,
+            options: options        // -optional--
+        };
+
+        - OR -
+
+        const item = function () {}
+        item.register = register;
+        item.options = options;
+
+        const plugins = register, items, [register, item]
+    */
+
+    const registrations = [];
+    plugins = [].concat(plugins);
+    for (let i = 0; i &lt; plugins.length; ++i) {
+        let plugin = plugins[i];
+
+        if (typeof plugin === &#039;function&#039;) {
+            if (!plugin.register) {                                 // plugin is register() function
+                plugin = { register: plugin };
+            }
+            else {
+                plugin = Hoek.shallow(plugin);                      // Convert function to object
+            }
+        }
+
+        if (plugin.register.register) {                             // Required plugin
+            plugin.register = plugin.register.register;
+        }
+
+        plugin = Schema.apply(&#039;plugin&#039;, plugin);
+
+        const attributes = plugin.register.attributes;
+        const registration = {
+            register: plugin.register,
+            name: attributes.name || attributes.pkg.name,
+            version: attributes.version || attributes.pkg.version,
+            multiple: attributes.multiple,
+            pluginOptions: plugin.options,
+            dependencies: attributes.dependencies,
+            connections: attributes.connections,
+            options: {
+                once: attributes.once || (plugin.once !== undefined ? plugin.once : options.once),
+                routes: {
+                    prefix: plugin.routes.prefix || options.routes.prefix,
+                    vhost: plugin.routes.vhost || options.routes.vhost
+                },
+                select: plugin.select || options.select
+            }
+        };
+
+        registrations.push(registration);
+    }
+
+    this.root._registring = true;
+
+    const each = (item, next) =&gt; {
+
+        const selection = this._select(item.options.select, item.name);
+        selection.realm.modifiers.route.prefix = item.options.routes.prefix;
+        selection.realm.modifiers.route.vhost = item.options.routes.vhost;
+        selection.realm.pluginOptions = item.pluginOptions || {};
+
+        const registrationData = {
+            version: item.version,
+            name: item.name,
+            options: item.pluginOptions,
+            attributes: item.register.attributes
+        };
+
+        // Protect against multiple registrations
+
+        if (!item.connections) {
+            if (this.root._registrations[item.name]) {
+                if (item.options.once) {
+                    return next();
+                }
+
+                Hoek.assert(item.multiple, &#039;Plugin&#039;, item.name, &#039;already registered&#039;);
+            }
+            else {
+                this.root._registrations[item.name] = registrationData;
+            }
+        }
+
+        const connections = [];
+        if (selection.connections) {
+            for (let i = 0; i &lt; selection.connections.length; ++i) {
+                const connection = selection.connections[i];
+                if (connection.registrations[item.name]) {
+                    if (item.options.once) {
+                        continue;
+                    }
+
+                    Hoek.assert(item.multiple, &#039;Plugin&#039;, item.name, &#039;already registered in:&#039;, connection.info.uri);
+                }
+                else {
+                    connection.registrations[item.name] = registrationData;
+                }
+
+                connections.push(connection);
+            }
+
+            if (item.options.once &amp;&amp;
+                item.connections &amp;&amp;
+                !connections.length) {
+
+                return next();                                              // All the connections already registered
+            }
+        }
+
+        selection.connections = (item.connections ? connections : null);
+        selection._single();
+
+        if (item.dependencies) {
+            selection.dependency(item.dependencies);
+        }
+
+        if (!item.connections) {
+            selection.connection = this.connection;
+        }
+
+        // Register
+
+        item.register(selection, item.pluginOptions || {}, next);
+    };
+
+    Items.serial(registrations, each, (err) =&gt; {
+
+        this.root._registring = false;
+        return callback(err);
+    });
+};
+
+
+internals.Plugin.prototype.bind = function (context) {
+
+    Hoek.assert(typeof context === &#039;object&#039;, &#039;bind must be an object&#039;);
+    this.realm.settings.bind = context;
+};
+
+
+internals.Plugin.prototype.cache = function (options, _segment) {
+
+    options = Schema.apply(&#039;cachePolicy&#039;, options);
+
+    const segment = options.segment || _segment || (this.realm.plugin ? &#039;!&#039; + this.realm.plugin : &#039;&#039;);
+    Hoek.assert(segment, &#039;Missing cache segment name&#039;);
+
+    const cacheName = options.cache || &#039;_default&#039;;
+    const cache = this.root._caches[cacheName];
+    Hoek.assert(cache, &#039;Unknown cache&#039;, cacheName);
+    Hoek.assert(!cache.segments[segment] || cache.shared || options.shared, &#039;Cannot provision the same cache segment more than once&#039;);
+    cache.segments[segment] = true;
+
+    return new Catbox.Policy(options, cache.client, segment);
+};
+
+
+internals.Plugin.prototype.decorate = function (type, property, method, options) {
+
+    Hoek.assert([&#039;reply&#039;, &#039;request&#039;, &#039;server&#039;].indexOf(type) !== -1, &#039;Unknown decoration type:&#039;, type);
+    Hoek.assert(property, &#039;Missing decoration property name&#039;);
+    Hoek.assert(typeof property === &#039;string&#039;, &#039;Decoration property must be a string&#039;);
+    Hoek.assert(property[0] !== &#039;_&#039;, &#039;Property name cannot begin with an underscore:&#039;, property);
+
+    // Request
+
+    if (type === &#039;request&#039;) {
+        return this.root._requestor.decorate(property, method, options);
+    }
+
+    Hoek.assert(!options, &#039;Cannot specify options for non-request decoration&#039;);
+
+    // Reply
+
+    if (type === &#039;reply&#039;) {
+        return this.root._replier.decorate(property, method);
+    }
+
+    // Server
+
+    Hoek.assert(!this.root._decorations[property], &#039;Server decoration already defined:&#039;, property);
+    Hoek.assert(this[property] === undefined &amp;&amp; this.root[property] === undefined, &#039;Cannot override the built-in server interface method:&#039;, property);
+
+    this.root._decorations[property] = method;
+
+    this[property] = method;
+    let parent = this._parent;
+    while (parent) {
+        parent[property] = method;
+        parent = parent._parent;
+    }
+};
+
+
+internals.Plugin.prototype.dependency = function (dependencies, after) {
+
+    Hoek.assert(this.realm.plugin, &#039;Cannot call dependency() outside of a plugin&#039;);
+    Hoek.assert(!after || typeof after === &#039;function&#039;, &#039;Invalid after method&#039;);
+
+    dependencies = [].concat(dependencies);
+    this.root._dependencies.push({ plugin: this.realm.plugin, connections: this.connections, deps: dependencies });
+
+    if (after) {
+        this.ext(&#039;onPreStart&#039;, after, { after: dependencies });
+    }
+};
+
+
+internals.Plugin.prototype.expose = function (key, value) {
+
+    Hoek.assert(this.realm.plugin, &#039;Cannot call expose() outside of a plugin&#039;);
+
+    const plugin = this.realm.plugin;
+    this.root.plugins[plugin] = this.root.plugins[plugin] || {};
+
+    if (typeof key === &#039;string&#039;) {
+        this.root.plugins[plugin][key] = value;
+    }
+    else {
+        Hoek.merge(this.root.plugins[plugin], key);
+    }
+};
+
+
+internals.Plugin.prototype.ext = function (events) {        // (event, method, options) -OR- (events)
+
+    if (typeof events === &#039;string&#039;) {
+        events = { type: arguments[0], method: arguments[1], options: arguments[2] };
+    }
+
+    events = Schema.apply(&#039;exts&#039;, events);
+
+    for (let i = 0; i &lt; events.length; ++i) {
+        this._ext(events[i]);
+    }
+};
+
+
+internals.Plugin.prototype._ext = function (event) {
+
+    event = Hoek.shallow(event);
+    event.plugin = this;
+    const type = event.type;
+
+    if (!this.root._extensions[type]) {
+
+        // Realm route extensions
+
+        if (event.options.sandbox === &#039;plugin&#039;) {
+            Hoek.assert(this.realm._extensions[type], &#039;Unknown event type&#039;, type);
+            return this.realm._extensions[type].add(event);
+        }
+
+        // Connection route extensions
+
+        return this._apply(&#039;ext&#039;, Connection.prototype._ext, [event]);
+    }
+
+    // Server extensions
+
+    Hoek.assert(!event.options.sandbox, &#039;Cannot specify sandbox option for server extension&#039;);
+    Hoek.assert(type !== &#039;onPreStart&#039; || this.root._state === &#039;stopped&#039;, &#039;Cannot add onPreStart (after) extension after the server was initialized&#039;);
+    this.root._extensions[type].add(event);
+};
+
+
+internals.Plugin.prototype.handler = function (name, method) {
+
+    Hoek.assert(typeof name === &#039;string&#039;, &#039;Invalid handler name&#039;);
+    Hoek.assert(!this.root._handlers[name], &#039;Handler name already exists:&#039;, name);
+    Hoek.assert(typeof method === &#039;function&#039;, &#039;Handler must be a function:&#039;, name);
+    Hoek.assert(!method.defaults || typeof method.defaults === &#039;object&#039; || typeof method.defaults === &#039;function&#039;, &#039;Handler defaults property must be an object or function&#039;);
+    this.root._handlers[name] = method;
+};
+
+
+internals.Plugin.prototype.inject = function (options, callback) {
+
+    Hoek.assert(this.connections.length === 1, &#039;Method not available when the selection has more than one connection or none&#039;);
+    return this.connections[0].inject(options, callback);
+};
+
+
+internals.Plugin.prototype.log = function (tags, data, timestamp, _internal) {
+
+    tags = (Array.isArray(tags) ? tags : [tags]);
+    const now = (timestamp ? (timestamp instanceof Date ? timestamp.getTime() : timestamp) : Date.now());
+
+    const event = {
+        timestamp: now,
+        tags: tags,
+        data: data,
+        internal: !!_internal
+    };
+
+    const tagsMap = Hoek.mapToObject(event.tags);
+    this.root._events.emit(&#039;log&#039;, event, tagsMap);
+
+    if (this.root._settings.debug &amp;&amp;
+        this.root._settings.debug.log &amp;&amp;
+        Hoek.intersect(tagsMap, this.root._settings.debug.log, true)) {
+
+        console.error(&#039;Debug:&#039;, event.tags.join(&#039;, &#039;), (data ? &#039;\n    &#039; + (data.stack || (typeof data === &#039;object&#039; ? Hoek.stringify(data) : data)) : &#039;&#039;));
+    }
+};
+
+
+internals.Plugin.prototype._log = function (tags, data) {
+
+    return this.log(tags, data, null, true);
+};
+
+
+internals.Plugin.prototype.lookup = function (id) {
+
+    Hoek.assert(this.connections.length === 1, &#039;Method not available when the selection has more than one connection or none&#039;);
+    return this.connections[0].lookup(id);
+};
+
+
+internals.Plugin.prototype.match = function (method, path, host) {
+
+    Hoek.assert(this.connections.length === 1, &#039;Method not available when the selection has more than one connection or none&#039;);
+    return this.connections[0].match(method, path, host);
+};
+
+
+internals.Plugin.prototype.method = function (name, method, options) {
+
+    return this.root._methods.add(name, method, options, this.realm);
+};
+
+
+internals.Plugin.prototype.path = function (relativeTo) {
+
+    Hoek.assert(relativeTo &amp;&amp; typeof relativeTo === &#039;string&#039;, &#039;relativeTo must be a non-empty string&#039;);
+    this.realm.settings.files.relativeTo = relativeTo;
+};
+
+
+internals.Plugin.prototype.route = function (options) {
+
+    Hoek.assert(arguments.length === 1, &#039;Method requires a single object argument or a single array of objects&#039;);
+    Hoek.assert(typeof options === &#039;object&#039;, &#039;Invalid route options&#039;);
+    Hoek.assert(this.connections, &#039;Cannot add route from a connectionless plugin&#039;);
+    Hoek.assert(this.connections.length, &#039;Cannot add a route without any connections&#039;);
+
+    this._apply(&#039;route&#039;, Connection.prototype._route, [options, this]);
+};
+
+
+internals.Plugin.prototype.state = function (name, options) {
+
+    this._applyChild(&#039;state&#039;, &#039;states&#039;, &#039;add&#039;, [name, options]);
+};
+
+
+internals.Plugin.prototype.table = function (host) {
+
+    Hoek.assert(this.connections, &#039;Cannot request routing table from a connectionless plugin&#039;);
+
+    const table = [];
+    for (let i = 0; i &lt; this.connections.length; ++i) {
+        const connection = this.connections[i];
+        table.push({ info: connection.info, labels: connection.settings.labels, table: connection.table(host) });
+    }
+
+    return table;
+};
+
+
+internals.Plugin.prototype._apply = function (type, func, args) {
+
+    Hoek.assert(this.connections, &#039;Cannot add &#039; + type + &#039; from a connectionless plugin&#039;);
+    Hoek.assert(this.connections.length, &#039;Cannot add &#039; + type + &#039; without a connection&#039;);
+
+    for (let i = 0; i &lt; this.connections.length; ++i) {
+        func.apply(this.connections[i], args);
+    }
+};
+
+
+internals.Plugin.prototype._applyChild = function (type, child, func, args) {
+
+    Hoek.assert(this.connections, &#039;Cannot add &#039; + type + &#039; from a connectionless plugin&#039;);
+    Hoek.assert(this.connections.length, &#039;Cannot add &#039; + type + &#039; without a connection&#039;);
+
+    for (let i = 0; i &lt; this.connections.length; ++i) {
+        const obj = this.connections[i][child];
+        obj[func].apply(obj, args);
+    }
+};</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

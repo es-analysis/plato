@@ -44,11 +44,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
-      <p class="stat">60.80</p>
+      <p class="stat">61.56</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">163</p>
+      <p class="stat">179</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,11 +62,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">66.95</p>
+      <p class="stat">64.14</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
-      <p class="stat">1.22</p>
+      <p class="stat">1.21</p>
     </div>
   </div>
 </div>
@@ -89,51 +89,52 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="col-md-12">define([
+    <textarea id="file-source" class="col-md-12">define( [
 	&quot;../core&quot;,
 	&quot;../var/rnotwhite&quot;,
 	&quot;../data/var/dataPriv&quot;,
 	&quot;../core/init&quot;
 ], function( jQuery, rnotwhite, dataPriv ) {
 
+&quot;use strict&quot;;
+
 var rclass = /[\t\r\n\f]/g;
 
-jQuery.fn.extend({
+function getClass( elem ) {
+	return elem.getAttribute &amp;&amp; elem.getAttribute( &quot;class&quot; ) || &quot;&quot;;
+}
+
+jQuery.fn.extend( {
 	addClass: function( value ) {
-		var classes, elem, cur, clazz, j, finalValue,
-			proceed = typeof value === &quot;string&quot; &amp;&amp; value,
-			i = 0,
-			len = this.length;
+		var classes, elem, cur, curValue, clazz, j, finalValue,
+			i = 0;
 
 		if ( jQuery.isFunction( value ) ) {
-			return this.each(function( j ) {
-				jQuery( this ).addClass( value.call( this, j, this.className ) );
-			});
+			return this.each( function( j ) {
+				jQuery( this ).addClass( value.call( this, j, getClass( this ) ) );
+			} );
 		}
 
-		if ( proceed ) {
-			// The disjunction here is for better compressibility (see removeClass)
-			classes = ( value || &quot;&quot; ).match( rnotwhite ) || [];
+		if ( typeof value === &quot;string&quot; &amp;&amp; value ) {
+			classes = value.match( rnotwhite ) || [];
 
-			for ( ; i &lt; len; i++ ) {
-				elem = this[ i ];
-				cur = elem.nodeType === 1 &amp;&amp; ( elem.className ?
-					( &quot; &quot; + elem.className + &quot; &quot; ).replace( rclass, &quot; &quot; ) :
-					&quot; &quot;
-				);
+			while ( ( elem = this[ i++ ] ) ) {
+				curValue = getClass( elem );
+				cur = elem.nodeType === 1 &amp;&amp;
+					( &quot; &quot; + curValue + &quot; &quot; ).replace( rclass, &quot; &quot; );
 
 				if ( cur ) {
 					j = 0;
-					while ( (clazz = classes[j++]) ) {
+					while ( ( clazz = classes[ j++ ] ) ) {
 						if ( cur.indexOf( &quot; &quot; + clazz + &quot; &quot; ) &lt; 0 ) {
 							cur += clazz + &quot; &quot;;
 						}
 					}
 
-					// only assign if different to avoid unneeded rendering.
+					// Only assign if different to avoid unneeded rendering.
 					finalValue = jQuery.trim( cur );
-					if ( elem.className !== finalValue ) {
-						elem.className = finalValue;
+					if ( curValue !== finalValue ) {
+						elem.setAttribute( &quot;class&quot;, finalValue );
 					}
 				}
 			}
@@ -143,40 +144,43 @@ jQuery.fn.extend({
 	},
 
 	removeClass: function( value ) {
-		var classes, elem, cur, clazz, j, finalValue,
-			proceed = arguments.length === 0 || typeof value === &quot;string&quot; &amp;&amp; value,
-			i = 0,
-			len = this.length;
+		var classes, elem, cur, curValue, clazz, j, finalValue,
+			i = 0;
 
 		if ( jQuery.isFunction( value ) ) {
-			return this.each(function( j ) {
-				jQuery( this ).removeClass( value.call( this, j, this.className ) );
-			});
+			return this.each( function( j ) {
+				jQuery( this ).removeClass( value.call( this, j, getClass( this ) ) );
+			} );
 		}
-		if ( proceed ) {
-			classes = ( value || &quot;&quot; ).match( rnotwhite ) || [];
 
-			for ( ; i &lt; len; i++ ) {
-				elem = this[ i ];
+		if ( !arguments.length ) {
+			return this.attr( &quot;class&quot;, &quot;&quot; );
+		}
+
+		if ( typeof value === &quot;string&quot; &amp;&amp; value ) {
+			classes = value.match( rnotwhite ) || [];
+
+			while ( ( elem = this[ i++ ] ) ) {
+				curValue = getClass( elem );
+
 				// This expression is here for better compressibility (see addClass)
-				cur = elem.nodeType === 1 &amp;&amp; ( elem.className ?
-					( &quot; &quot; + elem.className + &quot; &quot; ).replace( rclass, &quot; &quot; ) :
-					&quot;&quot;
-				);
+				cur = elem.nodeType === 1 &amp;&amp;
+					( &quot; &quot; + curValue + &quot; &quot; ).replace( rclass, &quot; &quot; );
 
 				if ( cur ) {
 					j = 0;
-					while ( (clazz = classes[j++]) ) {
+					while ( ( clazz = classes[ j++ ] ) ) {
+
 						// Remove *all* instances
-						while ( cur.indexOf( &quot; &quot; + clazz + &quot; &quot; ) &gt;= 0 ) {
+						while ( cur.indexOf( &quot; &quot; + clazz + &quot; &quot; ) &gt; -1 ) {
 							cur = cur.replace( &quot; &quot; + clazz + &quot; &quot;, &quot; &quot; );
 						}
 					}
 
 					// Only assign if different to avoid unneeded rendering.
-					finalValue = value ? jQuery.trim( cur ) : &quot;&quot;;
-					if ( elem.className !== finalValue ) {
-						elem.className = finalValue;
+					finalValue = jQuery.trim( cur );
+					if ( curValue !== finalValue ) {
+						elem.setAttribute( &quot;class&quot;, finalValue );
 					}
 				}
 			}
@@ -193,22 +197,26 @@ jQuery.fn.extend({
 		}
 
 		if ( jQuery.isFunction( value ) ) {
-			return this.each(function( i ) {
+			return this.each( function( i ) {
 				jQuery( this ).toggleClass(
-					value.call(this, i, this.className, stateVal), stateVal
+					value.call( this, i, getClass( this ), stateVal ),
+					stateVal
 				);
-			});
+			} );
 		}
 
-		return this.each(function() {
-			if ( type === &quot;string&quot; ) {
-				// Toggle individual class names
-				var className,
-					i = 0,
-					self = jQuery( this ),
-					classNames = value.match( rnotwhite ) || [];
+		return this.each( function() {
+			var className, i, self, classNames;
 
-				while ( (className = classNames[ i++ ]) ) {
+			if ( type === &quot;string&quot; ) {
+
+				// Toggle individual class names
+				i = 0;
+				self = jQuery( this );
+				classNames = value.match( rnotwhite ) || [];
+
+				while ( ( className = classNames[ i++ ] ) ) {
+
 					// Check each className given, space separated list
 					if ( self.hasClass( className ) ) {
 						self.removeClass( className );
@@ -219,39 +227,47 @@ jQuery.fn.extend({
 
 			// Toggle whole class name
 			} else if ( value === undefined || type === &quot;boolean&quot; ) {
-				if ( this.className ) {
-					// store className if set
-					dataPriv.set( this, &quot;__className__&quot;, this.className );
+				className = getClass( this );
+				if ( className ) {
+
+					// Store className if set
+					dataPriv.set( this, &quot;__className__&quot;, className );
 				}
 
 				// If the element has a class name or if we&#039;re passed `false`,
 				// then remove the whole classname (if there was one, the above saved it).
 				// Otherwise bring back whatever was previously saved (if anything),
 				// falling back to the empty string if nothing was stored.
-				this.className = this.className || value === false ?
-					&quot;&quot; :
-					dataPriv.get( this, &quot;__className__&quot; ) || &quot;&quot;;
+				if ( this.setAttribute ) {
+					this.setAttribute( &quot;class&quot;,
+						className || value === false ?
+						&quot;&quot; :
+						dataPriv.get( this, &quot;__className__&quot; ) || &quot;&quot;
+					);
+				}
 			}
-		});
+		} );
 	},
 
 	hasClass: function( selector ) {
-		var className = &quot; &quot; + selector + &quot; &quot;,
-			i = 0,
-			l = this.length;
-		for ( ; i &lt; l; i++ ) {
-			if ( this[i].nodeType === 1 &amp;&amp;
-				(&quot; &quot; + this[i].className + &quot; &quot;).replace(rclass, &quot; &quot;).indexOf( className ) &gt;= 0 ) {
+		var className, elem,
+			i = 0;
 
+		className = &quot; &quot; + selector + &quot; &quot;;
+		while ( ( elem = this[ i++ ] ) ) {
+			if ( elem.nodeType === 1 &amp;&amp;
+				( &quot; &quot; + getClass( elem ) + &quot; &quot; ).replace( rclass, &quot; &quot; )
+					.indexOf( className ) &gt; -1
+			) {
 				return true;
 			}
 		}
 
 		return false;
 	}
-});
+} );
 
-});</textarea>
+} );</textarea>
   </div>
 </div>
 

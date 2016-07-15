@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - behaviors.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>behaviors.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">74.25</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">162</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">28.82</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">1.16</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">/* jshint maxlen: 143 */
+// Behaviors
+// ---------
+
+// Behaviors is a utility class that takes care of
+// gluing your behavior instances to their given View.
+// The most important part of this class is that you
+// **MUST** override the class level behaviorsLookup
+// method for things to work properly.
+
+Marionette.Behaviors = (function(Marionette, _) {
+  // Borrow event splitter from Backbone
+  var delegateEventSplitter = /^(\S+)\s*(.*)$/;
+
+  function Behaviors(view, behaviors) {
+
+    if (!_.isObject(view.behaviors)) {
+      return {};
+    }
+
+    // Behaviors defined on a view can be a flat object literal
+    // or it can be a function that returns an object.
+    behaviors = Behaviors.parseBehaviors(view, behaviors || _.result(view, &#039;behaviors&#039;));
+
+    // Wraps several of the view&#039;s methods
+    // calling the methods first on each behavior
+    // and then eventually calling the method on the view.
+    Behaviors.wrap(view, behaviors, _.keys(methods));
+    return behaviors;
+  }
+
+  var methods = {
+    behaviorTriggers: function(behaviorTriggers, behaviors) {
+      var triggerBuilder = new BehaviorTriggersBuilder(this, behaviors);
+      return triggerBuilder.buildBehaviorTriggers();
+    },
+
+    behaviorEvents: function(behaviorEvents, behaviors) {
+      var _behaviorsEvents = {};
+
+      _.each(behaviors, function(b, i) {
+        var _events = {};
+        var behaviorEvents = _.clone(_.result(b, &#039;events&#039;)) || {};
+
+        // Normalize behavior events hash to allow
+        // a user to use the @ui. syntax.
+        behaviorEvents = Marionette.normalizeUIKeys(behaviorEvents, getBehaviorsUI(b));
+
+        var j = 0;
+        _.each(behaviorEvents, function(behaviour, key) {
+          var match     = key.match(delegateEventSplitter);
+
+          // Set event name to be namespaced using the view cid,
+          // the behavior index, and the behavior event index
+          // to generate a non colliding event namespace
+          // http://api.jquery.com/event.namespace/
+          var eventName = match[1] + &#039;.&#039; + [this.cid, i, j++, &#039; &#039;].join(&#039;&#039;);
+          var selector  = match[2];
+
+          var eventKey  = eventName + selector;
+          var handler   = _.isFunction(behaviour) ? behaviour : b[behaviour];
+          if (!handler) { return; }
+          _events[eventKey] = _.bind(handler, b);
+        }, this);
+
+        _behaviorsEvents = _.extend(_behaviorsEvents, _events);
+      }, this);
+
+      return _behaviorsEvents;
+    }
+  };
+
+  _.extend(Behaviors, {
+
+    // Placeholder method to be extended by the user.
+    // The method should define the object that stores the behaviors.
+    // i.e.
+    //
+    // ```js
+    // Marionette.Behaviors.behaviorsLookup: function() {
+    //   return App.Behaviors
+    // }
+    // ```
+    behaviorsLookup: function() {
+      throw new Marionette.Error({
+        message: &#039;You must define where your behaviors are stored.&#039;,
+        url: &#039;marionette.behaviors.html#behaviorslookup&#039;
+      });
+    },
+
+    // Takes care of getting the behavior class
+    // given options and a key.
+    // If a user passes in options.behaviorClass
+    // default to using that. Otherwise delegate
+    // the lookup to the users `behaviorsLookup` implementation.
+    getBehaviorClass: function(options, key) {
+      if (options.behaviorClass) {
+        return options.behaviorClass;
+      }
+
+      // Get behavior class can be either a flat object or a method
+      return Marionette._getValue(Behaviors.behaviorsLookup, this, [options, key])[key];
+    },
+
+    // Iterate over the behaviors object, for each behavior
+    // instantiate it and get its grouped behaviors.
+    parseBehaviors: function(view, behaviors) {
+      return _.chain(behaviors).map(function(options, key) {
+        var BehaviorClass = Behaviors.getBehaviorClass(options, key);
+
+        var behavior = new BehaviorClass(options, view);
+        var nestedBehaviors = Behaviors.parseBehaviors(view, _.result(behavior, &#039;behaviors&#039;));
+
+        return [behavior].concat(nestedBehaviors);
+      }).flatten().value();
+    },
+
+    // Wrap view internal methods so that they delegate to behaviors. For example,
+    // `onDestroy` should trigger destroy on all of the behaviors and then destroy itself.
+    // i.e.
+    //
+    // `view.delegateEvents = _.partial(methods.delegateEvents, view.delegateEvents, behaviors);`
+    wrap: function(view, behaviors, methodNames) {
+      _.each(methodNames, function(methodName) {
+        view[methodName] = _.partial(methods[methodName], view[methodName], behaviors);
+      });
+    }
+  });
+
+  // Class to build handlers for `triggers` on behaviors
+  // for views
+  function BehaviorTriggersBuilder(view, behaviors) {
+    this._view      = view;
+    this._behaviors = behaviors;
+    this._triggers  = {};
+  }
+
+  _.extend(BehaviorTriggersBuilder.prototype, {
+    // Main method to build the triggers hash with event keys and handlers
+    buildBehaviorTriggers: function() {
+      _.each(this._behaviors, this._buildTriggerHandlersForBehavior, this);
+      return this._triggers;
+    },
+
+    // Internal method to build all trigger handlers for a given behavior
+    _buildTriggerHandlersForBehavior: function(behavior, i) {
+      var triggersHash = _.clone(_.result(behavior, &#039;triggers&#039;)) || {};
+
+      triggersHash = Marionette.normalizeUIKeys(triggersHash, getBehaviorsUI(behavior));
+
+      _.each(triggersHash, _.bind(this._setHandlerForBehavior, this, behavior, i));
+    },
+
+    // Internal method to create and assign the trigger handler for a given
+    // behavior
+    _setHandlerForBehavior: function(behavior, i, eventName, trigger) {
+      // Unique identifier for the `this._triggers` hash
+      var triggerKey = trigger.replace(/^\S+/, function(triggerName) {
+        return triggerName + &#039;.&#039; + &#039;behaviortriggers&#039; + i;
+      });
+
+      this._triggers[triggerKey] = this._view._buildViewTrigger(eventName);
+    }
+  });
+
+  function getBehaviorsUI(behavior) {
+    return behavior._uiBindings || behavior.ui;
+  }
+
+  return Behaviors;
+
+})(Marionette, _);</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

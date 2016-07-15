@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - region-manager.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>region-manager.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">75.30</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">118</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">28.89</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">0.74</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">// Region Manager
+// --------------
+
+// Manage one or more related `Marionette.Region` objects.
+Marionette.RegionManager = Marionette.Controller.extend({
+  constructor: function(options) {
+    this._regions = {};
+    this.length = 0;
+
+    Marionette.Controller.call(this, options);
+
+    this.addRegions(this.getOption(&#039;regions&#039;));
+  },
+
+  // Add multiple regions using an object literal or a
+  // function that returns an object literal, where
+  // each key becomes the region name, and each value is
+  // the region definition.
+  addRegions: function(regionDefinitions, defaults) {
+    regionDefinitions = Marionette._getValue(regionDefinitions, this, arguments);
+
+    return _.reduce(regionDefinitions, function(regions, definition, name) {
+      if (_.isString(definition)) {
+        definition = {selector: definition};
+      }
+      if (definition.selector) {
+        definition = _.defaults({}, definition, defaults);
+      }
+
+      regions[name] = this.addRegion(name, definition);
+      return regions;
+    }, {}, this);
+  },
+
+  // Add an individual region to the region manager,
+  // and return the region instance
+  addRegion: function(name, definition) {
+    var region;
+
+    if (definition instanceof Marionette.Region) {
+      region = definition;
+    } else {
+      region = Marionette.Region.buildRegion(definition, Marionette.Region);
+    }
+
+    this.triggerMethod(&#039;before:add:region&#039;, name, region);
+
+    region._parent = this;
+    this._store(name, region);
+
+    this.triggerMethod(&#039;add:region&#039;, name, region);
+    return region;
+  },
+
+  // Get a region by name
+  get: function(name) {
+    return this._regions[name];
+  },
+
+  // Gets all the regions contained within
+  // the `regionManager` instance.
+  getRegions: function() {
+    return _.clone(this._regions);
+  },
+
+  // Remove a region by name
+  removeRegion: function(name) {
+    var region = this._regions[name];
+    this._remove(name, region);
+
+    return region;
+  },
+
+  // Empty all regions in the region manager, and
+  // remove them
+  removeRegions: function() {
+    var regions = this.getRegions();
+    _.each(this._regions, function(region, name) {
+      this._remove(name, region);
+    }, this);
+
+    return regions;
+  },
+
+  // Empty all regions in the region manager, but
+  // leave them attached
+  emptyRegions: function() {
+    var regions = this.getRegions();
+    _.invoke(regions, &#039;empty&#039;);
+    return regions;
+  },
+
+  // Destroy all regions and shut down the region
+  // manager entirely
+  destroy: function() {
+    this.removeRegions();
+    return Marionette.Controller.prototype.destroy.apply(this, arguments);
+  },
+
+  // internal method to store regions
+  _store: function(name, region) {
+    if (!this._regions[name]) {
+      this.length++;
+    }
+
+    this._regions[name] = region;
+  },
+
+  // internal method to remove a region
+  _remove: function(name, region) {
+    this.triggerMethod(&#039;before:remove:region&#039;, name, region);
+    region.empty();
+    region.stopListening();
+
+    delete region._parent;
+    delete this._regions[name];
+    this.length--;
+    this.triggerMethod(&#039;remove:region&#039;, name, region);
+  }
+});
+
+Marionette.actAsCollection(Marionette.RegionManager.prototype, &#039;_regions&#039;);</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

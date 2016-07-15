@@ -44,11 +44,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
-      <p class="stat">67.22</p>
+      <p class="stat">66.87</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">116</p>
+      <p class="stat">123</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,11 +62,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">57.30</p>
+      <p class="stat">60.20</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
-      <p class="stat">1.11</p>
+      <p class="stat">1.14</p>
     </div>
   </div>
 </div>
@@ -89,10 +89,12 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="col-md-12">define([
+    <textarea id="file-source" class="col-md-12">define( [
 	&quot;../core&quot;,
 	&quot;../css&quot;
 ], function( jQuery ) {
+
+&quot;use strict&quot;;
 
 function Tween( elem, options, prop, end, easing ) {
 	return new Tween.prototype.init( elem, options, prop, end, easing );
@@ -104,7 +106,7 @@ Tween.prototype = {
 	init: function( elem, options, prop, end, easing, unit ) {
 		this.elem = elem;
 		this.prop = prop;
-		this.easing = easing || &quot;swing&quot;;
+		this.easing = easing || jQuery.easing._default;
 		this.options = options;
 		this.start = this.now = this.cur();
 		this.end = end;
@@ -150,8 +152,10 @@ Tween.propHooks = {
 		get: function( tween ) {
 			var result;
 
-			if ( tween.elem[ tween.prop ] != null &amp;&amp;
-				(!tween.elem.style || tween.elem.style[ tween.prop ] == null) ) {
+			// Use a property on the element directly when it is not a DOM element,
+			// or when there is no matching style property that exists.
+			if ( tween.elem.nodeType !== 1 ||
+				tween.elem[ tween.prop ] != null &amp;&amp; tween.elem.style[ tween.prop ] == null ) {
 				return tween.elem[ tween.prop ];
 			}
 
@@ -160,16 +164,18 @@ Tween.propHooks = {
 			// Simple values such as &quot;10px&quot; are parsed to Float;
 			// complex values such as &quot;rotate(1rad)&quot; are returned as-is.
 			result = jQuery.css( tween.elem, tween.prop, &quot;&quot; );
+
 			// Empty strings, null, undefined and &quot;auto&quot; are converted to 0.
 			return !result || result === &quot;auto&quot; ? 0 : result;
 		},
 		set: function( tween ) {
+
 			// Use step hook for back compat.
 			// Use cssHook if its there.
 			// Use .style if available and use plain properties where available.
 			if ( jQuery.fx.step[ tween.prop ] ) {
 				jQuery.fx.step[ tween.prop ]( tween );
-			} else if ( tween.elem.style &amp;&amp;
+			} else if ( tween.elem.nodeType === 1 &amp;&amp;
 				( tween.elem.style[ jQuery.cssProps[ tween.prop ] ] != null ||
 					jQuery.cssHooks[ tween.prop ] ) ) {
 				jQuery.style( tween.elem, tween.prop, tween.now + tween.unit );
@@ -180,7 +186,7 @@ Tween.propHooks = {
 	}
 };
 
-// Support: IE9
+// Support: IE &lt;=9 only
 // Panic based approach to setting things on disconnected nodes
 Tween.propHooks.scrollTop = Tween.propHooks.scrollLeft = {
 	set: function( tween ) {
@@ -196,15 +202,16 @@ jQuery.easing = {
 	},
 	swing: function( p ) {
 		return 0.5 - Math.cos( p * Math.PI ) / 2;
-	}
+	},
+	_default: &quot;swing&quot;
 };
 
 jQuery.fx = Tween.prototype.init;
 
-// Back Compat &lt;1.8 extension point
+// Back compat &lt;1.8 extension point
 jQuery.fx.step = {};
 
-});</textarea>
+} );</textarea>
   </div>
 </div>
 

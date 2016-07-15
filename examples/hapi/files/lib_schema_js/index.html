@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - lib/schema.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>lib/schema.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">74.70</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">345</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">30.22</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">5.92</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">&#039;use strict&#039;;
+
+// Load modules
+
+const Joi = require(&#039;joi&#039;);
+const Hoek = require(&#039;hoek&#039;);
+
+
+// Declare internals
+
+const internals = {};
+
+
+exports.apply = function (type, options, message) {
+
+    const result = Joi.validate(options, internals[type]);
+    Hoek.assert(!result.error, &#039;Invalid&#039;, type, &#039;options&#039;, message ? &#039;(&#039; + message + &#039;)&#039; : &#039;&#039;, result.error &amp;&amp; result.error.annotate());
+    return result.value;
+};
+
+
+internals.access = Joi.object({
+    entity: Joi.string().valid(&#039;user&#039;, &#039;app&#039;, &#039;any&#039;),
+    scope: [false, Joi.array().items(Joi.string()).single().min(1)]
+});
+
+
+internals.auth = Joi.alternatives([
+    Joi.string(),
+    internals.access.keys({
+        mode: Joi.string().valid(&#039;required&#039;, &#039;optional&#039;, &#039;try&#039;),
+        strategy: Joi.string(),
+        strategies: Joi.array().items(Joi.string()).min(1),
+        access: Joi.array().items(internals.access.min(1)).single().min(1),
+        payload: [
+            Joi.string().valid(&#039;required&#039;, &#039;optional&#039;),
+            Joi.boolean()
+        ]
+    })
+        .without(&#039;strategy&#039;, &#039;strategies&#039;)
+        .without(&#039;access&#039;, [&#039;scope&#039;, &#039;entity&#039;])
+]);
+
+
+internals.event = Joi.object({
+    method: Joi.array().items(Joi.func()).single(),
+    options: Joi.object({
+        before: Joi.array().items(Joi.string()).single(),
+        after: Joi.array().items(Joi.string()).single(),
+        bind: Joi.any(),
+        sandbox: Joi.string().valid(&#039;connection&#039;, &#039;plugin&#039;)
+    })
+        .default({})
+});
+
+
+internals.exts = Joi.array().items(internals.event.keys({ type: Joi.string().required() })).single();
+
+
+internals.routeBase = Joi.object({
+    app: Joi.object().allow(null),
+    auth: internals.auth.allow(false),
+    bind: Joi.object().allow(null),
+    cache: Joi.object({
+        expiresIn: Joi.number(),
+        expiresAt: Joi.string(),
+        privacy: Joi.string().valid(&#039;default&#039;, &#039;public&#039;, &#039;private&#039;),
+        statuses: Joi.array().items(Joi.number().integer().min(200)).min(1).single(),
+        otherwise: Joi.string().required()
+    })
+        .allow(false),
+    cors: Joi.object({
+        origin: Joi.array().min(1),
+        maxAge: Joi.number(),
+        headers: Joi.array().items(Joi.string()),
+        additionalHeaders: Joi.array().items(Joi.string()),
+        exposedHeaders: Joi.array().items(Joi.string()),
+        additionalExposedHeaders: Joi.array().items(Joi.string()),
+        credentials: Joi.boolean()
+    })
+        .allow(false, true),
+    ext: Joi.object({
+        onPreAuth: Joi.array().items(internals.event).single(),
+        onPostAuth: Joi.array().items(internals.event).single(),
+        onPreHandler: Joi.array().items(internals.event).single(),
+        onPostHandler: Joi.array().items(internals.event).single(),
+        onPreResponse: Joi.array().items(internals.event).single()
+    })
+        .default({}),
+    files: Joi.object({
+        relativeTo: Joi.string().regex(/^([\/\.])|([A-Za-z]:\\)|(\\\\)/).required()
+    }),
+    json: Joi.object({
+        replacer: Joi.alternatives(Joi.func(), Joi.array()).allow(null),
+        space: Joi.number().allow(null),
+        suffix: Joi.string().allow(null)
+    }),
+    jsonp: Joi.string(),
+    payload: Joi.object({
+        output: Joi.string().valid(&#039;data&#039;, &#039;stream&#039;, &#039;file&#039;),
+        parse: Joi.boolean().allow(&#039;gunzip&#039;),
+        allow: [
+            Joi.string(),
+            Joi.array()
+        ],
+        override: Joi.string(),
+        maxBytes: Joi.number(),
+        uploads: Joi.string(),
+        failAction: Joi.string().valid(&#039;error&#039;, &#039;log&#039;, &#039;ignore&#039;),
+        timeout: Joi.number().integer().positive().allow(false),
+        defaultContentType: Joi.string()
+    }),
+    plugins: Joi.object(),
+    response: Joi.object({
+        emptyStatusCode: Joi.number().valid(200, 204),
+        failAction: Joi.string().valid(&#039;error&#039;, &#039;log&#039;),
+        modify: Joi.boolean(),
+        options: Joi.object(),
+        ranges: Joi.boolean(),
+        sample: Joi.number().min(0).max(100),
+        schema: Joi.alternatives(Joi.object(), Joi.array(), Joi.func()).allow(true, false),
+        status: Joi.object().pattern(/\d\d\d/, Joi.alternatives(Joi.object(), Joi.array(), Joi.func()).allow(true, false))
+    })
+        .without(&#039;modify&#039;, &#039;sample&#039;)
+        .assert(&#039;options.stripUnknown&#039;, Joi.ref(&#039;modify&#039;), &#039;meet requirement of having peer modify set to true&#039;),
+    security: Joi.object({
+        hsts: [
+            Joi.object({
+                maxAge: Joi.number(),
+                includeSubdomains: Joi.boolean(),
+                includeSubDomains: Joi.boolean(),
+                preload: Joi.boolean()
+            }),
+            Joi.boolean(),
+            Joi.number()
+        ],
+        xframe: [
+            Joi.boolean(),
+            Joi.string().valid(&#039;sameorigin&#039;, &#039;deny&#039;),
+            Joi.object({
+                rule: Joi.string().valid(&#039;sameorigin&#039;, &#039;deny&#039;, &#039;allow-from&#039;),
+                source: Joi.string()
+            })
+        ],
+        xss: Joi.boolean(),
+        noOpen: Joi.boolean(),
+        noSniff: Joi.boolean()
+    })
+        .allow(null, false, true),
+    state: Joi.object({
+        parse: Joi.boolean(),
+        failAction: Joi.string().valid(&#039;error&#039;, &#039;log&#039;, &#039;ignore&#039;)
+    }),
+    timeout: Joi.object({
+        socket: Joi.number().integer().positive().allow(false),
+        server: Joi.number().integer().positive().allow(false).required()
+    }),
+    validate: Joi.object({
+        headers: Joi.alternatives(Joi.object(), Joi.array(), Joi.func()).allow(null, false, true),
+        params: Joi.alternatives(Joi.object(), Joi.array(), Joi.func()).allow(null, false, true),
+        query: Joi.alternatives(Joi.object(), Joi.array(), Joi.func()).allow(null, false, true),
+        payload: Joi.alternatives(Joi.object(), Joi.array(), Joi.func()).allow(null, false, true),
+        failAction: [
+            Joi.string().valid(&#039;error&#039;, &#039;log&#039;, &#039;ignore&#039;),
+            Joi.func()
+        ],
+        errorFields: Joi.object(),
+        options: Joi.object()
+    })
+});
+
+
+internals.connectionBase = Joi.object({
+    app: Joi.object().allow(null),
+    compression: Joi.boolean(),
+    load: Joi.object(),
+    plugins: Joi.object(),
+    router: Joi.object({
+        isCaseSensitive: Joi.boolean(),
+        stripTrailingSlash: Joi.boolean()
+    }),
+    routes: internals.routeBase,
+    state: Joi.object()                                     // Cookie defaults
+});
+
+
+internals.server = Joi.object({
+    app: Joi.object().allow(null),
+    cache: Joi.allow(null),                                 // Validated elsewhere
+    connections: internals.connectionBase,
+    debug: Joi.object({
+        request: Joi.array().allow(false),
+        log: Joi.array().allow(false)
+    }).allow(false),
+    load: Joi.object(),
+    mime: Joi.object(),
+    plugins: Joi.object(),
+    useDomains: Joi.boolean()
+});
+
+
+internals.connection = internals.connectionBase.keys({
+    autoListen: Joi.boolean(),
+    host: Joi.string().hostname(),
+    address: Joi.string().hostname(),
+    labels: Joi.array().items(Joi.string()).single(),
+    listener: Joi.any(),
+    port: Joi.alternatives([
+        Joi.number().integer().min(0),          // TCP port
+        Joi.string().regex(/\//),               // Unix domain socket
+        Joi.string().regex(/^\\\\\.\\pipe\\/)   // Windows named pipe
+    ])
+        .allow(null),
+    tls: Joi.alternatives([
+        Joi.object().allow(null),
+        Joi.boolean()
+    ]),
+    uri: Joi.string().regex(/[^/]$/)
+});
+
+
+internals.vhost = Joi.alternatives([
+    Joi.string().hostname(),
+    Joi.array().items(Joi.string().hostname()).min(1)
+]);
+
+
+internals.route = Joi.object({
+    method: Joi.string().regex(/^[a-zA-Z0-9!#\$%&amp;&#039;\*\+\-\.^_`\|~]+$/).required(),
+    path: Joi.string().required(),
+    vhost: internals.vhost,
+    handler: Joi.any(),                         // Validated in routeConfig
+    config: Joi.object().allow(null)
+});
+
+
+internals.pre = [
+    Joi.string(),
+    Joi.func(),
+    Joi.object({
+        method: Joi.alternatives(Joi.string(), Joi.func()).required(),
+        assign: Joi.string(),
+        mode: Joi.string().valid(&#039;serial&#039;, &#039;parallel&#039;),
+        failAction: Joi.string().valid(&#039;error&#039;, &#039;log&#039;, &#039;ignore&#039;)
+    })
+];
+
+
+internals.routeConfig = internals.routeBase.keys({
+    id: Joi.string(),
+    isInternal: Joi.boolean(),
+    pre: Joi.array().items(internals.pre.concat(Joi.array().items(internals.pre).min(1))),
+    handler: [
+        Joi.func(),
+        Joi.string(),
+        Joi.object().length(1)
+    ],
+    description: Joi.string(),
+    notes: [
+        Joi.string(),
+        Joi.array().items(Joi.string())
+    ],
+    tags: [
+        Joi.string(),
+        Joi.array().items(Joi.string())
+    ]
+});
+
+
+internals.cacheConfig = Joi.object({
+    name: Joi.string().invalid(&#039;_default&#039;),
+    partition: Joi.string(),
+    shared: Joi.boolean(),
+    engine: Joi.alternatives([
+        Joi.object(),
+        Joi.func()
+    ])
+        .required()
+}).unknown();
+
+
+internals.cache = Joi.array().items(internals.cacheConfig, Joi.func()).min(1).single();
+
+
+internals.cachePolicy = Joi.object({
+    cache: Joi.string().allow(null).allow(&#039;&#039;),
+    segment: Joi.string(),
+    shared: Joi.boolean()
+})
+    .options({ allowUnknown: true });               // Catbox validates other keys
+
+
+internals.method = Joi.object({
+    bind: Joi.object().allow(null),
+    generateKey: Joi.func(),
+    cache: internals.cachePolicy,
+    callback: Joi.boolean()
+});
+
+
+internals.methodObject = Joi.object({
+    name: Joi.string().required(),
+    method: Joi.func().required(),
+    options: Joi.object()
+});
+
+
+internals.register = Joi.object({
+    once: Joi.boolean(),
+    routes: Joi.object({
+        prefix: Joi.string().regex(/^\/.+/),
+        vhost: internals.vhost
+    })
+        .default({}),
+    select: Joi.array().items(Joi.string()).single()
+});
+
+
+internals.plugin = internals.register.keys({
+    register: Joi.func().keys({
+        attributes: Joi.object({
+            pkg: Joi.object({
+                name: Joi.string(),
+                version: Joi.string().default(&#039;0.0.0&#039;)
+            })
+                .unknown()
+                .default({
+                    version: &#039;0.0.0&#039;
+                }),
+            name: Joi.string()
+                .when(&#039;pkg.name&#039;, { is: Joi.exist(), otherwise: Joi.required() }),
+            version: Joi.string(),
+            multiple: Joi.boolean().default(false),
+            dependencies: Joi.array().items(Joi.string()).single(),
+            connections: Joi.boolean().default(true),
+            once: Joi.boolean().valid(true)
+        })
+            .required()
+            .unknown()
+    })
+        .required(),
+    options: Joi.any()
+})
+    .without(&#039;once&#039;, &#039;options&#039;)
+    .unknown();</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

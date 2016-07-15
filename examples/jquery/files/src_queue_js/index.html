@@ -44,11 +44,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
-      <p class="stat">68.41</p>
+      <p class="stat">68.29</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">142</p>
+      <p class="stat">145</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,7 +62,7 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">51.88</p>
+      <p class="stat">51.23</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
@@ -89,14 +89,16 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="col-md-12">define([
+    <textarea id="file-source" class="col-md-12">define( [
 	&quot;./core&quot;,
 	&quot;./data/var/dataPriv&quot;,
 	&quot;./deferred&quot;,
 	&quot;./callbacks&quot;
 ], function( jQuery, dataPriv ) {
 
-jQuery.extend({
+&quot;use strict&quot;;
+
+jQuery.extend( {
 	queue: function( elem, type, data ) {
 		var queue;
 
@@ -107,7 +109,7 @@ jQuery.extend({
 			// Speed up dequeue by getting out quickly if this is just a lookup
 			if ( data ) {
 				if ( !queue || jQuery.isArray( data ) ) {
-					queue = dataPriv.access( elem, type, jQuery.makeArray(data) );
+					queue = dataPriv.access( elem, type, jQuery.makeArray( data ) );
 				} else {
 					queue.push( data );
 				}
@@ -155,14 +157,14 @@ jQuery.extend({
 	_queueHooks: function( elem, type ) {
 		var key = type + &quot;queueHooks&quot;;
 		return dataPriv.get( elem, key ) || dataPriv.access( elem, key, {
-			empty: jQuery.Callbacks(&quot;once memory&quot;).add(function() {
+			empty: jQuery.Callbacks( &quot;once memory&quot; ).add( function() {
 				dataPriv.remove( elem, [ type + &quot;queue&quot;, key ] );
-			})
-		});
+			} )
+		} );
 	}
-});
+} );
 
-jQuery.fn.extend({
+jQuery.fn.extend( {
 	queue: function( type, data ) {
 		var setter = 2;
 
@@ -173,30 +175,31 @@ jQuery.fn.extend({
 		}
 
 		if ( arguments.length &lt; setter ) {
-			return jQuery.queue( this[0], type );
+			return jQuery.queue( this[ 0 ], type );
 		}
 
 		return data === undefined ?
 			this :
-			this.each(function() {
+			this.each( function() {
 				var queue = jQuery.queue( this, type, data );
 
 				// Ensure a hooks for this queue
 				jQuery._queueHooks( this, type );
 
-				if ( type === &quot;fx&quot; &amp;&amp; queue[0] !== &quot;inprogress&quot; ) {
+				if ( type === &quot;fx&quot; &amp;&amp; queue[ 0 ] !== &quot;inprogress&quot; ) {
 					jQuery.dequeue( this, type );
 				}
-			});
+			} );
 	},
 	dequeue: function( type ) {
-		return this.each(function() {
+		return this.each( function() {
 			jQuery.dequeue( this, type );
-		});
+		} );
 	},
 	clearQueue: function( type ) {
 		return this.queue( type || &quot;fx&quot;, [] );
 	},
+
 	// Get a promise resolved when queues of a certain type
 	// are emptied (fx is the type by default)
 	promise: function( type, obj ) {
@@ -227,10 +230,10 @@ jQuery.fn.extend({
 		resolve();
 		return defer.promise( obj );
 	}
-});
+} );
 
 return jQuery;
-});</textarea>
+} );</textarea>
   </div>
 </div>
 

@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - lib/auth.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>lib/auth.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">59.37</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">528</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">69.39</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">3.42</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">&#039;use strict&#039;;
+
+// Load modules
+
+const Boom = require(&#039;boom&#039;);
+const Hoek = require(&#039;hoek&#039;);
+const Schema = require(&#039;./schema&#039;);
+
+
+// Declare internals
+
+const internals = {};
+
+
+exports = module.exports = internals.Auth = function (connection) {
+
+    this.connection = connection;
+    this._schemes = {};
+    this._strategies = {};
+    this.settings = {
+        default: null           // Strategy used as default if route has no auth settings
+    };
+
+    this.api = {};
+};
+
+
+internals.Auth.prototype.scheme = function (name, scheme) {
+
+    Hoek.assert(name, &#039;Authentication scheme must have a name&#039;);
+    Hoek.assert(!this._schemes[name], &#039;Authentication scheme name already exists:&#039;, name);
+    Hoek.assert(typeof scheme === &#039;function&#039;, &#039;scheme must be a function:&#039;, name);
+
+    this._schemes[name] = scheme;
+};
+
+
+internals.Auth.prototype.strategy = function (name, scheme /*, mode, options */) {
+
+    const hasMode = (typeof arguments[2] === &#039;string&#039; || typeof arguments[2] === &#039;boolean&#039;);
+    const mode = (hasMode ? arguments[2] : false);
+    const options = (hasMode ? arguments[3] : arguments[2]) || null;
+
+    Hoek.assert(name, &#039;Authentication strategy must have a name&#039;);
+    Hoek.assert(name !== &#039;bypass&#039;, &#039;Cannot use reserved strategy name: bypass&#039;);
+    Hoek.assert(!this._strategies[name], &#039;Authentication strategy name already exists&#039;);
+    Hoek.assert(scheme, &#039;Authentication strategy&#039;, name, &#039;missing scheme&#039;);
+    Hoek.assert(this._schemes[scheme], &#039;Authentication strategy&#039;, name, &#039;uses unknown scheme:&#039;, scheme);
+
+    const server = this.connection.server._clone([this.connection], &#039;&#039;);
+    const strategy = this._schemes[scheme](server, options);
+
+    Hoek.assert(strategy.authenticate, &#039;Invalid scheme:&#039;, name, &#039;missing authenticate() method&#039;);
+    Hoek.assert(typeof strategy.authenticate === &#039;function&#039;, &#039;Invalid scheme:&#039;, name, &#039;invalid authenticate() method&#039;);
+    Hoek.assert(!strategy.payload || typeof strategy.payload === &#039;function&#039;, &#039;Invalid scheme:&#039;, name, &#039;invalid payload() method&#039;);
+    Hoek.assert(!strategy.response || typeof strategy.response === &#039;function&#039;, &#039;Invalid scheme:&#039;, name, &#039;invalid response() method&#039;);
+    strategy.options = strategy.options || {};
+    Hoek.assert(strategy.payload || !strategy.options.payload, &#039;Cannot require payload validation without a payload method&#039;);
+
+    this._strategies[name] = {
+        methods: strategy,
+        realm: server.realm
+    };
+
+    if (strategy.api) {
+        this.api[name] = strategy.api;
+    }
+
+    if (mode) {
+        this.default({ strategies: [name], mode: mode === true ? &#039;required&#039; : mode });
+    }
+};
+
+
+internals.Auth.prototype.default = function (options) {
+
+    Hoek.assert(!this.settings.default, &#039;Cannot set default strategy more than once&#039;);
+    options = Schema.apply(&#039;auth&#039;, options, &#039;default strategy&#039;);
+
+    this.settings.default = this._setupRoute(Hoek.clone(options));      // Can change options
+};
+
+
+internals.Auth.prototype.test = function (name, request, next) {
+
+    Hoek.assert(name, &#039;Missing authentication strategy name&#039;);
+    const strategy = this._strategies[name];
+    Hoek.assert(strategy, &#039;Unknown authentication strategy:&#039;, name);
+
+    const transfer = (response, data) =&gt; {
+
+        return next(response, data &amp;&amp; data.credentials);
+    };
+
+    const reply = request.server._replier.interface(request, strategy.realm, transfer);
+    strategy.methods.authenticate(request, reply);
+};
+
+
+internals.Auth.prototype._setupRoute = function (options, path) {
+
+    if (!options) {
+        return options;         // Preserve the difference between undefined and false
+    }
+
+    if (typeof options === &#039;string&#039;) {
+        options = { strategies: [options] };
+    }
+    else if (options.strategy) {
+        options.strategies = [options.strategy];
+        delete options.strategy;
+    }
+
+    if (path &amp;&amp;
+        !options.strategies) {
+
+        Hoek.assert(this.settings.default, &#039;Route missing authentication strategy and no default defined:&#039;, path);
+        options = Hoek.applyToDefaults(this.settings.default, options);
+    }
+
+    path = path || &#039;default strategy&#039;;
+    Hoek.assert(options.strategies &amp;&amp; options.strategies.length, &#039;Missing authentication strategy:&#039;, path);
+
+    options.mode = options.mode || &#039;required&#039;;
+
+    if (options.entity !== undefined ||                                             // Backwards compatibility with &lt;= 11.x.x
+        options.scope !== undefined) {
+
+        options.access = [{ entity: options.entity, scope: options.scope }];
+        delete options.entity;
+        delete options.scope;
+    }
+
+    if (options.access) {
+        for (let i = 0; i &lt; options.access.length; ++i) {
+            const access = options.access[i];
+            access.scope = internals.scope(access);
+        }
+    }
+
+    if (options.payload === true) {
+        options.payload = &#039;required&#039;;
+    }
+
+    let hasAuthenticatePayload = false;
+    for (let i = 0; i &lt; options.strategies.length; ++i) {
+        const name = options.strategies[i];
+        const strategy = this._strategies[name];
+        Hoek.assert(strategy, &#039;Unknown authentication strategy&#039;, name, &#039;in&#039;, path);
+
+        Hoek.assert(strategy.methods.payload || options.payload !== &#039;required&#039;, &#039;Payload validation can only be required when all strategies support it in&#039;, path);
+        hasAuthenticatePayload = hasAuthenticatePayload || strategy.methods.payload;
+        Hoek.assert(!strategy.methods.options.payload || options.payload === undefined || options.payload === &#039;required&#039;, &#039;Cannot set authentication payload to&#039;, options.payload, &#039;when a strategy requires payload validation in&#039;, path);
+    }
+
+    Hoek.assert(!options.payload || hasAuthenticatePayload, &#039;Payload authentication requires at least one strategy with payload support in&#039;, path);
+
+    return options;
+};
+
+
+internals.scope = function (access) {
+
+    if (!access.scope) {
+        return false;
+    }
+
+    const scope = {};
+    for (let i = 0; i &lt; access.scope.length; ++i) {
+        const value = access.scope[i];
+        const prefix = value[0];
+        const type = (prefix === &#039;+&#039; ? &#039;required&#039; : (prefix === &#039;!&#039; ? &#039;forbidden&#039; : &#039;selection&#039;));
+        const clean = (type === &#039;selection&#039; ? value : value.slice(1));
+        scope[type] = scope[type] || [];
+        scope[type].push(clean);
+
+        if ((!scope._parameters || !scope._parameters[type]) &amp;&amp;
+            /{([^}]+)}/.test(clean)) {
+
+            scope._parameters = scope._parameters || {};
+            scope._parameters[type] = true;
+        }
+    }
+
+    return scope;
+};
+
+
+internals.Auth.prototype.lookup = function (route) {
+
+    if (route.settings.auth === false) {
+        return false;
+    }
+
+    return route.settings.auth || this.settings.default;
+};
+
+
+internals.Auth.authenticate = function (request, next) {
+
+    const auth = request.connection.auth;
+    return auth._authenticate(request, next);
+};
+
+
+internals.Auth.prototype._authenticate = function (request, next) {
+
+    const config = this.lookup(request.route);
+    if (!config) {
+        return next();
+    }
+
+    const authenticator = new internals.Authenticator(config, request, this);
+    authenticator.authenticate(next);
+};
+
+
+internals.Auth.payload = function (request, next) {
+
+    if (!request.auth.isAuthenticated ||
+        request.auth.strategy === &#039;bypass&#039;) {
+
+        return next();
+    }
+
+    const auth = request.connection.auth;
+    const strategy = auth._strategies[request.auth.strategy];
+
+    if (!strategy.methods.payload) {
+        return next();
+    }
+
+    const config = auth.lookup(request.route);
+    const setting = config.payload || (strategy.methods.options.payload ? &#039;required&#039; : false);
+    if (!setting) {
+        return next();
+    }
+
+    const finalize = (response) =&gt; {
+
+        if (response &amp;&amp;
+            response.isBoom &amp;&amp;
+            response.isMissing) {
+
+            return next(setting === &#039;optional&#039; ? null : Boom.unauthorized(&#039;Missing payload authentication&#039;));
+        }
+
+        return next(response);
+    };
+
+    request._protect.run(finalize, (exit) =&gt; {
+
+        const reply = request.server._replier.interface(request, strategy.realm, exit);
+        strategy.methods.payload(request, reply);
+    });
+};
+
+
+internals.Auth.response = function (request, next) {
+
+    const auth = request.connection.auth;
+    const config = auth.lookup(request.route);
+    if (!config ||
+        !request.auth.isAuthenticated ||
+        request.auth.strategy === &#039;bypass&#039;) {
+
+        return next();
+    }
+
+    const strategy = auth._strategies[request.auth.strategy];
+    if (!strategy.methods.response) {
+        return next();
+    }
+
+    request._protect.run(next, (exit) =&gt; {
+
+        const reply = request.server._replier.interface(request, strategy.realm, exit);
+        strategy.methods.response(request, reply);
+    });
+};
+
+
+internals.Authenticator = class {
+    constructor(config, request, manager) {
+
+        this.config = config;
+        this.request = request;
+        this.manager = manager;
+
+        this.errors = [];
+        this.current = -1;
+    }
+
+    authenticate(next) {
+
+        this.request.auth.mode = this.config.mode;
+
+        // Injection bypass
+
+        if (this.request.auth.credentials) {
+            return this.validate(null, { credentials: this.request.auth.credentials, artifacts: this.request.auth.artifacts }, next);
+        }
+
+        // Authenticate
+
+        return this.execute(next);
+    }
+
+    execute(next) {
+
+        const config = this.config;
+        const request = this.request;
+
+        // Find next strategy
+
+        ++this.current;
+        if (this.current &lt; config.strategies.length) {
+            const name = config.strategies[this.current];
+            const after = (err, result) =&gt; this.validate(err, result, next);
+            request._protect.run(after, (exit) =&gt; {
+
+                const strategy = this.manager._strategies[name];
+                const reply = request.server._replier.interface(request, strategy.realm, exit);
+                strategy.methods.authenticate(request, reply);
+            });
+
+            return;
+        }
+
+        // No more strategies
+
+        const err = Boom.unauthorized(&#039;Missing authentication&#039;, this.errors);
+
+        if (config.mode === &#039;optional&#039; ||
+            config.mode === &#039;try&#039;) {
+
+            request.auth.isAuthenticated = false;
+            request.auth.credentials = null;
+            request.auth.error = err;
+            request._log([&#039;auth&#039;, &#039;unauthenticated&#039;]);
+            return next();
+        }
+
+        return next(err);
+    }
+
+    validate(err, result, next) {                 // err can be Boom, Error, or a valid response object
+
+        const config = this.config;
+        const request = this.request;
+        const name = config.strategies[this.current] || &#039;bypass&#039;;
+
+        result = result || {};
+
+        // Invalid
+
+        if (!err &amp;&amp;
+            !result.credentials) {
+
+            return next(Boom.badImplementation(&#039;Authentication response missing both error and credentials&#039;));
+        }
+
+        // Unauthenticated
+
+        if (err) {
+            if (err instanceof Error === false) {
+                request._log([&#039;auth&#039;, &#039;unauthenticated&#039;, &#039;response&#039;, name], err.statusCode);
+                return next(err);
+            }
+
+            if (err.isMissing) {
+
+                // Try next name
+
+                request._log([&#039;auth&#039;, &#039;unauthenticated&#039;, &#039;missing&#039;, name], err);
+                this.errors.push(err.output.headers[&#039;WWW-Authenticate&#039;]);
+                return this.execute(next);
+            }
+
+            if (config.mode === &#039;try&#039;) {
+                request.auth.isAuthenticated = false;
+                request.auth.strategy = name;
+                request.auth.credentials = result.credentials;
+                request.auth.artifacts = result.artifacts;
+                request.auth.error = err;
+                request._log([&#039;auth&#039;, &#039;unauthenticated&#039;, &#039;try&#039;, name], err);
+                return next();
+            }
+
+            request._log([&#039;auth&#039;, &#039;unauthenticated&#039;, &#039;error&#039;, name], err);
+            return next(err);
+        }
+
+        // Authenticated
+
+        const credentials = result.credentials;
+        request.auth.strategy = name;
+        request.auth.credentials = credentials;
+        request.auth.artifacts = result.artifacts;
+
+        const authenticated = () =&gt; {
+
+            request._log([&#039;auth&#039;, name]);
+            request.auth.isAuthenticated = true;
+            return next();
+        };
+
+        // Check access rules
+
+        if (!config.access) {
+            return authenticated();
+        }
+
+        const requestEntity = (credentials.user ? &#039;user&#039; : &#039;app&#039;);
+
+        const scopeErrors = [];
+        for (let i = 0; i &lt; config.access.length; ++i) {
+            const access = config.access[i];
+
+            // Check entity
+
+            const entity = access.entity;
+            if (entity &amp;&amp;
+                entity !== &#039;any&#039; &amp;&amp;
+                entity !== requestEntity) {
+
+                continue;
+            }
+
+            // Check scope
+
+            let scope = access.scope;
+            if (scope) {
+                if (!credentials.scope) {
+                    scopeErrors.push(scope);
+                    continue;
+                }
+
+                scope = internals.expandScope(request, scope);
+                if (!internals.validateScope(credentials, scope, &#039;required&#039;) ||
+                    !internals.validateScope(credentials, scope, &#039;selection&#039;) ||
+                    !internals.validateScope(credentials, scope, &#039;forbidden&#039;)) {
+
+                    scopeErrors.push(scope);
+                    continue;
+                }
+            }
+
+            return authenticated();
+        }
+
+        // Scope error
+
+        if (scopeErrors.length) {
+            request._log([&#039;auth&#039;, &#039;scope&#039;, &#039;error&#039;, name], { got: credentials.scope, need: scopeErrors });
+            return next(Boom.forbidden(&#039;Insufficient scope&#039;));
+        }
+
+        // Entity error
+
+        if (requestEntity === &#039;app&#039;) {
+            request._log([&#039;auth&#039;, &#039;entity&#039;, &#039;user&#039;, &#039;error&#039;, name]);
+            return next(Boom.forbidden(&#039;Application credentials cannot be used on a user endpoint&#039;));
+        }
+
+        request._log([&#039;auth&#039;, &#039;entity&#039;, &#039;app&#039;, &#039;error&#039;, name]);
+        return next(Boom.forbidden(&#039;User credentials cannot be used on an application endpoint&#039;));
+    }
+};
+
+
+internals.expandScope = function (request, scope) {
+
+    if (!scope._parameters) {
+        return scope;
+    }
+
+    const expanded = {
+        required: internals.expandScopeType(request, scope, &#039;required&#039;),
+        selection: internals.expandScopeType(request, scope, &#039;selection&#039;),
+        forbidden: internals.expandScopeType(request, scope, &#039;forbidden&#039;)
+    };
+
+    return expanded;
+};
+
+
+internals.expandScopeType = function (request, scope, type) {
+
+    if (!scope[type] ||
+        !scope._parameters[type]) {
+
+        return scope[type];
+    }
+
+    const expanded = [];
+    const context = {
+        params: request.params,
+        query: request.query
+    };
+
+    for (let i = 0; i &lt; scope[type].length; ++i) {
+        expanded.push(Hoek.reachTemplate(context, scope[type][i]));
+    }
+
+    return expanded;
+};
+
+
+internals.validateScope = function (credentials, scope, type) {
+
+    if (!scope[type]) {
+        return true;
+    }
+
+    const count = (typeof credentials.scope === &#039;string&#039; ? (scope[type].indexOf(credentials.scope) !== -1 ? 1 : 0)
+                                                         : Hoek.intersect(scope[type], credentials.scope).length);
+
+    if (type === &#039;forbidden&#039;) {
+        return count === 0;
+    }
+
+    if (type === &#039;required&#039;) {
+        return count === scope.required.length;
+    }
+
+    return !!count;
+};</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

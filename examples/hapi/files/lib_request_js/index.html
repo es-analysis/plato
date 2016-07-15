@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - lib/request.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>lib/request.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">58.43</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">587</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">62.62</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">6.13</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">&#039;use strict&#039;;
+
+// Load modules
+
+const Events = require(&#039;events&#039;);
+const Url = require(&#039;url&#039;);
+const Accept = require(&#039;accept&#039;);
+const Boom = require(&#039;boom&#039;);
+const Hoek = require(&#039;hoek&#039;);
+const Items = require(&#039;items&#039;);
+const Peekaboo = require(&#039;peekaboo&#039;);
+const Cors = require(&#039;./cors&#039;);
+const Protect = require(&#039;./protect&#039;);
+const Response = require(&#039;./response&#039;);
+const Transmit = require(&#039;./transmit&#039;);
+
+
+// Declare internals
+
+const internals = {
+    properties: [&#039;connection&#039;, &#039;server&#039;, &#039;url&#039;, &#039;query&#039;, &#039;path&#039;, &#039;method&#039;, &#039;mime&#039;, &#039;setUrl&#039;, &#039;setMethod&#039;, &#039;headers&#039;, &#039;id&#039;, &#039;app&#039;, &#039;plugins&#039;, &#039;route&#039;, &#039;auth&#039;, &#039;pre&#039;, &#039;preResponses&#039;, &#039;info&#039;, &#039;orig&#039;, &#039;params&#039;, &#039;paramsArray&#039;, &#039;payload&#039;, &#039;state&#039;, &#039;jsonp&#039;, &#039;response&#039;, &#039;raw&#039;, &#039;tail&#039;, &#039;addTail&#039;, &#039;domain&#039;, &#039;log&#039;, &#039;getLog&#039;, &#039;generateResponse&#039;]
+};
+
+
+exports = module.exports = internals.Generator = function () {
+
+    this._decorations = null;
+};
+
+
+internals.Generator.prototype.request = function (connection, req, res, options) {
+
+    const request = new internals.Request(connection, req, res, options);
+
+    // Decorate
+
+    if (this._decorations) {
+        const properties = Object.keys(this._decorations);
+        for (let i = 0; i &lt; properties.length; ++i) {
+            const property = properties[i];
+            const assignment = this._decorations[property];
+            request[property] = (assignment.apply ? assignment.method(request) : assignment.method);
+        }
+    }
+
+    return request;
+};
+
+
+internals.Generator.prototype.decorate = function (property, method, options) {
+
+    options = options || {};
+
+    Hoek.assert(!this._decorations || this._decorations[property] === undefined, &#039;Request interface decoration already defined:&#039;, property);
+    Hoek.assert(internals.properties.indexOf(property) === -1, &#039;Cannot override built-in request interface decoration:&#039;, property);
+
+    this._decorations = this._decorations || {};
+    this._decorations[property] = { method, apply: options.apply };
+};
+
+
+internals.Request = function (connection, req, res, options) {
+
+    Events.EventEmitter.call(this);
+
+    // Take measurement as soon as possible
+
+    this._bench = new Hoek.Bench();
+    const now = Date.now();
+
+    // Public members
+
+    this.connection = connection;
+    this.server = connection.server;
+
+    this.url = null;
+    this.query = null;
+    this.path = null;
+    this.method = null;
+    this.mime = null;                       // Set if payload is parsed
+
+    this.setUrl = this._setUrl;             // Decoration removed after &#039;onRequest&#039;
+    this.setMethod = this._setMethod;
+
+    this._setUrl(req.url, this.connection.settings.router.stripTrailingSlash);      // Sets: this.url, this.path, this.query
+    this._setMethod(req.method);                                                    // Sets: this.method
+    this.headers = req.headers;
+
+    this.id = now + &#039;:&#039; + connection.info.id + &#039;:&#039; + connection._requestCounter.value++;
+    if (connection._requestCounter.value &gt; connection._requestCounter.max) {
+        connection._requestCounter.value = connection._requestCounter.min;
+    }
+
+    this.app = (options.app ? Hoek.shallow(options.app) : {});              // Place for application-specific state without conflicts with hapi, should not be used by plugins
+    this.plugins = (options.plugins ? Hoek.shallow(options.plugins) : {});  // Place for plugins to store state without conflicts with hapi, should be namespaced using plugin name
+
+    this._route = this.connection._router.specials.notFound.route;    // Used prior to routing (only settings are used, not the handler)
+    this.route = this._route.public;
+
+    this.auth = {
+        isAuthenticated: false,
+        credentials: options.credentials || null,       // Special keys: &#039;app&#039;, &#039;user&#039;, &#039;scope&#039;
+        artifacts: options.artifacts || null,           // Scheme-specific artifacts
+        strategy: null,
+        mode: null,
+        error: null
+    };
+
+    this.pre = {};                          // Pre raw values
+    this.preResponses = {};                 // Pre response values
+
+    this.info = {
+        received: now,
+        responded: 0,
+        remoteAddress: req.connection.remoteAddress,
+        remotePort: req.connection.remotePort || &#039;&#039;,
+        referrer: req.headers.referrer || req.headers.referer || &#039;&#039;,
+        host: req.headers.host ? req.headers.host.replace(/\s/g, &#039;&#039;) : &#039;&#039;,
+        acceptEncoding: Accept.encoding(this.headers[&#039;accept-encoding&#039;], [&#039;identity&#039;, &#039;gzip&#039;, &#039;deflate&#039;])
+    };
+
+    this.info.hostname = this.info.host.split(&#039;:&#039;)[0];
+
+    // Assigned elsewhere:
+
+    this.orig = {};
+    this.params = {};
+    this.paramsArray = [];              // Array of path parameters in path order
+    this.payload = null;
+    this.state = null;
+    this.jsonp = null;
+    this.response = null;
+
+    // Semi-public members
+
+    this.raw = {
+        req: req,
+        res: res
+    };
+
+    this.tail = this.addTail = this._addTail;       // Removed once wagging
+
+    // Private members
+
+    this._states = {};
+    this._logger = [];
+    this._allowInternals = !!options.allowInternals;
+    this._isPayloadPending = true;      // false when incoming payload fully processed
+    this._isBailed = false;             // true when lifecycle should end
+    this._isReplied = false;            // true when response processing started
+    this._isFinalized = false;          // true when request completed (may be waiting on tails to complete)
+    this._tails = {};                   // tail id -&gt; name (tracks pending tails)
+    this._tailIds = 0;                  // Used to generate a unique tail id
+    this._protect = new Protect(this);
+    this.domain = this._protect.domain;
+
+    // Listen to request state
+
+    this._onEnd = () =&gt; {
+
+        this._isPayloadPending = false;
+    };
+
+    this.raw.req.once(&#039;end&#039;, this._onEnd);
+
+    this._onClose = () =&gt; {
+
+        this._log([&#039;request&#039;, &#039;closed&#039;, &#039;error&#039;]);
+        this._isPayloadPending = false;
+        this._isBailed = true;
+    };
+
+    this.raw.req.once(&#039;close&#039;, this._onClose);
+
+    this._onError = (err) =&gt; {
+
+        this._log([&#039;request&#039;, &#039;error&#039;], err);
+        this._isPayloadPending = false;
+    };
+
+    this.raw.req.once(&#039;error&#039;, this._onError);
+
+    // Log request
+
+    const about = {
+        method: this.method,
+        url: this.url.href,
+        agent: this.raw.req.headers[&#039;user-agent&#039;]
+    };
+
+    this._log([&#039;received&#039;], about, now);     // Must be last for object to be fully constructed
+};
+
+Hoek.inherits(internals.Request, Events.EventEmitter);
+
+
+internals.Request.prototype._setUrl = function (url, stripTrailingSlash) {
+
+    this.url = (typeof url === &#039;string&#039; ? Url.parse(url, true) : url);
+    this.query = this.url.query;
+    this.path = this.url.pathname || &#039;&#039;;                                                            // pathname excludes query
+
+    if (stripTrailingSlash &amp;&amp;
+        this.path.length &gt; 1 &amp;&amp;
+        this.path[this.path.length - 1] === &#039;/&#039;) {
+
+        this.path = this.path.slice(0, -1);
+        this.url.pathname = this.path;
+    }
+
+    this.path = this.connection._router.normalize(this.path);
+};
+
+
+internals.Request.prototype._setMethod = function (method) {
+
+    Hoek.assert(method &amp;&amp; typeof method === &#039;string&#039;, &#039;Missing method&#039;);
+    this.method = method.toLowerCase();
+};
+
+
+internals.Request.prototype.log = function (tags, data, timestamp, _internal) {
+
+    tags = (Array.isArray(tags) ? tags : [tags]);
+    const now = (timestamp ? (timestamp instanceof Date ? timestamp.getTime() : timestamp) : Date.now());
+
+    const event = {
+        request: this.id,
+        timestamp: now,
+        tags: tags,
+        data: data,
+        internal: !!_internal
+    };
+
+    const tagsMap = Hoek.mapToObject(event.tags);
+
+    // Add to request array
+
+    this._logger.push(event);
+    this.connection.emit(_internal ? &#039;request-internal&#039; : &#039;request&#039;, this, event, tagsMap);
+
+    if (this.server._settings.debug &amp;&amp;
+        this.server._settings.debug.request &amp;&amp;
+        Hoek.intersect(tagsMap, this.server._settings.debug.request, true)) {
+
+        console.error(&#039;Debug:&#039;, event.tags.join(&#039;, &#039;), (data ? &#039;\n    &#039; + (data.stack || (typeof data === &#039;object&#039; ? Hoek.stringify(data) : data)) : &#039;&#039;));
+    }
+};
+
+
+internals.Request.prototype._log = function (tags, data) {
+
+    return this.log(tags, data, null, true);
+};
+
+
+internals.Request.prototype.getLog = function (tags, internal) {
+
+    if (typeof tags === &#039;boolean&#039;) {
+        internal = tags;
+        tags = [];
+    }
+
+    tags = [].concat(tags || []);
+    if (!tags.length &amp;&amp;
+        internal === undefined) {
+
+        return this._logger;
+    }
+
+    const filter = tags.length ? Hoek.mapToObject(tags) : null;
+    const result = [];
+
+    for (let i = 0; i &lt; this._logger.length; ++i) {
+        const event = this._logger[i];
+        if (internal === undefined || event.internal === internal) {
+            if (filter) {
+                for (let j = 0; j &lt; event.tags.length; ++j) {
+                    const tag = event.tags[j];
+                    if (filter[tag]) {
+                        result.push(event);
+                        break;
+                    }
+                }
+            }
+            else {
+                result.push(event);
+            }
+        }
+    }
+
+    return result;
+};
+
+
+internals.Request.prototype._execute = function () {
+
+    // Execute onRequest extensions (can change request method and url)
+
+    if (!this.connection._extensions.onRequest.nodes) {
+        return this._lifecycle();
+    }
+
+    this._invoke(this.connection._extensions.onRequest, (err) =&gt; {
+
+        return this._lifecycle(err);
+    });
+};
+
+
+internals.Request.prototype._lifecycle = function (err) {
+
+    // Undecorate request
+
+    this.setUrl = undefined;
+    this.setMethod = undefined;
+
+    if (err) {
+        return this._reply(err);
+    }
+
+    if (!this.path ||
+        this.path[0] !== &#039;/&#039;) {
+
+        return this._reply(Boom.badRequest(&#039;Invalid path&#039;));
+    }
+
+    // Lookup route
+
+    const match = this.connection._router.route(this.method, this.path, this.info.hostname);
+    if (!match.route.settings.isInternal ||
+        this._allowInternals) {
+
+        this._route = match.route;
+        this.route = this._route.public;
+    }
+
+    this.params = match.params || {};
+    this.paramsArray = match.paramsArray || [];
+
+    if (this.route.settings.cors) {
+        this.info.cors = {
+            isOriginMatch: Cors.matchOrigin(this.headers.origin, this.route.settings.cors)
+        };
+    }
+
+    // Setup timeout
+
+    if (this.raw.req.socket &amp;&amp;
+        this.route.settings.timeout.socket !== undefined) {
+
+        this.raw.req.socket.setTimeout(this.route.settings.timeout.socket || 0);     // Value can be false or positive
+    }
+
+    let serverTimeout = this.route.settings.timeout.server;
+    if (serverTimeout) {
+        serverTimeout = Math.floor(serverTimeout - this._bench.elapsed());      // Calculate the timeout from when the request was constructed
+        const timeoutReply = () =&gt; {
+
+            this._log([&#039;request&#039;, &#039;server&#039;, &#039;timeout&#039;, &#039;error&#039;], { timeout: serverTimeout, elapsed: this._bench.elapsed() });
+            this._reply(Boom.serverTimeout());
+        };
+
+        if (serverTimeout &lt;= 0) {
+            return timeoutReply();
+        }
+
+        this._serverTimeoutId = setTimeout(timeoutReply, serverTimeout);
+    }
+
+    const each = (func, next) =&gt; {
+
+        if (this._isReplied ||
+            this._isBailed) {
+
+            return next(Boom.internal(&#039;Already closed&#039;));                       // Error is not used
+        }
+
+        if (typeof func !== &#039;function&#039;) {                                       // Extension point
+            return this._invoke(func, next);
+        }
+
+        return func(this, next);
+    };
+
+    Items.serial(this._route._cycle, each, (err) =&gt; {
+
+        return this._reply(err);
+    });
+};
+
+
+internals.Request.prototype._invoke = function (event, callback) {
+
+    this._protect.run(callback, (exit) =&gt; {
+
+        Items.serial(event.nodes, (ext, next) =&gt; {
+
+            const reply = this.server._replier.interface(this, ext.plugin.realm, next);
+            const bind = (ext.bind || ext.plugin.realm.settings.bind);
+
+            ext.func.call(bind, this, reply);
+        }, exit);
+    });
+};
+
+
+internals.Request.prototype._reply = function (exit) {
+
+    if (this._isReplied) {                                  // Prevent any future responses to this request
+        return;
+    }
+
+    this._isReplied = true;
+
+    clearTimeout(this._serverTimeoutId);
+
+    if (this._isBailed) {
+        return this._finalize();
+    }
+
+    if (this.response &amp;&amp;                                    // Can be null if response coming from exit
+        this.response.closed) {
+
+        if (this.response.end) {
+            this.raw.res.end();                             // End the response in case it wasn&#039;t already closed
+        }
+
+        return this._finalize();
+    }
+
+    if (exit) {
+        this._setResponse(Response.wrap(exit, this));
+    }
+
+    this._protect.reset();
+
+    const transmit = (err) =&gt; {
+
+        if (err) {                                          // err can be valid response or error
+            this._setResponse(Response.wrap(err, this));
+        }
+
+        Transmit.send(this, () =&gt; {
+
+            return this._finalize();
+        });
+    };
+
+    if (!this._route._extensions.onPreResponse.nodes) {
+        return transmit();
+    }
+
+    this._invoke(this._route._extensions.onPreResponse, transmit);
+};
+
+
+internals.Request.prototype._finalize = function () {
+
+    this.info.responded = Date.now();
+
+    if (this.response &amp;&amp;
+        this.response.statusCode === 500 &amp;&amp;
+        this.response._error) {
+
+        this.connection.emit(&#039;request-error&#039;, this, this.response._error);
+        this._log(this.response._error.isDeveloperError ? [&#039;internal&#039;, &#039;implementation&#039;, &#039;error&#039;] : [&#039;internal&#039;, &#039;error&#039;], this.response._error);
+    }
+
+    this.connection.emit(&#039;response&#039;, this);
+
+    this._isFinalized = true;
+    this.addTail = undefined;
+    this.tail = undefined;
+
+    if (Object.keys(this._tails).length === 0) {
+        this.connection.emit(&#039;tail&#039;, this);
+    }
+
+    // Cleanup
+
+    this.raw.req.removeListener(&#039;end&#039;, this._onEnd);
+    this.raw.req.removeListener(&#039;close&#039;, this._onClose);
+    this.raw.req.removeListener(&#039;error&#039;, this._onError);
+
+    if (this.response &amp;&amp;
+        this.response._close) {
+
+        this.response._close();
+    }
+
+    this._protect.logger = this.server;
+};
+
+
+internals.Request.prototype._setResponse = function (response) {
+
+    if (this.response &amp;&amp;
+        !this.response.isBoom &amp;&amp;
+        this.response !== response &amp;&amp;
+        (response.isBoom || this.response.source !== response.source)) {
+
+        this.response._close();
+    }
+
+    if (this._isFinalized) {
+        if (response._close) {
+            response._close();
+        }
+
+        return;
+    }
+
+    this.response = response;
+};
+
+
+internals.Request.prototype._addTail = function (name) {
+
+    name = name || &#039;unknown&#039;;
+    const tailId = this._tailIds++;
+    this._tails[tailId] = name;
+    this._log([&#039;tail&#039;, &#039;add&#039;], { name: name, id: tailId });
+
+    const drop = () =&gt; {
+
+        if (!this._tails[tailId]) {
+            this._log([&#039;tail&#039;, &#039;remove&#039;, &#039;error&#039;], { name: name, id: tailId });             // Already removed
+            return;
+        }
+
+        delete this._tails[tailId];
+
+        if (Object.keys(this._tails).length === 0 &amp;&amp;
+            this._isFinalized) {
+
+            this._log([&#039;tail&#039;, &#039;remove&#039;, &#039;last&#039;], { name: name, id: tailId });
+            this.connection.emit(&#039;tail&#039;, this);
+        }
+        else {
+            this._log([&#039;tail&#039;, &#039;remove&#039;], { name: name, id: tailId });
+        }
+    };
+
+    return drop;
+};
+
+
+internals.Request.prototype._setState = function (name, value, options) {          // options: see Defaults.state
+
+    const state = {
+        name: name,
+        value: value
+    };
+
+    if (options) {
+        Hoek.assert(!options.autoValue, &#039;Cannot set autoValue directly in a response&#039;);
+        state.options = Hoek.clone(options);
+    }
+
+    this._states[name] = state;
+};
+
+
+internals.Request.prototype._clearState = function (name, options) {
+
+    const state = {
+        name: name
+    };
+
+    state.options = Hoek.clone(options || {});
+    state.options.ttl = 0;
+
+    this._states[name] = state;
+};
+
+
+internals.Request.prototype._tap = function () {
+
+    return (this.listeners(&#039;finish&#039;).length || this.listeners(&#039;peek&#039;).length ? new Peekaboo(this) : null);
+};
+
+
+internals.Request.prototype.generateResponse = function (source, options) {
+
+    return new Response(source, this, options);
+};</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

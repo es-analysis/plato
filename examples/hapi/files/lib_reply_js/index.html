@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - lib/reply.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>lib/reply.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">72.10</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">174</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">30.74</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">0.90</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">&#039;use strict&#039;;
+
+// Load modules
+
+const Hoek = require(&#039;hoek&#039;);
+const Response = require(&#039;./response&#039;);
+
+
+// Declare internals
+
+const internals = {};
+
+
+exports = module.exports = internals.Reply = function () {
+
+    this._decorations = null;
+};
+
+
+internals.Reply.prototype.decorate = function (property, method) {
+
+    Hoek.assert(!this._decorations || !this._decorations[property], &#039;Reply interface decoration already defined:&#039;, property);
+    Hoek.assert([&#039;request&#039;, &#039;response&#039;, &#039;close&#039;, &#039;state&#039;, &#039;unstate&#039;, &#039;redirect&#039;, &#039;continue&#039;].indexOf(property) === -1, &#039;Cannot override built-in reply interface decoration:&#039;, property);
+
+    this._decorations = this._decorations || {};
+    this._decorations[property] = method;
+};
+
+
+/*
+    const handler = function (request, reply) {
+
+        reply(error, result, ignore);   -&gt; error || result (continue)
+        reply(...).takeover();          -&gt; ... (continue)
+
+        reply.continue(ignore);         -&gt; null (continue)
+    };
+
+    const ext = function (request, reply) {
+
+        reply(error, result, ignore);   -&gt; error || result (respond)
+        reply(...).takeover();          -&gt; ... (respond)
+
+        reply.continue(ignore);         -&gt; (continue)
+    };
+
+    const pre = function (request, reply) {
+
+        reply(error);                   -&gt; error (respond)  // failAction override
+        reply(null, result, ignore);    -&gt; result (continue)
+        reply(...).takeover();          -&gt; ... (respond)
+
+        reply.continue(ignore);         -&gt; null (continue)
+    };
+
+    const auth = function (request, reply) {
+
+        reply(error, result, data);     -&gt; error || result (respond) + data
+        reply(...).takeover();          -&gt; ... (respond) + data
+
+        reply.continue(data);           -&gt; (continue) + data
+    };
+*/
+
+internals.Reply.prototype.interface = function (request, realm, next) {       // next(err || response, data);
+
+    const reply = (err, response, data) =&gt; {
+
+        reply._data = data;                 // Held for later
+        return reply.response(err !== null &amp;&amp; err !== undefined ? err : response);
+    };
+
+    reply._replied = false;
+    reply._next = Hoek.once(next);
+
+    reply.realm = realm;
+    reply.request = request;
+
+    reply.response = internals.response;
+    reply.close = internals.close;
+    reply.state = internals.state;
+    reply.unstate = internals.unstate;
+    reply.redirect = internals.redirect;
+    reply.continue = internals.continue;
+
+    if (this._decorations) {
+        const methods = Object.keys(this._decorations);
+        for (let i = 0; i &lt; methods.length; ++i) {
+            const method = methods[i];
+            reply[method] = this._decorations[method];
+        }
+    }
+
+    return reply;
+};
+
+
+internals.close = function (options) {
+
+    options = options || {};
+    this._next({ closed: true, end: options.end !== false });
+};
+
+
+internals.continue = function (data) {
+
+    this._next(null, data);
+    this._next = null;
+};
+
+
+internals.state = function (name, value, options) {
+
+    this.request._setState(name, value, options);
+};
+
+
+internals.unstate = function (name, options) {
+
+    this.request._clearState(name, options);
+};
+
+
+internals.redirect = function (location) {
+
+    return this.response(&#039;&#039;).redirect(location);
+};
+
+
+internals.response = function (result) {
+
+    Hoek.assert(!this._replied, &#039;reply interface called twice&#039;);
+    this._replied = true;
+
+    const response = Response.wrap(result, this.request);
+    if (response.isBoom) {
+        this._next(response, this._data);
+        this._next = null;
+        return response;
+    }
+
+    response.hold = internals.hold(this);
+
+    process.nextTick(() =&gt; {
+
+        response.hold = undefined;
+
+        if (!response.send &amp;&amp;
+            this._next) {
+
+            response._prepare(this._data, this._next);
+            this._next = null;
+        }
+    });
+
+    return response;
+};
+
+
+internals.hold = function (reply) {
+
+    return function () {
+
+        this.hold = undefined;
+        this.send = () =&gt; {
+
+            this.send = undefined;
+            this._prepare(reply._data, reply._next);
+            this._next = null;
+        };
+
+        return this;
+    };
+};</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

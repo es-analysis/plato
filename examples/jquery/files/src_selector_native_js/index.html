@@ -44,11 +44,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
-      <p class="stat">63.99</p>
+      <p class="stat">63.07</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">174</p>
+      <p class="stat">237</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,11 +62,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">41.59</p>
+      <p class="stat">45.33</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
-      <p class="stat">1.03</p>
+      <p class="stat">1.58</p>
     </div>
   </div>
 </div>
@@ -89,9 +89,15 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="col-md-12">define([
-	&quot;./core&quot;
-], function( jQuery ) {
+    <textarea id="file-source" class="col-md-12">define( [
+	&quot;./core&quot;,
+	&quot;./var/document&quot;,
+	&quot;./var/documentElement&quot;,
+	&quot;./var/hasOwn&quot;,
+	&quot;./var/indexOf&quot;
+], function( jQuery, document, documentElement, hasOwn, indexOf ) {
+
+&quot;use strict&quot;;
 
 /*
  * Optional (non-Sizzle) selector module for custom builds.
@@ -118,48 +124,112 @@
  * customize this stub for the project&#039;s specific needs.
  */
 
-var hasDuplicate,
-	docElem = window.document.documentElement,
-	matches = docElem.matches ||
-		docElem.webkitMatchesSelector ||
-		docElem.mozMatchesSelector ||
-		docElem.oMatchesSelector ||
-		docElem.msMatchesSelector,
-	sortOrder = function( a, b ) {
-		// Flag for duplicate removal
-		if ( a === b ) {
-			hasDuplicate = true;
-			return 0;
-		}
+var hasDuplicate, sortInput,
+	sortStable = jQuery.expando.split( &quot;&quot; ).sort( sortOrder ).join( &quot;&quot; ) === jQuery.expando,
+	matches = documentElement.matches ||
+		documentElement.webkitMatchesSelector ||
+		documentElement.mozMatchesSelector ||
+		documentElement.oMatchesSelector ||
+		documentElement.msMatchesSelector,
 
-		var compare = b.compareDocumentPosition &amp;&amp;
-			a.compareDocumentPosition &amp;&amp;
-			a.compareDocumentPosition( b );
+	// CSS string/identifier serialization
+	// https://drafts.csswg.org/cssom/#common-serializing-idioms
+	rcssescape = /([\0-\x1f\x7f]|^-?\d)|^-$|[^\x80-\uFFFF\w-]/g,
+	fcssescape = function( ch, asCodePoint ) {
+		if ( asCodePoint ) {
 
-		if ( compare ) {
-			// Disconnected nodes
-			if ( compare &amp; 1 ) {
-
-				// Choose the first element that is related to our document
-				if ( a === document || jQuery.contains(document, a) ) {
-					return -1;
-				}
-				if ( b === document || jQuery.contains(document, b) ) {
-					return 1;
-				}
-
-				// Maintain original order
-				return 0;
+			// U+0000 NULL becomes U+FFFD REPLACEMENT CHARACTER
+			if ( ch === &quot;\0&quot; ) {
+				return &quot;\uFFFD&quot;;
 			}
 
-			return compare &amp; 4 ? -1 : 1;
+			// Control characters and (dependent upon position) numbers get escaped as code points
+			return ch.slice( 0, -1 ) + &quot;\\&quot; + ch.charCodeAt( ch.length - 1 ).toString( 16 ) + &quot; &quot;;
 		}
 
-		// Not directly comparable, sort on existence of method
-		return a.compareDocumentPosition ? -1 : 1;
+		// Other potentially-special ASCII characters get backslash-escaped
+		return &quot;\\&quot; + ch;
 	};
 
-jQuery.extend({
+function sortOrder( a, b ) {
+
+	// Flag for duplicate removal
+	if ( a === b ) {
+		hasDuplicate = true;
+		return 0;
+	}
+
+	// Sort on method existence if only one input has compareDocumentPosition
+	var compare = !a.compareDocumentPosition - !b.compareDocumentPosition;
+	if ( compare ) {
+		return compare;
+	}
+
+	// Calculate position if both inputs belong to the same document
+	compare = ( a.ownerDocument || a ) === ( b.ownerDocument || b ) ?
+		a.compareDocumentPosition( b ) :
+
+		// Otherwise we know they are disconnected
+		1;
+
+	// Disconnected nodes
+	if ( compare &amp; 1 ) {
+
+		// Choose the first element that is related to our preferred document
+		if ( a === document || a.ownerDocument === document &amp;&amp;
+			jQuery.contains( document, a ) ) {
+			return -1;
+		}
+		if ( b === document || b.ownerDocument === document &amp;&amp;
+			jQuery.contains( document, b ) ) {
+			return 1;
+		}
+
+		// Maintain original order
+		return sortInput ?
+			( indexOf.call( sortInput, a ) - indexOf.call( sortInput, b ) ) :
+			0;
+	}
+
+	return compare &amp; 4 ? -1 : 1;
+}
+
+function uniqueSort( results ) {
+	var elem,
+		duplicates = [],
+		j = 0,
+		i = 0;
+
+	hasDuplicate = false;
+	sortInput = !sortStable &amp;&amp; results.slice( 0 );
+	results.sort( sortOrder );
+
+	if ( hasDuplicate ) {
+		while ( ( elem = results[ i++ ] ) ) {
+			if ( elem === results[ i ] ) {
+				j = duplicates.push( i );
+			}
+		}
+		while ( j-- ) {
+			results.splice( duplicates[ j ], 1 );
+		}
+	}
+
+	// Clear input after sorting to release objects
+	// See https://github.com/jquery/sizzle/pull/225
+	sortInput = null;
+
+	return results;
+}
+
+function escape( sel ) {
+	return ( sel + &quot;&quot; ).replace( rcssescape, fcssescape );
+}
+
+jQuery.extend( {
+	uniqueSort: uniqueSort,
+	unique: uniqueSort,
+	escapeSelector: escape,
 	find: function( selector, context, results, seed ) {
 		var elem, nodeType,
 			i = 0;
@@ -173,40 +243,18 @@ jQuery.extend({
 		}
 
 		// Early return if context is not an element or document
-		if ( (nodeType = context.nodeType) !== 1 &amp;&amp; nodeType !== 9 ) {
+		if ( ( nodeType = context.nodeType ) !== 1 &amp;&amp; nodeType !== 9 ) {
 			return [];
 		}
 
 		if ( seed ) {
-			while ( (elem = seed[i++]) ) {
-				if ( jQuery.find.matchesSelector(elem, selector) ) {
+			while ( ( elem = seed[ i++ ] ) ) {
+				if ( jQuery.find.matchesSelector( elem, selector ) ) {
 					results.push( elem );
 				}
 			}
 		} else {
-			jQuery.merge( results, context.querySelectorAll(selector) );
-		}
-
-		return results;
-	},
-	unique: function( results ) {
-		var elem,
-			duplicates = [],
-			i = 0,
-			j = 0;
-
-		hasDuplicate = false;
-		results.sort( sortOrder );
-
-		if ( hasDuplicate ) {
-			while ( (elem = results[i++]) ) {
-				if ( elem === results[ i ] ) {
-					j = duplicates.push( i );
-				}
-			}
-			while ( j-- ) {
-				results.splice( duplicates[ j ], 1 );
-			}
+			jQuery.merge( results, context.querySelectorAll( selector ) );
 		}
 
 		return results;
@@ -218,17 +266,21 @@ jQuery.extend({
 			nodeType = elem.nodeType;
 
 		if ( !nodeType ) {
+
 			// If no nodeType, this is expected to be an array
-			while ( (node = elem[i++]) ) {
+			while ( ( node = elem[ i++ ] ) ) {
+
 				// Do not traverse comment nodes
 				ret += jQuery.text( node );
 			}
 		} else if ( nodeType === 1 || nodeType === 9 || nodeType === 11 ) {
+
 			// Use textContent for elements
 			return elem.textContent;
 		} else if ( nodeType === 3 || nodeType === 4 ) {
 			return elem.nodeValue;
 		}
+
 		// Do not include comment or processing instruction nodes
 
 		return ret;
@@ -236,19 +288,24 @@ jQuery.extend({
 	contains: function( a, b ) {
 		var adown = a.nodeType === 9 ? a.documentElement : a,
 			bup = b &amp;&amp; b.parentNode;
-		return a === bup || !!( bup &amp;&amp; bup.nodeType === 1 &amp;&amp; adown.contains(bup) );
+		return a === bup || !!( bup &amp;&amp; bup.nodeType === 1 &amp;&amp; adown.contains( bup ) );
 	},
 	isXMLDoc: function( elem ) {
-		return (elem.ownerDocument || elem).documentElement.nodeName !== &quot;HTML&quot;;
+
+		// documentElement is verified for cases where it doesn&#039;t yet exist
+		// (such as loading iframes in IE - #4833)
+		var documentElement = elem &amp;&amp; ( elem.ownerDocument || elem ).documentElement;
+		return documentElement ? documentElement.nodeName !== &quot;HTML&quot; : false;
 	},
 	expr: {
 		attrHandle: {},
 		match: {
-			bool: /^(?:checked|selected|async|autofocus|autoplay|controls|defer|disabled|hidden|ismap|loop|multiple|open|readonly|required|scoped)$/i,
+			bool: new RegExp( &quot;^(?:checked|selected|async|autofocus|autoplay|controls|defer&quot; +
+				&quot;|disabled|hidden|ismap|loop|multiple|open|readonly|required|scoped)$&quot;, &quot;i&quot; ),
 			needsContext: /^[\x20\t\r\n\f]*[&gt;+~]/
 		}
 	}
-});
+} );
 
 jQuery.extend( jQuery.find, {
 	matches: function( expr, elements ) {
@@ -258,11 +315,17 @@ jQuery.extend( jQuery.find, {
 		return matches.call( elem, expr );
 	},
 	attr: function( elem, name ) {
-		return elem.getAttribute( name );
-	}
-});
+		var fn = jQuery.expr.attrHandle[ name.toLowerCase() ],
 
-});</textarea>
+			// Don&#039;t get fooled by Object.prototype properties (jQuery #13807)
+			value = fn &amp;&amp; hasOwn.call( jQuery.expr.attrHandle, name.toLowerCase() ) ?
+				fn( elem, name, jQuery.isXMLDoc( elem ) ) :
+				undefined;
+		return value !== undefined ? value : elem.getAttribute( name );
+	}
+} );
+
+} );</textarea>
   </div>
 </div>
 

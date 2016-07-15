@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - lib/transmit.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>lib/transmit.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">55.05</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">567</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">58.90</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">4.22</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">&#039;use strict&#039;;
+
+// Load modules
+
+const Http = require(&#039;http&#039;);
+const Stream = require(&#039;stream&#039;);
+const Zlib = require(&#039;zlib&#039;);
+const Ammo = require(&#039;ammo&#039;);
+const Boom = require(&#039;boom&#039;);
+const Hoek = require(&#039;hoek&#039;);
+const Items = require(&#039;items&#039;);
+const Shot = require(&#039;shot&#039;);
+const Auth = require(&#039;./auth&#039;);
+const Cors = require(&#039;./cors&#039;);
+const Response = require(&#039;./response&#039;);
+
+
+// Declare internals
+
+const internals = {};
+
+
+exports.send = function (request, callback) {
+
+    const response = request.response;
+    if (response.isBoom) {
+        return internals.fail(request, response, callback);
+    }
+
+    internals.marshal(request, (err) =&gt; {
+
+        if (err) {
+            request._setResponse(err);
+            return internals.fail(request, err, callback);
+        }
+
+        return internals.transmit(response, (err) =&gt; {
+
+            if (err) {
+                request._setResponse(err);
+                return internals.fail(request, err, callback);
+            }
+
+            return callback();
+        });
+    });
+};
+
+
+internals.marshal = function (request, next) {
+
+    const response = request.response;
+
+    Cors.headers(response);
+    internals.content(response, false);
+    internals.security(response);
+
+    if (response.statusCode !== 304 &amp;&amp;
+        (request.method === &#039;get&#039; || request.method === &#039;head&#039;)) {
+
+        if (response.headers.etag &amp;&amp;
+            request.headers[&#039;if-none-match&#039;]) {
+
+            // Strong verifier
+
+            const ifNoneMatch = request.headers[&#039;if-none-match&#039;].split(/\s*,\s*/);
+            for (let i = 0; i &lt; ifNoneMatch.length; ++i) {
+                const etag = ifNoneMatch[i];
+                if (etag === response.headers.etag) {
+                    response.code(304);
+                    break;
+                }
+                else if (response.settings.varyEtag) {
+                    const etagBase = response.headers.etag.slice(0, -1);
+                    if (etag === etagBase + &#039;-gzip&quot;&#039; ||
+                        etag === etagBase + &#039;-deflate&quot;&#039;) {
+
+                        response.code(304);
+                        break;
+                    }
+                }
+            }
+        }
+        else {
+            const ifModifiedSinceHeader = request.headers[&#039;if-modified-since&#039;];
+            const lastModifiedHeader = response.headers[&#039;last-modified&#039;];
+
+            if (ifModifiedSinceHeader &amp;&amp;
+                lastModifiedHeader) {
+
+                // Weak verifier
+
+                const ifModifiedSince = internals.parseDate(ifModifiedSinceHeader);
+                const lastModified = internals.parseDate(lastModifiedHeader);
+
+                if (ifModifiedSince &amp;&amp;
+                    lastModified &amp;&amp;
+                    ifModifiedSince &gt;= lastModified) {
+
+                    response.code(304);
+                }
+            }
+        }
+    }
+
+    internals.state(response, (err) =&gt; {
+
+        if (err) {
+            request._log([&#039;state&#039;, &#039;response&#039;, &#039;error&#039;], err);
+            request._states = {};                                           // Clear broken state
+            return next(err);
+        }
+
+        internals.cache(response);
+
+        if (!response._isPayloadSupported()) {
+
+            // Close unused file streams
+
+            response._close();
+
+            // Set empty stream
+
+            response._payload = new internals.Empty();
+            if (request.method !== &#039;head&#039;) {
+                delete response.headers[&#039;content-length&#039;];
+            }
+
+            return Auth.response(request, next);               // Must be last in case requires access to headers
+        }
+
+        response._marshal((err) =&gt; {
+
+            if (err) {
+                return next(Boom.wrap(err));
+            }
+
+            if (request.jsonp &amp;&amp;
+                response._payload.jsonp) {
+
+                response._header(&#039;content-type&#039;, &#039;text/javascript&#039; + (response.settings.charset ? &#039;; charset=&#039; + response.settings.charset : &#039;&#039;));
+                response._header(&#039;x-content-type-options&#039;, &#039;nosniff&#039;);
+                response._payload.jsonp(request.jsonp);
+            }
+
+            if (response._payload.size &amp;&amp;
+                typeof response._payload.size === &#039;function&#039;) {
+
+                response._header(&#039;content-length&#039;, response._payload.size(), { override: false });
+            }
+
+            internals.content(response, true);
+            return Auth.response(request, next);               // Must be last in case requires access to headers
+        });
+    });
+};
+
+
+internals.parseDate = function (string) {
+
+    try {
+        return Date.parse(string);
+    }
+    catch (errIgnore) { }
+};
+
+
+internals.fail = function (request, boom, callback) {
+
+    const error = boom.output;
+    const response = new Response(error.payload, request);
+    response._error = boom;
+    response.code(error.statusCode);
+    response.headers = error.headers;
+    request.response = response;                            // Not using request._setResponse() to avoid double log
+
+    internals.marshal(request, (err) =&gt; {
+
+        if (err) {
+
+            // Failed to marshal an error - replace with minimal representation of original error
+
+            const minimal = {
+                statusCode: error.statusCode,
+                error: Http.STATUS_CODES[error.statusCode],
+                message: boom.message
+            };
+
+            response._payload = new Response.Payload(JSON.stringify(minimal), {});
+        }
+
+        return internals.transmit(response, callback);
+    });
+};
+
+
+internals.transmit = function (response, callback) {
+
+    // Setup source
+
+    const request = response.request;
+    const source = response._payload;
+    const length = parseInt(response.headers[&#039;content-length&#039;], 10);      // In case value is a string
+
+    // Empty response
+
+    if (length === 0 &amp;&amp;
+        response.statusCode === 200 &amp;&amp;
+        request.route.settings.response.emptyStatusCode === 204) {
+
+        response.code(204);
+        delete response.headers[&#039;content-length&#039;];
+    }
+
+    // Compression
+
+    const mime = request.server.mime.type(response.headers[&#039;content-type&#039;] || &#039;application/octet-stream&#039;);
+    let encoding = (request.connection.settings.compression &amp;&amp; mime.compressible &amp;&amp; !response.headers[&#039;content-encoding&#039;] ? request.info.acceptEncoding : null);
+    encoding = (encoding === &#039;identity&#039; ? null : encoding);
+
+    // Range
+
+    let ranger = null;
+    if (request.route.settings.response.ranges &amp;&amp;
+        request.method === &#039;get&#039; &amp;&amp;
+        response.statusCode === 200 &amp;&amp;
+        length &gt; 0 &amp;&amp;
+        !encoding) {
+
+        if (request.headers.range) {
+
+            // Check If-Range
+
+            if (!request.headers[&#039;if-range&#039;] ||
+                request.headers[&#039;if-range&#039;] === response.headers.etag) {            // Ignoring last-modified date (weak)
+
+                // Parse header
+
+                const ranges = Ammo.header(request.headers.range, length);
+                if (!ranges) {
+                    const error = Boom.rangeNotSatisfiable();
+                    error.output.headers[&#039;content-range&#039;] = &#039;bytes */&#039; + length;
+                    return internals.fail(request, error, callback);
+                }
+
+                // Prepare transform
+
+                if (ranges.length === 1) {                                          // Ignore requests for multiple ranges
+                    const range = ranges[0];
+                    ranger = new Ammo.Stream(range);
+                    response.code(206);
+                    response.bytes(range.to - range.from + 1);
+                    response._header(&#039;content-range&#039;, &#039;bytes &#039; + range.from + &#039;-&#039; + range.to + &#039;/&#039; + length);
+                }
+            }
+        }
+
+        response._header(&#039;accept-ranges&#039;, &#039;bytes&#039;);
+    }
+
+    // Content-Encoding
+
+    if (request.headers[&#039;accept-encoding&#039;]) {
+        response.vary(&#039;accept-encoding&#039;);
+    }
+
+    let compressor = null;
+    if (encoding &amp;&amp;
+        length !== 0 &amp;&amp;
+        response._isPayloadSupported()) {
+
+        delete response.headers[&#039;content-length&#039;];
+        response._header(&#039;content-encoding&#039;, encoding);
+
+        compressor = (encoding === &#039;gzip&#039; ? Zlib.createGzip() : Zlib.createDeflate());
+    }
+
+    if ((response.headers[&#039;content-encoding&#039;] || encoding) &amp;&amp;
+        response.headers.etag &amp;&amp;
+        response.settings.varyEtag) {
+
+        response.headers.etag = response.headers.etag.slice(0, -1) + &#039;-&#039; + (response.headers[&#039;content-encoding&#039;] || encoding) + &#039;&quot;&#039;;
+    }
+
+    // Connection: close
+
+    const isInjection = Shot.isInjection(request.raw.req);
+    if (!isInjection &amp;&amp; !request.connection._started) {
+        response._header(&#039;connection&#039;, &#039;close&#039;);
+    }
+
+    // Write headers
+
+    const error = internals.writeHead(response);
+    if (error) {
+        return Hoek.nextTick(callback)(error);
+    }
+
+    // Write payload
+
+    let hasEnded = false;
+    const end = (err, event) =&gt; {
+
+        if (hasEnded) {
+            return;
+        }
+
+        hasEnded = true;
+
+        if (!request.raw.res.finished &amp;&amp;
+            event !== &#039;aborted&#039;) {
+
+            request.raw.res.end();
+        }
+
+        source.removeListener(&#039;error&#039;, end);
+
+        request.raw.req.removeListener(&#039;aborted&#039;, onAborted);
+        request.raw.req.removeListener(&#039;close&#039;, onClose);
+
+        request.raw.res.removeListener(&#039;close&#039;, onClose);
+        request.raw.res.removeListener(&#039;error&#039;, end);
+        request.raw.res.removeListener(&#039;finish&#039;, end);
+
+        const tags = (err ? [&#039;response&#039;, &#039;error&#039;]
+                        : (event ? [&#039;response&#039;, &#039;error&#039;, event]
+                                 : [&#039;response&#039;]));
+
+        if (event || err) {
+            request.emit(&#039;disconnect&#039;);
+        }
+
+        request._log(tags, err);
+        return callback();
+    };
+
+    source.once(&#039;error&#039;, end);
+
+    const onAborted = () =&gt; {
+
+        return end(null, &#039;aborted&#039;);
+    };
+
+    const onClose = () =&gt; {
+
+        return end(null, &#039;close&#039;);
+    };
+
+    request.raw.req.once(&#039;aborted&#039;, onAborted);
+    request.raw.req.once(&#039;close&#039;, onClose);
+
+    request.raw.res.once(&#039;close&#039;, onClose);
+    request.raw.res.once(&#039;error&#039;, end);
+    request.raw.res.once(&#039;finish&#039;, end);
+
+    const tap = response._tap();
+    const preview = (tap ? source.pipe(tap) : source);
+    const compressed = (compressor ? preview.pipe(compressor) : preview);
+    const ranged = (ranger ? compressed.pipe(ranger) : compressed);
+    ranged.pipe(request.raw.res);
+
+    // Injection
+
+    if (isInjection) {
+        request.raw.res._hapi = {
+            request: request
+        };
+
+        if (response.variety === &#039;plain&#039;) {
+            request.raw.res._hapi.result = response._isPayloadSupported() ? response.source : null;
+        }
+    }
+};
+
+
+internals.writeHead = function (response) {
+
+    const res = response.request.raw.res;
+    const headers = Object.keys(response.headers);
+    let i = 0;
+
+    try {
+        for (; i &lt; headers.length; ++i) {
+            const header = headers[i];
+            const value = response.headers[header];
+            if (value !== undefined) {
+                res.setHeader(header, value);
+            }
+        }
+    }
+    catch (err) {
+
+        for (--i; i &gt;= 0; --i) {
+            res.setHeader(headers[i], null);        // Undo headers
+        }
+
+        return Boom.wrap(err);
+    }
+
+    try {
+        res.writeHead(response.statusCode);
+    }
+    catch (err) {
+        return Boom.wrap(err);
+    }
+
+    return null;
+};
+
+
+internals.Empty = function () {
+
+    Stream.Readable.call(this);
+};
+
+Hoek.inherits(internals.Empty, Stream.Readable);
+
+
+internals.Empty.prototype._read = function (/* size */) {
+
+    this.push(null);
+};
+
+
+internals.cache = function (response) {
+
+    const request = response.request;
+
+    if (response.headers[&#039;cache-control&#039;]) {
+        return;
+    }
+
+    const policy = request.route.settings.cache &amp;&amp;
+                   request._route._cache &amp;&amp;
+                   (request.route.settings.cache._statuses[response.statusCode] || (response.statusCode === 304 &amp;&amp; request.route.settings.cache._statuses[&#039;200&#039;]));
+
+    if (policy ||
+        response.settings.ttl) {
+
+        const ttl = (response.settings.ttl !== null ? response.settings.ttl : request._route._cache.ttl());
+        const privacy = (request.auth.isAuthenticated || response.headers[&#039;set-cookie&#039;] ? &#039;private&#039; : request.route.settings.cache.privacy || &#039;default&#039;);
+        response._header(&#039;cache-control&#039;, &#039;max-age=&#039; + Math.floor(ttl / 1000) + &#039;, must-revalidate&#039; + (privacy !== &#039;default&#039; ? &#039;, &#039; + privacy : &#039;&#039;));
+    }
+    else if (request.route.settings.cache) {
+        response._header(&#039;cache-control&#039;, request.route.settings.cache.otherwise);
+    }
+};
+
+
+internals.security = function (response) {
+
+    const request = response.request;
+
+    const security = request.route.settings.security;
+    if (security) {
+        if (security._hsts) {
+            response._header(&#039;strict-transport-security&#039;, security._hsts, { override: false });
+        }
+
+        if (security._xframe) {
+            response._header(&#039;x-frame-options&#039;, security._xframe, { override: false });
+        }
+
+        if (security.xss) {
+            response._header(&#039;x-xss-protection&#039;, &#039;1; mode=block&#039;, { override: false });
+        }
+
+        if (security.noOpen) {
+            response._header(&#039;x-download-options&#039;, &#039;noopen&#039;, { override: false });
+        }
+
+        if (security.noSniff) {
+            response._header(&#039;x-content-type-options&#039;, &#039;nosniff&#039;, { override: false });
+        }
+    }
+};
+
+
+internals.content = function (response, postMarshal) {
+
+    const type = response.headers[&#039;content-type&#039;];
+    if (!type) {
+        if (response._contentType) {
+            const charset = (response.settings.charset &amp;&amp; response._contentType !== &#039;application/octet-stream&#039; ? &#039;; charset=&#039; + response.settings.charset : &#039;&#039;);
+            response.type(response._contentType + charset);
+        }
+    }
+    else if ((!response._contentType || !postMarshal) &amp;&amp;
+        response.settings.charset &amp;&amp;
+        type.match(/^(?:text\/)|(?:application\/(?:json)|(?:javascript))/)) {
+
+        const hasParams = (type.indexOf(&#039;;&#039;) !== -1);
+        if (!hasParams ||
+            !type.match(/[; ]charset=/)) {
+
+            response.type(type + (hasParams ? &#039;, &#039; : &#039;; &#039;) + &#039;charset=&#039; + (response.settings.charset));
+        }
+    }
+};
+
+
+internals.state = function (response, next) {
+
+    const request = response.request;
+
+    const names = {};
+    const states = [];
+
+    const requestStates = Object.keys(request._states);
+    for (let i = 0; i &lt; requestStates.length; ++i) {
+        const stateName = requestStates[i];
+        names[stateName] = true;
+        states.push(request._states[stateName]);
+    }
+
+    const each = (name, nextKey) =&gt; {
+
+        const autoValue = request.connection.states.cookies[name].autoValue;
+        if (!autoValue || names[name]) {
+            return nextKey();
+        }
+
+        names[name] = true;
+
+        if (typeof autoValue !== &#039;function&#039;) {
+            states.push({ name: name, value: autoValue });
+            return nextKey();
+        }
+
+        autoValue(request, (err, value) =&gt; {
+
+            if (err) {
+                return nextKey(err);
+            }
+
+            states.push({ name: name, value: value });
+            return nextKey();
+        });
+    };
+
+    const keys = Object.keys(request.connection.states.cookies);
+    Items.parallel(keys, each, (err) =&gt; {
+
+        if (err) {
+            return next(Boom.wrap(err));
+        }
+
+        if (!states.length) {
+            return next();
+        }
+
+        request.connection.states.format(states, (err, header) =&gt; {
+
+            if (err) {
+                return next(Boom.wrap(err));
+            }
+
+            const existing = response.headers[&#039;set-cookie&#039;];
+            if (existing) {
+                header = (Array.isArray(existing) ? existing : [existing]).concat(header);
+            }
+
+            response._header(&#039;set-cookie&#039;, header);
+            return next();
+        });
+    });
+};</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

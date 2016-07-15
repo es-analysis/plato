@@ -44,11 +44,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
-      <p class="stat">72.31</p>
+      <p class="stat">73.29</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">199</p>
+      <p class="stat">178</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,11 +62,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">53.47</p>
+      <p class="stat">47.67</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
-      <p class="stat">1.58</p>
+      <p class="stat">1.32</p>
     </div>
   </div>
 </div>
@@ -89,16 +89,21 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="col-md-12">define([
+    <textarea id="file-source" class="col-md-12">define( [
 	&quot;./core&quot;,
 	&quot;./var/indexOf&quot;,
+	&quot;./traversing/var/dir&quot;,
+	&quot;./traversing/var/siblings&quot;,
 	&quot;./traversing/var/rneedsContext&quot;,
 	&quot;./core/init&quot;,
 	&quot;./traversing/findFilter&quot;,
 	&quot;./selector&quot;
-], function( jQuery, indexOf, rneedsContext ) {
+], function( jQuery, indexOf, dir, siblings, rneedsContext ) {
+
+&quot;use strict&quot;;
 
 var rparentsprev = /^(?:parents|prev(?:Until|All))/,
+
 	// Methods guaranteed to produce a unique set when starting from a unique set
 	guaranteedUnique = {
 		children: true,
@@ -107,48 +112,19 @@ var rparentsprev = /^(?:parents|prev(?:Until|All))/,
 		prev: true
 	};
 
-jQuery.extend({
-	dir: function( elem, dir, until ) {
-		var matched = [],
-			truncate = until !== undefined;
-
-		while ( (elem = elem[ dir ]) &amp;&amp; elem.nodeType !== 9 ) {
-			if ( elem.nodeType === 1 ) {
-				if ( truncate &amp;&amp; jQuery( elem ).is( until ) ) {
-					break;
-				}
-				matched.push( elem );
-			}
-		}
-		return matched;
-	},
-
-	sibling: function( n, elem ) {
-		var matched = [];
-
-		for ( ; n; n = n.nextSibling ) {
-			if ( n.nodeType === 1 &amp;&amp; n !== elem ) {
-				matched.push( n );
-			}
-		}
-
-		return matched;
-	}
-});
-
-jQuery.fn.extend({
+jQuery.fn.extend( {
 	has: function( target ) {
 		var targets = jQuery( target, this ),
 			l = targets.length;
 
-		return this.filter(function() {
+		return this.filter( function() {
 			var i = 0;
 			for ( ; i &lt; l; i++ ) {
-				if ( jQuery.contains( this, targets[i] ) ) {
+				if ( jQuery.contains( this, targets[ i ] ) ) {
 					return true;
 				}
 			}
-		});
+		} );
 	},
 
 	closest: function( selectors, context ) {
@@ -156,27 +132,29 @@ jQuery.fn.extend({
 			i = 0,
 			l = this.length,
 			matched = [],
-			pos = rneedsContext.test( selectors ) || typeof selectors !== &quot;string&quot; ?
-				jQuery( selectors, context || this.context ) :
-				0;
+			targets = typeof selectors !== &quot;string&quot; &amp;&amp; jQuery( selectors );
 
-		for ( ; i &lt; l; i++ ) {
-			for ( cur = this[i]; cur &amp;&amp; cur !== context; cur = cur.parentNode ) {
-				// Always skip document fragments
-				if ( cur.nodeType &lt; 11 &amp;&amp; (pos ?
-					pos.index(cur) &gt; -1 :
+		// Positional selectors never match, since there&#039;s no _selection_ context
+		if ( !rneedsContext.test( selectors ) ) {
+			for ( ; i &lt; l; i++ ) {
+				for ( cur = this[ i ]; cur &amp;&amp; cur !== context; cur = cur.parentNode ) {
 
-					// Don&#039;t pass non-elements to Sizzle
-					cur.nodeType === 1 &amp;&amp;
-						jQuery.find.matchesSelector(cur, selectors)) ) {
+					// Always skip document fragments
+					if ( cur.nodeType &lt; 11 &amp;&amp; ( targets ?
+						targets.index( cur ) &gt; -1 :
 
-					matched.push( cur );
-					break;
+						// Don&#039;t pass non-elements to Sizzle
+						cur.nodeType === 1 &amp;&amp;
+							jQuery.find.matchesSelector( cur, selectors ) ) ) {
+
+						matched.push( cur );
+						break;
+					}
 				}
 			}
 		}
 
-		return this.pushStack( matched.length &gt; 1 ? jQuery.unique( matched ) : matched );
+		return this.pushStack( matched.length &gt; 1 ? jQuery.uniqueSort( matched ) : matched );
 	},
 
 	// Determine the position of an element within the set
@@ -202,7 +180,7 @@ jQuery.fn.extend({
 
 	add: function( selector, context ) {
 		return this.pushStack(
-			jQuery.unique(
+			jQuery.uniqueSort(
 				jQuery.merge( this.get(), jQuery( selector, context ) )
 			)
 		);
@@ -210,26 +188,26 @@ jQuery.fn.extend({
 
 	addBack: function( selector ) {
 		return this.add( selector == null ?
-			this.prevObject : this.prevObject.filter(selector)
+			this.prevObject : this.prevObject.filter( selector )
 		);
 	}
-});
+} );
 
 function sibling( cur, dir ) {
-	while ( (cur = cur[dir]) &amp;&amp; cur.nodeType !== 1 ) {}
+	while ( ( cur = cur[ dir ] ) &amp;&amp; cur.nodeType !== 1 ) {}
 	return cur;
 }
 
-jQuery.each({
+jQuery.each( {
 	parent: function( elem ) {
 		var parent = elem.parentNode;
 		return parent &amp;&amp; parent.nodeType !== 11 ? parent : null;
 	},
 	parents: function( elem ) {
-		return jQuery.dir( elem, &quot;parentNode&quot; );
+		return dir( elem, &quot;parentNode&quot; );
 	},
 	parentsUntil: function( elem, i, until ) {
-		return jQuery.dir( elem, &quot;parentNode&quot;, until );
+		return dir( elem, &quot;parentNode&quot;, until );
 	},
 	next: function( elem ) {
 		return sibling( elem, &quot;nextSibling&quot; );
@@ -238,22 +216,22 @@ jQuery.each({
 		return sibling( elem, &quot;previousSibling&quot; );
 	},
 	nextAll: function( elem ) {
-		return jQuery.dir( elem, &quot;nextSibling&quot; );
+		return dir( elem, &quot;nextSibling&quot; );
 	},
 	prevAll: function( elem ) {
-		return jQuery.dir( elem, &quot;previousSibling&quot; );
+		return dir( elem, &quot;previousSibling&quot; );
 	},
 	nextUntil: function( elem, i, until ) {
-		return jQuery.dir( elem, &quot;nextSibling&quot;, until );
+		return dir( elem, &quot;nextSibling&quot;, until );
 	},
 	prevUntil: function( elem, i, until ) {
-		return jQuery.dir( elem, &quot;previousSibling&quot;, until );
+		return dir( elem, &quot;previousSibling&quot;, until );
 	},
 	siblings: function( elem ) {
-		return jQuery.sibling( ( elem.parentNode || {} ).firstChild, elem );
+		return siblings( ( elem.parentNode || {} ).firstChild, elem );
 	},
 	children: function( elem ) {
-		return jQuery.sibling( elem.firstChild );
+		return siblings( elem.firstChild );
 	},
 	contents: function( elem ) {
 		return elem.contentDocument || jQuery.merge( [], elem.childNodes );
@@ -271,9 +249,10 @@ jQuery.each({
 		}
 
 		if ( this.length &gt; 1 ) {
+
 			// Remove duplicates
 			if ( !guaranteedUnique[ name ] ) {
-				jQuery.unique( matched );
+				jQuery.uniqueSort( matched );
 			}
 
 			// Reverse order for parents* and prev-derivatives
@@ -284,10 +263,10 @@ jQuery.each({
 
 		return this.pushStack( matched );
 	};
-});
+} );
 
 return jQuery;
-});</textarea>
+} );</textarea>
   </div>
 </div>
 

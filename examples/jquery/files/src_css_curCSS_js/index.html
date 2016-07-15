@@ -44,11 +44,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
-      <p class="stat">68.98</p>
+      <p class="stat">58.73</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">35</p>
+      <p class="stat">59</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,11 +62,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">16.02</p>
+      <p class="stat">22.75</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
-      <p class="stat">0.13</p>
+      <p class="stat">0.28</p>
     </div>
   </div>
 </div>
@@ -89,41 +89,65 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="col-md-12">define([
+    <textarea id="file-source" class="col-md-12">define( [
 	&quot;../core&quot;,
 	&quot;./var/rnumnonpx&quot;,
 	&quot;./var/rmargin&quot;,
 	&quot;./var/getStyles&quot;,
-	&quot;../selector&quot; // contains
-], function( jQuery, rnumnonpx, rmargin, getStyles ) {
+	&quot;./support&quot;,
+	&quot;../selector&quot; // Get jQuery.contains
+], function( jQuery, rnumnonpx, rmargin, getStyles, support ) {
+
+&quot;use strict&quot;;
 
 function curCSS( elem, name, computed ) {
-	var ret;
+	var width, minWidth, maxWidth, ret,
+		style = elem.style;
 
 	computed = computed || getStyles( elem );
 
-	// Support: IE9
+	// Support: IE &lt;=9 only
 	// getPropertyValue is only needed for .css(&#039;filter&#039;) (#12537)
 	if ( computed ) {
 		ret = computed.getPropertyValue( name ) || computed[ name ];
-	}
-
-	if ( computed ) {
 
 		if ( ret === &quot;&quot; &amp;&amp; !jQuery.contains( elem.ownerDocument, elem ) ) {
 			ret = jQuery.style( elem, name );
 		}
+
+		// A tribute to the &quot;awesome hack by Dean Edwards&quot;
+		// Android Browser returns percentage for some values,
+		// but width seems to be reliably pixels.
+		// This is against the CSSOM draft spec:
+		// https://drafts.csswg.org/cssom/#resolved-values
+		if ( !support.pixelMarginRight() &amp;&amp; rnumnonpx.test( ret ) &amp;&amp; rmargin.test( name ) ) {
+
+			// Remember the original values
+			width = style.width;
+			minWidth = style.minWidth;
+			maxWidth = style.maxWidth;
+
+			// Put in the new values to get a computed value out
+			style.minWidth = style.maxWidth = style.width = ret;
+			ret = computed.width;
+
+			// Revert the changed values
+			style.width = width;
+			style.minWidth = minWidth;
+			style.maxWidth = maxWidth;
+		}
 	}
 
 	return ret !== undefined ?
-		// Support: IE9-11+
+
+		// Support: IE &lt;=9 - 11 only
 		// IE returns zIndex value as an integer.
 		ret + &quot;&quot; :
 		ret;
 }
 
 return curCSS;
-});</textarea>
+} );</textarea>
   </div>
 </div>
 

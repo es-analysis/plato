@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - region.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>region.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">64.39</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">361</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">48.31</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">2.30</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">/* jshint maxcomplexity: 16, maxstatements: 45, maxlen: 120 */
+
+// Region
+// ------
+
+// Manage the visual regions of your composite application. See
+// http://lostechies.com/derickbailey/2011/12/12/composite-js-apps-regions-and-region-managers/
+
+Marionette.Region = Marionette.Object.extend({
+  constructor: function(options) {
+
+    // set options temporarily so that we can get `el`.
+    // options will be overriden by Object.constructor
+    this.options = options || {};
+    this.el = this.getOption(&#039;el&#039;);
+
+    // Handle when this.el is passed in as a $ wrapped element.
+    this.el = this.el instanceof Backbone.$ ? this.el[0] : this.el;
+
+    if (!this.el) {
+      throw new Marionette.Error({
+        name: &#039;NoElError&#039;,
+        message: &#039;An &quot;el&quot; must be specified for a region.&#039;
+      });
+    }
+
+    this.$el = this.getEl(this.el);
+    Marionette.Object.call(this, options);
+  },
+
+  // Displays a backbone view instance inside of the region.
+  // Handles calling the `render` method for you. Reads content
+  // directly from the `el` attribute. Also calls an optional
+  // `onShow` and `onDestroy` method on your view, just after showing
+  // or just before destroying the view, respectively.
+  // The `preventDestroy` option can be used to prevent a view from
+  // the old view being destroyed on show.
+  // The `forceShow` option can be used to force a view to be
+  // re-rendered if it&#039;s already shown in the region.
+  show: function(view, options) {
+    if (!this._ensureElement()) {
+      return;
+    }
+
+    this._ensureViewIsIntact(view);
+    Marionette.MonitorDOMRefresh(view);
+
+    var showOptions     = options || {};
+    var isDifferentView = view !== this.currentView;
+    var preventDestroy  = !!showOptions.preventDestroy;
+    var forceShow       = !!showOptions.forceShow;
+
+    // We are only changing the view if there is a current view to change to begin with
+    var isChangingView = !!this.currentView;
+
+    // Only destroy the current view if we don&#039;t want to `preventDestroy` and if
+    // the view given in the first argument is different than `currentView`
+    var _shouldDestroyView = isDifferentView &amp;&amp; !preventDestroy;
+
+    // Only show the view given in the first argument if it is different than
+    // the current view or if we want to re-show the view. Note that if
+    // `_shouldDestroyView` is true, then `_shouldShowView` is also necessarily true.
+    var _shouldShowView = isDifferentView || forceShow;
+
+    if (isChangingView) {
+      this.triggerMethod(&#039;before:swapOut&#039;, this.currentView, this, options);
+    }
+
+    if (this.currentView &amp;&amp; isDifferentView) {
+      delete this.currentView._parent;
+    }
+
+    if (_shouldDestroyView) {
+      this.empty();
+
+    // A `destroy` event is attached to the clean up manually removed views.
+    // We need to detach this event when a new view is going to be shown as it
+    // is no longer relevant.
+    } else if (isChangingView &amp;&amp; _shouldShowView) {
+      this.currentView.off(&#039;destroy&#039;, this.empty, this);
+    }
+
+    if (_shouldShowView) {
+
+      // We need to listen for if a view is destroyed
+      // in a way other than through the region.
+      // If this happens we need to remove the reference
+      // to the currentView since once a view has been destroyed
+      // we can not reuse it.
+      view.once(&#039;destroy&#039;, this.empty, this);
+
+      // make this region the view&#039;s parent,
+      // It&#039;s important that this parent binding happens before rendering
+      // so that any events the child may trigger during render can also be
+      // triggered on the child&#039;s ancestor views
+      view._parent = this;
+      this._renderView(view);
+
+      if (isChangingView) {
+        this.triggerMethod(&#039;before:swap&#039;, view, this, options);
+      }
+
+      this.triggerMethod(&#039;before:show&#039;, view, this, options);
+      Marionette.triggerMethodOn(view, &#039;before:show&#039;, view, this, options);
+
+      if (isChangingView) {
+        this.triggerMethod(&#039;swapOut&#039;, this.currentView, this, options);
+      }
+
+      // An array of views that we&#039;re about to display
+      var attachedRegion = Marionette.isNodeAttached(this.el);
+
+      // The views that we&#039;re about to attach to the document
+      // It&#039;s important that we prevent _getNestedViews from being executed unnecessarily
+      // as it&#039;s a potentially-slow method
+      var displayedViews = [];
+
+      var attachOptions = _.extend({
+        triggerBeforeAttach: this.triggerBeforeAttach,
+        triggerAttach: this.triggerAttach
+      }, showOptions);
+
+      if (attachedRegion &amp;&amp; attachOptions.triggerBeforeAttach) {
+        displayedViews = this._displayedViews(view);
+        this._triggerAttach(displayedViews, &#039;before:&#039;);
+      }
+
+      this.attachHtml(view);
+      this.currentView = view;
+
+      if (attachedRegion &amp;&amp; attachOptions.triggerAttach) {
+        displayedViews = this._displayedViews(view);
+        this._triggerAttach(displayedViews);
+      }
+
+      if (isChangingView) {
+        this.triggerMethod(&#039;swap&#039;, view, this, options);
+      }
+
+      this.triggerMethod(&#039;show&#039;, view, this, options);
+      Marionette.triggerMethodOn(view, &#039;show&#039;, view, this, options);
+
+      return this;
+    }
+
+    return this;
+  },
+
+  triggerBeforeAttach: true,
+  triggerAttach: true,
+
+  _triggerAttach: function(views, prefix) {
+    var eventName = (prefix || &#039;&#039;) + &#039;attach&#039;;
+    _.each(views, function(view) {
+      Marionette.triggerMethodOn(view, eventName, view, this);
+    }, this);
+  },
+
+  _displayedViews: function(view) {
+    return _.union([view], _.result(view, &#039;_getNestedViews&#039;) || []);
+  },
+
+  _renderView: function(view) {
+    if (!view.supportsRenderLifecycle) {
+      Marionette.triggerMethodOn(view, &#039;before:render&#039;, view);
+    }
+    view.render();
+    if (!view.supportsRenderLifecycle) {
+      Marionette.triggerMethodOn(view, &#039;render&#039;, view);
+    }
+  },
+
+  _ensureElement: function() {
+    if (!_.isObject(this.el)) {
+      this.$el = this.getEl(this.el);
+      this.el = this.$el[0];
+    }
+
+    if (!this.$el || this.$el.length === 0) {
+      if (this.getOption(&#039;allowMissingEl&#039;)) {
+        return false;
+      } else {
+        throw new Marionette.Error(&#039;An &quot;el&quot; &#039; + this.$el.selector + &#039; must exist in DOM&#039;);
+      }
+    }
+    return true;
+  },
+
+  _ensureViewIsIntact: function(view) {
+    if (!view) {
+      throw new Marionette.Error({
+        name: &#039;ViewNotValid&#039;,
+        message: &#039;The view passed is undefined and therefore invalid. You must pass a view instance to show.&#039;
+      });
+    }
+
+    if (view.isDestroyed) {
+      throw new Marionette.Error({
+        name: &#039;ViewDestroyedError&#039;,
+        message: &#039;View (cid: &quot;&#039; + view.cid + &#039;&quot;) has already been destroyed and cannot be used.&#039;
+      });
+    }
+  },
+
+  // Override this method to change how the region finds the DOM
+  // element that it manages. Return a jQuery selector object scoped
+  // to a provided parent el or the document if none exists.
+  getEl: function(el) {
+    return Backbone.$(el, Marionette._getValue(this.options.parentEl, this));
+  },
+
+  // Override this method to change how the new view is
+  // appended to the `$el` that the region is managing
+  attachHtml: function(view) {
+    this.$el.contents().detach();
+
+    this.el.appendChild(view.el);
+  },
+
+  // Destroy the current view, if there is one. If there is no
+  // current view, it does nothing and returns immediately.
+  empty: function(options) {
+    var view = this.currentView;
+
+    var emptyOptions = options || {};
+    var preventDestroy  = !!emptyOptions.preventDestroy;
+    // If there is no view in the region
+    // we should not remove anything
+    if (!view) { return this; }
+
+    view.off(&#039;destroy&#039;, this.empty, this);
+    this.triggerMethod(&#039;before:empty&#039;, view);
+    if (!preventDestroy) {
+      this._destroyView();
+    }
+    this.triggerMethod(&#039;empty&#039;, view);
+
+    // Remove region pointer to the currentView
+    delete this.currentView;
+
+    if (preventDestroy) {
+      this.$el.contents().detach();
+    }
+
+    return this;
+  },
+
+  // call &#039;destroy&#039; or &#039;remove&#039;, depending on which is found
+  // on the view (if showing a raw Backbone view or a Marionette View)
+  _destroyView: function() {
+    var view = this.currentView;
+    if (view.isDestroyed) { return; }
+
+    if (!view.supportsDestroyLifecycle) {
+      Marionette.triggerMethodOn(view, &#039;before:destroy&#039;, view);
+    }
+    if (view.destroy) {
+      view.destroy();
+    } else {
+      view.remove();
+
+      // appending isDestroyed to raw Backbone View allows regions
+      // to throw a ViewDestroyedError for this view
+      view.isDestroyed = true;
+    }
+    if (!view.supportsDestroyLifecycle) {
+      Marionette.triggerMethodOn(view, &#039;destroy&#039;, view);
+    }
+  },
+
+  // Attach an existing view to the region. This
+  // will not call `render` or `onShow` for the new view,
+  // and will not replace the current HTML for the `el`
+  // of the region.
+  attachView: function(view) {
+    if (this.currentView) {
+      delete this.currentView._parent;
+    }
+    view._parent = this;
+    this.currentView = view;
+    return this;
+  },
+
+  // Checks whether a view is currently present within
+  // the region. Returns `true` if there is and `false` if
+  // no view is present.
+  hasView: function() {
+    return !!this.currentView;
+  },
+
+  // Reset the region by destroying any existing view and
+  // clearing out the cached `$el`. The next time a view
+  // is shown via this region, the region will re-query the
+  // DOM for the region&#039;s `el`.
+  reset: function() {
+    this.empty();
+
+    if (this.$el) {
+      this.el = this.$el.selector;
+    }
+
+    delete this.$el;
+    return this;
+  }
+
+},
+
+// Static Methods
+{
+
+  // Build an instance of a region by passing in a configuration object
+  // and a default region class to use if none is specified in the config.
+  //
+  // The config object should either be a string as a jQuery DOM selector,
+  // a Region class directly, or an object literal that specifies a selector,
+  // a custom regionClass, and any options to be supplied to the region:
+  //
+  // ```js
+  // {
+  //   selector: &quot;#foo&quot;,
+  //   regionClass: MyCustomRegion,
+  //   allowMissingEl: false
+  // }
+  // ```
+  //
+  buildRegion: function(regionConfig, DefaultRegionClass) {
+    if (_.isString(regionConfig)) {
+      return this._buildRegionFromSelector(regionConfig, DefaultRegionClass);
+    }
+
+    if (regionConfig.selector || regionConfig.el || regionConfig.regionClass) {
+      return this._buildRegionFromObject(regionConfig, DefaultRegionClass);
+    }
+
+    if (_.isFunction(regionConfig)) {
+      return this._buildRegionFromRegionClass(regionConfig);
+    }
+
+    throw new Marionette.Error({
+      message: &#039;Improper region configuration type.&#039;,
+      url: &#039;marionette.region.html#region-configuration-types&#039;
+    });
+  },
+
+  // Build the region from a string selector like &#039;#foo-region&#039;
+  _buildRegionFromSelector: function(selector, DefaultRegionClass) {
+    return new DefaultRegionClass({el: selector});
+  },
+
+  // Build the region from a configuration object
+  // ```js
+  // { selector: &#039;#foo&#039;, regionClass: FooRegion, allowMissingEl: false }
+  // ```
+  _buildRegionFromObject: function(regionConfig, DefaultRegionClass) {
+    var RegionClass = regionConfig.regionClass || DefaultRegionClass;
+    var options = _.omit(regionConfig, &#039;selector&#039;, &#039;regionClass&#039;);
+
+    if (regionConfig.selector &amp;&amp; !options.el) {
+      options.el = regionConfig.selector;
+    }
+
+    return new RegionClass(options);
+  },
+
+  // Build the region directly from a given `RegionClass`
+  _buildRegionFromRegionClass: function(RegionClass) {
+    return new RegionClass();
+  }
+});</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

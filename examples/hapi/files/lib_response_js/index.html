@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - lib/response.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>lib/response.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">66.47</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">627</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">73.47</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">5.82</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">&#039;use strict&#039;;
+
+// Load modules
+
+const Stream = require(&#039;stream&#039;);
+const Events = require(&#039;events&#039;);
+const Boom = require(&#039;boom&#039;);
+const Hoek = require(&#039;hoek&#039;);
+const Peekaboo = require(&#039;peekaboo&#039;);
+
+
+// Declare internals
+
+const internals = {};
+
+
+exports = module.exports = internals.Response = function (source, request, options) {
+
+    Events.EventEmitter.call(this);
+
+    options = options || {};
+
+    this.request = request;
+    this.statusCode = null;
+    this.headers = {};                          // Incomplete as some headers are stored in flags
+    this.variety = null;
+    this.source = null;
+    this.app = {};
+    this.plugins = {};
+    this.send = null;                           // Set by reply()
+    this.hold = null;                           // Set by reply()
+
+    this.settings = {
+        encoding: &#039;utf8&#039;,
+        charset: &#039;utf-8&#039;,                       // &#039;-&#039; required by IANA
+        ttl: null,
+        stringify: null,                        // JSON.stringify options
+        passThrough: true,
+        varyEtag: false
+    };
+
+    this._payload = null;                       // Readable stream
+    this._takeover = false;
+    this._contentEncoding = null;               // Set during transmit
+    this._contentType = null;                   // Used if no explicit content-type is set and type is known
+    this._error = null;                         // The boom object when created from an error
+
+    this._processors = {
+        marshal: options.marshal,
+        prepare: options.prepare,
+        close: options.close
+    };
+
+    this._setSource(source, options.variety);
+};
+
+Hoek.inherits(internals.Response, Events.EventEmitter);
+
+
+internals.Response.wrap = function (result, request) {
+
+    return (result instanceof Error ? Boom.wrap(result)
+                                    : (result instanceof internals.Response ? result
+                                                                            : new internals.Response(result, request)));
+};
+
+
+internals.Response.prototype._setSource = function (source, variety) {
+
+    // Method must not set any headers or other properties as source can change later
+
+    this.variety = variety || &#039;plain&#039;;
+
+    if (source === null ||
+        source === undefined ||
+        source === &#039;&#039;) {
+
+        source = null;
+    }
+    else if (Buffer.isBuffer(source)) {
+        this.variety = &#039;buffer&#039;;
+        this._contentType = &#039;application/octet-stream&#039;;
+    }
+    else if (source instanceof Stream) {
+        this.variety = &#039;stream&#039;;
+    }
+    else if (typeof source === &#039;object&#039; &amp;&amp;
+        typeof source.then === &#039;function&#039;) {                // Promise object
+
+        this.variety = &#039;promise&#039;;
+    }
+
+    this.source = source;
+
+    if (this.variety === &#039;plain&#039; &amp;&amp;
+        this.source !== null) {
+
+        this._contentType = (typeof this.source === &#039;string&#039; ? &#039;text/html&#039; : &#039;application/json&#039;);
+    }
+};
+
+
+internals.Response.prototype.code = function (statusCode) {
+
+    Hoek.assert(Hoek.isInteger(statusCode), &#039;Status code must be an integer&#039;);
+
+    this.statusCode = statusCode;
+    return this;
+};
+
+
+internals.Response.prototype.header = function (key, value, options) {
+
+    key = key.toLowerCase();
+    if (key === &#039;vary&#039;) {
+        return this.vary(value);
+    }
+
+    return this._header(key, value, options);
+};
+
+
+internals.Response.prototype._header = function (key, value, options) {
+
+    options = options || {};
+    const append = options.append || false;
+    const separator = options.separator || &#039;,&#039;;
+    const override = options.override !== false;
+    const duplicate = options.duplicate !== false;
+
+    // Ensure key and values do not include non-ascii text
+
+    if (value !== undefined &amp;&amp;
+        value !== null) {
+
+        const headerValues = [key].concat(value);
+        for (let i = 0; i &lt; headerValues.length; ++i) {
+            const header = headerValues[i];
+            const buffer = Buffer.isBuffer(header) ? header : new Buffer(header.toString());
+            for (let j = 0; j &lt; buffer.length; ++j) {
+                Hoek.assert((buffer[j] &amp; 0x7f) === buffer[j], &#039;Header value cannot contain or convert into non-ascii characters:&#039;, key);
+            }
+        }
+    }
+
+    if ((!append &amp;&amp; override) ||
+        !this.headers[key]) {
+
+        this.headers[key] = value;
+    }
+    else if (override) {
+        if (key === &#039;set-cookie&#039;) {
+            this.headers[key] = [].concat(this.headers[key], value);
+        }
+        else {
+            const existing = this.headers[key];
+            if (!duplicate) {
+                const values = existing.split(separator);
+                for (let i = 0; i &lt; values.length; ++i) {
+                    if (values[i] === value) {
+                        return this;
+                    }
+                }
+            }
+
+            this.headers[key] = existing + separator + value;
+        }
+    }
+
+    return this;
+};
+
+
+internals.Response.prototype.vary = function (value) {
+
+    if (value === &#039;*&#039;) {
+        this.headers.vary = &#039;*&#039;;
+    }
+    else if (!this.headers.vary) {
+        this.headers.vary = value;
+    }
+    else if (this.headers.vary !== &#039;*&#039;) {
+        this._header(&#039;vary&#039;, value, { append: true, duplicate: false });
+    }
+
+    return this;
+};
+
+
+internals.Response.prototype.etag = function (tag, options) {
+
+    Hoek.assert(tag !== &#039;*&#039;, &#039;ETag cannot be *&#039;);
+
+    options = options || {};
+    this._header(&#039;etag&#039;, (options.weak ? &#039;W/&#039; : &#039;&#039;) + &#039;&quot;&#039; + tag + &#039;&quot;&#039;);
+    this.settings.varyEtag = options.vary !== false &amp;&amp; !options.weak;       // vary defaults to true
+    return this;
+};
+
+
+internals.Response.prototype.type = function (type) {
+
+    this._header(&#039;content-type&#039;, type);
+    return this;
+};
+
+
+internals.Response.prototype.bytes = function (bytes) {
+
+    this._header(&#039;content-length&#039;, bytes);
+    return this;
+};
+
+
+internals.Response.prototype.location = function (uri) {
+
+    this._header(&#039;location&#039;, uri);
+    return this;
+};
+
+
+internals.Response.prototype.created = function (location) {
+
+    Hoek.assert(this.request.method === &#039;post&#039; || this.request.method === &#039;put&#039;, &#039;Cannot create resource on GET&#039;);
+
+    this.statusCode = 201;
+    this.location(location);
+    return this;
+};
+
+
+internals.Response.prototype.replacer = function (method) {
+
+    this.settings.stringify = this.settings.stringify || {};
+    this.settings.stringify.replacer = method;
+    return this;
+};
+
+
+internals.Response.prototype.spaces = function (count) {
+
+    this.settings.stringify = this.settings.stringify || {};
+    this.settings.stringify.space = count;
+    return this;
+};
+
+
+internals.Response.prototype.suffix = function (suffix) {
+
+    this.settings.stringify = this.settings.stringify || {};
+    this.settings.stringify.suffix = suffix;
+    return this;
+};
+
+
+internals.Response.prototype.passThrough = function (enabled) {
+
+    this.settings.passThrough = (enabled !== false);    // Defaults to true
+    return this;
+};
+
+
+internals.Response.prototype.redirect = function (location) {
+
+    this.statusCode = 302;
+    this.location(location);
+    this.temporary = this._temporary;
+    this.permanent = this._permanent;
+    this.rewritable = this._rewritable;
+    return this;
+};
+
+
+internals.Response.prototype._temporary = function (isTemporary) {
+
+    this._setTemporary(isTemporary !== false);           // Defaults to true
+    return this;
+};
+
+
+internals.Response.prototype._permanent = function (isPermanent) {
+
+    this._setTemporary(isPermanent === false);           // Defaults to true
+    return this;
+};
+
+
+internals.Response.prototype._rewritable = function (isRewritable) {
+
+    this._setRewritable(isRewritable !== false);         // Defaults to true
+    return this;
+};
+
+
+internals.Response.prototype._isTemporary = function () {
+
+    return this.statusCode === 302 || this.statusCode === 307;
+};
+
+
+internals.Response.prototype._isRewritable = function () {
+
+    return this.statusCode === 301 || this.statusCode === 302;
+};
+
+
+internals.Response.prototype._setTemporary = function (isTemporary) {
+
+    if (isTemporary) {
+        if (this._isRewritable()) {
+            this.statusCode = 302;
+        }
+        else {
+            this.statusCode = 307;
+        }
+    }
+    else {
+        if (this._isRewritable()) {
+            this.statusCode = 301;
+        }
+        else {
+            this.statusCode = 308;
+        }
+    }
+};
+
+
+internals.Response.prototype._setRewritable = function (isRewritable) {
+
+    if (isRewritable) {
+        if (this._isTemporary()) {
+            this.statusCode = 302;
+        }
+        else {
+            this.statusCode = 301;
+        }
+    }
+    else {
+        if (this._isTemporary()) {
+            this.statusCode = 307;
+        }
+        else {
+            this.statusCode = 308;
+        }
+    }
+};
+
+
+internals.Response.prototype.encoding = function (encoding) {
+
+    this.settings.encoding = encoding;
+    return this;
+};
+
+
+internals.Response.prototype.charset = function (charset) {
+
+    this.settings.charset = charset || null;
+    return this;
+};
+
+
+internals.Response.prototype.ttl = function (ttl) {
+
+    this.settings.ttl = ttl;
+    return this;
+};
+
+
+internals.Response.prototype.state = function (name, value, options) {          // options: see Defaults.state
+
+    this.request._setState(name, value, options);
+    return this;
+};
+
+
+internals.Response.prototype.unstate = function (name, options) {
+
+    this.request._clearState(name, options);
+    return this;
+};
+
+
+internals.Response.prototype.takeover = function () {
+
+    this._takeover = true;
+    return this;
+};
+
+
+internals.Response.prototype._prepare = function (data, next) {
+
+    this._passThrough();
+
+    if (this.variety !== &#039;promise&#039;) {
+        return this._processPrepare(data, next);
+    }
+
+    const onDone = (source) =&gt; {
+
+        if (source instanceof Error) {
+            return next(Boom.wrap(source), data);
+        }
+
+        if (source instanceof internals.Response) {
+            return source._processPrepare(data, next);
+        }
+
+        this._setSource(source);
+        this._passThrough();
+        this._processPrepare(data, next);
+    };
+
+    this.source.then(onDone, onDone);
+};
+
+
+internals.Response.prototype._passThrough = function () {
+
+    if (this.variety === &#039;stream&#039; &amp;&amp;
+        this.settings.passThrough) {
+
+        if (this.source.statusCode &amp;&amp;
+            !this.statusCode) {
+
+            this.statusCode = this.source.statusCode;                        // Stream is an HTTP response
+        }
+
+        if (this.source.headers) {
+            let headerKeys = Object.keys(this.source.headers);
+
+            if (headerKeys.length) {
+                const localHeaders = this.headers;
+                this.headers = {};
+
+                for (let i = 0; i &lt; headerKeys.length; ++i) {
+                    const key = headerKeys[i];
+                    this.header(key.toLowerCase(), Hoek.clone(this.source.headers[key]));     // Clone arrays
+                }
+
+                headerKeys = Object.keys(localHeaders);
+                for (let i = 0; i &lt; headerKeys.length; ++i) {
+                    const key = headerKeys[i];
+                    this.header(key, localHeaders[key], { append: key === &#039;set-cookie&#039; });
+                }
+            }
+        }
+    }
+
+    this.statusCode = this.statusCode || 200;
+};
+
+
+internals.Response.prototype._processPrepare = function (data, next) {
+
+    if (!this._processors.prepare) {
+        return next(this, data);
+    }
+
+    this._processors.prepare(this, (prepared) =&gt; {
+
+        return next(prepared, data);
+    });
+};
+
+
+internals.Response.prototype._marshal = function (next) {
+
+    if (!this._processors.marshal) {
+        return this._streamify(this.source, next);
+    }
+
+    this._processors.marshal(this, (err, source) =&gt; {
+
+        if (err) {
+            return next(err);
+        }
+
+        return this._streamify(source, next);
+    });
+};
+
+
+internals.Response.prototype._streamify = function (source, next) {
+
+    if (source instanceof Stream) {
+        if (typeof source._read !== &#039;function&#039; || typeof source._readableState !== &#039;object&#039;) {
+            return next(Boom.badImplementation(&#039;Stream must have a streams2 readable interface&#039;));
+        }
+
+        if (source._readableState.objectMode) {
+            return next(Boom.badImplementation(&#039;Cannot reply with stream in object mode&#039;));
+        }
+
+        this._payload = source;
+        return next();
+    }
+
+    let payload = source;
+    if (this.variety === &#039;plain&#039; &amp;&amp;
+        source !== null &amp;&amp;
+        typeof source !== &#039;string&#039;) {
+
+        const options = this.settings.stringify || {};
+        const space = options.space || this.request.route.settings.json.space;
+        const replacer = options.replacer || this.request.route.settings.json.replacer;
+        const suffix = options.suffix || this.request.route.settings.json.suffix || &#039;&#039;;
+        try {
+            if (replacer || space) {
+                payload = JSON.stringify(payload, replacer, space);
+            }
+            else {
+                payload = JSON.stringify(payload);
+            }
+        }
+        catch (err) {
+            return next(err);
+        }
+
+        if (suffix) {
+            payload = payload + suffix;
+        }
+    }
+    else if (this.settings.stringify) {
+        return next(Boom.badImplementation(&#039;Cannot set formatting options on non object response&#039;));
+    }
+
+    this._payload = new internals.Payload(payload, this.settings);
+    return next();
+};
+
+
+internals.Response.prototype._tap = function () {
+
+    return (this.listeners(&#039;finish&#039;).length || this.listeners(&#039;peek&#039;).length ? new Peekaboo(this) : null);
+};
+
+
+internals.Response.prototype._close = function () {
+
+    if (this._processors.close) {
+        this._processors.close(this);
+    }
+
+    const stream = this._payload || this.source;
+    if (stream instanceof Stream) {
+        if (stream.close) {
+            stream.close();
+        }
+        else if (stream.destroy) {
+            stream.destroy();
+        }
+        else {
+            const read = () =&gt; {
+
+                stream.read();
+            };
+
+            const end = () =&gt; {
+
+                stream.removeListener(&#039;readable&#039;, read);
+                stream.removeListener(&#039;error&#039;, end);
+                stream.removeListener(&#039;end&#039;, end);
+            };
+
+            stream.on(&#039;readable&#039;, read);
+            stream.once(&#039;error&#039;, end);
+            stream.once(&#039;end&#039;, end);
+        }
+    }
+};
+
+
+internals.Response.prototype._isPayloadSupported = function () {
+
+    return (this.request.method !== &#039;head&#039; &amp;&amp; this.statusCode !== 304 &amp;&amp; this.statusCode !== 204);
+};
+
+
+internals.Response.Payload = internals.Payload = function (payload, options) {
+
+    Stream.Readable.call(this);
+    this._data = payload;
+    this._prefix = null;
+    this._suffix = null;
+    this._sizeOffset = 0;
+    this._encoding = options.encoding;
+};
+
+Hoek.inherits(internals.Payload, Stream.Readable);
+
+
+internals.Payload.prototype._read = function (/* size */) {
+
+    if (this._prefix) {
+        this.push(this._prefix, this._encoding);
+    }
+
+    if (this._data) {
+        this.push(this._data, this._encoding);
+    }
+
+    if (this._suffix) {
+        this.push(this._suffix, this._encoding);
+    }
+
+    this.push(null);
+};
+
+
+internals.Payload.prototype.size = function () {
+
+    if (!this._data) {
+        return this._sizeOffset;
+    }
+
+    return (Buffer.isBuffer(this._data) ? this._data.length : Buffer.byteLength(this._data, this._encoding)) + this._sizeOffset;
+};
+
+
+internals.Payload.prototype.jsonp = function (variable) {
+
+    this._sizeOffset = this._sizeOffset + variable.length + 7;
+    this._prefix = &#039;/**/&#039; + variable + &#039;(&#039;;                 // &#039;/**/&#039; prefix prevents CVE-2014-4671 security exploit
+    this._data = (this._data === null || Buffer.isBuffer(this._data)) ? this._data : this._data.replace(/\u2028/g, &#039;\\u2028&#039;).replace(/\u2029/g, &#039;\\u2029&#039;);
+    this._suffix = &#039;);&#039;;
+};</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

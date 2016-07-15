@@ -31,7 +31,7 @@ then
     rm -rf $TMPDIR
   fi
   git clone git://github.com/jquery/jquery.git $TMPDIR/jquery
-  git clone git://github.com/gruntjs/grunt.git $TMPDIR/grunt
+  git clone git@github.com:hapijs/hapi.git $TMPDIR/hapi
   git clone https://github.com/marionettejs/backbone.marionette.git $TMPDIR/marionette
 fi
 
@@ -55,10 +55,10 @@ for DAYS_AGO in 210 180 150 120 90 60 30 0; do
     git co -f $(git rev-list -n 1 --before="$DATE" master) &&
     runCommand "$CMD -D $DATE -d $ORIGWD/examples/marionette src/*.js";
 
-  cd $TMPDIR/grunt &&
+  cd $TMPDIR/hapi &&
     echo In $PWD &&
     git co -f $(git rev-list -n 1 --before="$DATE" master) &&
-    runCommand "$CMD -D $DATE -r -d $ORIGWD/examples/grunt lib";
+    runCommand "$CMD -D $DATE -r -d $ORIGWD/examples/hapi lib";
 done
 
 cd $ORIGWD

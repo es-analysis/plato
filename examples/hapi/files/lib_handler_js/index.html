@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - lib/handler.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>lib/handler.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">63.38</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">293</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">32.77</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">1.20</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">&#039;use strict&#039;;
+
+// Load modules
+
+const Hoek = require(&#039;hoek&#039;);
+const Items = require(&#039;items&#039;);
+const Methods = require(&#039;./methods&#039;);
+const Response = require(&#039;./response&#039;);
+
+
+// Declare internals
+
+const internals = {};
+
+
+exports.execute = function (request, next) {
+
+    const finalize = (err, result) =&gt; {
+
+        request._setResponse(err || result);
+        return next();                              // Must not include an argument
+    };
+
+    request._protect.run(finalize, (exit) =&gt; {
+
+        if (request._route._prerequisites) {
+            internals.prerequisites(request, Hoek.once(exit));
+        }
+        else {
+            internals.handler(request, exit);
+        }
+    });
+};
+
+
+internals.prerequisites = function (request, callback) {
+
+    const each = (set, nextSet) =&gt; {
+
+        Items.parallel(set, (pre, next) =&gt; {
+
+            pre(request, (err, result) =&gt; {
+
+                if (err) {
+                    return next(err);
+                }
+
+                if (!result._takeover) {
+                    return next();
+                }
+
+                return callback(null, result);
+            });
+        }, nextSet);
+    };
+
+    Items.serial(request._route._prerequisites, each, (err) =&gt; {
+
+        if (err) {
+            return callback(err);
+        }
+
+        return internals.handler(request, callback);
+    });
+};
+
+
+internals.handler = function (request, callback) {
+
+    const timer = new Hoek.Bench();
+    const finalize = (response, data) =&gt; {
+
+        if (response === null) {                            // reply.continue()
+            response = Response.wrap(null, request);
+            return response._prepare(null, finalize);
+        }
+
+        // Check for Error result
+
+        if (response.isBoom) {
+            request._log([&#039;handler&#039;, &#039;error&#039;], { msec: timer.elapsed(), error: response.message, data: response });
+            return callback(response);
+        }
+
+        request._log([&#039;handler&#039;], { msec: timer.elapsed() });
+        return callback(null, response);
+    };
+
+    // Decorate request
+
+    const reply = request.server._replier.interface(request, request.route.realm, finalize);
+    const bind = request.route.settings.bind;
+
+    // Execute handler
+
+    request.route.settings.handler.call(bind, request, reply);
+};
+
+
+exports.defaults = function (method, handler, server) {
+
+    let defaults = null;
+
+    if (typeof handler === &#039;object&#039;) {
+        const type = Object.keys(handler)[0];
+        const serverHandler = server._handlers[type];
+
+        Hoek.assert(serverHandler, &#039;Unknown handler:&#039;, type);
+
+        if (serverHandler.defaults) {
+            defaults = (typeof serverHandler.defaults === &#039;function&#039; ? serverHandler.defaults(method) : serverHandler.defaults);
+        }
+    }
+
+    return defaults || {};
+};
+
+
+exports.configure = function (handler, route) {
+
+    if (typeof handler === &#039;object&#039;) {
+        const type = Object.keys(handler)[0];
+        const serverHandler = route.server._handlers[type];
+
+        Hoek.assert(serverHandler, &#039;Unknown handler:&#039;, type);
+
+        return serverHandler(route.public, handler[type]);
+    }
+
+    if (typeof handler === &#039;string&#039;) {
+        const parsed = internals.fromString(&#039;handler&#039;, handler, route.server);
+        return parsed.method;
+    }
+
+    return handler;
+};
+
+
+exports.prerequisitesConfig = function (config, server) {
+
+    if (!config) {
+        return null;
+    }
+
+    /*
+        [
+            [
+                function (request, reply) { },
+                {
+                    method: function (request, reply) { }
+                    assign: key1
+                },
+                {
+                    method: function (request, reply) { },
+                    assign: key2
+                }
+            ],
+            &#039;user(params.id)&#039;
+        ]
+    */
+
+    const prerequisites = [];
+
+    for (let i = 0; i &lt; config.length; ++i) {
+        const pres = [].concat(config[i]);
+
+        const set = [];
+        for (let j = 0; j &lt; pres.length; ++j) {
+            let pre = pres[j];
+            if (typeof pre !== &#039;object&#039;) {
+                pre = { method: pre };
+            }
+
+            const item = {
+                method: pre.method,
+                assign: pre.assign,
+                failAction: pre.failAction || &#039;error&#039;
+            };
+
+            if (typeof item.method === &#039;string&#039;) {
+                const parsed = internals.fromString(&#039;pre&#039;, item.method, server);
+                item.method = parsed.method;
+                item.assign = item.assign || parsed.name;
+            }
+
+            set.push(internals.pre(item));
+        }
+
+        prerequisites.push(set);
+    }
+
+    return prerequisites.length ? prerequisites : null;
+};
+
+
+internals.fromString = function (type, notation, server) {
+
+    //                                  1:name            2:(        3:arguments
+    const methodParts = notation.match(/^([\w\.]+)(?:\s*)(?:(\()(?:\s*)(\w+(?:\.\w+)*(?:\s*\,\s*\w+(?:\.\w+)*)*)?(?:\s*)\))?$/);
+    Hoek.assert(methodParts, &#039;Invalid server method string notation:&#039;, notation);
+
+    const name = methodParts[1];
+    Hoek.assert(name.match(Methods.methodNameRx), &#039;Invalid server method name:&#039;, name);
+
+    const method = server._methods._normalized[name];
+    Hoek.assert(method, &#039;Unknown server method in string notation:&#039;, notation);
+
+    const result = { name: name };
+    const argsNotation = !!methodParts[2];
+    const methodArgs = (argsNotation ? (methodParts[3] || &#039;&#039;).split(/\s*\,\s*/) : null);
+
+    result.method = (request, reply) =&gt; {
+
+        if (!argsNotation) {
+            return method(request, reply);                      // Method is already bound to context
+        }
+
+        const finalize = (err, value, cached, report) =&gt; {
+
+            if (report) {
+                request._log([type, &#039;method&#039;, name], report);
+            }
+
+            return reply(err, value);
+        };
+
+        const args = [];
+        for (let i = 0; i &lt; methodArgs.length; ++i) {
+            const arg = methodArgs[i];
+            if (arg) {
+                args.push(Hoek.reach(request, arg));
+            }
+        }
+
+        args.push(finalize);
+        method.apply(null, args);
+    };
+
+    return result;
+};
+
+
+internals.pre = function (pre) {
+
+    /*
+        {
+            method: function (request, next) { }
+            assign:     &#039;key&#039;
+            failAction: &#039;error&#039;* | &#039;log&#039; | &#039;ignore&#039;
+        }
+    */
+
+    return (request, next) =&gt; {
+
+        const timer = new Hoek.Bench();
+        const finalize = (response, data) =&gt; {
+
+            if (response === null) {                            // reply.continue()
+                response = Response.wrap(null, request);
+                return response._prepare(null, finalize);
+            }
+
+            if (response instanceof Error) {
+                if (pre.failAction !== &#039;ignore&#039;) {
+                    request._log([&#039;pre&#039;, &#039;error&#039;], { msec: timer.elapsed(), assign: pre.assign, error: response });
+                }
+
+                if (pre.failAction === &#039;error&#039;) {
+                    return next(response);
+                }
+            }
+            else {
+                request._log([&#039;pre&#039;], { msec: timer.elapsed(), assign: pre.assign });
+            }
+
+            if (pre.assign) {
+                request.pre[pre.assign] = response.source;
+                request.preResponses[pre.assign] = response;
+            }
+
+            return next(null, response);
+        };
+
+        // Setup environment
+
+        const reply = request.server._replier.interface(request, request.route.realm, finalize);
+        const bind = request.route.settings.bind;
+
+        // Execute handler
+
+        pre.method.call(bind, request, reply);
+    };
+};</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

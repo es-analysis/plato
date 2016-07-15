@@ -44,11 +44,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
-      <p class="stat">63.20</p>
+      <p class="stat">62.79</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">206</p>
+      <p class="stat">232</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,11 +62,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">46.71</p>
+      <p class="stat">43.29</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
-      <p class="stat">1.63</p>
+      <p class="stat">1.64</p>
     </div>
   </div>
 </div>
@@ -89,9 +89,11 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="col-md-12">define([
+    <textarea id="file-source" class="col-md-12">define( [
 	&quot;./core&quot;,
 	&quot;./core/access&quot;,
+	&quot;./var/document&quot;,
+	&quot;./var/documentElement&quot;,
 	&quot;./css/var/rnumnonpx&quot;,
 	&quot;./css/curCSS&quot;,
 	&quot;./css/addGetHookIf&quot;,
@@ -100,9 +102,9 @@
 	&quot;./core/init&quot;,
 	&quot;./css&quot;,
 	&quot;./selector&quot; // contains
-], function( jQuery, access, rnumnonpx, curCSS, addGetHookIf, support ) {
+], function( jQuery, access, document, documentElement, rnumnonpx, curCSS, addGetHookIf, support ) {
 
-var docElem = window.document.documentElement;
+&quot;use strict&quot;;
 
 /**
  * Gets a window from an element
@@ -127,7 +129,7 @@ jQuery.offset = {
 		curCSSTop = jQuery.css( elem, &quot;top&quot; );
 		curCSSLeft = jQuery.css( elem, &quot;left&quot; );
 		calculatePosition = ( position === &quot;absolute&quot; || position === &quot;fixed&quot; ) &amp;&amp;
-			( curCSSTop + curCSSLeft ).indexOf(&quot;auto&quot;) &gt; -1;
+			( curCSSTop + curCSSLeft ).indexOf( &quot;auto&quot; ) &gt; -1;
 
 		// Need to be able to calculate position if either
 		// top or left is auto and position is either absolute or fixed
@@ -163,38 +165,48 @@ jQuery.offset = {
 	}
 };
 
-jQuery.fn.extend({
+jQuery.fn.extend( {
 	offset: function( options ) {
+
+		// Preserve chaining for setter
 		if ( arguments.length ) {
 			return options === undefined ?
 				this :
-				this.each(function( i ) {
+				this.each( function( i ) {
 					jQuery.offset.setOffset( this, options, i );
-				});
+				} );
 		}
 
-		var docElem, win,
-			elem = this[ 0 ],
-			box = { top: 0, left: 0 },
-			doc = elem &amp;&amp; elem.ownerDocument;
+		var docElem, win, rect, doc,
+			elem = this[ 0 ];
 
-		if ( !doc ) {
+		if ( !elem ) {
 			return;
 		}
 
-		docElem = doc.documentElement;
-
-		// Make sure it&#039;s not a disconnected DOM node
-		if ( !jQuery.contains( docElem, elem ) ) {
-			return box;
+		// Support: IE &lt;=11 only
+		// Running getBoundingClientRect on a
+		// disconnected node in IE throws an error
+		if ( !elem.getClientRects().length ) {
+			return { top: 0, left: 0 };
 		}
 
-		box = elem.getBoundingClientRect();
-		win = getWindow( doc );
-		return {
-			top: box.top + win.pageYOffset - docElem.clientTop,
-			left: box.left + win.pageXOffset - docElem.clientLeft
-		};
+		rect = elem.getBoundingClientRect();
+
+		// Make sure element is not hidden (display: none)
+		if ( rect.width || rect.height ) {
+			doc = elem.ownerDocument;
+			win = getWindow( doc );
+			docElem = doc.documentElement;
+
+			return {
+				top: rect.top + win.pageYOffset - docElem.clientTop,
+				left: rect.left + win.pageXOffset - docElem.clientLeft
+			};
+		}
+
+		// Return zeros for disconnected and hidden elements (gh-2310)
+		return rect;
 	},
 
 	position: function() {
@@ -209,10 +221,12 @@ jQuery.fn.extend({
 		// Fixed elements are offset from window (parentOffset = {top:0, left: 0},
 		// because it is its only offset parent
 		if ( jQuery.css( elem, &quot;position&quot; ) === &quot;fixed&quot; ) {
+
 			// Assume getBoundingClientRect is there when computed position is fixed
 			offset = elem.getBoundingClientRect();
 
 		} else {
+
 			// Get *real* offsetParent
 			offsetParent = this.offsetParent();
 
@@ -223,8 +237,10 @@ jQuery.fn.extend({
 			}
 
 			// Add offsetParent borders
-			parentOffset.top += jQuery.css( offsetParent[ 0 ], &quot;borderTopWidth&quot;, true );
-			parentOffset.left += jQuery.css( offsetParent[ 0 ], &quot;borderLeftWidth&quot;, true );
+			parentOffset = {
+				top: parentOffset.top + jQuery.css( offsetParent[ 0 ], &quot;borderTopWidth&quot;, true ),
+				left: parentOffset.left + jQuery.css( offsetParent[ 0 ], &quot;borderLeftWidth&quot;, true )
+			};
 		}
 
 		// Subtract parent offsets and element margins
@@ -234,19 +250,28 @@ jQuery.fn.extend({
 		};
 	},
 
+	// This method will return documentElement in the following cases:
+	// 1) For the element inside the iframe without offsetParent, this method will return
+	//    documentElement of the parent window
+	// 2) For the hidden or detached element
+	// 3) For body or html element, i.e. in case of the html node - it will return itself
+	//
+	// but those exceptions were never presented as a real life use-cases
+	// and might be considered as more preferable results.
+	//
+	// This logic, however, is not guaranteed and can change at any point in the future
 	offsetParent: function() {
-		return this.map(function() {
-			var offsetParent = this.offsetParent || docElem;
+		return this.map( function() {
+			var offsetParent = this.offsetParent;
 
-			while ( offsetParent &amp;&amp; ( !jQuery.nodeName( offsetParent, &quot;html&quot; ) &amp;&amp;
-				jQuery.css( offsetParent, &quot;position&quot; ) === &quot;static&quot; ) ) {
+			while ( offsetParent &amp;&amp; jQuery.css( offsetParent, &quot;position&quot; ) === &quot;static&quot; ) {
 				offsetParent = offsetParent.offsetParent;
 			}
 
-			return offsetParent || docElem;
-		});
+			return offsetParent || documentElement;
+		} );
 	}
-});
+} );
 
 // Create scrollLeft and scrollTop methods
 jQuery.each( { scrollLeft: &quot;pageXOffset&quot;, scrollTop: &quot;pageYOffset&quot; }, function( method, prop ) {
@@ -262,21 +287,21 @@ jQuery.each( { scrollLeft: &quot;pageXOffset&quot;, scrollTop: &quot;pageYOffset
 
 			if ( win ) {
 				win.scrollTo(
-					!top ? val : window.pageXOffset,
-					top ? val : window.pageYOffset
+					!top ? val : win.pageXOffset,
+					top ? val : win.pageYOffset
 				);
 
 			} else {
 				elem[ method ] = val;
 			}
-		}, method, val, arguments.length, null );
+		}, method, val, arguments.length );
 	};
-});
+} );
 
-// Support: Safari&lt;7+, Chrome&lt;37+
+// Support: Safari &lt;=7 - 9.1, Chrome &lt;=37 - 49
 // Add the top/left cssHooks using jQuery.fn.position
 // Webkit bug: https://bugs.webkit.org/show_bug.cgi?id=29084
-// Blink bug: https://code.google.com/p/chromium/issues/detail?id=229280
+// Blink bug: https://bugs.chromium.org/p/chromium/issues/detail?id=589347
 // getComputedStyle returns percent when specified for top/left/bottom/right;
 // rather than make the css module depend on the offset module, just check for it here
 jQuery.each( [ &quot;top&quot;, &quot;left&quot; ], function( i, prop ) {
@@ -284,6 +309,7 @@ jQuery.each( [ &quot;top&quot;, &quot;left&quot; ], function( i, prop ) {
 		function( elem, computed ) {
 			if ( computed ) {
 				computed = curCSS( elem, prop );
+
 				// If curCSS returns percentage, fallback to offset
 				return rnumnonpx.test( computed ) ?
 					jQuery( elem ).position()[ prop ] + &quot;px&quot; :
@@ -291,10 +317,10 @@ jQuery.each( [ &quot;top&quot;, &quot;left&quot; ], function( i, prop ) {
 			}
 		}
 	);
-});
+} );
 
 return jQuery;
-});</textarea>
+} );</textarea>
   </div>
 </div>
 

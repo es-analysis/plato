@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - JavaScript Introspection</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <script>
+    var __options = {"flags":{"complexity":{"logicalor":true,"switchcase":true,"forin":false,"trycatch":false,"newmi":true},"jshint":{}}}
+  </script>
+
+  <link href="assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="assets/css/plato.css" rel="stylesheet">
+  <link href="assets/css/plato-display.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container">
+    <h1>JavaScript Source Analysis</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="reportBlock lineCount">
+                <div class="reportContent">
+                    <small class="chart-label">Total / Average Lines</small>
+                    <h1>5904 / 310</h1>
+                </div>
+                <div id="chart_historical_sloc" class="chart js-chart"></div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="reportBlock maintainability">
+                <div class="reportContent">
+                    <small class="chart-label">Average Maintainability</small>
+                    <h1>63.11</h1>
+                </div>
+                <div id="chart_historical_maint" class="chart js-chart"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="reportBlock maintainabilityList">
+                <h2 class="reportTitle">Worst Maintainability Scores</h2>
+                <ul class="list-unstyled">
+
+                    <li>
+                        <strong>42 score</strong>
+                        <small>lib/defaults.js</small>
+                    </li>
+
+                    <li>
+                        <strong>46 score</strong>
+                        <small>lib/route.js</small>
+                    </li>
+
+                    <li>
+                        <strong>53 score</strong>
+                        <small>lib/server.js</small>
+                    </li>
+
+                    <li>
+                        <strong>55 score</strong>
+                        <small>lib/transmit.js</small>
+                    </li>
+
+                    <li>
+                        <strong>55 score</strong>
+                        <small>lib/cors.js</small>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="reportBlock locList">
+                <h2 class="reportTitle">Largest Files</h2>
+                <ul class="list-unstyled">
+
+                    <li>
+                        <strong>627 lines</strong>
+                        <small>lib/response.js</small>
+                    </li>
+
+                    <li>
+                        <strong>587 lines</strong>
+                        <small>lib/request.js</small>
+                    </li>
+
+                    <li>
+                        <strong>586 lines</strong>
+                        <small>lib/plugin.js</small>
+                    </li>
+
+                    <li>
+                        <strong>567 lines</strong>
+                        <small>lib/transmit.js</small>
+                    </li>
+
+                    <li>
+                        <strong>528 lines</strong>
+                        <small>lib/auth.js</small>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="reportBlock lintList">
+                <h2 class="reportTitle">Lint Warnings</h2>
+                <ul class="list-unstyled">
+
+                    <li>
+                        <strong>51 lint errors</strong>
+                        <small>lib/auth.js</small>
+                   </li>
+
+                    <li>
+                        <strong>51 lint errors</strong>
+                        <small>lib/connection.js</small>
+                   </li>
+
+                    <li>
+                        <strong>51 lint errors</strong>
+                        <small>lib/handler.js</small>
+                   </li>
+
+                    <li>
+                        <strong>51 lint errors</strong>
+                        <small>lib/plugin.js</small>
+                   </li>
+
+                    <li>
+                        <strong>51 lint errors</strong>
+                        <small>lib/request.js</small>
+                   </li>
+
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<script type="text/javascript" src="assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="assets/scripts/plato-display.js"></script>
+
+</body>
+</html>

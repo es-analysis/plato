@@ -44,11 +44,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
-      <p class="stat">66.63</p>
+      <p class="stat">68.37</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">96</p>
+      <p class="stat">89</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,11 +62,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">19.90</p>
+      <p class="stat">15.04</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
-      <p class="stat">0.51</p>
+      <p class="stat">0.42</p>
     </div>
   </div>
 </div>
@@ -89,102 +89,95 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="col-md-12">define([
+    <textarea id="file-source" class="col-md-12">define( [
 	&quot;../core&quot;,
+	&quot;../var/document&quot;,
+	&quot;../var/documentElement&quot;,
 	&quot;../var/support&quot;
-], function( jQuery, support ) {
+], function( jQuery, document, documentElement, support ) {
 
-(function() {
-	var pixelPositionVal, boxSizingReliableVal,
-		docElem = document.documentElement,
+&quot;use strict&quot;;
+
+( function() {
+
+	// Executing both pixelPosition &amp; boxSizingReliable tests require only one layout
+	// so they&#039;re executed at the same time to save the second computation.
+	function computeStyleTests() {
+
+		// This is a singleton, we need to execute it only once
+		if ( !div ) {
+			return;
+		}
+
+		div.style.cssText =
+			&quot;box-sizing:border-box;&quot; +
+			&quot;position:relative;display:block;&quot; +
+			&quot;margin:auto;border:1px;padding:1px;&quot; +
+			&quot;top:1%;width:50%&quot;;
+		div.innerHTML = &quot;&quot;;
+		documentElement.appendChild( container );
+
+		var divStyle = window.getComputedStyle( div );
+		pixelPositionVal = divStyle.top !== &quot;1%&quot;;
+
+		// Support: Android 4.0 - 4.3 only, Firefox &lt;=3 - 44
+		reliableMarginLeftVal = divStyle.marginLeft === &quot;2px&quot;;
+		boxSizingReliableVal = divStyle.width === &quot;4px&quot;;
+
+		// Support: Android 4.0 - 4.3 only
+		// Some styles come back with percentage values, even though they shouldn&#039;t
+		div.style.marginRight = &quot;50%&quot;;
+		pixelMarginRightVal = divStyle.marginRight === &quot;4px&quot;;
+
+		documentElement.removeChild( container );
+
+		// Nullify the div so it wouldn&#039;t be stored in the memory and
+		// it will also be a sign that checks already performed
+		div = null;
+	}
+
+	var pixelPositionVal, boxSizingReliableVal, pixelMarginRightVal, reliableMarginLeftVal,
 		container = document.createElement( &quot;div&quot; ),
 		div = document.createElement( &quot;div&quot; );
 
+	// Finish early in limited (non-browser) environments
 	if ( !div.style ) {
 		return;
 	}
 
-	// Support: IE9-11+
+	// Support: IE &lt;=9 - 11 only
 	// Style of cloned element affects source element cloned (#8908)
 	div.style.backgroundClip = &quot;content-box&quot;;
 	div.cloneNode( true ).style.backgroundClip = &quot;&quot;;
 	support.clearCloneStyle = div.style.backgroundClip === &quot;content-box&quot;;
 
-	container.style.cssText = &quot;border:0;width:0;height:0;top:0;left:-9999px;margin-top:1px;&quot; +
-		&quot;position:absolute&quot;;
+	container.style.cssText = &quot;border:0;width:8px;height:0;top:0;left:-9999px;&quot; +
+		&quot;padding:0;margin-top:1px;position:absolute&quot;;
 	container.appendChild( div );
 
-	// Executing both pixelPosition &amp; boxSizingReliable tests require only one layout
-	// so they&#039;re executed at the same time to save the second computation.
-	function computePixelPositionAndBoxSizingReliable() {
-		div.style.cssText =
-			// Support: Android 2.3
-			// Vendor-prefix box-sizing
-			&quot;-webkit-box-sizing:border-box;box-sizing:border-box;&quot; +
-			&quot;display:block;margin-top:1%;top:1%;&quot; +
-			&quot;border:1px;padding:1px;width:4px;position:absolute&quot;;
-		div.innerHTML = &quot;&quot;;
-		docElem.appendChild( container );
-
-		var divStyle = window.getComputedStyle( div, null );
-		pixelPositionVal = divStyle.top !== &quot;1%&quot;;
-		boxSizingReliableVal = divStyle.width === &quot;4px&quot;;
-
-		docElem.removeChild( container );
-	}
-
-	// Support: node.js jsdom
-	// Don&#039;t assume that getComputedStyle is a property of the global object
-	if ( window.getComputedStyle ) {
-		jQuery.extend( support, {
-			pixelPosition: function() {
-
-				// This test is executed only once but we still do memoizing
-				// since we can use the boxSizingReliable pre-computing.
-				// No need to check if the test was already performed, though.
-				computePixelPositionAndBoxSizingReliable();
-				return pixelPositionVal;
-			},
-			boxSizingReliable: function() {
-				if ( boxSizingReliableVal == null ) {
-					computePixelPositionAndBoxSizingReliable();
-				}
-				return boxSizingReliableVal;
-			},
-			reliableMarginRight: function() {
-
-				// Support: Android 2.3
-				// Check if div with explicit width and no margin-right incorrectly
-				// gets computed margin-right based on width of container. (#3333)
-				// WebKit Bug 13343 - getComputedStyle returns wrong value for margin-right
-				// This support function is only executed once so no memoizing is needed.
-				var ret,
-					marginDiv = div.appendChild( document.createElement( &quot;div&quot; ) );
-
-				// Reset CSS: box-sizing; display; margin; border; padding
-				marginDiv.style.cssText = div.style.cssText =
-					// Support: Android 2.3
-					// Vendor-prefix box-sizing
-					&quot;-webkit-box-sizing:content-box;box-sizing:content-box;&quot; +
-					&quot;display:block;margin:0;border:0;padding:0&quot;;
-				marginDiv.style.marginRight = marginDiv.style.width = &quot;0&quot;;
-				div.style.width = &quot;1px&quot;;
-				docElem.appendChild( container );
-
-				ret = !parseFloat( window.getComputedStyle( marginDiv, null ).marginRight );
-
-				docElem.removeChild( container );
-				div.removeChild( marginDiv );
-
-				return ret;
-			}
-		});
-	}
-})();
+	jQuery.extend( support, {
+		pixelPosition: function() {
+			computeStyleTests();
+			return pixelPositionVal;
+		},
+		boxSizingReliable: function() {
+			computeStyleTests();
+			return boxSizingReliableVal;
+		},
+		pixelMarginRight: function() {
+			computeStyleTests();
+			return pixelMarginRightVal;
+		},
+		reliableMarginLeft: function() {
+			computeStyleTests();
+			return reliableMarginLeftVal;
+		}
+	} );
+} )();
 
 return support;
 
-});</textarea>
+} );</textarea>
   </div>
 </div>
 

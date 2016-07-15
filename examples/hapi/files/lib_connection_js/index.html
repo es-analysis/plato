@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - lib/connection.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>lib/connection.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">59.58</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">421</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">52.84</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">3.98</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">&#039;use strict&#039;;
+
+// Load modules
+
+const Events = require(&#039;events&#039;);
+const Http = require(&#039;http&#039;);
+const Https = require(&#039;https&#039;);
+const Os = require(&#039;os&#039;);
+const Path = require(&#039;path&#039;);
+const Boom = require(&#039;boom&#039;);
+const Call = require(&#039;call&#039;);
+const Hoek = require(&#039;hoek&#039;);
+const Shot = require(&#039;shot&#039;);
+const Statehood = require(&#039;statehood&#039;);
+const Auth = require(&#039;./auth&#039;);
+const Cors = require(&#039;./cors&#039;);
+const Ext = require(&#039;./ext&#039;);
+const Promises = require(&#039;./promises&#039;);
+const Route = require(&#039;./route&#039;);
+
+
+// Declare internals
+
+const internals = {
+    counter: {
+        min: 10000,
+        max: 99999
+    }
+};
+
+
+exports = module.exports = internals.Connection = function (server, options) {
+
+    const now = Date.now();
+
+    Events.EventEmitter.call(this);
+
+    this.settings = options;                                                        // options cloned in server.connection()
+    this.server = server;
+
+    // Normalize settings
+
+    this.settings.labels = Hoek.unique(this.settings.labels || []);                 // Remove duplicates
+    if (this.settings.port === undefined) {
+        this.settings.port = 0;
+    }
+
+    this.type = (typeof this.settings.port === &#039;string&#039; ? &#039;socket&#039; : &#039;tcp&#039;);
+    if (this.type === &#039;socket&#039;) {
+        this.settings.port = (this.settings.port.indexOf(&#039;/&#039;) !== -1 ? Path.resolve(this.settings.port) : this.settings.port.toLowerCase());
+    }
+
+    if (this.settings.autoListen === undefined) {
+        this.settings.autoListen = true;
+    }
+
+    Hoek.assert(this.settings.autoListen || !this.settings.port, &#039;Cannot specify port when autoListen is false&#039;);
+    Hoek.assert(this.settings.autoListen || !this.settings.address, &#039;Cannot specify address when autoListen is false&#039;);
+
+    // Connection facilities
+
+    this._started = false;
+    this._connections = {};
+    this._onConnection = null;          // Used to remove event listener on stop
+    this.registrations = {};            // Tracks plugin for dependency validation { name -&gt; { version } }
+
+    this._extensions = {
+        onRequest: new Ext(this.server),
+        onPreAuth: new Ext(this.server),
+        onPostAuth: new Ext(this.server),
+        onPreHandler: new Ext(this.server),
+        onPostHandler: new Ext(this.server),
+        onPreResponse: new Ext(this.server)
+    };
+
+    this._requestCounter = { value: internals.counter.min, min: internals.counter.min, max: internals.counter.max };
+    this._load = server._heavy.policy(this.settings.load);
+    this.states = new Statehood.Definitions(this.settings.state);
+    this.auth = new Auth(this);
+    this._router = new Call.Router(this.settings.router);
+    this._defaultRoutes();
+
+    this.plugins = {};                  // Registered plugin APIs by plugin name
+    this.app = {};                      // Place for application-specific state without conflicts with hapi, should not be used by plugins
+
+    // Create listener
+
+    this.listener = this.settings.listener || (this.settings.tls ? Https.createServer(this.settings.tls) : Http.createServer());
+    this.listener.on(&#039;request&#039;, this._dispatch());
+    this._init();
+
+    this.listener.on(&#039;clientError&#039;, (err, socket) =&gt; {
+
+        this.server._log([&#039;connection&#039;, &#039;client&#039;, &#039;error&#039;], err);
+    });
+
+    // Connection information
+
+    this.info = {
+        created: now,
+        started: 0,
+        host: this.settings.host || Os.hostname() || &#039;localhost&#039;,
+        port: this.settings.port,
+        protocol: this.type === &#039;tcp&#039; ? (this.settings.tls ? &#039;https&#039; : &#039;http&#039;) : this.type,
+        id: Os.hostname() + &#039;:&#039; + process.pid + &#039;:&#039; + now.toString(36)
+    };
+
+    this.info.uri = (this.settings.uri || (this.info.protocol + &#039;:&#039; + (this.type === &#039;tcp&#039; ? &#039;//&#039; + this.info.host + (this.info.port ? &#039;:&#039; + this.info.port : &#039;&#039;) : this.info.port)));
+
+    this.on(&#039;route&#039;, Cors.options);
+};
+
+Hoek.inherits(internals.Connection, Events.EventEmitter);
+
+
+internals.Connection.prototype._init = function () {
+
+    // Setup listener
+
+    this.listener.once(&#039;listening&#039;, () =&gt; {
+
+        // Update the address, port, and uri with active values
+
+        if (this.type === &#039;tcp&#039;) {
+            const address = this.listener.address();
+            this.info.address = address.address;
+            this.info.port = address.port;
+            this.info.uri = (this.settings.uri || (this.info.protocol + &#039;://&#039; + this.info.host + &#039;:&#039; + this.info.port));
+        }
+
+        this._onConnection = (connection) =&gt; {
+
+            const key = connection.remoteAddress + &#039;:&#039; + connection.remotePort;
+            this._connections[key] = connection;
+
+            connection.once(&#039;close&#039;, () =&gt; {
+
+                delete this._connections[key];
+            });
+        };
+
+        this.listener.on(&#039;connection&#039;, this._onConnection);
+    });
+};
+
+
+internals.Connection.prototype._start = function (callback) {
+
+    if (this._started) {
+        return process.nextTick(callback);
+    }
+
+    this._started = true;
+    this.info.started = Date.now();
+
+    if (!this.settings.autoListen) {
+        return process.nextTick(callback);
+    }
+
+    const onError = (err) =&gt; {
+
+        this._started = false;
+        return callback(err);
+    };
+
+    this.listener.once(&#039;error&#039;, onError);
+
+    const finalize = () =&gt; {
+
+        this.listener.removeListener(&#039;error&#039;, onError);
+        callback();
+    };
+
+    if (this.type !== &#039;tcp&#039;) {
+        this.listener.listen(this.settings.port, finalize);
+    }
+    else {
+        const address = this.settings.address || this.settings.host || &#039;0.0.0.0&#039;;
+        this.listener.listen(this.settings.port, address, finalize);
+    }
+};
+
+
+internals.Connection.prototype._stop = function (options, callback) {
+
+    if (!this._started) {
+        return process.nextTick(callback);
+    }
+
+    this._started = false;
+    this.info.started = 0;
+
+    const timeoutId = setTimeout(() =&gt; {
+
+        Object.keys(this._connections).forEach((key) =&gt; {
+
+            this._connections[key].destroy();
+        });
+
+
+        this._connections = {};
+    }, options.timeout);
+
+    this.listener.close(() =&gt; {
+
+        this.listener.removeListener(&#039;connection&#039;, this._onConnection);
+        clearTimeout(timeoutId);
+
+        this._init();
+        return callback();
+    });
+
+    // Tell idle keep-alive connections to close
+
+    Object.keys(this._connections).forEach((key) =&gt; {
+
+        const connection = this._connections[key];
+        if (!connection._isHapiProcessing) {
+            connection.end();
+        }
+    });
+};
+
+
+internals.Connection.prototype._dispatch = function (options) {
+
+    options = options || {};
+
+    return (req, res) =&gt; {
+
+        // Track socket request processing state
+
+        if (req.socket) {
+            req.socket._isHapiProcessing = true;
+            res.on(&#039;finish&#039;, () =&gt; {
+
+                req.socket._isHapiProcessing = false;
+                if (!this._started) {
+                    req.socket.end();
+                }
+            });
+        }
+
+        // Create request
+
+        const request = this.server._requestor.request(this, req, res, options);
+
+        // Check load
+
+        const overload = this._load.check();
+        if (overload) {
+            this.server._log([&#039;load&#039;], this.server.load);
+            request._reply(overload);
+        }
+        else {
+
+            // Execute request lifecycle
+
+            request._protect.enter(() =&gt; {
+
+                request._execute();
+            });
+        }
+    };
+};
+
+
+internals.Connection.prototype.inject = function (options, callback) {
+
+    if (!callback) {
+        return Promises.wrap(this, this.inject, [options]);
+    }
+
+    let settings = options;
+    if (typeof settings === &#039;string&#039;) {
+        settings = { url: settings };
+    }
+
+    if (!settings.authority ||
+        settings.credentials ||
+        settings.app ||
+        settings.plugins ||
+        settings.allowInternals !== undefined) {        // Can be false
+
+        settings = Hoek.shallow(settings);              // options can be reused
+        delete settings.credentials;
+        delete settings.artifacts;                      // Cannot appear without credentials
+        delete settings.app;
+        delete settings.plugins;
+        delete settings.allowInternals;
+
+        settings.authority = settings.authority || (this.info.host + &#039;:&#039; + this.info.port);
+    }
+
+    const needle = this._dispatch({
+        credentials: options.credentials,
+        artifacts: options.artifacts,
+        allowInternals: options.allowInternals,
+        app: options.app,
+        plugins: options.plugins
+    });
+
+    Shot.inject(needle, settings, (res) =&gt; {
+
+        if (res.raw.res._hapi) {
+            res.result = res.raw.res._hapi.result;
+            res.request = res.raw.res._hapi.request;
+            delete res.raw.res._hapi;
+        }
+
+        if (res.result === undefined) {
+            res.result = res.payload;
+        }
+
+        return callback(res);
+    });
+};
+
+
+internals.Connection.prototype.table = function (host) {
+
+    return this._router.table(host);
+};
+
+
+internals.Connection.prototype.lookup = function (id) {
+
+    Hoek.assert(id &amp;&amp; typeof id === &#039;string&#039;, &#039;Invalid route id:&#039;, id);
+
+    const record = this._router.ids[id];
+    if (!record) {
+        return null;
+    }
+
+    return record.route.public;
+};
+
+
+internals.Connection.prototype.match = function (method, path, host) {
+
+    Hoek.assert(method &amp;&amp; typeof method === &#039;string&#039;, &#039;Invalid method:&#039;, method);
+    Hoek.assert(path &amp;&amp; typeof path === &#039;string&#039; &amp;&amp; path[0] === &#039;/&#039;, &#039;Invalid path:&#039;, path);
+    Hoek.assert(!host || typeof host === &#039;string&#039;, &#039;Invalid host:&#039;, host);
+
+    const match = this._router.route(method.toLowerCase(), path, host);
+    Hoek.assert(match !== this._router.specials.badRequest, &#039;Invalid path:&#039;, path);
+    if (match === this._router.specials.notFound) {
+        return null;
+    }
+
+    return match.route.public;
+};
+
+
+internals.Connection.prototype._ext = function (event) {
+
+    const type = event.type;
+    Hoek.assert(this._extensions[type], &#039;Unknown event type&#039;, type);
+    this._extensions[type].add(event);
+};
+
+
+internals.Connection.prototype._route = function (configs, plugin) {
+
+    configs = [].concat(configs);
+    for (let i = 0; i &lt; configs.length; ++i) {
+        const config = configs[i];
+
+        if (Array.isArray(config.method)) {
+            for (let j = 0; j &lt; config.method.length; ++j) {
+                const method = config.method[j];
+
+                const settings = Hoek.shallow(config);
+                settings.method = method;
+                this._addRoute(settings, plugin);
+            }
+        }
+        else {
+            this._addRoute(config, plugin);
+        }
+    }
+};
+
+
+internals.Connection.prototype._addRoute = function (config, plugin) {
+
+    const route = new Route(config, this, plugin);                // Do no use config beyond this point, use route members
+    const vhosts = [].concat(route.settings.vhost || &#039;*&#039;);
+
+    for (let i = 0; i &lt; vhosts.length; ++i) {
+        const vhost = vhosts[i];
+        const record = this._router.add({ method: route.method, path: route.path, vhost: vhost, analysis: route._analysis, id: route.settings.id }, route);
+        route.fingerprint = record.fingerprint;
+        route.params = record.params;
+    }
+
+    this.emit(&#039;route&#039;, route.public, this, plugin);
+};
+
+
+internals.Connection.prototype._defaultRoutes = function () {
+
+    this._router.special(&#039;notFound&#039;, new Route({ method: &#039;_special&#039;, path: &#039;/{p*}&#039;, handler: internals.notFound }, this, this.server, { special: true }));
+    this._router.special(&#039;badRequest&#039;, new Route({ method: &#039;_special&#039;, path: &#039;/{p*}&#039;, handler: internals.badRequest }, this, this.server, { special: true }));
+
+    if (this.settings.routes.cors) {
+        Cors.handler(this);
+    }
+};
+
+
+internals.notFound = function (request, reply) {
+
+    return reply(Boom.notFound());
+};
+
+
+internals.badRequest = function (request, reply) {
+
+    return reply(Boom.badRequest());
+};</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>
