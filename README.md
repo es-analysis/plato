@@ -1,15 +1,17 @@
 # plato
 
-[![Build Status](https://travis-ci.org/es-analysis/plato.png?branch=master)](https://travis-ci.org/es-analysis/plato)
+## Needs active maintainer
 
-[![Codeship Status for es-analysis/plato](https://www.codeship.io/projects/479c7b90-f024-0131-6150-66d8ca7dad4d/status)](https://www.codeship.io/projects/27326)
+plato was updated to support es6 by @devcrust, but needs an active maintainer to keep it moving forward.
+
+[![Build Status](https://travis-ci.org/es-analysis/plato.png?branch=master)](https://travis-ci.org/es-analysis/plato)
 
 Visualize JavaScript source complexity with plato.
 
 ## Example report on popular projects
 
  - [jquery](http://es-analysis.github.com/plato/examples/jquery/)
- - [grunt](http://es-analysis.github.com/plato/examples/grunt/)
+ - [hapi](http://es-analysis.github.com/plato/examples/hapi/)
  - [marionettejs](http://es-analysis.github.com/plato/examples/marionette/)
 
 ## Installation
@@ -94,6 +96,7 @@ plato.inspect(files, outputDir, options, callback);
 
 ## Release History
 
+  - 1.6.0 Support es6 by updating eslint and using fork of escomplex
   - 1.3.0 Merged 107,130,128,119,114. Numerous bug fixed.
     - Minor bumped for changes to parsing of files passed. Technically a breaking change but effectively a bug fix + feature so bumping minor.
   - 1.2.1 Bumping versions for jshint and lodash
