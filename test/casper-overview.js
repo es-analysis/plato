@@ -12,7 +12,7 @@ casper.start('./tmp/index.html', function() {
   this.test.assertSelectorHasText('.jumbotron h1', 'test report');
   this.test.assertEvalEquals(function() {
     return document.querySelectorAll('.file-list li').length;
-  }, 2, 'Has appropriate number list items in the file list');
+  }, 4, 'Has appropriate number list items in the file list');
   this.test.assertEval(function() {
     return document.querySelectorAll('.chart').length === document.querySelectorAll('.chart svg').length;
   }, 'Every summary chart has an svg drawn');
@@ -22,7 +22,8 @@ casper.start('./tmp/index.html', function() {
 });
 
 casper.then(function () {
-  this.click('#chart_sloc svg');
+  var chart = this.getElementInfo('#chart_sloc svg');
+  this.mouse.click(chart.x + 1, chart.y + 1);
 });
 
 casper.waitForSelectorTextChange('.jumbotron h1', function() {

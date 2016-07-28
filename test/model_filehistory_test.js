@@ -40,6 +40,6 @@ exports['FileHistory'] = {
     test.equal(history[0].functions, newReport.complexity.methods.length);
     test.equal(history[0].lintErrors, newReport.jshint.messages.length);
     test.done();
-  },
+  }
 
 };

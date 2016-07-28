@@ -94,7 +94,7 @@ module.exports = function(grunt) {
           '-q',
           '-dtmp',
           '-ttest report',
-          'test/fixtures/a.js','test/fixtures/b.js','test/fixtures/empty.js'
+          'test/fixtures/a.js','test/fixtures/b.js','test/fixtures/c-es6.js','test/fixtures/d-es6.js','test/fixtures/empty.js'
         ]
       },
       function(err, result, code){
