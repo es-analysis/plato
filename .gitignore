@@ -1,7 +1,7 @@
-tmp
-node_module
-node_modules
 .idea
+.DS_Store
+npm-debug.log
+node_modules
 *.sass-cache
 tmp/
 reports/
