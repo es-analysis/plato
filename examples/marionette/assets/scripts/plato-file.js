@@ -37,19 +37,19 @@ $(function(){
 
   var popovers = cm.operation(function(){
     var queuedPopovers = [];
-    __report.complexity.functions.forEach(function(fn,i){
+    __report.complexity.methods.forEach(function(fn,i){
       byComplexity.push({
         label : fn.name,
-        value : fn.complexity.cyclomatic
+        value : fn.cyclomatic
       });
       bySloc.push({
         label : fn.name,
-        value : fn.complexity.sloc.physical,
+        value : fn.sloc.physical,
         formatter: function (x) { return x + " lines"; }
       });
 
       var name = fn.name === '<anonymous>' ? 'function\\s*\\([^)]*\\)' : fn.name;
-      var line = fn.line - 1;
+      var line = fn.lineStart - 1;
       var className = 'plato-mark-fn-' + i;
       var gutter = {
         gutterId : 'plato-gutter-complexity',
@@ -71,7 +71,7 @@ $(function(){
     var origScroll = [window.pageXOffset,window.pageYOffset];
     window.location.hash = '#plato-mark-fn-' + i;
     window.scrollTo(origScroll[0],origScroll[1]);
-    var line = __report.complexity.functions[i].line;
+    var line = __report.complexity.methods[i].lineStart;
     var coords = cm.charCoords({line : line, ch : 0});
     $('body,html').animate({scrollTop : coords.top -50},250);
   };

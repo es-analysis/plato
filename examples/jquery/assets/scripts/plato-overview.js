@@ -100,16 +100,16 @@ $(function(){
     reports.forEach(function(report){
 
       // @todo shouldn't need this, 'auto [num]' doesn't seem to work : https://github.com/oesmith/morris.js/issues/201
-      sloc.ymax = Math.max(sloc.ymax, report.complexity.aggregate.complexity.sloc.physical);
-      bugs.ymax = Math.max(bugs.ymax, report.complexity.aggregate.complexity.halstead.bugs.toFixed(2));
+      sloc.ymax = Math.max(sloc.ymax, report.complexity.methodAggregate.sloc.physical);
+      bugs.ymax = Math.max(bugs.ymax, report.complexity.methodAggregate.halstead.bugs.toFixed(2));
 
 
       sloc.data.push({
-        value : report.complexity.aggregate.complexity.sloc.physical,
+        value : report.complexity.methodAggregate.sloc.physical,
         label : report.info.fileShort
       });
       bugs.data.push({
-        value : report.complexity.aggregate.complexity.halstead.bugs.toFixed(2),
+        value : report.complexity.methodAggregate.halstead.bugs.toFixed(2),
         label : report.info.fileShort
       });
       maintainability.data.push({
