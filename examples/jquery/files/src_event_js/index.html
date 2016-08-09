@@ -44,11 +44,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
-      <p class="stat">58.83</p>
+      <p class="stat">58.72</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">738</p>
+      <p class="stat">745</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,11 +62,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">96.88</p>
+      <p class="stat">102.50</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
-      <p class="stat">5.95</p>
+      <p class="stat">5.97</p>
     </div>
   </div>
 </div>
@@ -446,51 +446,58 @@ jQuery.event = {
 	},
 
 	handlers: function( event, handlers ) {
-		var i, matches, sel, handleObj,
+		var i, handleObj, sel, matchedHandlers, matchedSelectors,
 			handlerQueue = [],
 			delegateCount = handlers.delegateCount,
 			cur = event.target;
 
-		// Support: IE &lt;=9
 		// Find delegate handlers
-		// Black-hole SVG &lt;use&gt; instance trees (#13180)
-		//
-		// Support: Firefox &lt;=42
-		// Avoid non-left-click in FF but don&#039;t block IE radio events (#3861, gh-2343)
-		if ( delegateCount &amp;&amp; cur.nodeType &amp;&amp;
-			( event.type !== &quot;click&quot; || isNaN( event.button ) || event.button &lt; 1 ) ) {
+		if ( delegateCount &amp;&amp;
+
+			// Support: IE &lt;=9
+			// Black-hole SVG &lt;use&gt; instance trees (trac-13180)
+			cur.nodeType &amp;&amp;
+
+			// Support: Firefox &lt;=42
+			// Suppress spec-violating clicks indicating a non-primary pointer button (trac-3861)
+			// https://www.w3.org/TR/DOM-Level-3-Events/#event-type-click
+			// Support: IE 11 only
+			// ...but not arrow key &quot;clicks&quot; of radio inputs, which can have `button` -1 (gh-2343)
+			!( event.type === &quot;click&quot; &amp;&amp; event.button &gt;= 1 ) ) {
 
 			for ( ; cur !== this; cur = cur.parentNode || this ) {
 
 				// Don&#039;t check non-elements (#13208)
 				// Don&#039;t process clicks on disabled elements (#6911, #8165, #11382, #11764)
-				if ( cur.nodeType === 1 &amp;&amp; ( cur.disabled !== true || event.type !== &quot;click&quot; ) ) {
-					matches = [];
+				if ( cur.nodeType === 1 &amp;&amp; !( event.type === &quot;click&quot; &amp;&amp; cur.disabled === true ) ) {
+					matchedHandlers = [];
+					matchedSelectors = {};
 					for ( i = 0; i &lt; delegateCount; i++ ) {
 						handleObj = handlers[ i ];
 
 						// Don&#039;t conflict with Object.prototype properties (#13203)
 						sel = handleObj.selector + &quot; &quot;;
 
-						if ( matches[ sel ] === undefined ) {
-							matches[ sel ] = handleObj.needsContext ?
+						if ( matchedSelectors[ sel ] === undefined ) {
+							matchedSelectors[ sel ] = handleObj.needsContext ?
 								jQuery( sel, this ).index( cur ) &gt; -1 :
 								jQuery.find( sel, this, null, [ cur ] ).length;
 						}
-						if ( matches[ sel ] ) {
-							matches.push( handleObj );
+						if ( matchedSelectors[ sel ] ) {
+							matchedHandlers.push( handleObj );
 						}
 					}
-					if ( matches.length ) {
-						handlerQueue.push( { elem: cur, handlers: matches } );
+					if ( matchedHandlers.length ) {
+						handlerQueue.push( { elem: cur, handlers: matchedHandlers } );
 					}
 				}
 			}
 		}
 
 		// Add the remaining (directly-bound) handlers
+		cur = this;
 		if ( delegateCount &lt; handlers.length ) {
-			handlerQueue.push( { elem: this, handlers: handlers.slice( delegateCount ) } );
+			handlerQueue.push( { elem: cur, handlers: handlers.slice( delegateCount ) } );
 		}
 
 		return handlerQueue;
