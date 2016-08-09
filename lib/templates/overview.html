@@ -121,9 +121,9 @@
           <span class="col-md-4 file"><a class="file-link" href="./<%= item.info.link %>"><%= item.info.fileShort %></a></span>
         <span class="col-md-8 file-chart js-file-chart"
               data-lint="<%= item.jshint && item.jshint.messages %>"
-              data-sloc="<%= item.complexity.aggregate.complexity.sloc.physical %>"
-              data-bugs="<%= item.complexity.aggregate.complexity.halstead.bugs.toFixed(2) %>"
-              data-complexity="<%= item.complexity.aggregate.complexity.cyclomatic%>"
+              data-sloc="<%= item.complexity.methodAggregate.sloc.physical %>"
+              data-bugs="<%= item.complexity.methodAggregate.halstead.bugs.toFixed(2) %>"
+              data-complexity="<%= item.complexity.methodAggregate.cyclomatic%>"
           ></span>
         </div>
       </li>

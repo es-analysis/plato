@@ -65,9 +65,9 @@
             <div class="reportBlock locList">
                 <h2 class="reportTitle">Largest Files</h2>
                 <ul class="list-unstyled">
-<% _.each(_.take(_.sortBy(report.reports, function (report) { return -1 * report.complexity.aggregate.complexity.sloc.physical }), 5), function(report, i) { %>
+<% _.each(_.take(_.sortBy(report.reports, function (report) { return -1 * report.complexity.methodAggregate.sloc.physical }), 5), function(report, i) { %>
                     <li>
-                        <strong><%= report.complexity.aggregate.complexity.sloc.physical %> lines</strong>
+                        <strong><%= report.complexity.methodAggregate.sloc.physical %> lines</strong>
                         <small><%= report.info.fileShort %></small>
                     </li>
 <% }); %>

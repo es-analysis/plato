@@ -48,14 +48,12 @@
     "analyze"
   ],
   "dependencies": {
-    "escomplex": "2.0.0-alpha",
+    "typhonjs-escomplex": "0.0.9",
     "fs-extra": "~0.30.0",
     "glob": "~7.0.5",
     "jshint": "~2.9.2",
     "lodash": "~4.13.1",
     "posix-getopt": "~1.2.0",
-    "complexity-report": "2.0.0-alpha",
-    "eslint": "~3.0.1",
-    "esprima": "~2.7.2"
+    "eslint": "~3.0.1"
   }
 }

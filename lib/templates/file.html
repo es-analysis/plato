@@ -48,7 +48,7 @@
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat"><%= report.complexity.aggregate.complexity.sloc.physical %></p>
+      <p class="stat"><%= report.complexity.methodAggregate.sloc.physical %></p>
     </div>
   </div>
   <div class="row historical">
@@ -62,11 +62,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat"><%= report.complexity.aggregate.complexity.halstead.difficulty.toFixed(2) %></p>
+      <p class="stat"><%= report.complexity.methodAggregate.halstead.difficulty.toFixed(2) %></p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
-      <p class="stat"><%= report.complexity.aggregate.complexity.halstead.bugs.toFixed(2) %></p>
+      <p class="stat"><%= report.complexity.methodAggregate.halstead.bugs.toFixed(2) %></p>
     </div>
   </div>
 </div>
@@ -101,10 +101,10 @@
 
 <script type="text/html" id="complexity-popover-template">
   <div class="complexity-notice">
-    Complexity : {{ complexity.cyclomatic }} <br>
-    Length : {{ complexity.halstead.length }} <br>
-    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
-    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+    Complexity : {{ cyclomatic }} <br>
+    Length : {{ halstead.length }} <br>
+    Difficulty : {{ halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ halstead.bugs.toFixed(2) }}<br>
   </div>
 </script>
 

@@ -33,11 +33,13 @@ exports['plato'] = {
     var files = [
       'test/fixtures/a.js',
       'test/fixtures/b.js',
+      'test/fixtures/c-es6.js',
+      'test/fixtures/d-es6.js',
       'test/fixtures/empty.js'
     ];
 
     plato.inspect(files, null, {}, function(reports) {
-      test.equal(reports.length, 2, 'Should not attempt to report on empty files');
+      test.equal(reports.length, 4, 'Should not attempt to report on empty files');
       test.done();
     });
   },
@@ -47,16 +49,18 @@ exports['plato'] = {
     var files = './test/fixtures/*.js';
 
     plato.inspect(files, null, {}, function(reports) {
-      test.equal(reports.length, 5, 'Should properly test against the array produced by the glob');
+      test.equal(reports.length, 7, 'Should properly test against the array produced by the glob');
       test.done();
     });
   },
   'test report structure' : function(test) {
-    test.expect(4);
+    test.expect(8);
 
     var files = [
       'test/fixtures/a.js',
-      'test/fixtures/b.js'
+      'test/fixtures/b.js',
+      'test/fixtures/c-es6.js',
+      'test/fixtures/d-es6.js'
     ];
 
     plato.inspect(files, null, {}, function(reports) {
@@ -71,10 +75,13 @@ exports['plato'] = {
 
     var files = [
       'test/fixtures/a.js',
-      'test/fixtures/b.js'
+      'test/fixtures/b.js',
+      'test/fixtures/c-es6.js',
+      'test/fixtures/d-es6.js'
     ];
 
-    test.expect((files.length * 3) + 1);
+//    test.expect((files.length * 3) + 1);
+    test.expect(7);
 
     plato.inspect(files, null, {}, function(reports) {
       var overview = plato.getOverviewReport(reports);
@@ -94,11 +101,13 @@ exports['plato'] = {
     var files = [
       'test/fixtures/a.js',
       'test/fixtures/b.js',
+      'test/fixtures/c-es6.js',
+      'test/fixtures/d-es6.js',
       'test/fixtures/shebang.js'
     ];
 
     plato.inspect(files, null, {}, function(reports) {
-      test.equal(reports.length, 3, 'Should report on files starting with a shebang');
+      test.equal(reports.length, 5, 'Should report on files starting with a shebang');
       test.done();
     });
   },
@@ -120,14 +129,16 @@ exports['plato'] = {
 
     var files = [
       'test/fixtures/a.js',
-      'test/fixtures/b.js'
+      'test/fixtures/b.js',
+      'test/fixtures/c-es6.js',
+      'test/fixtures/d-es6.js'
     ];
 
     test.expect(1);
 
     plato.inspect(files, null, {}, function(reports) {
       var overview = plato.getOverviewReport(reports);
-      test.ok(overview.summary.total.jshint === 2, 'Should contain total jshint issues');
+      test.ok(overview.summary.total.jshint === 4, 'Should contain total jshint issues');
       test.done();
     });
   }
