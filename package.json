@@ -48,7 +48,7 @@
     "analyze"
   ],
   "dependencies": {
-    "typhonjs-escomplex": "0.0.9",
+    "typhonjs-escomplex": "0.0.11",
     "fs-extra": "~0.30.0",
     "glob": "~7.0.5",
     "jshint": "~2.9.2",
