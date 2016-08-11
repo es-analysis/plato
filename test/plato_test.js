@@ -141,5 +141,23 @@ exports['plato'] = {
       test.ok(overview.summary.total.jshint === 4, 'Should contain total jshint issues');
       test.done();
     });
+  },
+
+  'should run eslint with default config' : function(test) {
+
+    var files = [
+      'test/fixtures/a.js',
+      'test/fixtures/b.js'
+    ];
+
+    test.expect(1);
+
+    plato.inspect(files, null, {
+        eslint: 'test/fixtures/.eslintrc.json'
+    }, function(reports) {
+      var overview = plato.getOverviewReport(reports);
+      test.ok(overview.summary.total.jshint === 8, 'Should contain total eslint issues');
+      test.done();
+    });
   }
 };
