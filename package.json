@@ -54,6 +54,6 @@
     "jshint": "~2.9.2",
     "lodash": "~4.13.1",
     "posix-getopt": "~1.2.0",
-    "eslint": "~3.0.1"
+    "eslint": "^3.0.0"
   }
 }
