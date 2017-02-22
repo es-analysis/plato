@@ -4,7 +4,7 @@
 
 plato was updated to support es6 by @devcrust, but needs an active maintainer to keep it moving forward.
 
-[![Build Status](https://travis-ci.org/es-analysis/plato.png?branch=master)](https://travis-ci.org/es-analysis/plato)
+[![Build Status](https://travis-ci.org/es-analysis/plato.svg?branch=master)](https://travis-ci.org/es-analysis/plato)
 
 Visualize JavaScript source complexity with plato.
 
@@ -61,25 +61,24 @@ plato -r -d report -l .jshintrc -t "My Awesome App" -x .json routes/*.js
 
 ### From scripts
 
-```
-var plato = require('plato');
+```js
+const plato = require('plato');
 
-var files = [
+const files = [
   'path/to/javascript/file1.js',
-  ...
   'path/to/javascript/fileN.js'
 ];
 
-var outputDir = './output/dir';
+const outputDir = './output/dir';
 // null options for this example
-var options = {
+const options = {
   title: 'Your title here'
 };
 
-var callback = function (report){
+const callback = (report) => {
 // once done the analysis,
 // execute this
-};
+}
 
 plato.inspect(files, outputDir, options, callback);
 ```
@@ -127,7 +126,3 @@ plato.inspect(files, outputDir, options, callback);
 ## License
 Copyright (c) 2012 Jarrod Overson
 Licensed under the MIT license.
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/es-analysis/plato/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
