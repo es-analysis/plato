@@ -53,6 +53,6 @@
     "jshint": "~2.9.2",
     "lodash": "^4.17.11",
     "posix-getopt": "~1.2.0",
-    "typhonjs-escomplex": "0.0.9"
+    "typhonjs-escomplex": "0.1.0"
   }
 }
