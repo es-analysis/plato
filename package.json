@@ -33,9 +33,9 @@
   "devDependencies": {
     "grunt": "~1.0.1",
     "grunt-contrib-jshint": "~1.0.0",
-    "grunt-contrib-nodeunit": "~1.0.0",
+    "grunt-contrib-nodeunit": "^2.0.0",
     "grunt-contrib-uglify": "~1.0.1",
-    "grunt-contrib-watch": "~1.0.0"
+    "grunt-contrib-watch": "^1.1.0"
   },
   "keywords": [
     "halstead",
@@ -47,12 +47,12 @@
     "analyze"
   ],
   "dependencies": {
-    "typhonjs-escomplex": "0.0.9",
+    "eslint": "~3.0.1",
     "fs-extra": "~0.30.0",
     "glob": "~7.0.5",
     "jshint": "~2.9.2",
-    "lodash": "~4.13.1",
+    "lodash": "^4.17.11",
     "posix-getopt": "~1.2.0",
-    "eslint": "~3.0.1"
+    "typhonjs-escomplex": "0.0.9"
   }
 }
