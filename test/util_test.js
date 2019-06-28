@@ -35,7 +35,7 @@ exports['util'] = {
     // Store value of current path separator (environment-specific)
     var sep = path.sep;
 
-    test.expect(6);
+    test.expect(7);
 
     // Explicitly set path for OSX/*nix environment path prefixing
     path.sep = '/';
@@ -70,6 +70,10 @@ exports['util'] = {
       'baz.js'
     ];
     test.equal(util.findCommonBase(files), '', 'should not find a prefix for files in the current directory');
+
+    files = [];
+    test.equal(util.findCommonBase(files), '', 'should not cause an error for no files');
+
 
     // Explicitly set path for Windows environment path prefixing
     path.sep = '\\';
