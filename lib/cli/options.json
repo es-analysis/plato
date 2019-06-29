@@ -56,5 +56,11 @@
     "long": "noempty",
     "desc": "Skips empty lines from line count",
     "type": "Boolean"
+  },
+  "X": {
+    "long": "extensions",
+    "desc": "Specify JavaScript file extensions",
+    "type": "Array",
+    "default": ".js"
   }
 }

@@ -179,5 +179,77 @@ exports['plato'] = {
       test.ok(overview.summary.total.jshint === 8, 'Should contain total eslint issues');
       test.done();
     });
+  },
+
+  'test extensions option that default value is .js' : function(test) {
+    var options = {
+      eslint: 'test/fixtures/.eslintrc.json'
+    };
+    var files = [
+      'test/fixtures/c-es6.js'
+    ];
+
+    test.expect(1);
+
+    plato.inspect(files, null, options, function(reports) {
+      var overview = plato.getOverviewReport(reports);
+      test.ok(overview.summary.total.jshint === 1, 'Should contain total eslint issues');
+      test.done();
+    });
+  },
+
+  'test extensions option with .es' : function(test) {
+    var options = {
+      extensions: [".es"],
+      eslint: 'test/fixtures/.eslintrc.json'
+    };
+    var files = [
+      'test/fixtures/c-es6.es'
+    ];
+
+    test.expect(1);
+
+    plato.inspect(files, null, options, function(reports) {
+      var overview = plato.getOverviewReport(reports);
+      test.ok(overview.summary.total.jshint === 1, 'Should contain total eslint issues');
+      test.done();
+    });
+  },
+
+  'test extensions option with empty string' : function(test) {
+    var options = {
+      extensions: [""],
+      eslint: 'test/fixtures/.eslintrc.json'
+    };
+    var files = [
+      'test/fixtures/c-es6'
+    ];
+
+    test.expect(1);
+
+    plato.inspect(files, null, options, function(reports) {
+      var overview = plato.getOverviewReport(reports);
+      test.ok(overview.summary.total.jshint === 1, 'Should contain total eslint issues');
+      test.done();
+    });
+  },
+
+  'test extensions option with multi values' : function(test) {
+    var options = {
+      extensions: [".es", ".js"],
+      eslint: 'test/fixtures/.eslintrc.json'
+    };
+    var files = [
+      'test/fixtures/c-es6.es',
+      'test/fixtures/c-es6.js'
+    ];
+
+    test.expect(1);
+
+    plato.inspect(files, null, options, function(reports) {
+      var overview = plato.getOverviewReport(reports);
+      test.ok(overview.summary.total.jshint === 2, 'Should contain total eslint issues');
+      test.done();
+    });
   }
 };
