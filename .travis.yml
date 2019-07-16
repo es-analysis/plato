@@ -3,7 +3,7 @@ node_js:
   - "10"
 before_script:
   - npm install -g grunt-cli
-  - mkdir ~/bin
+  - mkdir -p ~/bin
   - export PATH=~/bin:$PATH
   - npm install
 
