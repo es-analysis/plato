@@ -32,10 +32,10 @@ exports['FileHistory'] = {
     var newReport = require('./fixtures/model_history.json');
     history.addReport(newReport);
 
-    test.equal(history[0].sloc, newReport.complexity.methodAggregate.sloc.physical);
-    test.equal(history[0].lloc, newReport.complexity.methodAggregate.sloc.logical);
-    test.equal(history[0].deliveredBugs, newReport.complexity.methodAggregate.halstead.bugs);
-    test.equal(history[0].difficulty, newReport.complexity.methodAggregate.halstead.difficulty);
+    test.equal(history[0].sloc, newReport.complexity.aggregate.sloc.physical);
+    test.equal(history[0].lloc, newReport.complexity.aggregate.sloc.logical);
+    test.equal(history[0].deliveredBugs, newReport.complexity.aggregate.halstead.bugs);
+    test.equal(history[0].difficulty, newReport.complexity.aggregate.halstead.difficulty);
     test.equal(history[0].maintainability, newReport.complexity.maintainability);
     test.equal(history[0].functions, newReport.complexity.methods.length);
     test.equal(history[0].lintErrors, newReport.jshint.messages.length);

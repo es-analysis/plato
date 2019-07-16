@@ -83,7 +83,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-nodeunit');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-casper');
+//  grunt.loadNpmTasks('grunt-casper');
 
   grunt.registerTask('runtest',function(){
     var done = this.async();
@@ -136,7 +136,8 @@ module.exports = function(grunt) {
 
   grunt.registerTask('optimize', ['uglify']);
   // Default task.
-  grunt.registerTask('test', ['jshint', 'nodeunit', 'runtest', 'runbin', 'casper']);
+  //grunt.registerTask('test', ['jshint', 'nodeunit', 'runtest', 'runbin', 'casper']);
+  grunt.registerTask('test', ['jshint', 'nodeunit', 'runtest', 'runbin']);
   grunt.registerTask('default', ['test']);
 
 };
