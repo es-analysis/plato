@@ -7,7 +7,7 @@
    },
    "complexity":{
      "lineStart":1,
-      "methodAggregate":{
+      "aggregate":{
          "sloc":{
             "physical":22,
             "logical":10

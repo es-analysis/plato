@@ -15,7 +15,7 @@
   "boss": true,
   "eqnull": true,
   "node": true,
-  "es5": true
+  "maxparams": 3
 }
 
 /* foo */

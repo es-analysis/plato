@@ -1,11 +1,9 @@
 language: node_js
 node_js:
-  - "4"
-  - "5"
-  - "6"
+  - "10"
 before_script:
   - npm install -g grunt-cli
-  - mkdir ~/bin
+  - mkdir -p ~/bin
   - export PATH=~/bin:$PATH
   - npm install
 

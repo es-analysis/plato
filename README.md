@@ -45,18 +45,29 @@ Usage : plato [options] -d <output_dir> <input files>
       Time to use as the report date (seconds, > 9999999999 assumed to be ms)
   -n, --noempty
       Skips empty lines from line count
+  -X, --extensions : Array (default: .js)
+      Specify JavaScript file extensions
 ```
 
 __Example__
 
-```shell
-plato -r -d report src
+```console
+$ plato -r -d report src
 ```
 
 __Extended example__
 
+```console
+$ plato -r -d report -l .jshintrc -t "My Awesome App" -x .json routes/*.js
 ```
-plato -r -d report -l .jshintrc -t "My Awesome App" -x .json routes/*.js
+
+__Extended example (Specify JavaScript file extensions)__
+
+```console
+$ plato -r -d report -X .jsx src
+$ plato -r -d report --extensions=.jsx src
+$ plato -r -d report -X .js,.jsx src
+$ plato -r -d report -X .js -X .jsx src
 ```
 
 ### From scripts
