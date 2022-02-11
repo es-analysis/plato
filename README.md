@@ -10,9 +10,9 @@ Visualize JavaScript source complexity with plato.
 
 ## Example report on popular projects
 
- - [jquery](http://es-analysis.github.com/plato/examples/jquery/)
- - [hapi](http://es-analysis.github.com/plato/examples/hapi/)
- - [marionettejs](http://es-analysis.github.com/plato/examples/marionette/)
+ - [jquery](http://es-analysis.github.io/plato/examples/jquery/)
+ - [hapi](http://es-analysis.github.io/plato/examples/hapi/)
+ - [marionettejs](http://es-analysis.github.io/plato/examples/marionette/)
 
 ## Installation
 Install the module with: `npm install -g plato`
